@@ -1,5 +1,5 @@
-// import heroImage from "../../public/assets/images/hero.png";
+import logo from "../../public/assets/images/Apple-Empire-Logo.svg";
 
 export const images = {
-  //   heroImage,
+  logo,
 };
