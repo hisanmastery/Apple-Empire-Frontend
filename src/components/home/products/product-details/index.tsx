@@ -12,7 +12,7 @@ const ProductDetails = ({ product }:any) => {
     <section className="container mx-auto">
       <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
         <div>
-          <img src={product?.image} />
+          <img className="w-full" src={product?.image} />
           <ProductImage/>
         </div>
         <div>
