@@ -1,5 +1,5 @@
 import React from 'react';
-import Checkout from "../../../libs/components/checkout/index"
+import Checkout from './../../../../components/checkout/index';
 const CheckoutPage = () => {
     return (
         <div>

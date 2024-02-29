@@ -24,16 +24,16 @@ const cartSlice = createSlice({
 
       // Extracting the IDs and quantities from the payload
       const payloadData = payload.reduce((acc: any, item: any) => {
-        acc[item.id] = item.quantity || 0;
+        acc[item.id] = item.quantity || 1;
         return acc;
       }, {});
 
       // Updating state.storedCart with quantities
       state.storedCart = filteredProducts?.map((product: any) => ({
         ...product,
-        quantity: payloadData[product.id] || 0,
+        quantity: payloadData[product.id] || 1,
       }));
-      state.storedCart = payload;
+      // state.storedCart = payload;
     },
   },
 });

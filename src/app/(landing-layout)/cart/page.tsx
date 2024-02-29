@@ -10,7 +10,6 @@ import { getItemLocalStorage, setItemLocalstorage } from "@/utils/localstorage";
 const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const storedProduct = getItemLocalStorage("carts") || [];
     dispatch(addStoredCart(storedProduct));
