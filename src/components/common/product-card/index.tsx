@@ -1,21 +1,36 @@
 "use client";
+import { addStoredCart } from "@/store/features/cart/cartSlice";
+import { getItemLocalStorage, setItemLocalstorage } from "@/utils/localstorage";
 import Link from "next/link";
 import React from "react";
+import { useDispatch } from "react-redux";
 // import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = ({ datas }: any) => {
-  // const dispatch = useDispatch();
+  const product = {
+    id: datas?.id,
+  };
+  const dispatch = useDispatch();
   // handle cart click
-  // const handleCartClick = () => {
-  //   const existingCart = JSON.parse(localStorage.getItem("carts")) || [];
-  //   const existingProduct = existingCart.find((item) => item.id === datas.id);
-  //   if (!existingProduct) {
-  //     const updatedCart = [...existingCart, datas];
-  //     localStorage.setItem("carts", JSON.stringify(updatedCart));
-  //   }
-  //   const storedProduct = JSON.parse(localStorage.getItem("carts")) || [];
-  //   dispatch(addStoredCart(storedProduct));
-  // };
+  const handleCartClick = () => {
+    // get product data
+    const existingCart = getItemLocalStorage("carts") || [];
+    const existingProduct = existingCart?.find(
+      (item: any) => item.id === datas.id
+    );
+    // check existing product if not product it will be set
+    if (!existingProduct) {
+      const updatedCart = [...existingCart, product];
+      console.log(updatedCart);
+      // set updated cart into locastorage
+      setItemLocalstorage("carts", updatedCart);
+    }
+    // get updated sotred cart product
+    const storedProduct = getItemLocalStorage("carts") || [];
+    // save stored car in redux reducer
+    dispatch(addStoredCart(storedProduct));
+  };
+
   return (
     <div className="card  w-full mt-5  bg-base-100 shadow-md ">
       <div
@@ -37,7 +52,7 @@ const ProductCard = ({ datas }: any) => {
           {/* add to card button */}
           <div className=" flex absolute bottom-1  gap-1 left-1 right-1">
             <button
-              // onClick={() => handleCartClick()}
+              onClick={() => handleCartClick()}
               className="bg-blue-400 w-full text-white p-2"
             >
               ADD TO CARD
