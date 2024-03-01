@@ -2,23 +2,28 @@
 import { useSelector } from "react-redux";
 import CartPage from "@/app/(landing-layout)/cart/page";
 import { icons } from "@/constants/icons";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "../ui/button";
 const Carts = () => {
-  const { storedCart } = useSelector((state:any) => state?.cart);
+  const { storedCart } = useSelector((state: any) => state?.cart);
   // Using reduce to calculate the total price
   const totalPrice = storedCart?.reduce((acc: number, product: any) => {
     return acc + product?.quantity * parseInt(product?.offer_price);
   }, 0);
   return (
-    <div>
-      <div className="drawer drawer-end cursor-pointer">
-        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-          {/* Page content here */}
-          <label
-            htmlFor="my-drawer-4"
-            className="drawer-button  top-[50%] right-0 fixed"
-          >
-            {/* Open drawer */}
+
+      <Drawer>
+        <DrawerTrigger className="z-50" asChild>
+          <div className="top-[50%] right-0 fixed z-50">
             <div className="backdrop-blur-lg  shadow border cursor-pointer">
               <icons.AiOutlineShopping className="text-3xl text-center w-7 mx-auto text-blue-500" />
               <p className="text-center font-semibold">
@@ -28,22 +33,26 @@ const Carts = () => {
                 {totalPrice?.toFixed(2)} $
               </p>
             </div>
-          </label>
-        </div>
-        <div className="drawer-side">
-          <label
-            htmlFor="my-drawer-4"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-
-          {/* carts */}
-          <div className="menu p-4 w-80 min-h-full bg-white text-base-content relative">
-            <CartPage />
           </div>
-        </div>
-      </div>
-    </div>
+        </DrawerTrigger>
+        <DrawerContent>
+          <div className="mx-auto w-full max-w-sm">
+            <DrawerHeader>
+              <DrawerTitle>Move Goal</DrawerTitle>
+              <DrawerDescription>
+                Set your daily activity goal.
+              </DrawerDescription>
+            </DrawerHeader>
+
+            <DrawerFooter>
+            <Button>Submit</Button>
+            <DrawerClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+          </div>
+        </DrawerContent>
+      </Drawer>
   );
 };
 
