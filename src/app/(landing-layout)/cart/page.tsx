@@ -8,6 +8,15 @@ import InputQuantityCom from "@/components/carts/InputQuantityCom";
 import { getItemLocalStorage, setItemLocalstorage } from "@/utils/localstorage";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
@@ -84,40 +93,35 @@ const CartPage = ({ className }: any) => {
           {/* left side cart  */}
           <div className="col-span-4">
             <div className="flex justify-between items-center">
-              <h4 className="text-2xl font-semibold">Shopping Cart</h4>
-              <h4 className="text-2xl font-semibold">
+              <h4 className="text-xl font-semibold">Shopping Cart</h4>
+              <h4 className="text-xl font-semibold">
                 {storedCart?.length} Items
               </h4>
             </div>
             <hr className="border mt-4" />
-            {storedCart?.map((product: any, index: number) => (
-              <div
-                key={index}
-                className="relative w-full  backdrop-blur-md bg-white rounded p-3 mt-7 "
-              >
-                {/* Product details */}
-                <div className="flex items-center ">
-                  <div className="overflow-hidden flex-shrink-0">
-                    <img
-                      src={`${product?.image}`}
-                      alt="product"
-                      className="w-10 h-10 object-contain"
-                    />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-[15px] text-qblack">{product?.title}</p>
-                    <div className="flex space-x-1 items-center"></div>
-                    <p className="text-[15px] font-normal">
-                      {product?.offer_price} $
-                    </p>
-                  </div>
-                </div>
+            {/* list of cart */}
 
-                {/* Quantity and total */}
-                <div className="flex items-center justify-between mt-1">
-                  <div className="flex items-center">
-                    <span className="text-[15px] font-normal">Quantity:</span>
-                    <div className="ml-2">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Product</TableHead>
+                  <TableHead></TableHead>
+                  <TableHead>Quantity</TableHead>
+                  <TableHead>Price</TableHead>
+                  <TableHead>Total</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody className="bg-white">
+                {storedCart?.map((product: any, index: number) => (
+                  <TableRow key={index} className="mt-4">
+                    <TableCell className="font-medium w-1/3">
+                      <p>{product?.title}</p>
+
+                      <div className="cursor-pointer mt-4 font-bold text-red-500 hover:text-red-700">
+                        <p onClick={() => removeCart(product?.id)}>Remove</p>
+                      </div>
+                    </TableCell>
+                    <TableCell className="font-medium">
                       <InputQuantityCom
                         quantity={product.quantity ?? 1}
                         onIncrement={(newQuantity: number) =>
@@ -127,30 +131,20 @@ const CartPage = ({ className }: any) => {
                           handleDecrement(index, newQuantity)
                         }
                       />
-                    </div>
-                  </div>
-                  <div className="text-[15px] font-normal">
-                    {parseInt(product?.offer_price) * (product.quantity ?? 1)}$
-                  </div>
-                  <div className="cursor-pointer">
-                    <span onClick={() => removeCart(product?.id)}>
-                      <svg
-                        width="10"
-                        height="10"
-                        viewBox="0 0 10 10"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                          fill="#AAAAAA"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      {product?.quantity}
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      {product?.price}
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      {product?.price * product?.quantity}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
 
             <Link href={"/products"}>
               <p className="text-blue-600 text-sm cursor-pointer mt-4 hover:text-blue-800">
@@ -162,7 +156,7 @@ const CartPage = ({ className }: any) => {
           <div className="col-span-2">
             {storedCart?.length !== 0 && (
               <div className="w-full">
-                <h4 className="text-2xl font-semibold text-center">
+                <h4 className="text-xl font-semibold text-center">
                   Order Summary
                 </h4>
                 <hr className="border mt-4" />
