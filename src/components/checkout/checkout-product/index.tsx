@@ -1,8 +1,7 @@
-
-const CheckoutProduct = ({ storedCart, subTotal }) => {
+const CheckoutProduct = ({ storedCart, subTotal }: any) => {
   return (
     <div>
-      {storedCart?.map((product, index) => (
+      {storedCart?.map((product: any, index: number) => (
         <div
           key={index}
           className="relative w-full  backdrop-blur-md bg-stone-100 rounded p-1 mt-2"
@@ -26,7 +25,6 @@ const CheckoutProduct = ({ storedCart, subTotal }) => {
                 </p>
               </div>
             </div>
-
             <div>
               <p className="text-[15px] font-normal">
                 {product?.offer_price} $
@@ -38,7 +36,7 @@ const CheckoutProduct = ({ storedCart, subTotal }) => {
 
       {/* pricing calculation */}
       <hr />
-          <div>Total Price: {subTotal}</div>
+      <div>Total Price: {subTotal}</div>
     </div>
   );
 };

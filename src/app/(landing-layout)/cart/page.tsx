@@ -89,7 +89,7 @@ const CartPage = ({ className }: any) => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-6 gap-12 justify-center">
+        <div className="grid md:grid-cols-6 grid-cols-3 gap-12 justify-center">
           {/* left side cart  */}
           <div className="col-span-4">
             <div className="flex justify-between items-center">
@@ -153,7 +153,7 @@ const CartPage = ({ className }: any) => {
             </Link>
           </div>
           {/* order summary  */}
-          <div className="col-span-2">
+          <div className="md:col-span-2 col-span-4">
             {storedCart?.length !== 0 && (
               <div className="w-full">
                 <h4 className="text-xl font-semibold text-center">
