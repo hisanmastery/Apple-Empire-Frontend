@@ -1,4 +1,4 @@
-  import React from "react";
+import React from "react";
 
 import ClientBrand from "../home/client-brand/index";
 import Products from "../home/products/index";
@@ -12,15 +12,15 @@ const Home = () => {
   const datas = productDatas.products.slice(0, 8);
   return (
     <main>
-      <div className="container mx-auto md:p-0 p-3">
+      <div className="lg:container mx-auto md:p-0 p-3">
         {/* brand profile */}
-        <ClientBrand />
+        {/* <ClientBrand /> */}
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/images/content/highlight/Nokia_2660_Flip_Valentines_Day.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/images/content/highlight/Nokia_2660_Flip_Valentines_Day.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Honor_X9B_EID.webp`,
           ]}
-          className=" mb-[60px] container mx-auto"
+          className=" mb-[60px] lg:container mx-auto"
         />
         {/* all products */}
         <Products productData={datas} />
@@ -29,12 +29,12 @@ const Home = () => {
           ads={[
             `https://appleempire.hisanmastery.com/assets/images/ads-3.webp`,
           ]}
-          className=" mb-[60px] container mx-auto"
+          className=" mb-[60px] lg:container mx-auto"
         />
 
         {/* top selling product */}
         <ViewMoreTitle
-          className="top-selling-product mb-[60px] container"
+          className="top-selling-product mb-[60px] lg:container"
           seeMoreUrl="/all-products"
           categoryTitle="Top Selling Products"
         >
@@ -44,16 +44,16 @@ const Home = () => {
         {/* product ads banner */}
         <ProductAds
           ads={[
-            `https://appleempire.hisanmastery.com/assets/images/ads-1.webp`,
-            `https://appleempire.hisanmastery.com/assets/images/ads-2.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Honor_X9B_EID.webp`,
           ]}
-          className=" mb-[60px] container mx-auto"
+          className=" mb-[60px] lg:container mx-auto"
         />
 
         {/* popular products */}
 
         <ViewMoreTitle
-          className="top-selling-product mb-[60px] container"
+          className="top-selling-product mb-[60px] lg:container"
           seeMoreUrl="/all-products"
           categoryTitle="Popular Products"
         >
@@ -65,13 +65,21 @@ const Home = () => {
           ads={[
             `https://appleempire.hisanmastery.com/assets/images/discount-banner-1.webp`,
           ]}
-          className=" mb-[60px] container mx-auto"
+          className=" mb-[60px] lg:container mx-auto"
         />
+        {/* top selling product */}
+        <ViewMoreTitle
+          className="top-selling-product mb-[60px] lg:container"
+          seeMoreUrl="/all-products"
+          categoryTitle="Top Pricing Products"
+        >
+          <TopSellingProducts />
+        </ViewMoreTitle>
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/images/content/highlight/Nokia_2660_Flip_Valentines_Day.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/horizontal_image/3-2024/iPhone_15_Pro_Max_International.webp`,
           ]}
-          className=" mb-[60px] container mx-auto"
+          className=" mb-[60px] lg:container mx-auto"
         />
       </div>
     </main>
