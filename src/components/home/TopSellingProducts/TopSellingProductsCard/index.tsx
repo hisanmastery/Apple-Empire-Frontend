@@ -4,7 +4,7 @@ import React from "react";
 const TopSellingProductsCard = ({ className, datas }:any) => {
   return (
     <div
-      data-aos="fade-left"
+      data-aos="fade-up"
       className={`product-row-card-style-one w-full h-[250px] shadow-md bg-white group relative overflow-hidden ${
         className || ""
       }`}
