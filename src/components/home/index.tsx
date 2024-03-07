@@ -35,7 +35,7 @@ const Home = () => {
         {/* top selling product */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"
-          seeMoreUrl="/all-products"
+          seeMoreUrl="/products"
           categoryTitle="Top Selling Products"
         >
           <TopSellingProducts />
@@ -54,7 +54,7 @@ const Home = () => {
 
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"
-          seeMoreUrl="/all-products"
+          seeMoreUrl="/products"
           categoryTitle="Popular Products"
         >
           <PopularProducts />
@@ -70,7 +70,7 @@ const Home = () => {
         {/* top selling product */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"
-          seeMoreUrl="/all-products"
+          seeMoreUrl="/products"
           categoryTitle="Top Pricing Products"
         >
           <TopSellingProducts />
