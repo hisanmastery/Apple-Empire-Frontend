@@ -1,7 +1,5 @@
 "use client";
-
 import React, { useState, useCallback } from "react";
-import { render } from "react-dom";
 import ImageViewer from "react-simple-image-viewer";
 const ProductImage = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -26,13 +24,12 @@ const ProductImage = () => {
     <div>
       <div className="grid grid-cols-4 gap-2 mt-2 cursor-pointer">
         {images.map((src, index) => (
-          <div>
+          <div key={index}>
             <img
               className="w-44"
               src={src}
               onClick={() => openImageViewer(index)}
               width="200"
-              key={index}
               style={{ margin: "2px" }}
               alt=""
             />
