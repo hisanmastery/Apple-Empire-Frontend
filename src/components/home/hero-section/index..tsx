@@ -30,7 +30,7 @@ const HeroSection = () => {
                 <CardContent className="flex w-full aspect-square items-center justify-center  h-[600px] p-1">
                   <img
                     className="h-full w-full rounded-sm"
-                    src="https://demo.nopcommerce.com/images/thumbs/0000088_banner_01.webp"
+                    src="https://d61s2hjse0ytn.cloudfront.net/images/web/slider/Bkash_S24_Ultra.webp"
                     alt=""
                   />
                 </CardContent>
