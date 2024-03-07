@@ -12,7 +12,7 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from "@/components/ui/menubar";
+} from '@/components/ui/menubar';
 const Navbar = () => {
   return (
     <Menubar className="p-8 text-white bg-black ">
