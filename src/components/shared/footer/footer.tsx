@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-10 mt-10">
+    <footer className="bg-[#1e272e] text-white py-10 mt-10">
       <div className="container mx-auto grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         <div className="col-span-1">
           <Link href={'/'}>
@@ -97,6 +97,7 @@ const Footer = () => {
       </div>
       <div className="mt-12 text-center">
         <p className="text-white">© 2024 All rights reserved by Apple Empire.</p>
+        <p className="text-white">Developed by Hisan Mastery</p>
       </div>
     </footer>
   );
