@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/menubar";
 const Navbar = () => {
   return (
-    <Menubar className="p-8">
+    <Menubar className="p-8 text-whtie">
       <MenubarMenu>
         <MenubarTrigger>Home</MenubarTrigger>
         <MenubarContent>

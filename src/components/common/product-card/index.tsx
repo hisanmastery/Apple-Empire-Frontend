@@ -32,7 +32,10 @@ const ProductCard = ({ datas }: any) => {
   };
 
   return (
-    <div className="card  w-full mt-5  bg-base-100 shadow-md ">
+    <div
+      data-aos="fade-up"
+      className="card  w-full mt-5  bg-base-100 shadow-md  "
+    >
       <div
         className="cursor-pointer product-card-one w-full h-full bg-white rounded relative group overflow-hidden "
         style={{ boxShadow: "0px 15px 64px 0px rgba(0, 0, 0, 0.05)" }}

@@ -22,7 +22,7 @@ const PaymentForm = ({ storedCart }: any) => {
   };
 
   return (
-    <div className="mx-auto max-w-screen-lg px-6 py-4 bg-white rounded-lg shadow-md">
+    <div data-aos="fade-left" className="mx-auto max-w-screen-lg px-6 py-4 bg-white rounded-lg shadow-md">
       <h1 className="text-center mb-10 text-xl">Payment Information</h1>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-600 mb-1">

@@ -77,7 +77,7 @@ const CartPage = ({ className }: any) => {
   };
 
   return (
-    <div className={`w-full container mt-4 ${className || ""}`}>
+    <div data-aos="fade-left" className={`w-full container mt-4 ${className || ""}`}>
       {storedCart?.length == 0 ? (
         <div className="h-[90vh] w-full flex justify-center items-center">
           <div>
@@ -89,9 +89,9 @@ const CartPage = ({ className }: any) => {
           </div>
         </div>
       ) : (
-        <div className="grid md:grid-cols-6 grid-cols-3 gap-12 justify-center">
+        <div  className="grid md:grid-cols-6 grid-cols-3 gap-12 justify-center">
           {/* left side cart  */}
-          <div className="col-span-4">
+          <div  className="col-span-4">
             <div className="flex justify-between items-center">
               <h4 className="text-xl font-semibold">Shopping Cart</h4>
               <h4 className="text-xl font-semibold">
