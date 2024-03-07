@@ -27,7 +27,8 @@ const HeroSection = () => {
           <CarouselItem key={index}>
             <div>
               <Card>
-                <CardContent className="flex w-full aspect-square items-center justify-center  h-[600px] p-1">
+                {/* <CardContent className="flex w-full aspect-square items-center justify-center  lg:h-[600px] h-[230px] p-1"> */}
+                <CardContent className="flex w-full aspect-[1920/850] items-center justify-center   p-1">
                   <img
                     className="h-full w-full rounded-sm"
                     src="https://d61s2hjse0ytn.cloudfront.net/images/web/slider/Bkash_S24_Ultra.webp"
