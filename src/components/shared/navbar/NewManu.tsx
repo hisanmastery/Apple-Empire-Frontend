@@ -5,8 +5,19 @@ import { Drawer } from "vaul";
 import { AlignLeft, X } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useDispatch, useSelector } from "react-redux";
+import { getItemLocalStorage } from "@/utils/localstorage";
+import { addStoredCart } from "@/store/features/cart/cartSlice";
+import Link from "next/link";
+import { FaCartPlus } from "react-icons/fa6";
 
 const NewManu = () => {
+  const dispatch = useDispatch();
+  const { storedCart } = useSelector((state: any) => state?.cart);
+  React.useEffect(() => {
+    const storedProduct = getItemLocalStorage("carts") || [];
+    dispatch(addStoredCart(storedProduct));
+  }, []);
   return (
     <Radix.Root className="  grid grid-cols-3 lg:grid-cols-7 items-center  gap-4 fixed w-full z-[2]  shadow-md bg-[#1e272e] p-3">
       <div className="col-span-1 lg:hidden z-[10] ">
@@ -183,7 +194,11 @@ const NewManu = () => {
         <Radix.List className="flex text-white list-none float-right col-span-1">
           <Radix.Item>
             <Radix.Trigger className=" py-1 px-3">
-              <Button className="bg-[#FF4C06] px-[30px]">Login</Button>
+              <p>
+                <Link className="" href={"/cart"}>
+                  <FaCartPlus  className="text-2xl"/><span className="absolute top-0 -mt-2 bg-[#FF4C06] w-6 h-6 rounded-full"> {storedCart?.length}</span>
+                </Link>
+              </p>
             </Radix.Trigger>
           </Radix.Item>
         </Radix.List>
