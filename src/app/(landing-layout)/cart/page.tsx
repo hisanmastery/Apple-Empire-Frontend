@@ -17,6 +17,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { toast } from "sonner";
+import { icons } from './../../../constants/icons';
 
 const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
@@ -70,9 +72,19 @@ const CartPage = ({ className }: any) => {
     const cuponCode = "appleempire";
     if (promoCode === cuponCode) {
       setDiscountPrice(subTotal / 10); // descrount 10%
-      alert("apply successfull");
+      toast.success("Promo code added successfull", {
+        action: {
+          label: <icons.RxCross1 />,
+          onClick: () => toast.dismiss(),
+        },
+      });
     } else {
-      alert("opps promo code not correct");
+      toast.error("Worng promo code", {
+        action: {
+          label: <icons.RxCross1 />,
+          onClick: () => toast.dismiss(),
+        },
+      });
     }
   };
 
