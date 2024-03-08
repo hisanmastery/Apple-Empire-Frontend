@@ -18,7 +18,7 @@ const HeroSection = () => {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full mt-20"
+      className="w-full"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >

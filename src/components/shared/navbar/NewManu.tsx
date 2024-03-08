@@ -19,7 +19,8 @@ const NewManu = () => {
     dispatch(addStoredCart(storedProduct));
   }, []);
   return (
-    <Radix.Root className="  grid grid-cols-3 lg:grid-cols-7 items-center  gap-4 fixed w-full z-[2]  shadow-md bg-[#1e272e] p-3">
+
+<Radix.Root className="  grid grid-cols-3 lg:grid-cols-7 items-center sticky top-0  gap-4  w-full z-[2]  shadow-md bg-[#1e272e] p-3">
       <div className="col-span-1 lg:hidden z-[10] ">
         <Drawer.Root direction="left">
           <Drawer.Trigger asChild>
@@ -85,7 +86,7 @@ const NewManu = () => {
         <Radix.List className="flex list-none font-medium col-span-2">
           <Radix.Item>
             <Radix.Trigger className=" py-1 hover:bg-slate-600 rounded px-3">
-              Home
+             <Link href={"/"}>Home</Link>
             </Radix.Trigger>
           </Radix.Item>
           <Radix.Item>
@@ -204,6 +205,7 @@ const NewManu = () => {
         </Radix.List>
       </div>
     </Radix.Root>
+
   );
 };
 
