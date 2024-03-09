@@ -1,9 +1,11 @@
 "use client";
+import { icons } from "@/constants/icons";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
 import { getItemLocalStorage, setItemLocalstorage } from "@/utils/localstorage";
 import Link from "next/link";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "sonner";
 // import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = ({ datas }: any) => {
@@ -21,9 +23,22 @@ const ProductCard = ({ datas }: any) => {
     // check existing product if not product it will be set
     if (!existingProduct) {
       const updatedCart = [...existingCart, product];
-      console.log(updatedCart);
+      toast.success("Add to cart successfull", {
+        action: {
+          label: <icons.RxCross1 />,
+          onClick: () => toast.dismiss(),
+        },
+      });
+
       // set updated cart into locastorage
       setItemLocalstorage("carts", updatedCart);
+    } else {
+      toast.error("Already added to cart", {
+        action: {
+          label: <icons.RxCross1 />,
+          onClick: () => toast.dismiss(),
+        },
+      });
     }
     // get updated sotred cart product
     const storedProduct = getItemLocalStorage("carts") || [];

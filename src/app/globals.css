@@ -78,6 +78,9 @@
     width: 95%;
     margin: auto;
   }
+  .bg-gradient {
+    @apply bg-gradient-to-r from-[#f5edda] via-[#f7d5da] to-[#f9e8fa]
+  }
 
 
 }

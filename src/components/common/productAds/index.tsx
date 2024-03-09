@@ -19,13 +19,13 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
                 ads.length > 1 && ads.length <= 2 ? "sm:w-1/2 w-full" : "w-full"
               }  `}
             >
-              <Link href="/single-product">
+              <Link href="/products">
                 <img src={ads[0]} alt="" className="w-full sm:h-full h-auto" />
               </Link>
             </div>
             {ads.length > 1 && ads.length <= 2 && (
               <div data-aos="fade-left" className="flex-1 h-full">
-                <Link href="/single-product">
+                <Link href="/products">
                   <img src={ads[1]} alt="" className="w-full h-full" />
                 </Link>
               </div>

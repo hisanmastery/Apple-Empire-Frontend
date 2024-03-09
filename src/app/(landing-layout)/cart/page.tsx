@@ -1,13 +1,13 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addStoredCart } from "../../../store/features/cart/cartSlice";
-import Link from "next/link";
-import InputQuantityCom from "@/components/carts/InputQuantityCom";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addStoredCart } from '../../../store/features/cart/cartSlice';
+import Link from 'next/link';
+import InputQuantityCom from '@/components/carts/InputQuantityCom';
 
-import { getItemLocalStorage, setItemLocalstorage } from "@/utils/localstorage";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { getItemLocalStorage, setItemLocalstorage } from '@/utils/localstorage';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -16,16 +16,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
+import { toast } from 'sonner';
+import { icons } from './../../../constants/icons';
 
 const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
-  const [promoCode, setPromoCode] = useState("");
+  const [promoCode, setPromoCode] = useState('');
   const [discountPrice, setDiscountPrice] = useState(0);
   console.log(promoCode);
   const dispatch = useDispatch();
   useEffect(() => {
-    const storedProduct = getItemLocalStorage("carts") || [];
+    const storedProduct = getItemLocalStorage('carts') || [];
     dispatch(addStoredCart(storedProduct));
   }, [dispatch]);
 
@@ -33,9 +35,9 @@ const CartPage = ({ className }: any) => {
   const handleIncrement = (index: number, newQuantity: number) => {
     const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
     updatedStoredCart[index].quantity = newQuantity;
-    localStorage.setItem("carts", JSON.stringify(updatedStoredCart));
+    localStorage.setItem('carts', JSON.stringify(updatedStoredCart));
     // refetch
-    const storedProduct = getItemLocalStorage("carts") || [];
+    const storedProduct = getItemLocalStorage('carts') || [];
     dispatch(addStoredCart(storedProduct));
   };
 
@@ -43,18 +45,18 @@ const CartPage = ({ className }: any) => {
   const handleDecrement = (index: number, newQuantity: number) => {
     const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
     updatedStoredCart[index].quantity = newQuantity;
-    localStorage.setItem("carts", JSON.stringify(updatedStoredCart));
+    localStorage.setItem('carts', JSON.stringify(updatedStoredCart));
     // refetch
-    const storedProduct = getItemLocalStorage("carts") || [];
+    const storedProduct = getItemLocalStorage('carts') || [];
     dispatch(addStoredCart(storedProduct));
   };
 
   // handle remove  cart in right sidebar
   const removeCart = (id: any) => {
-    const storedProduct = getItemLocalStorage("carts") || [];
+    const storedProduct = getItemLocalStorage('carts') || [];
     const updatedCart = storedProduct.filter((item: any) => item.id !== id);
-    setItemLocalstorage("carts", updatedCart);
-    const storedProducts = getItemLocalStorage("carts") || [];
+    setItemLocalstorage('carts', updatedCart);
+    const storedProducts = getItemLocalStorage('carts') || [];
 
     dispatch(addStoredCart(storedProducts));
   };
@@ -67,17 +69,30 @@ const CartPage = ({ className }: any) => {
   const shippingCost = subTotal / 5; // shiping cost total price 5%
   // handle submit promocode
   const handlePromoCode = () => {
-    const cuponCode = "appleempire";
+    const cuponCode = 'appleempire';
     if (promoCode === cuponCode) {
       setDiscountPrice(subTotal / 10); // descrount 10%
-      alert("apply successfull");
+      toast.success('Promo code added successfull', {
+        action: {
+          label: <icons.RxCross1 />,
+          onClick: () => toast.dismiss(),
+        },
+      });
     } else {
-      alert("opps promo code not correct");
+      toast.error('Worng promo code', {
+        action: {
+          label: <icons.RxCross1 />,
+          onClick: () => toast.dismiss(),
+        },
+      });
     }
   };
 
   return (
-    <div data-aos="fade-left" className={`w-full container mt-4 ${className || ""}`}>
+    <div
+      data-aos="fade-left"
+      className={`w-full container mt-4 ${className || ''}`}
+    >
       {storedCart?.length == 0 ? (
         <div className="h-[90vh] w-full flex justify-center items-center">
           <div>
@@ -89,9 +104,9 @@ const CartPage = ({ className }: any) => {
           </div>
         </div>
       ) : (
-        <div  className="grid md:grid-cols-6 grid-cols-3 gap-12 justify-center">
+        <div className="grid md:grid-cols-6 grid-cols-3 gap-12 justify-center">
           {/* left side cart  */}
-          <div  className="col-span-4">
+          <div className="col-span-4">
             <div className="flex justify-between items-center">
               <h4 className="text-xl font-semibold">Shopping Cart</h4>
               <h4 className="text-xl font-semibold">
@@ -146,7 +161,7 @@ const CartPage = ({ className }: any) => {
               </TableBody>
             </Table>
 
-            <Link href={"/products"}>
+            <Link href={'/products'}>
               <p className="text-blue-600 text-sm cursor-pointer mt-4 hover:text-blue-800">
                 Continue Shopping
               </p>
@@ -197,7 +212,7 @@ const CartPage = ({ className }: any) => {
                   <p className="">{subTotal + shippingCost - discountPrice}$</p>
                 </div>
                 <div className="mt-5">
-                  <Link href={"/cart/checkout"} className="w-full ">
+                  <Link href={'/cart/checkout'} className="w-full ">
                     <button
                       // onClick={() => handleCartClick()}
                       className="bg-blue-400 text-white p-2 w-full "
