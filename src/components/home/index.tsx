@@ -7,6 +7,7 @@ import ViewMoreTitle from "../common/ViewMoreTitle/index";
 import TopSellingProducts from "../home/TopSellingProducts/index";
 import PopularProducts from "../home/popularProducts/index";
 import productDatas from "@/../../public/product.json";
+import TopItems from "./top-items";
 
 const Home = () => {
   const datas = productDatas.products.slice(0, 8);
@@ -15,6 +16,7 @@ const Home = () => {
       <div className="lg:container mx-auto md:p-0 p-3">
         {/* brand profile */}
         {/* <ClientBrand /> */}
+        <TopItems />
         <ProductAds
           ads={[
             `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,

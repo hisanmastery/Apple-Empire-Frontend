@@ -14,7 +14,7 @@ const Footer = () => {
 
         {/* row -1  */}
 
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-center">
           <div>
             <img
               className="w-[80px]"
@@ -39,8 +39,8 @@ const Footer = () => {
         </div>
         {/* row -2  */}
 
-        <div className="flex flex-col md:flex-row justify-between items-center mt-16">
-          <ul className="sm:flex items-center flex-wrap  gap-4 font-normal cursor-pointer">
+        <div className="grid grid-cols-12 ga-5 justify-between items-center mt-16">
+          <ul className="sm:flex items-center col-span-8 lg:col-span-6 flex-wrap  gap-4 font-normal cursor-pointer">
             <li>About Us</li>
             <li>Order Tracking</li>
             <li>Return Policy</li>
@@ -48,7 +48,7 @@ const Footer = () => {
             <li>Cookie Policy</li>
             <li>Privacy Policy</li>
           </ul>
-          <div className="flex justify-center mt-4 space-x-4">
+          <div className="flex justify-center mt-4 space-x-4 leading-3 col-span-4 lg:col-span-4">
             <Link href="#">
               <Facebook className="text-blue-500" />
             </Link>
@@ -63,7 +63,7 @@ const Footer = () => {
             </Link>
           </div>
 
-          <div>
+          <div className="mt-5 col-span-12 sm:col-span-8 md:col-span-4 lg:col-span-2">
             <button className="bg-blue-400 w-full text-white px-10 py-2 rounded-sm uppercase">
               Store Locator
             </button>

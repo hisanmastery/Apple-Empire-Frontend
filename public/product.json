@@ -2,7 +2,7 @@
   "products": [
     {
       "id": "62aefe9ad8b80d5234af625a",
-      "image": "https://demo.nopcommerce.com/images/thumbs/0000024_apple-macbook-pro-13-inch_550.jpeg ",
+      "image": "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-14-Pro-Max-9907.jpg",
       "brand": "xioami",
       "review": 3,
       "quantity": 1,
@@ -17,7 +17,7 @@
     },
     {
       "id": "62aefe9a17780a9e549646c2",
-      "image": "https://demo.nopcommerce.com/images/thumbs/0000024_apple-macbook-pro-13-inch_550.jpeg ",
+      "image": "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-14-Pro-Max-9907.jpg",
       "brand": "apple",
       "review": 5,
       "quantity": 1,
@@ -32,7 +32,7 @@
     },
     {
       "id": "62aefe9af9a0e865ee49c99e",
-      "image": "https://demo.nopcommerce.com/images/thumbs/0000024_apple-macbook-pro-13-inch_550.jpeg ",
+      "image": "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-14-Pro-Max-9907.jpg",
       "brand": "apple",
       "review": 5,
       "quantity": 1,
@@ -47,7 +47,7 @@
     },
     {
       "id": "62aefe9a6e662e77accd4cc4",
-      "image": "https://demo.nopcommerce.com/images/thumbs/0000024_apple-macbook-pro-13-inch_550.jpeg ",
+      "image": "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-14-Pro-Max-9907.jpg",
       "brand": "google",
       "review": 5,
       "quantity": 1,
@@ -62,7 +62,7 @@
     },
     {
       "id": "62aefe9a9e1c4b69e47fa40f",
-      "image": "https://demo.nopcommerce.com/images/thumbs/0000024_apple-macbook-pro-13-inch_550.jpeg ",
+      "image": "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-14-Pro-Max-9907.jpg",
       "brand": "xioami",
       "review": 5,
       "quantity": 1,

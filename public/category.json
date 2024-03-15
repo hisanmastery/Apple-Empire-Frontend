@@ -1,0 +1,41 @@
+{
+    "top_items": [
+      {
+        "category": "phone",
+        "name": "Smartphone",
+        "price": "$999",
+        "image": "https://d61s2hjse0ytn.cloudfront.net/category_cover/1/iPhone_14_Pro_Max.webp"
+      },
+      {
+        "category": "tablet",
+        "name": "Tablet",
+        "price": "$499",
+        "image": "https://d61s2hjse0ytn.cloudfront.net/category_cover/None/Tablets.webp"
+      },
+      {
+        "category": "laptop",
+        "name": "Laptop",
+        "price": "$1499",
+        "image": "https://d61s2hjse0ytn.cloudfront.net/category_cover/2/Laptop.webp"
+      },
+      {
+        "category": "smart_watch",
+        "name": "Smart Watch",
+        "price": "$199",
+        "image": "https://d61s2hjse0ytn.cloudfront.net/category_cover/None/Smart_Watch.webp"
+      },
+      {
+        "category": "air_port",
+        "name": "Air Port",
+        "price": "$299",
+        "image": "https://d61s2hjse0ytn.cloudfront.net/category_cover/None/Airpods.webp"
+      },
+      {
+        "category": "air_port",
+        "name": "Gamnig Console",
+        "price": "$299",
+        "image": "https://d61s2hjse0ytn.cloudfront.net/category_cover/None/Smart_Watch.webp"
+      }
+    ]
+  }
+  
