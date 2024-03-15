@@ -15,7 +15,7 @@ const Home = () => {
     <main>
       <div className="lg:container mx-auto md:p-0 p-3">
         {/* brand profile */}
-        {/* <ClientBrand /> */}
+        <ClientBrand />
         <TopItems />
         <ProductAds
           ads={[
