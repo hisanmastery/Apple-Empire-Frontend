@@ -14,9 +14,9 @@ const Home = () => {
   return (
     <main>
       <div className="lg:container mx-auto md:p-0 p-3">
+        <TopItems />
         {/* brand profile */}
         <ClientBrand />
-        <TopItems />
         <ProductAds
           ads={[
             `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,
