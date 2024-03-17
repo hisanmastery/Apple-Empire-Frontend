@@ -72,7 +72,7 @@ const ClientBrand = () => {
     },
   ];
   return (
-    <section className="container mx-auto mt-10">
+    <section className="container mx-auto mt-10 mb-10">
       <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2  lg:gap-10 gap-7">
         {brandData?.map((brand, index) => (
           <div key={index}>

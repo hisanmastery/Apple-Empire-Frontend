@@ -1,6 +1,7 @@
-import NewManu from "./NewManu";
+import Menu from './Menu';
+
 const Navbar = () => {
-  return <NewManu />;
+  return <Menu />;
 };
 
 export default Navbar;
