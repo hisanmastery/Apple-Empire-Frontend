@@ -52,7 +52,7 @@ const ProductCard = ({ datas }: any) => {
           }}
         ></div>
         <div className="product-card-details px-[10px] pb-[10px] ">
-          {/* add to card button */}
+          {/* add to cart button */}
           <div className="absolute bottom-1  gap-1 left-1 right-1">
             <button
               onClick={() => handleCartClick()}

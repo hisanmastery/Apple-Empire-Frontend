@@ -4,16 +4,17 @@ import Products from "..";
 import productDatas from "@/../../public/product.json";
 import ViewMoreTitle from "../../../common/ViewMoreTitle";
 import ProductAds from "../../../common/productAds";
-import ProductImage from "./image-viewer/index"
+import ProductImage from "./image-viewer/index";
 import { icons } from "@/constants/icons";
-const ProductDetails = ({ product }:any) => {
-  const datas = productDatas.products.slice(0, 4);
+import { Button } from "@/components/ui/button";
+const ProductDetails = ({ product }: any) => {
+  const datas = productDatas.products.slice(0, 5);
   return (
     <section className="container mx-auto">
       <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
         <div>
           <img className="w-full" src={product?.image} />
-          <ProductImage/>
+          <ProductImage />
         </div>
         <div>
           <h2 className="text-2xl font-bold">{product?.title}</h2>
@@ -45,9 +46,21 @@ const ProductDetails = ({ product }:any) => {
             <p>Tags : Beer, Foamer</p>
             <p>SKU: KE-91039</p>
           </div>
-          {/* add to card button */}
-          <div className=" flex  bottom-1 mt-5 gap-1 left-1 right-1">
-            <button className="bg-blue-400  text-white p-2">ADD TO CARD</button>
+          {/* add to cart button */}
+          <div className="flex gap-5 mt-5">
+            <Button
+              // onClick={() => handleCartClick()}
+              className="bg-slate-800 hover:bg-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
+            >
+              ADD TO CART
+            </Button>
+            <Button
+              variant={"outline"}
+              // onClick={() => handleCartClick()}
+              className=" hover:bg-[#FF4C06] border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
+            >
+              Buy Now
+            </Button>
           </div>
         </div>
       </div>
@@ -79,7 +92,7 @@ const ProductDetails = ({ product }:any) => {
       {/* product ads banner */}
       <ProductAds
         ads={[
-          `https://d61s2hjse0ytn.cloudfront.net/images/content/highlight/Nokia_2660_Flip_Valentines_Day.webp`,
+          `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,
         ]}
         className=" mb-[60px] container mx-auto"
       />
