@@ -419,6 +419,21 @@
       "cam_product_available": 18,
       "cam_product_sale": 10,
       "product_type": null
+    },
+    {
+      "id": "62aefea9ae4a87b5c3essswsssssffqwreadgaefafa1ffaff5ae",
+      "image": "https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-14-Pro-Max-9907.jpg",
+      "brand": "xioami",
+      "review": 5,
+      "quantity": 1,
+      "description": "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+      "title": "Callflex dolore eiusmod voluptate proident aute incididunt anim",
+      "offer_price": "18.74",
+      "price": "34.99",
+      "campaingn_product": true,
+      "cam_product_available": 18,
+      "cam_product_sale": 10,
+      "product_type": null
     }
   ]
 }

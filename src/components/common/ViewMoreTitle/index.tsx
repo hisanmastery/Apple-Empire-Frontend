@@ -6,9 +6,10 @@ const ViewMoreTitle = ({
   className,
   children,
   seeMoreUrl = "",
-}:any) => {
+  style,
+}: any) => {
   return (
-    <div className={`section-wrapper w-full ${className || ""}`}>
+    <div style={{marginTop:'30px'}} className={`section-wrapper w-full  ${className || ""}`}>
       <div className="container-x mx-auto">
         <div className=" section-title flex justify-between items-center mb-5">
           <div>

@@ -10,13 +10,12 @@ import productDatas from "@/../../public/product.json";
 import TopItems from "./top-items";
 
 const Home = () => {
-  const datas = productDatas.products.slice(0, 8);
+  const datas = productDatas.products.slice(0, 10);
   return (
     <main>
       <div className="lg:container mx-auto md:p-0 p-3">
         <TopItems />
-        {/* brand profile */}
-        <ClientBrand />
+
         <ProductAds
           ads={[
             `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,
@@ -24,6 +23,8 @@ const Home = () => {
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
+        {/* brand profile */}
+        <ClientBrand />
         {/* all products */}
         <Products productData={datas} />
         {/* ads banner */}
@@ -37,7 +38,7 @@ const Home = () => {
         {/* top selling product */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"
-          seeMoreUrl="/all-products"
+          seeMoreUrl="/products"
           categoryTitle="Top Selling Products"
         >
           <TopSellingProducts />
@@ -55,8 +56,8 @@ const Home = () => {
         {/* popular products */}
 
         <ViewMoreTitle
-          className="top-selling-product mb-[60px] lg:container"
-          seeMoreUrl="/all-products"
+          className="mb-[60px] lg:container"
+          seeMoreUrl="/products"
           categoryTitle="Popular Products"
         >
           <PopularProducts />

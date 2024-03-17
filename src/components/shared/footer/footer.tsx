@@ -41,12 +41,12 @@ const Footer = () => {
 
         <div className="grid grid-cols-12 ga-5 justify-between items-center mt-16">
           <ul className="sm:flex items-center col-span-8 lg:col-span-6 flex-wrap  gap-4 font-normal cursor-pointer">
-            <li>About Us</li>
-            <li>Order Tracking</li>
-            <li>Return Policy</li>
-            <li>Terms and Conditions</li>
-            <li>Cookie Policy</li>
-            <li>Privacy Policy</li>
+            <li className="hover:text-[#FF4C06]">About Us</li>
+            <li className="hover:text-[#FF4C06]">Order Tracking</li>
+            <li className="hover:text-[#FF4C06]">Return Policy</li>
+            <li className="hover:text-[#FF4C06]">Terms and Conditions</li>
+            <li className="hover:text-[#FF4C06]">Cookie Policy</li>
+            <li className="hover:text-[#FF4C06]">Privacy Policy</li>
           </ul>
           <div className="flex justify-center mt-4 space-x-4 leading-3 col-span-4 lg:col-span-4">
             <Link href="#">
