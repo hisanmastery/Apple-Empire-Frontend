@@ -1,14 +1,10 @@
 'use client';
 import React, { Fragment } from 'react';
-import * as Radix from '@radix-ui/react-navigation-menu';
 import { LeftSideMenu, RightSideMenu } from './sideMenu';
 import Link from 'next/link';
-import { FaCartPlus } from 'react-icons/fa6';
 import SearchInput from './searchInput';
 import { Gift, ShoppingCart, Store, UserRound } from 'lucide-react';
-import { Menubar, MenubarShortcut } from '@/components/ui/menubar';
 import SubMenu from './subMenu';
-
 function Menu(props: any) {
   return (
     <Fragment>
@@ -49,7 +45,7 @@ function Menu(props: any) {
                 <ShoppingCart size={34} />
               </div>
               <div className="ml-2">
-                <h5 className="font-semibold text-sm">Cart(0)</h5>
+                <Link href={"/cart"}><h5 className="font-semibold text-sm">Cart(0)</h5></Link>
                 <p className="text-xs font-light">Add Items</p>
               </div>
             </div>

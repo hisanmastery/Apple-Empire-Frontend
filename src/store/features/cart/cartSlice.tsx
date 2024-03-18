@@ -16,14 +16,14 @@ const cartSlice = createSlice({
     },
     addStoredCart(state: ICartState, { payload }) {
       // Extracting the IDs from the store array
-      const productids = payload.map((item: any) => item?.id);
+      const productids = payload?.map((item: any) => item?.id);
       // Filtering products from datas based on storeIds
       const filteredProducts = datas?.products?.filter((product: any) =>
-        productids.includes(product.id)
+        productids?.includes(product.id)
       );
 
       // Extracting the IDs and quantities from the payload
-      const payloadData = payload.reduce((acc: any, item: any) => {
+      const payloadData = payload?.reduce((acc: any, item: any) => {
         acc[item.id] = item.quantity || 1;
         return acc;
       }, {});

@@ -1,17 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addStoredCart } from "../../../store/features/cart/cartSlice";
 import Link from "next/link";
 import InputQuantityCom from "@/components/carts/InputQuantityCom";
 
-import { getItemLocalStorage, setItemLocalstorage } from "@/utils/localstorage";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -22,41 +20,27 @@ const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const [promoCode, setPromoCode] = useState("");
   const [discountPrice, setDiscountPrice] = useState(0);
-  console.log(promoCode);
   const dispatch = useDispatch();
-  useEffect(() => {
-    const storedProduct = getItemLocalStorage("carts") || [];
-    dispatch(addStoredCart(storedProduct));
-  }, [dispatch]);
 
   // handle increment quantity
   const handleIncrement = (index: number, newQuantity: number) => {
     const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
     updatedStoredCart[index].quantity = newQuantity;
-    localStorage.setItem("carts", JSON.stringify(updatedStoredCart));
-    // refetch
-    const storedProduct = getItemLocalStorage("carts") || [];
-    dispatch(addStoredCart(storedProduct));
+    dispatch(addStoredCart(updatedStoredCart));
   };
 
   // handle decrement quantity
   const handleDecrement = (index: number, newQuantity: number) => {
     const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
     updatedStoredCart[index].quantity = newQuantity;
-    localStorage.setItem("carts", JSON.stringify(updatedStoredCart));
-    // refetch
-    const storedProduct = getItemLocalStorage("carts") || [];
-    dispatch(addStoredCart(storedProduct));
+    dispatch(addStoredCart(updatedStoredCart));
   };
 
   // handle remove  cart in right sidebar
   const removeCart = (id: any) => {
-    const storedProduct = getItemLocalStorage("carts") || [];
+    const storedProduct = storedCart || [];
     const updatedCart = storedProduct.filter((item: any) => item.id !== id);
-    setItemLocalstorage("carts", updatedCart);
-    const storedProducts = getItemLocalStorage("carts") || [];
-
-    dispatch(addStoredCart(storedProducts));
+    dispatch(addStoredCart(updatedCart));
   };
 
   // calculate total price
@@ -77,7 +61,10 @@ const CartPage = ({ className }: any) => {
   };
 
   return (
-    <div data-aos="fade-left" className={`w-full container mt-4 ${className || ""}`}>
+    <div
+      data-aos="fade-left"
+      className={`w-full container mt-4 ${className || ""}`}
+    >
       {storedCart?.length == 0 ? (
         <div className="h-[90vh] w-full flex justify-center items-center">
           <div>
@@ -89,9 +76,9 @@ const CartPage = ({ className }: any) => {
           </div>
         </div>
       ) : (
-        <div  className="grid md:grid-cols-6 grid-cols-3 gap-12 justify-center">
+        <div className="grid md:grid-cols-6 grid-cols-3 gap-12 justify-center">
           {/* left side cart  */}
-          <div  className="col-span-4">
+          <div className="col-span-4">
             <div className="flex justify-between items-center">
               <h4 className="text-xl font-semibold">Shopping Cart</h4>
               <h4 className="text-xl font-semibold">

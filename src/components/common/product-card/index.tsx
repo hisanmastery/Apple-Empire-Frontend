@@ -1,34 +1,26 @@
 "use client";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
-import { getItemLocalStorage, setItemLocalstorage } from "@/utils/localstorage";
 import Link from "next/link";
 import React from "react";
-import { useDispatch } from "react-redux";
-// import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 const ProductCard = ({ datas }: any) => {
   const product = {
     id: datas?.id,
   };
+  const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   // handle cart click
   const handleCartClick = () => {
     // get product data
-    const existingCart = getItemLocalStorage("carts") || [];
+    const existingCart = storedCart || [];
     const existingProduct = existingCart?.find(
       (item: any) => item.id === datas.id
     );
     // check existing product if not product it will be set
     if (!existingProduct) {
       const updatedCart = [...existingCart, product];
-      console.log(updatedCart);
-      // set updated cart into locastorage
-      setItemLocalstorage("carts", updatedCart);
+      dispatch(addStoredCart(updatedCart));
     }
-    // get updated sotred cart product
-    const storedProduct = getItemLocalStorage("carts") || [];
-    // save stored car in redux reducer
-    dispatch(addStoredCart(storedProduct));
   };
 
   return (
