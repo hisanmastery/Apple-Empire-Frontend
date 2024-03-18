@@ -22,7 +22,7 @@ const HeroSection = () => {
     {
       id: "62aefe9ad8b80d5234af625a",
       image:
-        "https://demo.nopcommerce.com/images/thumbs/0000024_apple-macbook-pro-13-inch_550.jpeg",
+        "https://maccity.com.my/image/cache/data/iphone/iphone%2014%20plus/starlight/iPhone_14_Plus_Starlight_PDP_Image_Position-1A_Starlight_Color_SEA-450x579.jpg",
       brand: "xioami",
       review: 3,
       quantity: 1,
@@ -39,7 +39,7 @@ const HeroSection = () => {
     {
       id: "62aefe9ad8b80d5234af625a",
       image:
-        "https://demo.nopcommerce.com/images/thumbs/0000024_apple-macbook-pro-13-inch_550.jpeg",
+        "https://maccity.com.my/image/cache/data/iphone/iphone%2014%20plus/starlight/iPhone_14_Plus_Starlight_PDP_Image_Position-1A_Starlight_Color_SEA-450x579.jpg",
       brand: "xioami",
       review: 3,
       quantity: 1,
@@ -105,7 +105,7 @@ const HeroSection = () => {
                 />
               </div>
               <div className="flex-1 h-full flex flex-col justify-center">
-                <Link href="/single-product">
+                <Link href={`/products/${datas?.id}`}>
                   <p className="font-semibold title mb-2 sm:text-[15px] text-[13px] font-600 text-qblack leading-[24px] line-clamp-1 hover:text-qyellow cursor-pointer">
                     {datas?.title}
                   </p>
