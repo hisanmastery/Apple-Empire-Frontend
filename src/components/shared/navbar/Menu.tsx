@@ -1,11 +1,13 @@
-'use client';
-import React, { Fragment } from 'react';
-import { LeftSideMenu, RightSideMenu } from './sideMenu';
-import Link from 'next/link';
-import SearchInput from './searchInput';
-import { Gift, ShoppingCart, Store, UserRound } from 'lucide-react';
-import SubMenu from './subMenu';
+"use client";
+import React, { Fragment } from "react";
+import { LeftSideMenu, RightSideMenu } from "./sideMenu";
+import Link from "next/link";
+import SearchInput from "./searchInput";
+import { Gift, ShoppingCart, Store, UserRound } from "lucide-react";
+import SubMenu from "./subMenu";
+import { useSelector } from "react-redux";
 function Menu(props: any) {
+  const { storedCart } = useSelector((state: any) => state?.cart);
   return (
     <Fragment>
       <div className=" font-inter grid grid-cols-5 lg:grid-cols-12 items-center sticky top-0  gap-4  w-full z-[2]  shadow-md bg-black p-3">
@@ -14,11 +16,11 @@ function Menu(props: any) {
         </div>
         <div className="col-span-1 flex list-none text-white py-1 px-3">
           {/* Apple Empire */}
-          <Link href={'/'}>
+          <Link href={"/"}>
             <img
               className="w-14"
               src={
-                'https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg'
+                "https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg"
               }
               alt="logo"
             />
@@ -45,8 +47,12 @@ function Menu(props: any) {
                 <ShoppingCart size={34} />
               </div>
               <div className="ml-2">
-                <Link href={"/cart"}><h5 className="font-semibold text-sm">Cart(0)</h5></Link>
-                <p className="text-xs font-light">Add Items</p>
+                <Link href={"/cart"}>
+                  <h5 className="font-semibold text-sm">
+                    Cart({storedCart?.length})
+                  </h5>{" "}
+                  <p className="text-xs font-light">Add Items</p>
+                </Link>
               </div>
             </div>
 
