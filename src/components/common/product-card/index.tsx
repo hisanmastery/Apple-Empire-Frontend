@@ -22,6 +22,8 @@ const ProductCard = ({ datas }: any) => {
       dispatch(addStoredCart(updatedCart));
     }
   };
+  // check already added cart
+  const isInCart = storedCart.find((item: any) => item.id === datas.id);
 
   return (
     <div
@@ -43,14 +45,15 @@ const ProductCard = ({ datas }: any) => {
             margin: "auto",
           }}
         ></div>
-        <div className="product-card-details px-[10px] pb-[10px] ">
+        <div className="px-[10px] pb-[10px] ">
           {/* add to cart button */}
           <div className="absolute bottom-1  gap-1 left-1 right-1">
             <button
+              disabled={isInCart}
               onClick={() => handleCartClick()}
-              className="bg-slate-800 hover:bg-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
+              className={`bg-slate-800 uppercase ${!isInCart ? '  hover:bg-[#FF4C06]' : 'bg-slate-500 opacity-40'} rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm`}
             >
-              ADD TO CART
+              {isInCart ? "Added to cart" : "ADD TO CART"}
             </button>
           </div>
 
@@ -59,12 +62,8 @@ const ProductCard = ({ datas }: any) => {
               {datas?.title}
             </p>
           </Link>
-          <div className="reviews flex space-x-[1px] mb-3">
-            {/* <span className="text-yellow-400">{<icons.FaStar />}</span>
-            <span className="text-yellow-400">{<icons.FaStar />}</span>
-            <span className="text-yellow-400">{<icons.FaStar />}</span>
-            <span className="text-yellow-400">{<icons.FaStar />}</span> */}
-          </div>
+          {/* rating */}
+          <div className="reviews flex space-x-[1px] mb-3"></div>
           <p className="price pb-10">
             <span className="main-price text-qgray line-through font-600 font-semibold text-[18px] ">
               {datas?.price}
