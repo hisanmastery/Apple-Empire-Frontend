@@ -10,7 +10,7 @@ import { icons } from "@/constants/icons";
 import { Button } from "@/components/ui/button";
 import { IoLogoWhatsapp } from "react-icons/io5";
 // const ProductDetails = ({ product }: any) => {
-const ProductDetails = () => {
+const ProductDetails = ({products}:any) => {
   const datas = productDatas.products.slice(0, 5);
   const [selectedColor, setSelectedColor]: any = useState("");
   const product = {

@@ -6,7 +6,7 @@ const ProductsDetailsPage = ({ params }:any) => {
   const product = ProductData?.products.find((pro) => pro?.id === id);
   return (
     <div>
-      <ProductDetails product={product} />
+      <ProductDetails products={product} />
     </div>
   );
 };
