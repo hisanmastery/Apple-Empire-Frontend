@@ -12,9 +12,6 @@ import { Button } from "@/components/ui/button";
 const ProductDetails = () => {
   const datas = productDatas.products.slice(0, 5);
   const [selectedColor, setSelectedColor]: any = useState("");
-  const [isImageViewerOpen, setIsImageViewerOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
-
   const product = {
     id: "62aefe9a6e662e77accd4cc4",
     image:
@@ -49,51 +46,34 @@ const ProductDetails = () => {
         image:
           "https://adminapi.applegadgetsbd.com/storage/media/large/1533-33734.jpg",
       },
+      {
+        color: "Blue",
+        colorCode: "#0000FF",
+        image: "https://www.coolmod.com/images/product/large/apple-iphone-12-61-5g-128gb-libre-azul-smartphone-mavil-001.jpg",
+      },
     ],
   };
 
   const handleColorButtonClick = (color: any) => {
     setSelectedColor(color);
-    setIsImageViewerOpen(true);
   };
 
-  const handleImageViewerClose = () => {
-    setIsImageViewerOpen(false);
-  };
-
-  const handleThumbnailClick = (index: any) => {
-    setCurrentImage(index);
-  };
-
-  // const images = selectedColor
-  //   ? product.variations.find((variant:any) => variant.color === selectedColor)
-  //       .image
-  //   : product.image;
   const images = selectedColor
     ? product.variations.find((variant: any) => variant.color === selectedColor)
         ?.image ?? product.image
     : product.image;
 
+  // Extracting only the 'image' property from each object in the 'variations' array
+  const variationImages = product.variations.map(
+    (variation) => variation.image
+  );
+  console.log(selectedColor);
   return (
     <section className="container mx-auto">
       <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
-        {/* <div>
-          <img className="w-full" src={product?.image} />
-          <ProductImage />
-        </div> */}
-
         <div>
           <img className="w-full" src={images} />
-          {/* <div className="flex justify-center mt-4 space-x-4">
-            {product.variations.map((variant: any, index: any) => (
-              <button
-                key={index}
-                style={{backgroundColor:`${variant.colorCode}`}}
-                className={`w-8 h-8 rounded-full bg-[${variant.colorCode}] border border-gray-300`}
-                onClick={() => handleColorButtonClick(variant.color)}
-              ></button>
-            ))}
-          </div> */}
+          <ProductImage variationImages={variationImages} />
         </div>
 
         <div>
@@ -110,21 +90,26 @@ const ProductDetails = () => {
             Manufacturer: <span className="text-blue-600">Apple</span>
           </p>
           <div className="flex items-center mt-4 space-x-4">
-            {product.variations.map((variant: any, index: any) => (
+          <h4>Color:</h4>  {product.variations.map((variant: any, index: any) => (
               <button
                 key={index}
                 style={{ backgroundColor: `${variant.colorCode}` }}
-                className={`w-8 h-8 rounded-full bg-[${variant.colorCode}] border border-gray-300`}
+                className={`w-9 h-9 rounded-lg bg-[${
+                  variant.colorCode
+                }] border border-gray-300 ${
+                  selectedColor === variant.color &&
+                  "p-1  border-yellow-500 border-4"
+                }`}
                 onClick={() => handleColorButtonClick(variant.color)}
               ></button>
             ))}
           </div>
           {/* pricing */}
           <p className="price pb-5 mt-5">
-            <span className="main-price text-qgray line-through font-600 font-semibold text-[18px] ">
+            <span className="main-price  line-through font-600 font-semibold text-[18px] ">
               {product?.price}
             </span>
-            <span className="offer-price text-qred font-600 text-[18px] ml-2 font-semibold text-red-500">
+            <span className="offer-price  font-600 text-[18px] ml-2 font-semibold text-red-500">
               {product?.offer_price}
             </span>
           </p>
