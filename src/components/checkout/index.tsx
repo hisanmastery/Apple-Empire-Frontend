@@ -1,6 +1,8 @@
 "use client";
 import { useSelector } from "react-redux";
-import PaymentFrom from "./payment-from/index";
+import ShippingAddress from "./shiping-address";
+import ShippingMethod from "./shipping-method";
+import OrderSummary from "./order-summary";
 const Checkout = () => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   // calculate sub total price
@@ -8,14 +10,25 @@ const Checkout = () => {
     return acc + product?.quantity * parseInt(product?.offer_price);
   }, 0);
   return (
-    <main>
-      {/* <div className="grid grid-cols-2 container mx-auto gap-5"> */}
-      <div>
-        {/* <div>
-          <CheckoutProduct subTotal={subTotal} storedCart={storedCart} />
-        </div> */}
+    <main className=" container mx-auto mt-10">
+      <div className="flex justify-between items-center">
         <div>
-          <PaymentFrom subTotal={subTotal} storedCart={storedCart} />
+        <h2 className="uppercase text-2xl">Checkout</h2>
+        <p>Please enter your details below to complete your purchase</p>
+        </div>
+        <div>
+          <button className="border-2 border-orange-500 text-orange-500 px-5 p-2 rounded-md hover:bg-orange-500 hover:text-white transition-all ease-in-out duration-700">BACK TO CART</button>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 justify-center gap-8 items-center mt-10">
+        <div>
+          <ShippingAddress />
+        </div>
+        <div>
+          <ShippingMethod />
+        </div>
+        <div>
+          <OrderSummary />
         </div>
       </div>
     </main>
