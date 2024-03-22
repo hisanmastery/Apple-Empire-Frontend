@@ -18,13 +18,11 @@ const Home = () => {
 
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Honor_X9B_EID.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Galaxy_A55.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Xiaomi_Pad_6.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
-        {/* brand profile */}
-        <ClientBrand />
         {/* all products */}
         <Products productData={datas} />
         {/* ads banner */}
@@ -47,8 +45,8 @@ const Home = () => {
         {/* product ads banner */}
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Honor_X9B_EID.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Galaxy_A55.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Galaxy_A55.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
@@ -80,10 +78,12 @@ const Home = () => {
         </ViewMoreTitle>
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/horizontal_image/3-2024/iPhone_15_Pro_Max_International.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/horizontal_image/3-2024/Get_the_iPhone_15_Pro_Max.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
+           {/* brand profile */}
+           <ClientBrand />
       </div>
     </main>
   );
