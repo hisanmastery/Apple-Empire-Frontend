@@ -20,7 +20,7 @@ const Checkout = () => {
           <button className="border-2 border-orange-500 text-orange-500 px-5 p-2 rounded-md hover:bg-orange-500 hover:text-white transition-all ease-in-out duration-700">BACK TO CART</button>
         </div>
       </div>
-      <div className="grid grid-cols-3 justify-center gap-8 items-center mt-10">
+      <div className="grid grid-cols-3 justify-center gap-8 mt-10">
         <div>
           <ShippingAddress />
         </div>
