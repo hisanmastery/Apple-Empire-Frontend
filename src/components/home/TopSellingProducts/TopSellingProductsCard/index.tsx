@@ -9,8 +9,8 @@ const TopSellingProductsCard = ({ className, datas }:any) => {
         className || ""
       }`}
     >
-      <div className="flex space-x-5 items-center w-full h-full lg:p-[30px] sm:p-5 p-2">
-        <div className="lg:w-1/2 w-1/3 h-full">
+      <div className="flex space-x-5 items-center w-full h-full lg:p-[20px] sm:p-5 p-2">
+        <div className="lg:w-1/3 w-1/3 h-full">
           <img
             src={datas?.image}
             alt=""
@@ -22,7 +22,7 @@ const TopSellingProductsCard = ({ className, datas }:any) => {
             {/* reviews */}
             <div className="flex space-x-1 mb-3">
               {Array.from(Array(datas?.review), () => (
-                <span key={datas?.review + Math.random()}>*</span>
+                <span key={datas?.review + Math.random()}><icons.FaStar className="text-_secondary"/></span>
               ))}
             </div>
             <Link href="/single-product">
@@ -31,16 +31,15 @@ const TopSellingProductsCard = ({ className, datas }:any) => {
               </p>
             </Link>
             <p className="price mb-[26px]">
-              <span className=" font-bold main-price text-qgray line-through font-600 sm:text-[18px] text-base">
+              <span className="  main-price text-qgray line-through font-600 sm:text-[18px] text-sm">
                 {datas?.price}
               </span>
-              <span className=" font-bold text-red-500 offer-price text-qred font-600 sm:text-[18px] text-base ml-2">
+              <span className="  text-red-500 offer-price text-qred font-600 sm:text-[18px] text-sm ml-2">
                 {datas?.offer_price}
               </span>
             </p>
             <button type="button" className="w-[110px] h-[30px]">
-              <span className="bg-blue-600 text-white p-2  rounded">
-                {" "}
+              <span className="bg-_primary text-white p-2  rounded">
                 Add To Cart
               </span>
             </button>

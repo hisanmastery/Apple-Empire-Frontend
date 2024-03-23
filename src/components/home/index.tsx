@@ -10,7 +10,7 @@ import productDatas from "@/../../public/product.json";
 import TopItems from "./top-items";
 
 const Home = () => {
-  const datas = productDatas.products.slice(0, 10);
+  const datas = productDatas.products.slice(0, 12);
   return (
     <main>
       <div className="lg:container mx-auto md:p-0 p-3">

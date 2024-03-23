@@ -28,7 +28,7 @@ const ProductCard = ({ datas }: any) => {
   return (
     <div
       data-aos="fade-up"
-      className="card  w-full mt-5  bg-base-100 shadow-md border"
+      className="card h-[240px] w-[190px] mt-5 mx-auto bg-base-100 shadow-md border"
     >
       <div
         className="cursor-pointer product-card-one w-full h-full bg-white rounded relative group overflow-hidden hover:scale-105 ease-in-out duration-500"
@@ -41,8 +41,8 @@ const ProductCard = ({ datas }: any) => {
               background: `url(${datas?.image}) no-repeat center`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              width: "100%",
-              height: "200px",
+              width: "131px",
+              height: "131px",
               margin: "auto",
             }}
           ></div>
@@ -53,7 +53,7 @@ const ProductCard = ({ datas }: any) => {
             <button
               disabled={isInCart}
               onClick={() => handleCartClick()}
-              className={`bg-slate-800 uppercase ${
+              className={`bg-_primary uppercase ${
                 !isInCart ? "  hover:bg-[#FF4C06]" : "bg-slate-500 opacity-40"
               } rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm`}
             >
@@ -62,18 +62,16 @@ const ProductCard = ({ datas }: any) => {
           </div>
 
           <Link href={`/products/${datas?.id}`}>
-            <p className="title mb-2  text-[15px] font-600 text-qblack leading-[24px] font-semibold line-clamp-2 hover:text-qyellow cursor-pointer">
+            <p className="title  text-sm  f line-clamp-2 hover:text-blue-600 cursor-pointer">
               {datas?.title}
             </p>
           </Link>
 
-          {/* rating */}
-          <div className="reviews flex space-x-[1px] mb-3"></div>
-          <p className="price pb-10">
-            <span className="main-price text-qgray line-through font-600 font-semibold text-[18px] ">
+          <p className="price">
+            <span className="main-price text-sm line-through font-600 font-semibold  ">
               {datas?.price}
             </span>
-            <span className="offer-price text-qred font-600 text-[18px] ml-2 font-semibold text-red-500">
+            <span className="offer-price text-sm font-600  ml-2 font-semibold text-red-500">
               {datas?.offer_price}
             </span>
           </p>

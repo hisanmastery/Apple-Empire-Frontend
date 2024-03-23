@@ -33,7 +33,7 @@ function Menu(props: any) {
         <div className="col-span-6 lg:block hidden">
           <div className=" grid grid-flow-col justify-around ">
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <Gift size={34} />
               </div>
               <div className="ml-2">
@@ -43,7 +43,7 @@ function Menu(props: any) {
             </div>
 
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <ShoppingCart size={34} />
               </div>
               <div className="ml-2">
@@ -57,7 +57,7 @@ function Menu(props: any) {
             </div>
 
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <Store size={34} />
               </div>
               <div className="ml-2">
@@ -67,7 +67,7 @@ function Menu(props: any) {
             </div>
 
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <UserRound size={34} />
               </div>
               <div className="ml-2">
