@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { FaRegCalendarAlt } from "react-icons/fa";
 const Offers = ({ offers }: any) => {
   const currentDate = new Date();
@@ -31,7 +32,9 @@ const Offers = ({ offers }: any) => {
             </h4>
             <p className="text-sm text-justify">{offer.description}</p>
             <button className="bg-orange-400 hover:bg-orange-500 text-white font-bold my-2 py-1 px-4 rounded-lg ">
+              <Link href={`/offerDetails/${offer?.id}`}>
               View Details
+              </Link>
             </button>
           </div>
         </div>
