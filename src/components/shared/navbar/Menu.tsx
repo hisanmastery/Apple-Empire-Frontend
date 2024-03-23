@@ -37,8 +37,10 @@ function Menu(props: any) {
                 <Gift size={34} />
               </div>
               <div className="ml-2">
+                <Link href="/offers">
                 <h5 className="font-semibold text-sm">Offers</h5>
                 <p className="text-xs font-light">latest offers</p>
+                </Link>
               </div>
             </div>
 
@@ -71,10 +73,8 @@ function Menu(props: any) {
                 <UserRound size={34} />
               </div>
               <div className="ml-2">
-                <Link href="/offers">
-                  <h5 className="font-semibold text-sm">Offers</h5>
-                  <p className="text-xs font-light">latest offers</p>
-                </Link>
+                <h5 className="font-semibold text-sm">Accounts</h5>
+                <p className="text-xs font-light">Register or Login</p>
               </div>
             </div>
           </div>
