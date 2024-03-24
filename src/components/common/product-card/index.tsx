@@ -1,4 +1,5 @@
 "use client";
+import { icons } from "@/constants/icons";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import React from "react";
@@ -28,7 +29,7 @@ const ProductCard = ({ datas }: any) => {
   return (
     <div
       data-aos="fade-up"
-      className="card  w-full mt-5  bg-base-100 shadow-md border"
+      className="card h-[240px] w-[190px] mt-5 mx-auto bg-base-100 shadow-md border"
     >
       <div
         className="cursor-pointer product-card-one w-full h-full bg-white rounded relative group overflow-hidden hover:scale-105 ease-in-out duration-500"
@@ -41,39 +42,64 @@ const ProductCard = ({ datas }: any) => {
               background: `url(${datas?.image}) no-repeat center`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              width: "100%",
-              height: "200px",
+              width: "131px",
+              height: "131px",
               margin: "auto",
             }}
           ></div>
         </Link>
         <div className="px-[10px] pb-[10px] ">
           {/* add to cart button */}
-          <div className="absolute bottom-1  gap-1 left-1 right-1">
-            <button
+          <div className="absolute bottom-1  gap-1 left-1 right-1 flex justify-between items-center">
+            {/* <button
               disabled={isInCart}
               onClick={() => handleCartClick()}
-              className={`bg-slate-800 uppercase ${
+              className={`bg-_primary uppercase ${
                 !isInCart ? "  hover:bg-[#FF4C06]" : "bg-slate-500 opacity-40"
               } rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm`}
             >
               {isInCart ? "Added to cart" : "ADD TO CART"}
+            </button> */}
+
+            {/* rating */}
+            {/* reviews */}
+            <div className="flex items-center gap-1">
+              {/* {Array.from(Array(datas?.review), () => (
+                <span key={datas?.review + Math.random()}>
+                  <icons.FaStar className="text-_secondary" />
+                </span>
+              ))} */}
+              <icons.FaStar className="text-_secondary" />{" "}
+              <span>{datas?.review}</span>
+            </div>
+            <button
+              disabled={isInCart}
+              onClick={() => handleCartClick()}
+              className={`bg-_primary uppercase ${
+                !isInCart ? "  hover:bg-[#FF4C06]" : "bg-slate-500 opacity-40"
+              } rounded-full ease-in-out duration-500 transition-all w-8 h-8 text-white p-2 font-normal text-sm text-center flex  justify-center items-center`}
+            >
+              <span>
+                {isInCart ? (
+                  <icons.IoCheckmarkDoneCircleSharp className="text-lg text-center" />
+                ) : (
+                  <icons.plusIcon className="text-lg text-center  " />
+                )}
+              </span>
             </button>
           </div>
 
           <Link href={`/products/${datas?.id}`}>
-            <p className="title mb-2  text-[15px] font-600 text-qblack leading-[24px] font-semibold line-clamp-2 hover:text-qyellow cursor-pointer">
+            <p className="title  text-sm   line-clamp-2 hover:text-blue-600 cursor-pointer">
               {datas?.title}
             </p>
           </Link>
 
-          {/* rating */}
-          <div className="reviews flex space-x-[1px] mb-3"></div>
-          <p className="price pb-10">
-            <span className="main-price text-qgray line-through font-600 font-semibold text-[18px] ">
+          <p className="price">
+            <span className="main-price text-sm line-through font-600 font-semibold  ">
               {datas?.price}
             </span>
-            <span className="offer-price text-qred font-600 text-[18px] ml-2 font-semibold text-red-500">
+            <span className="offer-price text-sm font-600  ml-2 font-semibold text-red-500">
               {datas?.offer_price}
             </span>
           </p>

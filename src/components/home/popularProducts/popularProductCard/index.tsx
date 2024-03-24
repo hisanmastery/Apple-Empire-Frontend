@@ -22,17 +22,17 @@ const PopularProductCard = ({ className, datas }: any) => {
             />
           </div>
           <div className="flex-1 h-full flex flex-col justify-center ">
-            <Link href="/single-product">
-              <p className=" font-semibold title mb-2 sm:text-[15px] text-[13px] font-600 text-qblack leading-[24px] line-clamp-1 hover:text-qyellow cursor-pointer">
+            <Link href="/product">
+              <p className=" font-bold text-_primary title mb-2 sm:text-[15px] text-[13px] font-600 text-qblack leading-[24px] line-clamp-1 hover:text-qyellow cursor-pointer">
                 {datas?.title}
               </p>
             </Link>
 
             <p className="price">
-              <span className=" font-bold main-price text-qgray line-through font-600 text-[18px]">
+              <span className=" font-semibold line-through font-600 text-sm">
                 {datas?.price}
               </span>
-              <span className=" font-bold text-red-500 offer-price text-qred font-600 text-[18px] ml-2">
+              <span className=" font-semibold text-red-500 text-qred font-600 text-sm ml-2">
                 {datas?.offer_price}
               </span>
             </p>

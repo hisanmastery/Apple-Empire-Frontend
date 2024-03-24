@@ -74,10 +74,10 @@ const ClientBrand = () => {
   return (
     <section className="container mx-auto mt-10 mb-10">
       <h4 className="text-2xl mb-3 font-semibold">SHOP BY BRANDS</h4>
-      <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2  lg:gap-10 gap-7">
+      <div className="grid lg:grid-cols-7 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-7">
         {brandData?.map((brand, index) => (
           <div key={index}>
-            <img className="max-h-28 mx-auto" src={brand.image} />
+            <img className="w-28 mx-auto" src={brand.image} />
           </div>
         ))}
       </div>
