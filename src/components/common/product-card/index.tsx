@@ -50,7 +50,7 @@ const ProductCard = ({ datas }: any) => {
         </Link>
         <div className="px-[10px] pb-[10px] ">
           {/* add to cart button */}
-          <div className="absolute bottom-1  gap-1 left-1 right-1 flex">
+          <div className="absolute bottom-1  gap-1 left-1 right-1 flex justify-between items-center">
             {/* <button
               disabled={isInCart}
               onClick={() => handleCartClick()}
@@ -62,20 +62,35 @@ const ProductCard = ({ datas }: any) => {
             </button> */}
 
             {/* rating */}
-            <h4>Rating: 5.4</h4>
+            {/* reviews */}
+            <div className="flex items-center gap-1">
+              {/* {Array.from(Array(datas?.review), () => (
+                <span key={datas?.review + Math.random()}>
+                  <icons.FaStar className="text-_secondary" />
+                </span>
+              ))} */}
+              <icons.FaStar className="text-_secondary" />{" "}
+              <span>{datas?.review}</span>
+            </div>
             <button
               disabled={isInCart}
               onClick={() => handleCartClick()}
               className={`bg-_primary uppercase ${
                 !isInCart ? "  hover:bg-[#FF4C06]" : "bg-slate-500 opacity-40"
-              } rounded-full ease-in-out duration-500 transition-all w-12 h-12 text-white p-2 font-normal text-sm`}
+              } rounded-full ease-in-out duration-500 transition-all w-8 h-8 text-white p-2 font-normal text-sm text-center flex  justify-center items-center`}
             >
-              {isInCart ? "Added to cart" : <icons.plusIcon/> }
+              <span>
+                {isInCart ? (
+                  <icons.IoCheckmarkDoneCircleSharp className="text-lg text-center" />
+                ) : (
+                  <icons.plusIcon className="text-lg text-center  " />
+                )}
+              </span>
             </button>
           </div>
 
           <Link href={`/products/${datas?.id}`}>
-            <p className="title  text-sm  f line-clamp-2 hover:text-blue-600 cursor-pointer">
+            <p className="title  text-sm   line-clamp-2 hover:text-blue-600 cursor-pointer">
               {datas?.title}
             </p>
           </Link>
