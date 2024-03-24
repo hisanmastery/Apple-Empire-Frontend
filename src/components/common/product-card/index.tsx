@@ -1,4 +1,5 @@
 "use client";
+import { icons } from "@/constants/icons";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import React from "react";
@@ -49,8 +50,8 @@ const ProductCard = ({ datas }: any) => {
         </Link>
         <div className="px-[10px] pb-[10px] ">
           {/* add to cart button */}
-          <div className="absolute bottom-1  gap-1 left-1 right-1">
-            <button
+          <div className="absolute bottom-1  gap-1 left-1 right-1 flex">
+            {/* <button
               disabled={isInCart}
               onClick={() => handleCartClick()}
               className={`bg-_primary uppercase ${
@@ -58,6 +59,18 @@ const ProductCard = ({ datas }: any) => {
               } rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm`}
             >
               {isInCart ? "Added to cart" : "ADD TO CART"}
+            </button> */}
+
+            {/* rating */}
+            <h4>Rating: 5.4</h4>
+            <button
+              disabled={isInCart}
+              onClick={() => handleCartClick()}
+              className={`bg-_primary uppercase ${
+                !isInCart ? "  hover:bg-[#FF4C06]" : "bg-slate-500 opacity-40"
+              } rounded-full ease-in-out duration-500 transition-all w-12 h-12 text-white p-2 font-normal text-sm`}
+            >
+              {isInCart ? "Added to cart" : <icons.plusIcon/> }
             </button>
           </div>
 
