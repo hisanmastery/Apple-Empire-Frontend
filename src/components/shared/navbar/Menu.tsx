@@ -33,17 +33,19 @@ function Menu(props: any) {
         <div className="col-span-6 lg:block hidden">
           <div className=" grid grid-flow-col justify-around ">
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <Gift size={34} />
               </div>
               <div className="ml-2">
+                <Link href="/offers">
                 <h5 className="font-semibold text-sm">Offers</h5>
                 <p className="text-xs font-light">latest offers</p>
+                </Link>
               </div>
             </div>
 
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <ShoppingCart size={34} />
               </div>
               <div className="ml-2">
@@ -57,7 +59,7 @@ function Menu(props: any) {
             </div>
 
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <Store size={34} />
               </div>
               <div className="ml-2">
@@ -67,14 +69,12 @@ function Menu(props: any) {
             </div>
 
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <UserRound size={34} />
               </div>
               <div className="ml-2">
-                <Link href="/offers">
-                  <h5 className="font-semibold text-sm">Offers</h5>
-                  <p className="text-xs font-light">latest offers</p>
-                </Link>
+                <h5 className="font-semibold text-sm">Accounts</h5>
+                <p className="text-xs font-light">Register or Login</p>
               </div>
             </div>
           </div>

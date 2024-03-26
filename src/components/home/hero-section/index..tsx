@@ -72,7 +72,7 @@ const HeroSection = () => {
                     <CardContent className="flex h-full">
                       <img
                         className=""
-                        src="https://d61s2hjse0ytn.cloudfront.net/images/web/slider/Bkash_S24_Ultra.webp"
+                        src="https://d61s2hjse0ytn.cloudfront.net/images/web/slider/EID_Offer_SA.webp"
                         alt=""
                       />
                     </CardContent>
