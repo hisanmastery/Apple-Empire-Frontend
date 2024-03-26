@@ -21,7 +21,10 @@ import { FaStar } from "react-icons/fa6";
 import { AiOutlineShopping } from "react-icons/ai";
 import { FaPlusCircle } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-
+import { FaHandHoldingHeart } from "react-icons/fa";
+import { RiGiftFill } from "react-icons/ri";
+import { TbTruckDelivery } from "react-icons/tb";
+import { RiSecurePaymentLine } from "react-icons/ri";
 
 export const icons = {
   GiDiscussion,
@@ -44,6 +47,10 @@ export const icons = {
   FaLongArrowAltRight,
   FaStar,
   AiOutlineShopping,
-  plusIcon:FaPlusCircle,
-  crossIcon:RxCross1
+  plusIcon: FaPlusCircle,
+  crossIcon: RxCross1,
+  loveHartIcon: FaHandHoldingHeart,
+  giftIcon: RiGiftFill,
+  truckDelivaryIcon: TbTruckDelivery,
+  paymentIcon: RiSecurePaymentLine,
 };
