@@ -8,6 +8,8 @@ import TopSellingProducts from "../home/TopSellingProducts/index";
 import PopularProducts from "../home/popularProducts/index";
 import productDatas from "@/../../public/product.json";
 import TopItems from "./top-items";
+import MultiCarousel from "../common/carousel";
+import ProductSlider from "./product-slider";
 
 const Home = () => {
   const datas = productDatas.products.slice(0, 12);
@@ -32,6 +34,8 @@ const Home = () => {
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
+        {/* product caorusel */}
+        <ProductSlider productData={datas} />
 
         {/* top selling product */}
         <ViewMoreTitle
@@ -82,8 +86,8 @@ const Home = () => {
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
-           {/* brand profile */}
-           <ClientBrand />
+        {/* brand profile */}
+        <ClientBrand />
       </div>
     </main>
   );
