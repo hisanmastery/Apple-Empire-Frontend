@@ -33,7 +33,7 @@ const ShippingMethod = () => {
           </button>
           Shipping method
         </h1>
-        <div className="flex items-center space-x-2 mt-5">
+        <div className="flex items-center space-x-2 mt-5 ml-3">
           <input
             type="checkbox"
             id="default"
@@ -50,8 +50,8 @@ const ShippingMethod = () => {
                 systemOn ? "bg-orange-500" : "bg-white"
               }`}
             ></div>
-            <div className="flex justify-between items-center gap-10">
-              <span className="ml-2 text-lg">
+            <div className="flex justify-between ml-2 items-center gap-10">
+              <span className="text-md">
                 Outside Dhaka : Within 5-7 days
               </span>
               <span>TK. 100</span>
@@ -72,7 +72,7 @@ const ShippingMethod = () => {
                 {...register("onlinePayment")}
                 id="r1"
               />
-              <label htmlFor="r1" className="text-lg mt-2">
+              <label htmlFor="r1" className="text-md mt-2">
                 Debit & Cards / Online Payment
               </label>
             </div>
@@ -92,14 +92,14 @@ const ShippingMethod = () => {
                 {...register("cardsOnDelivery")}
                 id="r3"
               />
-              <label htmlFor="r3" className="text-lg mt-2">
+              <label htmlFor="r3" className="text-md mt-2">
                 Cards on Delivery
               </label>
             </div>
           </RadioGroup>
         </div>
         <div>
-          <h1 className="text-lg mb-2">Order notes(options)</h1>
+          <h1 className="text-md mb-2">Order notes(options)</h1>
           <textarea
             placeholder="order notes"
             name="order-notes"
