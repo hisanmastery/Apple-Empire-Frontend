@@ -45,7 +45,7 @@ const CartPage = ({ className }: any) => {
 
   // calculate total price
   const subTotal = storedCart?.reduce((acc: number, product: any) => {
-    console.log(acc,product )
+    console.log(acc, product);
     return acc + product?.quantity * parseInt(product?.offer_price);
   }, 0);
   // shipping charge
@@ -93,7 +93,7 @@ const CartPage = ({ className }: any) => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Product</TableHead>
-                  <TableHead></TableHead>
+                  {/* <TableHead></TableHead> */}
                   <TableHead>Quantity</TableHead>
                   <TableHead>Price</TableHead>
                   <TableHead>Total</TableHead>
@@ -109,7 +109,7 @@ const CartPage = ({ className }: any) => {
                         <p onClick={() => removeCart(product?.id)}>Remove</p>
                       </div>
                     </TableCell>
-                    <TableCell className="font-medium">
+                    {/* <TableCell className="font-medium">
                       <InputQuantityCom
                         quantity={product.quantity ?? 1}
                         onIncrement={(newQuantity: number) =>
@@ -119,7 +119,7 @@ const CartPage = ({ className }: any) => {
                           handleDecrement(index, newQuantity)
                         }
                       />
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell className="font-medium">
                       {product?.quantity}
                     </TableCell>
