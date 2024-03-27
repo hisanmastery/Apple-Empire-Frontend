@@ -49,8 +49,8 @@ const CartItem = () => {
 
       <div className="overflow-auto mb-10">
         {storedCart?.map((product: any, index: number) => (
-          <div className="border p-1 mt-2">
-            <div key={index} className="mt-4 flex justify-between items-center">
+          <div key={index} className="border p-1 mt-2">
+            <div className="mt-4 flex justify-between items-center">
               <img src={product?.image} className="w-16" alt="" />
               <div className="font-medium w-2/3">
                 <p>{product?.title.slice(0, 30)}...</p>
