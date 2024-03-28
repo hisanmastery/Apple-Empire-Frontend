@@ -12,15 +12,17 @@ const Checkout = () => {
   return (
     <main className=" container mx-auto mt-10">
       <div className="flex justify-between items-center">
-        <div>
-        <h2 className="uppercase text-2xl">Checkout</h2>
-        <p>Please enter your details below to complete your purchase</p>
+        <div className="w-[60%]">
+          <h2 className="uppercase text-2xl">Checkout</h2>
+          <p>Please enter your details below to complete your purchase</p>
         </div>
         <div>
-          <button className="border-2 border-orange-500 text-orange-500 px-5 p-2 rounded-md hover:bg-orange-500 hover:text-white transition-all ease-in-out duration-700">BACK TO CART</button>
+          <button className="border-2 border-orange-500 text-orange-500 px-5 p-2 rounded-md hover:bg-orange-500 hover:text-white transition-all ease-in-out duration-1000">
+            BACK TO CART
+          </button>
         </div>
       </div>
-      <div className="grid grid-cols-3 justify-center gap-8 items-center mt-10">
+      <div className="grid lg:grid-cols-3 grid-cols-1 justify-center gap-14 mt-10">
         <div>
           <ShippingAddress />
         </div>
