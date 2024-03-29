@@ -28,7 +28,7 @@ const ShippingMethod = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <h1 className="flex items-center text-lg font-semibold gap-4">
-          <button className="bg-orange-500 p-3 rounded-full">
+          <button className="bg-_primary p-3 rounded-full">
             <GrDeliver className="text-2xl text-white" />
           </button>
           Shipping method
@@ -46,8 +46,8 @@ const ShippingMethod = () => {
             onClick={toggleSystem}
           >
             <div
-              className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-orange-500 ${
-                systemOn ? "bg-orange-500" : "bg-white"
+              className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${
+                systemOn ? "bg-_primary" : "bg-white"
               }`}
             ></div>
             <div className="flex justify-between ml-2 items-center gap-10">
@@ -59,7 +59,7 @@ const ShippingMethod = () => {
           </label>
         </div>
         <h1 className="flex items-center text-lg font-semibold gap-4 mt-14">
-          <button className="bg-orange-500 p-3 rounded-full">
+          <button className="bg-_primary p-3 rounded-full">
             <MdOutlinePayment className="text-2xl text-white" />
           </button>
           Payment method

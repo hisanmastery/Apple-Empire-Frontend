@@ -34,7 +34,7 @@ const OrderSummary = () => {
   return (
     <div>
       <h1 className="flex items-center text-lg font-semibold gap-4">
-        <button className="bg-orange-500 p-3 rounded-full">
+        <button className="bg-_primary p-3 rounded-full">
           <FaFileAlt className="text-2xl text-white" />
         </button>
         Order summary
@@ -91,9 +91,8 @@ const OrderSummary = () => {
           onClick={toggleSystem}
         >
           <div
-            className={`w-6 h-6 flex items-center justify-center border-2 border-orange-500 ${
-              systemOn ? "bg-orange-500" : "bg-white"
-            }`}
+            className={`w-6 h-6 flex items-center justify-center border-2 border-_pribg-_primary ${systemOn ? "bg-_primary" : "bg-white"
+              }`}
           ></div>
           <p className="ml-2">Send as Gift</p>
         </label>
@@ -104,7 +103,7 @@ const OrderSummary = () => {
           terms and condition
         </Link>
       </p>
-      <button className="bg-orange-600 text-white px-5 py-2 w-full mt-3 border-[1px] hover:bg-white hover:border-orange-500 hover:text-orange-500 transition-all ease-in-out duration-1000">
+      <button className="bg-_primary text-white px-5 py-2 w-full mt-3 border-[1px] hover:bg-_secondary hover:text-black hover:border-_pribg-_primary hover:text-_pribg-_primary transition-all ease-in-out duration-300">
         CONFIRM ORDER
       </button>
     </div>

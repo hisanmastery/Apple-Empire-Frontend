@@ -1,9 +1,10 @@
+import Signup from '@/components/auth/singup';
 import React from 'react';
 
 const SingupPage = () => {
     return (
         <div>
-            <h1>Singup</h1>
+            <Signup />
         </div>
     );
 };

@@ -17,7 +17,7 @@ const Checkout = () => {
           <p>Please enter your details below to complete your purchase</p>
         </div>
         <div>
-          <button className="border-2 border-orange-500 text-orange-500 px-5 p-2 rounded-md hover:bg-orange-500 hover:text-white transition-all ease-in-out duration-1000">
+          <button className="border-2 border-_primary text-_primary  px-5 p-2 rounded-md hover:bg-_priborder-_primary hover:text-black transition-all ease-in-out duration-1000">
             BACK TO CART
           </button>
         </div>

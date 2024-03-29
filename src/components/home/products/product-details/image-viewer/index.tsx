@@ -18,7 +18,7 @@ const ProductImage = ({ variationImages }: any) => {
   return (
     <div>
       <div className="grid grid-cols-4 gap-2 mt-2 cursor-pointer">
-        {images.map((src:any, index:number) => (
+        {images?.map((src:any, index:number) => (
           <div key={index}>
             <img
               className="w-44"
