@@ -27,7 +27,7 @@ const ProductDetails = ({ product }: any) => {
     : product?.image;
 
   // Extracting only the 'image' property from each object in the 'variations' array
-  const variationImages = product?.variations.map(
+  const variationImages = product?.variations?.map(
     (variation: any) => variation?.image
   );
 

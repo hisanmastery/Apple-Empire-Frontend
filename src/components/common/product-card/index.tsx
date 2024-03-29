@@ -37,18 +37,22 @@ const ProductCard = ({ datas }: any) => {
       >
         <Link href={`/products/${datas?.id}`}>
           <div
-            className="product-card-img w-full h-[300px]"
-            style={{
-              background: `url(${datas?.image}) no-repeat center`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              width: "131px",
-              height: "131px",
-              margin: "auto",
-            }}
-          ></div>
+          className="bg-slate-50 border-none  w-[134px] h-[134px] mx-auto mt-1"
+            // className="product-card-img w-full h-[300px]"
+            // style={{
+            //   background: `url(${datas?.image}) no-repeat center`,
+            //   backgroundSize: "cover",
+            //   backgroundPosition: "center",
+            //   width: "131px",
+            //   height: "131px",
+            //   margin: "auto",
+            //   backgroundColor:"#69B626",
+            //   padding:'2px'
+            // }}
+          ><img className="w-[131px] h-[131px] mx-auto " src={`${datas?.image}`} alt="" /></div>
         </Link>
         <div className="px-[10px] pb-[10px] ">
+    
           {/* add to cart button */}
           <div className="absolute bottom-1  gap-1 left-1 right-1 flex justify-between items-center">
             {/* <button
