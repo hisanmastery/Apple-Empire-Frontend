@@ -1,0 +1,238 @@
+{
+    "products": [
+        {
+            "id": "62aefe9a6e662e77accd4cc4",
+            "image": "https://cdn.britannica.com/09/241709-050-149181B1/apple-iphone-11-2019.jpg",
+            "brand": "Samsung",
+            "title": "Samsung Galaxy S22 Ultra",
+            "description": "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+            "price": "25.99",
+            "offer_price": "27.61",
+            "review": 5,
+            "quantity": 1,
+            "status": "Out of Stock",
+            "productCode": "ZXY987",
+            "campaingn_product": true,
+            "cam_product_available": 48,
+            "cam_product_sale": 12,
+            "product_type": null,
+            "variations": [
+                {
+                    "color": "Purple",
+                    "colorCode": "#A020F0",
+                    "image": "https://www.peacocks.com.bd/storage/2218/iPhone-12-64GB-1.jpg"
+                },
+                {
+                    "color": "Black",
+                    "colorCode": "#000000",
+                    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-12-black-2020?wid=2000&hei=1897&fmt=jpeg&qlt=95&.v=1635202741000"
+                },
+                {
+                    "color": "White",
+                    "colorCode": "#FFFFFF",
+                    "image": "https://adminapi.applegadgetsbd.com/storage/media/large/1533-33734.jpg"
+                },
+                {
+                    "color": "Blue",
+                    "colorCode": "#0000FF",
+                    "image": "https://www.coolmod.com/images/product/large/apple-iphone-12-61-5g-128gb-libre-azul-smartphone-mavil-001.jpg"
+                }
+            ]
+        },
+        {
+            "id": "62aefe9a6e662e77accd4cc4",
+            "image": "https://cdn.britannica.com/09/241709-050-149181B1/apple-iphone-11-2019.jpg",
+            "brand": "Sony",
+            "title": "Sony Xperia Pro 1",
+            "description": "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+            "price": "22.49",
+            "offer_price": "27.61",
+            "review": 5,
+            "quantity": 1,
+            "status": "In Stock",
+            "productCode": "LMN456",
+            "campaingn_product": true,
+            "cam_product_available": 48,
+            "cam_product_sale": 12,
+            "product_type": null,
+            "variations": [
+                {
+                    "color": "Purple",
+                    "colorCode": "#A020F0",
+                    "image": "https://www.peacocks.com.bd/storage/2218/iPhone-12-64GB-1.jpg"
+                },
+                {
+                    "color": "Black",
+                    "colorCode": "#000000",
+                    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-12-black-2020?wid=2000&hei=1897&fmt=jpeg&qlt=95&.v=1635202741000"
+                },
+                {
+                    "color": "White",
+                    "colorCode": "#FFFFFF",
+                    "image": "https://adminapi.applegadgetsbd.com/storage/media/large/1533-33734.jpg"
+                },
+                {
+                    "color": "Blue",
+                    "colorCode": "#0000FF",
+                    "image": "https://www.coolmod.com/images/product/large/apple-iphone-12-61-5g-128gb-libre-azul-smartphone-mavil-001.jpg"
+                }
+            ]
+        },
+        {
+            "id": "a2e3f7b8c9d0e1f2g3h4i5",
+            "image": "https://cdn.britannica.com/09/241709-050-149181B1/apple-iphone-11-2019.jpg",
+            "brand": "LG",
+            "title": "LG Velvet 2 Pro",
+            "description": "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+            "price": "21.79",
+            "offer_price": "27.61",
+            "review": 5,
+            "quantity": 1,
+            "status": "In Stock",
+            "productCode": "OPQ789",
+            "campaingn_product": true,
+            "cam_product_available": 48,
+            "cam_product_sale": 12,
+            "product_type": null,
+            "variations": [
+                {
+                    "color": "Purple",
+                    "colorCode": "#A020F0",
+                    "image": "https://www.peacocks.com.bd/storage/2218/iPhone-12-64GB-1.jpg"
+                },
+                {
+                    "color": "Black",
+                    "colorCode": "#000000",
+                    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-12-black-2020?wid=2000&hei=1897&fmt=jpeg&qlt=95&.v=1635202741000"
+                },
+                {
+                    "color": "White",
+                    "colorCode": "#FFFFFF",
+                    "image": "https://adminapi.applegadgetsbd.com/storage/media/large/1533-33734.jpg"
+                },
+                {
+                    "color": "Blue",
+                    "colorCode": "#0000FF",
+                    "image": "https://www.coolmod.com/images/product/large/apple-iphone-12-61-5g-128gb-libre-azul-smartphone-mavil-001.jpg"
+                }
+            ]
+        },
+        {
+            "id": "b3c4d5e6f7g8h9i0j1k2",
+            "image": "https://cdn.britannica.com/09/241709-050-149181B1/apple-iphone-11-2019.jpg",
+            "brand": "OnePlus",
+            "title": "OnePlus 10 Pro",
+            "description": "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+            "price": "24.99",
+            "offer_price": "27.61",
+            "review": 5,
+            "quantity": 1,
+            "status": "In Stock",
+            "productCode": "RST012",
+            "campaingn_product": true,
+            "cam_product_available": 48,
+            "cam_product_sale": 12,
+            "product_type": null,
+            "variations": [
+                {
+                    "color": "Purple",
+                    "colorCode": "#A020F0",
+                    "image": "https://www.peacocks.com.bd/storage/2218/iPhone-12-64GB-1.jpg"
+                },
+                {
+                    "color": "Black",
+                    "colorCode": "#000000",
+                    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-12-black-2020?wid=2000&hei=1897&fmt=jpeg&qlt=95&.v=1635202741000"
+                },
+                {
+                    "color": "White",
+                    "colorCode": "#FFFFFF",
+                    "image": "https://adminapi.applegadgetsbd.com/storage/media/large/1533-33734.jpg"
+                },
+                {
+                    "color": "Blue",
+                    "colorCode": "#0000FF",
+                    "image": "https://www.coolmod.com/images/product/large/apple-iphone-12-61-5g-128gb-libre-azul-smartphone-mavil-001.jpg"
+                }
+            ]
+        },
+        {
+            "id": "c5d6e7f8g9h0i1j2k3l4",
+            "image": "https://cdn.britannica.com/09/241709-050-149181B1/apple-iphone-11-2019.jpg",
+            "brand": "Xiaomi",
+            "title": "Xiaomi Mi 12",
+            "description": "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+            "price": "23.99",
+            "offer_price": "27.61",
+            "review": 5,
+            "quantity": 1,
+            "status": "In Stock",
+            "productCode": "UVW345",
+            "campaingn_product": true,
+            "cam_product_available": 48,
+            "cam_product_sale": 12,
+            "product_type": null,
+            "variations": [
+                {
+                    "color": "Purple",
+                    "colorCode": "#A020F0",
+                    "image": "https://www.peacocks.com.bd/storage/2218/iPhone-12-64GB-1.jpg"
+                },
+                {
+                    "color": "Black",
+                    "colorCode": "#000000",
+                    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-12-black-2020?wid=2000&hei=1897&fmt=jpeg&qlt=95&.v=1635202741000"
+                },
+                {
+                    "color": "White",
+                    "colorCode": "#FFFFFF",
+                    "image": "https://adminapi.applegadgetsbd.com/storage/media/large/1533-33734.jpg"
+                },
+                {
+                    "color": "Blue",
+                    "colorCode": "#0000FF",
+                    "image": "https://www.coolmod.com/images/product/large/apple-iphone-12-61-5g-128gb-libre-azul-smartphone-mavil-001.jpg"
+                }
+            ]
+        },
+        {
+            "id": "m5n6o7p8q9r0s1t2u3",
+            "image": "https://cdn.britannica.com/09/241709-050-149181B1/apple-iphone-11-2019.jpg",
+            "brand": "Motorola",
+            "title": "Motorola Edge X30",
+            "description": "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+            "price": "26.49",
+            "offer_price": "27.61",
+            "review": 5,
+            "quantity": 1,
+            "status": "In Stock",
+            "productCode": "XYZ678",
+            "campaingn_product": true,
+            "cam_product_available": 48,
+            "cam_product_sale": 12,
+            "product_type": null,
+            "variations": [
+                {
+                    "color": "Purple",
+                    "colorCode": "#A020F0",
+                    "image": "https://www.peacocks.com.bd/storage/2218/iPhone-12-64GB-1.jpg"
+                },
+                {
+                    "color": "Black",
+                    "colorCode": "#000000",
+                    "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-12-black-2020?wid=2000&hei=1897&fmt=jpeg&qlt=95&.v=1635202741000"
+                },
+                {
+                    "color": "White",
+                    "colorCode": "#FFFFFF",
+                    "image": "https://adminapi.applegadgetsbd.com/storage/media/large/1533-33734.jpg"
+                },
+                {
+                    "color": "Blue",
+                    "colorCode": "#0000FF",
+                    "image": "https://www.coolmod.com/images/product/large/apple-iphone-12-61-5g-128gb-libre-azul-smartphone-mavil-001.jpg"
+                }
+            ]
+        }
+    ]
+}

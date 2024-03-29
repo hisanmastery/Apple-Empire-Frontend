@@ -11,7 +11,7 @@ import ProductCard from "@/components/common/product-card";
 import Autoplay from "embla-carousel-autoplay";
 const ProductSlider = ({ productData }: any) => {
   const plugin = React?.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+    Autoplay({ delay: 1000, stopOnInteraction: true })
   );
   return (
     <div>

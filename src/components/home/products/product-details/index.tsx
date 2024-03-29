@@ -9,69 +9,45 @@ import ProductImage from "./image-viewer/index";
 import { icons } from "@/constants/icons";
 import { Button } from "@/components/ui/button";
 import { IoLogoWhatsapp } from "react-icons/io5";
-// const ProductDetails = ({ product }: any) => {
-const ProductDetails = ({products}:any) => {
+import { useDispatch, useSelector } from "react-redux";
+import { addStoredCart } from "@/store/features/cart/cartSlice";
+import Link from "next/link";
+const ProductDetails = ({ product }: any) => {
   const datas = productDatas.products.slice(0, 5);
   const [selectedColor, setSelectedColor]: any = useState("");
-  const product = {
-    id: "62aefe9a6e662e77accd4cc4",
-    image:
-      "https://cdn.britannica.com/09/241709-050-149181B1/apple-iphone-11-2019.jpg",
-    brand: "google",
-    title: "I Phone 15 Pro Max",
-    description:
-      "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
-    price: "20.64",
-    offer_price: "27.61",
-    review: 5,
-    quantity: 1,
-    status: "In Stock",
-    productCode: "ABH73HG",
-    campaingn_product: true,
-    cam_product_available: 48,
-    cam_product_sale: 12,
-    product_type: null,
-    variations: [
-      {
-        color: "Purple",
-        colorCode: "#A020F0",
-        image: "https://www.peacocks.com.bd/storage/2218/iPhone-12-64GB-1.jpg",
-      },
-      {
-        color: "Black",
-        colorCode: "#000000",
-        image:
-          "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-12-black-2020?wid=2000&hei=1897&fmt=jpeg&qlt=95&.v=1635202741000",
-      },
-      {
-        color: "White",
-        colorCode: "#FFFFFF",
-        image:
-          "https://adminapi.applegadgetsbd.com/storage/media/large/1533-33734.jpg",
-      },
-      {
-        color: "Blue",
-        colorCode: "#0000FF",
-        image:
-          "https://www.coolmod.com/images/product/large/apple-iphone-12-61-5g-128gb-libre-azul-smartphone-mavil-001.jpg",
-      },
-    ],
-  };
-
+  const { storedCart } = useSelector((state: any) => state?.cart);
+  const dispatch = useDispatch();
   const handleColorButtonClick = (color: any) => {
     setSelectedColor(color);
   };
 
   const images = selectedColor
-    ? product.variations.find((variant: any) => variant.color === selectedColor)
-        ?.image ?? product.image
-    : product.image;
+    ? product?.variations?.find((variant: any) => variant?.color === selectedColor)
+      ?.image ?? product?.image
+    : product?.image;
 
   // Extracting only the 'image' property from each object in the 'variations' array
-  const variationImages = product.variations.map(
-    (variation) => variation.image
+  const variationImages = product?.variations.map(
+    (variation: any) => variation?.image
   );
-  console.log(selectedColor);
+
+  // handle cart click
+  const handleCartClick = () => {
+    // get product data
+    const existingCart = storedCart || [];
+    const existingProduct = existingCart?.find(
+      (item: any) => item.id === product.id
+    );
+    // check existing product if not product it will be set
+    if (!existingProduct) {
+      const updatedCart = [...existingCart, product];
+      dispatch(addStoredCart(updatedCart));
+    }
+  };
+  // check already added cart
+  const isInCart = storedCart.find((item: any) => item.id === product.id);
+
+  console.log(product)
   return (
     <section className="w-11/12 mx-auto mt-4">
       <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
@@ -121,18 +97,16 @@ const ProductDetails = ({products}:any) => {
             Manufacturer: <span className="text-blue-600">Apple</span>
           </p>
           <div className="flex items-center mt-4 space-x-4">
-            <h4>Color:</h4>{" "}
-            {product.variations.map((variant: any, index: any) => (
+            <h4>Color:</h4>
+            {product?.variations?.map((variant: any, index: any) => (
               <button
                 key={index}
-                style={{ backgroundColor: `${variant.colorCode}` }}
-                className={`w-9 h-9 rounded-lg bg-[${
-                  variant.colorCode
-                }] border border-gray-300 ${
-                  selectedColor === variant.color &&
+                style={{ backgroundColor: `${variant?.colorCode}` }}
+                className={`w-9 h-9 rounded-full bg-[${variant?.colorCode
+                  }] border border-gray-300 ${selectedColor === variant?.color &&
                   "p-1  border-yellow-500 border-4"
-                }`}
-                onClick={() => handleColorButtonClick(variant.color)}
+                  }`}
+                onClick={() => handleColorButtonClick(variant?.color)}
               ></button>
             ))}
           </div>
@@ -145,7 +119,8 @@ const ProductDetails = ({products}:any) => {
           {/* add to cart button */}
           <div className="flex gap-5 mt-5">
             <Button
-              // onClick={() => handleCartClick()}
+              onClick={() => handleCartClick()}
+              disabled={isInCart}
               className="bg-slate-800 hover:bg-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
             >
               ADD TO CART
@@ -155,7 +130,7 @@ const ProductDetails = ({products}:any) => {
               // onClick={() => handleCartClick()}
               className=" hover:bg-[#FF4C06] border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
             >
-              Buy Now
+              <Link href={'/cart/checkout'}> Buy Now</Link>
             </Button>
           </div>
         </div>
