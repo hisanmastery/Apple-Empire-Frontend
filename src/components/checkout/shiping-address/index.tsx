@@ -17,7 +17,7 @@ const ShippingAddress = () => {
   return (
     <div className="border-[1px] border-gray-400 p-5">
       <h1 className="flex items-center text-lg font-semibold gap-4 border-b-[1px] border-gray-400 py-2">
-        <button className="bg-orange-500 p-3 rounded-full">
+        <button className="bg-_primary p-3 rounded-full">
           <CiLocationOn className="text-2xl text-white" />
         </button>
         Shipping address
@@ -84,7 +84,7 @@ const ShippingAddress = () => {
         </div>
       </form>
       <h1 className="flex items-center text-lg font-semibold gap-4 border-t-[1px] border-gray-400 py-2 mt-5">
-        <button className="bg-orange-500 p-3 rounded-full">
+        <button className="bg-_primary p-3 rounded-full">
           <CiLocationOn className="text-2xl text-white" />
         </button>
         Billing address

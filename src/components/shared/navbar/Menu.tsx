@@ -44,7 +44,7 @@ function Menu(props: any) {
               </div>
             </div>
 
-            <div className="flex text-white items-center">
+            {/* <div className="flex text-white items-center">
               <div className="text-[#029293]">
                 <ShoppingCart size={34} />
               </div>
@@ -56,7 +56,7 @@ function Menu(props: any) {
                   <p className="text-xs font-light">Add Items</p>
                 </Link>
               </div>
-            </div>
+            </div> */}
 
             <div className="flex text-white items-center">
               <div className="text-[#029293]">
