@@ -25,6 +25,9 @@ import { FaHandHoldingHeart } from "react-icons/fa";
 import { RiGiftFill } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import { GrNext } from "react-icons/gr";
+import { GrPrevious } from "react-icons/gr";
+
 
 export const icons = {
   GiDiscussion,
@@ -53,4 +56,6 @@ export const icons = {
   giftIcon: RiGiftFill,
   truckDelivaryIcon: TbTruckDelivery,
   paymentIcon: RiSecurePaymentLine,
+  nextIcon: GrNext,
+  previousIcon: GrPrevious
 };
