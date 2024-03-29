@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link
+      {/* <link
         rel="stylesheet"
         type="text/css"
 
@@ -28,7 +28,7 @@ export default function RootLayout({
         rel="stylesheet"
         type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      />
+      /> */}
       <Providers>
         <AosSetup />
         <body className={inter.className}>{children}</body>

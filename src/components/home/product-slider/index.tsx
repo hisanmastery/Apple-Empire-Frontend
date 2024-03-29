@@ -2,7 +2,8 @@ import ProductCard from "@/components/common/product-card";
 import { icons } from "@/constants/icons";
 import React, { useRef } from "react";
 import Slider from "react-slick";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const ProductSlider = ({ productData }: any) => {
     let sliderRef: any = useRef(null);
     const next = () => {
