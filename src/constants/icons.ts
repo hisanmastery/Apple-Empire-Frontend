@@ -27,6 +27,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
+import { FaArrowLeft } from "react-icons/fa6";
 
 
 export const icons = {
@@ -57,5 +58,6 @@ export const icons = {
   truckDelivaryIcon: TbTruckDelivery,
   paymentIcon: RiSecurePaymentLine,
   nextIcon: GrNext,
-  previousIcon: GrPrevious
+  previousIcon: GrPrevious,
+  leftArrowIcon: FaArrowLeft
 };
