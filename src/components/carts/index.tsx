@@ -1,5 +1,5 @@
 "use client";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartPage from "@/app/(landing-layout)/cart/page";
 import { icons } from "@/constants/icons";
 import {
@@ -15,13 +15,22 @@ import {
 import { Button } from "../ui/button";
 import CartItem from "./cartItem";
 import SheetDrawer from "../common/sheet-drawer/indext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useGetEmailCartQuery } from "@/store/features/cart/cartApi";
+import { addStoredCart } from "@/store/features/cart/cartSlice";
 const Carts = () => {
   const { storedCart } = useSelector((state: any) => state?.cart);
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  const { data }: any = useGetEmailCartQuery({
+    email: "dalim@gmail.com",
+  });
+  useEffect(() => {
+    dispatch(addStoredCart(data?.response));
+  }, [data?.response, dispatch]);
   // Using reduce to calculate the total price
   const totalPrice = storedCart?.reduce((acc: number, product: any) => {
-    return acc + product?.quantity * parseInt(product?.offer_price);
+    return acc + product?.quantity * parseInt(product?.price);
   }, 0);
   return (
     <div>
@@ -45,9 +54,7 @@ const Carts = () => {
               <CartItem />
             ) : (
               <div className="text-center h-screen flex flex-col justify-center items-center">
-                <h1>
-                  Emptry cart
-                </h1>{" "}
+                <h1>Emptry cart</h1>{" "}
               </div>
             )}
           </div>
@@ -58,4 +65,3 @@ const Carts = () => {
 };
 
 export default Carts;
-  

@@ -40,7 +40,7 @@ const CartItem = () => {
 
   // calculate total price
   const subTotal = storedCart?.reduce((acc: number, product: any) => {
-    return acc + product?.quantity * parseInt(product?.offer_price);
+    return acc + product?.quantity * parseInt(product?.price);
   }, 0);
 
   return (
@@ -53,14 +53,15 @@ const CartItem = () => {
 
         <div className="overflow-auto mb-10">
           {storedCart?.map((product: any, index: number) => (
+
             <div key={index} className="border p-1 mt-2">
               <div className="mt-4 flex justify-between items-center">
                 <img src={product?.image} className="w-16" alt="" />
-                <div className="font-medium w-2/3">
-                  <p>{product?.title.slice(0, 30)}...</p>
+                <div className="font-medium w-1/2">
+                  <p>{product?.title?.slice(0, 30)}...</p>
                 </div>
                 <div className="font-medium flex">
-                  <p>{product?.offer_price * product?.quantity + "$"}</p>
+                  <p>{parseInt(product?.price) * product?.quantity + "$"}</p>
                 </div>
                 <div className="cursor-pointer mx-2 font-bold text-red-500 hover:text-red-700">
                   <p onClick={() => removeCart(product?.id)}>

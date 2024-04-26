@@ -1,10 +1,14 @@
 "use client";
 import { icons } from "@/constants/icons";
-import { useAddToCartMutation } from "@/store/features/cart/cartApi";
+import {
+  useAddToCartMutation,
+  useGetEmailCartQuery,
+} from "@/store/features/cart/cartApi";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { title } from "process";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const ProductCard = ({ datas }: any) => {
   // const product = {
@@ -12,16 +16,23 @@ const ProductCard = ({ datas }: any) => {
   // };
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
+  const { data, refetch }: any = useGetEmailCartQuery({
+    email: "dalim@gmail.com",
+  });
   const [addToCart]: any = useAddToCartMutation();
   // handle cart click
   const handleCartClick = async (data: any) => {
     const payload = {
       email: "dalim@gmail.com",
-      ...data,
+      title: data?.title,
+      productId: data?._id,
+      price: data?.price,
+      image: data?.variations[0].image,
+      quantity: 0,
     };
-    const res: any = await addToCart(payload);
+    const res: any = await addToCart({ payload });
     if (res?.data?.isSuccess) {
-      
+      refetch();
     }
     // get product data
     // const existingCart = storedCart || [];
@@ -34,8 +45,14 @@ const ProductCard = ({ datas }: any) => {
     //   dispatch(addStoredCart(updatedCart));
     // }
   };
+  useEffect(() => {
+    dispatch(addStoredCart(data?.response));
+  }, [data?.response, dispatch]);
   // check already added cart
-  const isInCart = storedCart.find((item: any) => item._id === datas._id);
+  const isInCart = storedCart?.find(
+    (item: any) => item.productId === datas?._id
+  );
+  console.log(isInCart, storedCart, datas);
 
   return (
     <div

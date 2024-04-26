@@ -155,7 +155,7 @@ const ProductDetails = ({ product }: any) => {
         seeMoreUrl="/products"
         categoryTitle="Related products"
       >
-        <Products productData={datas} />
+        <Products  />
       </ViewMoreTitle>
       {/* product ads banner */}
       <ProductAds

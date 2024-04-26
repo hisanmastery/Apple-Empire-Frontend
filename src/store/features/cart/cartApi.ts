@@ -11,8 +11,8 @@ export const cartApi = fetchCartSlice.injectEndpoints({
     }),
     //get single products
     getEmailCart: builder.query({
-      query: (id: any) => ({
-        url: `/get-single-products/${id}`,
+      query: ({ email }: any) => ({
+        url: `/get-cart-by-email?email=${email}`,
         method: "get",
       }),
     }),
@@ -28,6 +28,17 @@ export const cartApi = fetchCartSlice.injectEndpoints({
     updateCart: builder.query({
       query: () => ({}),
     }),
+    //delete add too cart
+    addToCartDelete: builder.mutation({
+      query: ({ id }: any) => ({
+        url: `/delete-cart/${id}`,
+        method: "delete",
+      }),
+    }),
   }),
 });
-export const { useAddToCartMutation } = cartApi;
+export const {
+  useAddToCartMutation,
+  useGetEmailCartQuery,
+  useAddToCartDeleteMutation,
+} = cartApi;

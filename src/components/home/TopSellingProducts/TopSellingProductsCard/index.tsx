@@ -18,7 +18,7 @@ const TopSellingProductsCard = ({ className, datas }: any) => {
             width={500}
             height={500}
             src={datas?.variations[0].image}
-            alt={datas?.variations[0].altText}
+            alt={datas?.title}
             className="w-full h-full object-contain"
           />
         </div>
