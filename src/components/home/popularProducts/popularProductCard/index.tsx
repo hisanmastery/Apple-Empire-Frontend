@@ -25,7 +25,7 @@ const PopularProductCard = ({ className, data }: any) => {
             />
           </div>
           <div className="flex-1 h-full flex flex-col justify-center ">
-            <Link href="/product">
+            <Link href={`/products/${data?._id}`}>
               <p className=" font-bold text-_primary title mb-2 sm:text-[15px] text-[13px] font-600 text-qblack leading-[24px] line-clamp-1 hover:text-qyellow cursor-pointer">
                 {data?.title}
               </p>

@@ -26,7 +26,7 @@ const Home = () => {
           className=" mb-[60px] lg:container mx-auto"
         />
         {/* all products */}
-        <Products productData={datas} />
+        <Products />
         {/* ads banner */}
         <ProductAds
           ads={[

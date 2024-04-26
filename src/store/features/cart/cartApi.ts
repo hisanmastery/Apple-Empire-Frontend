@@ -1,38 +1,33 @@
-import fetchProductsSlice from "@/store/api/products/productsSlice";
+import fetchCartSlice from "@/store/api/cart/cartSlice";
 
-export const productsApi = fetchProductsSlice.injectEndpoints({
+export const cartApi = fetchCartSlice.injectEndpoints({
   endpoints: (builder: any) => ({
     // get all products
-    getProductsLists: builder.query({
+    getAllCart: builder.query({
       query: ({ currentPage, limit }: any) => ({
         url: `/get-all-products?page=${currentPage}&limit=${limit}`,
         method: "get",
       }),
     }),
     //get single products
-    getSingleProducts: builder.query({
+    getEmailCart: builder.query({
       query: (id: any) => ({
         url: `/get-single-products/${id}`,
         method: "get",
       }),
     }),
-    //post products
-    postProducts: builder.mutation({
+    //add to cart products
+    addToCart: builder.mutation({
       query: ({ payload }: any) => ({
-        url: "/post-products",
+        url: "/create-cart",
         method: "post",
         body: payload,
       }),
     }),
     //edit products
-    updateProducts: builder.query({
+    updateCart: builder.query({
       query: () => ({}),
     }),
   }),
 });
-export const {
-  useGetProductsListsQuery,
-  useGetSingleProductsQuery,
-  usePostProductsMutation,
-  useUpdateProductsMutation,
-} = productsApi;
+export const { useAddToCartMutation } = cartApi;
