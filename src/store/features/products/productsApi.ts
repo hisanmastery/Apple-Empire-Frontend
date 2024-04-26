@@ -6,7 +6,7 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
     // get all products
     getProductsLists: builder.query({
       query: ({ currentPage, limit }: any) => ({
-        url: `/get-all-blogs?page=${currentPage}&limit=${limit}`,
+        url: `/get-all-products?page=${currentPage}&limit=${limit}`,
         method: "get",
       }),
     }),

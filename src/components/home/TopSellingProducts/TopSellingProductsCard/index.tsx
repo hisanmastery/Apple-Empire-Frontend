@@ -1,7 +1,10 @@
 import { icons } from "@/constants/icons";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-const TopSellingProductsCard = ({ className, datas }:any) => {
+const TopSellingProductsCard = ({ className, datas }: any) => {
+  // Generate an array of length equal to the review rating
+  const stars = Array.from(Array(parseInt(datas?.review) || 0).keys());
   return (
     <div
       data-aos="fade-up"
@@ -11,9 +14,11 @@ const TopSellingProductsCard = ({ className, datas }:any) => {
     >
       <div className="flex space-x-5 items-center w-full h-full lg:p-[20px] sm:p-5 p-2">
         <div className="lg:w-1/3 w-1/3 h-full">
-          <img
-            src={datas?.image}
-            alt=""
+          <Image
+            width={500}
+            height={500}
+            src={datas?.variations[0].image}
+            alt={datas?.variations[0].altText}
             className="w-full h-full object-contain"
           />
         </div>
@@ -32,10 +37,13 @@ const TopSellingProductsCard = ({ className, datas }:any) => {
                 {datas?.offer_price}
               </span>
             </p>
-             {/* reviews */}
-             <div className="flex space-x-1 mb-4">
-              {Array.from(Array(datas?.review), () => (
-                <span key={datas?.review + Math.random()}><icons.FaStar className="text-_secondary"/></span>
+            {/* reviews */}
+            <div className="flex space-x-1 mb-4">
+              {/* Render star icons based on review rating */}
+              {stars.map((index) => (
+                <span key={index}>
+                  <icons.FaStar className="text-_secondary" />
+                </span>
               ))}
             </div>
             <button type="button" className="w-[110px] h-[30px]">
