@@ -7,7 +7,7 @@ export default function InputQuantityCom({
   onIncrement,
   onDecrement,
   className,
-  buttonClass
+  buttonClass,
 }: any) {
   const [localQuantity, setLocalQuantity] = useState(quantity);
 
@@ -29,7 +29,9 @@ export default function InputQuantityCom({
     <div
       className={`${className} w-[120px] h-[40px] px-[26px] flex items-center border border-qgray-border`}
     >
-      <div className={`${buttonClass} flex justify-between items-center w-full`}>
+      <div
+        className={`${buttonClass} flex justify-between items-center w-full`}
+      >
         <button
           onClick={decrement}
           type="button"

@@ -16,6 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useAddToCartDeleteMutation } from "@/store/features/cart/cartApi";
+import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
 
 const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
@@ -39,11 +40,12 @@ const CartPage = ({ className }: any) => {
 
   // handle remove  cart in right sidebar
   const removeCart = async (id: any) => {
-    // const storedProduct = storedCart || [];
-    // const updatedCart = storedProduct.filter((item: any) => item.id !== id);
-    // dispatch(addStoredCart(updatedCart));
     const res: any = await addToCartDelete({ id });
-    console.log(res);
+    if (res?.data?.isSuccess) {
+      const storedProduct = storedCart || [];
+      const updatedCart = storedProduct.filter((item: any) => item._id !== id);
+      dispatch(addStoredCart(updatedCart));
+    }
   };
 
   // calculate total price

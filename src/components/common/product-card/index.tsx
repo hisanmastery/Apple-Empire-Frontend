@@ -52,8 +52,6 @@ const ProductCard = ({ datas }: any) => {
   const isInCart = storedCart?.find(
     (item: any) => item.productId === datas?._id
   );
-  console.log(isInCart, storedCart, datas);
-
   return (
     <div
       data-aos="fade-up"

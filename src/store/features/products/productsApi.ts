@@ -11,8 +11,8 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
     }),
     //get single products
     getSingleProducts: builder.query({
-      query: (id: any) => ({
-        url: `/get-single-products/${id}`,
+      query: ({ id }: any) => ({
+        url: `/get-single-product/${id}`,
         method: "get",
       }),
     }),

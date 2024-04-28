@@ -22,12 +22,13 @@ const Carts = () => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const { data }: any = useGetEmailCartQuery({
+  const { data, refetch }: any = useGetEmailCartQuery({
     email: "dalim@gmail.com",
   });
   useEffect(() => {
     dispatch(addStoredCart(data?.response));
-  }, [data?.response, dispatch]);
+    refetch();
+  }, [data?.response, dispatch, refetch]);
   // Using reduce to calculate the total price
   const totalPrice = storedCart?.reduce((acc: number, product: any) => {
     return acc + product?.quantity * parseInt(product?.price);

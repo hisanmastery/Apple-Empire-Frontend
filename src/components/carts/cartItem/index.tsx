@@ -7,9 +7,14 @@ import Link from "next/link";
 import { icons } from "@/constants/icons";
 import { Button } from "@/components/ui/button";
 
+import {
+  useAddToCartDeleteMutation,
+  useGetEmailCartQuery,
+} from "@/store/features/cart/cartApi";
+
 const CartItem = () => {
   const { storedCart } = useSelector((state: any) => state?.cart);
-
+  const [addToCartDelete] = useAddToCartDeleteMutation();
   // Using reduce to calculate the total price
   const totalPrice = storedCart?.reduce((acc: number, product: any) => {
     return acc + product?.quantity * parseInt(product?.offer_price);
@@ -17,25 +22,58 @@ const CartItem = () => {
 
   const dispatch = useDispatch();
 
-  // handle increment quantity
-  const handleIncrement = (index: number, newQuantity: number) => {
-    const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
-    updatedStoredCart[index].quantity = newQuantity;
-    dispatch(addStoredCart(updatedStoredCart));
+  // // handle increment quantity
+  // const handleIncrement = (index: number, newQuantity: number) => {
+  //   const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
+  //   updatedStoredCart[index].quantity = newQuantity;
+  //   dispatch(addStoredCart(updatedStoredCart));
+  // };
+
+  // // handle decrement quantity
+  // const handleDecrement = (index: number, newQuantity: number) => {
+  //   const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
+  //   updatedStoredCart[index].quantity = newQuantity;
+  //   dispatch(addStoredCart(updatedStoredCart));
+  // };
+  // CartItem.jsx
+
+  // handle increment quantity for a specific product
+  const handleIncrement = async (productId: string, newQuantity: number) => {
+    const updatedStoredCart = storedCart.map((product: any) => {
+      if (product._id === productId) {
+        return { ...product, quantity: newQuantity };
+      }
+      return product;
+    });
+    await dispatch(addStoredCart(updatedStoredCart));
   };
 
-  // handle decrement quantity
-  const handleDecrement = (index: number, newQuantity: number) => {
-    const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
-    updatedStoredCart[index].quantity = newQuantity;
+  const handleDecrement = async (productId: string, newQuantity: number) => {
+    // Get the current stored cart
+    const storedProduct = storedCart || [];
+
+    // Find the product to decrement and update its quantity
+    const updatedStoredCart = storedProduct.map((item: any) => {
+      if (item._id === productId) {
+        // Ensure the quantity doesn't go below 1
+        const updatedQuantity = Math.max(1, newQuantity);
+        return { ...item, quantity: updatedQuantity };
+      }
+      return item;
+    });
+
+    // Update the cart in the Redux store
     dispatch(addStoredCart(updatedStoredCart));
   };
 
   // handle remove  cart in right sidebar
-  const removeCart = (id: any) => {
-    const storedProduct = storedCart || [];
-    const updatedCart = storedProduct.filter((item: any) => item.id !== id);
-    dispatch(addStoredCart(updatedCart));
+  const removeCart = async (id: any) => {
+    const res: any = await addToCartDelete({ id });
+    if (res?.data?.isSuccess) {
+      const storedProduct = storedCart || [];
+      const updatedCart = storedProduct.filter((item: any) => item._id !== id);
+      dispatch(addStoredCart(updatedCart));
+    }
   };
 
   // calculate total price
@@ -53,7 +91,6 @@ const CartItem = () => {
 
         <div className="overflow-auto mb-10">
           {storedCart?.map((product: any, index: number) => (
-
             <div key={index} className="border p-1 mt-2">
               <div className="mt-4 flex justify-between items-center">
                 <img src={product?.image} className="w-16" alt="" />
@@ -64,7 +101,7 @@ const CartItem = () => {
                   <p>{parseInt(product?.price) * product?.quantity + "$"}</p>
                 </div>
                 <div className="cursor-pointer mx-2 font-bold text-red-500 hover:text-red-700">
-                  <p onClick={() => removeCart(product?.id)}>
+                  <p onClick={() => removeCart(product?._id)}>
                     <icons.crossIcon />
                   </p>
                 </div>
@@ -72,12 +109,12 @@ const CartItem = () => {
               <div className="font-medium">
                 <InputQuantityCom
                   className={"border-none"}
-                  quantity={product.quantity ?? 1}
+                  quantity={product?.quantity ?? 1}
                   onIncrement={(newQuantity: number) =>
-                    handleIncrement(index, newQuantity)
+                    handleIncrement(product?._id, newQuantity)
                   }
                   onDecrement={(newQuantity: number) =>
-                    handleDecrement(index, newQuantity)
+                    handleDecrement(product?._id, newQuantity)
                   }
                 />
               </div>

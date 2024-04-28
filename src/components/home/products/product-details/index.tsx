@@ -12,8 +12,10 @@ import { IoLogoWhatsapp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
-const ProductDetails = ({ product }: any) => {
-  const datas = productDatas.products.slice(0, 5);
+import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
+const ProductDetails = ({ id }: any) => {
+  const { data }: any = useGetSingleProductsQuery({ id });
+  // const datas = data?.response?.slice(0, 5);
   const [selectedColor, setSelectedColor]: any = useState("");
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
@@ -22,12 +24,13 @@ const ProductDetails = ({ product }: any) => {
   };
 
   const images = selectedColor
-    ? product?.variations?.find((variant: any) => variant?.color === selectedColor)
-      ?.image ?? product?.image
-    : product?.image;
+    ? data?.response?.variations?.find(
+        (variant: any) => variant?.color === selectedColor
+      )?.image ?? data?.response.variations[0].image
+    : data?.response.variations[0].image;
 
   // Extracting only the 'image' property from each object in the 'variations' array
-  const variationImages = product?.variations?.map(
+  const variationImages = data?.response?.variations?.map(
     (variation: any) => variation?.image
   );
 
@@ -36,18 +39,18 @@ const ProductDetails = ({ product }: any) => {
     // get product data
     const existingCart = storedCart || [];
     const existingProduct = existingCart?.find(
-      (item: any) => item.id === product.id
+      (item: any) => item.id === data?.response?._id
     );
     // check existing product if not product it will be set
     if (!existingProduct) {
-      const updatedCart = [...existingCart, product];
+      const updatedCart = [...existingCart, data?.response];
       dispatch(addStoredCart(updatedCart));
     }
   };
   // check already added cart
-  const isInCart = storedCart.find((item: any) => item.id === product.id);
-
-  console.log(product)
+  const isInCart = storedCart?.find(
+    (item: any) => item.id === data?.response?._id
+  );
   return (
     <section className="w-11/12 mx-auto mt-4">
       <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
@@ -57,21 +60,21 @@ const ProductDetails = ({ product }: any) => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold">{product?.title}</h2>
+          <h2 className="text-2xl font-bold">{data?.response?.title}</h2>
           {/* pricing */}
           <div className="grid md:grid-cols-3 grid-cols-1 w-full gap-4 items-center text-center ">
             <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full ">
               Price:
               <span className="line-through text-gray-600">
-                {product?.price} $
+                {data?.response.price} $
               </span>
-              <span className="mx-2">{product?.offer_price}$</span>
+              <span className="mx-2">{data?.response?.price}$</span>
             </h4>
             <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full">
-              Status:{product?.status}
+              Status:{data?.response?.status}
             </h4>
             <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full ">
-              Code:{product?.productCode}
+              Code:{data?.response?.productCode}
             </h4>
           </div>
 
@@ -85,7 +88,7 @@ const ProductDetails = ({ product }: any) => {
           <h2 className="text-xl mt-6 font-bold">
             Apple Store 1 Year Warranty Support
           </h2>
-          <p className="mt-5 leading-8 mb-3">{product?.description}</p>
+          <p className="mt-5 leading-8 mb-3">{data?.response?.description}</p>
           {/* review star */}
           <div className="reviews flex space-x-[1px] mb-3">
             <span className="text-yellow-400">{<icons.FaStar />}</span>
@@ -98,14 +101,16 @@ const ProductDetails = ({ product }: any) => {
           </p>
           <div className="flex items-center mt-4 space-x-4">
             <h4>Color:</h4>
-            {product?.variations?.map((variant: any, index: any) => (
+            {data?.response?.variations?.map((variant: any, index: any) => (
               <button
                 key={index}
                 style={{ backgroundColor: `${variant?.colorCode}` }}
-                className={`w-9 h-9 rounded-full bg-[${variant?.colorCode
-                  }] border border-gray-300 ${selectedColor === variant?.color &&
+                className={`w-9 h-9 rounded-full bg-[${
+                  variant?.colorCode
+                }] border border-gray-300 ${
+                  selectedColor === variant?.color &&
                   "p-1  border-yellow-500 border-4"
-                  }`}
+                }`}
                 onClick={() => handleColorButtonClick(variant?.color)}
               ></button>
             ))}
@@ -130,7 +135,7 @@ const ProductDetails = ({ product }: any) => {
               // onClick={() => handleCartClick()}
               className=" hover:bg-[#FF4C06] border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
             >
-              <Link href={'/cart/checkout'}> Buy Now</Link>
+              <Link href={"/cart/checkout"}> Buy Now</Link>
             </Button>
           </div>
         </div>
@@ -155,7 +160,7 @@ const ProductDetails = ({ product }: any) => {
         seeMoreUrl="/products"
         categoryTitle="Related products"
       >
-        <Products  />
+        <Products />
       </ViewMoreTitle>
       {/* product ads banner */}
       <ProductAds
