@@ -206,7 +206,8 @@ const Products = ({ productData }: any) => {
         <Pagination totalPosts={productData?.length}
         postsPerPage={postsPerPage}
         setCurrentPage={setCurrentPage}
-        currentPage={currentPage}/>
+        currentPage={currentPage} />
+        
       </div>
         
     </div>

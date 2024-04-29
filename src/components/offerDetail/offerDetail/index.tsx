@@ -17,7 +17,8 @@ const OfferDetail: React.FC<OfferDetailProps> = ({ params }) => {
       <h1>Hello</h1> */}
       <DiscountBanner/>
       <DiscountDetails/>
-      <Products/>
+      <Products />
+      
     </div>
   );
 };
