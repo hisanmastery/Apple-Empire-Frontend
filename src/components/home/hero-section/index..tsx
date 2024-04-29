@@ -21,8 +21,7 @@ const HeroSection = () => {
   const products = [
     {
       id: "62aefe9ad8b80d5234af625a",
-      image:
-        "https://maccity.com.my/image/cache/data/iphone/iphone%2014%20plus/starlight/iPhone_14_Plus_Starlight_PDP_Image_Position-1A_Starlight_Color_SEA-450x579.jpg",
+      image: "https://i.ibb.co/4ZpZQSz/iPhone15.webp",
       brand: "xioami",
       review: 3,
       quantity: 1,
@@ -38,8 +37,7 @@ const HeroSection = () => {
     },
     {
       id: "62aefe9ad8b80d5234af625a",
-      image:
-        "https://maccity.com.my/image/cache/data/iphone/iphone%2014%20plus/starlight/iPhone_14_Plus_Starlight_PDP_Image_Position-1A_Starlight_Color_SEA-450x579.jpg",
+      image: "https://i.ibb.co/VCHkXrr/Pixel-8-Series.webp",
       brand: "xioami",
       review: 3,
       quantity: 1,
@@ -53,6 +51,57 @@ const HeroSection = () => {
       campaign_product_sale: null,
       product_type: null,
     },
+    {
+      id: "62aefe9ad8b80d5234af625b",
+      image: "https://i.ibb.co/znZWNqy/Galazy.webp",
+      brand: "xioami",
+      review: 4,
+      quantity: 1,
+      description:
+        "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
+      offer_price: 18.73,
+      price: 27.27,
+      campaign_product: false,
+      campaign_product_available: null,
+      campaign_product_sale: null,
+      product_type: null,
+    },
+  ];
+
+  const hotProducts = [
+    {
+      id: "62aefe9ad8b80d5234af625a",
+      image: "https://i.ibb.co/S70JhGt/Galaxy-F23-Forest-Green.webp",
+      brand: "xioami",
+      review: 3,
+      quantity: 1,
+      description:
+        "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
+      offer_price: 18.73,
+      price: 27.27,
+      campaign_product: false,
+      campaign_product_available: null,
+      campaign_product_sale: null,
+      product_type: null,
+    },
+    {
+      id: "62aefe9ad8b80d5234af625a",
+      image: "https://i.ibb.co/0fx1P6Z/Galaxy-A34-Lime.webp",
+      brand: "xioami",
+      review: 3,
+      quantity: 1,
+      description:
+        "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
+      offer_price: 18.73,
+      price: 27.27,
+      campaign_product: false,
+      campaign_product_available: null,
+      campaign_product_sale: null,
+      product_type: null,
+    }
   ];
 
   return (
@@ -65,15 +114,15 @@ const HeroSection = () => {
           onMouseLeave={plugin.current.reset}
         >
           <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
+            {products.slice(0, 3).map((product, index) => (
               <CarouselItem key={index}>
                 <div className="aspect-w-16 aspect-h-9">
                   <Card className="h-full">
                     <CardContent className="flex h-full">
                       <img
                         className=""
-                        src="https://d61s2hjse0ytn.cloudfront.net/images/web/slider/EID_Offer_SA.webp"
-                        alt=""
+                        src={product.image}
+                        alt={`Carousel Image ${index + 1}`}
                       />
                     </CardContent>
                   </Card>
@@ -81,6 +130,7 @@ const HeroSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
+
           <CarouselPrevious className="absolute top-1/2 transform -translate-y-1/2 left-2" />
           <CarouselNext className="absolute top-1/2 transform -translate-y-1/2 right-2" />
         </Carousel>
@@ -92,7 +142,7 @@ const HeroSection = () => {
         </h1>
 
         <div className="flex xl:flex-col flex-col md:flex-row gap-4">
-          {products.map((datas, index) => (
+          {hotProducts.map((datas, index) => (
             <div
               key={index}
               className="aspect-w-16 aspect-h-9 bg-white border border-primarygray px-5 py-5 mb-5 rounded-lg flex justify-center items-center gap-4"
