@@ -64,13 +64,13 @@ const regions = [
 const Products = ({ productData }: any) => {
   const [value, setValue] = useState([33]); 
 
-  const handleChange = (newValue) => {
+  const handleChange = ({newValue}:any) => {
     setValue(newValue);
   };
 
   return (
     <div className="flex">
-      <div className="w-1/4 border-2 rounded-md p-4">
+      <div className="w-1/4 mx-auto lg:container border-2 rounded-md p-4">
         <div className="flex justify-between">
           <h4>Price Range</h4>
           <p>-</p>
