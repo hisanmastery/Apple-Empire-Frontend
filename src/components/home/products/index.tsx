@@ -6,9 +6,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
+import { Input } from "@/components/ui/input"
+import { FiMinus } from "react-icons/fi";
 import ProductCard from "../../common/product-card/index";
 import { Slider } from "@/components/ui/slider";
+import Pagination from "@/components/Pagination";
 
 const displays = [
   "PLS LCD",
@@ -62,25 +64,49 @@ const regions = [
 ]
 
 const Products = ({ productData }: any) => {
-  const [value, setValue] = useState([33]); 
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(8);
 
-  const handleChange = ({newValue}:any) => {
-    setValue(newValue);
+  // slider range 
+  const [priceRangeMin, setPriceRangeMin] = useState(50);
+  const [priceRangeMax, setPriceRangeMax] = useState(100);
+
+  const handleMinPriceChange = (event: any) => {
+    setPriceRangeMin(parseInt(event.target.value));
   };
 
+  const handleMaxPriceChange = (event: any) => {
+    setPriceRangeMax(parseInt(event.target.value));
+  };
+
+  const handleSliderChange = (values: number[]) => {
+    setPriceRangeMin(values[0]);
+    setPriceRangeMax(values[1]);
+  };
+
+  // pagination 
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = productData?.slice(firstPostIndex, lastPostIndex);
+
   return (
-    <div className="flex">
-      <div className="w-1/4 mx-auto lg:container border-2 rounded-md p-4">
-        <div className="flex justify-between">
-          <h4>Price Range</h4>
-          <p>-</p>
+    <div className="flex lg:container mx-auto gap-6">
+      <div className="w-1/4 mt-5">
+        <div className="border-2 rounded-md p-4 ">
+        <div className="flex justify-between items-center">
+          <h4 className="text-xl font-bold">Price Range</h4>
+          <span><FiMinus /></span>
         </div>
-        <hr className="border border-gray-300 "/>
+        <hr className="border border-gray-300 mt-2"/>
 
         <div className="mt-5 mb-2">
-          <Slider  defaultValue={[33]} max={100} step={1} onValueChange={handleChange}/>
-          <p className="mt-6">Current value: {value}</p>
-
+          <Slider value={[priceRangeMin, priceRangeMax]} max={100} min={50} step={1} onValueChange={handleSliderChange} />
+          <div className="flex justify-center lg:gap-6 md:gap-4 gap-1 mt-4">
+            <Input type="text" value={priceRangeMin} onChange={handleMinPriceChange} />
+            <Input type="text" value={priceRangeMax} onChange={handleMaxPriceChange} />
+          </div>
+        </div>
         </div>
         <div className="flex justify-between ">
           <Accordion type="single" collapsible className="w-full">
@@ -172,12 +198,20 @@ const Products = ({ productData }: any) => {
           </Accordion>
         </div>
       </div>
-      <div className="w-3/4 grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-6 lg:container mx-auto ">
-        {productData?.map((product: any) => (
+      <div className="w-3/4 grid lg:container mx-auto lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6  ">
+        {currentPosts?.map((product: any) => (
           <ProductCard key={product.id} datas={product}></ProductCard>
         ))}
+        
+        <Pagination totalPosts={productData?.length}
+        postsPerPage={postsPerPage}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}/>
       </div>
+        
     </div>
+    
+    
   );
 };
 
