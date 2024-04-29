@@ -15,13 +15,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useAddToCartDeleteMutation } from "@/store/features/cart/cartApi";
+import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
 
 const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const [promoCode, setPromoCode] = useState("");
   const [discountPrice, setDiscountPrice] = useState(0);
   const dispatch = useDispatch();
-
+  const [addToCartDelete] = useAddToCartDeleteMutation();
   // handle increment quantity
   const handleIncrement = (index: number, newQuantity: number) => {
     const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
@@ -37,16 +39,19 @@ const CartPage = ({ className }: any) => {
   };
 
   // handle remove  cart in right sidebar
-  const removeCart = (id: any) => {
-    const storedProduct = storedCart || [];
-    const updatedCart = storedProduct.filter((item: any) => item.id !== id);
-    dispatch(addStoredCart(updatedCart));
+  const removeCart = async (id: any) => {
+    const res: any = await addToCartDelete({ id });
+    if (res?.data?.isSuccess) {
+      const storedProduct = storedCart || [];
+      const updatedCart = storedProduct.filter((item: any) => item._id !== id);
+      dispatch(addStoredCart(updatedCart));
+    }
   };
 
   // calculate total price
   const subTotal = storedCart?.reduce((acc: number, product: any) => {
     console.log(acc, product);
-    return acc + product?.quantity * parseInt(product?.offer_price);
+    return acc + product?.quantity * parseInt(product?.price);
   }, 0);
   // shipping charge
   const shippingCost = subTotal / 5; // shiping cost total price 5%
@@ -106,7 +111,7 @@ const CartPage = ({ className }: any) => {
                       <p>{product?.title}</p>
 
                       <div className="cursor-pointer mt-4 font-bold text-red-500 hover:text-red-700">
-                        <p onClick={() => removeCart(product?.id)}>Remove</p>
+                        <p onClick={() => removeCart(product?._id)}>Remove</p>
                       </div>
                     </TableCell>
                     {/* <TableCell className="font-medium">
@@ -124,10 +129,10 @@ const CartPage = ({ className }: any) => {
                       {product?.quantity}
                     </TableCell>
                     <TableCell className="font-medium">
-                      {product?.offer_price}
+                      {product?.price}
                     </TableCell>
                     <TableCell className="font-medium">
-                      {product?.offer_price * product?.quantity}
+                      {parseInt(product?.price) * product?.quantity}
                     </TableCell>
                   </TableRow>
                 ))}

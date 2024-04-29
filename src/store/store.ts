@@ -1,12 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reducers from "./reducers";
-import baseApi from "./api/baseApi";
+import fetchProductsSlice from "./api/products/productsSlice";
+import fetchCartSlice from "./api/cart/cartSlice";
+
 export const store = configureStore({
   reducer: {
-    // all reducer
-    [baseApi.reducerPath]: baseApi.reducer,
+    // Mount each reducer with a unique reducerPath
+    [fetchProductsSlice.reducerPath]: fetchProductsSlice.reducer,
+    [fetchCartSlice.reducerPath]: fetchCartSlice.reducer,
     ...reducers,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware),
+    getDefaultMiddleware()
+      .concat(fetchProductsSlice.middleware)
+      .concat(fetchCartSlice.middleware),
 });
