@@ -21,16 +21,17 @@ const products = [
     product_type: null,
   },
 ];
-const OrderSummary = () => {
+const OrderSummary = ({
+  subtotal,
+  cartDiscount,
+  deliveryFee,
+  totalPrice,
+  totalProducts,
+}: any) => {
   const [systemOn, setSystemOn] = useState(false);
   const toggleSystem = () => {
     setSystemOn(!systemOn);
   };
-  const subtotal =
-    products?.reduce((sum, product) => sum + product.price, 0) ?? 0;
-  const cartDiscount = 5;
-  const deliveryFee = 100;
-  const totalPrice = subtotal - cartDiscount + deliveryFee;
   return (
     <div>
       <h1 className="flex items-center text-lg font-semibold gap-4">
@@ -40,9 +41,9 @@ const OrderSummary = () => {
         Order summary
       </h1>
       <div className="mt-5 border-b-[1px] border-blue-500 pb-2">
-        {products?.map((item: any, index: number) => (
+        {totalProducts?.map((item: any, index: number) => (
           <div key={index} className="flex justify-between items-center gap-6">
-            <div className="w-[75%] flex gap-5 items-center">
+            <div className="w-[75%] flex gap-5 items-center mb-2">
               <Image
                 src={item?.image}
                 alt="image"
@@ -52,7 +53,7 @@ const OrderSummary = () => {
                 className="rounded-md"
               />
               <div>
-                <p className="text-sm mb-2">{item?.title.slice(0, 40)}..</p>
+                <p className="text-sm mb-2">{item?.title.slice(0, 20)}..</p>
                 <p className="font-semibold">{item?.brand}</p>
               </div>
             </div>
@@ -91,8 +92,9 @@ const OrderSummary = () => {
           onClick={toggleSystem}
         >
           <div
-            className={`w-6 h-6 flex items-center justify-center border-2 border-_pribg-_primary ${systemOn ? "bg-_primary" : "bg-white"
-              }`}
+            className={`w-6 h-6 flex items-center justify-center border-2 border-_pribg-_primary ${
+              systemOn ? "bg-_primary" : "bg-white"
+            }`}
           ></div>
           <p className="ml-2">Send as Gift</p>
         </label>
@@ -103,9 +105,6 @@ const OrderSummary = () => {
           terms and condition
         </Link>
       </p>
-      <button className="bg-_primary text-white px-5 py-2 w-full mt-3 border-[1px] hover:bg-_secondary hover:text-black hover:border-_pribg-_primary hover:text-_pribg-_primary transition-all ease-in-out duration-300">
-        CONFIRM ORDER
-      </button>
     </div>
   );
 };

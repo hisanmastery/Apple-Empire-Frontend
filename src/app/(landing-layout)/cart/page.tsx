@@ -50,7 +50,6 @@ const CartPage = ({ className }: any) => {
 
   // calculate total price
   const subTotal = storedCart?.reduce((acc: number, product: any) => {
-    console.log(acc, product);
     return acc + product?.quantity * parseInt(product?.price);
   }, 0);
   // shipping charge

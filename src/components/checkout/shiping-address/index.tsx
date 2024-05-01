@@ -1,19 +1,14 @@
 "use client";
+import Input from "@/components/common/input";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { CiLocationOn } from "react-icons/ci";
 const address = ["jessore", "khulna", "dhaka"];
 const ShippingAddress = () => {
   const {
     register,
-    handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data: any) =>{ 
-    console.log(data)
-  };
-
+  } = useFormContext();
   return (
     <div className="border-[1px] border-gray-400 p-5">
       <h1 className="flex items-center text-lg font-semibold gap-4 border-b-[1px] border-gray-400 py-2">
@@ -22,67 +17,82 @@ const ShippingAddress = () => {
         </button>
         Shipping address
       </h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-5">
+      <div className="mt-5">
         <div>
-          <h1 className="mb-1">Full Name</h1>
-          <input
+          <Input
             type="text"
             placeholder="Name"
-            {...register("name", { required: "Name is required" })}
+            rules={{ required: "" }}
+            required
+            label="Full Name"
             name="name"
-            className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400"
+            className="mt-2"
           />
         </div>
         <div className="mt-2">
-          <h1 className="mb-1">Address</h1>
-          <textarea
+          <Input
             placeholder="Address"
-            {...register("address", { required: "Address is required" })}
+            label="Address"
+            rules={{ required: "" }}
+            required
+            textArea={true}
             name="address"
-            className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400"
+            className="mt-2 focus:outline-none"
           />
         </div>
         <div className="flex items-center gap-2 mt-2">
           <div className="w-full">
             <h1 className="mb-1">City</h1>
-            <select  {...register("city", { required: "City is required" })} className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400">
+            <select
+              {...register("city", { required: "" })}
+              className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400"
+            >
               {address?.map((item, index) => (
-                <option value={item} key={index}>{item}</option>
+                <option value={item} key={index}>
+                  {item}
+                </option>
               ))}
             </select>
           </div>
           <div className="w-full">
             <h1 className="mb-1">PostCode</h1>
-            <select  {...register("postCode", { required: "postCode is required" })} className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400">
+            <select
+              {...register("city", { required: "" })}
+              className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400"
+            >
               {address?.map((item, index) => (
-                <option value={item} key={index}>{item}</option>
+                <option value={item} key={index}>
+                  {item}
+                </option>
               ))}
             </select>
           </div>
         </div>
         <div className="mt-2 flex items-center gap-2">
           <div>
-            <h1 className="mb-1">Mobile number</h1>
-            <input
+            <Input
               type="text"
-              {...register("mobile", { required: "Mobile is required" })}
+              label="Mobile number"
+              rules={{ required: "" }}
+              required
               placeholder="mobile number"
               name="number"
-              className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400"
+              className="mt-2"
             />
           </div>
           <div>
-            <h1 className="mb-1">Email</h1>
-            <input
+            <Input
+              label="Email"
               type="email"
-              {...register("email", { required: "Email Address is required" })}
+              rules={{ required: "" }}
+              required
               name="email"
-              placeholder="email"
-              className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400"
+              placeholder="Email"
+              className="mt-2"
             />
           </div>
         </div>
-      </form>
+      </div>
       <h1 className="flex items-center text-lg font-semibold gap-4 border-t-[1px] border-gray-400 py-2 mt-5">
         <button className="bg-_primary p-3 rounded-full">
           <CiLocationOn className="text-2xl text-white" />

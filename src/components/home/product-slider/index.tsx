@@ -5,7 +5,7 @@ import MultiCarousel from "@/components/common/carousel";
 import Loading from "@/components/common/loading";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 
-const ProductSlider = ({ productData }: any) => {
+const ProductSlider = () => {
   const { data: sliderProducts, isLoading }: any = useGetProductsListsQuery({});
   if (isLoading) {
     return <Loading />;

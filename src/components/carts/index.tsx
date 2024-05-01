@@ -22,9 +22,12 @@ const Carts = () => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const { data, refetch }: any = useGetEmailCartQuery({
-    email: "dalim@gmail.com",
-  });
+  const { data, refetch }: any = useGetEmailCartQuery(
+    {
+      email: "dalim@gmail.com",
+    },
+    { pollingInterval: 1000 }
+  );
   useEffect(() => {
     dispatch(addStoredCart(data?.response));
     refetch();
@@ -49,7 +52,7 @@ const Carts = () => {
         </div>
       </div>
       <SheetDrawer title={""} isOpen={isOpen} setIsOpen={setIsOpen}>
-        <div>
+        <div className="overflow-hidden">
           <div>
             {storedCart?.length > 0 ? (
               <CartItem />

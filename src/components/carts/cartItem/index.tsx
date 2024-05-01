@@ -22,15 +22,27 @@ const CartItem = () => {
 
   const dispatch = useDispatch();
 
-  // // handle increment quantity
-  // const handleIncrement = (index: number, newQuantity: number) => {
-  //   const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
-  //   updatedStoredCart[index].quantity = newQuantity;
+  // handle increment quantity
+  // const handleIncrement = (_id: string, newQuantity: number) => {
+  //   const updatedStoredCart = storedCart.map((product: any) => {
+  //     if (product._id === _id) {
+  //       // If the product's _id matches the _id passed to the function,
+  //       // update its quantity
+  //       return { ...product, quantity: newQuantity };
+  //     } else {
+  //       // Otherwise, return the product unchanged
+  //       return product;
+  //     }
+  //   });
+
+  //   console.log(updatedStoredCart); // Check the updated cart in the console
+
+  //   // Dispatch the action to update the cart in the Redux store
   //   dispatch(addStoredCart(updatedStoredCart));
   // };
 
-  // // handle decrement quantity
-  // const handleDecrement = (index: number, newQuantity: number) => {
+  // handle decrement quantity
+  // const handleDecrement = (index: any, newQuantity: number) => {
   //   const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
   //   updatedStoredCart[index].quantity = newQuantity;
   //   dispatch(addStoredCart(updatedStoredCart));
@@ -82,19 +94,19 @@ const CartItem = () => {
   }, 0);
 
   return (
-    <div className="p-2">
+    <div className="p-2 h-screen">
       <div>
         <div className="flex justify-between items-center">
           <h4 className="text-xl font-semibold">Shopping Cart</h4>
           <h4 className="text-xl font-semibold">{storedCart?.length} Items</h4>
         </div>
 
-        <div className="overflow-auto mb-10">
+        <div className="overflow-auto h-[80vh] pb-10">
           {storedCart?.map((product: any, index: number) => (
             <div key={index} className="border p-1 mt-2">
-              <div className="mt-4 flex justify-between items-center">
-                <img src={product?.image} className="w-16" alt="" />
-                <div className="font-medium w-1/2">
+              <div className="mt-4 flex gap-2 justify-between items-center">
+                <img src={product?.image} className="w-16" alt="products" />
+                <div className="font-medium text-sm w-1/2">
                   <p>{product?.title?.slice(0, 30)}...</p>
                 </div>
                 <div className="font-medium flex">
@@ -124,7 +136,7 @@ const CartItem = () => {
       </div>
 
       {/* footer */}
-      <div className="sticky bottom-0 left-0 right-0 w-full flex">
+      <div className="fixed bottom-0 left-0 right-0 w-full flex">
         <Link href={"/cart"} className="w-full">
           <button className="bg-blue-400 text-white p-2 w-full">
             Go to Checkout
