@@ -2,30 +2,31 @@ import { GrDeliver } from "react-icons/gr";
 import React, { useState } from "react";
 import { MdOutlinePayment } from "react-icons/md";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useForm } from "react-hook-form";
-const ShippingMethod = () => {
+import { useFormContext } from "react-hook-form";
+import Input from "@/components/common/input";
+const ShippingMethod = ({
+  setShippingMethod = () => {},
+  shippingMethod,
+}: any) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   const [selectedDhakaOutside, setSelectedDhakaOutside] = useState("default");
-  const [systemOn, setSystemOn] = useState(false);
-
   const handleMethodChangeDhakaOutside = (e: any) => {
-    setSelectedMethod(e.target.value);
+    setSelectedDhakaOutside(e.target.value);
   };
 
   const toggleSystem = () => {
-    setSystemOn(!systemOn);
+    setShippingMethod(!shippingMethod);
   };
   const [selectedMethod, setSelectedMethod] = useState("default");
 
   const handleMethodChange = (method: any) => {
     setSelectedMethod(method);
   };
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit = (data: any) => {
-    console.log(data); // You can handle form submission here
-  };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <div>
       <div>
         <h1 className="flex items-center text-lg font-semibold gap-4">
           <button className="bg-_primary p-3 rounded-full">
@@ -37,8 +38,8 @@ const ShippingMethod = () => {
           <input
             type="checkbox"
             id="default"
-            name="shippingMethod"
             className="hidden" // Hide the default checkbox
+            {...register("shippingMethod", { required: "" })}
           />
           <label
             htmlFor="default"
@@ -47,13 +48,11 @@ const ShippingMethod = () => {
           >
             <div
               className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${
-                systemOn ? "bg-_primary" : "bg-white"
+                shippingMethod ? "bg-_primary" : "bg-white"
               }`}
             ></div>
             <div className="flex justify-between ml-2 items-center gap-10">
-              <span className="text-md">
-                Outside Dhaka : Within 5-7 days
-              </span>
+              <span className="text-md">Outside Dhaka : Within 5-7 days</span>
               <span>TK. 100</span>
             </div>
           </label>
@@ -65,33 +64,24 @@ const ShippingMethod = () => {
           Payment method
         </h1>
         <div className="p-5">
-          <RadioGroup defaultValue="Debit-Cards-Online Payment">
+          <RadioGroup
+            defaultValue="Debit-Cards-Online Payment"
+            {...register("onlinePayment", { required: "" })}
+          >
             <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                value="default"
-                {...register("onlinePayment")}
-                id="r1"
-              />
+              <RadioGroupItem value="Debit-Cards-Online Payment" id="r1" />
               <label htmlFor="r1" className="text-md mt-2">
                 Debit & Cards / Online Payment
               </label>
             </div>
             <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                value="comfortable"
-                {...register("cashOnDelivery")}
-                id="r2"
-              />
+              <RadioGroupItem value="Cash on Delivery" id="r2" />
               <label htmlFor="r2" className="text-lg mt-2">
                 Cash on Delivery
               </label>
             </div>
             <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                value="compact"
-                {...register("cardsOnDelivery")}
-                id="r3"
-              />
+              <RadioGroupItem value="Cards on Delivery" id="r3" />
               <label htmlFor="r3" className="text-md mt-2">
                 Cards on Delivery
               </label>
@@ -99,15 +89,17 @@ const ShippingMethod = () => {
           </RadioGroup>
         </div>
         <div>
-          <h1 className="text-md mb-2">Order notes(options)</h1>
-          <textarea
+          <h1 className="text-md mb-2"></h1>
+          <Input
+            label="Order notes(options)"
             placeholder="order notes"
             name="order-notes"
-            className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400"
+            textArea={true}
+            className="mt-2 focus:outline-none"
           />
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 

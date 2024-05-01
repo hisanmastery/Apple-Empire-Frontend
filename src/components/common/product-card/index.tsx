@@ -11,9 +11,6 @@ import { title } from "process";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const ProductCard = ({ datas }: any) => {
-  // const product = {
-  //   id: datas?._id,
-  // };
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const { data, refetch }: any = useGetEmailCartQuery({

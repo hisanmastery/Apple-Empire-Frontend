@@ -35,7 +35,7 @@ const Home = () => {
           className=" mb-[60px] lg:container mx-auto"
         />
         {/* product caorusel */}
-        <ProductSlider productData={datas} />
+        <ProductSlider />
 
         {/* top selling product */}
         <ViewMoreTitle
