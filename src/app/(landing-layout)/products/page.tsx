@@ -1,10 +1,9 @@
 import React from "react";
-import productDatas from "@/../../public/product.json";
-import Product from "@/components/home/products";
+import AllProductsSection from "@/components/all-products";
 const Products = () => {
   return (
     <div>
-      <Product />
+      <AllProductsSection />
     </div>
   );
 };
