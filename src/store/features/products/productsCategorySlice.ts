@@ -4,16 +4,36 @@ import { createSlice } from "@reduxjs/toolkit";
 export const productsCategorySlice = createSlice({
     name: "productsCategory",
     initialState: {
-        name: ""
+        displayType: "",
+        ram: "",
+        shape: "",
+        internalStorage: "",
+        chipset: "",
+        region: ""
     },
     reducers: {
-        setProductsCategory: (state, action) => {
-            state.name = action.payload;
-        }
+        setProductsDisplayType: (state, action) => {
+            state.displayType = action.payload;
+        },
+        setProductsRam: (state, action) => {
+            state.ram = action.payload;
+        },
+        setProductsShape: (state, action) => {
+            state.shape = action.payload;
+        },
+        setProductsInternalStoragee: (state, action) => {
+            state.internalStorage = action.payload;
+        },
+        setProductsChipset: (state, action) => {
+            state.chipset = action.payload;
+        },
+        setProductsRegion: (state, action) => {
+            state.region = action.payload;
+        },
     },
 });
 
-export const { setProductsCategory } = productsCategorySlice.actions;
+export const { setProductsDisplayType, setProductsChipset, setProductsInternalStoragee, setProductsRam, setProductsRegion, setProductsShape } = productsCategorySlice.actions;
 
 export const selectProductsCategory = (state: any) => state.productsCategory;
 

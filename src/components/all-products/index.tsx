@@ -12,7 +12,8 @@ import ProductsNotFound from "../products-not-found";
 const AllProductsSection = () => {
     const { data: allProducts, isLoading }: any = useGetProductsListsQuery({});
     const { min, max } = useSelector(selectPriceRange);
-    const { name } = useSelector(selectProductsCategory);
+    const { displayType, ram, shape, internalStorage, chipset, region } = useSelector(selectProductsCategory);
+    console.log(displayType, ram, shape, internalStorage, chipset, region);
     // pagination
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(12);

@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const priceRangeSlice = createSlice({
     name: "priceRange",
     initialState: {
-        min: 0,
+        min: 250,
         max: 100000,
     },
     reducers: {

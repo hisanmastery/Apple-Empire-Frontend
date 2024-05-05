@@ -11,7 +11,7 @@ import { FiMinus } from "react-icons/fi";
 import { Slider } from "@/components/ui/slider";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPriceRange, setPriceRangeMax, setPriceRangeMin } from "@/store/features/products/productsPriceRangeSlice";
-import { setProductsCategory } from "@/store/features/products/productsCategorySlice";
+import { setProductsChipset, setProductsDisplayType, setProductsInternalStoragee, setProductsRam, setProductsRegion } from "@/store/features/products/productsCategorySlice";
 
 
 const displays = [
@@ -67,9 +67,6 @@ const regions = [
 const ProductsSideBar = () => {
     const dispatch = useDispatch();
     const { min, max } = useSelector(selectPriceRange)
-    const handleCheckboxClick = (value: any) => {
-        dispatch(setProductsCategory(value));
-    };
     const handleMinPriceChange = (event: any) => {
         dispatch(setPriceRangeMin(parseInt(event.target.value)));
     };
@@ -92,7 +89,7 @@ const ProductsSideBar = () => {
                 <hr className="mt-2" />
 
                 <div className="mt-5 mb-2">
-                    <Slider value={[min, max]} max={100000} min={0} step={1} onValueChange={handleSliderChange} className="cursor-pointer" />
+                    <Slider value={[min, max]} max={100000} min={250} step={1} onValueChange={handleSliderChange} className="cursor-pointer" />
                     <div className="flex justify-center lg:gap-6 md:gap-4 gap-1 mt-4">
                         <Input className="focus:outline-none" type="text" defaultValue={min || 0} onChange={handleMinPriceChange} />
                         <Input className="focus:outline-none" type="text" defaultValue={max || 0} onChange={handleMaxPriceChange} />
@@ -111,7 +108,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="display"
                                         value={display}
-                                        onClick={() => handleCheckboxClick(display)}
+                                        onClick={() => dispatch(setProductsDisplayType(display))}
                                     />
                                     <label>{display}</label>
                                     <br />
@@ -129,7 +126,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="ram"
                                         value={ram}
-                                        onClick={() => handleCheckboxClick(ram)}
+                                        onClick={() => dispatch(setProductsRam(ram))}
                                     />
                                     <label>{ram}</label>
                                     <br />
@@ -147,7 +144,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="internalStorage"
                                         value={internalStorage}
-                                        onClick={() => handleCheckboxClick(internalStorage)}
+                                        onClick={() => dispatch(setProductsInternalStoragee(internalStorage))}
                                     />
                                     <label>{internalStorage}</label>
                                     <br />
@@ -165,7 +162,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="chipset"
                                         value={chipset}
-                                        onClick={() => handleCheckboxClick(chipset)}
+                                        onClick={() => dispatch(setProductsChipset(chipset))}
                                     />
                                     <label>{chipset}</label>
                                     <br />
@@ -183,7 +180,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="region"
                                         value={region}
-                                        onClick={() => handleCheckboxClick(region)}
+                                        onClick={() => dispatch(setProductsRegion(region))}
                                     />
                                     <label>{region}</label>
                                     <br />
