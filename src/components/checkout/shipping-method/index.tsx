@@ -65,7 +65,6 @@ const ShippingMethod = ({
         </h1>
         <div className="p-5">
           <RadioGroup
-            defaultValue="Debit-Cards-Online Payment"
             {...register("onlinePayment", { required: "" })}
           >
             <div className="flex items-center space-x-2">

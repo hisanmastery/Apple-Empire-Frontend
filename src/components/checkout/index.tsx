@@ -6,10 +6,12 @@ import OrderSummary from "./order-summary";
 import { FormProvider, useForm } from "react-hook-form";
 import { useGetEmailCartQuery } from "@/store/features/cart/cartApi";
 import { useState } from "react";
+import { useOrderCreateMutation } from "@/store/features/checkout/checkoutApi";
 const Checkout = () => {
   const methods = useForm();
   const { storedCart } = useSelector((state: any) => state?.cart);
   const [shippingMethod, setShippingMethod] = useState(false);
+  const [orderCreate] = useOrderCreateMutation()
   // calculate sub total price
   const subtotal =
     storedCart?.reduce(
@@ -20,7 +22,17 @@ const Checkout = () => {
   const deliveryFee = 100;
   const totalPrice = subtotal - cartDiscount + deliveryFee;
   const onSubmit = async (data: any) => {
-    console.log(data);
+    const payload = {
+      email: data.email,
+      name: data?.name,
+      phone: data?.number,
+      isPayment: false,
+      address: data?.address
+    }
+    const res: any = await orderCreate({ payload })
+    if (res?.data?.isSuccess) {
+            
+    }
   };
   return (
     <main className=" container mx-auto mt-10">

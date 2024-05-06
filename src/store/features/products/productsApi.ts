@@ -4,8 +4,8 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
   endpoints: (builder: any) => ({
     // get all products
     getProductsLists: builder.query({
-      query: ({ currentPage, limit }: any) => ({
-        url: `/get-all-products?page=${currentPage}&limit=${limit}`,
+      query: ({ currentPage, displayType, ram, chipset, region, internalStorage, limit }: any) => ({
+        url: `/get-all-products?page=${currentPage}&limit=${limit}&displayType=${displayType}&ram=${ram}&chipset=${chipset}&region=${region}&internalStorage=${internalStorage}`,
         method: "get",
       }),
     }),

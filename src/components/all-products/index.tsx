@@ -10,10 +10,16 @@ import { selectProductsCategory } from "@/store/features/products/productsCatego
 import ProductsNotFound from "../products-not-found";
 
 const AllProductsSection = () => {
-    const { data: allProducts, isLoading }: any = useGetProductsListsQuery({});
     const { min, max } = useSelector(selectPriceRange);
     const { displayType, ram, shape, internalStorage, chipset, region } = useSelector(selectProductsCategory);
-    console.log(displayType, ram, shape, internalStorage, chipset, region);
+    const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
+        displayType: displayType,
+        ram: ram,
+        chipset: chipset,
+        region: region,
+        internalStorage: internalStorage
+    });
+    console.log(allProducts);
     // pagination
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(12);
