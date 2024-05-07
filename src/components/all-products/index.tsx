@@ -12,17 +12,19 @@ import ProductsNotFound from "../products-not-found";
 const AllProductsSection = () => {
     const { min, max } = useSelector(selectPriceRange);
     const { displayType, ram, shape, internalStorage, chipset, region } = useSelector(selectProductsCategory);
+    // pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(12);
     const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
         displayType: displayType,
         ram: ram,
         chipset: chipset,
         region: region,
-        internalStorage: internalStorage
+        internalStorage: internalStorage,
+        page: currentPage,
+        limit: postsPerPage
     });
     console.log(allProducts);
-    // pagination
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(12);
     // pagination 
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
