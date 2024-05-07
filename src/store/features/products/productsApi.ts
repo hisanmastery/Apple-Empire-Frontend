@@ -5,7 +5,7 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
     // get all products
     getProductsLists: builder.query({
       query: ({ currentPage, displayType, ram, chipset, region, internalStorage, limit }: any) => ({
-        url: `/get-all-products?page=${currentPage}&limit=${limit}&displayType=${displayType}&ram=${ram}&chipset=${chipset}&region=${region}&internalStorage=${internalStorage}`,
+        url: `/get-all-products?page=${currentPage || ""}&limit=${limit || ""}&displayType=${displayType || ""}&ram=${ram || ""}&chipset=${chipset || ""}&region=${region || ""}&internalStorage=${internalStorage || ""}`,
         method: "get",
       }),
     }),
