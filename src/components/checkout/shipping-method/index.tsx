@@ -5,12 +5,11 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useFormContext } from "react-hook-form";
 import Input from "@/components/common/input";
 const ShippingMethod = ({
-  setShippingMethod = () => {},
+  setShippingMethod = () => { },
   shippingMethod,
 }: any) => {
   const {
     register,
-    formState: { errors },
   } = useFormContext();
   const [selectedDhakaOutside, setSelectedDhakaOutside] = useState("default");
   const handleMethodChangeDhakaOutside = (e: any) => {
@@ -47,9 +46,8 @@ const ShippingMethod = ({
             onClick={toggleSystem}
           >
             <div
-              className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${
-                shippingMethod ? "bg-_primary" : "bg-white"
-              }`}
+              className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${shippingMethod ? "bg-_primary" : "bg-white"
+                }`}
             ></div>
             <div className="flex justify-between ml-2 items-center gap-10">
               <span className="text-md">Outside Dhaka : Within 5-7 days</span>
@@ -65,7 +63,6 @@ const ShippingMethod = ({
         </h1>
         <div className="p-5">
           <RadioGroup
-            defaultValue="Debit-Cards-Online Payment"
             {...register("onlinePayment", { required: "" })}
           >
             <div className="flex items-center space-x-2">
@@ -74,7 +71,7 @@ const ShippingMethod = ({
                 Debit & Cards / Online Payment
               </label>
             </div>
-            <div className="flex items-center space-x-2">
+            {/* <div className="flex items-center space-x-2">
               <RadioGroupItem value="Cash on Delivery" id="r2" />
               <label htmlFor="r2" className="text-lg mt-2">
                 Cash on Delivery
@@ -85,7 +82,7 @@ const ShippingMethod = ({
               <label htmlFor="r3" className="text-md mt-2">
                 Cards on Delivery
               </label>
-            </div>
+            </div> */}
           </RadioGroup>
         </div>
         <div>
@@ -93,7 +90,7 @@ const ShippingMethod = ({
           <Input
             label="Order notes(options)"
             placeholder="order notes"
-            name="order-notes"
+            name="orderNotes"
             textArea={true}
             className="mt-2 focus:outline-none"
           />

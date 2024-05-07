@@ -23,7 +23,7 @@ const ProductCard = ({ datas }: any) => {
       email: "dalim@gmail.com",
       title: data?.title,
       productId: data?._id,
-      price: data?.price,
+      price: data?.offer_price,
       image: data?.variations[0].image,
       quantity: 0,
     };
@@ -61,17 +61,17 @@ const ProductCard = ({ datas }: any) => {
         <Link href={`/products/${datas?._id}`}>
           <div
             className="bg-slate-50 border-none  w-[134px] h-[134px] mx-auto mt-1"
-            // className="product-card-img w-full h-[300px]"
-            // style={{
-            //   background: `url(${datas?.image}) no-repeat center`,
-            //   backgroundSize: "cover",
-            //   backgroundPosition: "center",
-            //   width: "131px",
-            //   height: "131px",
-            //   margin: "auto",
-            //   backgroundColor:"#69B626",
-            //   padding:'2px'
-            // }}
+          // className="product-card-img w-full h-[300px]"
+          // style={{
+          //   background: `url(${datas?.image}) no-repeat center`,
+          //   backgroundSize: "cover",
+          //   backgroundPosition: "center",
+          //   width: "131px",
+          //   height: "131px",
+          //   margin: "auto",
+          //   backgroundColor:"#69B626",
+          //   padding:'2px'
+          // }}
           >
             <Image
               width={500}
@@ -109,9 +109,8 @@ const ProductCard = ({ datas }: any) => {
             <button
               disabled={isInCart}
               onClick={() => handleCartClick(datas)}
-              className={`bg-_primary uppercase ${
-                !isInCart ? "  hover:bg-[#FF4C06]" : "bg-slate-500 opacity-40"
-              } rounded-full ease-in-out duration-500 transition-all w-8 h-8 text-white p-2 font-normal text-sm text-center flex  justify-center items-center`}
+              className={`bg-_primary uppercase ${!isInCart ? "  hover:bg-[#FF4C06]" : "bg-slate-500 opacity-40"
+                } rounded-full ease-in-out duration-500 transition-all w-8 h-8 text-white p-2 font-normal text-sm text-center flex  justify-center items-center`}
             >
               <span>
                 {isInCart ? (

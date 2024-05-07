@@ -1,0 +1,45 @@
+import fetchCartSlice from "@/store/api/cart/cartSlice";
+import fetchCheckoutSlice from "@/store/api/checkout/checkoutSlice";
+
+export const cartApi = fetchCheckoutSlice.injectEndpoints({
+    endpoints: (builder: any) => ({
+        // get all products
+        getAllCart: builder.query({
+            query: ({ currentPage, limit }: any) => ({
+                url: `/get-all-products?page=${currentPage}&limit=${limit}`,
+                method: "get",
+            }),
+        }),
+        //get single products
+        getEmailCart: builder.query({
+            query: ({ email }: any) => ({
+                url: `/get-cart-by-email?email=${email}`,
+                method: "get",
+            }),
+        }),
+        //add to cart products
+        orderCreate: builder.mutation({
+            query: ({ payload }: any) => ({
+                url: "/create-order",
+                method: "post",
+                body: payload,
+            }),
+        }),
+        //edit products
+        updateCart: builder.query({
+            query: () => ({}),
+        }),
+        //delete add too cart
+        addToCartDelete: builder.mutation({
+            query: ({ id }: any) => ({
+                url: `/delete-cart/${id}`,
+                method: "delete",
+            }),
+        }),
+    }),
+});
+export const {
+    useOrderCreateMutation,
+    useGetEmailCartQuery,
+    useAddToCartDeleteMutation,
+} = cartApi;

@@ -3,7 +3,7 @@ import Input from "@/components/common/input";
 import React from "react";
 import { useForm, useFormContext } from "react-hook-form";
 import { CiLocationOn } from "react-icons/ci";
-const address = ["jessore", "khulna", "dhaka"];
+import { Address } from "@/data/address";
 const ShippingAddress = () => {
   const {
     register,
@@ -47,7 +47,7 @@ const ShippingAddress = () => {
               {...register("city", { required: "" })}
               className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400"
             >
-              {address?.map((item, index) => (
+              {Address?.map((item: any, index: number) => (
                 <option value={item} key={index}>
                   {item}
                 </option>
@@ -55,43 +55,44 @@ const ShippingAddress = () => {
             </select>
           </div>
           <div className="w-full">
-            <h1 className="mb-1">PostCode</h1>
-            <select
+            {/* <select
               {...register("city", { required: "" })}
               className="border-[1px] w-full p-2 rounded-md focus:outline-none border-gray-400"
             >
-              {address?.map((item, index) => (
+              {Address?.map((item: any, index: number) => (
                 <option value={item} key={index}>
                   {item}
                 </option>
               ))}
-            </select>
-          </div>
-        </div>
-        <div className="mt-2 flex items-center gap-2">
-          <div>
+            </select> */}
             <Input
-              type="text"
-              label="Mobile number"
+              placeholder="Post Code"
+              label="Post Code"
               rules={{ required: "" }}
               required
-              placeholder="mobile number"
-              name="number"
-              className="mt-2"
-            />
-          </div>
-          <div>
-            <Input
-              label="Email"
-              type="email"
-              rules={{ required: "" }}
-              required
-              name="email"
-              placeholder="Email"
-              className="mt-2"
+              name="postCode"
+              className="mt-2 focus:outline-none"
             />
           </div>
         </div>
+        <Input
+          label="Email"
+          type="email"
+          rules={{ required: "" }}
+          required
+          name="email"
+          placeholder="Email"
+          className="mt-[2px] mb-2"
+        />
+        <Input
+          type="text"
+          label="Mobile number"
+          rules={{ required: "" }}
+          required
+          placeholder="mobile number"
+          name="number"
+          className="mt-[2px]"
+        />
       </div>
       <h1 className="flex items-center text-lg font-semibold gap-4 border-t-[1px] border-gray-400 py-2 mt-5">
         <button className="bg-_primary p-3 rounded-full">
