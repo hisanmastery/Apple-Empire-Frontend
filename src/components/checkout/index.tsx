@@ -11,6 +11,7 @@ const Checkout = () => {
   const methods = useForm();
   const { storedCart } = useSelector((state: any) => state?.cart);
   const [shippingMethod, setShippingMethod] = useState(false);
+  const [giftSend, setGiftSend] = useState(false);
   const [orderCreate] = useOrderCreateMutation()
   // calculate sub total price
   const subtotal =
@@ -22,16 +23,27 @@ const Checkout = () => {
   const deliveryFee = 100;
   const totalPrice = subtotal - cartDiscount + deliveryFee;
   const onSubmit = async (data: any) => {
+    console.log(data);
     const payload = {
       email: data.email,
       name: data?.name,
       phone: data?.number,
+      city: data?.city,
       isPayment: false,
-      address: data?.address
+      address: data?.address,
+      productIds: storedCart?.map((item: any) => item._id),
+      shippingMethod: {
+        isOutesideDhaka: true,
+        paymentMethod: data?.onlinePayment,
+        orderNotes: data?.orderNotes
+      },
+      // gift: giftSend,
+      totalPrice: totalPrice
     }
     const res: any = await orderCreate({ payload })
     if (res?.data?.isSuccess) {
-            
+      console.log(res);
+      alert("Successfully Order")
     }
   };
   return (
@@ -42,7 +54,7 @@ const Checkout = () => {
           <p>Please enter your details below to complete your purchase</p>
         </div>
         <div>
-          <button className="border-2 border-_primary text-_primary  px-5 p-2 rounded-md hover:bg-_priborder-_primary hover:text-black transition-all ease-in-out duration-1000">
+          <button className="border-2 border-_primary text-_primary  px-5 p-2 rounded-md hover:bg-_border-_primary hover:text-black transition-all ease-in-out duration-1000">
             BACK TO CART
           </button>
         </div>
@@ -68,6 +80,8 @@ const Checkout = () => {
               deliveryFee={deliveryFee}
               totalPrice={totalPrice}
               totalProducts={storedCart}
+              giftSend={giftSend}
+              setGiftSend={setGiftSend}
             />
             <button
               type="submit"

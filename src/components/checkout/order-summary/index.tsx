@@ -2,35 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaFileAlt } from "react-icons/fa";
-const products = [
-  {
-    id: "62aefe9ad8b80d5234af625a",
-    image:
-      "https://maccity.com.my/image/cache/data/iphone/iphone%2014%20plus/starlight/iPhone_14_Plus_Starlight_PDP_Image_Position-1A_Starlight_Color_SEA-450x579.jpg",
-    brand: "xioami",
-    review: 3,
-    quantity: 1,
-    description:
-      "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
-    title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
-    offer_price: "18.73",
-    price: 27.27,
-    campaingn_product: false,
-    cam_product_available: null,
-    cam_product_sale: null,
-    product_type: null,
-  },
-];
 const OrderSummary = ({
   subtotal,
   cartDiscount,
   deliveryFee,
   totalPrice,
   totalProducts,
+  giftSend,
+  setGiftSend
 }: any) => {
-  const [systemOn, setSystemOn] = useState(false);
   const toggleSystem = () => {
-    setSystemOn(!systemOn);
+    setGiftSend(!giftSend);
   };
   return (
     <div>
@@ -92,9 +74,8 @@ const OrderSummary = ({
           onClick={toggleSystem}
         >
           <div
-            className={`w-6 h-6 flex items-center justify-center border-2 border-_pribg-_primary ${
-              systemOn ? "bg-_primary" : "bg-white"
-            }`}
+            className={`w-6 h-6 flex items-center justify-center border-2 border-_pribg-_primary ${giftSend ? "bg-_primary" : "bg-white"
+              }`}
           ></div>
           <p className="ml-2">Send as Gift</p>
         </label>
