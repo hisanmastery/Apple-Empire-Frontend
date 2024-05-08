@@ -23,8 +23,8 @@ const AllProductsSection = () => {
         internalStorage: internalStorage,
         page: currentPage,
         limit: postsPerPage
-    });
-    console.log(allProducts);
+    }, { pollingInterval: 1000 });
+    console.log(ram);
     // pagination 
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;

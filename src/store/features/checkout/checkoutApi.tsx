@@ -18,9 +18,9 @@ export const cartApi = fetchCheckoutSlice.injectEndpoints({
             }),
         }),
         //add to cart products
-        orderCreate: builder.mutation({
+        createPayment: builder.mutation({
             query: ({ payload }: any) => ({
-                url: "/create-order",
+                url: "/create-payment",
                 method: "post",
                 body: payload,
             }),
@@ -39,7 +39,7 @@ export const cartApi = fetchCheckoutSlice.injectEndpoints({
     }),
 });
 export const {
-    useOrderCreateMutation,
+    useCreatePaymentMutation,
     useGetEmailCartQuery,
     useAddToCartDeleteMutation,
 } = cartApi;
