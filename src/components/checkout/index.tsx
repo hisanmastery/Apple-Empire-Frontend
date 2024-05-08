@@ -6,13 +6,15 @@ import OrderSummary from "./order-summary";
 import { FormProvider, useForm } from "react-hook-form";
 import { useGetEmailCartQuery } from "@/store/features/cart/cartApi";
 import { useState } from "react";
-import { useOrderCreateMutation } from "@/store/features/checkout/checkoutApi";
+import { useCreatePaymentMutation } from "@/store/features/checkout/checkoutApi";
+import { useRouter } from "next/navigation";
 const Checkout = () => {
   const methods = useForm();
+  const router = useRouter()
   const { storedCart } = useSelector((state: any) => state?.cart);
   const [shippingMethod, setShippingMethod] = useState(false);
   const [giftSend, setGiftSend] = useState(false);
-  const [orderCreate] = useOrderCreateMutation()
+  const [createPayment] = useCreatePaymentMutation()
   // calculate sub total price
   const subtotal =
     storedCart?.reduce(
@@ -28,6 +30,7 @@ const Checkout = () => {
       email: data.email,
       name: data?.name,
       phone: data?.number,
+      postCode: data?.postCode,
       city: data?.city,
       isPayment: false,
       address: data?.address,
@@ -40,10 +43,10 @@ const Checkout = () => {
       // gift: giftSend,
       totalPrice: totalPrice
     }
-    const res: any = await orderCreate({ payload })
+    const res: any = await createPayment({ payload })
     if (res?.data?.isSuccess) {
-      console.log(res);
-      alert("Successfully Order")
+      console.log(res, res?.data?.response?.paymentInfo?.GatewayPageURL);
+      router.push(res?.data?.response?.paymentInfo?.GatewayPageURL)
     }
   };
   return (
