@@ -1,11 +1,13 @@
 
 import PaymentSuccess from '@/components/payment/payment-success';
-import React from 'react';
+import React, { Suspense } from 'react';
 const PaymentSuccessPage = () => {
     return (
-        <div>
-            <PaymentSuccess />
-        </div>
+        <Suspense fallback={<div>loading...</div>}>
+            <div>
+                <PaymentSuccess />
+            </div>
+        </Suspense>
     );
 };
 
