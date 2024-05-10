@@ -19,9 +19,9 @@ const PopularProductCard = ({ className, data }: any) => {
             <Image
               width={100}
               height={100}
-              src={data?.variations[0].image}
+              src={data?.image?.viewUrl}
               className="w-full h-full object-cover"
-              alt={data?.variations[0].altText}
+              alt={data?.image?.altText}
             />
           </div>
           <div className="flex-1 h-full flex flex-col justify-center ">

@@ -7,7 +7,7 @@ import Loading from "@/components/common/loading";
 
 const PopularProducts = () => {
   const { data: popularProducts, isLoading }: any = useGetProductsListsQuery(
-    {}
+    { productType: "Popular Products" }
   );
   if (isLoading) {
     return <Loading />;

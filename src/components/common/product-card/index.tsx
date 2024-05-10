@@ -24,7 +24,7 @@ const ProductCard = ({ datas }: any) => {
       title: data?.title,
       productId: data?._id,
       price: data?.offer_price,
-      image: data?.variations[0].image,
+      image: data?.image?.viewUrl,
       quantity: 0,
     };
     const res: any = await addToCart({ payload });
@@ -77,8 +77,8 @@ const ProductCard = ({ datas }: any) => {
               width={500}
               height={500}
               className="w-[131px] h-[131px] mx-auto "
-              src={`${datas?.variations[0].image}`}
-              alt={datas?.title}
+              src={`${datas?.image?.viewUrl}`}
+              alt={datas?.image?.altText}
             />
           </div>
         </Link>
