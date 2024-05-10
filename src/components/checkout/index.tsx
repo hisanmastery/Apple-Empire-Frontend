@@ -25,7 +25,6 @@ const Checkout = () => {
   const deliveryFee = 100;
   const totalPrice = subtotal - cartDiscount + deliveryFee;
   const onSubmit = async (data: any) => {
-    console.log(data);
     const payload = {
       email: data.email,
       name: data?.name,
@@ -34,7 +33,7 @@ const Checkout = () => {
       city: data?.city,
       isPayment: false,
       address: data?.address,
-      productIds: storedCart?.map((item: any) => item._id),
+      productIds: storedCart?.map((item: any) => item.productId),
       shippingMethod: {
         isOutesideDhaka: true,
         paymentMethod: data?.onlinePayment,

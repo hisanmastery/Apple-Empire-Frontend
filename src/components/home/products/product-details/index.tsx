@@ -64,7 +64,7 @@ const ProductDetails = ({ id }: any) => {
     img.style.transform = 'scale(1)';
   };
   return (
-    <section className="w-11/12 mx-auto mt-4">
+    <section className="w-11/12 mx-auto mt-8">
       <div className="grid md:grid-cols-5 gap-10">
         <div className="col-span-2">
           <div
@@ -96,7 +96,7 @@ const ProductDetails = ({ id }: any) => {
             <h4 className="mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full">
               Status:{data?.response?.status}
             </h4>
-            <h4 className="mt-3 bg-blue-100 p-3 rounded-sm w-full ">
+            <h4 className="mt-3 bg-blue-100 px-2 py-3 rounded-sm w-full ">
               <span className="font-bold text-lg">Code:</span>{data?.response?._id}
             </h4>
           </div>
