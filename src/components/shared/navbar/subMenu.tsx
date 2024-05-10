@@ -1,4 +1,7 @@
 import React, { Fragment } from 'react';
+import { phoneMenusData } from '@/data/phone-menus';
+import { tabletMenusData } from '@/data/tablet-menus';
+import { SoundEquipmentData } from '@/data/sound-equipment-menus';
 import {
   Menubar,
   MenubarCheckboxItem,
@@ -15,6 +18,12 @@ import {
   MenubarTrigger,
 } from '@/components/ui/menubar';
 import SearchInput from './searchInput';
+import Link from 'next/link';
+import { PowerAccessoriesMenus } from '@/data/power-accessories-menus';
+import { DesktopMenusData } from '@/data/desktop-menus';
+import { SmartWatchData } from '@/data/smart-watch-menus';
+import { AccessroiesData } from '@/data/accessroies-menus';
+import { GadgetData } from '@/data/gadget-menus';
 function SubMenu(props: any) {
   return (
     <Fragment>
@@ -25,159 +34,98 @@ function SubMenu(props: any) {
         <Menubar className="p-2 rounded-none text-black bg-white ">
           <MenubarMenu>
             <MenubarTrigger>Phones & Tablets</MenubarTrigger>
-            <MenubarContent>
-              <MenubarItem>
-                New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-              </MenubarItem>
-              <MenubarItem>
-                New Window <MenubarShortcut>⌘N</MenubarShortcut>
-              </MenubarItem>
-              <MenubarItem disabled>New Incognito Window</MenubarItem>
-              <MenubarSeparator />
-              <MenubarSub>
-                <MenubarSubTrigger>Share</MenubarSubTrigger>
-                <MenubarSubContent>
-                  <MenubarItem>Email link</MenubarItem>
-                  <MenubarItem>Messages</MenubarItem>
-                  <MenubarItem>Notes</MenubarItem>
-                </MenubarSubContent>
-              </MenubarSub>
-              <MenubarSeparator />
-              <MenubarItem>
-                Print... <MenubarShortcut>⌘P</MenubarShortcut>
-              </MenubarItem>
+            <MenubarContent className='h-screen mb-10 overflow-auto -z-0'>
+              {
+                phoneMenusData?.map((items: any, index: number) => <MenubarItem key={index}>
+                  <Link href={""} className='hover:text-_dark-color text-md font-medium'>
+                    {items?.label}
+                  </Link>
+                </MenubarItem>)
+              }
             </MenubarContent>
           </MenubarMenu>
           <MenubarMenu>
-            <MenubarTrigger>Laptop & Desktop</MenubarTrigger>
-            <MenubarContent>
-              <MenubarItem>
-                Undo <MenubarShortcut>⌘Z</MenubarShortcut>
-              </MenubarItem>
-              <MenubarItem>
-                Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
-              </MenubarItem>
-              <MenubarSeparator />
-              <MenubarSub>
-                <MenubarSubTrigger>Find</MenubarSubTrigger>
-                <MenubarSubContent>
-                  <MenubarItem>Search the web</MenubarItem>
-                  <MenubarSeparator />
-                  <MenubarItem>Find...</MenubarItem>
-                  <MenubarItem>Find Next</MenubarItem>
-                  <MenubarItem>Find Previous</MenubarItem>
-                </MenubarSubContent>
-              </MenubarSub>
-              <MenubarSeparator />
-              <MenubarItem>Cut</MenubarItem>
-              <MenubarItem>Copy</MenubarItem>
-              <MenubarItem>Paste</MenubarItem>
+            <MenubarTrigger>Laptop</MenubarTrigger>
+            <MenubarContent className='-z-0'>
+              {
+                tabletMenusData?.map((items: any, index: number) => <MenubarItem key={index}>
+                  <Link href={""} className='hover:text-_dark-color text-md font-medium'>
+                    {items?.label}
+                  </Link>
+                </MenubarItem>)
+              }
+            </MenubarContent>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTrigger>Desktop</MenubarTrigger>
+            <MenubarContent className='-z-0'>
+              {
+                DesktopMenusData?.map((items: any, index: number) => <MenubarItem key={index}>
+                  <Link href={""} className='hover:text-_dark-color text-md font-medium'>
+                    {items?.label}
+                  </Link>
+                </MenubarItem>)
+              }
             </MenubarContent>
           </MenubarMenu>
           <MenubarMenu>
             <MenubarTrigger>Sound Equipment</MenubarTrigger>
-            <MenubarContent>
-              <MenubarCheckboxItem>
-                Always Show Bookmarks Bar
-              </MenubarCheckboxItem>
-              <MenubarCheckboxItem checked>
-                Always Show Full URLs
-              </MenubarCheckboxItem>
-              <MenubarSeparator />
-              <MenubarItem inset>
-                Reload <MenubarShortcut>⌘R</MenubarShortcut>
-              </MenubarItem>
-              <MenubarItem disabled inset>
-                Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
-              </MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem inset>Toggle Fullscreen</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem inset>Hide Sidebar</MenubarItem>
+            <MenubarContent className='-z-0'>
+              {
+                SoundEquipmentData?.map((items: any, index: number) => <MenubarItem key={index}>
+                  <Link href={""} className='hover:text-_dark-color text-md font-medium'>
+                    {items?.label}
+                  </Link>
+                </MenubarItem>)
+              }
             </MenubarContent>
           </MenubarMenu>
           <MenubarMenu>
             <MenubarTrigger>Power & Accessories</MenubarTrigger>
-            <MenubarContent>
-              <MenubarRadioGroup value="benoit">
-                <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-                <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-              </MenubarRadioGroup>
-              <MenubarSeparator />
-              <MenubarItem inset>Edit...</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem inset>Add Profile...</MenubarItem>
+            <MenubarContent className='-z-0'>
+              {
+                PowerAccessoriesMenus?.map((items: any, index: number) => <MenubarItem key={index}>
+                  <Link href={""} className='hover:text-_dark-color text-md font-medium'>
+                    {items?.label}
+                  </Link>
+                </MenubarItem>)
+              }
             </MenubarContent>
           </MenubarMenu>
           <MenubarMenu>
-            <MenubarTrigger>Fitness & Wearable</MenubarTrigger>
-            <MenubarContent>
-              <MenubarRadioGroup value="benoit">
-                <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-                <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-              </MenubarRadioGroup>
-              <MenubarSeparator />
-              <MenubarItem inset>Edit...</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem inset>Add Profile...</MenubarItem>
+            <MenubarTrigger>Smart Watch</MenubarTrigger>
+            <MenubarContent className='h-screen mb-10 overflow-auto -z-0'>
+              {
+                SmartWatchData?.map((items: any, index: number) => <MenubarItem key={index}>
+                  <Link href={""} className='hover:text-_dark-color text-md font-medium'>
+                    {items?.label}
+                  </Link>
+                </MenubarItem>)
+              }
             </MenubarContent>
           </MenubarMenu>
           <MenubarMenu>
-            <MenubarTrigger>Peripherals</MenubarTrigger>
-            <MenubarContent>
-              <MenubarRadioGroup value="benoit">
-                <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-                <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-              </MenubarRadioGroup>
-              <MenubarSeparator />
-              <MenubarItem inset>Edit...</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem inset>Add Profile...</MenubarItem>
+            <MenubarTrigger>Accessories</MenubarTrigger>
+            <MenubarContent className='-z-0'>
+              {
+                AccessroiesData?.map((items: any, index: number) => <MenubarItem key={index}>
+                  <Link href={""} className='hover:text-_dark-color text-md font-medium'>
+                    {items?.label}
+                  </Link>
+                </MenubarItem>)
+              }
             </MenubarContent>
           </MenubarMenu>
           <MenubarMenu>
-            <MenubarTrigger>Cover & Glass</MenubarTrigger>
-            <MenubarContent>
-              <MenubarRadioGroup value="benoit">
-                <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-                <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-              </MenubarRadioGroup>
-              <MenubarSeparator />
-              <MenubarItem inset>Edit...</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem inset>Add Profile...</MenubarItem>
-            </MenubarContent>
-          </MenubarMenu>
-          <MenubarMenu>
-            <MenubarTrigger>Smart Electronics</MenubarTrigger>
-            <MenubarContent>
-              <MenubarRadioGroup value="benoit">
-                <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-                <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-              </MenubarRadioGroup>
-              <MenubarSeparator />
-              <MenubarItem inset>Edit...</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem inset>Add Profile...</MenubarItem>
-            </MenubarContent>
-          </MenubarMenu>
-          <MenubarMenu>
-            <MenubarTrigger> Used Device</MenubarTrigger>
-            <MenubarContent>
-              <MenubarRadioGroup value="benoit">
-                <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-                <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-                <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-              </MenubarRadioGroup>
-              <MenubarSeparator />
-              <MenubarItem inset>Edit...</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem inset>Add Profile...</MenubarItem>
+            <MenubarTrigger>Gadget</MenubarTrigger>
+            <MenubarContent className='-z-0'>
+              {
+                GadgetData?.map((items: any, index: number) => <MenubarItem key={index}>
+                  <Link href={""} className='hover:text-_dark-color text-md font-medium'>
+                    {items?.label}
+                  </Link>
+                </MenubarItem>)
+              }
             </MenubarContent>
           </MenubarMenu>
         </Menubar>

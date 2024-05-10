@@ -25,6 +25,15 @@ export const cartApi = fetchCheckoutSlice.injectEndpoints({
                 body: payload,
             }),
         }),
+
+        // payment status update 
+        PaymentStatusUpdate: builder.mutation({
+            query: ({ transactionId, payload }: any) => ({
+                url: `/update-payment-status?transactionId=${transactionId}`,
+                method: "put",
+                body: payload,
+            }),
+        }),
         //edit products
         updateCart: builder.query({
             query: () => ({}),
@@ -40,6 +49,7 @@ export const cartApi = fetchCheckoutSlice.injectEndpoints({
 });
 export const {
     useCreatePaymentMutation,
+    usePaymentStatusUpdateMutation,
     useGetEmailCartQuery,
     useAddToCartDeleteMutation,
 } = cartApi;

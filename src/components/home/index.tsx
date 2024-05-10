@@ -6,13 +6,11 @@ import ProductAds from "../common/productAds/index";
 import ViewMoreTitle from "../common/ViewMoreTitle/index";
 import TopSellingProducts from "../home/TopSellingProducts/index";
 import PopularProducts from "../home/popularProducts/index";
-import productDatas from "@/../../public/product.json";
 import TopItems from "./top-items";
 import MultiCarousel from "../common/carousel";
 import ProductSlider from "./product-slider";
 
 const Home = () => {
-  const datas = productDatas.products.slice(0, 12);
   return (
     <main>
       <div className="lg:container mx-auto md:p-0 p-3">

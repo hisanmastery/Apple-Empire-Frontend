@@ -1,23 +1,63 @@
 import { icons } from "@/constants/icons";
+import { useAddToCartMutation, useGetEmailCartQuery } from "@/store/features/cart/cartApi";
+import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 const TopSellingProductsCard = ({ className, datas }: any) => {
   // Generate an array of length equal to the review rating
   const stars = Array.from(Array(parseInt(datas?.review) || 0).keys());
+  const { storedCart } = useSelector((state: any) => state?.cart);
+  const dispatch = useDispatch();
+  const { data, refetch }: any = useGetEmailCartQuery({
+    email: "dalim@gmail.com",
+  });
+  const [addToCart]: any = useAddToCartMutation();
+  // handle cart click
+  const handleCartClick = async (data: any) => {
+    const payload = {
+      email: "dalim@gmail.com",
+      title: data?.title,
+      productId: data?._id,
+      price: data?.offer_price,
+      image: data?.image?.viewUrl,
+      quantity: 0,
+    };
+    const res: any = await addToCart({ payload });
+    if (res?.data?.isSuccess) {
+      refetch();
+    }
+    // get product data
+    // const existingCart = storedCart || [];
+    // const existingProduct = existingCart?.find(
+    //   (item: any) => item._id === datas._id
+    // );
+    // // check existing product if not product it will be set
+    // if (!existingProduct) {
+    //   const updatedCart = [...existingCart, product];
+    //   dispatch(addStoredCart(updatedCart));
+    // }
+  };
+  useEffect(() => {
+    dispatch(addStoredCart(data?.response));
+  }, [data?.response, dispatch]);
+  // check already added cart
+  const isInCart = storedCart?.find(
+    (item: any) => item.productId === datas?._id
+  );
   return (
     <div
       data-aos="fade-up"
-      className={`product-row-card-style-one w-full h-[250px] shadow-md bg-white group relative overflow-hidden ${
-        className || ""
-      }`}
+      className={`product-row-card-style-one w-full h-[250px] shadow-md bg-white group relative overflow-hidden ${className || ""
+        }`}
     >
       <div className="flex space-x-5 items-center w-full h-full lg:p-[20px] sm:p-5 p-2">
         <div className="lg:w-1/3 w-1/3 h-full">
           <Image
             width={500}
             height={500}
-            src={datas?.variations[0].image}
+            src={datas?.image?.viewUrl}
             alt={datas?.title}
             className="w-full h-full object-contain"
           />
@@ -46,8 +86,11 @@ const TopSellingProductsCard = ({ className, datas }: any) => {
                 </span>
               ))}
             </div>
-            <button type="button" className="w-[110px] h-[30px]">
-              <span className="bg-_primary text-white p-2  rounded">
+            <button type="button"
+              disabled={isInCart}
+              onClick={() => handleCartClick(datas)}
+              className="w-[110px] h-[30px]">
+              <span className={`${isInCart ? "bg-slate-500 opacity-40" : "bg-_primary"} text-white p-2  rounded`}>
                 Add To Cart
               </span>
             </button>

@@ -25,8 +25,8 @@ const ProductDetails = ({ id }: any) => {
 
   const images = selectedColor
     ? data?.response?.variations?.find(
-        (variant: any) => variant?.color === selectedColor
-      )?.image ?? data?.response.variations[0].image
+      (variant: any) => variant?.color === selectedColor
+    )?.image ?? data?.response.variations[0].image
     : data?.response.variations[0].image;
 
   // Extracting only the 'image' property from each object in the 'variations' array
@@ -51,15 +51,38 @@ const ProductDetails = ({ id }: any) => {
   const isInCart = storedCart?.find(
     (item: any) => item.id === data?.response?._id
   );
+
+  const handleImageMouseMove = (e: any) => {
+    const img = e.target;
+    img.style.transformOrigin = `${e.nativeEvent.offsetX}px ${e.nativeEvent.offsetY}px`;
+    img.style.transform = 'scale(3)';
+  };
+
+  const handleImageMouseLeave = (e: any) => {
+    const img = e.target;
+    img.style.transformOrigin = 'center';
+    img.style.transform = 'scale(1)';
+  };
   return (
-    <section className="w-11/12 mx-auto mt-4">
-      <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
-        <div>
-          <img className="w-full" src={images} />
+    <section className="w-11/12 mx-auto mt-8">
+      <div className="grid md:grid-cols-5 gap-10">
+        <div className="col-span-2">
+          <div
+            className="relative overflow-hidden bg-_white"
+            onMouseMove={handleImageMouseMove}
+            onMouseLeave={handleImageMouseLeave}
+          >
+            <img
+              id="activeImage"
+              className="w-full transition-transform duration-300 transform cursor-pointer"
+              src={images}
+              alt="Product Image"
+            />
+          </div>
           <ProductImage variationImages={variationImages} />
         </div>
 
-        <div>
+        <div className="col-span-3">
           <h2 className="text-2xl font-bold">{data?.response?.title}</h2>
           {/* pricing */}
           <div className="grid md:grid-cols-3 grid-cols-1 w-full gap-4 items-center text-center ">
@@ -70,11 +93,11 @@ const ProductDetails = ({ id }: any) => {
               </span>
               <span className="mx-2">{data?.response?.price}$</span>
             </h4>
-            <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full">
+            <h4 className="mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full">
               Status:{data?.response?.status}
             </h4>
-            <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full ">
-              Code:{data?.response?.productCode}
+            <h4 className="mt-3 bg-blue-100 px-2 py-3 rounded-sm w-full ">
+              <span className="font-bold text-lg">Code:</span>{data?.response?._id}
             </h4>
           </div>
 
@@ -105,12 +128,10 @@ const ProductDetails = ({ id }: any) => {
               <button
                 key={index}
                 style={{ backgroundColor: `${variant?.colorCode}` }}
-                className={`w-9 h-9 rounded-full bg-[${
-                  variant?.colorCode
-                }] border border-gray-300 ${
-                  selectedColor === variant?.color &&
+                className={`w-9 h-9 rounded-full bg-[${variant?.colorCode
+                  }] border border-gray-300 ${selectedColor === variant?.color &&
                   "p-1  border-yellow-500 border-4"
-                }`}
+                  }`}
                 onClick={() => handleColorButtonClick(variant?.color)}
               ></button>
             ))}

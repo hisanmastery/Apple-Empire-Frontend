@@ -8,7 +8,7 @@ import { MdManageHistory } from "react-icons/md";
 import { MdTimer } from "react-icons/md";
 import { MdOutlineSupportAgent } from "react-icons/md";
 import { SlBadge } from "react-icons/sl";
-import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import { IoCheckmark, IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { BsBagCheckFill } from "react-icons/bs";
 import { TbWorldPlus } from "react-icons/tb";
 import { MdSupervisorAccount } from "react-icons/md";
@@ -28,8 +28,8 @@ import { RiSecurePaymentLine } from "react-icons/ri";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import { FaArrowLeft } from "react-icons/fa6";
-
-
+import { IoMdCheckmark } from "react-icons/io";
+import { FaXmark } from "react-icons/fa6";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -59,5 +59,7 @@ export const icons = {
   paymentIcon: RiSecurePaymentLine,
   nextIcon: GrNext,
   previousIcon: GrPrevious,
-  leftArrowIcon: FaArrowLeft
+  leftArrowIcon: FaArrowLeft,
+  CheckMarkIcon: IoMdCheckmark,
+  XmarkIcon: FaXmark
 };

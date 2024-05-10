@@ -10,7 +10,7 @@ function Menu(props: any) {
   const { storedCart } = useSelector((state: any) => state?.cart);
   return (
     <Fragment>
-      <div className=" font-inter grid grid-cols-5 lg:grid-cols-12 items-center sticky top-0  gap-4  w-full z-[2]  shadow-md bg-black p-3">
+      <div className="font-inter grid grid-cols-5 lg:grid-cols-12 items-center sticky top-0  gap-4  w-full z-50  shadow-md bg-black p-3">
         <div className="col-span-2 lg:hidden z-[10] ">
           <LeftSideMenu />
         </div>
