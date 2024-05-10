@@ -68,7 +68,7 @@ const ProductDetails = ({ id }: any) => {
       <div className="grid md:grid-cols-5 gap-10">
         <div className="col-span-2">
           <div
-            className="relative overflow-hidden"
+            className="relative overflow-hidden bg-_white"
             onMouseMove={handleImageMouseMove}
             onMouseLeave={handleImageMouseLeave}
           >
@@ -93,11 +93,11 @@ const ProductDetails = ({ id }: any) => {
               </span>
               <span className="mx-2">{data?.response?.price}$</span>
             </h4>
-            <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full">
+            <h4 className="mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full">
               Status:{data?.response?.status}
             </h4>
-            <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full ">
-              Code:{data?.response?.productCode}
+            <h4 className="mt-3 bg-blue-100 p-3 rounded-sm w-full ">
+              <span className="font-bold text-lg">Code:</span>{data?.response?._id}
             </h4>
           </div>
 
