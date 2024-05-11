@@ -30,6 +30,7 @@ import { GrPrevious } from "react-icons/gr";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoMdCheckmark } from "react-icons/io";
 import { FaXmark } from "react-icons/fa6";
+import { HiBars4 } from "react-icons/hi2";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -61,5 +62,6 @@ export const icons = {
   previousIcon: GrPrevious,
   leftArrowIcon: FaArrowLeft,
   CheckMarkIcon: IoMdCheckmark,
-  XmarkIcon: FaXmark
+  XmarkIcon: FaXmark,
+  barsIcon: HiBars4
 };
