@@ -23,7 +23,7 @@ export default function NewNavbar({ className, type }: any) {
 
     return (
         <div
-            className={` w-full bg-blue-500  h-[60px] relative z-30`}
+            className={` w-full bg-_primary sticky top-0  h-[60px] z-30`}
         >
             <div className="container mx-auto h-full">
                 <div className="w-full h-full relative">
@@ -89,11 +89,11 @@ export default function NewNavbar({ className, type }: any) {
                             <div className="text-_white">
                                 <CustomNavigationMenu title="Pages" data={AccessroiesData} />
                             </div>
-                            <div className="text-_white font-medium text-lg">
-                                <Link href={""}>About</Link>
+                            <div className="text-_white">
+                                <CustomNavigationMenu title="Pages" data={AccessroiesData} />
                             </div>
-                            <div className="text-_white font-medium text-lg">
-                                <Link href={""}>Blogs</Link>
+                            <div className="text-_white">
+                                <CustomNavigationMenu title="Pages" data={AccessroiesData} />
                             </div>
                         </div>
                         <div className="become-seller-btn">
