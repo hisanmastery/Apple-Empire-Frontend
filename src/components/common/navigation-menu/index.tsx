@@ -16,8 +16,8 @@ const CustomNavigationMenu = ({ data, title }: any) => {
         <NavigationMenu>
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className='text-lg font-medium'>{title}</NavigationMenuTrigger>
-                    <NavigationMenuContent style={{ width: "200px" }} className='h-auto w-72'>
+                    <NavigationMenuTrigger className='text-md hover:text-_white'>{title}</NavigationMenuTrigger>
+                    <NavigationMenuContent style={{ width: "200px" }} className='h-auto w-72 p-3'>
                         {
                             data?.map((items: any, index: number) => <Link key={index} href={""} className='mb-10 hover:text-_primary w-80'>
                                 <p>{items.value}</p>

@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { icons } from "@/constants/icons";
 
-const MultiCarousel = ({ children, settings }: any) => {
+const MultiCarousel = ({ children, settings, className }: any) => {
   let sliderRef: any = useRef(null);
   const next = () => {
     sliderRef.current.slickNext();
@@ -50,7 +50,7 @@ const MultiCarousel = ({ children, settings }: any) => {
   const mergedSettings = { ...defaultSettings, ...settings };
 
   return (
-    <div className="container relative">
+    <div className={`${className} container relative`}>
       <Slider ref={sliderRef} {...mergedSettings}>
         {children}
       </Slider>

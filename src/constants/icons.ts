@@ -31,6 +31,11 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { IoMdCheckmark } from "react-icons/io";
 import { FaXmark } from "react-icons/fa6";
 import { HiBars4 } from "react-icons/hi2";
+import { MdFavoriteBorder } from "react-icons/md";
+import { LiaShoppingBagSolid } from "react-icons/lia";
+import { LuUser2 } from "react-icons/lu";
+import { MdPhoneAndroid } from "react-icons/md";
+import { IoGameController } from "react-icons/io5";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -63,5 +68,10 @@ export const icons = {
   leftArrowIcon: FaArrowLeft,
   CheckMarkIcon: IoMdCheckmark,
   XmarkIcon: FaXmark,
-  barsIcon: HiBars4
+  barsIcon: HiBars4,
+  FavoriteBorder: MdFavoriteBorder,
+  ShoppingBagSolid: LiaShoppingBagSolid,
+  LuUser2: LuUser2,
+  PhoneAndroid: MdPhoneAndroid,
+  GameController: IoGameController
 };

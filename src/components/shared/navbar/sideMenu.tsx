@@ -13,7 +13,7 @@ export const LeftSideMenu = (props: any) => {
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="bg-black text-white flex flex-col rounded-t-[10px] z-[3] w-[300px] h-full  mt-24 fixed bottom-0 left-0">
+        <Drawer.Content className="bg-black text-white flex flex-col rounded-t-[10px] z-[10] w-[300px] h-full  mt-24 fixed bottom-0 left-0">
           <div className="p-4 bg-black flex-1 mt-5 h-full">
             <div className="max-w-sm mx-auto">
               <Drawer.Title className="font-medium mb-4">
