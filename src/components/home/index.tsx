@@ -9,6 +9,7 @@ import PopularProducts from "../home/popularProducts/index";
 import TopItems from "./top-items";
 import MultiCarousel from "../common/carousel";
 import ProductSlider from "./product-slider";
+import CampaignsCountDown from "./campaigns-count-down";
 
 const Home = () => {
   return (
@@ -24,6 +25,9 @@ const Home = () => {
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
+
+        {/* brand profile */}
+        <ClientBrand />
         {/* all products */}
         <Products />
         {/* ads banner */}
@@ -85,8 +89,9 @@ const Home = () => {
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
-        {/* brand profile */}
-        <ClientBrand />
+        {/* Campaigns Count Down */}
+
+        <CampaignsCountDown lastDate="2024-06-22 4:00:00" />
       </div>
     </main>
   );
