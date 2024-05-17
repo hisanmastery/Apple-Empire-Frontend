@@ -55,7 +55,7 @@ const ProductCard = ({ datas }: any) => {
       <>
         <Link href={`/products/${datas?._id}`}>
           <div
-            className="cursor-pointer product-card-one w-full h-full bg-white relative group overflow-hidden"
+            className="cursor-pointer product-card-one w-full h-full max-h-[300px] text-nowrap bg-white relative group overflow-hidden"
             style={{ boxShadow: "0px 15px 64px 0px rgba(0, 0, 0, 0.05)" }}
           >
             <div
@@ -71,7 +71,7 @@ const ProductCard = ({ datas }: any) => {
             ></div>
             <div className=" px-[30px] pb-[30px] relative">
               {/* add to card button */}
-              <div className="absolute w-full z-50  px-[30px]  top-40 group-hover:top-[70px] transition-all duration-300 ease-in-out">
+              <div className="absolute w-full z-50  px-[30px]  top-40 group-hover:top-[50px] transition-all duration-300 ease-in-out">
                 <Button
                   disabled={isInCart}
                   onClick={() => handleCartClick(datas)}
@@ -104,7 +104,7 @@ const ProductCard = ({ datas }: any) => {
               </div>
               <Link href={`/single-product/${datas?.id}`}>
                 <p className="title mb-2 text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
-                  {datas.title}
+                  {datas.title.slice(0,22)}...
                 </p>
               </Link>
               <p className="price">
