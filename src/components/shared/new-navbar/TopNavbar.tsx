@@ -2,8 +2,11 @@ import Link from "next/link";
 import SearchInput from "../navbar/searchInput";
 import { icons } from "@/constants/icons";
 import Image from "next/image";
+import Cart from "./Cart";
+import { useSelector } from "react-redux";
 
 export default function TopNavbar({ className, type }: any) {
+    const { storedCart } = useSelector((state: any) => state?.cart);
     return (
         <div className={`w-full h-[86px] bg-[#a0c1b1] ${className}`}>
             <div className="container mx-auto h-full">
@@ -25,10 +28,10 @@ export default function TopNavbar({ className, type }: any) {
                         </div>
                         <div className="flex space-x-6 items-center">
                             <div className="compaire relative">
-                                <Link href="/products-compaire" passHref>
+                                <Link href="" passHref>
                                     <p rel="noopener noreferrer">
                                         <span>
-                                            <icons.FavoriteBorder className="text-lg" />
+                                            <icons.FavoriteBorder className="text-2xl" />
                                         </span>
                                     </p>
                                 </Link>
@@ -39,11 +42,32 @@ export default function TopNavbar({ className, type }: any) {
                                     2
                                 </span>
                             </div>
+                            <div className="cart-wrapper group relative py-4">
+                                <div className="cart relative cursor-pointer">
+                                    <Link href="/cart">
+                                        <p rel="noopener noreferrer">
+                                            <span>
+                                                <icons.ShoppingBagSolid className="text-2xl" />
+                                            </span>
+                                        </p>
+                                    </Link>
+                                    <span
+                                        className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
+                                            }`}
+                                    >
+                                        {storedCart?.length}
+                                    </span>
+                                </div>
+                                <Cart
+                                    type={type}
+                                    className="absolute -right-[45px] top-11 z-50 hidden group-hover:block"
+                                />
+                            </div>
                             <div className="favorite relative">
-                                <Link href="/wishlist" passHref>
+                                <Link href="" passHref>
                                     <p rel="noopener noreferrer">
                                         <span>
-                                            <icons.ShoppingBagSolid className="text-lg" />
+                                            <icons.LuUser2 className="text-2xl" />
                                         </span>
                                     </p>
                                 </Link>
@@ -53,36 +77,6 @@ export default function TopNavbar({ className, type }: any) {
                                 >
                                     1
                                 </span>
-                            </div>
-                            <div className="cart-wrapper group relative py-4">
-                                <div className="cart relative cursor-pointer">
-                                    <Link href="/cart" passHref>
-                                        <p rel="noopener noreferrer">
-                                            <span>
-                                                <icons.LuUser2 className="text-lg" />
-                                            </span>
-                                        </p>
-                                    </Link>
-                                    <span
-                                        className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
-                                            }`}
-                                    >
-                                        15
-                                    </span>
-                                </div>
-                                {/* <Cart
-                  type={type}
-                  className="absolute -right-[45px] top-11 z-50 hidden group-hover:block"
-                /> */}
-                            </div>
-                            <div>
-                                <Link href="/profile#dashboard" passHref>
-                                    <p rel="noopener noreferrer">
-                                        <span>
-                                            {/* <ThinPeople /> */}
-                                        </span>
-                                    </p>
-                                </Link>
                             </div>
                         </div>
                     </div>
