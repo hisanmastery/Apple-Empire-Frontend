@@ -25,8 +25,12 @@ export const cartApi = fetchCartSlice.injectEndpoints({
       }),
     }),
     //edit products
-    updateCart: builder.query({
-      query: () => ({}),
+    updateCart: builder.mutation({
+      query: ({ id, payload }: any) => ({
+        url: `/update-cart/${id}`,
+        method: 'PUT',
+        body: payload
+      }),
     }),
     //delete add too cart
     addToCartDelete: builder.mutation({
@@ -41,4 +45,5 @@ export const {
   useAddToCartMutation,
   useGetEmailCartQuery,
   useAddToCartDeleteMutation,
+  useUpdateCartMutation
 } = cartApi;

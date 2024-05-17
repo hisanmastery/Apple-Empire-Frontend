@@ -1,76 +1,40 @@
 import InputQuantityCom from "@/components/carts/InputQuantityCom";
 import { icons } from "@/constants/icons";
-import { useAddToCartDeleteMutation } from "@/store/features/cart/cartApi";
-import { addStoredCart } from "@/store/features/cart/cartSlice";
+import { useAddToCartDeleteMutation, useUpdateCartMutation } from "@/store/features/cart/cartApi";
+import { addStoredCart, decrementQuantity, incrementQuantity } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart({ className, type }: any) {
     const { storedCart } = useSelector((state: any) => state?.cart);
+    const dispatch = useDispatch()
     const [addToCartDelete] = useAddToCartDeleteMutation();
-    // Using reduce to calculate the total price
-    const totalPrice = storedCart?.reduce((acc: number, product: any) => {
-        return acc + product?.quantity * parseInt(product?.offer_price);
-    }, 0);
-
-    const dispatch = useDispatch();
-
-    // handle increment quantity
-    // const handleIncrement = (_id: string, newQuantity: number) => {
-    //   const updatedStoredCart = storedCart.map((product: any) => {
-    //     if (product._id === _id) {
-    //       // If the product's _id matches the _id passed to the function,
-    //       // update its quantity
-    //       return { ...product, quantity: newQuantity };
-    //     } else {
-    //       // Otherwise, return the product unchanged
-    //       return product;
-    //     }
-    //   });
-
-    //   console.log(updatedStoredCart); // Check the updated cart in the console
-
-    //   // Dispatch the action to update the cart in the Redux store
-    //   dispatch(addStoredCart(updatedStoredCart));
-    // };
-
-    // handle decrement quantity
-    // const handleDecrement = (index: any, newQuantity: number) => {
-    //   const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
-    //   updatedStoredCart[index].quantity = newQuantity;
-    //   dispatch(addStoredCart(updatedStoredCart));
-    // };
-    // CartItem.jsx
-
-    // handle increment quantity for a specific product
-    const handleIncrement = async (productId: string, newQuantity: number) => {
-        const updatedStoredCart = storedCart.map((product: any) => {
-            if (product._id === productId) {
-                return { ...product, quantity: newQuantity };
+    const [updateCart] = useUpdateCartMutation()
+    // increment
+    const handleIncrementQuantity = async (product: any) => {
+        dispatch(incrementQuantity(product));
+        const payload = {
+            ...product,
+            quantity: product.quantity + 1
+        }
+        console.log(payload);
+        const res = await updateCart({ id: product._id, payload });
+        console.log(res);
+    }
+    // decrement
+    const handleDecrementQuantity = async (product: any) => {
+        if (product.quantity > 1) {
+            dispatch(decrementQuantity(product));
+            const payload = {
+                ...product,
+                quantity: product.quantity - 1
             }
-            return product;
-        });
-        await dispatch(addStoredCart(updatedStoredCart));
-    };
-
-    const handleDecrement = async (productId: string, newQuantity: number) => {
-        // Get the current stored cart
-        const storedProduct = storedCart || [];
-
-        // Find the product to decrement and update its quantity
-        const updatedStoredCart = storedProduct.map((item: any) => {
-            if (item._id === productId) {
-                // Ensure the quantity doesn't go below 1
-                const updatedQuantity = Math.max(1, newQuantity);
-                return { ...item, quantity: updatedQuantity };
-            }
-            return item;
-        });
-
-        // Update the cart in the Redux store
-        dispatch(addStoredCart(updatedStoredCart));
-    };
+            console.log(payload);
+            const res = await updateCart({ id: product._id, payload });
+            console.log(res);
+        }
+    }
 
     // handle remove  cart in right sidebar
     const removeCart = async (id: any) => {
@@ -90,39 +54,45 @@ export default function Cart({ className, type }: any) {
         <>
             <div
                 style={{ boxShadow: " 0px 15px 50px 0px rgba(0, 0, 0, 0.14)" }}
-                className={`w-[300px] bg-white border-t-[3px] ${type === 3 ? 'border-qh3-blue' : 'cart-wrappwer'}  ${className || ""
+                className={`w-[330px] bg-white border-t-[3px]  ${className || ""
                     }`}
             >
                 <div className="w-full h-full">
                     <div className="product-items h-[310px] overflow-y-scroll">
                         <ul>
                             {storedCart?.map((product: any, index: number) => (
-                                <li className="w-full h-full flex justify-between" key={index}>
-                                    <div className="flex space-x-[6px] justify-center items-center px-4 my-[20px]">
-                                        <div className="w-[65px] h-full">
-                                            <Image
-                                                width={50}
-                                                height={50}
-                                                src={product?.image}
-                                                alt="images"
-                                                className="w-full h-full object-contain"
-                                            />
+                                <li key={index} className="px-2 border-[1px] mb-2">
+                                    <div className="flex gap-2 justify-between items-center">
+                                        <div className="flex gap-2 items-center">
+                                            <Image height={50} width={50} src={product?.image} className="w-16" alt="products" />
+                                            <div className="flex gap-5">
+                                                <p className="text-sm">{product?.title?.slice(0, 20)}...</p>
+                                                <p>{parseInt(product?.price) * product?.quantity + "$"}</p>
+                                            </div>
                                         </div>
-                                        <div className="flex-1 h-full flex flex-col justify-center ">
-                                            <p className="title mb-2 text-[13px] font-600 text-qblack leading-4 line-clamp-2 hover:text-blue-600">
-                                                {product?.title?.slice(0, 30)}...
-                                            </p>
-
-                                            <p className="price">
-                                                <span className="offer-price text-qred font-600 text-[15px] ml-2">
-                                                    {product?.price}
-                                                </span>
+                                        <div className="cursor-pointer mx-2 font-bold text-red-500 hover:text-red-700">
+                                            <p onClick={() => removeCart(product?._id)}>
+                                                <icons.crossIcon />
                                             </p>
                                         </div>
                                     </div>
-                                    <span className="mt-[20px] mr-[15px] inline-flex cursor-pointer ">
-                                        <icons.crossIcon />
-                                    </span>
+                                    <div className="flex justify-center items-center w-full mb-2">
+                                        <button
+                                            onClick={() => handleDecrementQuantity(product)}
+                                            type="button"
+                                            className="text-base mr-2 border-[1px] size-7"
+                                        >
+                                            -
+                                        </button>
+                                        <span className="text-qblack">{product?.quantity}</span>
+                                        <button
+                                            onClick={() => handleIncrementQuantity(product)}
+                                            type="button"
+                                            className="text-base size-7 ml-2 border-[1px]"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

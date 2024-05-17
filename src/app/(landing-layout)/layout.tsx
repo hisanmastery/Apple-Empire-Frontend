@@ -8,7 +8,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     <main>
       {/* <Navbar /> */}
       <NewNavbar />
-      <Carts />
+      {/* <Carts /> */}
       {/* children content */}
       <div className="overflow-auto col-span-4 p-1">{children}</div>
       <Footer />
