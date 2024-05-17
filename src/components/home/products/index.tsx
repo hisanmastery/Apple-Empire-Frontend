@@ -11,8 +11,8 @@ const Products = () => {
     return <Loading />;
   }
   return (
-    <div>
-      <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 mx-auto mb-10 gap-5">
+    <div className="lg:container mt-10">
+      <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 mx-auto mb-10 gap-5">
         {allProducts?.blogs?.map((product: any) => (
           <ProductCard key={product.id} datas={product}></ProductCard>
         ))}

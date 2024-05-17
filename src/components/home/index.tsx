@@ -14,6 +14,7 @@ const Home = () => {
   return (
     <main>
       <div className="lg:container mx-auto md:p-0 p-3">
+        {/* category */}
         <TopItems />
 
         <ProductAds

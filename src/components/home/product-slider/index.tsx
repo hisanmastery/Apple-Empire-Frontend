@@ -12,12 +12,13 @@ const ProductSlider = () => {
   }
   return (
     <MultiCarousel
+      className="mt-10"
       settings={{
         dots: false,
         infinite: true,
         speed: 1000,
         autoplay: true,
-        slidesToShow: 6,
+        slidesToShow: 5,
         slidesToScroll: 1,
         autoplaySpeed: 2000,
       }}
@@ -25,7 +26,11 @@ const ProductSlider = () => {
       {sliderProducts?.blogs
         ?.slice(0, 12)
         ?.map((product: any, index: number) => (
-          <div key={index} className="aspect-w-16 aspect-h-9 lg:basis-1/6">
+          <div
+            key={index}
+            className="aspect-w-16 aspect-h-9 lg:basis-1/6 "
+            style={{ margin: "0 10px" }}
+          >
             <ProductCard key={product._id} datas={product}></ProductCard>
           </div>
         ))}

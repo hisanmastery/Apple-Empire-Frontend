@@ -84,3 +84,14 @@
 .slick-prev, .slick-next {
   display: none !important;
 }
+
+
+
+/* carousel.css */
+.slick-slide {
+  padding: 0 10px; /* Adjust the value as needed */
+}
+
+.slick-list {
+  margin: 0 -10px; /* This compensates for the padding so the first and last items align correctly */
+}
