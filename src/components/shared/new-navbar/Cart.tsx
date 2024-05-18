@@ -111,7 +111,7 @@ export default function Cart({ className, type }: any) {
                             </Link>
                         </div>
                         <div className="w-full bg-_primary mt-3">
-                            <Link href="/checkout" className="flex justify-center w-full py-2 text-_white">
+                            <Link href="/cart/checkout" className="flex justify-center w-full py-2 text-_white">
                                 Checkout Now
                             </Link>
                         </div>
