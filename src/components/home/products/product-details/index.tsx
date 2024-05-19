@@ -13,6 +13,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
+import ProductSlider from "../../product-slider";
+import { Tabs } from "@/components/ui/tabs";
+import CustomTabs from "@/components/common/custom-tab";
+import { tabs } from "@/data/products-description-tab-data";
+
+const Storage = [
+  "4GB", "256Gb", "1TB"
+]
+const sim = [
+  "singel", "dual", "usa"
+]
+const region = [
+  "global", "hk", "usa"
+]
 const ProductDetails = ({ id }: any) => {
   const { data }: any = useGetSingleProductsQuery({ id });
   // const datas = data?.response?.slice(0, 5);
@@ -64,7 +78,7 @@ const ProductDetails = ({ id }: any) => {
     img.style.transform = 'scale(1)';
   };
   return (
-    <section className="w-11/12 mx-auto mt-8">
+    <section className="md:w-11/12 mx-auto mt-8 px-2 md:px-0">
       <div className="grid md:grid-cols-5 gap-10">
         <div className="col-span-2">
           <div
@@ -72,7 +86,9 @@ const ProductDetails = ({ id }: any) => {
             onMouseMove={handleImageMouseMove}
             onMouseLeave={handleImageMouseLeave}
           >
-            <img
+            <Image
+              width={500}
+              height={500}
               id="activeImage"
               className="w-full transition-transform duration-300 transform cursor-pointer"
               src={images}
@@ -123,7 +139,7 @@ const ProductDetails = ({ id }: any) => {
             Manufacturer: <span className="text-blue-600">Apple</span>
           </p>
           <div className="flex items-center mt-4 space-x-4">
-            <h4>Color:</h4>
+            <h4 className="bg-gray-300 w-32 flex justify-center rounded-sm p-1">Color</h4>
             {data?.response?.variations?.map((variant: any, index: any) => (
               <button
                 key={index}
@@ -139,8 +155,10 @@ const ProductDetails = ({ id }: any) => {
 
           {/* spacification */}
           <div className="mt-4">
-            <p> Storage : 4GB, 256Gb</p>
-            <p>CPU : CPU Name</p>
+            <p className="uppercase flex flex-wrap gap-5"> <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">Storage </span> {Storage?.map((items: any, index: number) => <span key={index} className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm">{items}</span>)}</p>
+            <p className="uppercase flex flex-wrap gap-5 mt-5"> <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">Sim </span> {sim?.map((items: any, index: number) => <span key={index} className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm">{items}</span>)}</p>
+            <p className="uppercase flex flex-wrap gap-5 mt-5"> <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">Region </span> {region?.map((items: any, index: number) => <span key={index} className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm">{items}</span>)}</p>
+            {/* <p>CPU : CPU Name</p> */}
           </div>
           {/* add to cart button */}
           <div className="flex gap-5 mt-5">
@@ -161,35 +179,26 @@ const ProductDetails = ({ id }: any) => {
           </div>
         </div>
       </div>
-      description
-      <p className="leading-8 mt-10">
-        With fifth-generation Intel Core processors, the latest graphics, and
-        faster flash storage, the incredibly advanced MacBook Pro with Retina
-        display moves even further ahead in performance and battery life.*
-        *Compared with the previous generation. Retina display with 2560-by-1600
-        resolution Fifth-generation dual-core Intel Core i5 processor Intel Iris
-        Graphics Up to 9 hours of battery life1 Faster flash storage2 802.11ac
-        Wi-Fi Two Thunderbolt 2 ports for connecting high-performance devices
-        and transferring data at lightning speed Two USB 3 ports (compatible
-        with USB 2 devices) and HDMI FaceTime HD camera Pages, Numbers, Keynote,
-        iPhoto, iMovie, GarageBand included OS X, the world's most advanced
-        desktop operating system
-      </p>
       {/* Related products */}
       <ViewMoreTitle
-        className="top-selling-product mb-[60px] mt-10"
+        className="top-selling-product mt-14"
         seeMoreUrl="/products"
         categoryTitle="Related products"
-      >
-        <Products />
-      </ViewMoreTitle>
+      />
+      {/* product caorusel */}
+      <ProductSlider />
       {/* product ads banner */}
-      <ProductAds
+      {/* <ProductAds
         ads={[
           `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,
         ]}
         className=" mb-[60px] container mx-auto"
-      />
+      /> */}
+
+      {/* products details */}
+      <div className="mt-10">
+        <CustomTabs defaultValue={"Specification"} tabs={tabs} />
+      </div>
     </section>
   );
 };

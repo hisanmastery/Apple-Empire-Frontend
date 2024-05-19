@@ -125,12 +125,12 @@ const ProductCard = ({ datas }: any) => {
             </a>
             <a href="#">
               <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-                {<icons.loveHartIcon />}
+                {<icons.MdZoomOutMapIcon className="text-xl" />}
               </span>
             </a>
             <a href="#">
               <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-                {<icons.loveHartIcon />}
+                {<icons.LiaSyncSolidIcons className="text-xl" />}
                 {/* comperr */}
               </span>
             </a>
