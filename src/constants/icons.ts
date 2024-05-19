@@ -36,6 +36,8 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { LuUser2 } from "react-icons/lu";
 import { MdPhoneAndroid } from "react-icons/md";
 import { IoGameController } from "react-icons/io5";
+import { MdZoomOutMap } from "react-icons/md";
+import { LiaSyncSolid } from "react-icons/lia";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -73,5 +75,7 @@ export const icons = {
   ShoppingBagSolid: LiaShoppingBagSolid,
   LuUser2: LuUser2,
   PhoneAndroid: MdPhoneAndroid,
-  GameController: IoGameController
+  GameController: IoGameController,
+  MdZoomOutMapIcon: MdZoomOutMap,
+  LiaSyncSolidIcons: LiaSyncSolid
 };

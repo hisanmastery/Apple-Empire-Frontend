@@ -53,11 +53,11 @@ const ProductCard = ({ datas }: any) => {
   return (
     <div>
       <>
-        <Link href={`/products/${datas?._id}`}>
-          <div
-            className="cursor-pointer product-card-one w-full h-full max-h-[300px] text-nowrap bg-white relative group overflow-hidden"
-            style={{ boxShadow: "0px 15px 64px 0px rgba(0, 0, 0, 0.05)" }}
-          >
+        <div
+          className="cursor-pointer product-card-one w-full h-full max-h-[300px] text-nowrap bg-white relative group overflow-hidden"
+          style={{ boxShadow: "0px 15px 64px 0px rgba(0, 0, 0, 0.05)" }}
+        >
+          <Link href={`/products/${datas?._id}`}>
             <div
               className="product-card-img w-full h-[300px]"
               style={{
@@ -69,25 +69,26 @@ const ProductCard = ({ datas }: any) => {
                 margin: "auto",
               }}
             ></div>
-            <div className=" px-[30px] pb-[30px] relative">
-              {/* add to card button */}
-              <div className="absolute w-full z-50  px-[30px]  top-40 group-hover:top-[50px] transition-all duration-300 ease-in-out">
-                <Button
-                  disabled={isInCart}
-                  onClick={() => handleCartClick(datas)}
-                  className={`bg-_primary uppercase mb-52 ${
-                    !isInCart
-                      ? "  hover:bg-[#FF4C06]"
-                      : "bg-slate-500 opacity-40"
+          </Link>
+          <div className=" px-[30px] pb-[30px] relative">
+            {/* add to card button */}
+            <div className="absolute w-full z-50  px-[30px]  top-40 group-hover:top-[50px] transition-all duration-300 ease-in-out">
+              <Button
+                disabled={isInCart}
+                onClick={() => handleCartClick(datas)}
+                className={`bg-_primary uppercase mb-52 ${!isInCart
+                  ? "  hover:bg-[#FF4C06]"
+                  : "bg-slate-500 opacity-40"
                   } `}
-                  type="button"
-                >
-                  <div className="flex items-center space-x-3 w-full">
-                    <span></span>
-                    <span>Add To Cart</span>
-                  </div>
-                </Button>
-              </div>
+                type="button"
+              >
+                <div className="flex items-center space-x-3 w-full">
+                  <span></span>
+                  <span>Add To Cart</span>
+                </div>
+              </Button>
+            </div>
+            <Link href={`/products/${datas?._id}`}>
               <div className="reviews flex space-x-[1px] mb-3">
                 {Array.from(Array(datas.review), () => (
                   <span key={datas.review + Math.random()}>
@@ -102,41 +103,39 @@ const ProductCard = ({ datas }: any) => {
                   </span>
                 ))}
               </div>
-              <Link href={`/single-product/${datas?.id}`}>
-                <p className="title mb-2 text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
-                  {datas.title.slice(0,22)}...
-                </p>
-              </Link>
-              <p className="price">
-                <span className="main-price text-qgray line-through font-600 text-[18px] text-red-500">
-                  {datas.price}
-                </span>
-                <span className="offer-price text-qred font-600 text-[18px] ml-2">
-                  {datas.offer_price}
-                </span>
+              <p className="title mb-2 text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
+                {datas.title.slice(0, 22)}...
               </p>
-            </div>
-            {/* quick-access-btns */}
-            <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20  transition-all duration-300 ease-in-out">
-              <a href="#">
-                <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-                  {<icons.loveHartIcon />}
-                </span>
-              </a>
-              <a href="#">
-                <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-                  {<icons.loveHartIcon />}
-                </span>
-              </a>
-              <a href="#">
-                <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-                  {<icons.loveHartIcon />}
-                  {/* comperr */}
-                </span>
-              </a>
-            </div>
+            </Link>
+            <p className="price">
+              <span className="main-price text-qgray line-through font-600 text-[18px] text-red-500">
+                {datas.price}
+              </span>
+              <span className="offer-price text-qred font-600 text-[18px] ml-2">
+                {datas.offer_price}
+              </span>
+            </p>
           </div>
-        </Link>
+          {/* quick-access-btns */}
+          <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20  transition-all duration-300 ease-in-out">
+            <a href="#">
+              <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
+                {<icons.FavoriteBorder className="text-xl" />}
+              </span>
+            </a>
+            <a href="#">
+              <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
+                {<icons.MdZoomOutMapIcon className="text-xl" />}
+              </span>
+            </a>
+            <a href="#">
+              <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
+                {<icons.LiaSyncSolidIcons className="text-xl" />}
+                {/* comperr */}
+              </span>
+            </a>
+          </div>
+        </div>
       </>
     </div>
   );
