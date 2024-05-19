@@ -1,9 +1,10 @@
 import InputQuantityCom from "@/components/carts/InputQuantityCom";
 import { icons } from "@/constants/icons";
-import { useAddToCartDeleteMutation, useUpdateCartMutation } from "@/store/features/cart/cartApi";
+import { useAddToCartDeleteMutation, useGetEmailCartQuery, useUpdateCartMutation } from "@/store/features/cart/cartApi";
 import { addStoredCart, decrementQuantity, incrementQuantity } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart({ className, type }: any) {
@@ -11,12 +12,28 @@ export default function Cart({ className, type }: any) {
     const dispatch = useDispatch()
     const [addToCartDelete] = useAddToCartDeleteMutation();
     const [updateCart] = useUpdateCartMutation()
+    const { data, refetch }: any = useGetEmailCartQuery(
+        {
+            email: "dalim@gmail.com",
+        }
+    );
+    useEffect(() => {
+        dispatch(addStoredCart(data?.response));
+        refetch();
+    }, [data?.response, dispatch, refetch]);
     // increment
     const handleIncrementQuantity = async (product: any) => {
         dispatch(incrementQuantity(product));
+        const quantity = product.quantity + 1
+        // Parse the price string to a number
+        const unitPrice = parseFloat(product.price.replace(/,/g, ''));
+        // Calculate the new total price
+        const newTotalPrice = unitPrice * quantity;
         const payload = {
             ...product,
-            quantity: product.quantity + 1
+            quantity: quantity,
+            price: newTotalPrice,
+
         }
         console.log(payload);
         const res = await updateCart({ id: product._id, payload });
@@ -26,6 +43,10 @@ export default function Cart({ className, type }: any) {
     const handleDecrementQuantity = async (product: any) => {
         if (product.quantity > 1) {
             dispatch(decrementQuantity(product));
+            const quantity = product.quantity + 1
+            // Parse the price string to a number
+            const unitPrice = parseFloat(product.price.replace(/,/g, ''));
+            // Calculate the new total price
             const payload = {
                 ...product,
                 quantity: product.quantity - 1
@@ -45,11 +66,22 @@ export default function Cart({ className, type }: any) {
             dispatch(addStoredCart(updatedCart));
         }
     };
+    const ProductPrice = ({ product }: any) => {
+        if (!product) return null; // Handle case where product is undefined
+        // Parse the price string to an integer
+        const unitPrice = parseInt(product.price.replace(/,/g, ''));
+        console.log(unitPrice);
+        const totalPrice = unitPrice * product.quantity;
 
+        return (
+            <p>{`${totalPrice}$`}</p>
+        );
+    };
     // calculate total price
     const subTotal = storedCart?.reduce((acc: number, product: any) => {
         return acc + product?.quantity * parseInt(product?.price);
     }, 0);
+    console.log(storedCart);
     return (
         <>
             <div
@@ -67,7 +99,7 @@ export default function Cart({ className, type }: any) {
                                             <Image height={50} width={50} src={product?.image} className="w-16" alt="products" />
                                             <div className="flex gap-5">
                                                 <p className="text-sm">{product?.title?.slice(0, 20)}...</p>
-                                                <p>{parseInt(product?.price) * product?.quantity + "$"}</p>
+                                                <ProductPrice product={product} />
                                             </div>
                                         </div>
                                         <div className="cursor-pointer mx-2 font-bold text-red-500 hover:text-red-700">
