@@ -40,8 +40,8 @@ const ProductDetails = ({ id }: any) => {
   const images = selectedColor
     ? data?.response?.variations?.find(
       (variant: any) => variant?.color === selectedColor
-    )?.image ?? data?.response.variations[0].image
-    : data?.response.variations[0].image;
+    )?.image ?? data?.response?.variations[0]?.image
+    : data?.response?.variations[0]?.image;
 
   // Extracting only the 'image' property from each object in the 'variations' array
   const variationImages = data?.response?.variations?.map(
