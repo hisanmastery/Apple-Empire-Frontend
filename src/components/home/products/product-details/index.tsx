@@ -16,17 +16,10 @@ import { useGetSingleProductsQuery } from "@/store/features/products/productsApi
 import ProductSlider from "../../product-slider";
 import { Tabs } from "@/components/ui/tabs";
 import CustomTabs from "@/components/common/custom-tab";
-import { tabs } from "@/data/products-description-tab-data";
 
-const Storage = [
-  "4GB", "256Gb", "1TB"
-]
-const sim = [
-  "singel", "dual", "usa"
-]
-const region = [
-  "global", "hk", "usa"
-]
+const Storage = ["4GB", "256Gb", "1TB"];
+const sim = ["singel", "dual", "usa"];
+const region = ["global", "hk", "usa"];
 const ProductDetails = ({ id }: any) => {
   const { data }: any = useGetSingleProductsQuery({ id });
   // const datas = data?.response?.slice(0, 5);
@@ -40,8 +33,8 @@ const ProductDetails = ({ id }: any) => {
   const images = selectedColor
     ? data?.response?.variations?.find(
       (variant: any) => variant?.color === selectedColor
-    )?.image ?? data?.response.variations[0].image
-    : data?.response.variations[0].image;
+    )?.image ?? data?.response?.variations[0]?.image
+    : data?.response?.variations[0]?.image;
 
   // Extracting only the 'image' property from each object in the 'variations' array
   const variationImages = data?.response?.variations?.map(
@@ -69,14 +62,47 @@ const ProductDetails = ({ id }: any) => {
   const handleImageMouseMove = (e: any) => {
     const img = e.target;
     img.style.transformOrigin = `${e.nativeEvent.offsetX}px ${e.nativeEvent.offsetY}px`;
-    img.style.transform = 'scale(3)';
+    img.style.transform = "scale(3)";
   };
 
   const handleImageMouseLeave = (e: any) => {
     const img = e.target;
-    img.style.transformOrigin = 'center';
-    img.style.transform = 'scale(1)';
+    img.style.transformOrigin = "center";
+    img.style.transform = "scale(1)";
   };
+
+  const tabs = [
+    {
+      value: "Specification",
+      label: "Specification",
+      // content: <div>{data?.response?.specification}</div>,
+      content: (
+        <div
+          dangerouslySetInnerHTML={{ __html: data?.response?.specification }}
+        />
+      ),
+    },
+    {
+      value: "Description",
+      label: "Description",
+      content: <div>{data?.response?.description}</div>,
+    },
+    {
+      value: "Warranty",
+      label: "Warranty",
+      content: (
+        <div>
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It
+          has roots in a piece of classical Latin literature from 45 BC, making
+          it over 2000 years old. Richard McClintock, a Latin professor at
+          Hampden-Sydney College in Virginia, looked up one of the more obscure
+          Latin words, consectetur, from a Lorem Ipsum passage, and going
+          through the cites of the word in classical literature, discovered the
+          undoubtable source.
+        </div>
+      ),
+    },
+  ];
   return (
     <section className="md:w-11/12 mx-auto mt-8 px-2 md:px-0">
       <div className="grid md:grid-cols-5 gap-10">
@@ -113,7 +139,8 @@ const ProductDetails = ({ id }: any) => {
               Status:{data?.response?.status}
             </h4>
             <h4 className="mt-3 bg-blue-100 px-2 py-3 rounded-sm w-full ">
-              <span className="font-bold text-lg">Code:</span>{data?.response?._id}
+              <span className="font-bold text-lg">Code:</span>
+              {data?.response?._id}
             </h4>
           </div>
 
@@ -127,7 +154,9 @@ const ProductDetails = ({ id }: any) => {
           <h2 className="text-xl mt-6 font-bold">
             Apple Store 1 Year Warranty Support
           </h2>
-          <p className="mt-5 leading-8 mb-3">{data?.response?.description}</p>
+          <p className="mt-5 leading-8 mb-3">
+            {data?.response?.description.slice(0, 200)}
+          </p>
           {/* review star */}
           <div className="reviews flex space-x-[1px] mb-3">
             <span className="text-yellow-400">{<icons.FaStar />}</span>
@@ -139,15 +168,19 @@ const ProductDetails = ({ id }: any) => {
             Manufacturer: <span className="text-blue-600">Apple</span>
           </p>
           <div className="flex items-center mt-4 space-x-4">
-            <h4 className="bg-gray-300 w-32 flex justify-center rounded-sm p-1">Color</h4>
+            <h4 className="bg-gray-300 w-32 flex justify-center rounded-sm p-1">
+              Color
+            </h4>
             {data?.response?.variations?.map((variant: any, index: any) => (
               <button
                 key={index}
                 style={{ backgroundColor: `${variant?.colorCode}` }}
-                className={`w-9 h-9 rounded-full bg-[${variant?.colorCode
-                  }] border border-gray-300 ${selectedColor === variant?.color &&
+                className={`w-9 h-9 rounded-full bg-[${
+                  variant?.colorCode
+                }] border border-gray-300 ${
+                  selectedColor === variant?.color &&
                   "p-1  border-yellow-500 border-4"
-                  }`}
+                }`}
                 onClick={() => handleColorButtonClick(variant?.color)}
               ></button>
             ))}
@@ -155,9 +188,48 @@ const ProductDetails = ({ id }: any) => {
 
           {/* spacification */}
           <div className="mt-4">
-            <p className="uppercase flex flex-wrap gap-5"> <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">Storage </span> {Storage?.map((items: any, index: number) => <span key={index} className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm">{items}</span>)}</p>
-            <p className="uppercase flex flex-wrap gap-5 mt-5"> <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">Sim </span> {sim?.map((items: any, index: number) => <span key={index} className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm">{items}</span>)}</p>
-            <p className="uppercase flex flex-wrap gap-5 mt-5"> <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">Region </span> {region?.map((items: any, index: number) => <span key={index} className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm">{items}</span>)}</p>
+            <p className="uppercase flex flex-wrap gap-5">
+              {" "}
+              <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">
+                Storage{" "}
+              </span>{" "}
+              {Storage?.map((items: any, index: number) => (
+                <span
+                  key={index}
+                  className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm"
+                >
+                  {items}
+                </span>
+              ))}
+            </p>
+            <p className="uppercase flex flex-wrap gap-5 mt-5">
+              {" "}
+              <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">
+                Sim{" "}
+              </span>{" "}
+              {sim?.map((items: any, index: number) => (
+                <span
+                  key={index}
+                  className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm"
+                >
+                  {items}
+                </span>
+              ))}
+            </p>
+            <p className="uppercase flex flex-wrap gap-5 mt-5">
+              {" "}
+              <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">
+                Region{" "}
+              </span>{" "}
+              {region?.map((items: any, index: number) => (
+                <span
+                  key={index}
+                  className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm"
+                >
+                  {items}
+                </span>
+              ))}
+            </p>
             {/* <p>CPU : CPU Name</p> */}
           </div>
           {/* add to cart button */}
