@@ -1,4 +1,3 @@
-import InputQuantityCom from "@/components/carts/InputQuantityCom";
 import { icons } from "@/constants/icons";
 import { useAddToCartDeleteMutation, useGetEmailCartQuery, useUpdateCartMutation } from "@/store/features/cart/cartApi";
 import { addStoredCart, decrementQuantity, incrementQuantity } from "@/store/features/cart/cartSlice";
@@ -7,7 +6,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Cart({ className, type }: any) {
+export default function Cart({ className}: any) {
     const { storedCart } = useSelector((state: any) => state?.cart);
     const dispatch = useDispatch()
     const [addToCartDelete] = useAddToCartDeleteMutation();
@@ -32,31 +31,33 @@ export default function Cart({ className, type }: any) {
         const payload = {
             ...product,
             quantity: quantity,
-            price: newTotalPrice,
+            totalPrice: newTotalPrice,
 
         }
-        console.log(payload);
-        const res = await updateCart({ id: product._id, payload });
-        console.log(res);
+        const res: any = await updateCart({ id: product._id, payload });
+        if (res?.data?.isSuccess) {
+            refetch()
+        }
     }
     // decrement
     const handleDecrementQuantity = async (product: any) => {
         if (product.quantity > 1) {
             dispatch(decrementQuantity(product));
-            const quantity = product.quantity + 1
+            const quantity = product.quantity - 1
             // Parse the price string to a number
             const unitPrice = parseFloat(product.price.replace(/,/g, ''));
+            const newTotalPrice = unitPrice * quantity;
             // Calculate the new total price
             const payload = {
                 ...product,
-                quantity: product.quantity - 1
+                quantity: newTotalPrice
             }
-            console.log(payload);
-            const res = await updateCart({ id: product._id, payload });
-            console.log(res);
+            const res:any = await updateCart({ id: product._id, payload });
+            if (res?.data?.isSuccess) {
+                refetch()
+            }
         }
     }
-
     // handle remove  cart in right sidebar
     const removeCart = async (id: any) => {
         const res: any = await addToCartDelete({ id });
@@ -81,7 +82,6 @@ export default function Cart({ className, type }: any) {
     const subTotal = storedCart?.reduce((acc: number, product: any) => {
         return acc + product?.quantity * parseInt(product?.price);
     }, 0);
-    console.log(storedCart);
     return (
         <>
             <div

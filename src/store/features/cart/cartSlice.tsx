@@ -15,18 +15,16 @@ const cartSlice = createSlice({
       return { ...state, cart: payload };
     },
     addStoredCart(state: ICartState, { payload }) {
-      // Extracting the IDs from the store array
-      const productids = payload?.map((item: any) => item?.id);
       // Extracting the IDs and quantities from the payload
       const payloadData = payload?.reduce((acc: any, item: any) => {
-        acc[item.id] = item.quantity || 1;
+        acc[item._id] = item.quantity || 1;
         return acc;
       }, {});
 
       // Updating state.storedCart with quantities
       state.storedCart = payload?.map((product: any) => ({
         ...product,
-        quantity: payloadData[product.id] || 1,
+        quantity: payloadData[product._id] || 1,
       }));
       // state.storedCart = payload;
     },
