@@ -6,9 +6,6 @@ import NewNavbar from "@/components/shared/new-navbar";
 import useAuth from "@/hooks/useAuth";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const { isAuthenticated, customerInfo } = useAuth();
-  console.log(isAuthenticated);
-
   return (
     <main>
       {/* <Navbar /> */}

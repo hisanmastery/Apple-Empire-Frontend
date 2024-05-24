@@ -22,15 +22,12 @@ const Signup = () => {
       role: "customer",
     };
     try {
-      // Add your signup logic here
-      console.log("Signing up with:", data);
       const res: any = await customerRegister(registerData);
       if (res?.data?.message) {
         alert(res?.data?.message);
       } else {
         alert(res?.error?.data?.message);
       }
-      console.log({ res });
     } catch (error: any) {
       console.log(error);
     }
