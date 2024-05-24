@@ -73,7 +73,6 @@ const ClientBrand = () => {
   ];
   return (
     <section className="container mx-auto mt-10 mb-10">
-      <h4 className="text-2xl mb-3 font-semibold">SHOP BY BRANDS</h4>
       <div className="grid lg:grid-cols-7 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-7">
         {brandData?.map((brand, index) => (
           <div key={index}>

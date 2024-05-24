@@ -17,11 +17,14 @@ const CustomNavigationMenu = ({ data, title }: any) => {
             <NavigationMenuList>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger className='text-md hover:text-_white'>{title}</NavigationMenuTrigger>
-                    <NavigationMenuContent style={{ width: "200px" }} className='h-auto w-72 p-3'>
+                    <NavigationMenuContent style={{ width: "300px", height: "auto" }} className='py-5'>
                         {
-                            data?.map((items: any, index: number) => <Link key={index} href={""} className='mb-10 hover:text-_primary w-80'>
-                                <p>{items.value}</p>
-                            </Link>)
+                            data?.map((items: any, index: number) => <div key={index} className='mb-2'>
+                                <Link href={""}
+                                    className='hover:text-_blue hover:underline w-96 text-_gray'>
+                                    <p>{items.value}</p>
+                                </Link>
+                            </div>)
                         }
                     </NavigationMenuContent>
                 </NavigationMenuItem>

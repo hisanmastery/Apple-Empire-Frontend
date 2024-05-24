@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Cart({ className}: any) {
+export default function Cart({ className }: any) {
     const { storedCart } = useSelector((state: any) => state?.cart);
     const dispatch = useDispatch()
     const [addToCartDelete] = useAddToCartDeleteMutation();
@@ -50,9 +50,10 @@ export default function Cart({ className}: any) {
             // Calculate the new total price
             const payload = {
                 ...product,
-                quantity: newTotalPrice
+                quantity: quantity,
+                totalPrice: newTotalPrice
             }
-            const res:any = await updateCart({ id: product._id, payload });
+            const res: any = await updateCart({ id: product._id, payload });
             if (res?.data?.isSuccess) {
                 refetch()
             }

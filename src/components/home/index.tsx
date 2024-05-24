@@ -26,7 +26,13 @@ const Home = () => {
           className=" mb-[60px] lg:container mx-auto"
         />
         {/* brand profile */}
-        <ClientBrand />
+        <ViewMoreTitle
+          className="top-selling-product mb-[60px] lg:container"
+          seeMoreUrl="/products"
+          categoryTitle="SHOP BY BRANDS"
+        >
+          <ClientBrand />
+        </ViewMoreTitle>
         {/* all products */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"

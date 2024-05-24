@@ -1,8 +1,6 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import Products from "..";
-import productDatas from "@/../../public/product.json";
 import ViewMoreTitle from "../../../common/ViewMoreTitle";
 import ProductAds from "../../../common/productAds";
 import ProductImage from "./image-viewer/index";
@@ -14,7 +12,6 @@ import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
 import ProductSlider from "../../product-slider";
-import { Tabs } from "@/components/ui/tabs";
 import CustomTabs from "@/components/common/custom-tab";
 
 const Storage = ["4GB", "256Gb", "1TB"];
@@ -78,6 +75,7 @@ const ProductDetails = ({ id }: any) => {
       // content: <div>{data?.response?.specification}</div>,
       content: (
         <div
+          className="text-gray-600"
           dangerouslySetInnerHTML={{ __html: data?.response?.specification }}
         />
       ),
@@ -85,13 +83,13 @@ const ProductDetails = ({ id }: any) => {
     {
       value: "Description",
       label: "Description",
-      content: <div>{data?.response?.description}</div>,
+      content: <div className="text-gray-600">{data?.response?.description}</div>,
     },
     {
       value: "Warranty",
       label: "Warranty",
       content: (
-        <div>
+        <div className="text-gray-600">
           Contrary to popular belief, Lorem Ipsum is not simply random text. It
           has roots in a piece of classical Latin literature from 45 BC, making
           it over 2000 years old. Richard McClintock, a Latin professor at
@@ -121,11 +119,27 @@ const ProductDetails = ({ id }: any) => {
               alt="Product Image"
             />
           </div>
-          <ProductImage variationImages={variationImages} />
+          {/* <ProductImage variationImages={variationImages} /> */}
+          <div className="flex gap-2 mt-2">
+            {
+              data?.response?.variations?.map((image: any, index: number) =>
+                <div key={index} className="bg-_white"
+                  onClick={() => handleColorButtonClick(image.color)}
+                >
+                  <Image
+                    width={150}
+                    height={150}
+                    id="activeImage"
+                    className=" transition-transform duration-300 transform cursor-pointer"
+                    src={image?.image}
+                    alt="Product Image"
+                  />
+                </div>)
+            }
+          </div>
         </div>
-
-        <div className="col-span-3">
-          <h2 className="text-2xl font-bold">{data?.response?.title}</h2>
+        <div className="relative col-span-3 bg-white p-5">
+          <h2 className="text-2xl font-medium">{data?.response?.title}</h2>
           {/* pricing */}
           <div className="grid md:grid-cols-3 grid-cols-1 w-full gap-4 items-center text-center ">
             <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full ">
@@ -140,22 +154,22 @@ const ProductDetails = ({ id }: any) => {
             </h4>
             <h4 className="mt-3 bg-blue-100 px-2 py-3 rounded-sm w-full ">
               <span className="font-bold text-lg">Code:</span>
-              {data?.response?._id}
+              {data?.response?._id?.slice(0, 20)}
             </h4>
           </div>
 
           {/* whatsapp */}
-          <div className="bg-green-600 w-44 p-1  text-white   rounded mt-5 flex gap-3 items-center">
+          <div className="bg-_green text-white rounded mt-5 flex gap-1 py-2 cursor-pointer items-center w-60">
             <span>
               <IoLogoWhatsapp className="text-2xl mx-3" />
             </span>
             <p>Message on Whatsapp</p>
           </div>
-          <h2 className="text-xl mt-6 font-bold">
+          <h2 className="text-2xl mt-6 font-medium">
             Apple Store 1 Year Warranty Support
           </h2>
-          <p className="mt-5 leading-8 mb-3">
-            {data?.response?.description.slice(0, 200)}
+          <p className="mt-5 leading-8 mb-3 text-gray-600">
+            {data?.response?.description.slice(0, 300)}
           </p>
           {/* review star */}
           <div className="reviews flex space-x-[1px] mb-3">
@@ -168,83 +182,67 @@ const ProductDetails = ({ id }: any) => {
             Manufacturer: <span className="text-blue-600">Apple</span>
           </p>
           <div className="flex items-center mt-4 space-x-4">
-            <h4 className="bg-gray-300 w-32 flex justify-center rounded-sm p-1">
-              Color
+            <h4>
+              Color :
             </h4>
             {data?.response?.variations?.map((variant: any, index: any) => (
               <button
                 key={index}
                 style={{ backgroundColor: `${variant?.colorCode}` }}
-                className={`w-9 h-9 rounded-full bg-[${
-                  variant?.colorCode
-                }] border border-gray-300 ${
-                  selectedColor === variant?.color &&
+                className={`w-9 h-9 rounded-full bg-[${variant?.colorCode
+                  }] border border-gray-300 ${selectedColor === variant?.color &&
                   "p-1  border-yellow-500 border-4"
-                }`}
+                  }`}
                 onClick={() => handleColorButtonClick(variant?.color)}
               ></button>
             ))}
           </div>
-
           {/* spacification */}
           <div className="mt-4">
-            <p className="uppercase flex flex-wrap gap-5">
-              {" "}
-              <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">
-                Storage{" "}
-              </span>{" "}
-              {Storage?.map((items: any, index: number) => (
-                <span
-                  key={index}
-                  className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm"
-                >
-                  {items}
-                </span>
-              ))}
-            </p>
-            <p className="uppercase flex flex-wrap gap-5 mt-5">
-              {" "}
-              <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">
-                Sim{" "}
-              </span>{" "}
-              {sim?.map((items: any, index: number) => (
-                <span
-                  key={index}
-                  className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm"
-                >
-                  {items}
-                </span>
-              ))}
-            </p>
-            <p className="uppercase flex flex-wrap gap-5 mt-5">
-              {" "}
-              <span className="bg-gray-300 p-1 w-32 flex justify-center rounded-sm">
-                Region{" "}
-              </span>{" "}
-              {region?.map((items: any, index: number) => (
-                <span
-                  key={index}
-                  className="flex justify-center bg-gray-300 w-32 p-1 rounded-sm"
-                >
-                  {items}
-                </span>
-              ))}
-            </p>
-            {/* <p>CPU : CPU Name</p> */}
+            <div className="grid grid-cols-12 gap-2 items-start">
+              <span className="col-span-1">Storage:</span>
+              <div className="col-span-11 flex flex-wrap gap-2">
+                {Storage?.map((item: any, index: number) => (
+                  <span key={index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-2 items-start mt-5">
+              <span className="col-span-1">Sim:</span>
+              <div className="col-span-11 flex flex-wrap gap-2">
+                {sim?.map((item: any, index: number) => (
+                  <span key={index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-2 items-start mt-5">
+              <span className="col-span-1">Region:</span>
+              <div className="col-span-11 flex flex-wrap gap-2">
+                {region?.map((item: any, index: number) => (
+                  <span key={index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
           {/* add to cart button */}
-          <div className="flex gap-5 mt-5">
+          <div className="absolute bottom-10 left-0 right-0 flex mx-5 gap-5 mt-5">
             <Button
               onClick={() => handleCartClick()}
               disabled={isInCart}
-              className="bg-slate-800 hover:bg-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
+              className="bg-_blue hover:bg-_primary rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
             >
               ADD TO CART
             </Button>
             <Button
               variant={"outline"}
               // onClick={() => handleCartClick()}
-              className=" hover:bg-[#FF4C06] border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
+              className="uppercase hover:bg-[#FF4C06] border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
             >
               <Link href={"/cart/checkout"}> Buy Now</Link>
             </Button>

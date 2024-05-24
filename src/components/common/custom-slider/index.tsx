@@ -5,7 +5,8 @@ import MultiCarousel from "@/components/common/carousel";
 const CustomSlider = ({ sliderProducts }: any) => {
     return (
         <MultiCarousel
-            className="mt-10"
+            className="mt-10 bg-slate-200 rounded-md    
+            + p-5"
             settings={{
                 dots: false,
                 infinite: true,
@@ -38,6 +39,13 @@ const CustomSlider = ({ sliderProducts }: any) => {
                     },
                     {
                         breakpoint: 576,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                        },
+                    },
+                    {
+                        breakpoint: 500,
                         settings: {
                             slidesToShow: 1,
                             slidesToScroll: 1,
