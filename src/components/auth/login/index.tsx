@@ -3,17 +3,42 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
+import { useCustomerLoginMutation } from "@/store/api/auth/authApi";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [customerLogin, { isLoading }] = useCustomerLoginMutation();
+  const onSubmit = async (data: any) => {
+    const loginData = {
+      email: data.email,
+      password: data.password,
+      role: "customer",
+    };
+    try {
+      // Add your signup logic here
+      const res: any = await customerLogin(loginData);
+      const loginResponse = res?.data;
 
-  const onSubmit = (data: any) => {
-    // Add your login logic here
-    console.log("Logging in with:", data);
+      if (res?.data?.message) {
+        alert(res?.data?.message);
+      } else {
+        alert(res?.error?.data?.message);
+      }
+
+      if (loginResponse.isSuccess) {
+        const accessToken = loginResponse?.data?.accessToken;
+        localStorage.setItem("token", accessToken);
+        router.push("/");
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return (
@@ -96,10 +121,11 @@ const Login = () => {
 
           <div>
             <button
+              disabled={isLoading}
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-_primary  focus:outline-none focus:ring-2 focus:ring-offset-2 "
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-_primary hover:bg-_primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Log in
+              {`${isLoading ? "loading..." : "Log in"}`}
             </button>
           </div>
         </form>
