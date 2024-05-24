@@ -11,11 +11,6 @@ const PopularProductCard = ({ className, data }: any) => {
       <div className="w-full h-[105px] bg-white border border-primarygray px-5 ">
         <div className="w-full h-full flex space-x-5 justify-center items-center">
           <div className="w-[75px] h-[75px] relative">
-            {/* <Image layout='fill'
-              src={`/assets/images/${datas?.image}`}
-              alt=""
-              className="w-full h-full object-cover"
-            /> */}
             <Image
               width={100}
               height={100}

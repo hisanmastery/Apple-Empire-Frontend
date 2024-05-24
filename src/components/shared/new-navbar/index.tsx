@@ -4,9 +4,10 @@ import { icons } from "@/constants/icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AccessroiesData } from "@/data/accessroies-menus";
-import TopNavbar from "./TopNavbar";
 import { CategoryData } from "@/data/category";
 import { LeftSideMenu } from "../navbar/sideMenu";
+import Middlebar from "./MiddleNavbar";
+import TopBar from "./TopNavbar";
 export default function NewNavbar({ className, type }: any) {
     const [categoryToggle, setToggle] = useState(false);
     const [elementsSize, setSize] = useState("0px");
@@ -26,8 +27,9 @@ export default function NewNavbar({ className, type }: any) {
 
     return (
         <div className="sticky top-0 z-[6]">
-            <TopNavbar />
-            <div className={` w-full bg-_primary  h-[60px]`}>
+            <TopBar />
+            <Middlebar />
+            <div className={` w-full bg-_blue h-[60px]`}>
                 <div className="container mx-auto h-full">
                     <div className="w-full h-full relative">
                         <div className="w-full h-full flex justify-between items-center">

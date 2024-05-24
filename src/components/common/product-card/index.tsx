@@ -32,16 +32,6 @@ const ProductCard = ({ datas }: any) => {
     if (res?.data?.isSuccess) {
       refetch();
     }
-    // get product data
-    // const existingCart = storedCart || [];
-    // const existingProduct = existingCart?.find(
-    //   (item: any) => item._id === datas._id
-    // );
-    // // check existing product if not product it will be set
-    // if (!existingProduct) {
-    //   const updatedCart = [...existingCart, product];
-    //   dispatch(addStoredCart(updatedCart));
-    // }
   };
   useEffect(() => {
     dispatch(addStoredCart(data?.response));
@@ -51,11 +41,12 @@ const ProductCard = ({ datas }: any) => {
     (item: any) => item.productId === datas?._id
   );
   return (
-    <div>
+    <div className="overflow-hidden"
+      style={{ boxShadow: "0px 0px 10px 0px gray" }}
+    >
       <>
         <div
-          className="cursor-pointer product-card-one w-full h-full max-h-[300px] text-nowrap bg-white relative group overflow-hidden"
-          style={{ boxShadow: "0px 15px 64px 0px rgba(0, 0, 0, 0.05)" }}
+          className="cursor-pointer product-card-one w-full h-full max-h-[300px] text-nowrap bg-white relative group hover:scale-105 ease-in-out duration-700"
         >
           <Link href={`/products/${datas?._id}`}>
             <div

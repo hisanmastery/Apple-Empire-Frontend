@@ -25,11 +25,16 @@ const Home = () => {
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
-
         {/* brand profile */}
         <ClientBrand />
         {/* all products */}
-        <Products />
+        <ViewMoreTitle
+          className="top-selling-product mb-[60px] lg:container"
+          seeMoreUrl="/products"
+          categoryTitle="Top Selling Products"
+        >
+          <Products />
+        </ViewMoreTitle>
         {/* ads banner */}
         <ProductAds
           ads={[
@@ -38,13 +43,13 @@ const Home = () => {
           className=" mb-[60px] lg:container mx-auto"
         />
         {/* product caorusel */}
-        <ProductSlider />
+        {/* <ProductSlider /> */}
 
         {/* top selling product */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"
           seeMoreUrl="/products"
-          categoryTitle="Top Selling Products"
+          categoryTitle="All Products"
         >
           <TopSellingProducts />
         </ViewMoreTitle>

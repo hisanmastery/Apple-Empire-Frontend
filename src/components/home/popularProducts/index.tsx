@@ -4,6 +4,7 @@ import productData from "@/../../public/product.json";
 import PopularProductCard from "./popularProductCard";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import Loading from "@/components/common/loading";
+import CustomSlider from "@/components/common/custom-slider";
 
 const PopularProducts = () => {
   const { data: popularProducts, isLoading }: any = useGetProductsListsQuery(
@@ -13,12 +14,8 @@ const PopularProducts = () => {
     return <Loading />;
   }
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-      {popularProducts?.blogs
-        ?.slice(0, 9)
-        ?.map((product: any, index: number) => (
-          <PopularProductCard key={index} data={product} />
-        ))}
+    <div>
+      <CustomSlider sliderProducts={popularProducts} />
     </div>
   );
 };
