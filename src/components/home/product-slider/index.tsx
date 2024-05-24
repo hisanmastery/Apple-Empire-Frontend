@@ -4,6 +4,7 @@ import ProductCard from "@/components/common/product-card";
 import MultiCarousel from "@/components/common/carousel";
 import Loading from "@/components/common/loading";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
+import CustomSlider from "@/components/common/custom-slider";
 
 const ProductSlider = () => {
   const { data: sliderProducts, isLoading }: any = useGetProductsListsQuery({});
@@ -11,30 +12,9 @@ const ProductSlider = () => {
     return <Loading />;
   }
   return (
-    <MultiCarousel
-      className="mt-10"
-      settings={{
-        dots: false,
-        infinite: true,
-        speed: 1000,
-        autoplay: true,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        autoplaySpeed: 2000,
-      }}
-    >
-      {sliderProducts?.blogs
-        ?.slice(0, 12)
-        ?.map((product: any, index: number) => (
-          <div
-            key={index}
-            className="aspect-w-16 aspect-h-9 lg:basis-1/6 "
-            style={{ margin: "0 10px" }}
-          >
-            <ProductCard key={product._id} datas={product}></ProductCard>
-          </div>
-        ))}
-    </MultiCarousel>
+    <div>
+      <CustomSlider sliderProducts={sliderProducts} />
+    </div>
   );
 };
 
