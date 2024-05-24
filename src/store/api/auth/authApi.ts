@@ -1,5 +1,5 @@
 import authBaseApi from "./authBaseAPI";
-
+const order_url = "/order";
 export const authApi = authBaseApi.injectEndpoints({
   endpoints: (builder: any) => ({
     customerRegister: builder.mutation({

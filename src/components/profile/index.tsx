@@ -1,17 +1,22 @@
 "use client";
 
 import useAuth from "@/hooks/useAuth";
+import { useCustomerOrdersQuery } from "@/store/features/checkout/checkoutApi";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const Profile = () => {
   const { isAuthenticated, customerInfo } = useAuth();
+  const { data }: any = useCustomerOrdersQuery(customerInfo?.email);
+  const orders = data?.response;
   const router = useRouter();
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/");
-    }
-  }, [router]);
+
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     router.push("/");
+  //   }
+  // }, [isAuthenticated, router]);
+
   return (
     <>
       <div className="min-h-screen bg-gray-100 flex">
@@ -64,7 +69,7 @@ const Profile = () => {
                   <input
                     type="text"
                     className="mt-1 p-2 w-full border rounded-md"
-                    value={customerInfo?.name}
+                    value={customerInfo?.name || ""}
                     readOnly
                   />
                 </div>
@@ -73,7 +78,7 @@ const Profile = () => {
                   <input
                     type="email"
                     className="mt-1 p-2 w-full border rounded-md"
-                    value={customerInfo?.email}
+                    value={customerInfo?.email || ""}
                     readOnly
                   />
                 </div>
@@ -82,7 +87,7 @@ const Profile = () => {
                   <input
                     type="tel"
                     className="mt-1 p-2 w-full border rounded-md"
-                    value={customerInfo?.phone}
+                    value={customerInfo?.phone || ""}
                     readOnly
                   />
                 </div>
@@ -102,16 +107,25 @@ const Profile = () => {
               <h2 className="text-2xl font-semibold mb-4">Order Information</h2>
               <div className="space-y-6">
                 {/* Example Order */}
-                <div className="p-4 bg-gray-50 rounded-md shadow flex justify-between items-center">
-                  <div>
-                    <h3 className="text-lg font-semibold">Order #12345</h3>
-                    <p className="text-gray-600">Date: May 10, 2023</p>
-                    <p className="text-gray-600">Status: Shipped</p>
+                {orders?.map((order: any, index: number) => (
+                  <div
+                    key={index}
+                    className="p-4 bg-gray-50 rounded-md shadow flex justify-between items-center"
+                  >
+                    <div>
+                      <h3 className="text-lg font-semibold">
+                        Order #{order._id}
+                      </h3>
+                      <p className="text-gray-600">Date: {order.createdAt}</p>
+                      <p className="text-gray-600">Payment Status: {order.paymentStatus}</p>
+                      <p className="text-gray-600">Transaction Id: {order.transactionId}</p>
+                      <p className="text-gray-600">Delivery Status: {order.deliveryStatus}</p>
+                    </div>
+                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md">
+                      View Details
+                    </button>
                   </div>
-                  <button className="px-4 py-2 bg-blue-500 text-white rounded-md">
-                    View Details
-                  </button>
-                </div>
+                ))}
                 {/* More orders can be added similarly */}
               </div>
             </section>
