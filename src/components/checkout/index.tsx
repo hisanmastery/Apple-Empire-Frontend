@@ -8,13 +8,15 @@ import { useGetEmailCartQuery } from "@/store/features/cart/cartApi";
 import { useState } from "react";
 import { useCreatePaymentMutation } from "@/store/features/checkout/checkoutApi";
 import { useRouter } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
 const Checkout = () => {
   const methods = useForm();
-  const router = useRouter()
+  const router = useRouter();
   const { storedCart } = useSelector((state: any) => state?.cart);
   const [shippingMethod, setShippingMethod] = useState(false);
   const [giftSend, setGiftSend] = useState(false);
-  const [createPayment] = useCreatePaymentMutation()
+  const [createPayment] = useCreatePaymentMutation();
+  const { isAuthenticated, customerInfo } = useAuth();
   // calculate sub total price
   const subtotal =
     storedCart?.reduce(
@@ -25,8 +27,12 @@ const Checkout = () => {
   const deliveryFee = 100;
   const totalPrice = subtotal - cartDiscount + deliveryFee;
   const onSubmit = async (data: any) => {
+    if (!isAuthenticated) {
+      router.push("/login");
+      return;
+    }
     const payload = {
-      email: data.email,
+      email: customerInfo?.email,
       name: data?.name,
       phone: data?.number,
       postCode: data?.postCode,
@@ -37,15 +43,19 @@ const Checkout = () => {
       shippingMethod: {
         isOutesideDhaka: true,
         paymentMethod: data?.onlinePayment,
-        orderNotes: data?.orderNotes
+        orderNotes: data?.orderNotes,
       },
       // gift: giftSend,
-      totalPrice: totalPrice
-    }
-    const res: any = await createPayment({ payload })
-    if (res?.data?.isSuccess) {
-      console.log(res, res?.data?.response?.paymentInfo?.GatewayPageURL);
-      router.push(res?.data?.response?.paymentInfo?.GatewayPageURL)
+      totalPrice: totalPrice,
+    };
+    if (payload?.email) {
+      const res: any = await createPayment({ payload });
+      if (res?.data?.isSuccess) {
+        console.log(res, res?.data?.response?.paymentInfo?.GatewayPageURL);
+        router.push(res?.data?.response?.paymentInfo?.GatewayPageURL);
+      }
+    } else {
+      alert("Email missing");
     }
   };
   return (
@@ -76,6 +86,7 @@ const Checkout = () => {
             />
           </div>
           <div>
+            CONFIRM ORDER
             <OrderSummary
               subtotal={subtotal}
               cartDiscount={cartDiscount}

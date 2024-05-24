@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { icons } from "@/constants/icons";
+import useAuth from "@/hooks/useAuth";
 import {
   useAddToCartMutation,
   useGetEmailCartQuery,
@@ -8,29 +9,36 @@ import {
 import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { title } from "process";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const ProductCard = ({ datas }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
+  const router = useRouter();
+  const { isAuthenticated, customerInfo }: any = useAuth();
   const { data, refetch }: any = useGetEmailCartQuery({
-    email: "dalim@gmail.com",
+    email: customerInfo?.email,
   });
   const [addToCart]: any = useAddToCartMutation();
   // handle cart click
   const handleCartClick = async (data: any) => {
-    const payload = {
-      email: "dalim@gmail.com",
-      title: data?.title,
-      productId: data?._id,
-      price: data?.offer_price,
-      image: data?.image?.viewUrl,
-      quantity: 0,
-    };
-    const res: any = await addToCart({ payload });
-    if (res?.data?.isSuccess) {
-      refetch();
+    if (!isAuthenticated) {
+      router.push("/login");
+    } else {
+      const payload = {
+        email: customerInfo.email,
+        title: data?.title,
+        productId: data?._id,
+        price: data?.offer_price,
+        image: data?.image?.viewUrl,
+        quantity: 0,
+      };
+      const res: any = await addToCart({ payload });
+      if (res?.data?.isSuccess) {
+        refetch();
+      }
     }
   };
   useEffect(() => {
@@ -41,13 +49,12 @@ const ProductCard = ({ datas }: any) => {
     (item: any) => item.productId === datas?._id
   );
   return (
-    <div className="overflow-hidden"
+    <div
+      className="overflow-hidden"
       style={{ boxShadow: "0px 0px 10px 0px gray" }}
     >
       <>
-        <div
-          className="cursor-pointer product-card-one w-full h-full max-h-[300px] text-nowrap bg-white relative group hover:scale-105 ease-in-out duration-700"
-        >
+        <div className="cursor-pointer product-card-one w-full h-full max-h-[300px] text-nowrap bg-white relative group hover:scale-105 ease-in-out duration-700">
           <Link href={`/products/${datas?._id}`}>
             <div
               className="product-card-img w-full h-[300px]"
@@ -67,10 +74,9 @@ const ProductCard = ({ datas }: any) => {
               <Button
                 disabled={isInCart}
                 onClick={() => handleCartClick(datas)}
-                className={`bg-_primary uppercase mb-52 ${!isInCart
-                  ? "  hover:bg-[#FF4C06]"
-                  : "bg-slate-500 opacity-40"
-                  } `}
+                className={`bg-_primary uppercase mb-52 ${
+                  !isInCart ? "  hover:bg-[#FF4C06]" : "bg-slate-500 opacity-40"
+                } `}
                 type="button"
               >
                 <div className="flex items-center space-x-3 w-full">

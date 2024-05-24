@@ -1,7 +1,9 @@
+"use client";
 import Carts from "@/components/carts";
 import Footer from "@/components/shared/footer/footer";
 import Navbar from "@/components/shared/navbar";
 import NewNavbar from "@/components/shared/new-navbar";
+import useAuth from "@/hooks/useAuth";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
