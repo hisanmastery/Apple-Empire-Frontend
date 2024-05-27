@@ -2,7 +2,7 @@
 import { GiDiscussion } from "react-icons/gi";
 import { GiTeamIdea } from "react-icons/gi";
 import { SiMicrostrategy } from "react-icons/si";
-import { FaHandshakeSimple } from "react-icons/fa6";
+import { FaHandshakeSimple, FaXTwitter } from "react-icons/fa6";
 import { TbSettingsUp } from "react-icons/tb";
 import { MdManageHistory } from "react-icons/md";
 import { MdTimer } from "react-icons/md";
@@ -38,6 +38,20 @@ import { MdPhoneAndroid } from "react-icons/md";
 import { IoGameController } from "react-icons/io5";
 import { MdZoomOutMap } from "react-icons/md";
 import { LiaSyncSolid } from "react-icons/lia";
+import {
+  FaFacebook,
+  FaWhatsapp,
+  FaEnvelope,
+  FaLinkedin,
+  FaTelegram,
+  FaPinterest,
+  FaSkype,
+  FaReddit,
+} from 'react-icons/fa';
+import { GrCurrency } from "react-icons/gr";
+import { FaCodeCompare } from "react-icons/fa6";
+import { TbExchange } from "react-icons/tb";
+import { FaApple } from "react-icons/fa";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -77,5 +91,18 @@ export const icons = {
   PhoneAndroid: MdPhoneAndroid,
   GameController: IoGameController,
   MdZoomOutMapIcon: MdZoomOutMap,
-  LiaSyncSolidIcons: LiaSyncSolid
+  LiaSyncSolidIcons: LiaSyncSolid,
+  FaFacebookIcons: FaFacebook,
+  FaXTwitterIcons: FaXTwitter,
+  FaWhatsappIcons: FaWhatsapp,
+  FaEnvelopeIcons: FaEnvelope,
+  FaLinkedinIcons: FaLinkedin,
+  FaPinterestIcons: FaPinterest,
+  FaTelegramIcons: FaTelegram,
+  FaSkypeIcons: FaSkype,
+  FaRedditIcons: FaReddit,
+  GrCurrencyIcons: GrCurrency,
+  FaCodeCompareIcons: FaCodeCompare,
+  TbExchangeIcons: TbExchange,
+  FaAppleIcons: FaApple,
 };

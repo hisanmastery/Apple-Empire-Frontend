@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ViewMoreTitle from "../../../common/ViewMoreTitle";
 import ProductAds from "../../../common/productAds";
 import ProductImage from "./image-viewer/index";
@@ -8,11 +8,12 @@ import { icons } from "@/constants/icons";
 import { Button } from "@/components/ui/button";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { addStoredCart } from "@/store/features/cart/cartSlice";
+import { addStoredCart, decrementQuantity, incrementQuantity } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
 import ProductSlider from "../../product-slider";
 import CustomTabs from "@/components/common/custom-tab";
+import { useGetEmailCartQuery, useUpdateCartMutation } from "@/store/features/cart/cartApi";
 
 const Storage = ["4GB", "256Gb", "1TB"];
 const sim = ["singel", "dual", "usa"];
@@ -23,10 +24,59 @@ const ProductDetails = ({ id }: any) => {
   const [selectedColor, setSelectedColor]: any = useState("");
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
+  const [updateCart] = useUpdateCartMutation()
+  const { data:addToCart, refetch }: any = useGetEmailCartQuery(
+    {
+        email: "dalim@gmail.com",
+    }
+  );
+  useEffect(() => {
+    dispatch(addStoredCart(addToCart?.response));
+    refetch();
+}, [addToCart?.response, dispatch, refetch]);
   const handleColorButtonClick = (color: any) => {
     setSelectedColor(color);
   };
+  // increment
+  const handleIncrementQuantity = async (product: any) => {
+    dispatch(incrementQuantity(product));
+    const quantity = parseFloat(product.quantity) + 1
+    // Parse the price string to a number
+    const unitPrice = parseFloat(product.price.replace(/,/g, ''));
+    // Calculate the new total price
+    const newTotalPrice = unitPrice * quantity;
+    const payload = {
+        ...product,
+        quantity: quantity,
+        totalPrice: newTotalPrice,
 
+    }
+    const res: any = await updateCart({ id: product._id, payload });
+    if (res?.data?.isSuccess) {
+        refetch()
+    }
+}
+// decrement
+  const handleDecrementQuantity = async (product: any) => {
+    console.log(product);
+    if (parseFloat(product.quantity) > 1) {
+        dispatch(decrementQuantity(product));
+        const quantity = parseFloat(product.quantity) - 1
+        // Parse the price string to a number
+        const unitPrice = parseFloat(product.price.replace(/,/g, ''));
+        const newTotalPrice = unitPrice * quantity;
+        // Calculate the new total price
+        const payload = {
+            ...product,
+            quantity: quantity,
+            totalPrice: newTotalPrice
+        }
+        const res: any = await updateCart({ id: product._id, payload });
+        if (res?.data?.isSuccess) {
+            refetch()
+        }
+    }
+}
   const images = selectedColor
     ? data?.response?.variations?.find(
       (variant: any) => variant?.color === selectedColor
@@ -37,7 +87,6 @@ const ProductDetails = ({ id }: any) => {
   const variationImages = data?.response?.variations?.map(
     (variation: any) => variation?.image
   );
-
   // handle cart click
   const handleCartClick = () => {
     // get product data
@@ -101,10 +150,30 @@ const ProductDetails = ({ id }: any) => {
       ),
     },
   ];
+
+  console.log(data);
   return (
-    <section className="md:w-11/12 mx-auto mt-8 px-2 md:px-0">
-      <div className="grid md:grid-cols-5 gap-10">
-        <div className="col-span-2">
+    <section className="md:w-11/12 mx-auto py-5 px-2 md:px-0">
+      <div className="grid md:grid-cols-6 gap-10">
+        <div className="col-span-3 flex">
+        <div>
+            {
+              data?.response?.variations?.map((image: any, index: number) =>
+                <div key={index} className="bg-_white"
+                  onClick={() => handleColorButtonClick(image.color)}
+                >
+                  <Image
+                    width={130}
+                    height={130}
+                    id="activeImage"
+                    className=" transition-transform duration-300 transform cursor-pointer"
+                    src={image?.image}
+                    alt="Product Image"
+                  />
+                </div>)
+            }
+            </div>
+          <div>
           <div
             className="relative overflow-hidden bg-_white"
             onMouseMove={handleImageMouseMove}
@@ -136,12 +205,13 @@ const ProductDetails = ({ id }: any) => {
                   />
                 </div>)
             }
+            </div>
           </div>
         </div>
         <div className="relative col-span-3 bg-white p-5">
-          <h2 className="text-2xl font-medium">{data?.response?.title}</h2>
+          {/* <h2 className="text-2xl font-medium">{data?.response?.title}</h2> */}
           {/* pricing */}
-          <div className="grid md:grid-cols-3 grid-cols-1 w-full gap-4 items-center text-center ">
+          {/* <div className="grid md:grid-cols-3 grid-cols-1 w-full gap-4 items-center text-center ">
             <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full ">
               Price:
               <span className="line-through text-gray-600">
@@ -154,17 +224,38 @@ const ProductDetails = ({ id }: any) => {
             </h4>
             <h4 className="mt-3 bg-blue-100 px-2 py-3 rounded-sm w-full ">
               <span className="font-bold text-lg">Code:</span>
-              {data?.response?._id?.slice(0, 20)}
+              {data?.response?._id?.slice(0, 10)}
             </h4>
-          </div>
+          </div> */}
 
+          <div className="flex justify-between">
+            <div>
+            <h2 className="flex items-center gap-2 text-3xl font-medium mb-3"><icons.FaAppleIcons className="text-5xl" /> {data?.response?.title}</h2>
+            <span >{data?.response?.displayType}</span> |
+              <span>{data?.response?.ram[0]}</span> |
+              <span>{data?.response?.region[0]}</span>
+            </div>
+            <p>
+              <span className="text-lg font-semibold">DisCount Price</span>
+              <span className="text-[30px] font-semibold text-red-500 block">ট {data?.response.price}</span>
+              <span className="line-through text-md font-semibold">ট { data?.response?.offer_price}</span>
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-5 mt-5">
+            <p className="text-md font-medium flex items-center gap-3"><icons.GrCurrencyIcons className="text-xl"/> EMIPLAN</p>
+            <p className="text-md font-medium flex items-center gap-3"><icons.FaCodeCompareIcons className="text-xl" />COMPARE</p>
+            <p className="text-md font-medium flex items-center gap-3"><icons.TbExchangeIcons className="text-xl" />EXCHANGE</p>
+            <p className="text-md font-medium flex items-center gap-3"><icons.FavoriteBorder className="text-xl" />WISHLIST</p>
+            <p className="text-md font-medium flex items-center gap-3"><icons.FaWhatsappIcons className="text-xl" />MESSAGE</p>
+            <p className="text-md font-medium flex items-center gap-3"><icons.truckDelivaryIcon className="text-xl"/>DELIVARY PLAN</p>
+          </div>
           {/* whatsapp */}
-          <div className="bg-_green text-white rounded mt-5 flex gap-1 py-2 cursor-pointer items-center w-60">
+          {/* <div className="bg-_green text-white rounded mt-5 flex gap-1 py-2 cursor-pointer items-center w-60">
             <span>
               <IoLogoWhatsapp className="text-2xl mx-3" />
             </span>
             <p>Message on Whatsapp</p>
-          </div>
+          </div> */}
           <h2 className="text-2xl mt-6 font-medium">
             Apple Store 1 Year Warranty Support
           </h2>
@@ -231,7 +322,27 @@ const ProductDetails = ({ id }: any) => {
             </div>
           </div>
           {/* add to cart button */}
-          <div className="absolute bottom-10 left-0 right-0 flex mx-5 gap-5 mt-5">
+          <div className="xl:absolute bottom-10 left-0 right-0 flex mx-5 gap-5 mt-5">
+            <div>
+            <div className="flex justify-center items-center w-full mb-2">
+                                        <button
+                                            onClick={() => handleDecrementQuantity(data?.response)}
+                                            type="button"
+                                            className="text-md mr-3 border-[1px] size-8"
+                                        >
+                                            -
+                                        </button>
+                <span className="text-qblack">{ data?.response?.quantity}</span>
+                                        <button
+                                            onClick={() => handleIncrementQuantity(data?.response)}
+                                            type="button"
+                                            className="text-base size-8 ml-3 border-[1px]"
+                                        >
+                                            +
+                </button>
+                
+                                    </div>
+          </div>
             <Button
               onClick={() => handleCartClick()}
               disabled={isInCart}
@@ -247,6 +358,48 @@ const ProductDetails = ({ id }: any) => {
               <Link href={"/cart/checkout"}> Buy Now</Link>
             </Button>
           </div>
+        </div>
+      </div>
+      <div className="flex justify-center gap-10 items-center">
+      <div className="flex justify-center mt-8 space-x-4 leading-3 col-span-4 lg:col-span-4">
+            <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaFacebookIcons className="text-_black text-lg" />
+            </Link>
+            <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaXTwitterIcons className="text-_black text-lg" />
+          </Link>
+          <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaWhatsappIcons className="text-_black text-lg" />
+          </Link>
+          <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaPinterestIcons className="text-_black text-lg" />
+          </Link>
+          <Link href="#"className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaHandshakeSimple className="text-_black text-lg" />
+            </Link>  <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaSkypeIcons className="text-_black text-lg" />
+            </Link>
+
+            <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaEnvelopeIcons className="text-_black text-lg" />
+            </Link>
+            <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaLinkedinIcons className="text-_black text-lg" />
+          </Link>
+          <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaRedditIcons className="text-_black text-lg" />
+          </Link>
+          <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
+              <icons.FaTelegramIcons className="text-_black text-lg" />
+            </Link>
+          </div>
+        <div>
+        <h5 className="mb-3">Secure Payments</h5>
+            <img
+              src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
+            alt="payment"
+            className="w-96 -mt-1"
+            />
         </div>
       </div>
       {/* Related products */}
