@@ -139,7 +139,7 @@ export default function About() {
                                         <div className="w-[50px] h-[50px] rounded-full overflow-hidden relative">
                                             <Image
                                                 layout="fill"
-                                                src={`/assets/images/comment-user-1.png`}
+                                                src={`/public/next.svg`}
                                                 alt="user"
                                             />
                                         </div>
@@ -213,7 +213,7 @@ export default function About() {
                                         <div className="w-[50px] h-[50px] rounded-full overflow-hidden relative">
                                             <Image
                                                 layout="fill"
-                                                src={`/assets/images/comment-user-1.png`}
+                                                src={`/public/images-2/comment-user-2.png`}
                                                 alt="user"
                                             />
                                         </div>
@@ -250,7 +250,7 @@ export default function About() {
                                         <div className="w-[50px] h-[50px] rounded-full overflow-hidden relative">
                                             <Image
                                                 layout="fill"
-                                                src={`/assets/images/comment-user-1.png`}
+                                                src={`/public/images-2/comment-user-2.png`}
                                                 alt="user"
                                             />
                                         </div>

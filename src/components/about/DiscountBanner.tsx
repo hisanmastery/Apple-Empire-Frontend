@@ -4,12 +4,13 @@ export default function DiscountBanner({ className, type }: any) {
             className={`discount-banner w-full h-[307px] bg-cover flex justify-center items-center ${className || ""
                 }`}
             style={{
-                background: `url(/assets/images/discount-banner-1.webp) no-repeat`,
+                background: `url(https://appleempire.hisanmastery.com/assets/images/discount-banner-1.webp) no-repeat`,
                 backgroundSize: "cover",
+                backgroundPosition:"center"
             }}
         >
             {type === 3 ? (
-                <div className="container-x mx-auto">
+                <div className="mx-auto">
                     <div
                         className="best-services w-full  flex flex-col space-y-10 lg:space-y-0 lg:flex-row lg:justify-between lg:items-center lg:h-[110px] px-10 lg:py-0 py-10"
                     >
