@@ -154,7 +154,7 @@ const ProductDetails = ({ id }: any) => {
   console.log(data);
   return (
     <section className="md:w-11/12 mx-auto py-5 px-2 md:px-0">
-      <div className="grid md:grid-cols-6 gap-10">
+      <div className="grid lg:grid-cols-7 gap-10">
         <div className="col-span-3 flex">
         <div>
             {
@@ -163,8 +163,8 @@ const ProductDetails = ({ id }: any) => {
                   onClick={() => handleColorButtonClick(image.color)}
                 >
                   <Image
-                    width={130}
-                    height={130}
+                    width={100}
+                    height={100}
                     id="activeImage"
                     className=" transition-transform duration-300 transform cursor-pointer"
                     src={image?.image}
@@ -180,10 +180,10 @@ const ProductDetails = ({ id }: any) => {
             onMouseLeave={handleImageMouseLeave}
           >
             <Image
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               id="activeImage"
-              className="w-full transition-transform duration-300 transform cursor-pointer"
+              className="w-full transition-transform duration-300 transform cursor-pointer mx-auto"
               src={images}
               alt="Product Image"
             />
@@ -196,8 +196,8 @@ const ProductDetails = ({ id }: any) => {
                   onClick={() => handleColorButtonClick(image.color)}
                 >
                   <Image
-                    width={150}
-                    height={150}
+                    width={100}
+                    height={100}
                     id="activeImage"
                     className=" transition-transform duration-300 transform cursor-pointer"
                     src={image?.image}
@@ -208,7 +208,7 @@ const ProductDetails = ({ id }: any) => {
             </div>
           </div>
         </div>
-        <div className="relative col-span-3 bg-white p-5">
+        <div className="relative col-span-4 bg-white px-5">
           {/* <h2 className="text-2xl font-medium">{data?.response?.title}</h2> */}
           {/* pricing */}
           {/* <div className="grid md:grid-cols-3 grid-cols-1 w-full gap-4 items-center text-center ">
@@ -256,13 +256,13 @@ const ProductDetails = ({ id }: any) => {
             </span>
             <p>Message on Whatsapp</p>
           </div> */}
-          <h2 className="text-2xl mt-6 font-medium">
+          {/* <h2 className="text-2xl mt-6 font-medium">
             Apple Store 1 Year Warranty Support
-          </h2>
+          </h2> */}
           <p className="mt-5 leading-8 mb-3 text-gray-600">
-            {data?.response?.description.slice(0, 300)}
+            {data?.response?.description.slice(0, 300)}..
           </p>
-          {/* review star */}
+          {/* review star
           <div className="reviews flex space-x-[1px] mb-3">
             <span className="text-yellow-400">{<icons.FaStar />}</span>
             <span className="text-yellow-400">{<icons.FaStar />}</span>
@@ -271,8 +271,8 @@ const ProductDetails = ({ id }: any) => {
           </div>
           <p>
             Manufacturer: <span className="text-blue-600">Apple</span>
-          </p>
-          <div className="flex items-center mt-4 space-x-4">
+          </p> */}
+          <div className="flex items-center mt-5 space-x-4">
             <h4>
               Color :
             </h4>
@@ -290,7 +290,7 @@ const ProductDetails = ({ id }: any) => {
           </div>
           {/* spacification */}
           <div className="mt-4">
-            <div className="grid grid-cols-12 gap-2 items-start">
+            <div className="grid grid-cols-12 gap-[5rem] items-start">
               <span className="col-span-1">Storage:</span>
               <div className="col-span-11 flex flex-wrap gap-2">
                 {Storage?.map((item: any, index: number) => (
@@ -300,7 +300,7 @@ const ProductDetails = ({ id }: any) => {
                 ))}
               </div>
             </div>
-            <div className="grid grid-cols-12 gap-2 items-start mt-5">
+            <div className="grid grid-cols-12 gap-[5rem] items-start mt-5">
               <span className="col-span-1">Sim:</span>
               <div className="col-span-11 flex flex-wrap gap-2">
                 {sim?.map((item: any, index: number) => (
@@ -310,7 +310,7 @@ const ProductDetails = ({ id }: any) => {
                 ))}
               </div>
             </div>
-            <div className="grid grid-cols-12 gap-2 items-start mt-5">
+            <div className="grid grid-cols-12 gap-[5rem] items-start mt-5">
               <span className="col-span-1">Region:</span>
               <div className="col-span-11 flex flex-wrap gap-2">
                 {region?.map((item: any, index: number) => (
@@ -322,7 +322,7 @@ const ProductDetails = ({ id }: any) => {
             </div>
           </div>
           {/* add to cart button */}
-          <div className="xl:absolute bottom-10 left-0 right-0 flex mx-5 gap-5 mt-5">
+          <div className="flex gap-5 mt-14">
             <div>
             <div className="flex justify-center items-center w-full mb-2">
                                         <button

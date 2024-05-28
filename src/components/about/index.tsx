@@ -68,7 +68,7 @@ export default function About() {
                             <div className="md:w-[570px] w-full md:h-[560px] h-auto rounded overflow-hidden my-5 lg:my-0 relative">
                                 <Image
                                     layout="fill"
-                                    src={`/assets/images/about-banner.png`}
+                                    src={`/public/images-2/about-banner.png`}
                                     alt="about"
                                     className="w-full h-full"
                                 />
