@@ -150,11 +150,9 @@ const ProductDetails = ({ id }: any) => {
       ),
     },
   ];
-
-  console.log(data);
   return (
-    <section className="md:w-11/12 mx-auto py-5 px-2 md:px-0">
-      <div className="grid lg:grid-cols-7 gap-10">
+    <section className="container mx-auto py-5 px-2 md:px-0">
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
         <div className="col-span-3 flex">
         <div>
             {
@@ -180,10 +178,10 @@ const ProductDetails = ({ id }: any) => {
             onMouseLeave={handleImageMouseLeave}
           >
             <Image
-              width={400}
-              height={400}
+              width={500}
+              height={500}
               id="activeImage"
-              className="w-full transition-transform duration-300 transform cursor-pointer mx-auto"
+              className="transition-transform duration-300 transform cursor-pointer mx-auto"
               src={images}
               alt="Product Image"
             />
@@ -208,7 +206,7 @@ const ProductDetails = ({ id }: any) => {
             </div>
           </div>
         </div>
-        <div className="relative col-span-4 bg-white px-5">
+        <div className="col-span-4  bg-white px-2 md:px-5">
           {/* <h2 className="text-2xl font-medium">{data?.response?.title}</h2> */}
           {/* pricing */}
           {/* <div className="grid md:grid-cols-3 grid-cols-1 w-full gap-4 items-center text-center ">
@@ -230,18 +228,18 @@ const ProductDetails = ({ id }: any) => {
 
           <div className="flex justify-between">
             <div>
-            <h2 className="flex items-center gap-2 text-3xl font-medium mb-3"><icons.FaAppleIcons className="text-5xl" /> {data?.response?.title}</h2>
+            <h2 className="flex items-center gap-2 text-xl md:text-3xl font-medium mb-3"><icons.FaAppleIcons className="text-2xl md:text-5xl" /> {data?.response?.title}</h2>
             <span >{data?.response?.displayType}</span> |
               <span>{data?.response?.ram[0]}</span> |
               <span>{data?.response?.region[0]}</span>
             </div>
             <p>
-              <span className="text-lg font-semibold">DisCount Price</span>
-              <span className="text-[30px] font-semibold text-red-500 block">ট {data?.response.price}</span>
+              <span className="md:text-lg font-semibold">DisCount Price</span>
+              <span className="text-[20px] md:text-[30px] font-semibold text-red-500 block">ট {data?.response.price}</span>
               <span className="line-through text-md font-semibold">ট { data?.response?.offer_price}</span>
             </p>
           </div>
-          <div className="grid grid-cols-3 gap-5 mt-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5">
             <p className="text-md font-medium flex items-center gap-3"><icons.GrCurrencyIcons className="text-xl"/> EMIPLAN</p>
             <p className="text-md font-medium flex items-center gap-3"><icons.FaCodeCompareIcons className="text-xl" />COMPARE</p>
             <p className="text-md font-medium flex items-center gap-3"><icons.TbExchangeIcons className="text-xl" />EXCHANGE</p>
@@ -260,7 +258,7 @@ const ProductDetails = ({ id }: any) => {
             Apple Store 1 Year Warranty Support
           </h2> */}
           <p className="mt-5 leading-8 mb-3 text-gray-600">
-            {data?.response?.description.slice(0, 300)}..
+            {data?.response?.description.slice(0, 150)}..
           </p>
           {/* review star
           <div className="reviews flex space-x-[1px] mb-3">
@@ -323,26 +321,21 @@ const ProductDetails = ({ id }: any) => {
           </div>
           {/* add to cart button */}
           <div className="flex gap-5 mt-14">
-            <div>
-            <div className="flex justify-center items-center w-full mb-2">
-                                        <button
-                                            onClick={() => handleDecrementQuantity(data?.response)}
-                                            type="button"
-                                            className="text-md mr-3 border-[1px] size-8"
-                                        >
-                                            -
-                                        </button>
+          <div className="flex justify-center items-center w-full mb-2">
+            <button
+               onClick={() => handleDecrementQuantity(data?.response)}
+                type="button"
+                className="text-md mr-3 border-[1px] size-8" >- </button>
                 <span className="text-qblack">{ data?.response?.quantity}</span>
-                                        <button
-                                            onClick={() => handleIncrementQuantity(data?.response)}
-                                            type="button"
-                                            className="text-base size-8 ml-3 border-[1px]"
-                                        >
-                                            +
+                 <button
+                  onClick={() => handleIncrementQuantity(data?.response)}
+                   type="button"
+                   className="text-base size-8 ml-3 border-[1px]"
+                >
+                   +
                 </button>
                 
-                                    </div>
-          </div>
+               </div>
             <Button
               onClick={() => handleCartClick()}
               disabled={isInCart}
@@ -360,8 +353,8 @@ const ProductDetails = ({ id }: any) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center gap-10 items-center">
-      <div className="flex justify-center mt-8 space-x-4 leading-3 col-span-4 lg:col-span-4">
+      <div className="lg:flex justify-center gap-10 items-center">
+      <div className="flex flex-wrap lg:justify-center mt-8 gap-2 leading-3 col-span-4 lg:col-span-4">
             <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
               <icons.FaFacebookIcons className="text-_black text-lg" />
             </Link>
