@@ -14,14 +14,12 @@ import { useGetSingleProductsQuery } from "@/store/features/products/productsApi
 import ProductSlider from "../../product-slider";
 import CustomTabs from "@/components/common/custom-tab";
 import { useGetEmailCartQuery, useUpdateCartMutation } from "@/store/features/cart/cartApi";
-
-const Storage = ["4GB", "256Gb", "1TB"];
+import Loading from "@/components/common/loading";
 const sim = ["singel", "dual", "usa"];
-const region = ["global", "hk", "usa"];
 const ProductDetails = ({ id }: any) => {
-  const { data }: any = useGetSingleProductsQuery({ id });
-  // const datas = data?.response?.slice(0, 5);
-  const [selectedColor, setSelectedColor]: any = useState("");
+  const { data,isLoading }: any = useGetSingleProductsQuery({ id });
+  const [selectedColor, setSelectedColor]: any = useState(data?.response?.variations[0]?.color);
+  const [viewImage,setViewImages]=useState("")
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const [updateCart] = useUpdateCartMutation()
@@ -30,6 +28,7 @@ const ProductDetails = ({ id }: any) => {
         email: "dalim@gmail.com",
     }
   );
+  console.log(data);
   useEffect(() => {
     dispatch(addStoredCart(addToCart?.response));
     refetch();
@@ -77,16 +76,22 @@ const ProductDetails = ({ id }: any) => {
         }
     }
 }
-  const images = selectedColor
-    ? data?.response?.variations?.find(
-      (variant: any) => variant?.color === selectedColor
-    )?.image ?? data?.response?.variations[0]?.image
-    : data?.response?.variations[0]?.image;
 
-  // Extracting only the 'image' property from each object in the 'variations' array
-  const variationImages = data?.response?.variations?.map(
-    (variation: any) => variation?.image
-  );
+  //================= color code image filter =========//
+const selectedImages = selectedColor
+? data?.response?.variations?.find((variant: any) => variant?.color === selectedColor)?.image
+    : data?.response?.variations[0]?.image;
+  // ================ handle color code view image show ========//
+  const handleColorImageShow = (image:any) => {
+     setViewImages(image)
+   }
+  
+  //==========view image ==========//
+  useEffect(() => {
+    if (selectedImages?.length>0) {
+      setViewImages(selectedImages[0])
+    }
+ },[selectedImages])
   // handle cart click
   const handleCartClick = () => {
     // get product data
@@ -150,92 +155,72 @@ const ProductDetails = ({ id }: any) => {
       ),
     },
   ];
+
+
+
+   if (isLoading) {
+    return <Loading/>
+   }
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
         <div className="col-span-3 flex">
-        <div>
-            {
-              data?.response?.variations?.map((image: any, index: number) =>
-                <div key={index} className="bg-_white"
-                  onClick={() => handleColorButtonClick(image.color)}
-                >
+          <div>
+          {selectedImages?.map((image: string, index: number) => (
+                <div key={index} className="bg-white border mb-1 rounded-md" onClick={()=>handleColorImageShow(image)}>
                   <Image
                     width={100}
                     height={100}
-                    id="activeImage"
-                    className=" transition-transform duration-300 transform cursor-pointer"
-                    src={image?.image}
-                    alt="Product Image"
+                    className="transition-transform duration-300 transform cursor-pointer"
+                    src={image}
+                    alt={`Product Image - ${selectedColor}`}
                   />
-                </div>)
-            }
+                </div>
+              ))}
             </div>
           <div>
           <div
-            className="relative overflow-hidden bg-_white"
+            className="relative overflow-hidden bg-_white border w-[90%] md:w-[80%] mx-auto"
             onMouseMove={handleImageMouseMove}
             onMouseLeave={handleImageMouseLeave}
           >
             <Image
-              width={500}
-              height={500}
-              id="activeImage"
-              className="transition-transform duration-300 transform cursor-pointer mx-auto"
-              src={images}
-              alt="Product Image"
-            />
+                width={500}
+                height={500}
+                className="transition-transform duration-300 transform cursor-pointer mx-auto"
+                src={viewImage}
+                alt="Product Image"
+              />
           </div>
           {/* <ProductImage variationImages={variationImages} /> */}
-          <div className="flex gap-2 mt-2">
-            {
-              data?.response?.variations?.map((image: any, index: number) =>
-                <div key={index} className="bg-_white"
-                  onClick={() => handleColorButtonClick(image.color)}
-                >
-                  <Image
-                    width={100}
-                    height={100}
-                    id="activeImage"
-                    className=" transition-transform duration-300 transform cursor-pointer"
-                    src={image?.image}
-                    alt="Product Image"
-                  />
-                </div>)
-            }
+          <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
+         
+
+               {data?.response?.variations?.map((variant: any, index: number) => (
+              <div key={index} className="bg-white border rounded-md" onClick={() => handleColorButtonClick(variant.color)}>
+                <Image
+                  width={100}
+                  height={100}
+                  className="transition-transform duration-300 transform cursor-pointer"
+                  src={variant?.image[0]}
+                  alt={`Product Image - ${variant.color}`}
+                />
+              </div>
+            ))}
             </div>
           </div>
         </div>
         <div className="col-span-4  bg-white px-2 md:px-5">
-          {/* <h2 className="text-2xl font-medium">{data?.response?.title}</h2> */}
-          {/* pricing */}
-          {/* <div className="grid md:grid-cols-3 grid-cols-1 w-full gap-4 items-center text-center ">
-            <h4 className=" mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full ">
-              Price:
-              <span className="line-through text-gray-600">
-                {data?.response.price} $
-              </span>
-              <span className="mx-2">{data?.response?.price}$</span>
-            </h4>
-            <h4 className="mt-3 font-bold bg-blue-100 p-3 rounded-sm w-full">
-              Status:{data?.response?.status}
-            </h4>
-            <h4 className="mt-3 bg-blue-100 px-2 py-3 rounded-sm w-full ">
-              <span className="font-bold text-lg">Code:</span>
-              {data?.response?._id?.slice(0, 10)}
-            </h4>
-          </div> */}
-
           <div className="flex justify-between">
             <div>
-            <h2 className="flex items-center gap-2 text-xl md:text-3xl font-medium mb-3"><icons.FaAppleIcons className="text-2xl md:text-5xl" /> {data?.response?.title}</h2>
-            <span >{data?.response?.displayType}</span> |
-              <span>{data?.response?.ram[0]}</span> |
-              <span>{data?.response?.region[0]}</span>
+            <h2 className="flex gap-2 text-md md:text-2xl font-medium mb-3"><icons.FaAppleIcons className="text-2xl md:text-5xl" /> {data?.response?.title?.slice(0,50)}</h2>
+            <span className="text-sm text-md">{data?.response?.displayType}</span> |
+              <span  className="text-sm text-md">{data?.response?.ram[0]}</span> |
+              <span  className="text-sm text-md">{data?.response?.region[0]}</span>
             </div>
             <p>
-              <span className="md:text-lg font-semibold">DisCount Price</span>
-              <span className="text-[20px] md:text-[30px] font-semibold text-red-500 block">ট {data?.response.price}</span>
+              <span className="text-sm md:text-lg font-semibold">DisCount Price</span>
+              <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">ট {data?.response.price}</span>
               <span className="line-through text-md font-semibold">ট { data?.response?.offer_price}</span>
             </p>
           </div>
@@ -247,54 +232,28 @@ const ProductDetails = ({ id }: any) => {
             <p className="text-md font-medium flex items-center gap-3"><icons.FaWhatsappIcons className="text-xl" />MESSAGE</p>
             <p className="text-md font-medium flex items-center gap-3"><icons.truckDelivaryIcon className="text-xl"/>DELIVARY PLAN</p>
           </div>
-          {/* whatsapp */}
-          {/* <div className="bg-_green text-white rounded mt-5 flex gap-1 py-2 cursor-pointer items-center w-60">
-            <span>
-              <IoLogoWhatsapp className="text-2xl mx-3" />
-            </span>
-            <p>Message on Whatsapp</p>
-          </div> */}
-          {/* <h2 className="text-2xl mt-6 font-medium">
-            Apple Store 1 Year Warranty Support
-          </h2> */}
-          <p className="mt-5 leading-8 mb-3 text-gray-600">
-            {data?.response?.description.slice(0, 150)}..
-          </p>
-          {/* review star
-          <div className="reviews flex space-x-[1px] mb-3">
-            <span className="text-yellow-400">{<icons.FaStar />}</span>
-            <span className="text-yellow-400">{<icons.FaStar />}</span>
-            <span className="text-yellow-400">{<icons.FaStar />}</span>
-            <span className="text-yellow-400">{<icons.FaStar />}</span>
-          </div>
-          <p>
-            Manufacturer: <span className="text-blue-600">Apple</span>
-          </p> */}
           <div className="flex items-center mt-5 space-x-4">
             <h4>
               Color :
             </h4>
-            {data?.response?.variations?.map((variant: any, index: any) => (
-              <button
-                key={index}
-                style={{ backgroundColor: `${variant?.colorCode}` }}
-                className={`w-9 h-9 rounded-full bg-[${variant?.colorCode
-                  }] border border-gray-300 ${selectedColor === variant?.color &&
-                  "p-1  border-yellow-500 border-4"
-                  }`}
-                onClick={() => handleColorButtonClick(variant?.color)}
-              ></button>
-            ))}
+            {data?.response?.variations?.map((variant: any, index: number) => (
+                  <button
+                    key={index}
+                    onClick={() => handleColorButtonClick(variant.color)}
+                    className={`w-8 h-8 rounded-full ${variant.color === selectedColor ? "border-2 border-blue-500" : "border"} transition-all duration-300`}
+                    style={{ backgroundColor: variant.color }}
+                  ></button>
+                ))}
           </div>
           {/* spacification */}
           <div className="mt-4">
             <div className="grid grid-cols-12 gap-[5rem] items-start">
               <span className="col-span-1">Storage:</span>
               <div className="col-span-11 flex flex-wrap gap-2">
-                {Storage?.map((item: any, index: number) => (
-                  <span key={index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                {data?.response?.internalStorage?.map((item: any, index: number) => (
+                  <p key={index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                     {item}
-                  </span>
+                  </p>
                 ))}
               </div>
             </div>
@@ -311,7 +270,7 @@ const ProductDetails = ({ id }: any) => {
             <div className="grid grid-cols-12 gap-[5rem] items-start mt-5">
               <span className="col-span-1">Region:</span>
               <div className="col-span-11 flex flex-wrap gap-2">
-                {region?.map((item: any, index: number) => (
+                {data?.response?.region?.map((item: any, index: number) => (
                   <span key={index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                     {item}
                   </span>
@@ -403,14 +362,6 @@ const ProductDetails = ({ id }: any) => {
       />
       {/* product caorusel */}
       <ProductSlider />
-      {/* product ads banner */}
-      {/* <ProductAds
-        ads={[
-          `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Redmi_Note_13_Pro_EID.webp`,
-        ]}
-        className=" mb-[60px] container mx-auto"
-      /> */}
-
       {/* products details */}
       <div className="mt-10">
         <CustomTabs defaultValue={"Specification"} tabs={tabs} />
