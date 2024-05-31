@@ -137,7 +137,10 @@ const selectedImages = selectedColor
     {
       value: "Description",
       label: "Description",
-      content: <div className="text-gray-600">{data?.response?.description}</div>,
+      content: (<div
+      className="text-gray-600"
+      dangerouslySetInnerHTML={{ __html: data?.response?.description }}
+    />),
     },
     {
       value: "Warranty",
