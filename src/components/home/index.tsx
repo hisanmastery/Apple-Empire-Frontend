@@ -20,8 +20,8 @@ const Home = () => {
 
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Galaxy_A55.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Xiaomi_Pad_6.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/ligion-5-gaming-laptop.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
@@ -63,8 +63,8 @@ const Home = () => {
         {/* product ads banner */}
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Galaxy_A55.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/3-2024/Galaxy_A55.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/ligion-5-gaming-laptop.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
