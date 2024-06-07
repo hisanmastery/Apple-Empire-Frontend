@@ -4,7 +4,6 @@ import { FaCaretDown } from 'react-icons/fa';
 const SelectBox = ({ options }: any) => {
     const [selected, setSelected] = useState(options[0]);
     const [isOpen, setIsOpen] = useState(false);
-    console.log(options);
     const handleSelect = (option: any) => {
         setSelected(option);
         setIsOpen(false);

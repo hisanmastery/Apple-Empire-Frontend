@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from "react";
-import Pagination from "@/components/Pagination";
 import Loading from "@/components/common/loading";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import ProductCard from "../common/product-card";
@@ -8,26 +7,27 @@ import { useSelector } from "react-redux";
 import { selectPriceRange } from "@/store/features/products/productsPriceRangeSlice";
 import { selectProductsCategory } from "@/store/features/products/productsCategorySlice";
 import ProductsNotFound from "../products-not-found";
+import Pagination from "../common/pagination";
 
-const AllProductsSection = () => {
+const AllProductsSection = ({ productsType, title }: any) => {
     const { min, max } = useSelector(selectPriceRange);
     const { displayType, ram, shape, internalStorage, chipset, region } = useSelector(selectProductsCategory);
     // pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(12);
+    const [pageSize, setPageSize] = useState(12);
     const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
         displayType: displayType,
         ram: ram,
+        productsType:title,
         chipset: chipset,
         region: region,
         internalStorage: internalStorage,
         page: currentPage,
-        limit: postsPerPage
+        limit: pageSize
     }, { pollingInterval: 1000 });
-    console.log(ram);
     // pagination 
-    const lastPostIndex = currentPage * postsPerPage;
-    const firstPostIndex = lastPostIndex - postsPerPage;
+    const lastPostIndex = currentPage * pageSize;
+    const firstPostIndex = lastPostIndex - pageSize;
     const filterProducts = allProducts?.blogs?.filter((product: any) => min >= parseInt(product?.price));
     const currentProducts = filterProducts?.slice(firstPostIndex, lastPostIndex);
     if (isLoading) {
@@ -35,6 +35,9 @@ const AllProductsSection = () => {
     }
     return (
         <div className="mt-5">
+             <div className='mb-10 border-b-[1px] border-_blue'>
+                <p className='text-2xl font-semibold mb-2'>{decodeURIComponent(title) }</p>
+            </div>
             <div>
                 {currentProducts?.length > 0 ? <>
                     <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 mx-auto mb-10 gap-5">
@@ -42,11 +45,14 @@ const AllProductsSection = () => {
                             <ProductCard key={product.id} datas={product}></ProductCard>
                         ))}
                     </div>
-                    <Pagination totalPosts={allProducts?.blogs?.length}
-                        postsPerPage={postsPerPage}
-                        setCurrentPage={setCurrentPage}
-                        currentPage={currentPage} />
+                   
                 </> : <ProductsNotFound />}
+                <Pagination
+                     totalItems={currentProducts?.length}
+                     pageSize={pageSize}
+                     setCurrentPage={setCurrentPage}
+                     currentPage={currentPage}
+                    />
             </div>
         </div>
     );

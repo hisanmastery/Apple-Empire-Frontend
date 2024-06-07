@@ -28,7 +28,7 @@ const Home = () => {
         {/* brand profile */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"
-          seeMoreUrl="/products"
+          seeMoreUrl=""
           categoryTitle="SHOP BY BRANDS"
         >
           <ClientBrand />
@@ -36,7 +36,7 @@ const Home = () => {
         {/* all products */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"
-          seeMoreUrl="/products"
+          seeMoreUrl="/section/top-selling-product"
           categoryTitle="Top Selling Products"
         >
           <Products />
@@ -54,7 +54,7 @@ const Home = () => {
         {/* top selling product */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"
-          seeMoreUrl="/products"
+          seeMoreUrl="/section/top-selling-product"
           categoryTitle="All Products"
         >
           <TopSellingProducts />
@@ -73,7 +73,7 @@ const Home = () => {
 
         <ViewMoreTitle
           className="mb-[60px] lg:container"
-          seeMoreUrl="/products"
+          seeMoreUrl="/section/popular-products"
           categoryTitle="Popular Products"
         >
           <PopularProducts />
@@ -89,7 +89,7 @@ const Home = () => {
         {/* top selling product */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] lg:container"
-          seeMoreUrl="/all-products"
+          seeMoreUrl="/section/top-pricing-products"
           categoryTitle="Top Pricing Products"
         >
           <TopSellingProducts />

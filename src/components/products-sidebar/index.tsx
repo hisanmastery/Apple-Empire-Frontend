@@ -89,7 +89,7 @@ const ProductsSideBar = () => {
                 <hr className="mt-2" />
 
                 <div className="mt-5 mb-2">
-                    <Slider value={[min, max]} max={100000} min={250} step={1} onValueChange={handleSliderChange} className="cursor-pointer" />
+                    <Slider value={[min, max]} max={10000000} min={100000} step={1} onValueChange={handleSliderChange} className="cursor-pointer" />
                     <div className="flex justify-center lg:gap-6 md:gap-4 gap-1 mt-4">
                         <Input className="focus:outline-none" type="text" defaultValue={min || 0} onChange={handleMinPriceChange} />
                         <Input className="focus:outline-none" type="text" defaultValue={max || 0} onChange={handleMaxPriceChange} />
