@@ -28,13 +28,13 @@ const AllProductsSection = () => {
     // pagination 
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
-    const filterProducts = allProducts?.blogs?.filter((product: any) => min >= parseInt(product?.offer_price));
+    const filterProducts = allProducts?.blogs?.filter((product: any) => min >= parseInt(product?.price));
     const currentProducts = filterProducts?.slice(firstPostIndex, lastPostIndex);
     if (isLoading) {
         return <Loading />;
     }
     return (
-        <div>
+        <div className="mt-5">
             <div>
                 {currentProducts?.length > 0 ? <>
                     <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 mx-auto mb-10 gap-5">
