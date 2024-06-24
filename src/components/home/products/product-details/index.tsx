@@ -30,6 +30,8 @@ const ProductDetails = ({ id }: any) => {
 
   const [selectedRam, setSelectedRam] = useState<string>(""); // State for selected RAM
   const [selectedRegion, setSelectedRegion] = useState<string>(""); // State for selected Region
+  const [selectedSize,setSelectedSize]=useState<string>("")
+  
   const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
 
   const [updateCart] = useUpdateCartMutation()
@@ -41,7 +43,7 @@ const ProductDetails = ({ id }: any) => {
 
 const ram = useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "RAM");
 const region =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "Reign")
-console.log(data?.response?.variants[0]?.variantList);
+const Size =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "size")
 
 
   useEffect(() => {
@@ -50,6 +52,7 @@ console.log(data?.response?.variants[0]?.variantList);
 }, [addToCart?.response, dispatch, refetch]);
   const handleColorButtonClick = (color: any) => {
     setSelectedColor(color);
+
   };
   // increment
   const handleIncrementQuantity = async (product: any) => {
@@ -100,7 +103,6 @@ const selectedImages = selectedColor
   const handleColorImageShow = (image:any) => {
      setViewImages(image)
    }
-  
   //==========view image ==========//
   useEffect(() => {
     if (selectedImages?.length>0) {
@@ -172,9 +174,11 @@ const selectedImages = selectedColor
  const handleVariants = () => {
   // Find the variant that matches selected RAM and Region
   const matchedVariant = data?.response?.variants[0]?.variantList.find((variant:any) => {
-    const ramMatch = variant.attributeValues.some((attr:any) => attr.label === 'RAM' && attr.value === selectedRam);
-    const regionMatch = variant.attributeValues.some((attr:any) => attr.label === 'Reign' && attr.value === selectedRegion);
-    return ramMatch && regionMatch;
+    const ramMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'ram' && attr.value.toLowerCase() === selectedRam.toLowerCase());
+    const regionMatch = variant.attributeValues.some((attr: any) => attr.label?.toLowerCase() === 'reign' && attr.value.toLowerCase() === selectedRegion.toLowerCase());
+    const sizeMatch = variant.attributeValues.some((attr: any) => attr.label.toLowerCase() === 'size' && attr.value.toLowerCase() === selectedSize.toLowerCase());
+    const colorMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'color' && attr.value.toLowerCase() === selectedColor?.toLowerCase());
+    return ramMatch && regionMatch && sizeMatch && colorMatch;
   });
 
   if (matchedVariant) {
@@ -184,11 +188,15 @@ const selectedImages = selectedColor
   }
 };
 
-  
+// Call handleVariants initially to set default matchedVariant
 useEffect(() => {
-  handleVariants(); // Call handleVariants initially to set default matchedVariant
-}, [selectedRam, selectedRegion]);
-  
+  handleVariants(); 
+}, [selectedRam, selectedRegion,selectedColor]);
+
+  //======== color default value set ========//
+  useEffect(() => {
+   setSelectedColor(data?.response?.variations[0]?.color)
+  },[data])
   
    if (isLoading) {
     return <Loading/>
@@ -224,7 +232,6 @@ useEffect(() => {
                 alt="Product Image"
               />
           </div>
-          {/* <ProductImage variationImages={variationImages} /> */}
           <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
          
 
@@ -280,7 +287,10 @@ useEffect(() => {
           </div>
           {/* spacification */}
           <div className="mt-8">
-            <Attributes label="RAM" items={ram} handleSelection={setSelectedRam} handleVariants={ handleVariants} />
+            <Attributes label="RAM" items={ram} handleSelection={setSelectedRam} handleVariants={handleVariants} />
+            <div className="mt-8">
+              <Attributes label="Size" items={Size} handleSelection={setSelectedSize} handleVariants={ handleVariants} />
+      </div>
       <div className="mt-8">
               <Attributes label="Region" items={region} handleSelection={setSelectedRegion} handleVariants={ handleVariants} />
       </div>
