@@ -100,7 +100,7 @@ const HeroSection = () => {
       campaign_product: false,
       campaign_product_available: null,
       campaign_product_sale: null,
-      product_type: null,
+      product_type: null, 
     },
   ];
 
