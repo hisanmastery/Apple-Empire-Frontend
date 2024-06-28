@@ -11,7 +11,7 @@ import { FiMinus } from "react-icons/fi";
 import { Slider } from "@/components/ui/slider";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPriceRange, setPriceRangeMax, setPriceRangeMin } from "@/store/features/products/productsPriceRangeSlice";
-import { setProductsChipset, setProductsDisplayType, setProductsInternalStoragee, setProductsRam, setProductsRegion } from "@/store/features/products/productsCategorySlice";
+import { selectProductsCategory, setProductsChipset, setProductsDisplayType, setProductsInternalStorage, setProductsRam, setProductsRegion } from "@/store/features/products/productsCategorySlice";
 
 
 const displays = [
@@ -52,21 +52,11 @@ const chipsets = [
     "Unisoc",
     "Apple"
 ];
-const regions = [
-    "Indian",
-    "UK",
-    "USE",
-    "Japan",
-    "International",
-    "Singapore",
-    "China",
-    "Vietnam",
-    "Canada",
-    "Hong Kong"
-]
+const regions =  ["BD", "AT", "CA", "IN", "ID", "JP", "KP", "PK", "SG", "UK", "US"]
 const ProductsSideBar = () => {
     const dispatch = useDispatch();
     const { min, max } = useSelector(selectPriceRange)
+    const { displayType, ram, shape, internalStorage, chipset, region } = useSelector(selectProductsCategory);
     const handleMinPriceChange = (event: any) => {
         dispatch(setPriceRangeMin(parseInt(event.target.value)));
     };
@@ -79,6 +69,56 @@ const ProductsSideBar = () => {
         dispatch(setPriceRangeMin(values[0]));
         dispatch(setPriceRangeMax(values[1]));
     };
+    //============ handle display type ==========//
+    const handleDisplayTypeChange = (value: any) => {
+        if (displayType === value) {
+            dispatch(setProductsDisplayType(""))
+        }
+        else {
+            dispatch(setProductsDisplayType(value)) 
+        }
+    };
+
+    // =========== handle ram ============//
+    const handleRamChange = (value: any) => {
+        if (ram === value) {
+            dispatch(setProductsRam(""))
+        }
+        else {
+            dispatch(setProductsRam(value)) 
+        }
+    };
+
+    //============ Internal Storage =============//
+    const handleInternalStorageChange = (value: any) => {
+        if (internalStorage === value) {
+            dispatch(setProductsInternalStorage(""))
+        }
+        else {
+            dispatch(setProductsInternalStorage(value)) 
+        }
+    };
+    //============== Chipset =============// 
+    const handleChipsetChange = (value: any) => {
+        if (chipset === value) {
+            dispatch(setProductsChipset(""))
+        }
+        else {
+            dispatch(setProductsChipset(value)) 
+        }
+    };
+
+    // ============= Region ============//
+    const handleRegionChange = (value: any) => {
+        if (region === value) {
+            dispatch(setProductsRegion(""))
+        }
+        else {
+            dispatch(setProductsRegion(value)) 
+        }
+    };
+
+
     return (
         <div className="mt-5 bg-_white border-[1px] border-[#dfedeb] p-5 rounded-md">
             <div className="border-[1px] border-[#dfedeb] rounded-md p-4 ">
@@ -108,7 +148,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="display"
                                         value={display}
-                                        onClick={() => dispatch(setProductsDisplayType(display))}
+                                        onClick={() => handleDisplayTypeChange(display)}
                                     />
                                     <label>{display}</label>
                                     <br />
@@ -126,7 +166,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="ram"
                                         value={ram}
-                                        onClick={() => dispatch(setProductsRam(ram))}
+                                        onClick={() =>handleRamChange(ram)}
                                     />
                                     <label>{ram}</label>
                                     <br />
@@ -144,7 +184,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="internalStorage"
                                         value={internalStorage}
-                                        onClick={() => dispatch(setProductsInternalStoragee(internalStorage))}
+                                        onClick={() => handleInternalStorageChange(internalStorage)}
                                     />
                                     <label>{internalStorage}</label>
                                     <br />
@@ -162,7 +202,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="chipset"
                                         value={chipset}
-                                        onClick={() => dispatch(setProductsChipset(chipset))}
+                                        onClick={() => handleChipsetChange(chipset)}
                                     />
                                     <label>{chipset}</label>
                                     <br />
@@ -180,7 +220,7 @@ const ProductsSideBar = () => {
                                         type="checkbox"
                                         name="region"
                                         value={region}
-                                        onClick={() => dispatch(setProductsRegion(region))}
+                                        onClick={() => handleRegionChange(region)}
                                     />
                                     <label>{region}</label>
                                     <br />

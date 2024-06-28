@@ -15,26 +15,44 @@ import ProductSlider from "../../product-slider";
 import CustomTabs from "@/components/common/custom-tab";
 import { useGetEmailCartQuery, useUpdateCartMutation } from "@/store/features/cart/cartApi";
 import Loading from "@/components/common/loading";
-const sim = ["singel", "dual", "usa"];
+import { useExtractUniqueAttributes } from "@/utils/Helpers/Attributes";
+import Attributes from "@/components/common/attributes";
+import { iconsData } from "@/data/prodcuts_details_icons";
+
+
+
 const ProductDetails = ({ id }: any) => {
   const { data,isLoading }: any = useGetSingleProductsQuery({ id });
   const [selectedColor, setSelectedColor]: any = useState(data?.response?.variations[0]?.color);
   const [viewImage,setViewImages]=useState("")
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
+
+  const [selectedRam, setSelectedRam] = useState<string>(""); // State for selected RAM
+  const [selectedRegion, setSelectedRegion] = useState<string>(""); // State for selected Region
+  const [selectedSize,setSelectedSize]=useState<string>("")
+  
+  const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
+
   const [updateCart] = useUpdateCartMutation()
   const { data:addToCart, refetch }: any = useGetEmailCartQuery(
     {
         email: "dalim@gmail.com",
     }
   );
-  console.log(data);
+
+const ram = useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "RAM");
+const region =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "Reign")
+const Size =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "size")
+
+
   useEffect(() => {
     dispatch(addStoredCart(addToCart?.response));
     refetch();
 }, [addToCart?.response, dispatch, refetch]);
   const handleColorButtonClick = (color: any) => {
     setSelectedColor(color);
+
   };
   // increment
   const handleIncrementQuantity = async (product: any) => {
@@ -85,7 +103,6 @@ const selectedImages = selectedColor
   const handleColorImageShow = (image:any) => {
      setViewImages(image)
    }
-  
   //==========view image ==========//
   useEffect(() => {
     if (selectedImages?.length>0) {
@@ -153,6 +170,34 @@ const selectedImages = selectedColor
     },
   ];
 
+ //=============== handle variants function =======//
+ const handleVariants = () => {
+  // Find the variant that matches selected RAM and Region
+  const matchedVariant = data?.response?.variants[0]?.variantList.find((variant:any) => {
+    const ramMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'ram' && attr.value.toLowerCase() === selectedRam.toLowerCase());
+    const regionMatch = variant.attributeValues.some((attr: any) => attr.label?.toLowerCase() === 'reign' && attr.value.toLowerCase() === selectedRegion.toLowerCase());
+    const sizeMatch = variant.attributeValues.some((attr: any) => attr.label.toLowerCase() === 'size' && attr.value.toLowerCase() === selectedSize.toLowerCase());
+    const colorMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'color' && attr.value.toLowerCase() === selectedColor?.toLowerCase());
+    return ramMatch && regionMatch && sizeMatch && colorMatch;
+  });
+
+  if (matchedVariant) {
+    setMatchedVariant(matchedVariant); 
+  } else {
+    setMatchedVariant(null);
+  }
+};
+
+// Call handleVariants initially to set default matchedVariant
+useEffect(() => {
+  handleVariants(); 
+}, [selectedRam, selectedRegion,selectedColor]);
+
+  //======== color default value set ========//
+  useEffect(() => {
+   setSelectedColor(data?.response?.variations[0]?.color)
+  },[data])
+  
    if (isLoading) {
     return <Loading/>
    }
@@ -161,7 +206,7 @@ const selectedImages = selectedColor
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
         <div className="col-span-3 flex">
           <div>
-          {selectedImages?.map((image: string, index: number) => (
+          {selectedImages?.slice(0,4)?.map((image: string, index: number) => (
                 <div key={index} className="bg-white border mb-1 rounded-md" onClick={()=>handleColorImageShow(image)}>
                   <Image
                     width={100}
@@ -187,11 +232,10 @@ const selectedImages = selectedColor
                 alt="Product Image"
               />
           </div>
-          {/* <ProductImage variationImages={variationImages} /> */}
           <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
          
 
-               {data?.response?.variations?.map((variant: any, index: number) => (
+               {data?.response?.variations?.slice(0,4)?.map((variant: any, index: number) => (
               <div key={index} className="bg-white border rounded-md" onClick={() => handleColorButtonClick(variant.color)}>
                 <Image
                   width={100}
@@ -208,26 +252,26 @@ const selectedImages = selectedColor
         <div className="col-span-4  bg-white px-2 md:px-5">
           <div className="flex justify-between">
             <div>
-            <h2 className="flex gap-2 text-md md:text-2xl font-medium mb-3"><icons.FaAppleIcons className="text-2xl md:text-5xl" /> {data?.response?.title?.slice(0,50)}</h2>
-            <span className="text-sm text-md">{data?.response?.displayType}</span> |
-              <span  className="text-sm text-md">{data?.response?.ram[0]}</span> |
-              <span  className="text-sm text-md">{data?.response?.region[0]}</span>
+            <h2 className="flex items-center gap-2 text-md md:text-xl font-medium mb-3"><icons.FaAppleIcons className="text-xl md:text-4xl" /> {data?.response?.title?.slice(0,50)}</h2>
+              <span  className="text-sm text-md">{selectedRam}</span> |
+              <span  className="text-sm text-md">{selectedRegion}</span>
             </div>
             <p>
-              <span className="text-sm md:text-lg font-semibold">DisCount Price</span>
-              <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">ট {data?.response.price}</span>
+              <span className="text-sm md:text-lg">Discount Price:</span>
+              <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">ট {matchedVariant?.base_sell_price}</span>
               <span className="line-through text-md font-semibold">ট { data?.response?.offer_price}</span>
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5">
-            <p className="text-md font-medium flex items-center gap-3"><icons.GrCurrencyIcons className="text-xl"/> EMIPLAN</p>
-            <p className="text-md font-medium flex items-center gap-3"><icons.FaCodeCompareIcons className="text-xl" />COMPARE</p>
-            <p className="text-md font-medium flex items-center gap-3"><icons.TbExchangeIcons className="text-xl" />EXCHANGE</p>
-            <p className="text-md font-medium flex items-center gap-3"><icons.FavoriteBorder className="text-xl" />WISHLIST</p>
-            <p className="text-md font-medium flex items-center gap-3"><icons.FaWhatsappIcons className="text-xl" />MESSAGE</p>
-            <p className="text-md font-medium flex items-center gap-3"><icons.truckDelivaryIcon className="text-xl"/>DELIVARY PLAN</p>
-          </div>
-          <div className="flex items-center mt-5 space-x-4">
+          {/*  */}
+           <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5">
+      {iconsData.map((item:any, index:number) => (
+        <p key={index} className="text-md font-medium flex items-center gap-3">
+          {item.icon}
+          {item.label}
+        </p>
+      ))}
+    </div>
+          <div className="flex items-center mt-8 space-x-4">
             <h4>
               Color :
             </h4>
@@ -241,38 +285,15 @@ const selectedImages = selectedColor
                 ))}
           </div>
           {/* spacification */}
-          <div className="mt-4">
-            <div className="grid grid-cols-12 gap-[5rem] items-start">
-              <span className="col-span-1">Storage:</span>
-              <div className="col-span-11 flex flex-wrap gap-2">
-                {data?.response?.internalStorage?.map((item: any, index: number) => (
-                  <p key={index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                    {item}
-                  </p>
-                ))}
-              </div>
-            </div>
-            <div className="grid grid-cols-12 gap-[5rem] items-start mt-5">
-              <span className="col-span-1">Sim:</span>
-              <div className="col-span-11 flex flex-wrap gap-2">
-                {sim?.map((item: any, index: number) => (
-                  <span key={index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="grid grid-cols-12 gap-[5rem] items-start mt-5">
-              <span className="col-span-1">Region:</span>
-              <div className="col-span-11 flex flex-wrap gap-2">
-                {data?.response?.region?.map((item: any, index: number) => (
-                  <span key={index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+          <div className="mt-8">
+            <Attributes label="RAM" items={ram} handleSelection={setSelectedRam} handleVariants={handleVariants} />
+            <div className="mt-8">
+              <Attributes label="Size" items={Size} handleSelection={setSelectedSize} handleVariants={ handleVariants} />
+      </div>
+      <div className="mt-8">
+              <Attributes label="Region" items={region} handleSelection={setSelectedRegion} handleVariants={ handleVariants} />
+      </div>
+    </div>
           {/* add to cart button */}
           <div className="flex gap-5 mt-14">
           <div className="flex justify-center items-center w-full mb-2">

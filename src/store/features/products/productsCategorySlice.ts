@@ -21,7 +21,7 @@ export const productsCategorySlice = createSlice({
         setProductsShape: (state, action) => {
             state.shape = action.payload;
         },
-        setProductsInternalStoragee: (state, action) => {
+        setProductsInternalStorage: (state, action) => {
             state.internalStorage = action.payload;
         },
         setProductsChipset: (state, action) => {
@@ -33,7 +33,7 @@ export const productsCategorySlice = createSlice({
     },
 });
 
-export const { setProductsDisplayType, setProductsChipset, setProductsInternalStoragee, setProductsRam, setProductsRegion, setProductsShape } = productsCategorySlice.actions;
+export const { setProductsDisplayType, setProductsChipset, setProductsInternalStorage, setProductsRam, setProductsRegion, setProductsShape } = productsCategorySlice.actions;
 
 export const selectProductsCategory = (state: any) => state.productsCategory;
 

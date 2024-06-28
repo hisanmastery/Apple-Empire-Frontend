@@ -9,7 +9,7 @@ import { selectProductsCategory } from "@/store/features/products/productsCatego
 import ProductsNotFound from "../products-not-found";
 import Pagination from "../common/pagination";
 
-const AllProductsSection = ({ productsType, title }: any) => {
+const AllProductsSection = ({ productsType}: any) => {
     const { min, max } = useSelector(selectPriceRange);
     const { displayType, ram, shape, internalStorage, chipset, region } = useSelector(selectProductsCategory);
     // pagination
@@ -18,25 +18,26 @@ const AllProductsSection = ({ productsType, title }: any) => {
     const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
         displayType: displayType,
         ram: ram,
-        productsType:title,
+        productsType:productsType,
         chipset: chipset,
         region: region,
         internalStorage: internalStorage,
         page: currentPage,
         limit: pageSize
     }, { pollingInterval: 1000 });
+
     // pagination 
     const lastPostIndex = currentPage * pageSize;
     const firstPostIndex = lastPostIndex - pageSize;
-    const filterProducts = allProducts?.blogs?.filter((product: any) => min >= parseInt(product?.price));
-    const currentProducts = filterProducts?.slice(firstPostIndex, lastPostIndex);
+    const currentProducts = allProducts?.blogs?.slice(firstPostIndex, lastPostIndex);
+
     if (isLoading) {
         return <Loading />;
     }
     return (
         <div className="mt-5">
              <div className='mb-10 border-b-[1px] border-_blue'>
-                <p className='text-2xl font-semibold mb-2'>{decodeURIComponent(title) }</p>
+                <p className='text-2xl font-semibold mb-2'>{productsType}</p>
             </div>
             <div>
                 {currentProducts?.length > 0 ? <>

@@ -56,17 +56,7 @@ const ProductCard = ({ datas }: any) => {
       <>
         <div className="cursor-pointer product-card-one w-full h-full max-h-[300px] text-nowrap bg-white relative group hover:scale-105 ease-in-out duration-700">
           <Link href={`/products/${datas?._id}`}>
-            <div
-              className="product-card-img w-full h-[300px]"
-              style={{
-                background: `url(${datas?.image?.viewUrl}) no-repeat center`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                width: "200px",
-                height: "200px",
-                margin: "auto",
-              }}
-            ></div>
+          <div className="product-card-img w-full h-[300px]" style={{ backgroundImage: `url(${datas?.image?.viewUrl})`, backgroundSize: "cover", backgroundPosition: "center", width: "200px", height: "200px", margin: "auto" }}></div>
           </Link>
           <div className=" px-[30px] pb-[30px] relative">
             {/* add to card button */}

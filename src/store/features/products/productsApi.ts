@@ -8,7 +8,12 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
         url: `/get-all-products`,
         method: "get",
         params: {
-          arg
+          productType: arg?.productType || "",
+          ram: arg?.ram || "",
+          internalStorage: arg?.internalStorage || "",
+          chipset: arg?.chipset || "",
+          region: arg?.region || "",
+          displayType: arg?.displayType || ""
         }
       }),
     }),
