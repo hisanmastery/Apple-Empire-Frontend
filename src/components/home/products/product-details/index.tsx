@@ -206,7 +206,7 @@ useEffect(() => {
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
         <div className="col-span-3 flex">
           <div>
-          {selectedImages?.map((image: string, index: number) => (
+          {selectedImages?.slice(0,4)?.map((image: string, index: number) => (
                 <div key={index} className="bg-white border mb-1 rounded-md" onClick={()=>handleColorImageShow(image)}>
                   <Image
                     width={100}
@@ -235,7 +235,7 @@ useEffect(() => {
           <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
          
 
-               {data?.response?.variations?.map((variant: any, index: number) => (
+               {data?.response?.variations?.slice(0,4)?.map((variant: any, index: number) => (
               <div key={index} className="bg-white border rounded-md" onClick={() => handleColorButtonClick(variant.color)}>
                 <Image
                   width={100}
@@ -253,7 +253,6 @@ useEffect(() => {
           <div className="flex justify-between">
             <div>
             <h2 className="flex items-center gap-2 text-md md:text-xl font-medium mb-3"><icons.FaAppleIcons className="text-xl md:text-4xl" /> {data?.response?.title?.slice(0,50)}</h2>
-            <span className="text-sm text-md">{data?.response?.displayType}</span> |
               <span  className="text-sm text-md">{selectedRam}</span> |
               <span  className="text-sm text-md">{selectedRegion}</span>
             </div>
