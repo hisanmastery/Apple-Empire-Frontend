@@ -45,7 +45,6 @@ const ram = useExtractUniqueAttributes(data?.response?.variants[0]?.variantList,
 const region =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "Reign")
 const Size =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "size")
 
-
   useEffect(() => {
     dispatch(addStoredCart(addToCart?.response));
     refetch();
@@ -198,6 +197,9 @@ useEffect(() => {
    setSelectedColor(data?.response?.variations[0]?.color)
   },[data])
   
+
+  console.log(data?.response);
+
    if (isLoading) {
     return <Loading/>
    }
@@ -258,7 +260,7 @@ useEffect(() => {
             </div>
             <p>
               <span className="text-sm md:text-lg">Discount Price:</span>
-              <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">ট {matchedVariant?.base_sell_price}</span>
+              <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">ট {matchedVariant?.base_sell_price || data?.response?.price}</span>
               <span className="line-through text-md font-semibold">ট { data?.response?.offer_price}</span>
             </p>
           </div>
@@ -286,12 +288,12 @@ useEffect(() => {
           </div>
           {/* spacification */}
           <div className="mt-8">
-            <Attributes label="Ram" items={ram} handleSelection={setSelectedRam} handleVariants={handleVariants} />
-            <div className="mt-8">
-              <Attributes label="Size" items={Size} handleSelection={setSelectedSize} handleVariants={ handleVariants} />
-      </div>
+            <Attributes label="Ram" items={(ram?.length>0 && ram) || data?.response?.ram} handleSelection={setSelectedRam} handleVariants={handleVariants} />
+            {Size?.length>0&& <div className="mt-8">
+              <Attributes label="Size" items={Size} handleSelection={setSelectedSize} handleVariants={ handleVariants} />FFFF
+      </div>}
       <div className="mt-8">
-              <Attributes label="Region" items={region} handleSelection={setSelectedRegion} handleVariants={ handleVariants} />
+              <Attributes label="Region" items={(region?.length>0 &&region) ||data?.response?.region } handleSelection={setSelectedRegion} handleVariants={ handleVariants} />
       </div>
     </div>
           {/* add to cart button */}
