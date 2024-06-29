@@ -175,7 +175,7 @@ const selectedImages = selectedColor
   // Find the variant that matches selected RAM and Region
   const matchedVariant = data?.response?.variants[0]?.variantList.find((variant:any) => {
     const ramMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'ram' && attr.value.toLowerCase() === selectedRam.toLowerCase());
-    const regionMatch = variant.attributeValues.some((attr: any) => attr.label?.toLowerCase() === 'reign' && attr.value.toLowerCase() === selectedRegion.toLowerCase());
+    const regionMatch = variant.attributeValues.some((attr: any) => attr.label?.toLowerCase() === 'region' && attr.value.toLowerCase() === selectedRegion.toLowerCase());
     const sizeMatch = variant.attributeValues.some((attr: any) => attr.label.toLowerCase() === 'size' && attr.value.toLowerCase() === selectedSize.toLowerCase());
     const colorMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'color' && attr.value.toLowerCase() === selectedColor?.toLowerCase());
     return ramMatch && regionMatch && sizeMatch && colorMatch;
@@ -286,7 +286,7 @@ useEffect(() => {
           </div>
           {/* spacification */}
           <div className="mt-8">
-            <Attributes label="RAM" items={ram} handleSelection={setSelectedRam} handleVariants={handleVariants} />
+            <Attributes label="Ram" items={ram} handleSelection={setSelectedRam} handleVariants={handleVariants} />
             <div className="mt-8">
               <Attributes label="Size" items={Size} handleSelection={setSelectedSize} handleVariants={ handleVariants} />
       </div>
