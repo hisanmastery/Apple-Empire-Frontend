@@ -25,9 +25,9 @@ const Attributes = <T,>({ label, items, handleSelection,handleVariants, defaultV
   };
 
   return (
-    <div className="grid grid-cols-12 gap-[5rem] items-start">
-      <span className="col-span-1">{label}:</span>
-      <div className="col-span-11 flex flex-wrap gap-2">
+    <div className="flex gap-[5rem] items-start">
+      <span className='w-[10%]'>{label}:</span>
+      <div className="flex flex-wrap gap-2">
         {items?.map((item, index) => (
           <button
             onClick={() => handleClick(item)}

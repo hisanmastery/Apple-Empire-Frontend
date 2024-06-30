@@ -31,7 +31,7 @@ const ProductDetails = ({ id }: any) => {
   const [selectedRam, setSelectedRam] = useState<string>(""); // State for selected RAM
   const [selectedRegion, setSelectedRegion] = useState<string>(""); // State for selected Region
   const [selectedSize,setSelectedSize]=useState<string>("")
-  
+  const [selectedInternalStorage,setSelectedInternalStorage]=useState<string>("")
   const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
 
   const [updateCart] = useUpdateCartMutation()
@@ -44,7 +44,7 @@ const ProductDetails = ({ id }: any) => {
 const ram = useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "RAM");
 const region =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "Reign")
 const Size =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "size")
-
+const InternalStorage =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "rom")
   useEffect(() => {
     dispatch(addStoredCart(addToCart?.response));
     refetch();
@@ -176,8 +176,9 @@ const selectedImages = selectedColor
     const ramMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'ram' && attr.value.toLowerCase() === selectedRam.toLowerCase());
     const regionMatch = variant.attributeValues.some((attr: any) => attr.label?.toLowerCase() === 'region' && attr.value.toLowerCase() === selectedRegion.toLowerCase());
     const sizeMatch = variant.attributeValues.some((attr: any) => attr.label.toLowerCase() === 'size' && attr.value.toLowerCase() === selectedSize.toLowerCase());
-    const colorMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'color' && attr.value.toLowerCase() === selectedColor?.toLowerCase());
-    return ramMatch && regionMatch && sizeMatch && colorMatch;
+    const colorMatch = variant.attributeValues.some((attr: any) => attr.label.toLowerCase() === 'color' && attr.value.toLowerCase() === selectedColor?.toLowerCase());
+    const internalStorageMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'rom' && attr.value.toLowerCase() === selectedInternalStorage?.toLowerCase());
+    return ramMatch && regionMatch && sizeMatch && colorMatch && internalStorageMatch;
   });
 
   if (matchedVariant) {
@@ -251,7 +252,7 @@ useEffect(() => {
             </div>
           </div>
         </div>
-        <div className="col-span-4  bg-white px-2 md:px-5">
+        <div className="col-span-4 bg-white px-2 md:px-5">
           <div className="flex justify-between">
             <div>
             <h2 className="flex items-center gap-2 text-md md:text-xl font-medium mb-3"><icons.FaAppleIcons className="text-xl md:text-4xl" /> {data?.response?.title?.slice(0,50)}</h2>
@@ -273,27 +274,32 @@ useEffect(() => {
         </p>
       ))}
     </div>
-          <div className="flex items-center mt-8 space-x-4">
-            <h4>
+          <div className="flex items-center mt-8">
+            <span className="w-[20%]">
               Color :
-            </h4>
+            </span>
+            <div className="flex gap-2">
             {data?.response?.variations?.map((variant: any, index: number) => (
-                  <button
-                    key={index}
-                    onClick={() => handleColorButtonClick(variant.color)}
-                    className={`w-8 h-8 rounded-full ${variant.color === selectedColor ? "border-2 border-blue-500" : "border"} transition-all duration-300`}
-                    style={{ backgroundColor: variant.color }}
-                  ></button>
-                ))}
+              <button
+               key={index}
+              onClick={() => handleColorButtonClick(variant.color)}
+              className={`w-8 h-8 rounded-full ${variant.color === selectedColor ? "border-2 border-blue-500" : "border"} transition-all duration-300`}
+              style={{ backgroundColor: variant.color }}
+              ></button>
+            ))}
+           </div>
           </div>
           {/* spacification */}
           <div className="mt-8">
-            <Attributes label="Ram" items={(ram?.length>0 && ram) || data?.response?.ram} handleSelection={setSelectedRam} handleVariants={handleVariants} />
+            <Attributes label="Ram" items={(ram?.length > 0 && ram) || []} handleSelection={setSelectedRam} handleVariants={handleVariants} />
+            <div className="mt-8">
+            <Attributes label="Storage" items={InternalStorage || []} handleSelection={setSelectedInternalStorage} handleVariants={ handleVariants} />
+            </div>
             {Size?.length>0&& <div className="mt-8">
-              <Attributes label="Size" items={Size} handleSelection={setSelectedSize} handleVariants={ handleVariants} />FFFF
+          <Attributes label="Size" items={Size || []} handleSelection={setSelectedSize} handleVariants={ handleVariants} />
       </div>}
       <div className="mt-8">
-              <Attributes label="Region" items={(region?.length>0 &&region) ||data?.response?.region } handleSelection={setSelectedRegion} handleVariants={ handleVariants} />
+       <Attributes label="Region" items={(region?.length>0 &&region) || []} handleSelection={setSelectedRegion} handleVariants={ handleVariants} />
       </div>
     </div>
           {/* add to cart button */}
