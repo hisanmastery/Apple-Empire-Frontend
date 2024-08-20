@@ -1,46 +1,96 @@
 import { icons } from "@/constants/icons";
+import { useAddToCartMutation, useGetEmailCartQuery } from "@/store/features/cart/cartApi";
+import { addStoredCart } from "@/store/features/cart/cartSlice";
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-const TopSellingProductsCard = ({ className, datas }:any) => {
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+const TopSellingProductsCard = ({ className, datas }: any) => {
+  // Generate an array of length equal to the review rating
+  const stars = Array.from(Array(parseInt(datas?.review) || 0).keys());
+  const { storedCart } = useSelector((state: any) => state?.cart);
+  const dispatch = useDispatch();
+  const { data, refetch }: any = useGetEmailCartQuery({
+    email: "dalim@gmail.com",
+  });
+  const [addToCart]: any = useAddToCartMutation();
+  // handle cart click
+  const handleCartClick = async (data: any) => {
+    const payload = {
+      email: "dalim@gmail.com",
+      title: data?.title,
+      productId: data?._id,
+      price: data?.offer_price,
+      image: data?.image?.viewUrl,
+      quantity: 0,
+    };
+    const res: any = await addToCart({ payload });
+    if (res?.data?.isSuccess) {
+      refetch();
+    }
+    // get product data
+    // const existingCart = storedCart || [];
+    // const existingProduct = existingCart?.find(
+    //   (item: any) => item._id === datas._id
+    // );
+    // // check existing product if not product it will be set
+    // if (!existingProduct) {
+    //   const updatedCart = [...existingCart, product];
+    //   dispatch(addStoredCart(updatedCart));
+    // }
+  };
+  useEffect(() => {
+    dispatch(addStoredCart(data?.response));
+  }, [data?.response, dispatch]);
+  // check already added cart
+  const isInCart = storedCart?.find(
+    (item: any) => item.productId === datas?._id
+  );
   return (
     <div
       data-aos="fade-up"
-      className={`product-row-card-style-one w-full h-[250px] shadow-md bg-white group relative overflow-hidden ${
-        className || ""
-      }`}
+      className={`product-row-card-style-one w-full h-[250px] shadow-md bg-white group relative overflow-hidden ${className || ""
+        }`}
     >
-      <div className="flex space-x-5 items-center w-full h-full lg:p-[30px] sm:p-5 p-2">
-        <div className="lg:w-1/2 w-1/3 h-full">
-          <img
-            src={datas?.image}
-            alt=""
+      <div className="flex space-x-5 items-center w-full h-full lg:p-[20px] sm:p-5 p-2">
+        <div className="lg:w-1/3 w-1/3 h-full">
+          <Image
+            width={500}
+            height={500}
+            src={datas?.image?.viewUrl}
+            alt={datas?.title}
             className="w-full h-full object-contain"
           />
         </div>
         <div className="flex-1 flex flex-col justify-center h-full">
           <div>
-            {/* reviews */}
-            <div className="flex space-x-1 mb-3">
-              {Array.from(Array(datas?.review), () => (
-                <span key={datas?.review + Math.random()}>*</span>
-              ))}
-            </div>
-            <Link href="/single-product">
-              <p className=" font-bold title mb-2 sm:text-[15px] text-[13px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
+            <Link href={`/products/${datas?._id}`}>
+              <p className=" font-bold title  sm:text-[15px] text-[13px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
                 {datas?.title}
               </p>
             </Link>
-            <p className="price mb-[26px]">
-              <span className=" font-bold main-price text-qgray line-through font-600 sm:text-[18px] text-base">
+            <p className="mb-[20px]">
+              <span className="  main-price text-qgray line-through font-600 sm:text-[18px] text-sm">
                 {datas?.price}
               </span>
-              <span className=" font-bold text-red-500 offer-price text-qred font-600 sm:text-[18px] text-base ml-2">
+              <span className="  text-red-500 offer-price text-qred font-600 sm:text-[18px] text-sm ml-2">
                 {datas?.offer_price}
               </span>
             </p>
-            <button type="button" className="w-[110px] h-[30px]">
-              <span className="bg-blue-600 text-white p-2  rounded">
-                {" "}
+            {/* reviews */}
+            <div className="flex space-x-1 mb-4">
+              {/* Render star icons based on review rating */}
+              {stars.map((index) => (
+                <span key={index}>
+                  <icons.FaStar className="text-_secondary" />
+                </span>
+              ))}
+            </div>
+            <button type="button"
+              disabled={isInCart}
+              onClick={() => handleCartClick(datas)}
+              className="w-[110px] h-[30px]">
+              <span className={`${isInCart ? "bg-slate-500 opacity-40" : "bg-_primary"} text-white p-2  rounded`}>
                 Add To Cart
               </span>
             </button>

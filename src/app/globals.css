@@ -78,9 +78,40 @@
     width: 95%;
     margin: auto;
   }
-  .bg-gradient {
-    @apply bg-gradient-to-r from-[#f5edda] via-[#f7d5da] to-[#f9e8fa]
-  }
+}
+.slick-prev,
+.slick-next {
+  display: none !important;
+}
 
+/* carousel.css */
+.slick-slide {
+  padding: 0 10px; /* Adjust the value as needed */
+}
 
+.slick-list {
+  margin: 0 -10px; /* This compensates for the padding so the first and last items align correctly */
+}
+
+/* ============== text editor =============== */
+/* Align images and videos to start */
+.ql-align-left img,
+.ql-align-left video {
+  display: block;
+  margin: 0;
+}
+
+/* Center images and videos */
+.ql-align-center img,
+.ql-align-center video {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Align images and videos to end */
+.ql-align-right img,
+.ql-align-right video {
+  display: block;
+  margin: 0;
+  margin-left: auto;
 }

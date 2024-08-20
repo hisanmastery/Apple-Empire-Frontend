@@ -1,28 +1,26 @@
-'use client';
-import React, { Fragment } from 'react';
-import * as Radix from '@radix-ui/react-navigation-menu';
-import { LeftSideMenu, RightSideMenu } from './sideMenu';
-import Link from 'next/link';
-import { FaCartPlus } from 'react-icons/fa6';
-import SearchInput from './searchInput';
-import { Gift, ShoppingCart, Store, UserRound } from 'lucide-react';
-import { Menubar, MenubarShortcut } from '@/components/ui/menubar';
-import SubMenu from './subMenu';
-
+"use client";
+import React, { Fragment } from "react";
+import { LeftSideMenu, RightSideMenu } from "./sideMenu";
+import Link from "next/link";
+import SearchInput from "./searchInput";
+import { Gift, ShoppingCart, Store, UserRound } from "lucide-react";
+import SubMenu from "./subMenu";
+import { useSelector } from "react-redux";
 function Menu(props: any) {
+  const { storedCart } = useSelector((state: any) => state?.cart);
   return (
     <Fragment>
-      <div className=" font-inter grid grid-cols-5 lg:grid-cols-12 items-center sticky top-0  gap-4  w-full z-[2]  shadow-md bg-black p-3">
+      <div className="font-inter grid grid-cols-5 lg:grid-cols-12 items-center sticky top-0  gap-4  w-full z-50  shadow-md bg-black p-3">
         <div className="col-span-2 lg:hidden z-[10] ">
           <LeftSideMenu />
         </div>
         <div className="col-span-1 flex list-none text-white py-1 px-3">
           {/* Apple Empire */}
-          <Link href={'/'}>
+          <Link href={"/"}>
             <img
               className="w-14"
               src={
-                'https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg'
+                "https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg"
               }
               alt="logo"
             />
@@ -35,27 +33,33 @@ function Menu(props: any) {
         <div className="col-span-6 lg:block hidden">
           <div className=" grid grid-flow-col justify-around ">
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <Gift size={34} />
               </div>
               <div className="ml-2">
-                <h5 className="font-semibold text-sm">Offers</h5>
-                <p className="text-xs font-light">latest offers</p>
+                <Link href="/offers">
+                  <h5 className="font-semibold text-sm">Offers</h5>
+                  <p className="text-xs font-light">latest offers</p>
+                </Link>
               </div>
             </div>
 
-            <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+            {/* <div className="flex text-white items-center">
+              <div className="text-[#029293]">
                 <ShoppingCart size={34} />
               </div>
               <div className="ml-2">
-                <h5 className="font-semibold text-sm">Cart(0)</h5>
-                <p className="text-xs font-light">Add Items</p>
+                <Link href={"/cart"}>
+                  <h5 className="font-semibold text-sm">
+                    Cart({storedCart?.length})
+                  </h5>{" "}
+                  <p className="text-xs font-light">Add Items</p>
+                </Link>
               </div>
-            </div>
+            </div> */}
 
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <Store size={34} />
               </div>
               <div className="ml-2">
@@ -65,12 +69,12 @@ function Menu(props: any) {
             </div>
 
             <div className="flex text-white items-center">
-              <div className="text-[#FF4C06]">
+              <div className="text-[#029293]">
                 <UserRound size={34} />
               </div>
               <div className="ml-2">
-                <h5 className="font-semibold text-sm">Offers</h5>
-                <p className="text-xs font-light">latest offers</p>
+
+                <Link href={'/login'}><h5 className="font-semibold text-sm">Accounts</h5> <p className="text-xs font-light">Register or Login</p></Link>
               </div>
             </div>
           </div>

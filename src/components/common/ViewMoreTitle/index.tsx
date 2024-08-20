@@ -6,21 +6,22 @@ const ViewMoreTitle = ({
   className,
   children,
   seeMoreUrl = "",
-}:any) => {
+  style,
+}: any) => {
   return (
-    <div className={`section-wrapper w-full ${className || ""}`}>
+    <div style={{ marginTop: '30px' }} className={`section-wrapper w-full  ${className || ""}`}>
       <div className="container-x mx-auto">
         <div className=" section-title flex justify-between items-center mb-5">
           <div>
-            <h1 className="sm:text-3xl text-xl font-600 text-qblacktext leading-none">
+            <h1 className="sm:text-2xl text-lg font-600 text-_blue font-semibold uppercase leading-none">
               {categoryTitle}
             </h1>
           </div>
           <div>
             <Link href={seeMoreUrl}>
               <div className="flex space-x-2 items-center">
-                <p className="text-base font-600 text-qblack">View More</p>
-                <span className="animate-right-dir">
+                <p className="text-base font-600 text-_blue hover:text-blue-400 font-bold">View More</p>
+                <span className="animate-right-dir text-_blue">
                   <svg
                     width="17"
                     height="14"

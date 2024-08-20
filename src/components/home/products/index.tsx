@@ -1,11 +1,16 @@
+"use client"
 import React from "react";
-import ProductCard from "../../common/product-card/index";
-const Products = ({ productData }: any) => {
+import Loading from "@/components/common/loading";
+import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
+import CustomSlider from "@/components/common/custom-slider";
+const Products = () => {
+  const { data: allProducts, isLoading }: any = useGetProductsListsQuery({});
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
-    <div className="  grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 lg:container mx-auto ">
-      {productData?.map((product: any) => (
-        <ProductCard key={product.id} datas={product}></ProductCard>
-      ))}
+    <div>
+      <CustomSlider sliderProducts={allProducts} />
     </div>
   );
 };

@@ -1,12 +1,20 @@
 import React from "react";
-import productData from "@/../../public/product.json";
 import TopSellingProductsCard from "./TopSellingProductsCard/index";
+import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
+import Loading from "@/components/common/loading";
+import CustomSlider from "@/components/common/custom-slider";
 const TopSellingProducts = () => {
+  const { data: topSellingProducts, isLoading }: any = useGetProductsListsQuery(
+    {
+      productType: "Top Selling Products"
+    }
+  );
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
-    <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
-      {productData?.products.slice(0,4).map((product) => (
-        <TopSellingProductsCard key={product?.id} datas={product} />
-      ))}
+    <div>
+      <CustomSlider sliderProducts={topSellingProducts} />
     </div>
   );
 };

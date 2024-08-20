@@ -7,7 +7,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -52,6 +52,21 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        _primary: "#029293", // blue
+        _secondary: "#00E0C6 ", //Crystal Blue
+        "_dark-color": "#245EB5", // hover dark blue
+        "_light-blue": "#E6F4FF", // light blue for bacground
+        "_primary-bg": "#EFF1F0", //Seashell
+        "_primary-text": "#929E9C", //star dust
+        "_secondary-text": "#fafafa",
+        "_white-ice": "#D7FAF4", // semi white
+        _white: "#FFFFFF", // pure white
+        _black: "#000000",
+        _green: "#0BDA51",
+        _green_ice: "#98FB98",
+        _blue: "#1868D5",
+        _gray: "#797D7F",
+        qyellow: "#FFBB38",
       },
       borderRadius: {
         lg: "var(--radius)",

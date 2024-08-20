@@ -3,22 +3,47 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
+import { useCustomerLoginMutation } from "@/store/api/auth/authApi";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [customerLogin, { isLoading }] = useCustomerLoginMutation();
+  const onSubmit = async (data: any) => {
+    const loginData = {
+      email: data.email,
+      password: data.password,
+      role: "customer",
+    };
+    try {
+      // Add your signup logic here
+      const res: any = await customerLogin(loginData);
+      const loginResponse = res?.data;
 
-  const onSubmit = (data: any) => {
-    // Add your login logic here
-    console.log("Logging in with:", data);
+      if (res?.data?.message) {
+        alert(res?.data?.message);
+      } else {
+        alert(res?.error?.data?.message);
+      }
+
+      if (loginResponse.isSuccess) {
+        const accessToken = loginResponse?.data?.accessToken;
+        localStorage.setItem("token", accessToken);
+        router.push("/");
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return (
     // <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 py-12 px-4 sm:px-6 lg:px-8">
-    <div className="min-h-screen flex items-center justify-center bg-gradient py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#f5edda] via-[#f7d5da] to-[#f9e8fa] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-md shadow-lg">
         <div>
           <div className="mt-6 text-center text-xl font-extrabold text-gray-900">
@@ -76,7 +101,7 @@ const Login = () => {
             <div className="text-sm">
               <a
                 href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
+                className="font-medium text-_primary hover:text-indigo-500"
               >
                 Forgot password?
               </a>
@@ -85,7 +110,7 @@ const Login = () => {
               <p className="text-gray-600">
                 Don't have an account?{" "}
                 <Link
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                  className="font-medium text-_primary hover:text-indigo-500"
                   href={"/singup"}
                 >
                   Sing-up
@@ -96,10 +121,11 @@ const Login = () => {
 
           <div>
             <button
+              disabled={isLoading}
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-_primary hover:bg-_primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Log in
+              {`${isLoading ? "loading..." : "Log in"}`}
             </button>
           </div>
         </form>

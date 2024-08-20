@@ -1,97 +1,74 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addStoredCart } from '../../../store/features/cart/cartSlice';
-import Link from 'next/link';
-import InputQuantityCom from '@/components/carts/InputQuantityCom';
+"use client";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addStoredCart } from "../../../store/features/cart/cartSlice";
+import Link from "next/link";
+import InputQuantityCom from "@/components/carts/InputQuantityCom";
 
-import { getItemLocalStorage, setItemLocalstorage } from '@/utils/localstorage';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { toast } from 'sonner';
-import { icons } from './../../../constants/icons';
+} from "@/components/ui/table";
+import { useAddToCartDeleteMutation } from "@/store/features/cart/cartApi";
+import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
 
 const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
-  const [promoCode, setPromoCode] = useState('');
+  const [promoCode, setPromoCode] = useState("");
   const [discountPrice, setDiscountPrice] = useState(0);
-  console.log(promoCode);
   const dispatch = useDispatch();
-  useEffect(() => {
-    const storedProduct = getItemLocalStorage('carts') || [];
-    dispatch(addStoredCart(storedProduct));
-  }, [dispatch]);
-
+  const [addToCartDelete] = useAddToCartDeleteMutation();
   // handle increment quantity
   const handleIncrement = (index: number, newQuantity: number) => {
     const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
     updatedStoredCart[index].quantity = newQuantity;
-    localStorage.setItem('carts', JSON.stringify(updatedStoredCart));
-    // refetch
-    const storedProduct = getItemLocalStorage('carts') || [];
-    dispatch(addStoredCart(storedProduct));
+    dispatch(addStoredCart(updatedStoredCart));
   };
 
   // handle decrement quantity
   const handleDecrement = (index: number, newQuantity: number) => {
     const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
     updatedStoredCart[index].quantity = newQuantity;
-    localStorage.setItem('carts', JSON.stringify(updatedStoredCart));
-    // refetch
-    const storedProduct = getItemLocalStorage('carts') || [];
-    dispatch(addStoredCart(storedProduct));
+    dispatch(addStoredCart(updatedStoredCart));
   };
 
   // handle remove  cart in right sidebar
-  const removeCart = (id: any) => {
-    const storedProduct = getItemLocalStorage('carts') || [];
-    const updatedCart = storedProduct.filter((item: any) => item.id !== id);
-    setItemLocalstorage('carts', updatedCart);
-    const storedProducts = getItemLocalStorage('carts') || [];
-
-    dispatch(addStoredCart(storedProducts));
+  const removeCart = async (id: any) => {
+    const res: any = await addToCartDelete({ id });
+    if (res?.data?.isSuccess) {
+      const storedProduct = storedCart || [];
+      const updatedCart = storedProduct.filter((item: any) => item._id !== id);
+      dispatch(addStoredCart(updatedCart));
+    }
   };
 
   // calculate total price
   const subTotal = storedCart?.reduce((acc: number, product: any) => {
-    return acc + product?.quantity * parseInt(product?.offer_price);
+    return acc + product?.quantity * parseInt(product?.price);
   }, 0);
   // shipping charge
   const shippingCost = subTotal / 5; // shiping cost total price 5%
   // handle submit promocode
   const handlePromoCode = () => {
-    const cuponCode = 'appleempire';
+    const cuponCode = "appleempire";
     if (promoCode === cuponCode) {
       setDiscountPrice(subTotal / 10); // descrount 10%
-      toast.success('Promo code added successfull', {
-        action: {
-          label: <icons.RxCross1 />,
-          onClick: () => toast.dismiss(),
-        },
-      });
+      alert("apply successfull");
     } else {
-      toast.error('Worng promo code', {
-        action: {
-          label: <icons.RxCross1 />,
-          onClick: () => toast.dismiss(),
-        },
-      });
+      alert("opps promo code not correct");
     }
   };
 
   return (
     <div
       data-aos="fade-left"
-      className={`w-full container mt-4 ${className || ''}`}
+      className={`w-full container mt-4 ${className || ""}`}
     >
       {storedCart?.length == 0 ? (
         <div className="h-[90vh] w-full flex justify-center items-center">
@@ -120,7 +97,7 @@ const CartPage = ({ className }: any) => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Product</TableHead>
-                  <TableHead></TableHead>
+                  {/* <TableHead></TableHead> */}
                   <TableHead>Quantity</TableHead>
                   <TableHead>Price</TableHead>
                   <TableHead>Total</TableHead>
@@ -133,10 +110,10 @@ const CartPage = ({ className }: any) => {
                       <p>{product?.title}</p>
 
                       <div className="cursor-pointer mt-4 font-bold text-red-500 hover:text-red-700">
-                        <p onClick={() => removeCart(product?.id)}>Remove</p>
+                        <p onClick={() => removeCart(product?._id)}>Remove</p>
                       </div>
                     </TableCell>
-                    <TableCell className="font-medium">
+                    {/* <TableCell className="font-medium">
                       <InputQuantityCom
                         quantity={product.quantity ?? 1}
                         onIncrement={(newQuantity: number) =>
@@ -146,7 +123,7 @@ const CartPage = ({ className }: any) => {
                           handleDecrement(index, newQuantity)
                         }
                       />
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell className="font-medium">
                       {product?.quantity}
                     </TableCell>
@@ -154,14 +131,14 @@ const CartPage = ({ className }: any) => {
                       {product?.price}
                     </TableCell>
                     <TableCell className="font-medium">
-                      {product?.price * product?.quantity}
+                      {parseInt(product?.price) * product?.quantity}
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
 
-            <Link href={'/products'}>
+            <Link href={"/products"}>
               <p className="text-blue-600 text-sm cursor-pointer mt-4 hover:text-blue-800">
                 Continue Shopping
               </p>
@@ -212,7 +189,7 @@ const CartPage = ({ className }: any) => {
                   <p className="">{subTotal + shippingCost - discountPrice}$</p>
                 </div>
                 <div className="mt-5">
-                  <Link href={'/cart/checkout'} className="w-full ">
+                  <Link href={"/cart/checkout"} className="w-full ">
                     <button
                       // onClick={() => handleCartClick()}
                       className="bg-blue-400 text-white p-2 w-full "

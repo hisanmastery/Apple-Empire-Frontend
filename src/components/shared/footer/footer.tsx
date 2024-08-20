@@ -25,28 +25,28 @@ const Footer = () => {
 
           <div className="font-normal">
             <h4>Contact Us</h4>
-            <p className="text-[#FE4C06]">support@appleempirebd.com</p>
+            <p className="text-[#029293]">support@appleempirebd.com</p>
           </div>
 
           <div className="font-normal">
             <h4>Customer Service</h4>
-            <p className="text-[#FE4C06]">support@appleempirebd.com</p>
+            <p className="text-[#029293]">support@appleempirebd.com</p>
           </div>
 
           <div className="md:block hidden">
-            <FaAnglesDown className="text-[#FE4C06] h-14 w-14 rounded-full border-2 border-white s p-2 cursor-pointer " />
+            <FaAnglesDown className="text-[#029293] h-14 w-14 rounded-full border-2 border-white s p-2 cursor-pointer " />
           </div>
         </div>
         {/* row -2  */}
 
         <div className="grid grid-cols-12 ga-5 justify-between items-center mt-16">
           <ul className="sm:flex items-center col-span-8 lg:col-span-6 flex-wrap  gap-4 font-normal cursor-pointer">
-            <li>About Us</li>
-            <li>Order Tracking</li>
-            <li>Return Policy</li>
-            <li>Terms and Conditions</li>
-            <li>Cookie Policy</li>
-            <li>Privacy Policy</li>
+            <li className="hover:text-[#029293]">About Us</li>
+            <li className="hover:text-[#029293]">Order Tracking</li>
+            <li className="hover:text-[#029293]">Return Policy</li>
+            <li className="hover:text-[#029293]">Terms and Conditions</li>
+            <li className="hover:text-[#029293]">Cookie Policy</li>
+            <li className="hover:text-[#029293]">Privacy Policy</li>
           </ul>
           <div className="flex justify-center mt-4 space-x-4 leading-3 col-span-4 lg:col-span-4">
             <Link href="#">
@@ -64,7 +64,7 @@ const Footer = () => {
           </div>
 
           <div className="mt-5 col-span-12 sm:col-span-8 md:col-span-4 lg:col-span-2">
-            <button className="bg-blue-400 w-full text-white px-10 py-2 rounded-sm uppercase">
+            <button className="bg-_primary w-full text-white px-10 py-2 rounded-sm uppercase">
               Store Locator
             </button>
           </div>

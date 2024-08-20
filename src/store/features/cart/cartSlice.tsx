@@ -15,27 +15,32 @@ const cartSlice = createSlice({
       return { ...state, cart: payload };
     },
     addStoredCart(state: ICartState, { payload }) {
-      // Extracting the IDs from the store array
-      const productids = payload.map((item: any) => item?.id);
-      // Filtering products from datas based on storeIds
-      const filteredProducts = datas?.products?.filter((product: any) =>
-        productids.includes(product.id)
-      );
-
       // Extracting the IDs and quantities from the payload
-      const payloadData = payload.reduce((acc: any, item: any) => {
-        acc[item.id] = item.quantity || 1;
+      const payloadData = payload?.reduce((acc: any, item: any) => {
+        acc[item._id] = item.quantity || 1;
         return acc;
       }, {});
 
       // Updating state.storedCart with quantities
-      state.storedCart = filteredProducts?.map((product: any) => ({
+      state.storedCart = payload?.map((product: any) => ({
         ...product,
-        quantity: payloadData[product.id] || 1,
+        quantity: payloadData[product._id] || 1,
       }));
       // state.storedCart = payload;
     },
+    incrementQuantity(state, { payload }) {
+      const item: any = state.storedCart.find((item: any) => item._id === payload._id);
+      if (item) {
+        item.quantity += 1;
+      }
+    },
+    decrementQuantity(state, { payload }) {
+      const item: any = state.storedCart.find((item: any) => item._id === payload._id);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+      }
+    },
   },
 });
-export const { addcart, addStoredCart } = cartSlice.actions;
+export const { addcart, addStoredCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
