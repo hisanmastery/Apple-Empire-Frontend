@@ -33,7 +33,7 @@ const ProductDetails = ({ id }: any) => {
   const [selectedSize,setSelectedSize]=useState<string>("")
   const [selectedInternalStorage,setSelectedInternalStorage]=useState<string>("")
   const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
-
+console.log(matchedVariant);
   const [updateCart] = useUpdateCartMutation()
   const { data:addToCart, refetch }: any = useGetEmailCartQuery(
     {
@@ -42,9 +42,9 @@ const ProductDetails = ({ id }: any) => {
   );
 
 const ram = useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "RAM");
-const region =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "Reign")
+const region =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "Region")
 const Size =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "size")
-const InternalStorage =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "rom")
+const InternalStorage =useExtractUniqueAttributes(data?.response?.variants[0]?.variantList, "Storage")
   useEffect(() => {
     dispatch(addStoredCart(addToCart?.response));
     refetch();
@@ -175,10 +175,8 @@ const selectedImages = selectedColor
   const matchedVariant = data?.response?.variants[0]?.variantList.find((variant:any) => {
     const ramMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'ram' && attr.value.toLowerCase() === selectedRam.toLowerCase());
     const regionMatch = variant.attributeValues.some((attr: any) => attr.label?.toLowerCase() === 'region' && attr.value.toLowerCase() === selectedRegion.toLowerCase());
-    const sizeMatch = variant.attributeValues.some((attr: any) => attr.label.toLowerCase() === 'size' && attr.value.toLowerCase() === selectedSize.toLowerCase());
-    const colorMatch = variant.attributeValues.some((attr: any) => attr.label.toLowerCase() === 'color' && attr.value.toLowerCase() === selectedColor?.toLowerCase());
-    const internalStorageMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'rom' && attr.value.toLowerCase() === selectedInternalStorage?.toLowerCase());
-    return ramMatch && regionMatch && sizeMatch && colorMatch && internalStorageMatch;
+    const internalStorageMatch = variant.attributeValues.some((attr:any) => attr.label.toLowerCase() === 'storage' && attr.value.toLowerCase() === selectedInternalStorage?.toLowerCase());
+    return ramMatch && regionMatch  && internalStorageMatch;
   });
 
   if (matchedVariant) {
@@ -261,7 +259,7 @@ useEffect(() => {
             </div>
             <p>
               <span className="text-sm md:text-lg">Discount Price:</span>
-              <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">ট {matchedVariant?.base_sell_price || data?.response?.price}</span>
+              <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">ট {matchedVariant?.base_sell_price || 0}</span>
               <span className="line-through text-md font-semibold">ট { data?.response?.offer_price}</span>
             </p>
           </div>
