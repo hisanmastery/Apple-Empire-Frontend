@@ -1,7 +1,9 @@
+import SkeletonLoader from "@/components/loading";
+
 const Loading = () => {
   return (
     <div>
-      <h1>loading...</h1>
+      <SkeletonLoader/>
     </div>
   );
 };
