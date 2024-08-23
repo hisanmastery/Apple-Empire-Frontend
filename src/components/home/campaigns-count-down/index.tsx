@@ -69,7 +69,7 @@ export default function CampaignsCountDown({ className, lastDate }: any) {
                 </div>
               </div>
               <div className="w-full lg:h-[400px]  border-2 ">
-                <img className="h-full w-full" src="https://d61s2hjse0ytn.cloudfront.net/images/web/slider/gaming-Laptop.webp" alt="" />
+                <img className="h-full w-full" src="https://d61s2hjse0ytn.cloudfront.net/vertical_image/7-2024/Monitors.webp" alt="" />
               </div>
 
             </div>

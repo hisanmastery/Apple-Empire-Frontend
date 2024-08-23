@@ -6,69 +6,79 @@ const ClientBrand = () => {
     {
       id: "1",
       title: "Hamko",
-      image: "https://appleempire.hisanmastery.com/assets/images/brand-2.webp",
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "2",
       title: "Hamko",
-      image: "https://appleempire.hisanmastery.com/assets/images/brand-2.webp",
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "3",
       title: "Hamko",
-      image: "https://appleempire.hisanmastery.com/assets/images/brand-2.webp",
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "4",
       title: "Hamko",
-      image: "https://appleempire.hisanmastery.com/assets/images/brand-2.webp",
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "5",
       title: "Hamko",
-      image: "https://appleempire.hisanmastery.com/assets/images/brand-2.webp",
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://appleempire.hisanmastery.com/assets/images/Huawei-01.webp",
+        "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://appleempire.hisanmastery.com/assets/images/Huawei-01.webp",
+        "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://appleempire.hisanmastery.com/assets/images/Huawei-01.webp",
+        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://appleempire.hisanmastery.com/assets/images/Huawei-01.webp",
+        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://appleempire.hisanmastery.com/assets/images/Huawei-01.webp",
+        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://appleempire.hisanmastery.com/assets/images/Huawei-01.webp",
+        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://appleempire.hisanmastery.com/assets/images/Huawei-01.webp",
+        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
+    },
+    {
+      id: "7",
+      title: "Hamko",
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
+    },
+    {
+      id: "4",
+      title: "Hamko",
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
   ];
   return (

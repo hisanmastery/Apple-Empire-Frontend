@@ -21,7 +21,7 @@ const Home = () => {
         <ProductAds
           ads={[
             `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/ligion-5-gaming-laptop.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
@@ -44,7 +44,7 @@ const Home = () => {
         {/* ads banner */}
         <ProductAds
           ads={[
-            `https://appleempire.hisanmastery.com/assets/images/ads-3.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/images/content/highlight/watch.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
@@ -64,7 +64,7 @@ const Home = () => {
         <ProductAds
           ads={[
             `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/ligion-5-gaming-laptop.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
@@ -82,7 +82,7 @@ const Home = () => {
         {/* ads banner */}
         <ProductAds
           ads={[
-            `https://appleempire.hisanmastery.com/assets/images/discount-banner-1.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/horizontal_image/7-2024/Amazfit_Banner.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
@@ -96,7 +96,7 @@ const Home = () => {
         </ViewMoreTitle>
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/horizontal_image/3-2024/Get_the_iPhone_15_Pro_Max.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/horizontal_image/7-2024/Amazfit_Banner.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
