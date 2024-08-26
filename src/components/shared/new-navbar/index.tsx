@@ -29,7 +29,7 @@ export default function NewNavbar({ className, type }: any) {
 
   return (
     <div className="sticky top-0 z-[6]">
-      <TopBar />
+      {/* <TopBar /> */}
       <Middlebar />
       <div className={` w-full bg-_blue h-[60px]`}>
         <div className="container mx-auto h-full">
@@ -107,14 +107,14 @@ export default function NewNavbar({ className, type }: any) {
                   <Link href={"/"}>Contact</Link>
                 </div>
               </div>
-              <div className="become-seller-btn hidden lg:block">
+              {/* <div className="become-seller-btn hidden lg:block">
                 <Link
                   href="/become-saller"
                   className="bg-_black px-3 py-2 text-_white"
                 >
                   Become a Seller
                 </Link>
-              </div>
+              </div> */}
               <div className="col-span-2 lg:hidden">
                 <LeftSideMenu />
               </div>
