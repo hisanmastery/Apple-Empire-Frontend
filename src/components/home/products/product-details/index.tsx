@@ -317,7 +317,6 @@ const ProductDetails = ({ id }: any) => {
               </span>
             </p> */}
           </div>
-          {/*  */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5">
             {iconsData.map((item: any, index: number) => (
               <p
