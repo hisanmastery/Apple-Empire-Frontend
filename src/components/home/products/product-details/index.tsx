@@ -293,11 +293,19 @@ const ProductDetails = ({ id }: any) => {
           <div className="flex justify-between">
             <div>
               <h2 className="flex items-center gap-2 text-md md:text-xl font-medium ">
-                <icons.FaAppleIcons className="text-xl md:text-4xl" />
+                {/* <icons.FaAppleIcons className="text-xl md:text-4xl" /> */}
                 {data?.response?.title?.slice(0, 50)}
               </h2>
-              {/* <span className="text-sm text-md">{selectedRam}</span> |
-              <span className="text-sm text-md">{selectedRegion}</span> */}
+              <span className="text-sm text-md">{selectedRam}</span> |
+              <span className="text-sm text-md">{selectedRegion}</span>
+              <div className="flex items-center gap-3 mt-3">
+                <span className="text-[18px] md:text-[18px] font-semibold text-red-500 block">
+                  ট {matchedVariant?.base_sell_price || 0}
+                </span>
+                <span className="line-through text-md font-semibold">
+                  ট {data?.response?.offer_price}
+                </span>
+              </div>
             </div>
             {/* <p>
               <span className="text-sm md:text-lg">Discount Price:</span>
@@ -377,12 +385,6 @@ const ProductDetails = ({ id }: any) => {
                 handleSelection={setSelectedRegion}
                 handleVariants={handleVariants}
               />
-              <p>
-                <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">
-                  ট {matchedVariant?.base_sell_price || 0}
-                </span>
-                {/* <span className="line-through text-md font-semibold">ট { data?.response?.offer_price}</span> */}
-              </p>
             </div>
           </div>
           {/* add to cart button */}
