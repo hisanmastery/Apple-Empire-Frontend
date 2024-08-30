@@ -159,10 +159,10 @@ export default function Cart({ className }: any) {
             <div className="total-equation flex justify-between items-center mb-[28px] px-5">
               <span className="text-[15px] font-500 text-qblack">Subtotal</span>
               <span className="text-[15px] font-500 text-qred ">
-                TK. {subTotal}
+                TK. {subTotal || 0}
               </span>
             </div>
-            <div className="w-full px-5 bg-_secondary">
+            <div className="w-full px-5 bg-_primary hover:bg-_secondary rounded">
               <Link
                 href="/cart"
                 className="flex justify-center py-2 text-_white w-full"
@@ -170,7 +170,7 @@ export default function Cart({ className }: any) {
                 View Cart
               </Link>
             </div>
-            <div className="w-full bg-_primary mt-3">
+            <div className="w-full bg-_primary hover:bg-_secondary rounded  mt-3">
               <Link
                 href="/cart/checkout"
                 className="flex justify-center w-full py-2 text-_white"

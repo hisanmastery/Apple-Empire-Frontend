@@ -31,7 +31,7 @@ export default function NewNavbar({ className, type }: any) {
     <div className="sticky top-0 z-[6]">
       {/* <TopBar /> */}
       <Middlebar />
-      <div className={` w-full bg-_blue h-[60px]`}>
+      <div className={` w-full bg-_primary h-[60px]`}>
         <div className="container mx-auto h-full">
           <div className="w-full h-full relative">
             <div className="w-full h-full flex justify-between items-center">
