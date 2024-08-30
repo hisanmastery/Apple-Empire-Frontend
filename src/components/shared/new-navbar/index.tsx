@@ -91,14 +91,17 @@ export default function NewNavbar({ className, type }: any) {
                 <div className="text-_white text-md">
                   <Link href={"/"}>Home</Link>
                 </div>
-                <div className="text-_white">
-                  <CustomNavigationMenu title="Shop" data={AccessroiesData} />
-                </div>
-                <div className="text-_white">
-                  <CustomNavigationMenu title="Pages" data={AccessroiesData} />
-                </div>
                 <div className="text-_white text-md">
-                  <Link href={"/"}>About</Link>
+                  <Link href={"/section/popular-products"}>Shop</Link>
+                </div>
+                {/* <div className="text-_white">
+                  <CustomNavigationMenu title="Shop" data={AccessroiesData} />
+                </div> */}
+                {/* <div className="text-_white">
+                  <CustomNavigationMenu title="Pages" data={AccessroiesData} />
+                </div> */}
+                <div className="text-_white text-md">
+                  <Link href={"/about"}>About</Link>
                 </div>
                 <div className="text-_white text-md">
                   <Link href={"/"}>Blogs</Link>
