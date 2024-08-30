@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/table";
 import { useAddToCartDeleteMutation } from "@/store/features/cart/cartApi";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
+import withAuth from "@/components/hoc/with-auth-wrapper";
 
 const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
@@ -207,4 +208,4 @@ const CartPage = ({ className }: any) => {
   );
 };
 
-export default CartPage;
+export default withAuth(CartPage);

@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useCreatePaymentMutation } from "@/store/features/checkout/checkoutApi";
 import { useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
+import withAuth from "../hoc/with-auth-wrapper";
 const Checkout = () => {
   const methods = useForm();
   const router = useRouter();
@@ -110,4 +111,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default withAuth(Checkout);

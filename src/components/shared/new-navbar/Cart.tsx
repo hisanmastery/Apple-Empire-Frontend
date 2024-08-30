@@ -141,13 +141,13 @@ export default function Cart({ className }: any) {
                             <span className="text-[15px] font-500 text-qblack">Subtotal</span>
                             <span className="text-[15px] font-500 text-qred ">TK. {subTotal}</span>
                         </div>
-                        <div className="w-full px-5 bg-_secondary">
-                            <Link href="/cart" className="flex justify-center py-2 text-_white w-full">
+                        <div className={`${storedCart?.length>0?"bg-_secondary":"bg-_primary-text cursor-not-allowed"}  w-full px-5`}>
+                            <Link href={`${storedCart?.length>0?"/cart":""}`} className="flex justify-center py-2 text-_white w-full">
                                 View Cart
                             </Link>
                         </div>
-                        <div className="w-full bg-_primary mt-3">
-                            <Link href="/cart/checkout" className="flex justify-center w-full py-2 text-_white">
+                        <div className={`${storedCart?.length>0?"bg-_primary":"bg-_primary-text cursor-not-allowed"} w-full  mt-3`}>
+                            <Link href={`${storedCart?.length>0?"/cart/checkout":""}`} className="flex justify-center w-full py-2 text-_white">
                                 Checkout Now
                             </Link>
                         </div>
