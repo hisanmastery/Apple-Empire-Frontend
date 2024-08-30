@@ -17,10 +17,11 @@ const Checkout = () => {
   const [giftSend, setGiftSend] = useState(false);
   const [createPayment] = useCreatePaymentMutation();
   const { isAuthenticated, customerInfo } = useAuth();
+  console.log(storedCart);
   // calculate sub total price
   const subtotal =
     storedCart?.reduce(
-      (sum: any, product: any) => sum + parseInt(product.price),
+      (sum: any, product: any) => sum + parseInt(product.totalPrice),
       0
     ) ?? 0;
   const cartDiscount = 5;

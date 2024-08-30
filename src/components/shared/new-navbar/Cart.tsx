@@ -1,4 +1,5 @@
 import { icons } from "@/constants/icons";
+import useAuth from "@/hooks/useAuth";
 import { useAddToCartDeleteMutation, useGetEmailCartQuery, useUpdateCartMutation } from "@/store/features/cart/cartApi";
 import { addStoredCart, decrementQuantity, incrementQuantity } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
@@ -11,9 +12,10 @@ export default function Cart({ className }: any) {
     const dispatch = useDispatch()
     const [addToCartDelete] = useAddToCartDeleteMutation();
     const [updateCart] = useUpdateCartMutation()
+    const { customerInfo } = useAuth()
     const { data, refetch }: any = useGetEmailCartQuery(
         {
-            email: "dalim@gmail.com",
+            email:customerInfo?.email,
         }
     );
     useEffect(() => {
@@ -63,6 +65,7 @@ export default function Cart({ className }: any) {
     const removeCart = async (id: any) => {
         const res: any = await addToCartDelete({ id });
         if (res?.data?.isSuccess) {
+            refetch()
             const storedProduct = storedCart || [];
             const updatedCart = storedProduct.filter((item: any) => item._id !== id);
             dispatch(addStoredCart(updatedCart));

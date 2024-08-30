@@ -24,8 +24,8 @@ const OrderSummary = ({
       </h1>
       <div className="mt-5 border-b-[1px] border-blue-500 pb-2">
         {totalProducts?.map((item: any, index: number) => (
-          <div key={index} className="flex justify-between items-center gap-6">
-            <div className="w-[75%] flex gap-5 items-center mb-2">
+          <div key={index} className="flex justify-between items-center gap-3">
+            <div className="w-[75%] flex gap-2 items-center mb-2">
               <Image
                 src={item?.image}
                 alt="image"
@@ -40,7 +40,7 @@ const OrderSummary = ({
               </div>
             </div>
             <div>
-              <p className="font-semibold">TK . {item?.price}</p>
+              <p className="font-semibold">TK . {item?.totalPrice}</p>
             </div>
           </div>
         ))}

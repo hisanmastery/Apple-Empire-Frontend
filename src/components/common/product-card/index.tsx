@@ -32,6 +32,7 @@ const ProductCard = ({ datas }: any) => {
         title: data?.title,
         productId: data?._id,
         price: data?.offer_price,
+        totalPrice:data?.offer_price,
         image: data?.image?.viewUrl,
         quantity: 0,
       };

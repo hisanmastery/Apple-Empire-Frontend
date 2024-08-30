@@ -18,10 +18,13 @@ import SheetDrawer from "../common/sheet-drawer/indext";
 import { useEffect, useState } from "react";
 import { useGetEmailCartQuery } from "@/store/features/cart/cartApi";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
+import useAuth from "@/hooks/useAuth";
 const Carts = () => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  const { customerInfo } = useAuth()
+  console.log(customerInfo);
   const { data, refetch }: any = useGetEmailCartQuery(
     {
       email: "dalim@gmail.com",
