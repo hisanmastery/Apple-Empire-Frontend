@@ -27,8 +27,10 @@ import { useExtractUniqueAttributes } from "@/utils/Helpers/Attributes";
 import Attributes from "@/components/common/attributes";
 import { iconsData } from "@/data/prodcuts_details_icons";
 import useAuth from "@/hooks/useAuth";
+import useToaster from "@/hooks/useToaster";
 
 const ProductDetails = ({ id }: any) => {
+  const showToast = useToaster();
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
   const [selectedColor, setSelectedColor]: any = useState(
     data?.response?.variations[0]?.color
@@ -44,7 +46,6 @@ const ProductDetails = ({ id }: any) => {
     useState<string>("");
   const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
   const [addToCartItem]: any = useAddToCartMutation();
-  console.log(matchedVariant);
   const [updateCart] = useUpdateCartMutation();
   const { data: addToCart, refetch }: any = useGetEmailCartQuery({
     email: "dalim@gmail.com",
@@ -92,8 +93,7 @@ const ProductDetails = ({ id }: any) => {
     }
   };
   // decrement
-  const handleDecrementQuantity = async (product: any) => {
-    console.log(product);
+  const handleDecrementQuantity = async (product: any) => {  
     if (parseFloat(product.quantity) > 1) {
       dispatch(decrementQuantity(product));
       const quantity = parseFloat(product.quantity) - 1;
@@ -130,6 +130,7 @@ const ProductDetails = ({ id }: any) => {
     }
   }, [selectedImages]);
   const { customerInfo } = useAuth();
+
   // handle cart click
   const handleCartClick = async (productData: any) => {
     const data = productData?.response;
@@ -141,15 +142,13 @@ const ProductDetails = ({ id }: any) => {
       image: data?.image?.viewUrl,
       quantity: 0,
     };
-    console.log(payload);
     const res: any = await addToCartItem({ payload });
-    console.log(res)
+    showToast("success", "Cart added successfull");
   };
   // check already added cart
   const isInCart = storedCart?.find(
     (item: any) => item.id === data?.response?._id
   );
-
   const handleImageMouseMove = (e: any) => {
     const img = e.target;
     img.style.transformOrigin = `${e.nativeEvent.offsetX}px ${e.nativeEvent.offsetY}px`;
@@ -232,7 +231,6 @@ const ProductDetails = ({ id }: any) => {
     setSelectedColor(data?.response?.variations[0]?.color);
   }, [data]);
 
-  console.log(data?.response);
 
   if (isLoading) {
     return <Loading />;

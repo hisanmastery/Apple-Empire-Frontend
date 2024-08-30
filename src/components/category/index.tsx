@@ -10,7 +10,6 @@ import { useGetProductsListsQuery } from '@/store/features/products/productsApi'
 import Pagination from '../common/pagination';
 
 const CategoryProducts = ({ category }: any) => {
-    console.log(decodeURIComponent(category));
     const { min, max } = useSelector(selectPriceRange);
     const { displayType, ram, shape, internalStorage, chipset, region } = useSelector(selectProductsCategory);
     // pagination

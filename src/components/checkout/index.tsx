@@ -18,7 +18,6 @@ const Checkout = () => {
   const [giftSend, setGiftSend] = useState(false);
   const [createPayment] = useCreatePaymentMutation();
   const { isAuthenticated, customerInfo } = useAuth();
-  console.log(storedCart);
   // calculate sub total price
   const subtotal =
     storedCart?.reduce(
@@ -53,7 +52,6 @@ const Checkout = () => {
     if (payload?.email) {
       const res: any = await createPayment({ payload });
       if (res?.data?.isSuccess) {
-        console.log(res, res?.data?.response?.paymentInfo?.GatewayPageURL);
         router.push(res?.data?.response?.paymentInfo?.GatewayPageURL);
       }
     } else {

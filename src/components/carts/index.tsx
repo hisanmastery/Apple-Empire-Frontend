@@ -24,7 +24,6 @@ const Carts = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { customerInfo } = useAuth()
-  console.log(customerInfo);
   const { data, refetch }: any = useGetEmailCartQuery(
     {
       email: "dalim@gmail.com",
