@@ -1,18 +1,6 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import CartPage from "@/app/(landing-layout)/cart/page";
 import { icons } from "@/constants/icons";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "../ui/button";
 import CartItem from "./cartItem";
 import SheetDrawer from "../common/sheet-drawer/indext";
 import { useEffect, useState } from "react";
@@ -23,17 +11,17 @@ const Carts = () => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const { customerInfo } = useAuth()
+  const { customerInfo } = useAuth();
   const { data, refetch }: any = useGetEmailCartQuery(
     {
-      email: "dalim@gmail.com",
+      email: customerInfo.email,
     },
     { pollingInterval: 1000 }
   );
   useEffect(() => {
     dispatch(addStoredCart(data?.response));
     refetch();
-  }, [data?.response, dispatch, refetch]);
+  }, [data?.response, dispatch, refetch, storedCart]);
   // Using reduce to calculate the total price
   const totalPrice = storedCart?.reduce((acc: number, product: any) => {
     return acc + product?.quantity * parseInt(product?.price);

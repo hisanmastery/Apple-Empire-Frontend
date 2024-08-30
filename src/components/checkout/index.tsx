@@ -19,11 +19,13 @@ const Checkout = () => {
   const [createPayment] = useCreatePaymentMutation();
   const { isAuthenticated, customerInfo } = useAuth();
   // calculate sub total price
-  const subtotal =
-    storedCart?.reduce(
-      (sum: any, product: any) => sum + parseInt(product.totalPrice),
-      0
-    ) ?? 0;
+
+  const subtotal = storedCart?.reduce((acc: number, product: any) => {
+    if (!product?.price) return acc; // Skip if price is undefined or null
+    const priceWithoutCommas = parseInt(product.price.replace(/,/g, ""), 10);
+    return acc + product.quantity * priceWithoutCommas;
+  }, 0);
+
   const cartDiscount = 5;
   const deliveryFee = 100;
   const totalPrice = subtotal - cartDiscount + deliveryFee;
