@@ -18,6 +18,7 @@ import { useGetSingleProductsQuery } from "@/store/features/products/productsApi
 import ProductSlider from "../../product-slider";
 import CustomTabs from "@/components/common/custom-tab";
 import {
+  useAddToCartMutation,
   useGetEmailCartQuery,
   useUpdateCartMutation,
 } from "@/store/features/cart/cartApi";
@@ -25,6 +26,7 @@ import Loading from "@/components/common/loading";
 import { useExtractUniqueAttributes } from "@/utils/Helpers/Attributes";
 import Attributes from "@/components/common/attributes";
 import { iconsData } from "@/data/prodcuts_details_icons";
+import useAuth from "@/hooks/useAuth";
 
 const ProductDetails = ({ id }: any) => {
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
@@ -41,6 +43,7 @@ const ProductDetails = ({ id }: any) => {
   const [selectedInternalStorage, setSelectedInternalStorage] =
     useState<string>("");
   const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
+  const [addToCartItem]: any = useAddToCartMutation();
   console.log(matchedVariant);
   const [updateCart] = useUpdateCartMutation();
   const { data: addToCart, refetch }: any = useGetEmailCartQuery({
@@ -126,18 +129,21 @@ const ProductDetails = ({ id }: any) => {
       setViewImages(selectedImages[0]);
     }
   }, [selectedImages]);
+  const { customerInfo } = useAuth();
   // handle cart click
-  const handleCartClick = () => {
-    // get product data
-    const existingCart = storedCart || [];
-    const existingProduct = existingCart?.find(
-      (item: any) => item.id === data?.response?._id
-    );
-    // check existing product if not product it will be set
-    if (!existingProduct) {
-      const updatedCart = [...existingCart, data?.response];
-      dispatch(addStoredCart(updatedCart));
-    }
+  const handleCartClick = async (productData: any) => {
+    const data = productData?.response;
+    const payload = {
+      email: customerInfo.email,
+      title: data?.title,
+      productId: data?._id,
+      price: data?.price,
+      image: data?.image?.viewUrl,
+      quantity: 0,
+    };
+    console.log(payload);
+    const res: any = await addToCartItem({ payload });
+    console.log(res)
   };
   // check already added cart
   const isInCart = storedCart?.find(
@@ -388,13 +394,13 @@ const ProductDetails = ({ id }: any) => {
           </div>
           {/* add to cart button */}
           <div className="flex gap-5 mt-14">
-            <div className="flex justify-center items-center w-full mb-2">
+            {/* <div className="flex justify-center items-center w-full mb-2">
               <button
                 onClick={() => handleDecrementQuantity(data?.response)}
                 type="button"
                 className="text-md mr-3 border-[1px] size-8"
               >
-                -{" "}
+                -
               </button>
               <span className="text-qblack">{data?.response?.quantity}</span>
               <button
@@ -404,9 +410,9 @@ const ProductDetails = ({ id }: any) => {
               >
                 +
               </button>
-            </div>
+            </div> */}
             <Button
-              onClick={() => handleCartClick()}
+              onClick={() => handleCartClick(data)}
               disabled={isInCart}
               className="bg-_blue hover:bg-_primary rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
             >
