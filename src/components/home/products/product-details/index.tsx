@@ -105,6 +105,7 @@ const ProductDetails = ({ id }: any) => {
     const res: any = await addToCartItem({ payload });
     if (res.data.isSuccess) {
       showToast("success", "Cart added successfull");
+      refetch()
     } else {
       showToast("error", "Cart can't add");
     }
