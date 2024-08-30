@@ -4,6 +4,7 @@ import useAuth from "@/hooks/useAuth";
 import { useCustomerOrdersQuery } from "@/store/features/checkout/checkoutApi";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import withAuth from "../hoc/with-auth-wrapper";
 
 const Profile = () => {
   const { isAuthenticated, customerInfo } = useAuth();
@@ -117,9 +118,15 @@ const Profile = () => {
                         Order #{order._id}
                       </h3>
                       <p className="text-gray-600">Date: {order.createdAt}</p>
-                      <p className="text-gray-600">Payment Status: {order.paymentStatus}</p>
-                      <p className="text-gray-600">Transaction Id: {order.transactionId}</p>
-                      <p className="text-gray-600">Delivery Status: {order.deliveryStatus}</p>
+                      <p className="text-gray-600">
+                        Payment Status: {order.paymentStatus}
+                      </p>
+                      <p className="text-gray-600">
+                        Transaction Id: {order.transactionId}
+                      </p>
+                      <p className="text-gray-600">
+                        Delivery Status: {order.deliveryStatus}
+                      </p>
                     </div>
                     <button className="px-4 py-2 bg-blue-500 text-white rounded-md">
                       View Details
@@ -136,4 +143,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);
