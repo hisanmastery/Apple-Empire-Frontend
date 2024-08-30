@@ -6,6 +6,7 @@ import Cart from "./Cart";
 import { useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
+import { Button } from "@/components/ui/button";
 
 export default function Middlebar({ className, type }: any) {
   const { storedCart } = useSelector((state: any) => state?.cart);
@@ -63,7 +64,7 @@ export default function Middlebar({ className, type }: any) {
                       type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
                     }`}
                   >
-                    {storedCart?.length}
+                    {storedCart?.length || 0}
                   </span>
                 </div>
                 <Cart
@@ -72,7 +73,7 @@ export default function Middlebar({ className, type }: any) {
                 />
               </div>
 
-              {isAuthenticated && (
+              {isAuthenticated ? (
                 <div className="favorite relative">
                   <Link href="/profile" passHref>
                     <p rel="noopener noreferrer">
@@ -81,6 +82,10 @@ export default function Middlebar({ className, type }: any) {
                       </span>
                     </p>
                   </Link>
+                </div>
+              ) : (
+                <div>
+                  <Link href={"/login"}><button  className="bg-_dark-color text-white p-2 rounded-md px-6 hover:bg-blue-600">Login</button></Link>
                 </div>
               )}
             </div>
