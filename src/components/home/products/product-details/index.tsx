@@ -340,14 +340,14 @@ const ProductDetails = ({ id }: any) => {
             <Button
               onClick={() => handleCartClick(data)}
               disabled={isInCart}
-              className="bg-_blue hover:bg-_primary rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
+              className="bg-_primary hover:bg-_secondary rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
             >
               ADD TO CART
             </Button>
             <Button
               variant={"outline"}
               // onClick={() => handleCartClick()}
-              className="uppercase hover:bg-[#FF4C06] border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
+              className="uppercase hover:bg-_primary border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
             >
               <Link href={"/cart/checkout"}> Buy Now</Link>
             </Button>

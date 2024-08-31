@@ -85,7 +85,7 @@ export default function Middlebar({ className, type }: any) {
                 </div>
               ) : (
                 <div>
-                  <Link href={"/login"}><button  className="bg-_dark-color text-white p-2 rounded-md px-6 hover:bg-blue-600">Login</button></Link>
+                  <Link href={"/login"}><button  className="bg-_primary text-white p-2 rounded-md px-6 hover:bg-_secondary">Login</button></Link>
                 </div>
               )}
             </div>
