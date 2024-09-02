@@ -71,12 +71,14 @@ const ProductCard = ({ datas }: any) => {
           </Link>
           <div className=" px-[30px] pb-[30px] relative">
             {/* add to card button */}
-            <div className="absolute w-full z-50  px-[30px]  top-40 group-hover:top-[50px] transition-all duration-300 ease-in-out">
+            <div className="absolute w-full z-50  px-[30px]  top-40 mx-auto group-hover:top-[50px] transition-all duration-300 ease-in-out">
               <Button
                 disabled={isInCart}
                 onClick={() => handleCartClick(datas)}
                 className={`bg-_primary uppercase mb-52 ${
-                  !isInCart ? "  hover:bg-[#FF4C06]" : "bg-slate-500 opacity-40"
+                  !isInCart
+                    ? " hover:bg-_secondary hover:text-black"
+                    : "bg-slate-500 opacity-40"
                 } `}
                 type="button"
               >
