@@ -32,7 +32,7 @@ const PaymentFailed = () => {
                 </div>
             </div>
             <div className='text-center'>
-                <h1 className='text-3xl font-semibold text-red-400 mb-2'>Payment Failed!</h1>
+                <h1 className='text-3xl font-semibold text-red-400 mb-2'>Payment Failed!!</h1>
                 <p className='text-md font-medium'>Please Try Again</p>
                 <Link href={"/"}>
                     <button className='text_white bg-red-500 px-5 font-medium rounded-sm py-2 text-_white mt-2'>Home</button>
