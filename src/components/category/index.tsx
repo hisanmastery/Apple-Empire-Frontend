@@ -9,7 +9,7 @@ import { selectProductsCategory } from '@/store/features/products/productsCatego
 import { useGetProductsListsQuery } from '@/store/features/products/productsApi';
 import Pagination from '../common/pagination';
 
-const CategoryProducts = ({ category }: any) => {
+const CategoryProducts = ({ category,subCategory }: any) => {
     const { min, max } = useSelector(selectPriceRange);
     const { displayType, ram, shape, internalStorage, chipset, region } = useSelector(selectProductsCategory);
     // pagination
@@ -17,7 +17,8 @@ const CategoryProducts = ({ category }: any) => {
     const [pageSize, setPageSize] = useState(12);
     const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
         displayType: displayType,
-        category:decodeURIComponent(category),
+        category: decodeURIComponent(category),
+        subCategory:decodeURIComponent(subCategory),
         ram: ram,
         chipset: chipset,
         region: region,
