@@ -49,14 +49,14 @@ export default function NewNavbar({ className, type }: any) {
                     categoryToggle && <div className="category-dropdown w-full absolute left-0 top-[53px]">
                     <ul className="categories-list">
                       {categoriesData?.categories?.map((category: any) => (
-                        <li key={category._id} className="relative group">
+                        <li key={category._id} className="relative group border-b">
                           {/* Category Link */}
                           <Link href={`/category/${category.categoryName}`}>
                             <div
                               className={`flex justify-between items-center px-5 h-10 bg-white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
                                 type === 3
                                   ? "hover:bg-qh3-blue hover:text-white"
-                                  : "hover:bg-qyellow"
+                                  : "hover:bg-_primary hover:text-white"
                               }`}
                             >
                               <span className="text-xs font-400">
@@ -73,7 +73,7 @@ export default function NewNavbar({ className, type }: any) {
                             >
                               {category.subCategory.map(
                                 (subCategory: string, subIndex: number) => (
-                                  <li key={subIndex}>
+                                  <li className="border-b" key={subIndex}>
                                     <Link
                                       href={`/category/${category.categoryName}/${subCategory
                                         .trim()
@@ -83,7 +83,7 @@ export default function NewNavbar({ className, type }: any) {
                                         className={`flex justify-between items-center px-5 h-10 transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
                                           type === 3
                                             ? "hover:bg-qh3-blue hover:text-white"
-                                            : "hover:bg-qyellow"
+                                            : "hover:bg-_primary hover:text-white"
                                         }`}
                                       >
                                         <span className="text-xs font-400">
