@@ -13,7 +13,8 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
           internalStorage: arg?.internalStorage || "",
           chipset: arg?.chipset || "",
           region: arg?.region || "",
-          displayType: arg?.displayType || ""
+          displayType: arg?.displayType || "",
+          category: arg?.category,
         }
       }),
     }),
