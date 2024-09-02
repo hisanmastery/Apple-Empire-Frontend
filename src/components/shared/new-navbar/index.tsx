@@ -31,7 +31,7 @@ export default function NewNavbar({ className, type }: any) {
     <div className="sticky top-0 z-[6]">
       {/* <TopBar /> */}
       <Middlebar />
-      <div className={` w-full bg-_blue h-[60px]`}>
+      <div className={` w-full bg-_primary h-[60px]`}>
         <div className="container mx-auto h-full">
           <div className="w-full h-full relative">
             <div className="w-full h-full flex justify-between items-center">
@@ -91,14 +91,17 @@ export default function NewNavbar({ className, type }: any) {
                 <div className="text-_white text-md">
                   <Link href={"/"}>Home</Link>
                 </div>
-                <div className="text-_white">
-                  <CustomNavigationMenu title="Shop" data={AccessroiesData} />
-                </div>
-                <div className="text-_white">
-                  <CustomNavigationMenu title="Pages" data={AccessroiesData} />
-                </div>
                 <div className="text-_white text-md">
-                  <Link href={"/"}>About</Link>
+                  <Link href={"/section/popular-products"}>Shop</Link>
+                </div>
+                {/* <div className="text-_white">
+                  <CustomNavigationMenu title="Shop" data={AccessroiesData} />
+                </div> */}
+                {/* <div className="text-_white">
+                  <CustomNavigationMenu title="Pages" data={AccessroiesData} />
+                </div> */}
+                <div className="text-_white text-md">
+                  <Link href={"/about"}>About</Link>
                 </div>
                 <div className="text-_white text-md">
                   <Link href={"/"}>Blogs</Link>

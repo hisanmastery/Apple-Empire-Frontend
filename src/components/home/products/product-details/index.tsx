@@ -18,6 +18,7 @@ import { useGetSingleProductsQuery } from "@/store/features/products/productsApi
 import ProductSlider from "../../product-slider";
 import CustomTabs from "@/components/common/custom-tab";
 import {
+  useAddToCartMutation,
   useGetEmailCartQuery,
   useUpdateCartMutation,
 } from "@/store/features/cart/cartApi";
@@ -25,8 +26,12 @@ import Loading from "@/components/common/loading";
 import { useExtractUniqueAttributes } from "@/utils/Helpers/Attributes";
 import Attributes from "@/components/common/attributes";
 import { iconsData } from "@/data/prodcuts_details_icons";
+import useAuth from "@/hooks/useAuth";
+import useToaster from "@/hooks/useToaster";
 
 const ProductDetails = ({ id }: any) => {
+  const showToast = useToaster();
+  const { customerInfo } = useAuth();
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
   const [selectedColor, setSelectedColor]: any = useState(
     data?.response?.variations[0]?.color
@@ -41,10 +46,10 @@ const ProductDetails = ({ id }: any) => {
   const [selectedInternalStorage, setSelectedInternalStorage] =
     useState<string>("");
   const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
-  console.log(matchedVariant);
+  const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
   const { data: addToCart, refetch }: any = useGetEmailCartQuery({
-    email: "dalim@gmail.com",
+    email: customerInfo?.email,
   });
 
   const ram = useExtractUniqueAttributes(
@@ -70,46 +75,6 @@ const ProductDetails = ({ id }: any) => {
   const handleColorButtonClick = (color: any) => {
     setSelectedColor(color);
   };
-  // increment
-  const handleIncrementQuantity = async (product: any) => {
-    dispatch(incrementQuantity(product));
-    const quantity = parseFloat(product.quantity) + 1;
-    // Parse the price string to a number
-    const unitPrice = parseFloat(product.price.replace(/,/g, ""));
-    // Calculate the new total price
-    const newTotalPrice = unitPrice * quantity;
-    const payload = {
-      ...product,
-      quantity: quantity,
-      totalPrice: newTotalPrice,
-    };
-    const res: any = await updateCart({ id: product._id, payload });
-    if (res?.data?.isSuccess) {
-      refetch();
-    }
-  };
-  // decrement
-  const handleDecrementQuantity = async (product: any) => {
-    console.log(product);
-    if (parseFloat(product.quantity) > 1) {
-      dispatch(decrementQuantity(product));
-      const quantity = parseFloat(product.quantity) - 1;
-      // Parse the price string to a number
-      const unitPrice = parseFloat(product.price.replace(/,/g, ""));
-      const newTotalPrice = unitPrice * quantity;
-      // Calculate the new total price
-      const payload = {
-        ...product,
-        quantity: quantity,
-        totalPrice: newTotalPrice,
-      };
-      const res: any = await updateCart({ id: product._id, payload });
-      if (res?.data?.isSuccess) {
-        refetch();
-      }
-    }
-  };
-
   //================= color code image filter =========//
   const selectedImages = selectedColor
     ? data?.response?.variations?.find(
@@ -127,23 +92,28 @@ const ProductDetails = ({ id }: any) => {
     }
   }, [selectedImages]);
   // handle cart click
-  const handleCartClick = () => {
-    // get product data
-    const existingCart = storedCart || [];
-    const existingProduct = existingCart?.find(
-      (item: any) => item.id === data?.response?._id
-    );
-    // check existing product if not product it will be set
-    if (!existingProduct) {
-      const updatedCart = [...existingCart, data?.response];
-      dispatch(addStoredCart(updatedCart));
+  const handleCartClick = async (productData: any) => {
+    const data = productData?.response;
+    const payload = {
+      email: customerInfo.email,
+      title: data?.title,
+      productId: data?._id,
+      price: data?.price,
+      image: data?.image?.viewUrl,
+      quantity: 0,
+    };
+    const res: any = await addToCartItem({ payload });
+    if (res.data.isSuccess) {
+      showToast("success", "Cart added successfull");
+      refetch()
+    } else {
+      showToast("error", "Cart can't add");
     }
   };
   // check already added cart
-  const isInCart = storedCart?.find(
-    (item: any) => item.id === data?.response?._id
-  );
-
+  const isInCart = storedCart?.find((item: any) => {
+    return item.productId === data?.response?._id;
+  });
   const handleImageMouseMove = (e: any) => {
     const img = e.target;
     img.style.transformOrigin = `${e.nativeEvent.offsetX}px ${e.nativeEvent.offsetY}px`;
@@ -226,8 +196,6 @@ const ProductDetails = ({ id }: any) => {
     setSelectedColor(data?.response?.variations[0]?.color);
   }, [data]);
 
-  console.log(data?.response);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -235,25 +203,6 @@ const ProductDetails = ({ id }: any) => {
     <section className="container mx-auto py-5 px-2 md:px-0">
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
         <div className="col-span-3 flex">
-          {/* <div>
-            {selectedImages
-              ?.slice(0, 4)
-              ?.map((image: string, index: number) => (
-                <div
-                  key={index}
-                  className="bg-white border mb-1 rounded-md"
-                  onClick={() => handleColorImageShow(image)}
-                >
-                  <Image
-                    width={100}
-                    height={100}
-                    className="transition-transform duration-300 transform cursor-pointer"
-                    src={image}
-                    alt={`Product Image - ${selectedColor}`}
-                  />
-                </div>
-              ))}
-          </div> */}
           <div>
             <div
               className="relative overflow-hidden bg-_white border w-[90%] md:w-[80%] mx-auto"
@@ -388,34 +337,17 @@ const ProductDetails = ({ id }: any) => {
           </div>
           {/* add to cart button */}
           <div className="flex gap-5 mt-14">
-            <div className="flex justify-center items-center w-full mb-2">
-              <button
-                onClick={() => handleDecrementQuantity(data?.response)}
-                type="button"
-                className="text-md mr-3 border-[1px] size-8"
-              >
-                -{" "}
-              </button>
-              <span className="text-qblack">{data?.response?.quantity}</span>
-              <button
-                onClick={() => handleIncrementQuantity(data?.response)}
-                type="button"
-                className="text-base size-8 ml-3 border-[1px]"
-              >
-                +
-              </button>
-            </div>
             <Button
-              onClick={() => handleCartClick()}
+              onClick={() => handleCartClick(data)}
               disabled={isInCart}
-              className="bg-_blue hover:bg-_primary rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
+              className="bg-_primary hover:bg-_secondary rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
             >
               ADD TO CART
             </Button>
             <Button
               variant={"outline"}
               // onClick={() => handleCartClick()}
-              className="uppercase hover:bg-[#FF4C06] border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
+              className="uppercase hover:bg-_primary border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
             >
               <Link href={"/cart/checkout"}> Buy Now</Link>
             </Button>

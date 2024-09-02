@@ -1,5 +1,9 @@
 import { icons } from "@/constants/icons";
-import { useAddToCartMutation, useGetEmailCartQuery } from "@/store/features/cart/cartApi";
+import useAuth from "@/hooks/useAuth";
+import {
+  useAddToCartMutation,
+  useGetEmailCartQuery,
+} from "@/store/features/cart/cartApi";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,14 +14,15 @@ const TopSellingProductsCard = ({ className, datas }: any) => {
   const stars = Array.from(Array(parseInt(datas?.review) || 0).keys());
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
+  const { customerInfo } = useAuth();
   const { data, refetch }: any = useGetEmailCartQuery({
-    email: "dalim@gmail.com",
+    email: customerInfo.email,
   });
   const [addToCart]: any = useAddToCartMutation();
   // handle cart click
   const handleCartClick = async (data: any) => {
     const payload = {
-      email: "dalim@gmail.com",
+      email: customerInfo.email,
       title: data?.title,
       productId: data?._id,
       price: data?.offer_price,
@@ -49,8 +54,9 @@ const TopSellingProductsCard = ({ className, datas }: any) => {
   return (
     <div
       data-aos="fade-up"
-      className={`product-row-card-style-one w-full h-[250px] shadow-md bg-white group relative overflow-hidden ${className || ""
-        }`}
+      className={`product-row-card-style-one w-full h-[250px] shadow-md bg-white group relative overflow-hidden ${
+        className || ""
+      }`}
     >
       <div className="flex space-x-5 items-center w-full h-full lg:p-[20px] sm:p-5 p-2">
         <div className="lg:w-1/3 w-1/3 h-full">
@@ -86,11 +92,17 @@ const TopSellingProductsCard = ({ className, datas }: any) => {
                 </span>
               ))}
             </div>
-            <button type="button"
+            <button
+              type="button"
               disabled={isInCart}
               onClick={() => handleCartClick(datas)}
-              className="w-[110px] h-[30px]">
-              <span className={`${isInCart ? "bg-slate-500 opacity-40" : "bg-_primary"} text-white p-2  rounded`}>
+              className="w-[110px] h-[30px]"
+            >
+              <span
+                className={`${
+                  isInCart ? "bg-slate-500 opacity-40" : "bg-_primary"
+                } text-white p-2  rounded`}
+              >
                 Add To Cart
               </span>
             </button>
