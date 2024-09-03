@@ -44,31 +44,31 @@ const ClientBrand = () => {
       id: "6",
       title: "Hamko",
       image:
-        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
+        "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
+        "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
+        "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
+        "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "6",
       title: "Hamko",
       image:
-        "https://freelogopng.com/images/all_img/1685901477apple-logo-transparent.png",
+        "https://upload.wikimedia.org/wikipedia/commons/f/fa/Huawei_logo_icon_170010.png",
     },
     {
       id: "7",
@@ -85,8 +85,8 @@ const ClientBrand = () => {
     <section className="container mx-auto mt-10 mb-10">
       <div className="grid lg:grid-cols-7 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-7">
         {brandData?.map((brand, index) => (
-          <div key={index}>
-            <img className="w-28 mx-auto" src={brand.image} />
+          <div key={index} className=" bg-white flex items-center justify-center shadow-sm rounded ">
+            <img className="w-28 h-16 p-1 mx-auto" src={brand.image} />
           </div>
         ))}
       </div>
