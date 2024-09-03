@@ -1,13 +1,16 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { useCustomerLoginMutation } from "@/store/api/auth/authApi";
+import { updateUserToken } from "@/store/features/user/userSlice";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
   const router = useRouter();
+  const dispatch=useDispatch();
   const {
     register,
     handleSubmit,
@@ -34,6 +37,7 @@ const Login = () => {
       if (loginResponse.isSuccess) {
         const accessToken = loginResponse?.data?.accessToken;
         localStorage.setItem("token", accessToken);
+        dispatch(updateUserToken(accessToken));
         router.push("/");
       }
     } catch (error: any) {

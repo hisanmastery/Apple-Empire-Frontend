@@ -47,6 +47,7 @@ import {
   FaPinterest,
   FaSkype,
   FaReddit,
+  FaRegUserCircle
 } from 'react-icons/fa';
 import { GrCurrency } from "react-icons/gr";
 import { FaCodeCompare } from "react-icons/fa6";
@@ -105,4 +106,5 @@ export const icons = {
   FaCodeCompareIcons: FaCodeCompare,
   TbExchangeIcons: TbExchange,
   FaAppleIcons: FaApple,
+  FaUserIcons:FaRegUserCircle 
 };

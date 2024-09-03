@@ -85,7 +85,13 @@ export default function Middlebar({ className, type }: any) {
                 </div>
               ) : (
                 <div>
-                  <Link href={"/login"}><button  className="bg-_primary text-white p-2 rounded-md px-6 hover:bg-_secondary">Login</button></Link>
+                  <Link href={"/login"}>
+                    <p rel="noopener noreferrer">
+                      <span>
+                        <icons.FaUserIcons className="text-2xl" />
+                      </span>
+                    </p>
+                  </Link>
                 </div>
               )}
             </div>

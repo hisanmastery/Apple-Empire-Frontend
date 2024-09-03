@@ -25,10 +25,10 @@ export default function Cart({ className }: any) {
   const { data, refetch }: any = useGetEmailCartQuery({
     email: customerInfo?.email,
   });
-  useEffect(() => {
-    dispatch(addStoredCart(data?.response));
-    refetch();
-  }, [data?.response, dispatch, refetch]);
+  // useEffect(() => {
+  //   dispatch(addStoredCart(data?.response));
+  //   refetch();
+  // }, [data?.response, dispatch, refetch]);
   // increment
   const handleIncrementQuantity = async (product: any) => {
     dispatch(incrementQuantity(product));
