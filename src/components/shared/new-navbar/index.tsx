@@ -45,62 +45,65 @@ export default function NewNavbar({ className, type }: any) {
                   )}
 
                   {/* Category Dropdown */}
-                  {
-                    categoryToggle && <div className="category-dropdown w-full absolute left-0 top-[53px]">
-                    <ul className="categories-list">
-                      {categoriesData?.categories?.map((category: any) => (
-                        <li key={category._id} className="relative group border-b">
-                          {/* Category Link */}
-                          <Link href={`/category/${category.categoryName}`}>
-                            <div
-                              className={`flex justify-between items-center px-5 h-10 bg-white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
-                                type === 3
-                                  ? "hover:bg-qh3-blue hover:text-white"
-                                  : "hover:bg-_primary hover:text-white"
-                              }`}
-                            >
-                              <span className="text-xs font-400">
-                                {category.categoryName}
-                              </span>
-                            </div>
-                          </Link>
+                  {categoryToggle && (
+                    <div className="category-dropdown w-full absolute left-0 top-[53px]">
+                      <ul className="categories-list">
+                        {categoriesData?.categories?.map((category: any) => (
+                          <li
+                            key={category._id}
+                            className="relative group border-b"
+                          >
+                            {/* Category Link */}
+                            <Link href={`/category/${category.categoryName}`}>
+                              <div
+                                className={`flex justify-between items-center px-5 h-10 bg-white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
+                                  type === 3
+                                    ? "hover:bg-qh3-blue hover:text-white"
+                                    : "hover:bg-_primary hover:text-white"
+                                }`}
+                              >
+                                <span className="text-xs font-400">
+                                  {category.categoryName}
+                                </span>
+                              </div>
+                            </Link>
 
-                          {/* Subcategory Dropdown */}
-                          {category.subCategory.length > 0 && (
-                            <ul
-                              className="absolute left-full top-0 hidden group-hover:block w-[200px] bg-white shadow-lg"
-                              style={{ zIndex: 10 }}
-                            >
-                              {category.subCategory.map(
-                                (subCategory: string, subIndex: number) => (
-                                  <li className="border-b" key={subIndex}>
-                                    <Link
-                                      href={`/category/${category.categoryName}/${subCategory
-                                        .trim()
-                                        .toLowerCase()}`}
-                                    >
-                                      <div
-                                        className={`flex justify-between items-center px-5 h-10 transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
-                                          type === 3
-                                            ? "hover:bg-qh3-blue hover:text-white"
-                                            : "hover:bg-_primary hover:text-white"
-                                        }`}
+                            {/* Subcategory Dropdown */}
+                            {category.subCategory.length > 0 && (
+                              <ul
+                                className="absolute left-full top-0 hidden group-hover:block w-[200px] bg-white shadow-lg"
+                                style={{ zIndex: 10 }}
+                              >
+                                {category.subCategory.map(
+                                  (subCategory: string, subIndex: number) => (
+                                    <li className="border-b" key={subIndex}>
+                                      <Link
+                                        href={`/category/${
+                                          category.categoryName
+                                        }/${subCategory.trim().toLowerCase()}`}
                                       >
-                                        <span className="text-xs font-400">
-                                          {subCategory}
-                                        </span>
-                                      </div>
-                                    </Link>
-                                  </li>
-                                )
-                              )}
-                            </ul>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  }
+                                        <div
+                                          className={`flex justify-between items-center px-5 h-10 transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
+                                            type === 3
+                                              ? "hover:bg-qh3-blue hover:text-white"
+                                              : "hover:bg-_primary hover:text-white"
+                                          }`}
+                                        >
+                                          <span className="text-xs font-400">
+                                            {subCategory}
+                                          </span>
+                                        </div>
+                                      </Link>
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
 
