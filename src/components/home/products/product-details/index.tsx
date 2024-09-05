@@ -39,6 +39,7 @@ const ProductDetails = ({ id }: any) => {
     data?.response?.variations[0]?.color
   );
   const [viewImage, setViewImages] = useState("");
+  const [thisItem,setThisItem]=useState<any>({});
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
 
@@ -70,6 +71,21 @@ const ProductDetails = ({ id }: any) => {
     data?.response?.variants[0]?.variantList,
     "Storage"
   );
+
+  useEffect(()=>{
+    if(storedCart?.length && data){
+      const new_data=data?.response;
+      if(new_data?._id){
+        const filter=storedCart.filter((d:any)=>{return d?.productId==new_data?._id});
+
+        if(filter?.length){
+          setThisItem(filter[0]);
+        }else{
+          setThisItem({});
+        }
+      }
+    }
+  },[storedCart,data])
   // useEffect(() => {
   //   dispatch(addStoredCart(addToCart?.response));
   //   refetch();
