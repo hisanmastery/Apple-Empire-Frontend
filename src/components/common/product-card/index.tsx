@@ -18,9 +18,9 @@ const ProductCard = ({ datas }: any) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { isAuthenticated, customerInfo }: any = useAuth();
-  const { data, refetch }: any = useGetEmailCartQuery({
-    email: customerInfo?.email,
-  });
+  // const { data, refetch }: any = useGetEmailCartQuery({
+  //   email: customerInfo?.email,
+  // });
   const [addToCart]: any = useAddToCartMutation();
   // handle cart click
   const handleCartClick = async (data: any) => {
@@ -38,13 +38,13 @@ const ProductCard = ({ datas }: any) => {
       };
       const res: any = await addToCart({ payload });
       if (res?.data?.isSuccess) {
-        refetch();
+       // refetch();
       }
     }
   };
-  useEffect(() => {
-    dispatch(addStoredCart(data?.response));
-  }, [data?.response, dispatch]);
+  // useEffect(() => {
+  //   dispatch(addStoredCart(data?.response));
+  // }, [data?.response, dispatch]);
   // check already added cart
   const isInCart = storedCart?.find(
     (item: any) => item.productId === datas?._id

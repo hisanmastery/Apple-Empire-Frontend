@@ -9,10 +9,12 @@ import {
   addStoredCart,
   decrementQuantity,
   incrementQuantity,
+  getStoredData
 } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import { get_store_data } from "@/utils/get_store_data";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart({ className }: any) {
@@ -22,9 +24,9 @@ export default function Cart({ className }: any) {
   const [addToCartDelete] = useAddToCartDeleteMutation();
   const [updateCart] = useUpdateCartMutation();
   const { customerInfo } = useAuth();
-  const { data, refetch }: any = useGetEmailCartQuery({
-    email: customerInfo?.email,
-  });
+  // const { data, refetch }: any = useGetEmailCartQuery({
+  //   email: customerInfo?.email,
+  // });
   // useEffect(() => {
   //   dispatch(addStoredCart(data?.response));
   //   refetch();
@@ -44,7 +46,12 @@ export default function Cart({ className }: any) {
     };
     const res: any = await updateCart({ id: product._id, payload });
     if (res?.data?.isSuccess) {
-      refetch();
+      const data:any=await get_store_data();
+      if(data?.length){
+        dispatch(getStoredData(data));
+      }else{
+        dispatch(getStoredData([]))
+      }
     }
   };
   // decrement
@@ -63,7 +70,12 @@ export default function Cart({ className }: any) {
       };
       const res: any = await updateCart({ id: product._id, payload });
       if (res?.data?.isSuccess) {
-        refetch();
+        const data:any=await get_store_data();
+        if(data?.length){
+          dispatch(getStoredData(data));
+        }else{
+          dispatch(getStoredData([]))
+        }
       }
     }
   };

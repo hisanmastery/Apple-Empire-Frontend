@@ -12,16 +12,16 @@ const Carts = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { customerInfo } = useAuth();
-  const { data, refetch }: any = useGetEmailCartQuery(
-    {
-      email: customerInfo.email,
-    },
-    { pollingInterval: 1000 }
-  );
-  useEffect(() => {
-    dispatch(addStoredCart(data?.response));
-    refetch();
-  }, [data?.response, dispatch, refetch, storedCart]);
+  // const { data, refetch }: any = useGetEmailCartQuery(
+  //   {
+  //     email: customerInfo.email,
+  //   },
+  //   { pollingInterval: 1000 }
+  // );
+  // useEffect(() => {
+  //   dispatch(addStoredCart(data?.response));
+  //   refetch();
+  // }, [data?.response, dispatch, refetch, storedCart]);
   // Using reduce to calculate the total price
   const totalPrice = storedCart?.reduce((acc: number, product: any) => {
     return acc + product?.quantity * parseInt(product?.price);

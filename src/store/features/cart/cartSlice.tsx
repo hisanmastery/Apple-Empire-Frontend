@@ -28,6 +28,9 @@ const cartSlice = createSlice({
       }));
       // state.storedCart = payload;
     },
+    getStoredData:(state,action)=>{
+      state.storedCart=action.payload;
+    },
     incrementQuantity(state, { payload }) {
       const item: any = state.storedCart.find((item: any) => item._id === payload._id);
       if (item) {
@@ -42,5 +45,5 @@ const cartSlice = createSlice({
     },
   },
 });
-export const { addcart, addStoredCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
+export const { addcart, addStoredCart, incrementQuantity, decrementQuantity,getStoredData } = cartSlice.actions;
 export default cartSlice.reducer;

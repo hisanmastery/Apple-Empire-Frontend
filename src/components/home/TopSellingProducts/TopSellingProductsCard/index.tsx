@@ -15,9 +15,9 @@ const TopSellingProductsCard = ({ className, datas }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const { customerInfo } = useAuth();
-  const { data, refetch }: any = useGetEmailCartQuery({
-    email: customerInfo.email,
-  });
+  // const { data, refetch }: any = useGetEmailCartQuery({
+  //   email: customerInfo.email,
+  // });
   const [addToCart]: any = useAddToCartMutation();
   // handle cart click
   const handleCartClick = async (data: any) => {
@@ -31,7 +31,7 @@ const TopSellingProductsCard = ({ className, datas }: any) => {
     };
     const res: any = await addToCart({ payload });
     if (res?.data?.isSuccess) {
-      refetch();
+      //refetch();
     }
     // get product data
     // const existingCart = storedCart || [];
@@ -44,9 +44,9 @@ const TopSellingProductsCard = ({ className, datas }: any) => {
     //   dispatch(addStoredCart(updatedCart));
     // }
   };
-  useEffect(() => {
-    dispatch(addStoredCart(data?.response));
-  }, [data?.response, dispatch]);
+  // useEffect(() => {
+  //   dispatch(addStoredCart(data?.response));
+  // }, [data?.response, dispatch]);
   // check already added cart
   const isInCart = storedCart?.find(
     (item: any) => item.productId === datas?._id

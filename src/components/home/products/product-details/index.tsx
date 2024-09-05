@@ -12,6 +12,7 @@ import {
   addStoredCart,
   decrementQuantity,
   incrementQuantity,
+  getStoredData
 } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
@@ -22,6 +23,7 @@ import {
   useGetEmailCartQuery,
   useUpdateCartMutation,
 } from "@/store/features/cart/cartApi";
+import { get_store_data } from "@/utils/get_store_data";
 import Loading from "@/components/common/loading";
 import { useExtractUniqueAttributes } from "@/utils/Helpers/Attributes";
 import Attributes from "@/components/common/attributes";
@@ -48,9 +50,9 @@ const ProductDetails = ({ id }: any) => {
   const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
   const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
-  const { data: addToCart, refetch }: any = useGetEmailCartQuery({
-    email: customerInfo?.email,
-  });
+  // const { data: addToCart, refetch }: any = useGetEmailCartQuery({
+  //   email: customerInfo?.email,
+  // });
 
   const ram = useExtractUniqueAttributes(
     data?.response?.variants[0]?.variantList,
@@ -68,10 +70,10 @@ const ProductDetails = ({ id }: any) => {
     data?.response?.variants[0]?.variantList,
     "Storage"
   );
-  useEffect(() => {
-    dispatch(addStoredCart(addToCart?.response));
-    refetch();
-  }, [addToCart?.response, dispatch, refetch]);
+  // useEffect(() => {
+  //   dispatch(addStoredCart(addToCart?.response));
+  //   refetch();
+  // }, [addToCart?.response, dispatch, refetch]);
   const handleColorButtonClick = (color: any) => {
     setSelectedColor(color);
   };
@@ -94,21 +96,91 @@ const ProductDetails = ({ id }: any) => {
   // handle cart click
   const handleCartClick = async (productData: any) => {
     const data = productData?.response;
-    const payload = {
-      email: customerInfo.email,
-      title: data?.title,
-      productId: data?._id,
-      price: data?.price,
-      image: data?.image?.viewUrl,
-      quantity: 0,
-    };
-    const res: any = await addToCartItem({ payload });
-    if (res.data.isSuccess) {
-      showToast("success", "Cart added successfull");
-      refetch()
-    } else {
-      showToast("error", "Cart can't add");
-    }
+    const token=localStorage.getItem("token");
+    const email=localStorage.getItem("email");
+
+    if(token){
+      const payload = {
+        email: customerInfo.email,
+        title: data?.title,
+        productId: data?._id,
+        price: data?.price,
+        image: data?.image?.viewUrl,
+        quantity: 0,
+      };
+      const res: any = await addToCartItem({ payload });
+      if (res.data.isSuccess) {
+        showToast("success", "Cart added successfull");
+        const data:any=await get_store_data();
+        if(data?.length){
+          dispatch(getStoredData(data));
+        }else{
+          dispatch(getStoredData([]))
+        }
+      } else {
+        showToast("error", "Cart can't add");
+      }
+    }else{
+      let product_items:any=localStorage.getItem("cart_items");
+
+      product_items=JSON.parse(product_items);
+
+      if(product_items?.length){
+        const data = productData?.response;
+        const item_id=data?._id;
+
+        if(item_id){
+          const lists:any=[...product_items];
+
+          const filters=lists.filter((d:any)=>{return d?.productId==item_id});
+
+          if(filters.length==1){
+            let new_lists:any=[];
+            product_items.map((d:any)=>{
+              if(d?.productId==item_id){
+                const obj={...d};
+                obj.quantity=d.quantity+1;
+                new_lists=[...new_lists,obj];
+              }else{
+                const obj={...d};
+                new_lists=[...new_lists,obj];
+              }
+            })
+            localStorage.setItem("cart_items",JSON.stringify(new_lists));
+            dispatch(getStoredData(new_lists))
+          }else{
+            const payload = {
+              email: "",
+              title: data?.title,
+              productId: data?._id,
+              price: data?.price,
+              image: data?.image?.viewUrl,
+              quantity: 1,
+            };
+            let cart_items:any=[...product_items];
+            cart_items=[...cart_items,payload];
+            localStorage.setItem("cart_items",JSON.stringify(cart_items));
+            dispatch(getStoredData(cart_items))
+          }
+        }else{
+          console.log("Product Id Not Found.");
+        }
+      }else{
+        const payload = {
+          email: "",
+          title: data?.title,
+          productId: data?._id,
+          price: data?.price,
+          image: data?.image?.viewUrl,
+          quantity: 1,
+        };
+        let cart_items:any=[];
+        cart_items=[...cart_items,payload];
+        localStorage.setItem("cart_items",JSON.stringify(cart_items));
+        dispatch(getStoredData(cart_items));
+      }
+
+    } 
   };
   // check already added cart
   const isInCart = storedCart?.find((item: any) => {
