@@ -12,7 +12,7 @@ import {
   addStoredCart,
   decrementQuantity,
   incrementQuantity,
-  getStoredData
+  getStoredData,
 } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
@@ -30,6 +30,7 @@ import Attributes from "@/components/common/attributes";
 import { iconsData } from "@/data/prodcuts_details_icons";
 import useAuth from "@/hooks/useAuth";
 import useToaster from "@/hooks/useToaster";
+import QuantityController from "@/components/common/quantity-controller";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -39,7 +40,7 @@ const ProductDetails = ({ id }: any) => {
     data?.response?.variations[0]?.color
   );
   const [viewImage, setViewImages] = useState("");
-  const [thisItem,setThisItem]=useState<any>({});
+  const [thisItem, setThisItem] = useState<any>({});
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
 
@@ -51,9 +52,8 @@ const ProductDetails = ({ id }: any) => {
   const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
   const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
-  // const { data: addToCart, refetch }: any = useGetEmailCartQuery({
-  //   email: customerInfo?.email,
-  // });
+  // Quantity
+  const [countQuantity, setCountQuantity] = useState(1);
 
   const ram = useExtractUniqueAttributes(
     data?.response?.variants[0]?.variantList,
@@ -72,20 +72,22 @@ const ProductDetails = ({ id }: any) => {
     "Storage"
   );
 
-  useEffect(()=>{
-    if(storedCart?.length && data){
-      const new_data=data?.response;
-      if(new_data?._id){
-        const filter=storedCart.filter((d:any)=>{return d?.productId==new_data?._id});
+  useEffect(() => {
+    if (storedCart?.length && data) {
+      const new_data = data?.response;
+      if (new_data?._id) {
+        const filter = storedCart.filter((d: any) => {
+          return d?.productId == new_data?._id;
+        });
 
-        if(filter?.length){
+        if (filter?.length) {
           setThisItem(filter[0]);
-        }else{
+        } else {
           setThisItem({});
         }
       }
     }
-  },[storedCart,data])
+  }, [storedCart, data]);
   // useEffect(() => {
   //   dispatch(addStoredCart(addToCart?.response));
   //   refetch();
@@ -112,10 +114,10 @@ const ProductDetails = ({ id }: any) => {
   // handle cart click
   const handleCartClick = async (productData: any) => {
     const data = productData?.response;
-    const token=localStorage.getItem("token");
-    const email=localStorage.getItem("email");
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
 
-    if(token){
+    if (token) {
       const payload = {
         email: customerInfo.email,
         title: data?.title,
@@ -127,44 +129,46 @@ const ProductDetails = ({ id }: any) => {
       const res: any = await addToCartItem({ payload });
       if (res.data.isSuccess) {
         showToast("success", "Cart added successfull");
-        const data:any=await get_store_data();
-        if(data?.length){
+        const data: any = await get_store_data();
+        if (data?.length) {
           dispatch(getStoredData(data));
-        }else{
-          dispatch(getStoredData([]))
+        } else {
+          dispatch(getStoredData([]));
         }
       } else {
         showToast("error", "Cart can't add");
       }
-    }else{
-      let product_items:any=localStorage.getItem("cart_items");
+    } else {
+      let product_items: any = localStorage.getItem("cart_items");
 
-      product_items=JSON.parse(product_items);
+      product_items = JSON.parse(product_items);
 
-      if(product_items?.length){
+      if (product_items?.length) {
         const data = productData?.response;
-        const item_id=data?._id;
+        const item_id = data?._id;
 
-        if(item_id){
-          const lists:any=[...product_items];
+        if (item_id) {
+          const lists: any = [...product_items];
 
-          const filters=lists.filter((d:any)=>{return d?.productId==item_id});
+          const filters = lists.filter((d: any) => {
+            return d?.productId == item_id;
+          });
 
-          if(filters.length==1){
-            let new_lists:any=[];
-            product_items.map((d:any)=>{
-              if(d?.productId==item_id){
-                const obj={...d};
-                obj.quantity=d.quantity+1;
-                new_lists=[...new_lists,obj];
-              }else{
-                const obj={...d};
-                new_lists=[...new_lists,obj];
+          if (filters.length == 1) {
+            let new_lists: any = [];
+            product_items.map((d: any) => {
+              if (d?.productId == item_id) {
+                const obj = { ...d };
+                obj.quantity = d.quantity + 1;
+                new_lists = [...new_lists, obj];
+              } else {
+                const obj = { ...d };
+                new_lists = [...new_lists, obj];
               }
-            })
-            localStorage.setItem("cart_items",JSON.stringify(new_lists));
-            dispatch(getStoredData(new_lists))
-          }else{
+            });
+            localStorage.setItem("cart_items", JSON.stringify(new_lists));
+            dispatch(getStoredData(new_lists));
+          } else {
             const payload = {
               email: "",
               title: data?.title,
@@ -173,15 +177,15 @@ const ProductDetails = ({ id }: any) => {
               image: data?.image?.viewUrl,
               quantity: 1,
             };
-            let cart_items:any=[...product_items];
-            cart_items=[...cart_items,payload];
-            localStorage.setItem("cart_items",JSON.stringify(cart_items));
-            dispatch(getStoredData(cart_items))
+            let cart_items: any = [...product_items];
+            cart_items = [...cart_items, payload];
+            localStorage.setItem("cart_items", JSON.stringify(cart_items));
+            dispatch(getStoredData(cart_items));
           }
-        }else{
+        } else {
           console.log("Product Id Not Found.");
         }
-      }else{
+      } else {
         const payload = {
           email: "",
           title: data?.title,
@@ -190,13 +194,12 @@ const ProductDetails = ({ id }: any) => {
           image: data?.image?.viewUrl,
           quantity: 1,
         };
-        let cart_items:any=[];
-        cart_items=[...cart_items,payload];
-        localStorage.setItem("cart_items",JSON.stringify(cart_items));
+        let cart_items: any = [];
+        cart_items = [...cart_items, payload];
+        localStorage.setItem("cart_items", JSON.stringify(cart_items));
         dispatch(getStoredData(cart_items));
       }
-
-    } 
+    }
   };
   // check already added cart
   const isInCart = storedCart?.find((item: any) => {
@@ -287,6 +290,18 @@ const ProductDetails = ({ id }: any) => {
   if (isLoading) {
     return <Loading />;
   }
+
+  // Increment function
+  const handleIncrementQuantity = () => {
+    setCountQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  // Decrement function
+  const handleDecrementQuantity = () => {
+    setCountQuantity((prevQuantity) =>
+      prevQuantity > 1 ? prevQuantity - 1 : 1
+    );
+  };
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
@@ -423,8 +438,15 @@ const ProductDetails = ({ id }: any) => {
               />
             </div>
           </div>
+
           {/* add to cart button */}
-          <div className="flex gap-5 mt-14">
+          <div className="flex gap-5 items-center mt-14">
+            {/* Product Quantity  */}
+            <QuantityController
+              countQuantity={countQuantity}
+              handleIncrementQuantity={handleIncrementQuantity}
+              handleDecrementQuantity={handleDecrementQuantity}
+            />
             <Button
               onClick={() => handleCartClick(data)}
               disabled={isInCart}
