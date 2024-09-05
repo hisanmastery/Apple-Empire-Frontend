@@ -32,61 +32,183 @@ export default function Cart({ className }: any) {
   //   refetch();
   // }, [data?.response, dispatch, refetch]);
   // increment
-  const handleIncrementQuantity = async (product: any) => {
-    dispatch(incrementQuantity(product));
-    const quantity = product.quantity + 1;
-    // Parse the price string to a number
-    const unitPrice = parseFloat(product.price.replace(/,/g, ""));
-    // Calculate the new total price
-    const newTotalPrice = unitPrice * quantity;
-    const payload = {
-      ...product,
-      quantity: quantity,
-      totalPrice: newTotalPrice,
-    };
-    const res: any = await updateCart({ id: product._id, payload });
-    if (res?.data?.isSuccess) {
-      const data:any=await get_store_data();
-      if(data?.length){
-        dispatch(getStoredData(data));
-      }else{
-        dispatch(getStoredData([]))
-      }
-    }
-  };
-  // decrement
-  const handleDecrementQuantity = async (product: any) => {
-    if (product.quantity > 1) {
-      dispatch(decrementQuantity(product));
-      const quantity = product.quantity - 1;
-      // Parse the price string to a number
-      const unitPrice = parseFloat(product.price.replace(/,/g, ""));
-      const newTotalPrice = unitPrice * quantity;
-      // Calculate the new total price
-      const payload = {
-        ...product,
-        quantity: quantity,
-        totalPrice: newTotalPrice,
-      };
-      const res: any = await updateCart({ id: product._id, payload });
-      if (res?.data?.isSuccess) {
-        const data:any=await get_store_data();
-        if(data?.length){
-          dispatch(getStoredData(data));
-        }else{
-          dispatch(getStoredData([]))
+  // const handleIncrementQuantity = async (product: any) => {
+  //   dispatch(incrementQuantity(product));
+  //   const quantity = product.quantity + 1;
+  //   // Parse the price string to a number
+  //   const unitPrice = parseFloat(product.price.replace(/,/g, ""));
+  //   // Calculate the new total price
+  //   const newTotalPrice = unitPrice * quantity;
+  //   const payload = {
+  //     ...product,
+  //     quantity: quantity,
+  //     totalPrice: newTotalPrice,
+  //   };
+  //   const res: any = await updateCart({ id: product._id, payload });
+  //   if (res?.data?.isSuccess) {
+  //     const data:any=await get_store_data();
+  //     if(data?.length){
+  //       dispatch(getStoredData(data));
+  //     }else{
+  //       dispatch(getStoredData([]))
+  //     }
+  //   }
+  // };
+  const handleIncrementQuantity = async (productData: any) => {
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
+
+    if (token) {
+      // const payload = {
+      //   email: customerInfo.email,
+      //   title: data?.title,
+      //   productId: data?._id,
+      //   price: data?.price,
+      //   image: data?.image?.viewUrl,
+      //   quantity: 0,
+      // };
+      // const res: any = await addToCartItem({ payload });
+      // if (res.data.isSuccess) {
+      //   showToast("success", "Cart added successfull");
+      //   const data: any = await get_store_data();
+      //   if (data?.length) {
+      //     dispatch(getStoredData(data));
+      //   } else {
+      //     dispatch(getStoredData([]));
+      //   }
+      // } else {
+      //   showToast("error", "Cart can't add");
+      // }
+    } else {
+      let product_items: any = localStorage.getItem("cart_items");
+
+      product_items = JSON.parse(product_items);
+
+      if (product_items?.length) {
+        const item_id = productData?.productId;
+
+        if (item_id) {
+          const lists: any = [...product_items];
+
+          const filters = lists.filter((d: any) => {
+            return d?.productId == item_id;
+          });
+
+          if (filters.length == 1) {
+            let new_lists: any = [];
+            product_items.map((d: any) => {
+              if (d?.productId == item_id) {
+                const obj = { ...d };
+                obj.quantity = d.quantity + 1;
+                new_lists = [...new_lists, obj];
+              } else {
+                const obj = { ...d };
+                new_lists = [...new_lists, obj];
+              }
+            });
+            localStorage.setItem("cart_items", JSON.stringify(new_lists));
+            dispatch(getStoredData(new_lists));
+          } else {
+            const payload = {
+              email: "",
+              title: productData?.title,
+              productId: productData?.productId,
+              price: productData?.price,
+              image: productData?.image,
+              quantity: 1,
+            };
+            let cart_items: any = [...product_items];
+            cart_items = [...cart_items, payload];
+            localStorage.setItem("cart_items", JSON.stringify(cart_items));
+            dispatch(getStoredData(cart_items));
+          }
+        } else {
+          console.log("Product Id Not Found.");
         }
       }
     }
   };
-  // handle remove  cart in right sidebar
-  const removeCart = async (id: any) => {
-    const res: any = await addToCartDelete({ id });
-    if (res?.data?.isSuccess) {
-      const storedProduct = storedCart || [];
-      const updatedCart = storedProduct.filter((item: any) => item._id !== id);
-      dispatch(addStoredCart(updatedCart));
+   // Decrement function
+  const handleDecrementQuantity = (item:any) => {
+    const new_data=item;
+
+    if(new_data?.productId){
+      const token=localStorage.getItem("token");
+      if(token){
+
+      }else{
+        const filter=storedCart.filter((d:any)=>{return d?.productId==new_data?.productId});
+        
+        if(filter?.length){
+          let lists:any=[];
+          storedCart.map((d:any)=>{
+            if(d?.productId==new_data?.productId){
+              const obj={...d};
+              obj.quantity=obj.quantity-1;
+              lists=[...lists,obj];
+            }else{
+              const obj={
+                ...d
+              }
+              lists=[...lists,obj];
+            }
+          })
+          localStorage.setItem("cart_items",JSON.stringify(lists));
+          dispatch(getStoredData(lists));
+        }
+      }
     }
+  };
+  // decrement
+  // const handleDecrementQuantity = async (product: any) => {
+  //   if (product.quantity > 1) {
+  //     dispatch(decrementQuantity(product));
+  //     const quantity = product.quantity - 1;
+  //     // Parse the price string to a number
+  //     const unitPrice = parseFloat(product.price.replace(/,/g, ""));
+  //     const newTotalPrice = unitPrice * quantity;
+  //     // Calculate the new total price
+  //     const payload = {
+  //       ...product,
+  //       quantity: quantity,
+  //       totalPrice: newTotalPrice,
+  //     };
+  //     const res: any = await updateCart({ id: product._id, payload });
+  //     if (res?.data?.isSuccess) {
+  //       const data:any=await get_store_data();
+  //       if(data?.length){
+  //         dispatch(getStoredData(data));
+  //       }else{
+  //         dispatch(getStoredData([]))
+  //       }
+  //     }
+  //   }
+  // };
+  // handle remove  cart in right sidebar
+  const removeCart = async (product: any) => {
+    // const res: any = await addToCartDelete({ id });
+    // if (res?.data?.isSuccess) {
+    //   const storedProduct = storedCart || [];
+    //   const updatedCart = storedProduct.filter((item: any) => item._id !== id);
+    //   dispatch(addStoredCart(updatedCart));
+    // }
+    const id=product?.productId;
+    const token=localStorage.getItem("token");
+
+    if(token){
+
+    }else{
+      const lists:any=storedCart?.filter((d:any)=>{return d?.productId!=id});
+
+      if(lists?.length){
+        localStorage.setItem("cart_items",JSON.stringify(lists));
+        dispatch(getStoredData(lists));
+      }else{
+        localStorage.setItem("cart_items",JSON.stringify([]));
+        dispatch(getStoredData(lists));
+      }
+    }
+    
   };
   const ProductPrice = ({ product }: any) => {
     // Handle case where product, price, or quantity is undefined
@@ -138,7 +260,7 @@ export default function Cart({ className }: any) {
                       </div>
                     </div>
                     <div className="cursor-pointer mx-2 font-bold text-red-500 hover:text-red-700">
-                      <p onClick={() => removeCart(product?._id)}>
+                      <p onClick={() => removeCart(product)}>
                         <icons.crossIcon />
                       </p>
                     </div>

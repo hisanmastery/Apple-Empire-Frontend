@@ -297,10 +297,33 @@ const ProductDetails = ({ id }: any) => {
   };
 
   // Decrement function
-  const handleDecrementQuantity = () => {
-    setCountQuantity((prevQuantity) =>
-      prevQuantity > 1 ? prevQuantity - 1 : 1
-    );
+  const handleDecrementQuantity = (item:any) => {
+      const new_data=item?.response;
+
+      if(new_data?._id){
+        console.log("New Data: ",new_data);
+        const token=localStorage.getItem("token");
+        if(token){
+
+        }else{
+          const filter=storedCart.filter((d:any)=>{return d?.productId==new_data?._id});
+          let lists:any=[];
+          storedCart.map((d:any)=>{
+            if(d?.productId==new_data?._id){
+              const obj={...d};
+              obj.quantity=obj.quantity-1;
+              lists=[...lists,obj];
+            }else{
+              const obj={
+                ...d
+              }
+              lists=[...lists,obj];
+            }
+          })
+          localStorage.setItem("cart_items",JSON.stringify(lists));
+          dispatch(getStoredData(lists));
+        }
+      }
   };
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
@@ -444,12 +467,14 @@ const ProductDetails = ({ id }: any) => {
             {/* Product Quantity  */}
             <QuantityController
               countQuantity={countQuantity}
-              handleIncrementQuantity={handleIncrementQuantity}
+              thisItem={thisItem}
+              data={data}
+              handleIncrementQuantity={handleCartClick}
               handleDecrementQuantity={handleDecrementQuantity}
             />
             <Button
               onClick={() => handleCartClick(data)}
-              disabled={isInCart}
+             // disabled={isInCart}
               className="bg-_primary hover:bg-_secondary rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
             >
               ADD TO CART
