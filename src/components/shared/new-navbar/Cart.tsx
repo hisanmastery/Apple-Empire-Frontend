@@ -137,7 +137,7 @@ export default function Cart({ className }: any) {
       if(token){
 
       }else{
-        const filter=storedCart.filter((d:any)=>{return d?.productId==new_data?.productId});
+        const filter:any=storedCart.filter((d:any)=>{return d?.productId==new_data?.productId});
         
         if(filter?.length){
           let lists:any=[];

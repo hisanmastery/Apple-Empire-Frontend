@@ -33,7 +33,15 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     // tokenn=JSON.parse(token);
 
     if(email && tokenn){
-      inital_loading(email,tokenn);
+      let cart_items:any=localStorage.getItem("cart_items");
+      cart_items=JSON.parse(cart_items);
+
+      if(cart_items?.length){
+        //  First Post cart_items then fetch data
+        // write hereeee
+      }else{
+        inital_loading(email,tokenn);
+      }
     }else{
       let cart_items:any=localStorage.getItem("cart_items");
       cart_items=JSON.parse(cart_items);
