@@ -6,7 +6,8 @@ import {
   useAddToCartMutation,
   useGetEmailCartQuery,
 } from "@/store/features/cart/cartApi";
-import { addStoredCart } from "@/store/features/cart/cartSlice";
+import { addStoredCart, getStoredData } from "@/store/features/cart/cartSlice";
+import { get_store_data } from "@/utils/get_store_data";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,31 +18,123 @@ const ProductCard = ({ datas }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const router = useRouter();
+  const [addToCartItem]: any = useAddToCartMutation();
   const { isAuthenticated, customerInfo }: any = useAuth();
   // const { data, refetch }: any = useGetEmailCartQuery({
   //   email: customerInfo?.email,
   // });
   const [addToCart]: any = useAddToCartMutation();
-  // handle cart click
-  const handleCartClick = async (data: any) => {
-    if (!isAuthenticated) {
-      router.push("/login");
-    } else {
+  // handle add to cart
+  // const handleAddToCart = async (data: any) => {
+  //   if (!isAuthenticated) {
+  //     router.push("/login");
+  //   } else {
+  //     const payload = {
+  //       email: customerInfo.email,
+  //       title: data?.title,
+  //       productId: data?._id,
+  //       price: data?.offer_price,
+  //       totalPrice: data?.offer_price,
+  //       image: data?.image?.viewUrl,
+  //       quantity: 0,
+  //     };
+  //     const res: any = await addToCart({ payload });
+  //     if (res?.data?.isSuccess) {
+  //       // refetch();
+  //     }
+  //   }
+  // };
+
+  const handleAddToCart = async (productData: any) => {
+    const data = productData;
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
+
+    if (token && isAuthenticated) {
       const payload = {
         email: customerInfo.email,
         title: data?.title,
         productId: data?._id,
-        price: data?.offer_price,
-        totalPrice: data?.offer_price,
+        price: data?.price,
         image: data?.image?.viewUrl,
         quantity: 0,
       };
-      const res: any = await addToCart({ payload });
-      if (res?.data?.isSuccess) {
-       // refetch();
+      const res: any = await addToCartItem({ payload });
+      if (res.data.isSuccess) {
+        // showToast("success", "Cart added successfull");
+        const data: any = await get_store_data();
+        if (data?.length) {
+          dispatch(getStoredData(data));
+        } else {
+          dispatch(getStoredData([]));
+        }
+      } else {
+        // showToast("error", "Cart can't add");
+      }
+    } else {
+      let product_items: any = localStorage.getItem("cart_items");
+
+      product_items = JSON.parse(product_items);
+
+      if (product_items?.length) {
+        const data = productData;
+        const item_id = data?._id;
+
+        if (item_id) {
+          const lists: any = [...product_items];
+
+          const filters = lists.filter((d: any) => {
+            return d?.productId == item_id;
+          });
+
+          if (filters.length == 1) {
+            let new_lists: any = [];
+            product_items.map((d: any) => {
+              if (d?.productId == item_id) {
+                const obj = { ...d };
+                obj.quantity = d.quantity + 1;
+                new_lists = [...new_lists, obj];
+              } else {
+                const obj = { ...d };
+                new_lists = [...new_lists, obj];
+              }
+            });
+            localStorage.setItem("cart_items", JSON.stringify(new_lists));
+            dispatch(getStoredData(new_lists));
+          } else {
+            const payload = {
+              email: "",
+              title: data?.title,
+              productId: data?._id,
+              price: data?.price,
+              image: data?.image?.viewUrl,
+              quantity: 1,
+            };
+            let cart_items: any = [...product_items];
+            cart_items = [...cart_items, payload];
+            localStorage.setItem("cart_items", JSON.stringify(cart_items));
+            dispatch(getStoredData(cart_items));
+          }
+        } else {
+          console.log("Product Id Not Found.");
+        }
+      } else {
+        const payload = {
+          email: "",
+          title: data?.title,
+          productId: data?._id,
+          price: data?.price,
+          image: data?.image?.viewUrl,
+          quantity: 1,
+        };
+        let cart_items: any = [];
+        cart_items = [...cart_items, payload];
+        localStorage.setItem("cart_items", JSON.stringify(cart_items));
+        dispatch(getStoredData(cart_items));
       }
     }
   };
+
   // useEffect(() => {
   //   dispatch(addStoredCart(data?.response));
   // }, [data?.response, dispatch]);
@@ -74,7 +167,7 @@ const ProductCard = ({ datas }: any) => {
             <div className="absolute w-full z-50  px-[30px]  top-40 mx-auto group-hover:top-[50px] transition-all duration-300 ease-in-out">
               <Button
                 disabled={isInCart}
-                onClick={() => handleCartClick(datas)}
+                onClick={() => handleAddToCart(datas)}
                 className={`bg-_primary uppercase mb-52 ${
                   !isInCart
                     ? " hover:bg-_secondary hover:text-black"
