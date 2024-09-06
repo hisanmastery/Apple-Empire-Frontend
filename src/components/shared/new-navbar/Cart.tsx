@@ -9,7 +9,7 @@ import {
   addStoredCart,
   decrementQuantity,
   incrementQuantity,
-  getStoredData
+  getStoredData,
 } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,10 +19,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart({ className }: any) {
   const { storedCart } = useSelector((state: any) => state?.cart);
+  console.log(storedCart)
   const dispatch = useDispatch();
   const [addToCartDelete] = useAddToCartDeleteMutation();
   const [updateCart] = useUpdateCartMutation();
-  const { customerInfo } = useAuth();
+  const { isAuthenticated, customerInfo } = useAuth();
   // const { data, refetch }: any = useGetEmailCartQuery({
   //   email: customerInfo?.email,
   // });
@@ -57,7 +58,7 @@ export default function Cart({ className }: any) {
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
 
-    if (token) {
+    if (token && isAuthenticated) {
       // const payload = {
       //   email: customerInfo.email,
       //   title: data?.title,
@@ -127,32 +128,33 @@ export default function Cart({ className }: any) {
       }
     }
   };
-   // Decrement function
-  const handleDecrementQuantity = (item:any) => {
-    const new_data=item;
+  // Decrement function
+  const handleDecrementQuantity = (item: any) => {
+    const new_data = item;
 
-    if(new_data?.productId){
-      const token=localStorage.getItem("token");
-      if(token){
+    if (new_data?.productId) {
+      const token = localStorage.getItem("token");
+      if (token) {
+      } else {
+        const filter: any = storedCart.filter((d: any) => {
+          return d?.productId == new_data?.productId;
+        });
 
-      }else{
-        const filter:any=storedCart.filter((d:any)=>{return d?.productId==new_data?.productId});
-        
-        if(filter?.length){
-          let lists:any=[];
-          storedCart.map((d:any)=>{
-            if(d?.productId==new_data?.productId){
-              const obj={...d};
-              obj.quantity=obj.quantity-1;
-              lists=[...lists,obj];
-            }else{
-              const obj={
-                ...d
-              }
-              lists=[...lists,obj];
+        if (filter?.length) {
+          let lists: any = [];
+          storedCart.map((d: any) => {
+            if (d?.productId == new_data?.productId) {
+              const obj = { ...d };
+              obj.quantity = obj.quantity - 1;
+              lists = [...lists, obj];
+            } else {
+              const obj = {
+                ...d,
+              };
+              lists = [...lists, obj];
             }
-          })
-          localStorage.setItem("cart_items",JSON.stringify(lists));
+          });
+          localStorage.setItem("cart_items", JSON.stringify(lists));
           dispatch(getStoredData(lists));
         }
       }
@@ -185,29 +187,32 @@ export default function Cart({ className }: any) {
   // };
   // handle remove  cart in right sidebar
   const removeCart = async (product: any) => {
-    // const res: any = await addToCartDelete({ id });
-    // if (res?.data?.isSuccess) {
-    //   const storedProduct = storedCart || [];
-    //   const updatedCart = storedProduct.filter((item: any) => item._id !== id);
-    //   dispatch(addStoredCart(updatedCart));
-    // }
-    const id=product?.productId;
-    const token=localStorage.getItem("token");
+    const id = product?.productId;
+    const cartId = product?._id;
+    const token = localStorage.getItem("token");
 
-    if(token){
+    if (token && isAuthenticated) {
+      const res: any = await addToCartDelete({ id: cartId });
+      if (res?.data?.isSuccess) {
+        const storedProduct = storedCart || [];
+        const updatedCart = storedProduct.filter(
+          (item: any) => item._id !== id
+        );
+        dispatch(addStoredCart(updatedCart));
+      }
+    } else {
+      const lists: any = storedCart?.filter((d: any) => {
+        return d?.productId != id;
+      });
 
-    }else{
-      const lists:any=storedCart?.filter((d:any)=>{return d?.productId!=id});
-
-      if(lists?.length){
-        localStorage.setItem("cart_items",JSON.stringify(lists));
+      if (lists?.length) {
+        localStorage.setItem("cart_items", JSON.stringify(lists));
         dispatch(getStoredData(lists));
-      }else{
-        localStorage.setItem("cart_items",JSON.stringify([]));
+      } else {
+        localStorage.setItem("cart_items", JSON.stringify([]));
         dispatch(getStoredData(lists));
       }
     }
-    
   };
   const ProductPrice = ({ product }: any) => {
     // Handle case where product, price, or quantity is undefined

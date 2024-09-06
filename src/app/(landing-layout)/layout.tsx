@@ -46,9 +46,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             };
             // Call the API to add each item to the cart in the database
             const res: any = await addToCartItem({ payload });
-            if (res.isSuccess) {
-              console.log("Added to cart: res");
-            }
+            console.log("Added to cart:", res);
           });
 
           //clear the cart after successful sync
