@@ -20,7 +20,7 @@ const ViewMoreTitle = ({
           <div>
             <Link href={seeMoreUrl}>
               <div className="flex space-x-2 items-center">
-                <p className="text-base font-600 text-_blue hover:text-blue-400 font-bold">View More</p>
+                <p className="sm:text-2xl text-lg font-600 font-600 text-_blue hover:text-blue-400 font-bold">View More</p>
                 <span className="animate-right-dir text-_blue">
                   <svg
                     width="17"

@@ -327,7 +327,7 @@ const ProductDetails = ({ id }: any) => {
   };
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
-      <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-7 sm:gap-10">
         <div className="col-span-3 flex">
           <div>
             <div
@@ -343,7 +343,7 @@ const ProductDetails = ({ id }: any) => {
                 alt="Product Image"
               />
             </div>
-            <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
+            <div className="flex gap-2 mt-2 md:w-[80%] mx-auto justify-around">
               {data?.response?.variations
                 ?.slice(0, 4)
                 ?.map((variant: any, index: number) => (
