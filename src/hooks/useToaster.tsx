@@ -1,31 +1,26 @@
-import { icons } from "@/constants/icons";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 const useToaster = () => {
   const showToast = (type?: string, message?: string, description?: string) => {
+    const content = (
+      <div>
+        <strong>{message}</strong>
+        {description && <div>{description}</div>}
+      </div>
+    );
     if (type === "success") {
-      toast.success(message, {
-        description: description,
-        action: {
-          label: "❌",
-          onClick: () => {},
-        },
-      });
+      toast.success(content);
     } else if (type === "error") {
-      toast.error(message, {
-        description: description,
-        action: {
-          label: "❌",
-          onClick: () => {},
-        },
-      });
+      toast.error(content);
     } else if (type === "warning") {
-      toast.warning(message, {
-        description: description,
-        action: {
-          label: "❌",
-          onClick: () => {},
+      toast(content, {
+        icon: "⚠️",
+        style: {
+          background: "#ffcc00",
+          color: "#000",
         },
       });
+    } else {
+      toast(content);
     }
   };
 

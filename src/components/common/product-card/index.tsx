@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { icons } from "@/constants/icons";
 import useAuth from "@/hooks/useAuth";
+import useToaster from "@/hooks/useToaster";
 import {
   useAddToCartMutation,
   useGetEmailCartQuery,
@@ -20,6 +21,7 @@ const ProductCard = ({ datas }: any) => {
   const router = useRouter();
   const [addToCartItem]: any = useAddToCartMutation();
   const { isAuthenticated, customerInfo }: any = useAuth();
+  const showToast = useToaster();
   // const { data, refetch }: any = useGetEmailCartQuery({
   //   email: customerInfo?.email,
   // });
@@ -61,7 +63,7 @@ const ProductCard = ({ datas }: any) => {
       };
       const res: any = await addToCartItem({ payload });
       if (res.data.isSuccess) {
-        // showToast("success", "Cart added successfull");
+        showToast("success", "Cart added successfull");
         const data: any = await get_store_data();
         if (data?.length) {
           dispatch(getStoredData(data));
@@ -69,7 +71,7 @@ const ProductCard = ({ datas }: any) => {
           dispatch(getStoredData([]));
         }
       } else {
-        // showToast("error", "Cart can't add");
+        showToast("error", "Cart can't add");
       }
     } else {
       let product_items: any = localStorage.getItem("cart_items");

@@ -12,6 +12,7 @@ import NewNavbar from "@/components/shared/new-navbar";
 import Middlebar from "@/components/shared/new-navbar/MiddleNavbar";
 import useAuth from "@/hooks/useAuth";
 import { useAddToCartMutation } from "@/store/features/cart/cartApi";
+import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
@@ -101,6 +102,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <main>
+             <Toaster />
       {/* <Navbar /> */}
       <Middlebar />
       <NewNavbar />
