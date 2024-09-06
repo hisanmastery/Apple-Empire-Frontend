@@ -19,7 +19,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart({ className }: any) {
   const { storedCart } = useSelector((state: any) => state?.cart);
-  console.log({ storedCart });
   const dispatch = useDispatch();
   const [addToCartDelete] = useAddToCartDeleteMutation();
   const [updateCart] = useUpdateCartMutation();

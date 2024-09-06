@@ -1,18 +1,9 @@
 "use client";
-import { 
-  useEffect,
-  useState 
-} from "react";
-import { 
-  useSelector,
-  useDispatch
-} from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Carts from "@/components/carts";
-import { 
-  addStoredCart,
-  getStoredData
-} from "@/store/features/cart/cartSlice";
-import axios from 'axios';
+import { addStoredCart, getStoredData } from "@/store/features/cart/cartSlice";
+import axios from "axios";
 import { baseApiUrl } from "@/constants/endpoint";
 import { get_store_data } from "@/utils/get_store_data";
 import Footer from "@/components/shared/footer/footer";
@@ -20,49 +11,75 @@ import Navbar from "@/components/shared/navbar";
 import NewNavbar from "@/components/shared/new-navbar";
 import Middlebar from "@/components/shared/new-navbar/MiddleNavbar";
 import useAuth from "@/hooks/useAuth";
+import { useAddToCartMutation } from "@/store/features/cart/cartApi";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const dispatch=useDispatch();
-  const {isAuthenticated,customerInfo}=useAuth();
-  const {token}=useSelector((state:any)=>state.user);
-
-  useEffect(()=>{
-    let email:any=localStorage.getItem("email");
-    let tokenn:any=localStorage.getItem('token');
+  const dispatch = useDispatch();
+  const { isAuthenticated, customerInfo } = useAuth();
+  const { token } = useSelector((state: any) => state.user);
+  const [addToCartItem]: any = useAddToCartMutation();
+  useEffect(() => {
+    let email: any = localStorage.getItem("email");
+    let tokenn: any = localStorage.getItem("token");
     // email=JSON.parse(email);
     // tokenn=JSON.parse(token);
+    if (email && tokenn) {
+      let cart_items: any = localStorage.getItem("cart_items");
+      cart_items = JSON.parse(cart_items);
 
-    if(email && tokenn){
-      let cart_items:any=localStorage.getItem("cart_items");
-      cart_items=JSON.parse(cart_items);
+      if (cart_items?.length) {
+        // Add the customer email to each cart item
+        cart_items = cart_items.map((item: any) => ({
+          ...item,
+          email: email,
+        }));
+        // Send each cart item to the backend via the addToCartItem API
+        try {
+          cart_items.map(async (item: any) => {
+            const payload = {
+              email: item.email,
+              title: item.title,
+              productId: item.productId,
+              price: item.price,
+              image: item.image,
+              quantity: item.quantity,
+            };
+            // Call the API to add each item to the cart in the database
+            const res: any = await addToCartItem({ payload });
+            if (res.isSuccess) {
+              console.log("Added to cart: res");
+            }
+          });
 
-      if(cart_items?.length){
-        //  First Post cart_items then fetch data
-        // write hereeee
-      }else{
-        inital_loading(email,tokenn);
+          //clear the cart after successful sync
+          localStorage.removeItem("cart_items");
+        } catch (error) {
+          console.error("Error syncing cart items:", error);
+        }
+      } else {
+        inital_loading(email, tokenn);
       }
-    }else{
-      let cart_items:any=localStorage.getItem("cart_items");
-      cart_items=JSON.parse(cart_items);
-  
-      if(cart_items?.length){
+    } else {
+      let cart_items: any = localStorage.getItem("cart_items");
+      cart_items = JSON.parse(cart_items);
+      console.log(cart_items);
+      if (cart_items?.length) {
         dispatch(getStoredData(cart_items));
-      }else{
+      } else {
         dispatch(getStoredData([]));
       }
     }
-  },[token,isAuthenticated]);
+  }, [token, isAuthenticated]);
 
-  const inital_loading=async(email:any,tokenn:any)=>{
-    const data:any=await get_store_data();
+  const inital_loading = async (email: any, tokenn: any) => {
+    const data: any = await get_store_data();
     //console.log("Res Data",data);
-    if(data?.length){
+    if (data?.length) {
       dispatch(getStoredData(data));
-    }else{
+    } else {
       dispatch(getStoredData([]));
     }
-  }
+  };
 
   // const get_store_data=async(email:any,tokenn:any)=>{
   //   //console.log('caledddd')
@@ -87,7 +104,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main>
       {/* <Navbar /> */}
-      <Middlebar/>
+      <Middlebar />
       <NewNavbar />
       {/* <Carts /> */}
       {/* children content */}
