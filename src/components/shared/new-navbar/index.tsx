@@ -56,13 +56,20 @@ export default function NewNavbar({ className, type }: any) {
                             {/* Category Link */}
                             <Link href={`/category/${category.categoryName}`}>
                               <div
-                                className={`flex justify-between items-center px-5 h-10 bg-white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
+                                className={`flex justify-between items-center px-2 h-10 bg-white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
                                   type === 3
                                     ? "hover:bg-qh3-blue hover:text-white"
                                     : "hover:bg-_primary hover:text-white"
                                 }`}
                               >
-                                <span className="text-xs font-400">
+                                <span className="text-xs font-400 flex items-center gap-4">
+                                  <span>
+                                    <img
+                                      className="w-4 h-4"
+                                      src={category.image}
+                                      alt={category.categoryName}
+                                    />
+                                  </span>
                                   {category.categoryName}
                                 </span>
                               </div>
