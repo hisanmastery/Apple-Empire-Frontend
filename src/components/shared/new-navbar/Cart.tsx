@@ -57,6 +57,14 @@ export default function Cart({ className }: any) {
   //   }
   // };
 
+  // refetch cart
+  const refetchCartData = async () => {
+    const data: any = await get_store_data();
+    console.log({ data });
+    if (data?.length) {
+      dispatch(getStoredData(data));
+    }
+  };
   const quantityUpdate = async (productData: any, isIncrement: boolean) => {
     const quantity = isIncrement
       ? productData.quantity + 1
@@ -74,10 +82,7 @@ export default function Cart({ className }: any) {
     if (res?.data?.isSuccess) {
       showToast("success", res?.data?.message);
       // refetch cart data
-      const data: any = await get_store_data();
-      if (data?.length) {
-        dispatch(getStoredData(data));
-      }
+      await refetchCartData();
     } else {
       showToast("success", "Something wrong please try again");
     }
@@ -204,12 +209,19 @@ export default function Cart({ className }: any) {
 
     if (token && isAuthenticated) {
       const res: any = await addToCartDelete({ id: cartId });
+
       if (res?.data?.isSuccess) {
+        showToast("success", res.data.message);
         const storedProduct = storedCart || [];
         const updatedCart = storedProduct.filter(
           (item: any) => item._id !== id
         );
+
+        // refetch cart data
+        await refetchCartData();
         dispatch(addStoredCart(updatedCart));
+      } else {
+        showToast("error", res.error.data.message);
       }
     } else {
       const lists: any = storedCart?.filter((d: any) => {
