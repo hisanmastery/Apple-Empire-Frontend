@@ -4,20 +4,22 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import { useCustomerLoginMutation } from "@/store/api/auth/authApi";
 import { updateUserToken } from "@/store/features/user/userSlice";
 import { useRouter } from "next/navigation";
+import useToaster from "@/hooks/useToaster";
 
 const Login = () => {
   const router = useRouter();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const [customerLogin, { isLoading }] = useCustomerLoginMutation();
+  const showToast = useToaster();
   const onSubmit = async (data: any) => {
     const loginData = {
       email: data.email,
@@ -30,19 +32,19 @@ const Login = () => {
       const loginResponse = res?.data;
 
       if (res?.data?.message) {
-        alert(res?.data?.message);
+        showToast("success", res?.data?.message);
       } else {
-        alert(res?.error?.data?.message);
+        showToast("error", res?.error?.data?.message);
       }
 
-      console.log("Login Response",res);
+      console.log("Login Response", res);
 
       if (loginResponse.isSuccess) {
         const accessToken = loginResponse?.data?.accessToken;
-        const decoded:any = jwt.decode(accessToken);
-       // console.log("Decoded",decoded)
-        if(decoded?.email){
-          localStorage.setItem("email",decoded?.email);
+        const decoded: any = jwt.decode(accessToken);
+        // console.log("Decoded",decoded)
+        if (decoded?.email) {
+          localStorage.setItem("email", decoded?.email);
         }
         localStorage.setItem("token", accessToken);
         dispatch(updateUserToken(accessToken));

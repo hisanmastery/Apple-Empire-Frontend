@@ -16,14 +16,16 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { get_store_data } from "@/utils/get_store_data";
 import { useDispatch, useSelector } from "react-redux";
+import useToaster from "@/hooks/useToaster";
 
 export default function Cart({ className }: any) {
   const { storedCart } = useSelector((state: any) => state?.cart);
-  console.log(storedCart)
+  console.log(storedCart);
   const dispatch = useDispatch();
   const [addToCartDelete] = useAddToCartDeleteMutation();
   const [updateCart] = useUpdateCartMutation();
   const { isAuthenticated, customerInfo } = useAuth();
+  const showToast = useToaster();
   // const { data, refetch }: any = useGetEmailCartQuery({
   //   email: customerInfo?.email,
   // });
@@ -54,31 +56,39 @@ export default function Cart({ className }: any) {
   //     }
   //   }
   // };
+
+  const quantityUpdate = async (productData: any, isIncrement: boolean) => {
+    const quantity = isIncrement
+      ? productData.quantity + 1
+      : productData.quantity - 1;
+    // Parse the price string to a number
+    const unitPrice = parseFloat(productData.price.replace(/,/g, ""));
+    // Calculate the new total price
+    const newTotalPrice = unitPrice * quantity;
+    const payload = {
+      ...productData,
+      quantity: quantity,
+      totalPrice: newTotalPrice,
+    };
+    const res: any = await updateCart({ id: productData._id, payload });
+    if (res?.data?.isSuccess) {
+      showToast("success", res?.data?.message);
+      // refetch cart data
+      const data: any = await get_store_data();
+      if (data?.length) {
+        dispatch(getStoredData(data));
+      }
+    } else {
+      showToast("success", "Something wrong please try again");
+    }
+  };
+
   const handleIncrementQuantity = async (productData: any) => {
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
 
     if (token && isAuthenticated) {
-      // const payload = {
-      //   email: customerInfo.email,
-      //   title: data?.title,
-      //   productId: data?._id,
-      //   price: data?.price,
-      //   image: data?.image?.viewUrl,
-      //   quantity: 0,
-      // };
-      // const res: any = await addToCartItem({ payload });
-      // if (res.data.isSuccess) {
-      //   showToast("success", "Cart added successfull");
-      //   const data: any = await get_store_data();
-      //   if (data?.length) {
-      //     dispatch(getStoredData(data));
-      //   } else {
-      //     dispatch(getStoredData([]));
-      //   }
-      // } else {
-      //   showToast("error", "Cart can't add");
-      // }
+      await quantityUpdate(productData, true);
     } else {
       let product_items: any = localStorage.getItem("cart_items");
 
@@ -129,12 +139,13 @@ export default function Cart({ className }: any) {
     }
   };
   // Decrement function
-  const handleDecrementQuantity = (item: any) => {
+  const handleDecrementQuantity = async (item: any) => {
     const new_data = item;
-
+    console.log("decremenet");
     if (new_data?.productId) {
       const token = localStorage.getItem("token");
-      if (token) {
+      if (token && isAuthenticated) {
+        await quantityUpdate(item, false);
       } else {
         const filter: any = storedCart.filter((d: any) => {
           return d?.productId == new_data?.productId;
