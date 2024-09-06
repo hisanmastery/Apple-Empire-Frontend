@@ -20,8 +20,8 @@ const Home = () => {
 
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/9-2024/MSI_Thin_GF63_12U.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/7-2024/Monitors.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
@@ -63,8 +63,8 @@ const Home = () => {
         {/* product ads banner */}
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/5-2024/asus-tuf-gaming.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/9-2024/MSI_Thin_GF63_12U.webp`,
+            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/7-2024/Monitors.webp`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
