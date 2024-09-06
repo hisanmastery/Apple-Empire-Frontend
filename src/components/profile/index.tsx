@@ -18,6 +18,12 @@ const Profile = () => {
   //   }
   // }, [isAuthenticated, router]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    router.push("/");
+  };
+
   return (
     <>
       <div className="min-h-screen bg-gray-100 flex">
@@ -49,6 +55,14 @@ const Profile = () => {
                 >
                   Order Information
                 </a>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleLogout()}
+                  className="block w-full py-2 px-4 bg-blue-500 text-white rounded-md text-center"
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </nav>
