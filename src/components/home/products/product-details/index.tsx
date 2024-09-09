@@ -394,13 +394,14 @@ const ProductDetails = ({ id }: any) => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5">
             {iconsData.map((item: any, index: number) => (
-              <p
-                key={index}
+              <Link
+                href={item.link?`/compare/${id}`:""}
+               key={index}
                 className="text-md font-medium flex items-center gap-3"
               >
                 {item.icon}
                 {item.label}
-              </p>
+              </Link>
             ))}
           </div>
           <div className="flex items-center mt-8">
