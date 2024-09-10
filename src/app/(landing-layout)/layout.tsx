@@ -2,10 +2,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Carts from "@/components/carts";
-import { addStoredCart, getStoredData } from "@/store/features/cart/cartSlice";
+import { 
+  addStoredCart, 
+  getStoredData,
+  storedWishLists 
+} from "@/store/features/cart/cartSlice";
 import axios from "axios";
 import { baseApiUrl } from "@/constants/endpoint";
-import { get_store_data } from "@/utils/get_store_data";
+import { get_store_data, get_wish_lists } from "@/utils/get_store_data";
 import Footer from "@/components/shared/footer/footer";
 import Navbar from "@/components/shared/navbar";
 import NewNavbar from "@/components/shared/new-navbar";
@@ -72,11 +76,20 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   const inital_loading = async (email: any, tokenn: any) => {
     const data: any = await get_store_data();
+    // call get wish lists apii
+    const wish_lists=await get_wish_lists();
     //console.log("Res Data",data);
     if (data?.length) {
       dispatch(getStoredData(data));
     } else {
       dispatch(getStoredData([]));
+    }
+
+    // stored wish lists data
+    if(wish_lists?.length){
+      dispatch(storedWishLists(wish_lists));
+    }else{
+      dispatch(storedWishLists([]));
     }
   };
 

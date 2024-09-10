@@ -9,6 +9,7 @@ const cartSlice = createSlice({
       product: [],
     },
     storedCart: [],
+    wishLists:[]
   },
   reducers: {
     addcart(state: any, { payload }: any) {
@@ -43,7 +44,10 @@ const cartSlice = createSlice({
         item.quantity -= 1;
       }
     },
+    storedWishLists:(state,action)=>{
+      state.wishLists=action.payload;
+    }
   },
 });
-export const { addcart, addStoredCart, incrementQuantity, decrementQuantity,getStoredData } = cartSlice.actions;
+export const { addcart,storedWishLists, addStoredCart, incrementQuantity, decrementQuantity,getStoredData } = cartSlice.actions;
 export default cartSlice.reducer;

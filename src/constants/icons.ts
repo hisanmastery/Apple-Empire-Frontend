@@ -5,7 +5,7 @@ import { SiMicrostrategy } from "react-icons/si";
 import { FaHandshakeSimple, FaXTwitter } from "react-icons/fa6";
 import { TbSettingsUp } from "react-icons/tb";
 import { MdManageHistory } from "react-icons/md";
-import { MdTimer } from "react-icons/md";
+import { MdTimer,MdOutlineFavorite } from "react-icons/md";
 import { MdOutlineSupportAgent } from "react-icons/md";
 import { SlBadge } from "react-icons/sl";
 import { IoCheckmark, IoCheckmarkDoneCircleSharp } from "react-icons/io5";
@@ -106,5 +106,6 @@ export const icons = {
   FaCodeCompareIcons: FaCodeCompare,
   TbExchangeIcons: TbExchange,
   FaAppleIcons: FaApple,
-  FaUserIcons:FaRegUserCircle 
+  FaUserIcons:FaRegUserCircle,
+  MdOutlineFavorite:MdOutlineFavorite
 };
