@@ -6,6 +6,7 @@ interface AttributesProps<T> {
   handleSelection: (selectedItem: T) => void;
   handleVariants:()=>void,
   defaultValue?: T;
+  data?:any
 }
 
 const Attributes = <T,>({ label, items, handleSelection,handleVariants, defaultValue }: AttributesProps<T>) => {

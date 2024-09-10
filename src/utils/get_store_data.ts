@@ -32,7 +32,8 @@ export const get_wish_lists=async()=>{
             'Authorization':`Bearer ${tokenn}`
           }}).then((response)=>{
               if(response.status===200){
-                const data:any=response.data.response;
+                //console.log("Response: ",response?.data);
+                const data:any=response?.data?.wishlists;
                 if(data?.length){
                   return data;
                 }else{
