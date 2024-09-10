@@ -41,7 +41,7 @@ const ProductDetails = ({ id }: any) => {
   );
   const [viewImage, setViewImages] = useState("");
   const [thisItem, setThisItem] = useState<any>({});
-  const { storedCart } = useSelector((state: any) => state?.cart);
+  const { storedCart,wishLists } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
 
   const [selectedRam, setSelectedRam] = useState<string>(""); // State for selected RAM
