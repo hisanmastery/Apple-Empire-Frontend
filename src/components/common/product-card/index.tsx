@@ -166,7 +166,7 @@ const ProductCard = ({ datas }: any) => {
           </Link>
           <div className=" px-[30px] pb-[30px] relative">
             {/* add to card button */}
-            <div className="absolute w-full z-50 left-[155px] sm:left-14 px-[30px]  top-40 mx-auto group-hover:top-[47px] transition-all duration-300 ease-in-out">
+            <div className="absolute w-full z-50 sm:left-14 px-[30px]  top-40 mx-auto group-hover:top-[47px] transition-all duration-300 ease-in-out">
               <Button
                 disabled={isInCart}
                 onClick={() => handleAddToCart(datas)}
