@@ -82,8 +82,8 @@ const ClientBrand = () => {
     },
   ];
   return (
-    <section className="container px-3 ssm:px-7 mx-auto mt-10 mb-10">
-      <div className="grid lg:grid-cols-7 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-5 ssm:gap-7">
+    <section className="container mx-auto mt-10 mb-10">
+      <div className="grid lg:grid-cols-7 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-7">
         {brandData?.map((brand, index) => (
           <div key={index} className=" bg-white flex items-center justify-center shadow-sm rounded ">
             <img className="w-28 h-16 p-1 mx-auto" src={brand.image} />

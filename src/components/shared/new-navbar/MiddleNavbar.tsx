@@ -3,17 +3,18 @@ import SearchInput from "../navbar/searchInput";
 import { icons } from "@/constants/icons";
 import Image from "next/image";
 import Cart from "./Cart";
+import WishLists from "./WishLists";
 import { useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 
 export default function Middlebar({ className, type }: any) {
-  const { storedCart } = useSelector((state: any) => state?.cart);
+  const { storedCart,wishLists } = useSelector((state: any) => state?.cart);
   const { isAuthenticated, customerInfo } = useAuth();
   return (
-    <div className={`w-full h-[70px] ssm:h-[86px] bg-slate-300 ${className}`}>
-      <div className="container mx-auto px-3 xsm:px-5 ssm:px-auto h-full">
+    <div className={`w-full h-[86px] bg-slate-300 ${className}`}>
+      <div className="container mx-auto h-full">
         <div className="relative h-full">
           <div className="flex justify-between items-center h-full">
             <div className="cursor-pointer">
@@ -23,7 +24,7 @@ export default function Middlebar({ className, type }: any) {
                   height={50}
                   src={`https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg`}
                   alt="logo"
-                  className="p-2 w-16 h-16 ssm:w-20 xsm:h-20"
+                  className="p-2 w-24 h-24"
                 />
               </Link>
             </div>
@@ -34,28 +35,34 @@ export default function Middlebar({ className, type }: any) {
               <SearchBox type={type} className="search-com" />
             </div>
             <div className="flex space-x-6 items-center">
-              <div className="compaire relative">
-                <Link href="" passHref>
-                  <p rel="noopener noreferrer">
-                    <span>
-                      <icons.FavoriteBorder className="text-xl ssm:text-2xl" />
-                    </span>
-                  </p>
-                </Link>
-                <span
-                  className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
-                    type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
-                  }`}
-                >
-                  2
-                </span>
+              <div className="cart-wrapper group relative py-4">
+                <div className="cart relative cursor-pointer">
+                  <Link href="" passHref>
+                    <p rel="noopener noreferrer">
+                      <span>
+                        <icons.FavoriteBorder className="text-2xl" />
+                      </span>
+                    </p>
+                  </Link>
+                  <span
+                    className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
+                      type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
+                    }`}
+                  >
+                    {wishLists?.length?wishLists?.length:0}
+                  </span>
+                </div>
+                <WishLists
+                type={type}
+                className="absolute -right-[45px] top-11 z-50 hidden group-hover:block"
+                />
               </div>
               <div className="cart-wrapper group relative py-4">
                 <div className="cart relative cursor-pointer">
                   <Link href="/cart">
                     <p rel="noopener noreferrer">
                       <span>
-                        <icons.ShoppingBagSolid className="text-xl ssm:text-2xl" />
+                        <icons.ShoppingBagSolid className="text-2xl" />
                       </span>
                     </p>
                   </Link>
@@ -78,7 +85,7 @@ export default function Middlebar({ className, type }: any) {
                   <Link href="/profile" passHref>
                     <p rel="noopener noreferrer">
                       <span>
-                        <icons.LuUser2 className="text-xl ssm:text-2xl" />
+                        <icons.LuUser2 className="text-2xl" />
                       </span>
                     </p>
                   </Link>
@@ -88,7 +95,7 @@ export default function Middlebar({ className, type }: any) {
                   <Link href={"/login"}>
                     <p rel="noopener noreferrer">
                       <span>
-                        <icons.FaUserIcons className="text-xl ssm:text-2xl" />
+                        <icons.FaUserIcons className="text-2xl" />
                       </span>
                     </p>
                   </Link>

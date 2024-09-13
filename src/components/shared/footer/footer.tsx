@@ -17,30 +17,30 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <div>
             <img
-              className="w-[60px] sm:w-[80px]"
+              className="w-[80px]"
               src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
               alt=""
             />
           </div>
 
-          <div className="font-normal text-sm sm:text-md">
+          <div className="font-normal">
             <h4>Contact Us</h4>
             <p className="text-[#029293]">support@appleempirebd.com</p>
           </div>
 
-          <div className="font-normal text-sm sm:text-md">
+          <div className="font-normal">
             <h4>Customer Service</h4>
             <p className="text-[#029293]">support@appleempirebd.com</p>
           </div>
 
-          <div className="md:block hidden ">
+          <div className="md:block hidden">
             <FaAnglesDown className="text-[#029293] h-14 w-14 rounded-full border-2 border-white s p-2 cursor-pointer " />
           </div>
         </div>
         {/* row -2  */}
 
         <div className="grid grid-cols-12 ga-5 justify-between items-center mt-16">
-          <ul className="sm:flex items-center col-span-12 sm:col-span-8 lg:col-span-6 flex-wrap  gap-4 font-normal cursor-pointer text-sm sm:text-md">
+          <ul className="sm:flex items-center col-span-8 lg:col-span-6 flex-wrap  gap-4 font-normal cursor-pointer">
             <li className="hover:text-[#029293]">About Us</li>
             <li className="hover:text-[#029293]">Order Tracking</li>
             <li className="hover:text-[#029293]">Return Policy</li>
@@ -48,7 +48,7 @@ const Footer = () => {
             <li className="hover:text-[#029293]">Cookie Policy</li>
             <li className="hover:text-[#029293]">Privacy Policy</li>
           </ul>
-          <div className="flex justify-center mt-4 space-x-4 leading-3 col-span-12 sm:col-span-4 lg:col-span-4">
+          <div className="flex justify-center mt-4 space-x-4 leading-3 col-span-4 lg:col-span-4">
             <Link href="#">
               <Facebook className="text-blue-500" />
             </Link>
@@ -73,7 +73,7 @@ const Footer = () => {
         {/* row -3  */}
 
         <div className="flex flex-col md:flex-row justify-between items-center mt-16 gap-4 text-center  md:text-start ">
-          <div className="text-sm sm:text-md">
+          <div>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
             officia iure adipisci laborum dolore eos exercitationem quis est
             quod. Laborum incidunt sint aperiam asperiores sapiente recusandae.
