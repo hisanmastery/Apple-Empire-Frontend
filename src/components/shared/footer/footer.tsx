@@ -48,7 +48,7 @@ const Footer = () => {
             <li className="hover:text-[#029293]">Cookie Policy</li>
             <li className="hover:text-[#029293]">Privacy Policy</li>
           </ul>
-          <div className="flex justify-center mt-4 space-x-4 leading-3 col-span-4 lg:col-span-4">
+          <div className="flex justify-center mt-4 space-x-4 leading-3 col-span-5 lsm:col-span-4 lg:col-span-4">
             <Link href="#">
               <Facebook className="text-blue-500" />
             </Link>

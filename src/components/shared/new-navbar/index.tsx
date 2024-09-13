@@ -17,12 +17,12 @@ export default function NewNavbar({ className, type }: any) {
 
   return (
     <div className="sticky top-0 z-[6]">
-      <div className={`w-full bg-_primary h-[60px]`}>
-        <div className="container mx-auto h-full">
+      <div className={`w-full bg-_primary h-[50px] smd:h-[60px]`}>
+        <div className=" px-5 smd:container smd:px-auto mx-auto h-full">
           <div className="w-full h-full relative">
             <div className="w-full h-full flex justify-between items-center">
               <div className="category-and-nav flex xl:space-x-7 space-x-3 items-center">
-                <div className="category w-[270px] h-[53px] bg-white px-5 rounded-t-md mt-[6px] relative">
+                <div className="category w-[85vw] ssm:w-[88vw] msm:w-[90vw] smd:w-[270px] h-[45px] smd:h-[53px] bg-white px-5 rounded-t-md mt-[6px] relative">
                   <button
                     onClick={handler}
                     type="button"
@@ -46,7 +46,7 @@ export default function NewNavbar({ className, type }: any) {
 
                   {/* Category Dropdown */}
                   {categoryToggle && (
-                    <div className="category-dropdown w-full absolute left-0 top-[53px]">
+                    <div className="category-dropdown w-full absolute left-0 top-[47px] sm:top-[47px] smd:top-[53px]">
                       <ul className="categories-list">
                         {categoriesData?.categories?.map((category: any) => (
                           <li

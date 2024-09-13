@@ -10,14 +10,14 @@ const TopItems = () => {
   })
   if (isLoading) return <Loading/>;
   return (
-    <div className="container mt-10">
+    <div className="px-3 ssm:px-5 msm:px-7 lsm:container lsm:px-auto my-5 lsm:my-10">
       <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-4">
         {data?.categories?.map((category:any, index:number) => (
           <Link href={`/category/${category?.categoryName}`}
            key={index}
           >
           <div
-            className="text-center border-[1px] border-_white rounded shadow p-3 hover:font-bold hover:text-[#FF4C06] hover:border hover:border-[#FF4C06] bg-_white hover:bg-slate-200 cursor-pointer transition-all ease-in-out duration-500 group"
+            className="text-center border-[1px] h-full border-_white rounded shadow p-3 hover:font-bold hover:text-[#FF4C06] hover:border hover:border-[#FF4C06] bg-_white hover:bg-slate-200 cursor-pointer transition-all ease-in-out duration-500 group"
             style={{ boxShadow: "0px 0px 2px 0px gray" }}
           >
               <img

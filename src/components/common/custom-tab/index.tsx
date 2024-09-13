@@ -5,7 +5,7 @@ import React from 'react';
 const CustomTabs = ({ defaultValue, className, tabs }: any) => {
     return (
         <Tabs defaultValue={defaultValue} className={className}>
-            <TabsList className="flex justify-start">
+            <TabsList className="flex justify-start max-w-screen-xsm">
                 {tabs.map((tab: any, index: number) => (
                     <TabsTrigger key={index} value={tab.value}>
                         {tab.label}

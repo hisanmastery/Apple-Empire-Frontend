@@ -13,10 +13,10 @@ const Products = ({ params }: any) => {
   }
   return (
     <div className='grid grid-cols-7 gap-5 container'>
-      <div className='col-span-2'>
+      <div className='col-span-7 sm:col-span-3 md:col-span-2'>
         <ProductsSideBar />
       </div>
-      <div className='col-span-5'>
+      <div className='col-span-7  sm:col-span-4 md:col-span-5'>
         <AllProductsSection productsType={productsType} />
       </div>
     </div>
