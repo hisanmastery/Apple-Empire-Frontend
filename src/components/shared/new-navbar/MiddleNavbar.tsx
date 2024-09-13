@@ -11,7 +11,6 @@ import useAuth from "@/hooks/useAuth";
 export default function Middlebar({ className, type }: any) {
   const { storedCart,wishLists } = useSelector((state: any) => state?.cart);
   const { isAuthenticated, customerInfo } = useAuth();
-  const url = window.location.href.split('/')[3];
   return (
     <div className={`w-full ssm:h-[75px] smd:h-[86px] bg-slate-300 ${className}`}>
       <div className="px-3 xsm:px-4 smd:container smd:px-auto mx-auto h-full">

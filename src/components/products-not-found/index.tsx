@@ -1,5 +1,5 @@
 import React from 'react';
-import EmptyImage from "../../../public/images/empty-bag (1).webp"
+import EmptyImage from "../../../public/images/empty-bag.webp"
 import Image from 'next/image';
 const ProductsNotFound = () => {
     return (
