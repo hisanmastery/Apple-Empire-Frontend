@@ -66,9 +66,35 @@ export default function WishLists({ className }: any) {
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
 
-    if (token && isAuthenticated) {
+    const post_object={
+      _id: productData?._id,
+      email:email,
+      productId:productData?._id,
+      image:productData?.image?.viewUrl,
+      price: productData?.price,
+      quantity: parseFloat(productData?.quantity) + 1,
+      title: productData?.title,
+    }
+    console.log(post_object);
+    axios.patch(`${baseApiUrl}/wishlist/update-wishlist/${productData?._id}`,post_object).then(async(res)=>{
+      if (res.data.isSuccess) {
+        const data: any = await get_wish_lists();
+        if (data?.length) {
+          //console.log("Dataa:::",data);
+          dispatch(storedWishLists(data));
+        } else {
+          dispatch(storedWishLists([]));
+        }
+      } else {
+        showToast("error", "Wish can't Increment");
+      }
+    }).catch((error)=>{
+      showToast("error", "Wish can't Increment");
+    })
+    /*if (token && isAuthenticated) {
       await quantityUpdate(productData, true);
-    } else {
+    }
+    else {
       let product_items: any = localStorage.getItem("cart_items");
 
       product_items = JSON.parse(product_items);
@@ -117,13 +143,58 @@ export default function WishLists({ className }: any) {
           console.log("Product Id Not Found.");
         }
       }
-    }
+    }*/
   };
   // Decrement function
   const handleDecrementQuantity = async (item: any) => {
     const new_data = item;
     console.log("decremenet");
-    if (new_data?.productId) {
+
+    const post_object={
+      quantity: parseFloat(new_data?.quantity) - 1,
+    }
+    console.log(post_object);
+
+    if(post_object?.quantity <= 0){
+      const token=localStorage.getItem("token");
+      await axios.delete(`${baseApiUrl}/wishlist/delete-wishlist/${new_data?._id}`,{headers:{
+          'Authorization':`Bearer ${token}`
+        }}).then(async(res)=>{
+        if (res.data.isSuccess) {
+          showToast("success", "Wish remove successfully");
+          const data: any = await get_wish_lists();
+          if (data?.length) {
+            //console.log("Dataa:::",data);
+            dispatch(storedWishLists(data));
+          } else {
+            dispatch(storedWishLists([]));
+          }
+        } else {
+          showToast("error", "Wish can't Decrement");
+        }
+      }).catch((error)=>{
+        showToast("error", "Wish can't Decrement");
+      })
+    }
+    else{
+      axios.patch(`${baseApiUrl}/wishlist/update-wishlist/${new_data?._id}`,post_object).then(async(res)=>{
+        if (res.data.isSuccess) {
+          const data: any = await get_wish_lists();
+          if (data?.length) {
+            //console.log("Dataa:::",data);
+            dispatch(storedWishLists(data));
+          } else {
+            dispatch(storedWishLists([]));
+          }
+        } else {
+          showToast("error", "Wish can't Decrement");
+        }
+      }).catch((error)=>{
+        showToast("error", "Wish can't Decrement");
+      })
+    }
+
+    /*if (new_data?.productId) {
       const token = localStorage.getItem("token");
       if (token && isAuthenticated) {
         await quantityUpdate(item, false);
@@ -150,7 +221,7 @@ export default function WishLists({ className }: any) {
           dispatch(getStoredData(lists));
         }
       }
-    }
+    }*/
   };
  
   // handle remove  cart in right sidebar
@@ -232,7 +303,7 @@ export default function WishLists({ className }: any) {
                       </p>
                     </div>
                   </div>
-                  <div className="flex justify-center items-center w-full mb-2 hidden">
+                  <div className="flex justify-center items-center w-full mb-2">
                     <button
                       onClick={() => handleDecrementQuantity(product)}
                       type="button"
@@ -244,7 +315,7 @@ export default function WishLists({ className }: any) {
                     <button
                       onClick={() => handleIncrementQuantity(product)}
                       type="button"
-                      className="text-base size-7 ml-2 border-[1px] hidden"
+                      className="text-base size-7 ml-2 border-[1px]"
                     >
                       +
                     </button>

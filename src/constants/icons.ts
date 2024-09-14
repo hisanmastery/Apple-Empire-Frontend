@@ -2,7 +2,7 @@
 import { GiDiscussion } from "react-icons/gi";
 import { GiTeamIdea } from "react-icons/gi";
 import { SiMicrostrategy } from "react-icons/si";
-import { FaHandshakeSimple, FaXTwitter } from "react-icons/fa6";
+import {FaCartShopping, FaHandshakeSimple, FaXTwitter} from "react-icons/fa6";
 import { TbSettingsUp } from "react-icons/tb";
 import { MdManageHistory } from "react-icons/md";
 import { MdTimer,MdOutlineFavorite } from "react-icons/md";
@@ -107,5 +107,6 @@ export const icons = {
   TbExchangeIcons: TbExchange,
   FaAppleIcons: FaApple,
   FaUserIcons:FaRegUserCircle,
-  MdOutlineFavorite:MdOutlineFavorite
+  FaCartIcons: FaCartShopping,
+  MdOutlineFavorite:MdOutlineFavorite,
 };

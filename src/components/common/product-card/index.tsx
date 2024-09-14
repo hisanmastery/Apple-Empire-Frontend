@@ -150,7 +150,7 @@ const ProductCard = ({ datas }: any) => {
       style={{ boxShadow: "0px 0px 10px 0px gray" }}
     >
       <>
-        <div className="cursor-pointer product-card-one w-full h-full max-h-[300px] text-nowrap bg-white relative group hover:scale-105 ease-in-out duration-700">
+        <div className="cursor-pointer product-card-one w-full h-full max-h-[340px] text-nowrap bg-white relative group hover:scale-105 ease-in-out duration-700">
           <Link href={`/products/${datas?._id}`}>
             <div
               className="product-card-img w-full h-[300px]"
@@ -166,7 +166,7 @@ const ProductCard = ({ datas }: any) => {
           </Link>
           <div className=" px-[30px] pb-[30px] relative">
             {/* add to card button */}
-            <div className="absolute w-full z-50  px-[30px]  top-40 mx-auto group-hover:top-[50px] transition-all duration-300 ease-in-out">
+            {/*<div className="absolute w-full z-50  px-[30px]  top-40 mx-auto group-hover:top-[50px] transition-all duration-300 ease-in-out">
               <Button
                 disabled={isInCart}
                 onClick={() => handleAddToCart(datas)}
@@ -182,7 +182,7 @@ const ProductCard = ({ datas }: any) => {
                   <span>Add To Cart</span>
                 </div>
               </Button>
-            </div>
+            </div>*/}
             <Link href={`/products/${datas?._id}`}>
               <div className="reviews flex space-x-[1px] mb-3">
                 {Array.from(Array(datas.review), () => (
@@ -210,6 +210,31 @@ const ProductCard = ({ datas }: any) => {
                 {datas.offer_price}
               </span>
             </p>
+            <div className='flex space-x-2'>
+              <Button
+                  disabled={isInCart}
+                  onClick={() => handleAddToCart(datas)}
+                  className={`bg-_primary uppercase mb-52 ${
+                      !isInCart
+                          ? " hover:bg-_secondary hover:text-black"
+                          : "bg-slate-500 opacity-40"
+                  } `}
+                  type="button"
+              >
+                <div className="flex items-center text-xs w-full">
+                  <span></span>
+                  <span>{<icons.FaCartIcons className="text-xl" />}</span>
+                </div>
+              </Button>
+              <Button
+                  variant={"outline"}
+                  onClick={isInCart ? ()=>{} :() => handleAddToCart(datas)}
+                  // onClick={() => handleCartClick()}
+                  className="uppercase hover:bg-_primary border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
+              >
+                <Link href={"/cart/checkout"}> Buy Now</Link>
+              </Button>
+            </div>
           </div>
           {/* quick-access-btns */}
           <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20  transition-all duration-300 ease-in-out">

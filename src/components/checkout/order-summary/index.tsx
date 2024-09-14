@@ -40,7 +40,7 @@ const OrderSummary = ({
               </div>
             </div>
             <div>
-              <p className="font-semibold">TK . {item?.totalPrice}</p>
+              <p className="font-semibold">TK . {item?.price}</p>
             </div>
           </div>
         ))}
