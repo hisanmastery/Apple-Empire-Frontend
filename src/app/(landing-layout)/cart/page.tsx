@@ -69,7 +69,7 @@ const CartPage = ({ className }: any) => {
   return (
     <div
       data-aos="fade-left"
-      className={`w-full container mt-4 ${className || ""}`}
+      className={`w-full msm:container mt-4 ${className || ""}`}
     >
       {storedCart?.length == 0 ? (
         <div className="h-[90vh] w-full flex justify-center items-center">

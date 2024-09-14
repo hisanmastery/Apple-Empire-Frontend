@@ -37,6 +37,7 @@ import useToaster from "@/hooks/useToaster";
 import QuantityController from "@/components/common/quantity-controller";
 import axios from "axios";
 import { baseApiUrl } from "@/constants/endpoint";
+import {useRouter} from "next/navigation";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -78,6 +79,8 @@ const ProductDetails = ({ id }: any) => {
     data?.response?.variants[0]?.variantList,
     "Storage"
   );
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const router = useRouter();
 
   useEffect(() => {
     if (storedCart?.length && data) {
@@ -107,9 +110,9 @@ const ProductDetails = ({ id }: any) => {
       }else{
         setWishItem({})
       }
-      //console.log("Filter::",filter);
+      // console.log("Filter::",filter);
     }
-  },[wishLists])
+  },[id, wishLists])
   // useEffect(() => {
   //   dispatch(addStoredCart(addToCart?.response));
   //   refetch();
@@ -350,13 +353,16 @@ const ProductDetails = ({ id }: any) => {
 
   // Handle Wish Lists
   const handleWishLists=async(item:any,hasIn:boolean)=>{
+    // const data = productData?.response;
+    console.log('wishlist',item,hasIn);
     if(hasIn){
       const token=localStorage.getItem("token");
-      await axios.delete(`${baseApiUrl}/wishlist/delete-wishlist/${id}`,{headers:{
+      await axios.delete(`${baseApiUrl}/wishlist/delete-wishlist/${wishItem?._id}`,{headers:{
         'Authorization':`Bearer ${token}`
       }}).then(async(res)=>{
+        setWishItem({})
         if (res.data.isSuccess) {
-          showToast("success", "Wish added successfull");
+          showToast("success", "Wish remove successfully");
           const data: any = await get_wish_lists();
           if (data?.length) {
            //console.log("Dataa:::",data);
@@ -373,14 +379,20 @@ const ProductDetails = ({ id }: any) => {
     }else{
       const new_data=item?.response;
       const email=localStorage.getItem("email");
+      if (!email) {
+        router.push('/login');
+      }
       const post_object={
         email:email,
         productId:new_data?._id,
-        image:new_data?.image?.viewUrl
+        image:new_data?.image?.viewUrl,
+        price: new_data?.price,
+        "quantity": 1,
+        title: new_data?.title,
       }
       axios.post(`${baseApiUrl}/wishlist/create-wishlist`,post_object).then(async(res)=>{
         if (res.data.isSuccess) {
-          showToast("success", "Wish added successfull");
+          showToast("success", "Wish added successful");
           const data: any = await get_wish_lists();
           if (data?.length) {
            //console.log("Dataa:::",data);
@@ -398,7 +410,7 @@ const ProductDetails = ({ id }: any) => {
   }
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
-      <div className="grid grid-cols-1 lg:grid-cols-7 sm:gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
         <div className="col-span-3 flex">
           <div>
             <div
@@ -414,7 +426,7 @@ const ProductDetails = ({ id }: any) => {
                 alt="Product Image"
               />
             </div>
-            <div className="flex gap-2 mt-2 md:w-[80%] mx-auto justify-around">
+            <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
               {data?.response?.variations
                 ?.slice(0, 4)
                 ?.map((variant: any, index: number) => (
@@ -469,12 +481,12 @@ const ProductDetails = ({ id }: any) => {
               key={index}
               className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
               onClick={()=>{
-                handleWishLists(data,wishItem?.productId==id?true:false);
+                handleWishLists(data,wishItem?.productId===id ?? false);
               }}
               >
                 <icons.MdOutlineFavorite 
                 style={{
-                  color:`${wishItem?.productId==id?'red':'black'}`
+                  color:`${wishItem?.productId===id ? 'red':'black'}`
                 }} 
                 className="text-xl" 
                 />

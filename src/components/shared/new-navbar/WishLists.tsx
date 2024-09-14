@@ -15,13 +15,15 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-import { get_store_data } from "@/utils/get_store_data";
+import {get_store_data, get_wish_lists} from "@/utils/get_store_data";
 import { useDispatch, useSelector } from "react-redux";
 import useToaster from "@/hooks/useToaster";
+import axios from "axios";
+import {baseApiUrl} from "@/constants/endpoint";
 
 export default function WishLists({ className }: any) {
   const { storedCart,wishLists } = useSelector((state: any) => state?.cart);
-  console.log(storedCart);
+  // console.log('storedCart',storedCart, 'wishLists', wishLists);
   const dispatch = useDispatch();
   const [addToCartDelete] = useAddToCartDeleteMutation();
   const [updateCart] = useUpdateCartMutation();
@@ -96,8 +98,9 @@ export default function WishLists({ className }: any) {
             localStorage.setItem("cart_items", JSON.stringify(new_lists));
             dispatch(getStoredData(new_lists));
           } else {
+            const email=localStorage.getItem("email");
             const payload = {
-              email: "",
+              email: email,
               title: productData?.title,
               productId: productData?.productId,
               price: productData?.price,
@@ -106,6 +109,7 @@ export default function WishLists({ className }: any) {
             };
             let cart_items: any = [...product_items];
             cart_items = [...cart_items, payload];
+            console.log('cart_items',cart_items);
             localStorage.setItem("cart_items", JSON.stringify(cart_items));
             dispatch(getStoredData(cart_items));
           }
@@ -150,40 +154,28 @@ export default function WishLists({ className }: any) {
   };
  
   // handle remove  cart in right sidebar
-  const removeCart = async (product: any) => {
+  const removeWish = async (product: any) => {
     const id = product?.productId;
     const cartId = product?._id;
-    const token = localStorage.getItem("token");
-
-    if (token && isAuthenticated) {
-      const res: any = await addToCartDelete({ id: cartId });
-
-      if (res?.data?.isSuccess) {
-        showToast("success", res.data.message);
-        const storedProduct = storedCart || [];
-        const updatedCart = storedProduct.filter(
-          (item: any) => item._id !== id
-        );
-
-        // refetch cart data
-        await refetchCartData();
-        dispatch(addStoredCart(updatedCart));
+    const token=localStorage.getItem("token");
+    await axios.delete(`${baseApiUrl}/wishlist/delete-wishlist/${product?._id}`,{headers:{
+        'Authorization':`Bearer ${token}`
+      }}).then(async(res)=>{
+      if (res.data.isSuccess) {
+        showToast("success", "Wish remove successfully");
+        const data: any = await get_wish_lists();
+        if (data?.length) {
+          //console.log("Dataa:::",data);
+          dispatch(storedWishLists(data));
+        } else {
+          dispatch(storedWishLists([]));
+        }
       } else {
-        showToast("error", res.error.data.message);
+        showToast("error", "Wish can't add");
       }
-    } else {
-      const lists: any = storedCart?.filter((d: any) => {
-        return d?.productId != id;
-      });
-
-      if (lists?.length) {
-        localStorage.setItem("cart_items", JSON.stringify(lists));
-        dispatch(getStoredData(lists));
-      } else {
-        localStorage.setItem("cart_items", JSON.stringify([]));
-        dispatch(getStoredData(lists));
-      }
-    }
+    }).catch((error)=>{
+      showToast("error", "Wish can't add");
+    })
   };
   const ProductPrice = ({ product }: any) => {
     // Handle case where product, price, or quantity is undefined
@@ -211,7 +203,7 @@ export default function WishLists({ className }: any) {
     <>
       <div
         style={{ boxShadow: " 0px 15px 50px 0px rgba(0, 0, 0, 0.14)" }}
-        className={`w-[330px] bg-white border-t-[3px]  ${className || ""}`}
+        className={`  w-[80vw] msm:w-[330px] bg-white border-t-[3px]  ${className || ""}`}
       >
         <div className="w-full h-full">
           <div className="product-items h-[310px] overflow-y-scroll">
@@ -235,12 +227,12 @@ export default function WishLists({ className }: any) {
                       </div>
                     </div>
                     <div className="cursor-pointer mx-2 font-bold text-red-500 hover:text-red-700">
-                      <p onClick={() => removeCart(product)}>
+                      <p onClick={() => removeWish(product)}>
                         <icons.crossIcon />
                       </p>
                     </div>
                   </div>
-                  <div className="flex justify-center items-center w-full mb-2">
+                  <div className="flex justify-center items-center w-full mb-2 hidden">
                     <button
                       onClick={() => handleDecrementQuantity(product)}
                       type="button"
@@ -252,7 +244,7 @@ export default function WishLists({ className }: any) {
                     <button
                       onClick={() => handleIncrementQuantity(product)}
                       type="button"
-                      className="text-base size-7 ml-2 border-[1px]"
+                      className="text-base size-7 ml-2 border-[1px] hidden"
                     >
                       +
                     </button>

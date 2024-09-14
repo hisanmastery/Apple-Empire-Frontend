@@ -26,9 +26,9 @@ const Profile = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 flex">
+      <div className="min-h-screen bg-gray-100 mx-auto md:mx-0 grid grid-cols-6 gap-0">
         {/* Sidebar */}
-        <div className="bg-white w-64 p-6 hidden md:block shadow-md">
+        <div className="bg-white mx-5 md:mx-0 md:w-64 p-6 md:col-span-2 col-span-6 shadow-md">
           <div className="flex flex-col items-center">
             <img
               className="w-24 h-24 rounded-full object-cover"
@@ -68,7 +68,7 @@ const Profile = () => {
           </nav>
         </div>
         {/* Main Content */}
-        <div className="flex-1 p-6">
+        <div className="flex-1 p-6 md:col-span-4 col-span-6">
           <div className="max-w-4xl mx-auto">
             {/* Profile Information */}
             <section

@@ -8,6 +8,11 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
+  screens: {
+    "ssm": "320px",
+    "msm": "380px",
+    "lsm": "450px",
+  },
   prefix: "",
   theme: {
     container: {
@@ -18,6 +23,22 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        xsm: '300px',
+        ssm: '370px',
+        msm: '420px',
+        lsm: '480px',
+        xmd: '520px',
+        smd: '560px',
+        mmd: '600px',
+        lmd: '620px',
+        // You can keep the default ones as well if needed
+        sm: '640px',   // Small screens
+        md: '768px',   // Medium screens
+        lg: '1024px',  // Large screens
+        xl: '1280px',  // Extra large screens
+        '2xl': '1536px', // 2x extra large screens
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

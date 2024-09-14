@@ -263,7 +263,7 @@ export default function Cart({ className }: any) {
     <>
       <div
         style={{ boxShadow: " 0px 15px 50px 0px rgba(0, 0, 0, 0.14)" }}
-        className={`w-[330px] bg-white border-t-[3px]  ${className || ""}`}
+        className={`w-[90vw] ssm:w-[330px] bg-white border-t-[3px]  ${className || ""}`}
       >
         <div className="w-full h-full">
           <div className="product-items h-[310px] overflow-y-scroll">

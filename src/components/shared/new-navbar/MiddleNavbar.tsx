@@ -7,14 +7,13 @@ import WishLists from "./WishLists";
 import { useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
-import { Button } from "@/components/ui/button";
 
 export default function Middlebar({ className, type }: any) {
   const { storedCart,wishLists } = useSelector((state: any) => state?.cart);
   const { isAuthenticated, customerInfo } = useAuth();
   return (
-    <div className={`w-full h-[86px] bg-slate-300 ${className}`}>
-      <div className="container mx-auto h-full">
+    <div className={`w-full ssm:h-[75px] smd:h-[86px] bg-slate-300 ${className}`}>
+      <div className="px-3 xsm:px-4 smd:container smd:px-auto mx-auto h-full">
         <div className="relative h-full">
           <div className="flex justify-between items-center h-full">
             <div className="cursor-pointer">
@@ -24,7 +23,7 @@ export default function Middlebar({ className, type }: any) {
                   height={50}
                   src={`https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg`}
                   alt="logo"
-                  className="p-2 w-24 h-24"
+                  className="p-2 w-14 h-14 xsm:w-16 xsm:h-16 ssm:w-16 ssm:h-16 msm:h-20 msm:w-20 smd:w-24 smd:h-24"
                 />
               </Link>
             </div>
@@ -40,7 +39,7 @@ export default function Middlebar({ className, type }: any) {
                   <Link href="" passHref>
                     <p rel="noopener noreferrer">
                       <span>
-                        <icons.FavoriteBorder className="text-2xl" />
+                        <icons.FavoriteBorder className="ssm:text-lg msm:text-xl lsm:text-2xl smd:text-2xl" />
                       </span>
                     </p>
                   </Link>
@@ -62,7 +61,7 @@ export default function Middlebar({ className, type }: any) {
                   <Link href="/cart">
                     <p rel="noopener noreferrer">
                       <span>
-                        <icons.ShoppingBagSolid className="text-2xl" />
+                        <icons.ShoppingBagSolid className="ssm:text-lg msm:text-xl lsm:text-2xl smd:text-2xl" />
                       </span>
                     </p>
                   </Link>
@@ -85,7 +84,7 @@ export default function Middlebar({ className, type }: any) {
                   <Link href="/profile" passHref>
                     <p rel="noopener noreferrer">
                       <span>
-                        <icons.LuUser2 className="text-2xl" />
+                        <icons.LuUser2 className="ssm:text-lg msm:text-xl lsm:text-2xl smd:text-2xl" />
                       </span>
                     </p>
                   </Link>
@@ -95,7 +94,7 @@ export default function Middlebar({ className, type }: any) {
                   <Link href={"/login"}>
                     <p rel="noopener noreferrer">
                       <span>
-                        <icons.FaUserIcons className="text-2xl" />
+                        <icons.FaUserIcons className="ssm:text-lg msm:text-xl lsm:text-2xl smd:text-2xl" />
                       </span>
                     </p>
                   </Link>

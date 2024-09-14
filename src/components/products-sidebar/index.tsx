@@ -75,7 +75,7 @@ const ProductsSideBar = () => {
             dispatch(setProductsDisplayType(""))
         }
         else {
-            dispatch(setProductsDisplayType(value))
+            dispatch(setProductsDisplayType(value)) 
         }
     };
 
@@ -85,7 +85,7 @@ const ProductsSideBar = () => {
             dispatch(setProductsRam(""))
         }
         else {
-            dispatch(setProductsRam(value))
+            dispatch(setProductsRam(value)) 
         }
     };
 
@@ -95,7 +95,7 @@ const ProductsSideBar = () => {
             dispatch(setProductsInternalStorage(""))
         }
         else {
-            dispatch(setProductsInternalStorage(value))
+            dispatch(setProductsInternalStorage(value)) 
         }
     };
     //============== Chipset =============// 
@@ -104,7 +104,7 @@ const ProductsSideBar = () => {
             dispatch(setProductsChipset(""))
         }
         else {
-            dispatch(setProductsChipset(value))
+            dispatch(setProductsChipset(value)) 
         }
     };
 
@@ -114,13 +114,14 @@ const ProductsSideBar = () => {
             dispatch(setProductsRegion(""))
         }
         else {
-            dispatch(setProductsRegion(value))
+            dispatch(setProductsRegion(value)) 
         }
     };
 
+
     return (
         <div className="mt-5 bg-_white border-[1px] border-[#dfedeb] p-5 rounded-md">
-            <div className="border-[1px] border-[#dfedeb] rounded-md p-4">
+            <div className="border-[1px] border-[#dfedeb] rounded-md p-4 ">
                 <div className="flex justify-between items-center">
                     <h4 className="text-xl font-bold">Price Range</h4>
                     <span><FiMinus /></span>
@@ -129,13 +130,13 @@ const ProductsSideBar = () => {
 
                 <div className="mt-5 mb-2">
                     <Slider value={[min, max]} max={10000000} min={100000} step={1} onValueChange={handleSliderChange} className="cursor-pointer" />
-                    <div className="flex flex-col sm:flex-row justify-center sm:gap-6 md:gap-4 gap-1 mt-4">
-                        <Input className="focus:outline-none mb-2 sm:mb-0" type="text" defaultValue={min || 0} onChange={handleMinPriceChange} />
+                    <div className="flex justify-center lg:gap-6 md:gap-4 gap-1 mt-4">
+                        <Input className="focus:outline-none" type="text" defaultValue={min || 0} onChange={handleMinPriceChange} />
                         <Input className="focus:outline-none" type="text" defaultValue={max || 0} onChange={handleMaxPriceChange} />
                     </div>
                 </div>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between ">
                 <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1" className="border-[1px] border-[#dfedeb] rounded-md px-2 my-3">
                         <AccordionTrigger>Display Type</AccordionTrigger>
