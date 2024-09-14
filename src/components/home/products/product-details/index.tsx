@@ -13,6 +13,7 @@ import {
   decrementQuantity,
   incrementQuantity,
   getStoredData,
+  storedWishLists
 } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
@@ -23,7 +24,10 @@ import {
   useGetEmailCartQuery,
   useUpdateCartMutation,
 } from "@/store/features/cart/cartApi";
-import { get_store_data } from "@/utils/get_store_data";
+import { 
+  get_store_data,
+  get_wish_lists 
+} from "@/utils/get_store_data";
 import Loading from "@/components/common/loading";
 import { useExtractUniqueAttributes } from "@/utils/Helpers/Attributes";
 import Attributes from "@/components/common/attributes";
@@ -31,6 +35,8 @@ import { iconsData } from "@/data/prodcuts_details_icons";
 import useAuth from "@/hooks/useAuth";
 import useToaster from "@/hooks/useToaster";
 import QuantityController from "@/components/common/quantity-controller";
+import axios from "axios";
+import { baseApiUrl } from "@/constants/endpoint";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -41,7 +47,8 @@ const ProductDetails = ({ id }: any) => {
   );
   const [viewImage, setViewImages] = useState("");
   const [thisItem, setThisItem] = useState<any>({});
-  const { storedCart } = useSelector((state: any) => state?.cart);
+  const [wishItem,setWishItem]=useState<any>({});
+  const { storedCart,wishLists } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
 
   const [selectedRam, setSelectedRam] = useState<string>(""); // State for selected RAM
@@ -88,6 +95,21 @@ const ProductDetails = ({ id }: any) => {
       }
     }
   }, [storedCart, data]);
+
+  useEffect(()=>{
+    if(wishLists?.length){
+      console.log(wishLists)
+      const filter=wishLists.filter((d:any)=>{return d?.productId===id});
+
+      if(filter?.length){
+        const data=filter[0];
+        setWishItem(data);
+      }else{
+        setWishItem({})
+      }
+      //console.log("Filter::",filter);
+    }
+  },[wishLists])
   // useEffect(() => {
   //   dispatch(addStoredCart(addToCart?.response));
   //   refetch();
@@ -298,33 +320,82 @@ const ProductDetails = ({ id }: any) => {
 
   // Decrement function
   const handleDecrementQuantity = (item:any) => {
-      const new_data=item?.response;
+    const new_data=item?.response;
 
-      if(new_data?._id){
-        console.log("New Data: ",new_data);
-        const token=localStorage.getItem("token");
-        if(token){
+    if(new_data?._id){
+      console.log("New Data: ",new_data);
+      const token=localStorage.getItem("token");
+      if(token){
 
-        }else{
-          const filter=storedCart.filter((d:any)=>{return d?.productId==new_data?._id});
-          let lists:any=[];
-          storedCart.map((d:any)=>{
-            if(d?.productId==new_data?._id){
-              const obj={...d};
-              obj.quantity=obj.quantity-1;
-              lists=[...lists,obj];
-            }else{
-              const obj={
-                ...d
-              }
-              lists=[...lists,obj];
+      }else{
+        const filter=storedCart.filter((d:any)=>{return d?.productId==new_data?._id});
+        let lists:any=[];
+        storedCart.map((d:any)=>{
+          if(d?.productId==new_data?._id){
+            const obj={...d};
+            obj.quantity=obj.quantity-1;
+            lists=[...lists,obj];
+          }else{
+            const obj={
+              ...d
             }
-          })
-          localStorage.setItem("cart_items",JSON.stringify(lists));
-          dispatch(getStoredData(lists));
-        }
+            lists=[...lists,obj];
+          }
+        })
+        localStorage.setItem("cart_items",JSON.stringify(lists));
+        dispatch(getStoredData(lists));
       }
+    }
   };
+
+  // Handle Wish Lists
+  const handleWishLists=async(item:any,hasIn:boolean)=>{
+    if(hasIn){
+      const token=localStorage.getItem("token");
+      await axios.delete(`${baseApiUrl}/wishlist/delete-wishlist/${id}`,{headers:{
+        'Authorization':`Bearer ${token}`
+      }}).then(async(res)=>{
+        if (res.data.isSuccess) {
+          showToast("success", "Wish added successfull");
+          const data: any = await get_wish_lists();
+          if (data?.length) {
+           //console.log("Dataa:::",data);
+            dispatch(storedWishLists(data));
+          } else {
+            dispatch(storedWishLists([]));
+          }
+        } else {
+          showToast("error", "Wish can't add");
+        }
+      }).catch((error)=>{
+        showToast("error", "Wish can't add");
+      })
+    }else{
+      const new_data=item?.response;
+      const email=localStorage.getItem("email");
+      const post_object={
+        email:email,
+        productId:new_data?._id,
+        image:new_data?.image?.viewUrl
+      }
+      axios.post(`${baseApiUrl}/wishlist/create-wishlist`,post_object).then(async(res)=>{
+        if (res.data.isSuccess) {
+          showToast("success", "Wish added successfull");
+          const data: any = await get_wish_lists();
+          if (data?.length) {
+           //console.log("Dataa:::",data);
+            dispatch(storedWishLists(data));
+          } else {
+            dispatch(storedWishLists([]));
+          }
+        } else {
+          showToast("error", "Wish can't add");
+        }
+      }).catch((error)=>{
+        showToast("error", "Wish can't add");
+      })
+    }
+  }
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
       <div className="grid grid-cols-1 lg:grid-cols-7 sm:gap-10">
@@ -394,13 +465,28 @@ const ProductDetails = ({ id }: any) => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5">
             {iconsData.map((item: any, index: number) => (
-              <p
-                key={index}
-                className="text-md font-medium flex items-center gap-3"
+              item?.label=="WISHLIST"?<div
+              key={index}
+              className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
+              onClick={()=>{
+                handleWishLists(data,wishItem?.productId==id?true:false);
+              }}
+              >
+                <icons.MdOutlineFavorite 
+                style={{
+                  color:`${wishItem?.productId==id?'red':'black'}`
+                }} 
+                className="text-xl" 
+                />
+                {item.label}
+              </div>:<Link
+              href={item.link?`/compare/${id}`:""}
+              key={index}
+              className="text-md font-medium flex items-center gap-3"
               >
                 {item.icon}
                 {item.label}
-              </p>
+              </Link>
             ))}
           </div>
           <div className="flex items-center mt-8">
@@ -458,6 +544,7 @@ const ProductDetails = ({ id }: any) => {
                 items={(region?.length > 0 && region) || []}
                 handleSelection={setSelectedRegion}
                 handleVariants={handleVariants}
+                data={data}
               />
             </div>
           </div>

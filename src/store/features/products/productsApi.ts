@@ -15,7 +15,8 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
           region: arg?.region || "",
           displayType: arg?.displayType || "",
           category: arg?.category,
-          subCategory:arg?.subCategory
+          subCategory: arg?.subCategory,
+          searchText:arg?.searchText
         }
       }),
     }),

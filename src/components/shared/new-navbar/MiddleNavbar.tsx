@@ -3,13 +3,14 @@ import SearchInput from "../navbar/searchInput";
 import { icons } from "@/constants/icons";
 import Image from "next/image";
 import Cart from "./Cart";
+import WishLists from "./WishLists";
 import { useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 
 export default function Middlebar({ className, type }: any) {
-  const { storedCart } = useSelector((state: any) => state?.cart);
+  const { storedCart,wishLists } = useSelector((state: any) => state?.cart);
   const { isAuthenticated, customerInfo } = useAuth();
   return (
     <div className={`w-full h-[86px] bg-slate-300 ${className}`}>
@@ -34,21 +35,27 @@ export default function Middlebar({ className, type }: any) {
               <SearchBox type={type} className="search-com" />
             </div>
             <div className="flex space-x-6 items-center">
-              <div className="compaire relative">
-                <Link href="" passHref>
-                  <p rel="noopener noreferrer">
-                    <span>
-                      <icons.FavoriteBorder className="text-2xl" />
-                    </span>
-                  </p>
-                </Link>
-                <span
-                  className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
-                    type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
-                  }`}
-                >
-                  2
-                </span>
+              <div className="cart-wrapper group relative py-4">
+                <div className="cart relative cursor-pointer">
+                  <Link href="" passHref>
+                    <p rel="noopener noreferrer">
+                      <span>
+                        <icons.FavoriteBorder className="text-2xl" />
+                      </span>
+                    </p>
+                  </Link>
+                  <span
+                    className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
+                      type === 3 ? "bg-qh3-blue text-white" : "bg-qyellow"
+                    }`}
+                  >
+                    {wishLists?.length?wishLists?.length:0}
+                  </span>
+                </div>
+                <WishLists
+                type={type}
+                className="absolute -right-[45px] top-11 z-50 hidden group-hover:block"
+                />
               </div>
               <div className="cart-wrapper group relative py-4">
                 <div className="cart relative cursor-pointer">
