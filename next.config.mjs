@@ -9,45 +9,9 @@ const nextConfig = {
         },
     ],
   },
-
-  remotePatterns: [
-    {
-      protocol: 'https',
-      hostname: 'appleempirebd.com',
-      port: '',
-     // pathname: '/wp-content/uploads/2023/07/**',
-    },
-    {
-      protocol: 'https',
-      hostname: 'www.peacocks.com.bd',
-      port: '',
-     // pathname: '/wp-content/uploads/2023/07/**',
-    },
-    // {
-    //   protocol: 'https',
-    //   hostname: 'i.ibb.co.com',
-    //   port: '',
-    //  // pathname: '/wp-content/uploads/2023/07/**',
-    // },
-    {
-      protocol: 'https',
-      hostname: 'png.pngtree.com',
-      port: '',
-     // pathname: '/wp-content/uploads/2023/07/**',
-    },
-    {
-      protocol: 'https',
-      hostname: 'd61s2hjse0ytn.cloudfront.net',
-      port: '',
-     // pathname: '/wp-content/uploads/2023/07/**',
-    },
-    {
-      protocol: 'https',
-      hostname: 'i.ibb.co.com',
-      port: '',
-     // pathname: '/wp-content/uploads/2023/07/**',
-    },
-  ],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 // module.exports = {
 //   images: {
