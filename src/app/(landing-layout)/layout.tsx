@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Carts from "@/components/carts";
 import { 
@@ -23,6 +23,24 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, customerInfo } = useAuth();
   const { token } = useSelector((state: any) => state.user);
   const [addToCartItem]: any = useAddToCartMutation();
+  const inital_loading = useCallback(async (email: any, tokenn: any) => {
+    const data: any = await get_store_data();
+    // call get wish lists apii
+    const wish_lists=await get_wish_lists();
+    //console.log("Res Data",data);
+    if (data?.length) {
+      dispatch(getStoredData(data));
+    } else {
+      dispatch(getStoredData([]));
+    }
+
+    // stored wish lists data
+    if(wish_lists?.length){
+      dispatch(storedWishLists(wish_lists));
+    }else{
+      dispatch(storedWishLists([]));
+    }
+  },[dispatch]);
   useEffect(() => {
     let email: any = localStorage.getItem("email");
     let tokenn: any = localStorage.getItem("token");
@@ -72,26 +90,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         dispatch(getStoredData([]));
       }
     }
-  }, [token, isAuthenticated]);
+  }, [token, isAuthenticated, addToCartItem, inital_loading, dispatch]);
 
-  const inital_loading = async (email: any, tokenn: any) => {
-    const data: any = await get_store_data();
-    // call get wish lists apii
-    const wish_lists=await get_wish_lists();
-    //console.log("Res Data",data);
-    if (data?.length) {
-      dispatch(getStoredData(data));
-    } else {
-      dispatch(getStoredData([]));
-    }
-
-    // stored wish lists data
-    if(wish_lists?.length){
-      dispatch(storedWishLists(wish_lists));
-    }else{
-      dispatch(storedWishLists([]));
-    }
-  };
 
   // const get_store_data=async(email:any,tokenn:any)=>{
   //   //console.log('caledddd')

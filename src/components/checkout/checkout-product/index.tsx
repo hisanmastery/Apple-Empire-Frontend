@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const CheckoutProduct = ({ storedCart, subTotal }: any) => {
   return (
     <div>
@@ -10,10 +12,12 @@ const CheckoutProduct = ({ storedCart, subTotal }: any) => {
           <div className="flex justify-between items-center">
             <div className="flex items-center ">
               <div>
-                <img
+                <Image
                   src={`${product?.image}`}
                   alt="product"
                   className="w-20 h-20 rounded-   md object-contain"
+                  width={80}
+                  height={80}
                 />
               </div>
 

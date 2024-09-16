@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { useCustomerRegisterMutation } from "@/store/api/auth/authApi";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Image from "next/image";
 
 const Signup = () => {
   const {
@@ -37,11 +38,13 @@ const Signup = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#f5edda] via-[#f7d5da] to-[#f9e8fa] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white p-8 rounded-md shadow-md space-y-8">
         <div className="mt-6 text-center text-xl font-extrabold text-gray-900">
-          <img
+          <Image
             className="w-14 mx-auto"
             src={
               "https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg"
             }
+            height={56}
+            width={56}
             alt="logo"
           />
           Create A New Account

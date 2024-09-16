@@ -9,6 +9,7 @@ import { useCustomerLoginMutation } from "@/store/api/auth/authApi";
 import { updateUserToken } from "@/store/features/user/userSlice";
 import { useRouter } from "next/navigation";
 import useToaster from "@/hooks/useToaster";
+import Image from "next/image";
 
 const Login = () => {
   const router = useRouter();
@@ -61,12 +62,14 @@ const Login = () => {
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-md shadow-lg">
         <div>
           <div className="mt-6 text-center text-xl font-extrabold text-gray-900">
-            <img
-              className="w-14 mx-auto"
+            <Image
+              // className="w-14 mx-auto"
               src={
                 "https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg"
               }
               alt="logo"
+              width={56}
+              height={56}
             />
             Log in Apple Empire
           </div>

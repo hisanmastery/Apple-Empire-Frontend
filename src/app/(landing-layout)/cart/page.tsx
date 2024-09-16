@@ -18,6 +18,7 @@ import {
 import { useAddToCartDeleteMutation } from "@/store/features/cart/cartApi";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
 import withAuth from "@/components/hoc/with-auth-wrapper";
+import Image from "next/image";
 
 const CartPage = ({ className }: any) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
@@ -74,10 +75,12 @@ const CartPage = ({ className }: any) => {
       {storedCart?.length == 0 ? (
         <div className="h-[90vh] w-full flex justify-center items-center">
           <div>
-            <img
-              className="w-40 mx-auto"
+            <Image
+              // className="w-40 mx-auto"
               src="https://cdn-icons-png.freepik.com/512/7835/7835563.png"
-              alt=""
+              alt="Image"
+              width={160}
+              height={160}
             />
           </div>
         </div>
