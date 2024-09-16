@@ -22,7 +22,7 @@ const CustomModal: React.FC<ModalProps> = ({
   setIsOpen,
   title,
   description,
-  triggerText,
+
   children,
 }) => {
   return (
@@ -30,10 +30,6 @@ const CustomModal: React.FC<ModalProps> = ({
       <DialogTrigger asChild>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
-        </DialogHeader>
         {children && <div>{children}</div>}
       </DialogContent>
     </Dialog>

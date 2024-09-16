@@ -38,7 +38,7 @@ import QuantityController from "@/components/common/quantity-controller";
 import axios from "axios";
 import { baseApiUrl } from "@/constants/endpoint";
 import {useRouter} from "next/navigation";
-import CustomModal from "@/components/common/model";
+import Emiplan from "@/components/emiplan";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -687,12 +687,9 @@ const ProductDetails = ({ id }: any) => {
       <div className="mt-10">
         <CustomTabs defaultValue={"Specification"} tabs={tabs} />
       </div>
-      <CustomModal
+      <Emiplan
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title="Are you absolutely sure?"
-        description="This action cannot be undone. This will permanently delete your account and remove your data from our servers."
-        triggerText="Open Modal"
       />
     </section>
   );
