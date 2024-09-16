@@ -17,12 +17,12 @@ export default function NewNavbar({ className, type }: any) {
 
   return (
     <div className="sticky top-0 z-[6]">
-      <div className={`w-full bg-_primary h-[50px] smd:h-[60px]`}>
+      <div className={`w-full bg-_white h-[50px] smd:h-[60px]`}>
         <div className=" px-5 smd:container smd:px-auto mx-auto h-full">
           <div className="w-full h-full relative">
             <div className="w-full h-full flex justify-between items-center">
               <div className="category-and-nav flex xl:space-x-7 space-x-3 items-center">
-                <div className="category w-[85vw] ssm:w-[88vw] msm:w-[90vw] smd:w-[270px] h-[45px] smd:h-[53px] bg-white px-5 rounded-t-md mt-[6px] relative">
+                <div className="category w-[85vw] ssm:w-[88vw] msm:w-[90vw] smd:w-[270px] h-[45px] smd:h-[53px] bg-_white px-5 rounded-t-md mt-[6px] relative">
                   <button
                     onClick={handler}
                     type="button"
@@ -56,7 +56,7 @@ export default function NewNavbar({ className, type }: any) {
                             {/* Category Link */}
                             <Link href={`/category/${category.categoryName}`}>
                               <div
-                                className={`flex justify-between items-center px-2 h-10 bg-white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
+                                className={`flex justify-between items-center px-2 h-10 bg-_white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
                                   type === 3
                                     ? "hover:bg-qh3-blue hover:text-white"
                                     : "hover:bg-_primary hover:text-white"
@@ -78,7 +78,7 @@ export default function NewNavbar({ className, type }: any) {
                             {/* Subcategory Dropdown */}
                             {category.subCategory.length > 0 && (
                               <ul
-                                className="absolute left-full top-0 hidden group-hover:block w-[200px] bg-white shadow-lg"
+                                className="absolute left-full top-0 hidden group-hover:block w-[200px] bg-_white shadow-lg"
                                 style={{ zIndex: 10 }}
                               >
                                 {category.subCategory.map(
@@ -115,19 +115,22 @@ export default function NewNavbar({ className, type }: any) {
               </div>
 
               <div className="lg:flex items-center gap-10 hidden">
-                <div className="text-_white text-md">
+                <div className="text-_black text-md">
                   <Link href={"/"}>Home</Link>
                 </div>
-                <div className="text-_white text-md">
+                <div className="text-_black text-md">
                   <Link href={"/section/popular-products"}>Shop</Link>
                 </div>
-                <div className="text-_white text-md">
+                <div className="text-_black text-md">
+                  <Link href={"/pre-order"}>Pre Order</Link>
+                </div>
+                <div className="text-_black text-md">
                   <Link href={"/about"}>About</Link>
                 </div>
-                <div className="text-_white text-md">
+                <div className="text-_black text-md">
                   <Link href={"/"}>Blogs</Link>
                 </div>
-                <div className="text-_white text-md">
+                <div className="text-_black text-md">
                   <Link href={"/"}>Contact</Link>
                 </div>
               </div>

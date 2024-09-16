@@ -1,7 +1,7 @@
 export default function SearchBox({ className }: any) {
   return (
     <>
-      <div className={`w-full h-full flex items-center justify-between bg-white rounded`}>
+      <div className={`w-full h-full flex items-center justify-between bg-_white rounded`}>
         <div className="h-full">
           <form action="#" className="h-full min-h-8 flex items-center px-2">
             <input
@@ -47,7 +47,7 @@ export default function SearchBox({ className }: any) {
           </button>
         </div> */}
         <button
-          className={`w-[93px] h-full min-h-8 text-sm bg-_primary rounded text-_white font-semibold`}
+          className={`w-[93px] h-full min-h-8 text-sm bg-_orange rounded text-_white font-semibold`}
           type="button"
         >
           Search
