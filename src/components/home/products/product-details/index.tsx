@@ -688,7 +688,7 @@ const ProductDetails = ({ id }: any) => {
         <CustomTabs defaultValue={"Specification"} tabs={tabs} />
       </div>
       <Emiplan
-        price={data?.response?.offer_price}
+        price={matchedVariant?.base_sell_price}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />

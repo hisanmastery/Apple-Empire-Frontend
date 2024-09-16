@@ -6,7 +6,7 @@ import { useGetEmiplanQuery } from '@/store/features/emi/emiApi';
 const Emiplan = ({ isOpen, setIsOpen ,price}: any) => {
   const [selectedName, setSelectedName] = useState("AB Bank")
   const [inputPrice,setInputPrice]=useState(price)
-  const { data ,isLoading}: any = useGetEmiplanQuery({ price: inputPrice, bankName: selectedName })
+  const { data }: any = useGetEmiplanQuery({ price: inputPrice, bankName: selectedName })
   const emiData = data?.data
   return (
     <div>
