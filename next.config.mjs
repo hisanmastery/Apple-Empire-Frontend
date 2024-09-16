@@ -13,8 +13,8 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: true,
-  },
+    ignoreDuringBuilds:true
+  }
 };
 // module.exports = {
 //   images: {

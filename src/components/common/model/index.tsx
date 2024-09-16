@@ -10,19 +10,14 @@ import {
 
 interface ModalProps {
   isOpen: boolean;
+  title:String,
   setIsOpen: (open: boolean) => void;
-  title: string;
-  description: string;
-  triggerText: string;
   children?: React.ReactNode;
 }
 
 const CustomModal: React.FC<ModalProps> = ({
   isOpen,
   setIsOpen,
-  title,
-  description,
-
   children,
 }) => {
   return (
