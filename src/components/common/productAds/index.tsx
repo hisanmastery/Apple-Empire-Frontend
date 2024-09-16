@@ -19,13 +19,13 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
                 }  `}
             >
               <Link href="/single-product">
-                <Image src={ads[0]} alt="ads" height={10} width={10} className="w-full sm:h-full h-auto hover:scale-105 ease-in-out transition-all duration-1000" />
+                <img src={ads[0]} alt="ads" className="w-full sm:h-full h-auto hover:scale-105 ease-in-out transition-all duration-1000" />
               </Link>
             </div>
             {ads.length > 1 && ads.length <= 2 && (
               <div data-aos="fade-left" className="w-full sm:w-[50%] h-full overflow-hidden">
                 <Link href="/single-product">
-                  <Image src={ads[1]} alt="ads"  height={10} width={10}  className="w-full h-full hover:scale-105 ease-in-out transition-all duration-1000" />
+                  <img src={ads[1]} alt="ads" className="w-full h-full hover:scale-105 ease-in-out transition-all duration-1000" />
                 </Link>
               </div>
             )}

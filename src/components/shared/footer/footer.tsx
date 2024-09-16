@@ -3,6 +3,7 @@ import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
 import { FaAnglesDown } from "react-icons/fa6";
 import EmailSubscribe from "@/components/home/email-subscribe";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -16,7 +17,9 @@ const Footer = () => {
 
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <div>
-            <img
+            <Image
+                width={80}
+                height={80}
               className="w-[80px]"
               src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
               alt=""
