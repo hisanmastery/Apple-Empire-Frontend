@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomModal from '../common/model';
 import { bankOptions } from '@/data/bank-data';
 import { useGetEmiplanQuery } from '@/store/features/emi/emiApi';
@@ -8,6 +8,9 @@ const Emiplan = ({ isOpen, setIsOpen ,price}: any) => {
   const [inputPrice,setInputPrice]=useState(price)
   const { data }: any = useGetEmiplanQuery({ price: inputPrice, bankName: selectedName })
   const emiData = data?.data
+  useEffect(() => {
+   setInputPrice(price)
+ },[price])
   return (
     <div>
       <CustomModal isOpen={isOpen} setIsOpen={setIsOpen} title="EMI Options">
