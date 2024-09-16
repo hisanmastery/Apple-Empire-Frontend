@@ -38,9 +38,11 @@ import QuantityController from "@/components/common/quantity-controller";
 import axios from "axios";
 import { baseApiUrl } from "@/constants/endpoint";
 import {useRouter} from "next/navigation";
+import CustomModal from "@/components/common/model";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
+  const [isOpen, setIsOpen] = useState(false);
   const { customerInfo } = useAuth();
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
   const [selectedColor, setSelectedColor]: any = useState(
@@ -476,31 +478,44 @@ const ProductDetails = ({ id }: any) => {
             </p> */}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5">
-            {iconsData.map((item: any, index: number) => (
-              item?.label=="WISHLIST"?<div
-              key={index}
-              className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
-              onClick={()=>{
-                handleWishLists(data,wishItem?.productId===id ?? false);
+      {iconsData.map((item: any, index: number) =>
+        item?.label === "WISHLIST" ? (
+          <div
+            key={index}
+            className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
+            onClick={() => {
+              handleWishLists(data, wishItem?.productId === id ?? false);
+            }}
+          >
+            <icons.MdOutlineFavorite
+              style={{
+                color: `${wishItem?.productId === id ? "red" : "black"}`,
               }}
-              >
-                <icons.MdOutlineFavorite 
-                style={{
-                  color:`${wishItem?.productId===id ? 'red':'black'}`
-                }} 
-                className="text-xl" 
-                />
-                {item.label}
-              </div>:<Link
-              href={item.link?`/compare/${id}`:""}
-              key={index}
-              className="text-md font-medium flex items-center gap-3"
-              >
-                {item.icon}
-                {item.label}
-              </Link>
-            ))}
+              className="text-xl"
+            />
+            {item.label}
           </div>
+        ) : item?.label === "EMIPLAN" ? (
+          <div
+            key={index}
+            className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
+            onClick={()=>setIsOpen(true)}
+          >
+            {item.icon}
+            {item.label}
+          </div>
+        ) : (
+          <Link
+            href={item.link ? `/compare/${id}` : ""}
+            key={index}
+            className="text-md font-medium flex items-center gap-3"
+          >
+            {item.icon}
+            {item.label}
+          </Link>
+        )
+      )}
+    </div>
           <div className="flex items-center mt-8">
             <span className="w-[20%]">Color :</span>
             <div className="flex gap-2">
@@ -672,6 +687,13 @@ const ProductDetails = ({ id }: any) => {
       <div className="mt-10">
         <CustomTabs defaultValue={"Specification"} tabs={tabs} />
       </div>
+      <CustomModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title="Are you absolutely sure?"
+        description="This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+        triggerText="Open Modal"
+      />
     </section>
   );
 };
