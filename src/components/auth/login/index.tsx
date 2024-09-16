@@ -22,7 +22,7 @@ const Login = () => {
   const [customerLogin, { isLoading }] = useCustomerLoginMutation();
   const showToast = useToaster();
   const onSubmit = async (data: any) => {
-    const loginData = {
+    const loginData:any = {
       email: data.email,
       password: data.password,
       role: "customer",
@@ -30,7 +30,7 @@ const Login = () => {
     try {
       // Add your signup logic here
       const res: any = await customerLogin(loginData);
-      const loginResponse = res?.data;
+      const loginResponse:any = res?.data;
 
       if (res?.data?.message) {
         showToast("success", res?.data?.message);
@@ -38,10 +38,10 @@ const Login = () => {
         showToast("error", res?.error?.data?.message);
       }
 
-      console.log("Login Response", res);
+      //console.log("Login Response", res);
 
       if (loginResponse.isSuccess) {
-        const accessToken = loginResponse?.data?.accessToken;
+        const accessToken:any = loginResponse?.data?.accessToken;
         const decoded: any = jwt.decode(accessToken);
         // console.log("Decoded",decoded)
         if (decoded?.email) {
