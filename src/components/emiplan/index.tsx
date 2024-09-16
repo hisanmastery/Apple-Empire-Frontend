@@ -7,10 +7,18 @@ const Emiplan = ({isOpen,setIsOpen}:any) => {
       <CustomModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title="Are you absolutely sure?"
-        description="This action cannot be undone. This will permanently delete your account and remove your data from our servers."
-        triggerText="Open Modal"
-      ></CustomModal>
+        title="EMIPLAN"
+      >
+        <div className='grid grid-cols-12'>
+          <div className='col-span-3'>
+            <h1>left side</h1>
+          </div>
+          <div className='col-span-9'>
+             <h1>right side</h1>
+          </div>
+      </div>
+
+      </CustomModal>
     </div>
   );
 };
