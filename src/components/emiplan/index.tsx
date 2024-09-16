@@ -18,7 +18,7 @@ const Emiplan = ({ isOpen, setIsOpen ,price}: any) => {
               {bankOptions?.map((bank) => (
                 <button
                   key={bank.id}
-                  className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded"
+                  className="w-full p-2 bg-_light-blue text-left hover:bg-_primary hover:text-_white rounded"
                   onClick={()=>setSelectedName(bank.name)}
                 >
                   {bank.name}
