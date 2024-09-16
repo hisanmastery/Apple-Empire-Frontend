@@ -1,45 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CustomModal from '../common/model';
+import { bankOptions } from '@/data/bank-data';
+import { useGetEmiplanQuery } from '@/store/features/emi/emiApi';
 
-const Emiplan = ({ isOpen, setIsOpen }: any) => {
+const Emiplan = ({ isOpen, setIsOpen ,price}: any) => {
+  const [selectedName, setSelectedName] = useState("AB Bank")
+  const [inputPrice,setInputPrice]=useState(price)
+  const { data ,isLoading}: any = useGetEmiplanQuery({ price: inputPrice, bankName: selectedName })
+  const emiData = data?.data
   return (
     <div>
       <CustomModal isOpen={isOpen} setIsOpen={setIsOpen} title="EMI Options">
         <div className="grid grid-cols-12 h-[500px]">
-          {/* Left sidebar with buttons */}
+          {/* Left sidebar with dynamic bank buttons */}
           <div className="col-span-4 border-r-2 border-gray-200 overflow-y-auto">
             <div className="flex flex-col space-y-2 p-2">
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                AB Bank
-              </button>
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                AB Bank - Online
-              </button>
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                Al-Arafah
-              </button>
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                Al-Arafah Islami Bank - Online
-              </button>
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                Bank Asia
-              </button>
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                Bank Asia - Online
-              </button>
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                Brac Bank
-              </button>
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                CBBL - Online
-              </button>
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                City Bank
-              </button>
-              <button className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded">
-                City Bank (AMEX) - Online
-              </button>
-              {/* Add more buttons as needed */}
+              {bankOptions?.map((bank) => (
+                <button
+                  key={bank.id}
+                  className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded"
+                  onClick={()=>setSelectedName(bank.name)}
+                >
+                  {bank.name}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -53,8 +37,10 @@ const Emiplan = ({ isOpen, setIsOpen }: any) => {
               <input
                 type="number"
                 id="amount"
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none"
                 placeholder="0"
+                value={inputPrice}
+                onChange={(e:any)=>setInputPrice(e.target.value)}
               />
             </div>
 
@@ -65,22 +51,22 @@ const Emiplan = ({ isOpen, setIsOpen }: any) => {
                   <tr>
                     <th className="p-2 border">Plan (Monthly)</th>
                     <th className="p-2 border">EMI</th>
+                    <th className="p-2 border">EMI Charge</th>
                     <th className="p-2 border">Effective Cost</th>
                   </tr>
                 </thead>
                 <tbody>
                   {/* Sample row data */}
-                  <tr>
-                    <td className="p-2 border text-center">3</td>
-                    <td className="p-2 border text-center">₹1000</td>
-                    <td className="p-2 border text-center">₹3000</td>
-                  </tr>
-                  <tr>
-                    <td className="p-2 border text-center">6</td>
-                    <td className="p-2 border text-center">₹500</td>
-                    <td className="p-2 border text-center">₹6000</td>
-                  </tr>
-                  {/* Add more rows dynamically */}
+                  {emiData?.map((item: any, index: number) => {
+                  return (
+                     <tr key={index}>
+                     <td className="p-2 border text-center">{item?.months}</td>
+                      <td className="p-2 border text-center">₹{item?.emi}</td>
+                      <td className="p-2 border text-center">₹{item?.emiCharge}</td>
+                       <td className="p-2 border text-center">₹{item?.effectiveCost}</td>
+                      </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>

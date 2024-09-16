@@ -25,7 +25,7 @@ const CustomModal: React.FC<ModalProps> = ({
     <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
       <DialogTrigger asChild>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="min-w-[800px]">
         <DialogHeader className="border-b-[1px] border-_primary pb-2">
           <DialogTitle>{ title}</DialogTitle>
         </DialogHeader>
