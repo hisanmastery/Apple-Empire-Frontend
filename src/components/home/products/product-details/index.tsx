@@ -412,9 +412,17 @@ const ProductDetails = ({ id }: any) => {
   }
 
     // Calculate the offer percentage
-    const discountPercentage = Math.round(
-      ((data?.response?.price - data?.response?.offer_price) / data?.response?.price) * 100
-    );
+    const parsePrice = (value: number | string) => {
+      if (typeof value === 'number') return value;
+      return parseFloat((value || '0').toString().replace(/[,৳]/g, ''));
+    };
+  
+    // Parse and log prices
+    const newPrice = parsePrice(data?.response?.price);
+    const newOfferPrice = parsePrice(data?.response?.offer_price);
+    const discountPercentage = newPrice ? Math.round(
+      ((newPrice - newOfferPrice) / newPrice) * 100
+    ) : 0;
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
@@ -514,16 +522,21 @@ const ProductDetails = ({ id }: any) => {
             {item.icon}
             {item.label}
           </div>
-        ) : (
-          <Link
-            href={item.link ? `/compare/${id}` : ""}
-            key={index}
-            className="text-md font-medium flex items-center gap-3"
-          >
-            {item.icon}
-            {item.label}
-          </Link>
-        )
+        ) : item.label === "EXCHANGE"? <Link
+        href={'/exchange-policy'}
+        key={index}
+        className="text-md font-medium flex items-center gap-3"
+      >
+        {item.icon}
+        {item.label}
+      </Link>:<Link
+        href={item.link ? `/compare/${id}` : ""}
+        key={index}
+        className="text-md font-medium flex items-center gap-3"
+      >
+        {item.icon}
+        {item.label}
+      </Link>
       )}
     </div>
           <div className="flex items-center mt-8">

@@ -112,9 +112,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   };
 
   // Calculate the offer percentage
-  const discountPercentage = Math.round(
-    ((datas.price - datas.offer_price) / datas.price) * 100
-  );
+  const parsePrice = (value: number | string) => {
+    if (typeof value === 'number') return value;
+    return parseFloat((value || '0').toString().replace(/[,৳]/g, ''));
+  };
+
+  // Parse and log prices
+  const newPrice = parsePrice(datas?.price);
+  const newOfferPrice = parsePrice(datas?.offer_price);
+  const discountPercentage = newPrice ? Math.round(
+    ((newPrice - newOfferPrice) / newPrice) * 100
+  ) : 0;
 
   const isInCart = storedCart?.find(
     (item: any) => item.productId === datas?._id

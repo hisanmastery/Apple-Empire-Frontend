@@ -135,7 +135,7 @@ const PreOrder: React.FC = () => {
                     {/* Video Embed */}
                     <iframe
                         className="w-full h-64 rounded-lg"
-                        src="https://www.youtube.com/embed/video_id"
+                        src="https://www.youtube.com/embed/7fkif715igA"
                         title="How to Pre-Order"
                         allowFullScreen
                     ></iframe>
