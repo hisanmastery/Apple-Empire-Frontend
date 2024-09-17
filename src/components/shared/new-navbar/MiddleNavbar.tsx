@@ -13,7 +13,7 @@ export default function Middlebar({ className, type }: any) {
   const { storedCart,wishLists } = useSelector((state: any) => state?.cart);
   const { isAuthenticated, customerInfo } = useAuth();
   return (
-    <div className={`w-full ssm:h-[75px] smd:h-[86px] bg-_black ${className}`}>
+    <div className={`w-full ssm:h-[75px] smd:h-[86px] bg-_black ${className} sticky top-0 z-50`}>
       <div className="px-3 xsm:px-4 smd:container smd:px-auto mx-auto h-full">
         <div className="relative h-full">
           <div className="flex justify-between items-center h-full">
@@ -24,13 +24,10 @@ export default function Middlebar({ className, type }: any) {
                   height={50}
                   src={images.NavbarLogo}
                   alt="logo"
-                  className="p-2 w-28"
+                  className="p-2 w-18 md:w-28"
                 />
               </Link>
             </div>
-            {/* <div className="lg:w-[517px] lg:h-[44px] w-[50%] hidden md:block">
-                            <SearchInput />
-                        </div> */}
             <div className="lg:w-[517px] lg:h-[44px] w-[50%] hidden md:block">
               <SearchBox type={type} className="search-com" />
             </div>
@@ -46,7 +43,7 @@ export default function Middlebar({ className, type }: any) {
                   </Link>
                   <span
                     className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
-                      type === 3 ? "bg-qh3-blue text-white" : "bg-_orange"
+                      type === 3 ? "bg-qh3-blue text-_white" : "bg-_primary"
                     }`}
                   >
                     {wishLists?.length?wishLists?.length:0}
@@ -68,7 +65,7 @@ export default function Middlebar({ className, type }: any) {
                   </Link>
                   <span
                     className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
-                      type === 3 ? "bg-qh3-blue text-white" : "bg-_orange"
+                      type === 3 ? "bg-qh3-blue text-_white" : "bg-_primary"
                     }`}
                   >
                     {storedCart?.length || 0}
@@ -85,7 +82,7 @@ export default function Middlebar({ className, type }: any) {
                   <Link href="/profile" passHref>
                     <p rel="noopener noreferrer">
                       <span>
-                        <icons.LuUser2 className="ssm:text-lg msm:text-xl text-_white lsm:text-2xl smd:text-2xl" />
+                        <icons.userIcons className="ssm:text-lg msm:text-xl text-_white lsm:text-2xl smd:text-2xl" />
                       </span>
                     </p>
                   </Link>
@@ -95,7 +92,7 @@ export default function Middlebar({ className, type }: any) {
                   <Link href={"/login"}>
                     <p rel="noopener noreferrer">
                       <span>
-                        <icons.FaUserIcons className="ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
+                        <icons.userIcons className="ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
                       </span>
                     </p>
                   </Link>

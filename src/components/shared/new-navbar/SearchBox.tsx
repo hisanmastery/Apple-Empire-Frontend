@@ -1,58 +1,32 @@
+import { icons } from "@/constants/icons";
+import { useState } from "react";
+
 export default function SearchBox({ className }: any) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = () => {
+      console.log(searchTerm);
+  };
+
   return (
-    <>
-      <div className={`w-full h-full flex items-center justify-between bg-_white rounded`}>
-        <div className="h-full">
-          <form action="#" className="h-full min-h-8 flex items-center px-2">
-            <input
-              type="text"
-              className="search-input focus:outline-none"
-              placeholder="Search Product..."
-            />
-          </form>
-        </div>
-        {/* <div className="w-[1px] h-[22px] border-_primary-text border-[1px]"></div>
-        <div className="flex-1 flex items-center px-4">
-          <button
-            type="button"
-            className="w-full text-xs font-500 text-qgray flex justify-between items-center"
-          >
-            <span>All Categories</span>
-            <span>
-              <svg
-                width="10"
-                height="5"
-                viewBox="0 0 10 5"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect
-                  x="9.18359"
-                  y="0.90918"
-                  width="5.78538"
-                  height="1.28564"
-                  transform="rotate(135 9.18359 0.90918)"
-                  fill="#8E8E8E"
-                />
-                <rect
-                  x="5.08984"
-                  y="5"
-                  width="5.78538"
-                  height="1.28564"
-                  transform="rotate(-135 5.08984 5)"
-                  fill="#8E8E8E"
-                />
-              </svg>
-            </span>
-          </button>
-        </div> */}
+    <form
+        className="flex items-center w-full relative"
+      >
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full p-2 focus:outline-none rounded-full focus:ring-2 focus:ring-_primary transition-all duration-300 ease-in-out"
+          placeholder="Search for products..."
+          aria-label="Search"
+        />
         <button
-          className={`w-[93px] h-full min-h-8 text-sm bg-_orange rounded text-_white font-semibold`}
-          type="button"
+          className="absolute top-2 text-_primary right-3"
+          type="submit"
+          onClick={handleSearch}
         >
-          Search
+        <icons.SearchIcons className="text-xl"/>
         </button>
-      </div>
-    </>
+      </form>
   );
 }

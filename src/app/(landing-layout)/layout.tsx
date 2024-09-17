@@ -13,7 +13,6 @@ import { get_store_data, get_wish_lists } from "@/utils/get_store_data";
 import Footer from "@/components/shared/footer/footer";
 import Navbar from "@/components/shared/navbar";
 import NewNavbar from "@/components/shared/new-navbar";
-import Middlebar from "@/components/shared/new-navbar/MiddleNavbar";
 import useAuth from "@/hooks/useAuth";
 import { useAddToCartMutation } from "@/store/features/cart/cartApi";
 import { Toaster } from "react-hot-toast";
@@ -117,7 +116,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     <main>
       <Toaster />
       {/* <Navbar /> */}
-      <Middlebar />
       <NewNavbar />
       {/* <Carts /> */}
       {/* children content */}

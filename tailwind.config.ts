@@ -73,7 +73,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        _primary: "#029293", // blue
+        _primary: "#EE3F0B", // blue
         _secondary: "#00E0C6 ", //Crystal Blue
         "_dark-color": "#245EB5", // hover dark blue
         "_light-blue": "#E6F4FF", // light blue for bacground

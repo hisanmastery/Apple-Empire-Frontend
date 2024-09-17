@@ -33,7 +33,7 @@ import { FaXmark } from "react-icons/fa6";
 import { HiBars4 } from "react-icons/hi2";
 import { MdFavoriteBorder } from "react-icons/md";
 import { LiaShoppingBagSolid } from "react-icons/lia";
-import { LuUser2 } from "react-icons/lu";
+import { FaUser } from "react-icons/fa6";
 import { MdPhoneAndroid } from "react-icons/md";
 import { IoGameController } from "react-icons/io5";
 import { MdZoomOutMap } from "react-icons/md";
@@ -53,6 +53,7 @@ import { GrCurrency } from "react-icons/gr";
 import { FaCodeCompare } from "react-icons/fa6";
 import { TbExchange } from "react-icons/tb";
 import { FaApple } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -88,7 +89,7 @@ export const icons = {
   barsIcon: HiBars4,
   FavoriteBorder: MdFavoriteBorder,
   ShoppingBagSolid: LiaShoppingBagSolid,
-  LuUser2: LuUser2,
+  userIcons: FaUser,
   PhoneAndroid: MdPhoneAndroid,
   GameController: IoGameController,
   MdZoomOutMapIcon: MdZoomOutMap,
@@ -108,5 +109,6 @@ export const icons = {
   FaAppleIcons: FaApple,
   FaUserIcons:FaRegUserCircle,
   FaCartIcons: FaCartShopping,
-  MdOutlineFavorite:MdOutlineFavorite,
+  MdOutlineFavorite: MdOutlineFavorite,
+  SearchIcons:FiSearch
 };
