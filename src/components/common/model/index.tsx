@@ -18,13 +18,17 @@ interface ModalProps {
 const CustomModal: React.FC<ModalProps> = ({
   isOpen,
   setIsOpen,
+  title,
   children,
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
       <DialogTrigger asChild>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="min-w-[800px]">
+        <DialogHeader className="border-b-[1px] border-_primary pb-2">
+          <DialogTitle>{ title}</DialogTitle>
+        </DialogHeader>
         {children && <div>{children}</div>}
       </DialogContent>
     </Dialog>
