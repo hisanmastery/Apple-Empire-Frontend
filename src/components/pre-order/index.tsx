@@ -140,10 +140,11 @@ const PreOrder: React.FC = () => {
                     {/* Submit Button */}
                     <div className="mb-4">
                         <button
+                            disabled={isLoading}
                             type="submit"
                             className="w-full py-2 px-4 bg-_orange text-white rounded-lg hover:bg-_orange/80 focus:outline-none focus:ring focus:border-blue-300"
                         >
-                            Submit
+                            {isLoading?"Loading........":"Submit"}
                         </button>
                     </div>
                 </form>
