@@ -441,7 +441,7 @@ const ProductDetails = ({ id }: any) => {
                 alt="Product Image"
               />
              {discountPercentage > 0 && (
-            <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 text-sm rounded">
+            <div className="absolute top-2 right-2 bg-_primary/80 text-white px-2 py-1 text-sm rounded">
               {discountPercentage}% OFF
             </div>
           )}
@@ -477,7 +477,7 @@ const ProductDetails = ({ id }: any) => {
               <span className="text-sm text-md">{selectedRam}</span> |
               <span className="text-sm text-md">{selectedRegion}</span>
               <div className="flex items-center gap-3 mt-3">
-                <span className="text-[18px] md:text-[18px] font-semibold text-red-500 block">
+                <span className="text-[18px] md:text-[18px] font-semibold text-_primary block">
                   ট {matchedVariant?.base_sell_price || 0}
                 </span>
                 <span className="line-through text-md font-semibold">
@@ -485,15 +485,6 @@ const ProductDetails = ({ id }: any) => {
                 </span>
               </div>
             </div>
-            {/* <p>
-              <span className="text-sm md:text-lg">Discount Price:</span>
-              <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">
-                ট {matchedVariant?.base_sell_price || 0}
-              </span>
-              <span className="line-through text-md font-semibold">
-                ট {data?.response?.offer_price}
-              </span>
-            </p> */}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5">
       {iconsData.map((item: any, index: number) =>
