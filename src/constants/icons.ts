@@ -38,6 +38,12 @@ import { MdPhoneAndroid } from "react-icons/md";
 import { IoGameController } from "react-icons/io5";
 import { MdZoomOutMap } from "react-icons/md";
 import { LiaSyncSolid } from "react-icons/lia";
+import { IoMdHome } from "react-icons/io";
+import { FaBloggerB } from "react-icons/fa";
+import { BiSolidContact } from "react-icons/bi";
+import { FcAbout } from "react-icons/fc";
+import { FaFirstOrder } from "react-icons/fa6";
+
 import {
   FaFacebook,
   FaWhatsapp,
@@ -110,5 +116,10 @@ export const icons = {
   FaUserIcons:FaRegUserCircle,
   FaCartIcons: FaCartShopping,
   MdOutlineFavorite: MdOutlineFavorite,
-  SearchIcons:FiSearch
+  SearchIcons: FiSearch,
+  HomeIcon: IoMdHome,
+  PreOrderIcon: FaFirstOrder,
+  ContactIcon: BiSolidContact,
+  BlogIcon:FaBloggerB,
+  AboutIcon:FcAbout
 };
