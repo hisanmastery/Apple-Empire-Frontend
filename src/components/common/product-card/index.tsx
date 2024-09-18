@@ -1,56 +1,40 @@
-"use client";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { icons } from "@/constants/icons";
 import useAuth from "@/hooks/useAuth";
 import useToaster from "@/hooks/useToaster";
-import {
-  useAddToCartMutation,
-  useGetEmailCartQuery,
-} from "@/store/features/cart/cartApi";
-import { addStoredCart, getStoredData } from "@/store/features/cart/cartSlice";
+import { useAddToCartMutation } from "@/store/features/cart/cartApi";
+import { getStoredData } from "@/store/features/cart/cartSlice";
 import { get_store_data } from "@/utils/get_store_data";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { title } from "process";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-const ProductCard = ({ datas }: any) => {
+
+// Define the type for the datas prop (can adjust as per your model)
+interface ProductData {
+  _id: string;
+  title: string;
+  price: number;
+  offer_price: number;
+  image: { viewUrl: string };
+  review: number;
+}
+
+interface ProductCardProps {
+  datas: ProductData;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const router = useRouter();
   const [addToCartItem]: any = useAddToCartMutation();
   const { isAuthenticated, customerInfo }: any = useAuth();
   const showToast = useToaster();
-  // const { data, refetch }: any = useGetEmailCartQuery({
-  //   email: customerInfo?.email,
-  // });
-  const [addToCart]: any = useAddToCartMutation();
-  // handle add to cart
-  // const handleAddToCart = async (data: any) => {
-  //   if (!isAuthenticated) {
-  //     router.push("/login");
-  //   } else {
-  //     const payload = {
-  //       email: customerInfo.email,
-  //       title: data?.title,
-  //       productId: data?._id,
-  //       price: data?.offer_price,
-  //       totalPrice: data?.offer_price,
-  //       image: data?.image?.viewUrl,
-  //       quantity: 0,
-  //     };
-  //     const res: any = await addToCart({ payload });
-  //     if (res?.data?.isSuccess) {
-  //       // refetch();
-  //     }
-  //   }
-  // };
 
-  const handleAddToCart = async (productData: any) => {
+  const handleAddToCart = async (productData: ProductData) => {
     const data = productData;
     const token = localStorage.getItem("token");
-    const email = localStorage.getItem("email");
 
     if (token && isAuthenticated) {
       const payload = {
@@ -63,7 +47,7 @@ const ProductCard = ({ datas }: any) => {
       };
       const res: any = await addToCartItem({ payload });
       if (res.data.isSuccess) {
-        showToast("success", "Cart added successfull");
+        showToast("success", "Cart added successfully");
         const data: any = await get_store_data();
         if (data?.length) {
           dispatch(getStoredData(data));
@@ -71,35 +55,27 @@ const ProductCard = ({ datas }: any) => {
           dispatch(getStoredData([]));
         }
       } else {
-        showToast("error", "Cart can't add");
+        showToast("error", "Cart can't be added");
       }
     } else {
       let product_items: any = localStorage.getItem("cart_items");
-
       product_items = JSON.parse(product_items);
 
       if (product_items?.length) {
-        const data = productData;
         const item_id = data?._id;
 
         if (item_id) {
           const lists: any = [...product_items];
+          const filters = lists.filter((d: any) => d?.productId === item_id);
 
-          const filters = lists.filter((d: any) => {
-            return d?.productId == item_id;
-          });
-
-          if (filters.length == 1) {
+          if (filters.length === 1) {
             let new_lists: any = [];
             product_items.map((d: any) => {
-              if (d?.productId == item_id) {
-                const obj = { ...d };
-                obj.quantity = d.quantity + 1;
-                new_lists = [...new_lists, obj];
-              } else {
-                const obj = { ...d };
-                new_lists = [...new_lists, obj];
+              const obj = { ...d };
+              if (d?.productId === item_id) {
+                obj.quantity += 1;
               }
+              new_lists = [...new_lists, obj];
             });
             localStorage.setItem("cart_items", JSON.stringify(new_lists));
             dispatch(getStoredData(new_lists));
@@ -112,8 +88,7 @@ const ProductCard = ({ datas }: any) => {
               image: data?.image?.viewUrl,
               quantity: 1,
             };
-            let cart_items: any = [...product_items];
-            cart_items = [...cart_items, payload];
+            let cart_items: any = [...product_items, payload];
             localStorage.setItem("cart_items", JSON.stringify(cart_items));
             dispatch(getStoredData(cart_items));
           }
@@ -129,21 +104,30 @@ const ProductCard = ({ datas }: any) => {
           image: data?.image?.viewUrl,
           quantity: 1,
         };
-        let cart_items: any = [];
-        cart_items = [...cart_items, payload];
+        let cart_items: any = [payload];
         localStorage.setItem("cart_items", JSON.stringify(cart_items));
         dispatch(getStoredData(cart_items));
       }
     }
   };
 
-  // useEffect(() => {
-  //   dispatch(addStoredCart(data?.response));
-  // }, [data?.response, dispatch]);
-  // check already added cart
+  // Calculate the offer percentage
+  const parsePrice = (value: number | string) => {
+    if (typeof value === 'number') return value;
+    return parseFloat((value || '0').toString().replace(/[,৳]/g, ''));
+  };
+
+  // Parse and log prices
+  const newPrice = parsePrice(datas?.price);
+  const newOfferPrice = parsePrice(datas?.offer_price);
+  const discountPercentage = newPrice ? Math.round(
+    ((newPrice - newOfferPrice) / newPrice) * 100
+  ) : 0;
+
   const isInCart = storedCart?.find(
     (item: any) => item.productId === datas?._id
   );
+
   return (
     <div
       className="overflow-hidden"
@@ -151,6 +135,13 @@ const ProductCard = ({ datas }: any) => {
     >
       <>
         <div className="cursor-pointer product-card-one w-full h-full max-h-[340px] text-nowrap bg-white relative group hover:scale-105 ease-in-out duration-700">
+          {/* Display Offer Percentage */}
+          {discountPercentage > 0 && (
+            <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 text-sm rounded">
+              {discountPercentage}% OFF
+            </div>
+          )}
+
           <Link href={`/products/${datas?._id}`}>
             <div
               className="product-card-img w-full h-[300px]"
@@ -164,35 +155,12 @@ const ProductCard = ({ datas }: any) => {
               }}
             ></div>
           </Link>
-          <div className=" px-[30px] pb-[30px] relative">
-            {/* add to card button */}
-            {/*<div className="absolute w-full z-50  px-[30px]  top-40 mx-auto group-hover:top-[50px] transition-all duration-300 ease-in-out">
-              <Button
-                disabled={isInCart}
-                onClick={() => handleAddToCart(datas)}
-                className={`bg-_primary uppercase mb-52 ${
-                  !isInCart
-                    ? " hover:bg-_secondary hover:text-black"
-                    : "bg-slate-500 opacity-40"
-                } `}
-                type="button"
-              >
-                <div className="flex items-center space-x-3 w-full">
-                  <span></span>
-                  <span>Add To Cart</span>
-                </div>
-              </Button>
-            </div>*/}
+          <div className="px-[30px] pb-[30px] relative">
             <Link href={`/products/${datas?._id}`}>
               <div className="reviews flex space-x-[1px] mb-3">
                 {Array.from(Array(datas.review), () => (
                   <span key={datas.review + Math.random()}>
-                    {/* <Star /> */}
                     <div className="flex text-yellow-400">
-                      {<icons.FaStar />}
-                      {<icons.FaStar />}
-                      {<icons.FaStar />}
-                      {<icons.FaStar />}
                       {<icons.FaStar />}
                     </div>
                   </span>
@@ -210,34 +178,36 @@ const ProductCard = ({ datas }: any) => {
                 {datas.offer_price}
               </span>
             </p>
-            <div className='flex space-x-2'>
+
+            {/* Add to Cart and Buy Now Buttons */}
+            <div className="flex space-x-2">
               <Button
-                  disabled={isInCart}
-                  onClick={() => handleAddToCart(datas)}
-                  className={`bg-_primary uppercase mb-52 ${
-                      !isInCart
-                          ? " hover:bg-_secondary hover:text-black"
-                          : "bg-slate-500 opacity-40"
-                  } `}
-                  type="button"
+                disabled={isInCart}
+                onClick={() => handleAddToCart(datas)}
+                className={`bg-_primary uppercase mb-52 ${
+                  !isInCart
+                    ? "hover:bg-_secondary hover:text-black"
+                    : "bg-slate-500 opacity-40"
+                } `}
+                type="button"
               >
                 <div className="flex items-center text-xs w-full">
-                  <span></span>
                   <span>{<icons.FaCartIcons className="text-xl" />}</span>
                 </div>
               </Button>
+
               <Button
-                  variant={"outline"}
-                  onClick={isInCart ? ()=>{} :() => handleAddToCart(datas)}
-                  // onClick={() => handleCartClick()}
-                  className="uppercase hover:bg-_primary border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
+                variant={"outline"}
+                onClick={isInCart ? () => {} : () => handleAddToCart(datas)}
+                className="uppercase hover:bg-_primary border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
               >
-                <Link href={"/cart/checkout"}> Buy Now</Link>
+                <Link href={"/cart/checkout"}>Buy Now</Link>
               </Button>
             </div>
           </div>
+
           {/* quick-access-btns */}
-          <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20  transition-all duration-300 ease-in-out">
+          <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20 transition-all duration-300 ease-in-out">
             <a href="#">
               <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
                 {<icons.FavoriteBorder className="text-xl" />}
@@ -251,7 +221,6 @@ const ProductCard = ({ datas }: any) => {
             <a href="#">
               <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
                 {<icons.LiaSyncSolidIcons className="text-xl" />}
-                {/* comperr */}
               </span>
             </a>
           </div>

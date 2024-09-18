@@ -410,6 +410,19 @@ const ProductDetails = ({ id }: any) => {
       })
     }
   }
+
+    // Calculate the offer percentage
+    const parsePrice = (value: number | string) => {
+      if (typeof value === 'number') return value;
+      return parseFloat((value || '0').toString().replace(/[,৳]/g, ''));
+    };
+  
+    // Parse and log prices
+    const newPrice = parsePrice(data?.response?.price);
+    const newOfferPrice = parsePrice(data?.response?.offer_price);
+    const discountPercentage = newPrice ? Math.round(
+      ((newPrice - newOfferPrice) / newPrice) * 100
+    ) : 0;
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
@@ -427,6 +440,11 @@ const ProductDetails = ({ id }: any) => {
                 src={viewImage}
                 alt="Product Image"
               />
+             {discountPercentage > 0 && (
+            <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 text-sm rounded">
+              {discountPercentage}% OFF
+            </div>
+          )}
             </div>
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
               {data?.response?.variations
@@ -504,16 +522,21 @@ const ProductDetails = ({ id }: any) => {
             {item.icon}
             {item.label}
           </div>
-        ) : (
-          <Link
-            href={item.link ? `/compare/${id}` : ""}
-            key={index}
-            className="text-md font-medium flex items-center gap-3"
-          >
-            {item.icon}
-            {item.label}
-          </Link>
-        )
+        ) : item.label === "EXCHANGE"? <Link
+        href={'/exchange-policy'}
+        key={index}
+        className="text-md font-medium flex items-center gap-3"
+      >
+        {item.icon}
+        {item.label}
+      </Link>:<Link
+        href={item.link ? `/compare/${id}` : ""}
+        key={index}
+        className="text-md font-medium flex items-center gap-3"
+      >
+        {item.icon}
+        {item.label}
+      </Link>
       )}
     </div>
           <div className="flex items-center mt-8">
@@ -688,7 +711,7 @@ const ProductDetails = ({ id }: any) => {
         <CustomTabs defaultValue={"Specification"} tabs={tabs} />
       </div>
       <Emiplan
-        price={data?.response?.offer_price}
+        price={matchedVariant?.base_sell_price}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomModal from '../common/model';
 import { bankOptions } from '@/data/bank-data';
 import { useGetEmiplanQuery } from '@/store/features/emi/emiApi';
@@ -6,8 +6,11 @@ import { useGetEmiplanQuery } from '@/store/features/emi/emiApi';
 const Emiplan = ({ isOpen, setIsOpen ,price}: any) => {
   const [selectedName, setSelectedName] = useState("AB Bank")
   const [inputPrice,setInputPrice]=useState(price)
-  const { data ,isLoading}: any = useGetEmiplanQuery({ price: inputPrice, bankName: selectedName })
+  const { data }: any = useGetEmiplanQuery({ price: inputPrice, bankName: selectedName })
   const emiData = data?.data
+  useEffect(() => {
+   setInputPrice(price)
+ },[price])
   return (
     <div>
       <CustomModal isOpen={isOpen} setIsOpen={setIsOpen} title="EMI Options">
@@ -18,7 +21,7 @@ const Emiplan = ({ isOpen, setIsOpen ,price}: any) => {
               {bankOptions?.map((bank) => (
                 <button
                   key={bank.id}
-                  className="w-full p-2 bg-gray-100 text-left hover:bg-gray-200 rounded"
+                  className={`w-full p-2 text-left hover:bg-_primary ${selectedName === bank.name? "bg-_primary text-_white":"bg-_light-blue"} hover:text-_white rounded`}
                   onClick={()=>setSelectedName(bank.name)}
                 >
                   {bank.name}

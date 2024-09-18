@@ -88,6 +88,7 @@ const config = {
         _blue: "#1868D5",
         _gray: "#797D7F",
         qyellow: "#FFBB38",
+        _orange:"#ea580c"
       },
       borderRadius: {
         lg: "var(--radius)",
