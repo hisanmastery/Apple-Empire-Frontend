@@ -483,6 +483,15 @@ const ProductDetails = ({ id }: any) => {
                 <span className="line-through text-md font-semibold">
                   ট {data?.response?.offer_price}
                 </span>
+                <span className={'ml-4'}>
+                  <div
+                      className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
+                      onClick={() => setIsOpen(true)}
+                  >
+                    <icons.GrCurrencyIcons className="text-xl"/>
+                    EMIPLAN
+                  </div>
+                </span>
               </div>
             </div>
             {/* <p>
@@ -507,13 +516,13 @@ const ProductDetails = ({ id }: any) => {
           >
             <icons.MdOutlineFavorite
               style={{
-                color: `${wishItem?.productId === id ? "red" : "black"}`,
+                color: `${wishItem?.productId === id ? "#A53E08" : "black"}`,
               }}
               className="text-xl"
             />
             {item.label}
           </div>
-        ) : item?.label === "EMIPLAN" ? (
+        ) : /*item?.label === "EMIPLAN" ? (
           <div
             key={index}
             className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
@@ -522,7 +531,7 @@ const ProductDetails = ({ id }: any) => {
             {item.icon}
             {item.label}
           </div>
-        ) : item.label === "EXCHANGE"? <Link
+        ) :*/ item.label === "EXCHANGE"? <Link
         href={'/exchange-policy'}
         key={index}
         className="text-md font-medium flex items-center gap-3"
@@ -539,41 +548,43 @@ const ProductDetails = ({ id }: any) => {
       </Link>
       )}
     </div>
-          <div className="flex items-center mt-8">
-            <span className="w-[20%]">Color :</span>
-            <div className="flex gap-2">
-              {data?.response?.variations?.map(
-                (variant: any, index: number) => (
-                  <button
-                    key={index}
-                    onClick={() => handleColorButtonClick(variant.color)}
-                    className={`w-8 h-8 rounded-full ${
-                      variant.color === selectedColor
-                        ? "border-2 border-blue-500"
-                        : "border"
-                    } transition-all duration-300`}
-                    style={{ backgroundColor: variant.color }}
-                  ></button>
-                )
-              )}
+          <div className="flex justify-between items-center mx-1 mt-8">
+            <div className="flex gap-[5rem] items-start">
+              <span className="w-[50px]">Color :</span>
+              <div className="flex gap-2">
+                {data?.response?.variations?.map(
+                    (variant: any, index: number) => (
+                        <button
+                            key={index}
+                            onClick={() => handleColorButtonClick(variant.color)}
+                            className={`w-8 h-8 rounded-full ${
+                                variant.color === selectedColor
+                                    ? "border-2 border-blue-500"
+                                    : "border"
+                            } transition-all duration-300`}
+                            style={{backgroundColor: variant.color}}
+                        ></button>
+                    )
+                )}
+              </div>
             </div>
           </div>
           {/* spacification */}
           <div className="mt-8  ">
             <div className="flex justify-between items-center mx-1">
               <Attributes
-                label="Ram"
-                items={(ram?.length > 0 && ram) || []}
-                handleSelection={setSelectedRam}
-                handleVariants={handleVariants}
+                  label="Ram"
+                  items={(ram?.length > 0 && ram) || []}
+                  handleSelection={setSelectedRam}
+                  handleVariants={handleVariants}
               />
             </div>
             <div className="mt-8 flex justify-between items-center">
               <Attributes
-                label="Storage"
-                items={InternalStorage || []}
-                handleSelection={setSelectedInternalStorage}
-                handleVariants={handleVariants}
+                  label="Storage"
+                  items={InternalStorage || []}
+                  handleSelection={setSelectedInternalStorage}
+                  handleVariants={handleVariants}
               />
               <div></div>
             </div>
@@ -600,7 +611,7 @@ const ProductDetails = ({ id }: any) => {
           </div>
 
           {/* add to cart button */}
-          <div className="flex gap-5 items-center mt-14">
+          <div className="flex gap-5 justify-start items-center mt-14">
             {/* Product Quantity  */}
             <QuantityController
               countQuantity={countQuantity}
@@ -626,8 +637,8 @@ const ProductDetails = ({ id }: any) => {
           </div>
         </div>
       </div>
-      <div className="lg:flex justify-center gap-10 items-center">
-        <div className="flex flex-wrap lg:justify-center mt-8 gap-2 leading-3 col-span-4 lg:col-span-4">
+      <div className="grid grid-cols-1 container lg:grid-cols-9 gap-10">
+        <div className="col-span-3 flex lg:justify-start mt-8 gap-2 leading-3 lg:col-span-4">
           <Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
@@ -640,36 +651,36 @@ const ProductDetails = ({ id }: any) => {
           >
             <icons.FaXTwitterIcons className="text-_black text-lg" />
           </Link>
-          <Link
+          {/*<Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
             <icons.FaWhatsappIcons className="text-_black text-lg" />
-          </Link>
-          <Link
+          </Link>*/}
+         {/* <Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
             <icons.FaPinterestIcons className="text-_black text-lg" />
-          </Link>
-          <Link
+          </Link>*/}
+          {/*<Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
             <icons.FaHandshakeSimple className="text-_black text-lg" />
-          </Link>{" "}
-          <Link
+          </Link>{" "}*/}
+          {/*<Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
             <icons.FaSkypeIcons className="text-_black text-lg" />
-          </Link>
-          <Link
+          </Link>*/}
+          {/*<Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
             <icons.FaEnvelopeIcons className="text-_black text-lg" />
-          </Link>
+          </Link>*/}
           <Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
@@ -680,16 +691,40 @@ const ProductDetails = ({ id }: any) => {
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
-            <icons.FaRedditIcons className="text-_black text-lg" />
+            <icons.FaInstagram className="text-_black text-lg" />
           </Link>
           <Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
-            <icons.FaTelegramIcons className="text-_black text-lg" />
+            <icons.BsTiktok className="text-_black text-lg" />
           </Link>
+          <Link
+            href="#"
+            className="rounded-full p-2 border-[1px] border-_black"
+          >
+            <icons.IoLogoYoutube className="text-_black text-lg" />
+          </Link>
+          <Link
+            href="#"
+            className="rounded-full p-2 border-[1px] border-_black"
+          >
+            <icons.FaGoogle className="text-_black text-lg" />
+          </Link>
+          {/*<Link
+            href="#"
+            className="rounded-full p-2 border-[1px] border-_black"
+          >
+            <icons.FaRedditIcons className="text-_black text-lg" />
+          </Link>*/}
+          {/*<Link
+            href="#"
+            className="rounded-full p-2 border-[1px] border-_black"
+          >
+            <icons.FaTelegramIcons className="text-_black text-lg" />
+          </Link>*/}
         </div>
-        <div>
+        <div className={'col-span-5'}>
           <h5 className="mb-3">Secure Payments</h5>
           <img
             src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"

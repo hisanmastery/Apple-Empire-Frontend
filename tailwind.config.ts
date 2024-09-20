@@ -32,6 +32,8 @@ const config = {
         smd: '560px',
         mmd: '600px',
         lmd: '620px',
+        slg: '660px',
+        mlg: '720px',
         // You can keep the default ones as well if needed
         sm: '640px',   // Small screens
         md: '768px',   // Medium screens
@@ -88,7 +90,7 @@ const config = {
         _blue: "#1868D5",
         _gray: "#797D7F",
         qyellow: "#FFBB38",
-        _orange:"#ea580c"
+        _orange:"#EE3F0B"
       },
       borderRadius: {
         lg: "var(--radius)",

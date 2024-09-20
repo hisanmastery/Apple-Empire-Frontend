@@ -16,7 +16,7 @@ export default function NewNavbar({ className, type }: any) {
   };
 
   return (
-    <div className="sticky top-0 z-[6]">
+    <div className="">
       <div className={`w-full bg-_white h-[50px] smd:h-[60px]`}>
         <div className=" px-5 smd:container smd:px-auto mx-auto h-full">
           <div className="w-full h-full relative">

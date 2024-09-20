@@ -17,8 +17,73 @@ const HeroSection = () => {
   const plugin = React?.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
-
   const products = [
+    {
+      id: "62aefe9ad8b80d5234af625a",
+      image: "https://i.ibb.co.com/jhpqHw6/IMG-20240919-WA0013.jpg",
+      brand: "xioami",
+      review: 3,
+      quantity: 1,
+      description:
+          "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
+      offer_price: 18.73,
+      price: 27.27,
+      campaign_product: false,
+      campaign_product_available: null,
+      campaign_product_sale: null,
+      product_type: null,
+    },
+    {
+      id: "62aefe9ad8b80d5234af625a",
+      image: "https://i.ibb.co.com/HhwkHPh/IMG-20240919-WA0002.jpg",
+      brand: "xioami",
+      review: 3,
+      quantity: 1,
+      description:
+        "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
+      offer_price: 18.73,
+      price: 27.27,
+      campaign_product: false,
+      campaign_product_available: null,
+      campaign_product_sale: null,
+      product_type: null,
+    },
+    {
+      id: "62aefe9ad8b80d5234af625b",
+      image: "https://i.ibb.co.com/4pJSrfm/IMG-20240919-WA0009.jpg",
+      brand: "xioami",
+      review: 4,
+      quantity: 1,
+      description:
+          "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
+      offer_price: 18.73,
+      price: 27.27,
+      campaign_product: false,
+      campaign_product_available: null,
+      campaign_product_sale: null,
+      product_type: null,
+    },
+    // {
+    //   id: "62aefe9ad8b80d5234af625s",
+    //   image: "https://i.ibb.co.com/86FZnTJ/IMG-20240919-WA0006.jpg",
+    //   brand: "xioami",
+    //   review: 4,
+    //   quantity: 1,
+    //   description:
+    //       "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+    //   title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
+    //   offer_price: 18.73,
+    //   price: 27.27,
+    //   campaign_product: false,
+    //   campaign_product_available: null,
+    //   campaign_product_sale: null,
+    //   product_type: null,
+    // },
+  ];
+ /* const products = [
     {
       id: "62aefe9ad8b80d5234af625a",
       image: "https://i.ibb.co/4ZpZQSz/iPhone15.webp",
@@ -67,7 +132,7 @@ const HeroSection = () => {
       campaign_product_sale: null,
       product_type: null,
     },
-  ];
+  ];*/
 
   const hotProducts = [
     {
@@ -118,7 +183,7 @@ const HeroSection = () => {
               <Card className="h-full">
                 <CardContent className="flex w-full  items-center justify-center  lg:h-[480px] h-full p-1">
                   <img
-                    className=""
+                    className="w-full"
                     src={product.image}
                     alt={`Carousel Image ${index + 1}`}
                   />

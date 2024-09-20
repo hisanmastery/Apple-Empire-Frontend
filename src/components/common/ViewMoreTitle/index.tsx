@@ -13,15 +13,15 @@ const ViewMoreTitle = ({
       <div className="container-x mx-auto">
         <div className=" section-title flex justify-between items-center mb-5 md:px-5">
           <div>
-            <h1 className="text-sm msm:text-md sm:text-lg md:text-xl font-600 text-_blue font-semibold uppercase leading-none">
+            <h1 className="text-xs msm:text-md sm:text-lg md:text-xlfont-600 text-black font-semibold uppercase leading-none font-inherit ">
               {categoryTitle}
             </h1>
           </div>
           <div>
             <Link href={seeMoreUrl}>
               <div className="flex space-x-2 items-center">
-                <p className="text-sm msm:text-md sm:text-lg md:text-xl font-600 text-_blue hover:text-blue-400 font-bold">View More</p>
-                <span className="animate-right-dir text-_blue">
+                <p className="text-xs msm:text-md sm:text-lg md:text-xlfont-600 text-black hover:text-blue-400 font-bold font-inherit ">View More</p>
+                {/*<span className="animate-right-dir text-black">
                   <svg
                     width="17"
                     height="14"
@@ -39,7 +39,7 @@ const ViewMoreTitle = ({
                       fill="black"
                     />
                   </svg>
-                </span>
+                </span>*/}
               </div>
             </Link>
           </div>

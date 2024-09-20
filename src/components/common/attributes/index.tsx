@@ -27,8 +27,8 @@ const Attributes = <T,>({ label, items, handleSelection,handleVariants, defaultV
 
   return (
     <div className="flex gap-[5rem] items-start">
-      <span className='w-[10%]'>{label}:</span>
-      <div className="flex flex-wrap gap-2">
+      <span className='w-[50px]'>{label}:</span>
+      <div className="flex gap-2">
         {items?.map((item, index) => (
           <button
             onClick={() => handleClick(item)}

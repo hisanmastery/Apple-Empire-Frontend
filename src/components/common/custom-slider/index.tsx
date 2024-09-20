@@ -5,8 +5,7 @@ import MultiCarousel from "@/components/common/carousel";
 const CustomSlider = ({ sliderProducts }: any) => {
     return (
         <MultiCarousel
-            className="mt-10 bg-slate-200 rounded-md    
-            + p-5"
+            className="mt-10 bg-transparent rounded-md smd:p-5 px-0 py-5 "
             settings={{
                 dots: false,
                 infinite: true,
@@ -47,7 +46,7 @@ const CustomSlider = ({ sliderProducts }: any) => {
                     {
                         breakpoint: 500,
                         settings: {
-                            slidesToShow: 1,
+                            slidesToShow: 2,
                             slidesToScroll: 1,
                         },
                     },
@@ -59,8 +58,7 @@ const CustomSlider = ({ sliderProducts }: any) => {
                 ?.map((product: any, index: number) => (
                     <div
                         key={index}
-                        className="aspect-w-16 aspect-h-9 lg:basis-1/6 "
-                        style={{ margin: "0 10px" }}
+                        className="aspect-w-10 aspect-h-5 lg:basis-1/6 mx-1 "
                     >
                         <ProductCard key={product._id} datas={product}></ProductCard>
                     </div>

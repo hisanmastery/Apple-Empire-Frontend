@@ -17,6 +17,7 @@ import Middlebar from "@/components/shared/new-navbar/MiddleNavbar";
 import useAuth from "@/hooks/useAuth";
 import {useAddToCartMutation} from "@/store/features/cart/cartApi";
 import {Toaster} from "react-hot-toast";
+import {FloatingWhatsApp} from "react-floating-whatsapp";
 
 const DashboardLayout = ({children}: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
@@ -114,15 +115,18 @@ const DashboardLayout = ({children}: { children: React.ReactNode }) => {
     // }
 
     return (
-        <main>
+        <main style={{backgroundColor: 'lightgrey'}}>
             <Toaster/>
             {/* <Navbar /> */}
-            <Middlebar/>
-            <NewNavbar/>
+            <div className={'sticky top-0 z-[6]'}>
+                <Middlebar/>
+                <NewNavbar/>
+            </div>
             {/* <Carts /> */}
             {/* children content */}
-            <div className="overflow-auto col-span-4 p-1">{children}</div>
+            <div className=" overflow-auto col-span-4 p-1" >{children}</div>
             <Footer/>
+            <FloatingWhatsApp phoneNumber="01907252606" accountName="Apple Empire" avatar="https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg" />
         </main>
     );
 };

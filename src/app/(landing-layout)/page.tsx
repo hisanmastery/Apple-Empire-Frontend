@@ -8,7 +8,6 @@ const DashboardPageLayout = () => {
     <main>
       <HeroSection />
       <Home/>
-      <FloatingWhatsApp phoneNumber="01907252606" accountName="Apple Empire" avatar="https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg" />
     </main>
   );
 };

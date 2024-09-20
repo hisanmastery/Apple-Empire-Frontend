@@ -65,11 +65,12 @@ const Login = () => {
             <Image
               // className="w-14 mx-auto"
               src={
-                "https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg"
+                "https://i.ibb.co.com/qrVJBy8/Whats-App-Image-2024-09-20-at-22-00-34-82706a25.jpg"
               }
+              className={'mx-auto mb-3'}
               alt="logo"
-              width={56}
-              height={56}
+              width={90}
+              height={90}
             />
             Log in Apple Empire
           </div>

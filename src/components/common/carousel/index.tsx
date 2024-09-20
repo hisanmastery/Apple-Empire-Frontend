@@ -56,13 +56,13 @@ const MultiCarousel = ({ children, settings, className }: any) => {
       </Slider>
       <div style={{ textAlign: "center" }}>
         <button
-          className="button absolute  left-8 top-[50%]"
+          className="button absolute bg-_white-ice font-thin p-1 rounded-full left-9 top-[50%]"
           onClick={previous}
         >
-          <icons.previousIcon className="text-2xl text-_primary" />
+          <icons.GoArrowLeft className="text-xl text-_orange" />
         </button>
-        <button className="button absolute  right-8 top-[50%]" onClick={next}>
-          <icons.nextIcon className="text-2xl text-_primary" />
+        <button className="button absolute bg-_white-ice p-1 font-thin rounded-full right-8 top-[50%]" onClick={next}>
+          <icons.GoArrowRight className="text-xl text-_orange" />
         </button>
       </div>
     </div>

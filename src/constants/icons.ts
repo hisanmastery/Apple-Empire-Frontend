@@ -9,14 +9,14 @@ import {MdTimer, MdOutlineFavorite} from "react-icons/md";
 import {MdOutlineSupportAgent} from "react-icons/md";
 import {SlBadge} from "react-icons/sl";
 import {IoCheckmark, IoCheckmarkDoneCircleSharp} from "react-icons/io5";
-import {BsBagCheckFill} from "react-icons/bs";
+import {BsBagCheckFill, BsTiktok} from "react-icons/bs";
 import {TbWorldPlus} from "react-icons/tb";
 import {MdSupervisorAccount} from "react-icons/md";
 import {FaCircleInfo} from "react-icons/fa6";
 import {MdEmail} from "react-icons/md";
 import {IoCall} from "react-icons/io5";
 import {FaLocationDot} from "react-icons/fa6";
-import {FaLongArrowAltRight} from "react-icons/fa";
+import {FaArrowRight, FaGoogle, FaInstagram, FaLongArrowAltRight} from "react-icons/fa";
 import {FaStar} from "react-icons/fa6";
 import {AiOutlineShopping} from "react-icons/ai";
 import {FaPlusCircle} from "react-icons/fa";
@@ -28,7 +28,7 @@ import {RiSecurePaymentLine} from "react-icons/ri";
 import {GrNext} from "react-icons/gr";
 import {GrPrevious} from "react-icons/gr";
 import {FaArrowLeft} from "react-icons/fa6";
-import {IoMdCheckmark, IoMdSearch} from "react-icons/io";
+import {IoLogoYoutube, IoMdCheckmark, IoMdSearch} from "react-icons/io";
 import {FaXmark} from "react-icons/fa6";
 import {HiBars4} from "react-icons/hi2";
 import {MdFavoriteBorder} from "react-icons/md";
@@ -53,6 +53,7 @@ import {GrCurrency} from "react-icons/gr";
 import {FaCodeCompare} from "react-icons/fa6";
 import {TbExchange} from "react-icons/tb";
 import {FaApple} from "react-icons/fa";
+import {GoArrowLeft, GoArrowRight} from "react-icons/go";
 
 export const icons = {
     GiDiscussion,
@@ -113,4 +114,12 @@ export const icons = {
     FaShop: FaShop,
     MdAddShoppingCart : MdAddShoppingCart,
     IoMdSearch  : IoMdSearch,
+    FaInstagram:FaInstagram,
+    BsTiktok: BsTiktok,
+    IoLogoYoutube: IoLogoYoutube,
+    FaGoogle: FaGoogle,
+    GoArrowLeft: GoArrowLeft,
+    GoArrowRight: GoArrowRight,
+
+
 };

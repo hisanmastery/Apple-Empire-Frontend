@@ -10,6 +10,7 @@ import TopItems from "./top-items";
 import MultiCarousel from "../common/carousel";
 import ProductSlider from "./product-slider";
 import CampaignsCountDown from "./campaigns-count-down";
+import HomePopup from "@/components/home/popup/HomePopup";
 
 const Home = () => {
   return (
@@ -18,10 +19,12 @@ const Home = () => {
         {/* category */}
         <TopItems />
 
+        <HomePopup />
+
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/9-2024/MSI_Thin_GF63_12U.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/7-2024/Monitors.webp`,
+            `https://i.ibb.co.com/86FZnTJ/IMG-20240919-WA0006.jpg`,
+            `https://i.ibb.co.com/mvbRnLK/IMG-20240919-WA0003.jpg`,
           ]}
           className=" lg:container mx-auto"
         />
@@ -53,7 +56,7 @@ const Home = () => {
 
         {/* top selling product */}
         <ViewMoreTitle
-          className="top-selling-product mb-[60px] lg:container"
+          className="top-selling-product mb-[60px] px-0 lg:container"
           seeMoreUrl="/section/top-selling-product"
           categoryTitle="All Products"
         >
@@ -63,8 +66,8 @@ const Home = () => {
         {/* product ads banner */}
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/9-2024/MSI_Thin_GF63_12U.webp`,
-            `https://d61s2hjse0ytn.cloudfront.net/vertical_image/7-2024/Monitors.webp`,
+            `https://i.ibb.co.com/jhpqHw6/IMG-20240919-WA0013.jpg`,
+            `https://i.ibb.co.com/HhwkHPh/IMG-20240919-WA0002.jpg`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
@@ -82,7 +85,7 @@ const Home = () => {
         {/* ads banner */}
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/horizontal_image/7-2024/Amazfit_Banner.webp`,
+            `https://i.ibb.co.com/p1rRxys/IMG-20240919-WA0005.jpg`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
@@ -96,7 +99,7 @@ const Home = () => {
         </ViewMoreTitle>
         <ProductAds
           ads={[
-            `https://d61s2hjse0ytn.cloudfront.net/horizontal_image/7-2024/Amazfit_Banner.webp`,
+            `https://i.ibb.co.com/V2rBT18/IMG-20240919-WA0012.jpg`,
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
