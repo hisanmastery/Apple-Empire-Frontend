@@ -96,7 +96,7 @@ const ClientBrand = () => {
       <div className="grid lg:grid-cols-8 md:grid-cols-7 smd:grid-cols-6 lsm:grid-cols-5 ssm:grid-cols-4 grid-cols-3 lg:gap-5 gap-2">
         {brandData?.map((brand, index) => (
           <div key={index} className=" bg-white flex items-center justify-center shadow-sm rounded ">
-            <Image className="w-28 h-28 p-1 mx-auto" height={100} width={100} src={brand.image} />
+            <Image className="w-28 h-28 p-1 mx-auto" height={100} width={100} src={brand.image} alt={'image'}/>
           </div>
         ))}
       </div>
