@@ -115,7 +115,7 @@ const DashboardLayout = ({children}: { children: React.ReactNode }) => {
     // }
 
     return (
-        <main style={{backgroundColor: 'lightgrey'}}>
+        <main style={{backgroundColor: '##e9f4ff6e'}}>
             <Toaster/>
             {/* <Navbar /> */}
             <div className={'sticky top-0 z-[6]'}>

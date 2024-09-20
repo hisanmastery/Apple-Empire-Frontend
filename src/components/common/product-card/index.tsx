@@ -134,7 +134,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
       // style={{ boxShadow: "0px 0px 1px 0px gray" }}
     >
       <>
-        <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-white relative group hover:scale-105 rounded-lg ease-in-out border-solid border-[1px] border-gray-400  duration-700">
+        <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-white relative group hover:scale-105 rounded-lg ease-in-out  duration-700">
           {/* Display Offer Percentage */}
           {discountPercentage > 0 && (
             <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 sm:text-sm rounded text-xs">
