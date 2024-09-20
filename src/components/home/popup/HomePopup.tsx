@@ -16,7 +16,7 @@ const HomePopup = () => {
             setIsOpen(true);
 
             // Set a cookie to remember that the popup has been shown
-            Cookies.set('hasSeenPopup', 'true', { expires: 30 / 1440 }); // Expires in 30 minutes
+            Cookies.set('hasSeenPopup', 'true', { expires: 1/24 });
         }
 
         // Function to handle clicks outside of the popup
