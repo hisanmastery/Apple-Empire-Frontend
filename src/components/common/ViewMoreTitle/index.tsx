@@ -11,22 +11,23 @@ const ViewMoreTitle = ({
   return (
     <div style={{ marginTop: '30px' }} className={`section-wrapper w-full  ${className || ""}`}>
       <div className="container-x mx-auto">
-        <div className=" section-title flex justify-between items-center mb-5">
+        <div className=" section-title flex justify-between items-center mb-5 md:px-5">
           <div>
-            <h1 className="text-md msm:text-lg sm:text-xl font-600 text-_blue font-semibold uppercase leading-none">
+            <h1 className="text-sm msm:text-md sm:text-lg md:text-xl font-600 text-_blue font-semibold uppercase leading-none">
               {categoryTitle}
             </h1>
           </div>
           <div>
             <Link href={seeMoreUrl}>
               <div className="flex space-x-2 items-center">
-                <p className="text-md msm:text-lg sm:text-xl font-600 text-_blue hover:text-blue-400 font-bold">View More</p>
+                <p className="text-sm msm:text-md sm:text-lg md:text-xl font-600 text-_blue hover:text-blue-400 font-bold">View More</p>
                 <span className="animate-right-dir text-_blue">
                   <svg
                     width="17"
                     height="14"
                     viewBox="0 0 17 14"
                     fill="none"
+                    className={'w-3 h-3'}
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path

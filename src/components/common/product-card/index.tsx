@@ -184,22 +184,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
               <Button
                 disabled={isInCart}
                 onClick={() => handleAddToCart(datas)}
-                className={`bg-_primary uppercase mb-52 ${
+                className={`bg-_primary uppercase mb-52 px-2 h-8 py-0 text-[9px] ${
                   !isInCart
                     ? "hover:bg-_secondary hover:text-black"
                     : "bg-slate-500 opacity-40"
                 } `}
                 type="button"
               >
-                <div className="flex items-center text-xs w-full">
-                  <span>{<icons.FaCartIcons className="text-xl" />}</span>
+                <div className="flex items-center w-full">
+                  <span>Add To Cart</span>
                 </div>
               </Button>
 
               <Button
                 variant={"outline"}
                 onClick={isInCart ? () => {} : () => handleAddToCart(datas)}
-                className="uppercase hover:bg-_primary border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
+                className="h-8 uppercase px-2 py-0 hover:bg-_primary border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-[9px]"
               >
                 <Link href={"/cart/checkout"}>Buy Now</Link>
               </Button>

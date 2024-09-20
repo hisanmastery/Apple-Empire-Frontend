@@ -22,7 +22,7 @@ export default function NewNavbar({ className, type }: any) {
           <div className="w-full h-full relative">
             <div className="w-full h-full flex justify-between items-center">
               <div className="category-and-nav flex xl:space-x-7 space-x-3 items-center">
-                <div className="category w-[85vw] ssm:w-[88vw] msm:w-[90vw] smd:w-[270px] h-[45px] smd:h-[53px] bg-_white px-5 rounded-t-md mt-[6px] relative">
+                <div className="category w-[85vw] ssm:w-[88vw] msm:w-[90vw] smd:w-[270px] h-[40px] smd:h-[53px] bg-_white px-5 rounded-t-md mt-[6px] relative">
                   <button
                     onClick={handler}
                     type="button"
@@ -32,7 +32,7 @@ export default function NewNavbar({ className, type }: any) {
                       <span>
                         <icons.barsIcon />
                       </span>
-                      <span className="text-sm font-600 text-qblacktext">
+                      <span className="text-xs sm:text-sm font-600 text-qblacktext">
                         All Categories
                       </span>
                     </div>
@@ -46,7 +46,7 @@ export default function NewNavbar({ className, type }: any) {
 
                   {/* Category Dropdown */}
                   {categoryToggle && (
-                    <div className="category-dropdown w-full absolute left-0 top-[47px] sm:top-[47px] smd:top-[53px]">
+                    <div className="category-dropdown w-full absolute left-0 top-[43px] sm:top-[47px] smd:top-[53px]">
                       <ul className="categories-list">
                         {categoriesData?.categories?.map((category: any) => (
                           <li

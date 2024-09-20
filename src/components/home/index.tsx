@@ -23,7 +23,7 @@ const Home = () => {
             `https://d61s2hjse0ytn.cloudfront.net/vertical_image/9-2024/MSI_Thin_GF63_12U.webp`,
             `https://d61s2hjse0ytn.cloudfront.net/vertical_image/7-2024/Monitors.webp`,
           ]}
-          className=" mb-[60px] lg:container mx-auto"
+          className=" lg:container mx-auto"
         />
         {/* brand profile */}
         <ViewMoreTitle
