@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const HomePopup = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const popupRef = useRef(null);
+    const popupRef:any = useRef(null);
 
     useEffect(() => {
         // Check if the popup has already been shown via cookies
