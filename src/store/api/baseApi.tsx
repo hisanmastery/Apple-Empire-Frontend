@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.appleempirebd.com" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_URL }),
   endpoints: (builder) => ({
     // find all blog
     GetBlogs: builder.query({
