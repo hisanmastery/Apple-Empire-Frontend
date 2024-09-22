@@ -425,8 +425,8 @@ const ProductDetails = ({ id }: any) => {
     ) : 0;
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
-      <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
-        <div className="col-span-3 flex">
+      <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
+        <div className="col-span-3 flex mx-auto">
           <div>
             <div
               className="relative overflow-hidden bg-_white border w-[90%] md:w-[80%] mx-auto"
@@ -469,30 +469,34 @@ const ProductDetails = ({ id }: any) => {
         </div>
         <div className="col-span-4 bg-white px-2 md:px-5">
           <div className="flex justify-between">
-            <div>
+            <div className={'w-full'}>
               <h2 className="flex items-center gap-2 text-md md:text-xl font-medium ">
                 {/* <icons.FaAppleIcons className="text-xl md:text-4xl" /> */}
                 {data?.response?.title?.slice(0, 50)}
               </h2>
               <span className="text-sm text-md">{selectedRam}</span> |
               <span className="text-sm text-md">{selectedRegion}</span>
-              <div className="flex items-center gap-3 mt-3">
+              <div className="grid grid-cols-2 items-center lg:max-w-[500px] ">
+                <div className="flex items-center  gap-2 mt-3">
                 <span className="text-[18px] md:text-[18px] font-semibold text-red-500 block">
                   ট {matchedVariant?.base_sell_price || 0}
                 </span>
-                <span className="line-through text-md font-semibold">
+                  <span className="line-through text-md font-semibold">
                   ট {data?.response?.offer_price}
                 </span>
-                <span className={'ml-4'}>
+
+                </div>
+                <div className={'ml-2 text-md font-medium flex items-center gap-3 hover:cursor-pointer'}>
                   <div
-                      className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
+                      className="text-md font-medium text-_orange flex items-center gap-3 hover:cursor-pointer"
                       onClick={() => setIsOpen(true)}
                   >
                     <icons.GrCurrencyIcons className="text-xl"/>
                     EMIPLAN
                   </div>
-                </span>
+                </div>
               </div>
+
             </div>
             {/* <p>
               <span className="text-sm md:text-lg">Discount Price:</span>
@@ -505,12 +509,12 @@ const ProductDetails = ({ id }: any) => {
             </p> */}
           </div>
           <div className="grid grid-cols-2 gap-5 lg:max-w-[500px] mt-5">
-      {iconsData.map((item: any, index: number) =>
-        item?.label === "WISHLIST" ? (
-          <div
-            key={index}
-            className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
-            onClick={() => {
+            {iconsData.map((item: any, index: number) =>
+                item?.label === "WISHLIST" ? (
+                    <div
+                        key={index}
+                        className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
+                        onClick={() => {
               handleWishLists(data, wishItem?.productId === id ?? false);
             }}
           >
