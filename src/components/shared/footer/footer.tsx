@@ -43,7 +43,7 @@ const Footer = () => {
         {/* row -2  */}
 
         <div className="grid grid-cols-12 gap-5 justify-between w-full items-center mt-16">
-          <ul className="sm:flex flex-wrap justify-center items-center mx-auto col-span-8 lg:col-span-6  gap-4 font-normal cursor-pointer">
+          <ul className="flex-wrap justify-center items-center mx-auto col-span-12 lg:col-span-6  gap-4 font-normal cursor-pointer">
             <li className="hover:text-[#029293]">About Us</li>
             <li className="hover:text-[#029293]">Order Tracking</li>
             <li className="hover:text-[#029293]">Return Policy</li>
@@ -51,7 +51,7 @@ const Footer = () => {
             <li className="hover:text-[#029293]">Cookie Policy</li>
             <li className="hover:text-[#029293]">Privacy Policy</li>
           </ul>
-          <div className="flex justify-center mt-4 mx-auto space-x-4 leading-3 col-span-5 lsm:col-span-4 lg:col-span-4">
+          <div className="flex justify-center mt-4 mx-auto space-x-4 leading-3 col-span-12 lsm:col-span-4 lg:col-span-4">
             <Link href="#">
               <Facebook className="text-blue-500" />
             </Link>
