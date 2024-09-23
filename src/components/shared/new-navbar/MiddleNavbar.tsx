@@ -9,6 +9,7 @@ import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
 import { images } from "@/constants/images";
 import StickyFooter from "@/components/shared/footer/StickyFooter";
+import React from "react";
 
 export default function Middlebar({ className, type }: any) {
   const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
@@ -90,6 +91,29 @@ export default function Middlebar({ className, type }: any) {
                     type={type}
                     className="absolute -right-[45px] top-11 z-50 hidden group-hover:block"
                 />
+              </div>
+              <div className="cart-wrapper group relative py-4">
+                <div className="cart relative cursor-pointer">
+                  <Link href="/section/popular-products">
+                    <p rel="noopener noreferrer">
+                <span>
+                  <icons.FaShop className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl"/>
+                </span>
+                    </p>
+                  </Link>
+                </div>
+              </div>
+              <div className="cart-wrapper group relative py-4">
+                <div className="cart relative cursor-pointer">
+                  <Link href="/cart">
+                    <p rel="noopener noreferrer">
+                <span>
+                  <icons.MdAddShoppingCart
+                      className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl"/>
+                </span>
+                    </p>
+                  </Link>
+                </div>
               </div>
 
               {isAuthenticated ? (

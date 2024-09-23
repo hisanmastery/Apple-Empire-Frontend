@@ -35,8 +35,8 @@ const Attributes = <T,>({ label, items, handleSelection,handleVariants, defaultV
             key={index}
             className={`inline-flex items-center rounded-md px-4 py-2 text-xs font-medium cursor-pointer border ${
               selected === item
-                ? 'bg-_primary text-white border-_primary'
-                : 'bg-white text-black border-_primary'
+                ? 'bg-_black text-white border-black'
+                : 'bg-white text-black border-black'
             }`}
           >
             {String(item)}

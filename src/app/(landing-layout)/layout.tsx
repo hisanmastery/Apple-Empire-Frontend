@@ -18,6 +18,7 @@ import useAuth from "@/hooks/useAuth";
 import {useAddToCartMutation} from "@/store/features/cart/cartApi";
 import {Toaster} from "react-hot-toast";
 import {FloatingWhatsApp} from "react-floating-whatsapp";
+import NewFooter from "@/components/shared/footer/newFooter";
 
 const DashboardLayout = ({children}: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
@@ -125,7 +126,8 @@ const DashboardLayout = ({children}: { children: React.ReactNode }) => {
             {/* <Carts /> */}
             {/* children content */}
             <div className=" overflow-auto col-span-4 p-1" >{children}</div>
-            <Footer/>
+            {/*<Footer/>*/}
+            <NewFooter />
             <FloatingWhatsApp phoneNumber="01907252606" accountName="Apple Empire" avatar="https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg" />
         </main>
     );

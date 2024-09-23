@@ -20,9 +20,25 @@ const HeroSection = () => {
   const products = [
     {
       id: "62aefe9ad8b80d5234af625a",
-      image: "https://i.ibb.co.com/jhpqHw6/IMG-20240919-WA0013.jpg",
+      image: "https://i.ibb.co.com/302jz8B/Whats-App-Image-2024-09-23-at-19-26-50-c27fd853.jpg",
       brand: "xioami",
       review: 3,
+      quantity: 1,
+      description:
+          "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
+      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
+      offer_price: 18.73,
+      price: 27.27,
+      campaign_product: false,
+      campaign_product_available: null,
+      campaign_product_sale: null,
+      product_type: null,
+    },
+    {
+      id: "62aefe9ad8b80d5234af625b",
+      image: "https://i.ibb.co.com/nmPrV4g/Whats-App-Image-2024-09-23-at-19-26-52-a5f25037.jpg",
+      brand: "xioami",
+      review: 4,
       quantity: 1,
       description:
           "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
@@ -36,28 +52,12 @@ const HeroSection = () => {
     },
     {
       id: "62aefe9ad8b80d5234af625a",
-      image: "https://i.ibb.co.com/HhwkHPh/IMG-20240919-WA0002.jpg",
+      image: "https://i.ibb.co.com/LCFVpc2/Whats-App-Image-2024-09-23-at-19-26-51-19eabe7d.jpg",
       brand: "xioami",
       review: 3,
       quantity: 1,
       description:
         "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
-      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
-      offer_price: 18.73,
-      price: 27.27,
-      campaign_product: false,
-      campaign_product_available: null,
-      campaign_product_sale: null,
-      product_type: null,
-    },
-    {
-      id: "62aefe9ad8b80d5234af625b",
-      image: "https://i.ibb.co.com/4pJSrfm/IMG-20240919-WA0009.jpg",
-      brand: "xioami",
-      review: 4,
-      quantity: 1,
-      description:
-          "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
       title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
       offer_price: 18.73,
       price: 27.27,
