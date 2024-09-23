@@ -22,7 +22,7 @@ const Login = () => {
   const [customerLogin, { isLoading }] = useCustomerLoginMutation();
   const showToast = useToaster();
   const onSubmit = async (data: any) => {
-    const loginData:any = {
+    const loginData:any= {
       email: data.email,
       password: data.password,
       role: "customer",
@@ -74,7 +74,7 @@ const Login = () => {
             Log in Apple Empire
           </div>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-8 space-y-6" onSubmit={()=>{handleSubmit(onSubmit)}}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">

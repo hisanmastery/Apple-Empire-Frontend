@@ -115,3 +115,15 @@
   margin: 0;
   margin-left: auto;
 }
+
+
+@media screen and (max-width: 1024px) {
+  .styles-module_whatsappButton__tVits {
+    bottom: 4.5rem !important;
+    right: .5rem !important;
+  }
+  .styles-module_whatsappButton__tVits.floating-whatsapp-button {
+    height: 45px !important;
+    width: 45px !important;
+  }
+}

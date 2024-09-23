@@ -59,7 +59,7 @@ const CustomSlider = ({ sliderProducts }: any) => {
                 ?.map((product: any, index: number) => (
                     <div
                         key={index}
-                        className="aspect-w-16 aspect-h-9 lg:basis-1/6"
+                        className="aspect-w-16 aspect-h-9 lg:basis-1/6 "
                         style={{ margin: "0 10px" }}
                     >
                         <ProductCard key={product._id} datas={product}></ProductCard>
