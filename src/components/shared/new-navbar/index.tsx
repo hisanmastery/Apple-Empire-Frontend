@@ -205,11 +205,23 @@ export default function NewNavbar({ className, type }: any) {
                               </div>
                             </Link>
                         )}
+
                       </div>
                   ))}
+                  <div className="lg:flex items-center gap-10 hidden">
+                    <div className="text-_black text-md">
+                      <Link href={"/about"}>About</Link>
+                    </div>
+                    <div className="text-_black text-md">
+                      <Link href={"/"}>Blogs</Link>
+                    </div>
+                    <div className="text-_black text-md">
+                      <Link href={"/"}>Contact</Link>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="lg:flex items-center gap-10 hidden">
+                {/*<div className="lg:flex items-center gap-10 hidden">
                   <div className="text-_black text-md">
                     <Link href={"/about"}>About</Link>
                   </div>
@@ -219,7 +231,7 @@ export default function NewNavbar({ className, type }: any) {
                   <div className="text-_black text-md">
                     <Link href={"/"}>Contact</Link>
                   </div>
-                </div>
+                </div>*/}
               </div>
             </div>
           </div>

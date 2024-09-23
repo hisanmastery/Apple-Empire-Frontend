@@ -59,9 +59,8 @@ export default function CampaignsCountDown({ className, lastDate }: any) {
                   <h1 className="xsm:text-[32px] lsm:text-[36px] smd:text-[44px] text-qblack font-medium">
                     WOO! Flash Sale
                   </h1>
-                  <p className="text-[18px] text-qblack leading-7">
-                    You get into the 2k+ best Products in Flash offer with
-                    <br /> a special-shaped sofa for sale.
+                  <p className="md:text-[18px] text-sm text-qblack leading-7">
+                    You get into the 2k+ best Products in Flash offer with a special-shaped sofa for sale.
                   </p>
                 </div>
                 <div className=" w-[100px] h-8 border-b border-qblack">
