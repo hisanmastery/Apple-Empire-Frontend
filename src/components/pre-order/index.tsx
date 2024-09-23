@@ -2,7 +2,6 @@
 import useToaster from "@/hooks/useToaster";
 import { uploadImage } from "@/lib/helpers/upload-image";
 import { useCreatePreOrderMutation } from "@/store/features/pre-order/preOrderApi";
-
 import React, { useState, ChangeEvent, FormEvent } from "react";
 
 const PreOrder: React.FC = () => {
