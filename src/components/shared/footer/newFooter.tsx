@@ -18,11 +18,11 @@ const NewFooter = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <div>
             <Image
-                width={80}
-                height={80}
-                className="lg:w-[80px] md:w-20 w-14 my-3"
-                src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
-                alt=""
+              width={80}
+              height={80}
+              className="lg:w-[80px] md:w-20 w-14 my-3"
+              src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
+              alt=""
             />
           </div>
 
@@ -31,14 +31,13 @@ const NewFooter = () => {
             <p className="text-[#029293] text-xs">support@appleempirebd.com</p>
           </div>
 
-
           <div>
             <Image
-                width={80}
-                height={80}
-                className="lg:w-[80px] md:w-20 w-14 my-3"
-                src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
-                alt=""
+              width={80}
+              height={80}
+              className="lg:w-[80px] md:w-20 w-14 my-3"
+              src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
+              alt=""
             />
           </div>
 
@@ -49,11 +48,11 @@ const NewFooter = () => {
 
           <div>
             <Image
-                width={80}
-                height={80}
-                className="lg:w-[80px] md:w-20 w-14 my-3"
-                src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
-                alt=""
+              width={80}
+              height={80}
+              className="lg:w-[80px] md:w-20 w-14 my-3"
+              src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
+              alt=""
             />
           </div>
 
@@ -73,43 +72,64 @@ const NewFooter = () => {
             <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className={"text-[#029293] md:text-lg text-sm"}>About Us</li>
               <li className={"text-white hover:text-[#029293] "}>About Us</li>
-              <li className={"text-white hover:text-[#029293] "}>Shop Address</li>
+              <li className={"text-white hover:text-[#029293] "}>
+                Shop Address
+              </li>
               <li className={"text-white hover:text-[#029293] "}>Blog</li>
             </li>
-            <li  className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
+            <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-[#029293] md:text-lg text-sm">Policy</li>
-              <li className={"text-white hover:text-[#029293] "}>Privacy Policy</li>
+              <Link
+                href={"/privacy-policy"}
+                className={"text-white hover:text-[#029293] "}
+              >
+                Privacy Policy
+              </Link>
               <li className={"text-white hover:text-[#029293] "}>EMI Policy</li>
-              <li className={"text-white hover:text-[#029293] "}>Warranty Policy</li>
+              <Link
+                href={"/warranty-policy"}
+                className={"text-white hover:text-[#029293] "}
+              >
+                Warranty Policy
+              </Link>
             </li>
-            <li  className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
-              <li className="text-[#029293] md:text-lg text-sm">PRODUCT DELIVERY</li>
-              <li className={"text-white hover:text-[#029293] "}>Delivery and Return</li>
-              <li className={"text-white hover:text-[#029293] "}>Order Tracking</li>
+            <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
+              <li className="text-[#029293] md:text-lg text-sm">
+                PRODUCT DELIVERY
+              </li>
+              <Link
+                href={"/return-refund-policy"}
+                className={"text-white hover:text-[#029293] "}
+              >
+                Delivery and Return
+              </Link>
+              <li className={"text-white hover:text-[#029293] "}>
+                Order Tracking
+              </li>
               <li className={"text-white hover:text-[#029293] "}>FAQ</li>
             </li>
-            <li  className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
+            <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-[#029293] md:text-lg text-sm">CATEGORY</li>
-              <li className={"text-white hover:text-[#029293]"}>Phone and Tablets</li>
+              <li className={"text-white hover:text-[#029293]"}>
+                Phone and Tablets
+              </li>
               <li className={"text-white hover:text-[#029293]"}>Macbook</li>
               <li className={"text-white hover:text-[#029293]"}>Sound</li>
             </li>
-
           </ul>
           <div className={"col-span-12 lg:col-span-4"}>
-            <div
-                className="flex justify-center mt-4 mx-auto space-x-4 leading-3 ">
+            <div className="flex justify-center mt-4 mx-auto space-x-4 leading-3 ">
               <Link href="#">
-                <Facebook className="text-blue-500"/>
+                <Facebook className="text-blue-500" />
               </Link>
               <Link href="#">
-                <Twitter className="text-sky-300"/>
+                <Twitter className="text-sky-300" />
               </Link>
               <Link href="#">
-                <Instagram className="text-pink-500"/>
+                <Instagram className="text-pink-500" />
               </Link>
               <Link href="#">
-                <Linkedin className="text-blue-400"/>
+                <Linkedin className="text-blue-400" />
               </Link>
             </div>
 
@@ -119,7 +139,6 @@ const NewFooter = () => {
               </button>
             </div>
           </div>
-
         </div>
 
         {/* row -3  */}
@@ -134,8 +153,8 @@ const NewFooter = () => {
           <div>
             <h5 className="mb-3">Secure Payments</h5>
             <img
-                src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
-                alt=""
+              src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
+              alt=""
             />
           </div>
         </div>

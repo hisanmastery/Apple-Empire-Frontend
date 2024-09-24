@@ -64,6 +64,8 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoMdHome } from "react-icons/io";
 import { FcAbout } from "react-icons/fc";
 import { FaFirstOrderAlt } from "react-icons/fa6";
+import { GoArrowLeft } from "react-icons/go";
+import { GoArrowRight } from "react-icons/go";
 
 export const icons = {
   GiDiscussion,
@@ -130,4 +132,6 @@ export const icons = {
   AboutIcon: FcAbout,
   HomeIcon: IoMdHome,
   SearchIcons: IoSearchOutline,
+  GoArrowLeft: GoArrowLeft,
+  GoArrowRight: GoArrowRight,
 };
