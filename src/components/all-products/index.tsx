@@ -8,6 +8,7 @@ import { selectPriceRange } from "@/store/features/products/productsPriceRangeSl
 import { selectProductsCategory } from "@/store/features/products/productsCategorySlice";
 import ProductsNotFound from "../products-not-found";
 import Pagination from "../common/pagination";
+import CategoryTabs from "../category-tabs";
 
 const AllProductsSection = ({ productsType }: any) => {
   const usedString = productsType === "used" ? "used" : "";
@@ -45,6 +46,10 @@ const AllProductsSection = ({ productsType }: any) => {
   }
   return (
     <div className="mt-5">
+      {/* category tabs */}
+      <div>
+        <CategoryTabs />
+      </div>
       <div className="mb-10 border-b-[1px] border-_blue">
         <p className="text-2xl font-semibold mb-2">{productsType}</p>
       </div>
