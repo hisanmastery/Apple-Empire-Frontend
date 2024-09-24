@@ -10,6 +10,7 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
         params: {
           productType: arg?.productType || "",
           ram: arg?.ram || "",
+          type: arg?.type || "",
           internalStorage: arg?.internalStorage || "",
           chipset: arg?.chipset || "",
           region: arg?.region || "",
