@@ -92,6 +92,12 @@ const NewFooter = () => {
               >
                 Warranty Policy
               </Link>
+              <Link
+                href={"/terms-conditions"}
+                className={"text-white hover:text-[#029293] block"}
+              >
+                Terms And Conditions
+              </Link>
             </li>
             <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-[#029293] md:text-lg text-sm">
