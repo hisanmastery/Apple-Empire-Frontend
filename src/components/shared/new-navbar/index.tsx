@@ -213,7 +213,7 @@ export default function NewNavbar({ className, type }: any) {
                     <Link href={"/"}>Blogs</Link>
                   </div>
                   <div className="text-_black text-md">
-                    <Link href={"/"}>Contact</Link>
+                    <Link href={"/contact-us"}>Contact</Link>
                   </div>
                   <div className="text-_black text-md">
                     <Link href={"/section/used"}>Used Products</Link>

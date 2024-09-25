@@ -43,7 +43,7 @@ const Profile = () => {
               <li>
                 <a
                   href="#profile"
-                  className="block py-2 px-4 bg-blue-500 text-white rounded-md text-center"
+                  className="block py-2 px-4 bg-_orange text-white rounded-md text-center"
                 >
                   Profile Information
                 </a>
@@ -51,15 +51,15 @@ const Profile = () => {
               <li>
                 <a
                   href="#orders"
-                  className="block py-2 px-4 bg-blue-500 text-white rounded-md text-center"
+                  className="block py-2 px-4 bg-_orange text-white rounded-md text-center"
                 >
-                 My Order Information
+                  My Order Information
                 </a>
               </li>
               <li>
                 <button
                   onClick={() => handleLogout()}
-                  className="block w-full py-2 px-4 bg-blue-500 text-white rounded-md text-center"
+                  className="block w-full py-2 px-4 bg-_orange text-white rounded-md text-center"
                 >
                   Logout
                 </button>
@@ -119,7 +119,9 @@ const Profile = () => {
             </section>
             {/* Order Information */}
             <section id="orders" className="bg-white shadow-md rounded-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4">My Order Information</h2>
+              <h2 className="text-2xl font-semibold mb-4">
+                My Order Information
+              </h2>
               <div className="space-y-6">
                 {orders?.map((order: any, index: number) => (
                   <div
@@ -228,7 +230,7 @@ const Profile = () => {
                       </div>
                     </div>
 
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md">
+                    <button className="px-4 py-2 bg-_orange  text-white rounded-md">
                       View Details
                     </button>
                   </div>
