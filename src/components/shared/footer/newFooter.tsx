@@ -109,9 +109,12 @@ const NewFooter = () => {
               >
                 Delivery and Return
               </Link>
-              <li className={"text-white hover:text-[#029293] "}>
-                Order Tracking
-              </li>
+
+              <Link href={"/track-my-order"}>
+                <li className={"text-white hover:text-[#029293] "}>
+                  Order Tracking
+                </li>
+              </Link>
               <li className={"text-white hover:text-[#029293] "}>FAQ</li>
             </li>
             <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
