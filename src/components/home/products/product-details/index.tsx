@@ -13,7 +13,7 @@ import {
   decrementQuantity,
   incrementQuantity,
   getStoredData,
-  storedWishLists
+  storedWishLists,
 } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
@@ -24,10 +24,7 @@ import {
   useGetEmailCartQuery,
   useUpdateCartMutation,
 } from "@/store/features/cart/cartApi";
-import { 
-  get_store_data,
-  get_wish_lists 
-} from "@/utils/get_store_data";
+import { get_store_data, get_wish_lists } from "@/utils/get_store_data";
 import Loading from "@/components/common/loading";
 import { useExtractUniqueAttributes } from "@/utils/Helpers/Attributes";
 import Attributes from "@/components/common/attributes";
@@ -37,7 +34,7 @@ import useToaster from "@/hooks/useToaster";
 import QuantityController from "@/components/common/quantity-controller";
 import axios from "axios";
 import { baseApiUrl } from "@/constants/endpoint";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import Emiplan from "@/components/emiplan";
 
 const ProductDetails = ({ id }: any) => {
@@ -50,8 +47,8 @@ const ProductDetails = ({ id }: any) => {
   );
   const [viewImage, setViewImages] = useState("");
   const [thisItem, setThisItem] = useState<any>({});
-  const [wishItem,setWishItem]=useState<any>({});
-  const { storedCart,wishLists } = useSelector((state: any) => state?.cart);
+  const [wishItem, setWishItem] = useState<any>({});
+  const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
 
   const [selectedRam, setSelectedRam] = useState<string>(""); // State for selected RAM
@@ -101,20 +98,22 @@ const ProductDetails = ({ id }: any) => {
     }
   }, [storedCart, data]);
 
-  useEffect(()=>{
-    if(wishLists?.length){
-      console.log(wishLists)
-      const filter=wishLists.filter((d:any)=>{return d?.productId===id});
+  useEffect(() => {
+    if (wishLists?.length) {
+      console.log(wishLists);
+      const filter = wishLists.filter((d: any) => {
+        return d?.productId === id;
+      });
 
-      if(filter?.length){
-        const data=filter[0];
+      if (filter?.length) {
+        const data = filter[0];
         setWishItem(data);
-      }else{
-        setWishItem({})
+      } else {
+        setWishItem({});
       }
       // console.log("Filter::",filter);
     }
-  },[id, wishLists])
+  }, [id, wishLists]);
   // useEffect(() => {
   //   dispatch(addStoredCart(addToCart?.response));
   //   refetch();
@@ -324,105 +323,114 @@ const ProductDetails = ({ id }: any) => {
   };
 
   // Decrement function
-  const handleDecrementQuantity = (item:any) => {
-    const new_data=item?.response;
+  const handleDecrementQuantity = (item: any) => {
+    const new_data = item?.response;
 
-    if(new_data?._id){
-      console.log("New Data: ",new_data);
-      const token=localStorage.getItem("token");
-      if(token){
-
-      }else{
-        const filter=storedCart.filter((d:any)=>{return d?.productId==new_data?._id});
-        let lists:any=[];
-        storedCart.map((d:any)=>{
-          if(d?.productId==new_data?._id){
-            const obj={...d};
-            obj.quantity=obj.quantity-1;
-            lists=[...lists,obj];
-          }else{
-            const obj={
-              ...d
-            }
-            lists=[...lists,obj];
+    if (new_data?._id) {
+      console.log("New Data: ", new_data);
+      const token = localStorage.getItem("token");
+      if (token) {
+      } else {
+        const filter = storedCart.filter((d: any) => {
+          return d?.productId == new_data?._id;
+        });
+        let lists: any = [];
+        storedCart.map((d: any) => {
+          if (d?.productId == new_data?._id) {
+            const obj = { ...d };
+            obj.quantity = obj.quantity - 1;
+            lists = [...lists, obj];
+          } else {
+            const obj = {
+              ...d,
+            };
+            lists = [...lists, obj];
           }
-        })
-        localStorage.setItem("cart_items",JSON.stringify(lists));
+        });
+        localStorage.setItem("cart_items", JSON.stringify(lists));
         dispatch(getStoredData(lists));
       }
     }
   };
 
   // Handle Wish Lists
-  const handleWishLists=async(item:any,hasIn:boolean)=>{
+  const handleWishLists = async (item: any, hasIn: boolean) => {
     // const data = productData?.response;
-    console.log('wishlist',item,hasIn);
-    if(hasIn){
-      const token=localStorage.getItem("token");
-      await axios.delete(`${baseApiUrl}/wishlist/delete-wishlist/${wishItem?._id}`,{headers:{
-        'Authorization':`Bearer ${token}`
-      }}).then(async(res)=>{
-        setWishItem({})
-        if (res.data.isSuccess) {
-          showToast("success", "Wish remove successfully");
-          const data: any = await get_wish_lists();
-          if (data?.length) {
-           //console.log("Dataa:::",data);
-            dispatch(storedWishLists(data));
+    console.log("wishlist", item, hasIn);
+    if (hasIn) {
+      const token = localStorage.getItem("token");
+      await axios
+        .delete(`${baseApiUrl}/wishlist/delete-wishlist/${wishItem?._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(async (res) => {
+          setWishItem({});
+          if (res.data.isSuccess) {
+            showToast("success", "Wish remove successfully");
+            const data: any = await get_wish_lists();
+            if (data?.length) {
+              //console.log("Dataa:::",data);
+              dispatch(storedWishLists(data));
+            } else {
+              dispatch(storedWishLists([]));
+            }
           } else {
-            dispatch(storedWishLists([]));
+            showToast("error", "Wish can't add");
           }
-        } else {
+        })
+        .catch((error) => {
           showToast("error", "Wish can't add");
-        }
-      }).catch((error)=>{
-        showToast("error", "Wish can't add");
-      })
-    }else{
-      const new_data=item?.response;
-      const email=localStorage.getItem("email");
+        });
+    } else {
+      const new_data = item?.response;
+      const email = localStorage.getItem("email");
       if (!email) {
-        router.push('/login');
+        router.push("/login");
       }
-      const post_object={
-        email:email,
-        productId:new_data?._id,
-        image:new_data?.image?.viewUrl,
+      const post_object = {
+        email: email,
+        productId: new_data?._id,
+        image: new_data?.image?.viewUrl,
         price: new_data?.price,
-        "quantity": 1,
+        quantity: 1,
         title: new_data?.title,
-      }
-      axios.post(`${baseApiUrl}/wishlist/create-wishlist`,post_object).then(async(res)=>{
-        if (res.data.isSuccess) {
-          showToast("success", "Wish added successful");
-          const data: any = await get_wish_lists();
-          if (data?.length) {
-           //console.log("Dataa:::",data);
-            dispatch(storedWishLists(data));
+      };
+      axios
+        .post(`${baseApiUrl}/wishlist/create-wishlist`, post_object)
+        .then(async (res) => {
+          if (res.data.isSuccess) {
+            showToast("success", "Wish added successful");
+            const data: any = await get_wish_lists();
+            if (data?.length) {
+              //console.log("Dataa:::",data);
+              dispatch(storedWishLists(data));
+            } else {
+              dispatch(storedWishLists([]));
+            }
           } else {
-            dispatch(storedWishLists([]));
+            showToast("error", "Wish can't add");
           }
-        } else {
+        })
+        .catch((error) => {
           showToast("error", "Wish can't add");
-        }
-      }).catch((error)=>{
-        showToast("error", "Wish can't add");
-      })
+        });
     }
-  }
+  };
 
-    // Calculate the offer percentage
-    const parsePrice = (value: number | string) => {
-      if (typeof value === 'number') return value;
-      return parseFloat((value || '0').toString().replace(/[,৳]/g, ''));
-    };
-  
-    // Parse and log prices
-    const newPrice = parsePrice(data?.response?.price);
-    const newOfferPrice = parsePrice(data?.response?.offer_price);
-    const discountPercentage = newPrice ? Math.round(
-      ((newPrice - newOfferPrice) / newPrice) * 100
-    ) : 0;
+  // Calculate the offer percentage
+  const parsePrice = (value: number | string) => {
+    if (typeof value === "number") return value;
+    return parseFloat((value || "0").toString().replace(/[,৳]/g, ""));
+  };
+
+  // Parse and log prices
+  const newPrice = parsePrice(data?.response?.price);
+  const newOfferPrice = parsePrice(data?.response?.offer_price);
+  const discountPercentage = newPrice
+    ? Math.round(((newPrice - newOfferPrice) / newPrice) * 100)
+    : 0;
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
@@ -440,11 +448,11 @@ const ProductDetails = ({ id }: any) => {
                 src={viewImage}
                 alt="Product Image"
               />
-             {discountPercentage > 0 && (
-            <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 text-sm rounded">
-              {discountPercentage}% OFF
-            </div>
-          )}
+              {discountPercentage > 0 && (
+                <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 text-sm rounded">
+                  {discountPercentage}% OFF
+                </div>
+              )}
             </div>
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
               {data?.response?.variations
@@ -469,7 +477,7 @@ const ProductDetails = ({ id }: any) => {
         </div>
         <div className="col-span-4 bg-white px-2 md:px-5">
           <div className="flex justify-between">
-            <div className={'w-full'}>
+            <div className={"w-full"}>
               <h2 className="flex items-center gap-2 text-md md:text-xl font-medium ">
                 {/* <icons.FaAppleIcons className="text-xl md:text-4xl" /> */}
                 {data?.response?.title?.slice(0, 50)}
@@ -478,25 +486,27 @@ const ProductDetails = ({ id }: any) => {
               <span className="text-sm text-md">{selectedRegion}</span>
               <div className="grid grid-cols-2 items-center lg:max-w-[500px] ">
                 <div className="flex items-center  gap-2 mt-3">
-                <span className="text-[18px] md:text-[18px] font-semibold text-red-500 block">
-                  ট {matchedVariant?.base_sell_price || 0}
-                </span>
+                  <span className="text-[18px] md:text-[18px] font-semibold text-red-500 block">
+                    ট {matchedVariant?.base_sell_price || 0}
+                  </span>
                   <span className="line-through text-md font-semibold">
-                  ট {data?.response?.offer_price}
-                </span>
-
+                    ট {data?.response?.offer_price}
+                  </span>
                 </div>
-                <div className={'ml-2 text-md font-medium flex items-center gap-3 hover:cursor-pointer'}>
+                <div
+                  className={
+                    "ml-2 text-md font-medium flex items-center gap-3 hover:cursor-pointer"
+                  }
+                >
                   <div
-                      className="text-md font-medium text-_orange flex items-center gap-3 hover:cursor-pointer"
-                      onClick={() => setIsOpen(true)}
+                    className="text-md font-medium text-_orange flex items-center gap-3 hover:cursor-pointer"
+                    onClick={() => setIsOpen(true)}
                   >
-                    <icons.GrCurrencyIcons className="text-xl"/>
+                    <icons.GrCurrencyIcons className="text-xl" />
                     EMIPLAN
                   </div>
                 </div>
               </div>
-
             </div>
             {/* <p>
               <span className="text-sm md:text-lg">Discount Price:</span>
@@ -510,23 +520,25 @@ const ProductDetails = ({ id }: any) => {
           </div>
           <div className="grid grid-cols-2 gap-5 lg:max-w-[500px] mt-5">
             {iconsData.map((item: any, index: number) =>
-                item?.label === "WISHLIST" ? (
-                    <div
-                        key={index}
-                        className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
-                        onClick={() => {
-              handleWishLists(data, wishItem?.productId === id ?? false);
-            }}
-          >
-            <icons.MdOutlineFavorite
-              style={{
-                color: `${wishItem?.productId === id ? "#A53E08" : "black"}`,
-              }}
-              className="text-xl"
-            />
-            {item.label}
-          </div>
-        ) : /*item?.label === "EMIPLAN" ? (
+              item?.label === "WISHLIST" ? (
+                <div
+                  key={index}
+                  className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
+                  onClick={() => {
+                    handleWishLists(data, wishItem?.productId === id ?? false);
+                  }}
+                >
+                  <icons.MdOutlineFavorite
+                    style={{
+                      color: `${
+                        wishItem?.productId === id ? "#A53E08" : "black"
+                      }`,
+                    }}
+                    className="text-xl"
+                  />
+                  {item.label}
+                </div>
+              ) : /*item?.label === "EMIPLAN" ? (
           <div
             key={index}
             className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
@@ -535,40 +547,44 @@ const ProductDetails = ({ id }: any) => {
             {item.icon}
             {item.label}
           </div>
-        ) :*/ item.label === "EXCHANGE"? <Link
-        href={'/exchange-policy'}
-        key={index}
-        className="text-md font-medium flex items-center gap-3"
-      >
-        {item.icon}
-        {item.label}
-      </Link>:<Link
-        href={item.link ? `/compare/${id}` : ""}
-        key={index}
-        className="text-md font-medium flex items-center gap-3"
-      >
-        {item.icon}
-        {item.label}
-      </Link>
-      )}
-    </div>
+        ) :*/ item.label === "EXCHANGE" ? (
+                <Link
+                  href={"/exchange-policy"}
+                  key={index}
+                  className="text-md font-medium flex items-center gap-3"
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              ) : (
+                <Link
+                  href={item.link ? `/compare/${id}` : ""}
+                  key={index}
+                  className="text-md font-medium flex items-center gap-3"
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              )
+            )}
+          </div>
           <div className="flex justify-between items-center mx-1 mt-8">
             <div className="flex gap-[5rem] items-start">
               <span className="w-[50px]">Color :</span>
               <div className="flex gap-2">
                 {data?.response?.variations?.map(
-                    (variant: any, index: number) => (
-                        <button
-                            key={index}
-                            onClick={() => handleColorButtonClick(variant.color)}
-                            className={`w-8 h-8 rounded-full ${
-                                variant.color === selectedColor
-                                    ? "border-2 border-blue-500"
-                                    : "border"
-                            } transition-all duration-300`}
-                            style={{backgroundColor: variant.color}}
-                        ></button>
-                    )
+                  (variant: any, index: number) => (
+                    <button
+                      key={index}
+                      onClick={() => handleColorButtonClick(variant.color)}
+                      className={`w-8 h-8 rounded-full ${
+                        variant.color === selectedColor
+                          ? "border-2 border-blue-500"
+                          : "border"
+                      } transition-all duration-300`}
+                      style={{ backgroundColor: variant.color }}
+                    ></button>
+                  )
                 )}
               </div>
             </div>
@@ -577,18 +593,18 @@ const ProductDetails = ({ id }: any) => {
           <div className="mt-8  ">
             <div className="flex justify-between items-center mx-1">
               <Attributes
-                  label="Ram"
-                  items={(ram?.length > 0 && ram) || []}
-                  handleSelection={setSelectedRam}
-                  handleVariants={handleVariants}
+                label="Ram"
+                items={(ram?.length > 0 && ram) || []}
+                handleSelection={setSelectedRam}
+                handleVariants={handleVariants}
               />
             </div>
             <div className="mt-8 flex justify-between items-center">
               <Attributes
-                  label="Storage"
-                  items={InternalStorage || []}
-                  handleSelection={setSelectedInternalStorage}
-                  handleVariants={handleVariants}
+                label="Storage"
+                items={InternalStorage || []}
+                handleSelection={setSelectedInternalStorage}
+                handleVariants={handleVariants}
               />
               <div></div>
             </div>
@@ -626,7 +642,7 @@ const ProductDetails = ({ id }: any) => {
             />
             <Button
               onClick={() => handleCartClick(data)}
-             // disabled={isInCart}
+              // disabled={isInCart}
               className="bg-black hover:bg-_orange rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
             >
               ADD TO CART
@@ -661,7 +677,7 @@ const ProductDetails = ({ id }: any) => {
           >
             <icons.FaWhatsappIcons className="text-_black text-lg" />
           </Link>*/}
-         {/* <Link
+          {/* <Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
@@ -695,25 +711,25 @@ const ProductDetails = ({ id }: any) => {
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
-            <icons.FaInstagram className="text-_black text-lg" />
+            <icons.FaLinkedinIcons className="text-_black text-lg" />
           </Link>
           <Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
-            <icons.BsTiktok className="text-_black text-lg" />
+            <icons.FaLinkedinIcons className="text-_black text-lg" />
           </Link>
           <Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
-            <icons.IoLogoYoutube className="text-_black text-lg" />
+            <icons.FaLinkedinIcons className="text-_black text-lg" />
           </Link>
           <Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
           >
-            <icons.FaGoogle className="text-_black text-lg" />
+            <icons.FaLinkedinIcons className="text-_black text-lg" />
           </Link>
           {/*<Link
             href="#"
@@ -728,7 +744,7 @@ const ProductDetails = ({ id }: any) => {
             <icons.FaTelegramIcons className="text-_black text-lg" />
           </Link>*/}
         </div>
-        <div className={'col-span-5'}>
+        <div className={"col-span-5"}>
           <h5 className="mb-3">Secure Payments</h5>
           <img
             src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
