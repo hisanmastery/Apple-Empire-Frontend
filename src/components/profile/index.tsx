@@ -125,7 +125,7 @@ const Profile = () => {
                 {orders?.map((order: any, index: number) => (
                   <div
                     key={index}
-                    className="p-4 bg-gray-50 rounded-md shadow flex justify-between items-center"
+                    className="p-4 bg-gray-50 rounded-md shadow flex flex-col justify-between space-y-4"
                   >
                     <div>
                       <h3 className="text-lg font-semibold">
@@ -142,6 +142,87 @@ const Profile = () => {
                         Delivery Status: {order.deliveryStatus}
                       </p>
                     </div>
+
+                    {/* Order Tracking Section */}
+                    <div>
+                      <h4 className="text-md font-semibold mb-2">
+                        Order Tracking:
+                      </h4>
+                      <div className="flex items-center justify-between">
+                        {/* Order stages */}
+                        <div className="w-full flex items-center justify-between">
+                          <div className="flex-1">
+                            <div
+                              className={`w-full h-2 ${
+                                order.deliveryStatus === "Order Placed" ||
+                                order.deliveryStatus === "Processing" ||
+                                order.deliveryStatus === "Shipped" ||
+                                order.deliveryStatus === "Out for Delivery" ||
+                                order.deliveryStatus === "Delivered"
+                                  ? "bg-blue-500"
+                                  : "bg-gray-300"
+                              } rounded-full`}
+                            ></div>
+                            <p className="text-xs text-center mt-2">
+                              Order Placed
+                            </p>
+                          </div>
+                          <div className="flex-1">
+                            <div
+                              className={`w-full h-2 ${
+                                order.deliveryStatus === "Processing" ||
+                                order.deliveryStatus === "Shipped" ||
+                                order.deliveryStatus === "Out for Delivery" ||
+                                order.deliveryStatus === "Delivered"
+                                  ? "bg-blue-500"
+                                  : "bg-gray-300"
+                              } rounded-full`}
+                            ></div>
+                            <p className="text-xs text-center mt-2">
+                              Processing
+                            </p>
+                          </div>
+                          <div className="flex-1">
+                            <div
+                              className={`w-full h-2 ${
+                                order.deliveryStatus === "Shipped" ||
+                                order.deliveryStatus === "Out for Delivery" ||
+                                order.deliveryStatus === "Delivered"
+                                  ? "bg-blue-500"
+                                  : "bg-gray-300"
+                              } rounded-full`}
+                            ></div>
+                            <p className="text-xs text-center mt-2">Shipped</p>
+                          </div>
+                          <div className="flex-1">
+                            <div
+                              className={`w-full h-2 ${
+                                order.deliveryStatus === "Out for Delivery" ||
+                                order.deliveryStatus === "Delivered"
+                                  ? "bg-blue-500"
+                                  : "bg-gray-300"
+                              } rounded-full`}
+                            ></div>
+                            <p className="text-xs text-center mt-2">
+                              Out for Delivery
+                            </p>
+                          </div>
+                          <div className="flex-1">
+                            <div
+                              className={`w-full h-2 ${
+                                order.deliveryStatus === "Delivered"
+                                  ? "bg-blue-500"
+                                  : "bg-gray-300"
+                              } rounded-full`}
+                            ></div>
+                            <p className="text-xs text-center mt-2">
+                              Delivered
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <button className="px-4 py-2 bg-blue-500 text-white rounded-md">
                       View Details
                     </button>
