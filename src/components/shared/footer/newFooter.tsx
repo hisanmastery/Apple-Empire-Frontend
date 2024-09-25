@@ -104,7 +104,7 @@ const NewFooter = () => {
                 PRODUCT DELIVERY
               </li>
               <Link
-                href={"/return-refund-policy"}
+                href={"/delivery-return"}
                 className={"text-white hover:text-[#029293] "}
               >
                 Delivery and Return
