@@ -71,7 +71,9 @@ const NewFooter = () => {
           <ul className=" flex flex-wrap justify-between items-center col-span-12 lg:col-span-8  font-normal cursor-pointer">
             <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className={"text-[#029293] md:text-lg text-sm"}>About Us</li>
-              <li className={"text-white hover:text-[#029293] "}>About Us</li>
+              <Link href={"/about"}>
+                <li className={"text-white hover:text-[#029293] "}>About Us</li>
+              </Link>
               <li className={"text-white hover:text-[#029293] "}>
                 Shop Address
               </li>
@@ -86,11 +88,26 @@ const NewFooter = () => {
                 Privacy Policy
               </Link>
               <li className={"text-white hover:text-[#029293] "}>EMI Policy</li>
+
               <Link
                 href={"/warranty-policy"}
                 className={"text-white hover:text-[#029293] "}
               >
-                Warranty Policy
+                <li className={"text-white hover:text-[#029293] "}>
+                  Warranty Policy
+                </li>
+              </Link>
+              <Link
+                href={"/return-refund-policy"}
+                className={"text-white hover:text-[#029293] "}
+              >
+                Return Refund policy
+              </Link>
+              <Link
+                href={"/pre-order"}
+                className={"text-white hover:text-[#029293] "}
+              >
+                <li>Pre Order</li>
               </Link>
               <Link
                 href={"/terms-conditions"}
