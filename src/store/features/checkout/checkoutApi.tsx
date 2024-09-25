@@ -46,10 +46,19 @@ export const cartApi = fetchCheckoutSlice.injectEndpoints({
       }),
     }),
 
-    // Getting All order Query
+    // Getting All order using email
     customerOrders: builder.query({
       query: (email: any) => ({
         url: `/get-order-email/${email}`,
+        method: "GET",
+      }),
+      providesTags: ["User"],
+    }),
+
+    // Getting single order by id
+    getSingleOrder: builder.query({
+      query: (id: any) => ({
+        url: `/get-single-order/${id}`,
         method: "GET",
       }),
       providesTags: ["User"],
@@ -62,4 +71,5 @@ export const {
   useGetEmailCartQuery,
   useAddToCartDeleteMutation,
   useCustomerOrdersQuery,
+  useGetSingleOrderQuery,
 } = cartApi;

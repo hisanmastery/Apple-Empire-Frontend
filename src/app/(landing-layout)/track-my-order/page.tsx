@@ -1,28 +1,27 @@
 "use client";
+import Loading from "@/components/common/loading";
+import { useGetSingleOrderQuery } from "@/store/features/checkout/checkoutApi";
 import React, { useState } from "react";
 
-// Mock order data for demonstration
-const mockOrderData = {
-  _id: "1234567890",
-  createdAt: "2024-09-25",
-  paymentStatus: "Paid",
-  transactionId: "TXN123456789",
-  deliveryStatus: "Shipped", // Status can be: "Order Placed", "Processing", "Shipped", "Out for Delivery", "Delivered", "Canceled"
-};
-
 const OrderTracking = () => {
-  const [orderId, setOrderId] = useState("1234567890");
+  const [orderId, setOrderId] = useState("");
   const [orderData, setOrderData]: any = useState(null);
+  const { data, isLoading }: any = useGetSingleOrderQuery(orderId);
 
   // Handler to track the order based on order ID
   const handleTrackOrder = () => {
-    // In a real-world application, you would fetch the order details from the API based on the order ID
-    if (orderId === mockOrderData._id) {
-      setOrderData(mockOrderData);
+    const resOrder = data?.response;
+    console.log(resOrder);
+    if (resOrder) {
+      setOrderData(resOrder);
     } else {
-      setOrderData(null); // Handle case where order is not found
+      setOrderData(null);
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="container mx-auto px-4 py-10">
@@ -60,7 +59,7 @@ const OrderTracking = () => {
       </div>
 
       {/* Order Tracking Information */}
-      {orderData ? (
+      {orderData && (
         <section className="bg-white shadow-md rounded-lg p-6">
           <h2 className="text-2xl font-semibold mb-4">Order Information</h2>
           <div className="space-y-6">
@@ -86,6 +85,9 @@ const OrderTracking = () => {
                 </p>
                 <p className="text-gray-600">
                   Delivery Status: {orderData.deliveryStatus}
+                </p>
+                <p className="text-gray-600">
+                  Total Price: ${orderData.totalPrice}
                 </p>
               </div>
 
@@ -160,20 +162,9 @@ const OrderTracking = () => {
                   </div>
                 </div>
               </div>
-
-              {/* View Details Button */}
-              <button className="px-4 py-2 bg-orange-500 text-white rounded-md">
-                View Details
-              </button>
             </div>
           </div>
         </section>
-      ) : (
-        orderId && (
-          <div className="text-center text-red-500">
-            Order not found. Please check your Order ID.
-          </div>
-        )
       )}
     </div>
   );
