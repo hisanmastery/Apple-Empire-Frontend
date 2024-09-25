@@ -53,7 +53,7 @@ const Profile = () => {
                   href="#orders"
                   className="block py-2 px-4 bg-blue-500 text-white rounded-md text-center"
                 >
-                  Order Information
+                 My Order Information
                 </a>
               </li>
               <li>
@@ -119,13 +119,18 @@ const Profile = () => {
             </section>
             {/* Order Information */}
             <section id="orders" className="bg-white shadow-md rounded-lg p-6">
-              <h2 className="text-2xl font-semibold mb-4">Order Information</h2>
+              <h2 className="text-2xl font-semibold mb-4">My Order Information</h2>
               <div className="space-y-6">
-                {/* Example Order */}
                 {orders?.map((order: any, index: number) => (
                   <div
                     key={index}
-                    className="p-4 bg-gray-50 rounded-md shadow flex flex-col justify-between space-y-4"
+                    className={`${
+                      order.deliveryStatus === "Delivered"
+                        ? "bg-green-100"
+                        : order.deliveryStatus === "Canceled"
+                        ? "bg-red-100"
+                        : "bg-gray-50"
+                    } p-4 rounded-md shadow flex flex-col justify-between space-y-4 border`}
                   >
                     <div>
                       <h3 className="text-lg font-semibold">
