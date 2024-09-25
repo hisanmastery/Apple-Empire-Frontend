@@ -1,27 +1,31 @@
 "use client";
 import Loading from "@/components/common/loading";
-import { useGetSingleOrderQuery } from "@/store/features/checkout/checkoutApi";
+import { useLazyGetSingleOrderQuery } from "@/store/features/checkout/checkoutApi";
 import React, { useState } from "react";
 
 const OrderTracking = () => {
   const [orderId, setOrderId] = useState("");
   const [orderData, setOrderData]: any = useState(null);
-  const { data, isLoading }: any = useGetSingleOrderQuery(orderId);
+  const [trigger, { data, isLoading, isError }]: any =
+    useLazyGetSingleOrderQuery();
 
   // Handler to track the order based on order ID
   const handleTrackOrder = () => {
-    const resOrder = data?.response;
-    console.log(resOrder);
-    if (resOrder) {
-      setOrderData(resOrder);
-    } else {
-      setOrderData(null);
+    if (orderId) {
+      trigger(orderId)
+        .unwrap()
+        .then((resOrder: any) => {
+          if (resOrder?.response) {
+            setOrderData(resOrder.response);
+          } else {
+            setOrderData(null);
+          }
+        })
+        .catch(() => {
+          setOrderData(null);
+        });
     }
   };
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <div className="container mx-auto px-4 py-10">
@@ -58,8 +62,18 @@ const OrderTracking = () => {
         </button>
       </div>
 
+      {/* Loading State */}
+      {isLoading && <Loading />}
+
+      {/* Error or No Order Found */}
+      {isError && (
+        <div className="text-center text-red-500">
+          Order not found. Please check your Order ID.
+        </div>
+      )}
+
       {/* Order Tracking Information */}
-      {orderData && (
+      {orderData && !isLoading && !isError && (
         <section className="bg-white shadow-md rounded-lg p-6">
           <h2 className="text-2xl font-semibold mb-4">Order Information</h2>
           <div className="space-y-6">
@@ -100,11 +114,13 @@ const OrderTracking = () => {
                     <div className="flex-1">
                       <div
                         className={`w-full h-2 ${
-                          orderData.deliveryStatus === "Order Placed" ||
-                          orderData.deliveryStatus === "Processing" ||
-                          orderData.deliveryStatus === "Shipped" ||
-                          orderData.deliveryStatus === "Out for Delivery" ||
-                          orderData.deliveryStatus === "Delivered"
+                          [
+                            "Order Placed",
+                            "Processing",
+                            "Shipped",
+                            "Out for Delivery",
+                            "Delivered",
+                          ].includes(orderData.deliveryStatus)
                             ? "bg-blue-500"
                             : "bg-gray-300"
                         } rounded-full`}
@@ -114,10 +130,12 @@ const OrderTracking = () => {
                     <div className="flex-1">
                       <div
                         className={`w-full h-2 ${
-                          orderData.deliveryStatus === "Processing" ||
-                          orderData.deliveryStatus === "Shipped" ||
-                          orderData.deliveryStatus === "Out for Delivery" ||
-                          orderData.deliveryStatus === "Delivered"
+                          [
+                            "Processing",
+                            "Shipped",
+                            "Out for Delivery",
+                            "Delivered",
+                          ].includes(orderData.deliveryStatus)
                             ? "bg-blue-500"
                             : "bg-gray-300"
                         } rounded-full`}
@@ -127,9 +145,9 @@ const OrderTracking = () => {
                     <div className="flex-1">
                       <div
                         className={`w-full h-2 ${
-                          orderData.deliveryStatus === "Shipped" ||
-                          orderData.deliveryStatus === "Out for Delivery" ||
-                          orderData.deliveryStatus === "Delivered"
+                          ["Shipped", "Out for Delivery", "Delivered"].includes(
+                            orderData.deliveryStatus
+                          )
                             ? "bg-blue-500"
                             : "bg-gray-300"
                         } rounded-full`}
@@ -139,8 +157,9 @@ const OrderTracking = () => {
                     <div className="flex-1">
                       <div
                         className={`w-full h-2 ${
-                          orderData.deliveryStatus === "Out for Delivery" ||
-                          orderData.deliveryStatus === "Delivered"
+                          ["Out for Delivery", "Delivered"].includes(
+                            orderData.deliveryStatus
+                          )
                             ? "bg-blue-500"
                             : "bg-gray-300"
                         } rounded-full`}

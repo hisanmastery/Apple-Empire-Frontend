@@ -72,4 +72,5 @@ export const {
   useAddToCartDeleteMutation,
   useCustomerOrdersQuery,
   useGetSingleOrderQuery,
+  useLazyGetSingleOrderQuery
 } = cartApi;
