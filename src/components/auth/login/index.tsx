@@ -22,7 +22,7 @@ const Login = () => {
   const [customerLogin, { isLoading }] = useCustomerLoginMutation();
   const showToast = useToaster();
   const onSubmit = async (data: any) => {
-    const loginData:any= {
+    const loginData: any = {
       email: data.email,
       password: data.password,
       role: "customer",
@@ -30,7 +30,7 @@ const Login = () => {
     try {
       // Add your signup logic here
       const res: any = await customerLogin(loginData);
-      const loginResponse:any = res?.data;
+      const loginResponse: any = res?.data;
 
       if (res?.data?.message) {
         showToast("success", res?.data?.message);
@@ -41,7 +41,7 @@ const Login = () => {
       //console.log("Login Response", res);
 
       if (loginResponse.isSuccess) {
-        const accessToken:any = loginResponse?.data?.accessToken;
+        const accessToken: any = loginResponse?.data?.accessToken;
         const decoded: any = jwt.decode(accessToken);
         // console.log("Decoded",decoded)
         if (decoded?.email) {
@@ -67,7 +67,7 @@ const Login = () => {
               src={
                 "https://i.ibb.co.com/qrVJBy8/Whats-App-Image-2024-09-20-at-22-00-34-82706a25.jpg"
               }
-              className={'mx-auto mb-3'}
+              className={"mx-auto mb-3"}
               alt="logo"
               width={90}
               height={90}
@@ -75,7 +75,7 @@ const Login = () => {
             Log in Apple Empire
           </div>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={()=>{handleSubmit(onSubmit)}}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
@@ -106,7 +106,6 @@ const Login = () => {
                 className="mt-5"
                 placeholder="Password"
               />
-
               {errors.password?.message && (
                 <p className="text-red-500 text-sm mt-1">
                   {String(errors.password.message)}
@@ -129,9 +128,9 @@ const Login = () => {
                 Don't have an account?{" "}
                 <Link
                   className="font-medium text-_primary hover:text-indigo-500"
-                  href={"/singup"}
+                  href={"/signup"}
                 >
-                  Sing-up
+                  Sign-up
                 </Link>
               </p>
             </div>
