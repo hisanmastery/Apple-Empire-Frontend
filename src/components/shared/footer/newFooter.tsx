@@ -28,7 +28,7 @@ const NewFooter = () => {
 
           <div className="font-normal">
             <h4 className="text-sm md:text-md">Contact Us</h4>
-            <p className="text-[#029293] text-xs">support@appleempirebd.com</p>
+            <p className="text-[#EE3F0B] text-xs">support@appleempirebd.com</p>
           </div>
 
           <div>
@@ -43,7 +43,7 @@ const NewFooter = () => {
 
           <div className="font-normal">
             <h4 className="text-sm md:text-md">Customer Service</h4>
-            <p className="text-[#029293] text-xs">support@appleempirebd.com</p>
+            <p className="text-[#EE3F0B] text-xs">support@appleempirebd.com</p>
           </div>
 
           <div>
@@ -58,11 +58,11 @@ const NewFooter = () => {
 
           <div className="font-normal">
             <h4 className="text-sm md:text-md">Customer Service</h4>
-            <p className="text-[#029293] text-xs">support@appleempirebd.com</p>
+            <p className="text-[#EE3F0B] text-xs">support@appleempirebd.com</p>
           </div>
 
           {/*<div className="md:block hidden">
-            <FaAnglesDown className="text-[#029293] h-14 w-14 rounded-full border-2 border-white s p-2 cursor-pointer " />
+            <FaAnglesDown className="text-[#EE3F0B] h-14 w-14 rounded-full border-2 border-white s p-2 cursor-pointer " />
           </div>*/}
         </div>
         {/* row -2  */}
@@ -70,60 +70,60 @@ const NewFooter = () => {
         <div className="grid grid-cols-12 gap-5 justify-between w-full items-center mt-16">
           <ul className=" flex flex-wrap justify-between items-center col-span-12 lg:col-span-8  font-normal cursor-pointer">
             <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
-              <li className={"text-[#029293] md:text-lg text-sm"}>About Us</li>
-              <li className={"text-white hover:text-[#029293] "}>About Us</li>
-              <li className={"text-white hover:text-[#029293] "}>
+              <li className={"text-[#EE3F0B] md:text-lg text-sm"}>About Us</li>
+              <li className={"text-white hover:text-[#EE3F0B] "}>About Us</li>
+              <li className={"text-white hover:text-[#EE3F0B] "}>
                 Shop Address
               </li>
-              <li className={"text-white hover:text-[#029293] "}>Blog</li>
+              <li className={"text-white hover:text-[#EE3F0B] "}>Blog</li>
             </li>
             <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
-              <li className="text-[#029293] md:text-lg text-sm">Policy</li>
+              <li className="text-[#EE3F0B] md:text-lg text-sm">Policy</li>
               <Link
                 href={"/privacy-policy"}
-                className={"text-white hover:text-[#029293] "}
+                className={"text-white hover:text-[#EE3F0B] "}
               >
                 Privacy Policy
               </Link>
-              <li className={"text-white hover:text-[#029293] "}>EMI Policy</li>
+              <li className={"text-white hover:text-[#EE3F0B] "}>EMI Policy</li>
               <Link
                 href={"/warranty-policy"}
-                className={"text-white hover:text-[#029293] "}
+                className={"text-white hover:text-[#EE3F0B] "}
               >
                 Warranty Policy
               </Link>
               <Link
                 href={"/terms-conditions"}
-                className={"text-white hover:text-[#029293] block"}
+                className={"text-white hover:text-[#EE3F0B] block"}
               >
                 Terms And Conditions
               </Link>
             </li>
             <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
-              <li className="text-[#029293] md:text-lg text-sm">
+              <li className="text-[#EE3F0B] md:text-lg text-sm">
                 PRODUCT DELIVERY
               </li>
               <Link
                 href={"/delivery-return"}
-                className={"text-white hover:text-[#029293] "}
+                className={"text-white hover:text-[#EE3F0B] "}
               >
                 Delivery and Return
               </Link>
 
               <Link href={"/track-my-order"}>
-                <li className={"text-white hover:text-[#029293] "}>
+                <li className={"text-white hover:text-[#EE3F0B] "}>
                   Order Tracking
                 </li>
               </Link>
-              <li className={"text-white hover:text-[#029293] "}>FAQ</li>
+              <li className={"text-white hover:text-[#EE3F0B] "}>FAQ</li>
             </li>
             <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
-              <li className="text-[#029293] md:text-lg text-sm">CATEGORY</li>
-              <li className={"text-white hover:text-[#029293]"}>
+              <li className="text-[#EE3F0B] md:text-lg text-sm">CATEGORY</li>
+              <li className={"text-white hover:text-[#EE3F0B]"}>
                 Phone and Tablets
               </li>
-              <li className={"text-white hover:text-[#029293]"}>Macbook</li>
-              <li className={"text-white hover:text-[#029293]"}>Sound</li>
+              <li className={"text-white hover:text-[#EE3F0B]"}>Macbook</li>
+              <li className={"text-white hover:text-[#EE3F0B]"}>Sound</li>
             </li>
           </ul>
           <div className={"col-span-12 lg:col-span-4"}>
