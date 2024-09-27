@@ -42,7 +42,7 @@ export default function Middlebar({ className, type }: any) {
               </Link>
             </div>
             <div className="lg:w-[517px] lg:h-[44px] w-[50%] hidden md:block">
-              <SearchBox type={type} className="search-com" />
+              <SearchBox />
             </div>
             <div className="lg:flex hidden  space-x-6 items-center">
               <div className="cart-wrapper group relative py-4">
@@ -137,8 +137,6 @@ export default function Middlebar({ className, type }: any) {
           </div>
         </div>
       </div>
-
-     
     </div>
   );
 }
