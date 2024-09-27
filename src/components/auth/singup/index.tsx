@@ -4,6 +4,7 @@ import { useCustomerRegisterMutation } from "@/store/api/auth/authApi";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
   const {
@@ -13,7 +14,7 @@ const Signup = () => {
     getValues,
   } = useForm();
   const [customerRegister, { isLoading }] = useCustomerRegisterMutation();
-
+  const router = useRouter();
   const onSubmit = async (data: any) => {
     const registerData = {
       name: data.name,
@@ -26,6 +27,7 @@ const Signup = () => {
       const res: any = await customerRegister(registerData);
       if (res?.data?.message) {
         alert(res?.data?.message);
+        router.push("/login");
       } else {
         alert(res?.error?.data?.message);
       }

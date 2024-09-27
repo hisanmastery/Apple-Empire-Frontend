@@ -12,6 +12,7 @@ import CategoryTabs from "../category-tabs";
 
 const AllProductsSection = ({ productsType }: any) => {
   const usedString = productsType === "used" ? "used" : "";
+  const offersString = productsType === "offers" ? "yes" : "";
   const { min, max } = useSelector(selectPriceRange);
   const { displayType, ram, shape, internalStorage, chipset, region } =
     useSelector(selectProductsCategory);
@@ -24,6 +25,7 @@ const AllProductsSection = ({ productsType }: any) => {
       ram: ram,
       productsType: productsType,
       type: usedString,
+      offerType: offersString,
       chipset: chipset,
       region: region,
       internalStorage: internalStorage,
