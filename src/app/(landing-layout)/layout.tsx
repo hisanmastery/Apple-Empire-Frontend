@@ -21,6 +21,7 @@ import { FloatingWhatsApp } from "react-floating-whatsapp";
 import NewFooter from "@/components/shared/footer/newFooter";
 import SmallDevice from "@/components/shared/new-navbar/small-device";
 import StickyFooter from "@/components/shared/footer/StickyFooter";
+import { images } from "@/constants/images";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
@@ -137,7 +138,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <FloatingWhatsApp
         phoneNumber="01907252606"
         accountName="Apple Empire"
-        avatar="https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg"
+        avatar={images.NavbarLogo.src || ""}
       />
     </main>
   );

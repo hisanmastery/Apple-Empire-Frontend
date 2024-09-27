@@ -1,7 +1,7 @@
 import { icons } from "@/constants/icons";
 import { useState } from "react";
 
-export default function SearchBox({ className }: any) {
+export default function SearchBox() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {
