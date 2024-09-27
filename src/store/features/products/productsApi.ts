@@ -11,14 +11,15 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
           productType: arg?.productType || "",
           ram: arg?.ram || "",
           type: arg?.type || "",
+          offerType: arg?.offerType || "",
           internalStorage: arg?.internalStorage || "",
           chipset: arg?.chipset || "",
           region: arg?.region || "",
           displayType: arg?.displayType || "",
           category: arg?.category,
           subCategory: arg?.subCategory,
-          searchText:arg?.searchText
-        }
+          searchText: arg?.searchText,
+        },
       }),
     }),
     //get single products
