@@ -31,29 +31,9 @@ const NewFooter = () => {
             <p className="text-[#EE3F0B] text-xs">support@appleempirebd.com</p>
           </div>
 
-          <div>
-            <Image
-              width={80}
-              height={80}
-              className="lg:w-[80px] md:w-20 w-14 my-3"
-              src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
-              alt=""
-            />
-          </div>
-
           <div className="font-normal">
             <h4 className="text-sm md:text-md">Customer Service</h4>
             <p className="text-[#EE3F0B] text-xs">support@appleempirebd.com</p>
-          </div>
-
-          <div>
-            <Image
-              width={80}
-              height={80}
-              className="lg:w-[80px] md:w-20 w-14 my-3"
-              src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
-              alt=""
-            />
           </div>
 
           <div className="font-normal">
