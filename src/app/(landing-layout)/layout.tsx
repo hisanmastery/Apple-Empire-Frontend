@@ -137,7 +137,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <FloatingWhatsApp
         phoneNumber="01907252606"
         accountName="Apple Empire"
-        avatar="https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg"
+        avatar="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
       />
     </main>
   );
