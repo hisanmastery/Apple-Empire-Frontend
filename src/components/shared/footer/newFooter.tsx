@@ -90,21 +90,7 @@ const NewFooter = () => {
                 href={"/warranty-policy"}
                 className={"text-white hover:text-[#EE3F0B] "}
               >
-                <li className={"text-white hover:text-[#029293] "}>
-                  Warranty Policy
-                </li>
-              </Link>
-              <Link
-                href={"/return-refund-policy"}
-                className={"text-white hover:text-[#029293] "}
-              >
-                Return Refund policy
-              </Link>
-              <Link
-                href={"/pre-order"}
-                className={"text-white hover:text-[#029293] "}
-              >
-                <li>Pre Order</li>
+                Warranty Policy
               </Link>
               <Link
                 href={"/terms-conditions"}
