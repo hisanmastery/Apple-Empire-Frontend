@@ -28,28 +28,28 @@ const Footer = () => {
 
           <div className="font-normal">
             <h4>Contact Us</h4>
-            <p className="text-[#029293]">support@appleempirebd.com</p>
+            <p className="text-[#EE3F0B]">support@appleempirebd.com</p>
           </div>
 
           <div className="font-normal">
             <h4>Customer Service</h4>
-            <p className="text-[#029293]">support@appleempirebd.com</p>
+            <p className="text-[#EE3F0B]">support@appleempirebd.com</p>
           </div>
 
           <div className="md:block hidden">
-            <FaAnglesDown className="text-[#029293] h-14 w-14 rounded-full border-2 border-white s p-2 cursor-pointer " />
+            <FaAnglesDown className="text-[#EE3F0B] h-14 w-14 rounded-full border-2 border-white s p-2 cursor-pointer " />
           </div>
         </div>
         {/* row -2  */}
 
         <div className="grid grid-cols-12 gap-5 justify-between w-full items-center mt-16">
           <ul className="flex-wrap justify-center items-center mx-auto col-span-12 lg:col-span-6  gap-4 font-normal cursor-pointer">
-            <li className="hover:text-[#029293]">About Us</li>
-            <li className="hover:text-[#029293]">Order Tracking</li>
-            <li className="hover:text-[#029293]">Return Policy</li>
-            <li className="hover:text-[#029293]">Terms and Conditions</li>
-            <li className="hover:text-[#029293]">Cookie Policy</li>
-            <li className="hover:text-[#029293]">Privacy Policy</li>
+            <li className="hover:text-[#EE3F0B]">About Us</li>
+            <li className="hover:text-[#EE3F0B]">Order Tracking</li>
+            <li className="hover:text-[#EE3F0B]">Return Policy</li>
+            <li className="hover:text-[#EE3F0B]">Terms and Conditions</li>
+            <li className="hover:text-[#EE3F0B]">Cookie Policy</li>
+            <li className="hover:text-[#EE3F0B]">Privacy Policy</li>
           </ul>
           <div className="flex justify-center mt-4 mx-auto space-x-4 leading-3 col-span-12 lsm:col-span-4 lg:col-span-4">
             <Link href="#">

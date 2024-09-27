@@ -14,6 +14,10 @@ const Products = ({ params }: any) => {
   }
   if (params?.id == "used") {
     productsType = "used";
+  } 
+  
+  else if (params?.id == "offers") {
+    productsType = "offers";
   }
   return (
     <div className="container">
