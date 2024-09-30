@@ -17,20 +17,26 @@ const PreOrder: React.FC = () => {
     }
   };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const value: any = e.target;
-    const imageUrl = await uploadImage(image);
-    const payload = {
-      productName: value?.productName?.value,
-      image: imageUrl,
-      name: value?.name?.value,
-      email: value?.email.value,
-      phoneNumber: value?.phone?.value,
-      address: value?.address?.value,
-    };
-    const res: any = await createPreOrder(payload).unwrap();
-    if (res?.isSuccess) {
-      showTost("Pre order successfully");
+    try {
+      e.preventDefault();
+      const value: any = e.target;
+      const imageUrl = await uploadImage(image);
+      const payload = {
+        productName: value?.productName?.value,
+        image: imageUrl,
+        name: value?.name?.value,
+        email: value?.email.value,
+        phoneNumber: value?.phone?.value,
+        address: value?.address?.value,
+      };
+      const res: any = await createPreOrder(payload);
+      if (res?.data?.isSuccess) {
+        showTost("success", res?.data?.message);
+      } else {
+        showTost("error", res?.error?.data?.message);
+      }
+    } catch (error: any) {
+      showTost("error", error?.message);
     }
   };
 

@@ -1,12 +1,8 @@
-import PreOrder from '@/components/pre-order';
-import React from 'react';
+import PreOrder from "@/components/pre-order";
+import React from "react";
 
 const PreOrderPage = () => {
-    return (
-        <div>
-            <PreOrder/>
-        </div>
-    );
+  return <PreOrder />;
 };
 
 export default PreOrderPage;
