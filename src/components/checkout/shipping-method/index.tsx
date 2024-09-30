@@ -13,7 +13,7 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
   // Shipping options
   const shippingOptions = [
     {
-      id: "Out Side  Dhaka",
+      id: "OutSide Dhaka",
       label: "Outside Dhaka : Within 5-7 days",
       cost: "TK. 100",
     },
