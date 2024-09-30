@@ -59,9 +59,11 @@ export default function NewNavbar({ type }: any) {
                         <>
                           <div className="w-full h-full flex justify-between text-center items-center">
                             <div className="flex space-x-3 items-center">
-                              <span className="text-md font-600 hover:text-_orange text-qblacktext">
-                                {category.categoryName}
-                              </span>
+                              <Link href={`/category/${category.categoryName}`}>
+                                <span className="text-md font-600 hover:text-_orange text-qblacktext">
+                                  {category.categoryName}
+                                </span>
+                              </Link>
                             </div>
                           </div>
 
@@ -82,7 +84,7 @@ export default function NewNavbar({ type }: any) {
                                           className={`flex justify-between items-center px-2 h-10 bg-_white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
                                             type === 3
                                               ? "hover:bg-qh3-blue hover:text-white"
-                                              : "hover:bg-black hover:text-_orange"
+                                              : "hover:bg-gray-100 hover:text-_orange"
                                           }`}
                                         >
                                           <span className="text-md font-400">
