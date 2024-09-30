@@ -44,7 +44,7 @@ const Checkout = () => {
       address: data?.address,
       productIds: storedCart?.map((item: any) => item.productId),
       shippingMethod: {
-        isOutesideDhaka: true,
+        shippingMethod: shippingMethod,
         paymentMethod: data?.onlinePayment,
         orderNotes: data?.orderNotes,
       },
@@ -82,10 +82,7 @@ const Checkout = () => {
             <ShippingAddress />
           </div>
           <div>
-            <ShippingMethod
-              setShippingMethod={setShippingMethod}
-              shippingMethod={shippingMethod}
-            />
+            <ShippingMethod setShippingMethod={setShippingMethod} />
           </div>
           <div>
             CONFIRM ORDER

@@ -9,7 +9,7 @@ const OrderSummary = ({
   totalPrice,
   totalProducts,
   giftSend,
-  setGiftSend
+  setGiftSend,
 }: any) => {
   const toggleSystem = () => {
     setGiftSend(!giftSend);
@@ -35,7 +35,7 @@ const OrderSummary = ({
                 className="rounded-md"
               />
               <div>
-                <p className="text-sm mb-2">{item?.title.slice(0, 20)}..</p>
+                <p className="text-sm mb-2">{item?.title?.slice(0, 20)}..</p>
                 <p className="font-semibold">{item?.brand}</p>
               </div>
             </div>
@@ -74,8 +74,9 @@ const OrderSummary = ({
           onClick={toggleSystem}
         >
           <div
-            className={`w-6 h-6 flex items-center justify-center border-2 border-_pribg-_primary ${giftSend ? "bg-_primary" : "bg-white"
-              }`}
+            className={`w-6 h-6 flex items-center justify-center border-2 border-_pribg-_primary ${
+              giftSend ? "bg-_primary" : "bg-white"
+            }`}
           ></div>
           <p className="ml-2">Send as Gift</p>
         </label>

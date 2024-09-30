@@ -1,31 +1,51 @@
 import { GrDeliver } from "react-icons/gr";
 import React, { useState } from "react";
 import { MdOutlinePayment } from "react-icons/md";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useFormContext } from "react-hook-form";
 import Input from "@/components/common/input";
-const ShippingMethod = ({
-  setShippingMethod = () => { },
-  shippingMethod,
-}: any) => {
-  const {
-    register,
-  } = useFormContext();
-  const [selectedDhakaOutside, setSelectedDhakaOutside] = useState("default");
-  const handleMethodChangeDhakaOutside = (e: any) => {
-    setSelectedDhakaOutside(e.target.value);
+
+const ShippingMethod = ({ setShippingMethod }: any) => {
+  const { register, setValue } = useFormContext();
+
+  const [selectedShippingMethod, setSelectedShippingMethod] = useState("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+
+  // Shipping options
+  const shippingOptions = [
+    {
+      id: "Out Side  Dhaka",
+      label: "Outside Dhaka : Within 5-7 days",
+      cost: "TK. 100",
+    },
+    {
+      id: "Shop By Pick Up",
+      label: "Shop By pick up",
+      cost: "TK. 0",
+    },
+  ];
+
+  // Handle the change in selected shipping method
+  const handleMethodChange = (e: any) => {
+    const selectedMethod = e.target.value;
+    console.log(selectedMethod);
+    setSelectedShippingMethod(selectedMethod);
+    setShippingMethod(selectedMethod);
   };
 
-  const toggleSystem = () => {
-    setShippingMethod(!shippingMethod);
+  // Handle payment method selection and deselection
+  const handlePaymentMethodChange = (method: string) => {
+    if (selectedPaymentMethod === method) {
+      setSelectedPaymentMethod("");
+      setValue("onlinePayment", "");
+    } else {
+      setSelectedPaymentMethod(method);
+      setValue("onlinePayment", method);
+    }
   };
-  const [selectedMethod, setSelectedMethod] = useState("default");
 
-  const handleMethodChange = (method: any) => {
-    setSelectedMethod(method);
-  };
   return (
     <div>
+      {/* Shipping Method Section */}
       <div>
         <h1 className="flex items-center text-lg font-semibold gap-4">
           <button className="bg-_primary p-3 rounded-full">
@@ -33,28 +53,41 @@ const ShippingMethod = ({
           </button>
           Shipping method
         </h1>
-        <div className="flex items-center space-x-2 mt-5 ml-3">
-          <input
-            type="checkbox"
-            id="default"
-            className="hidden" // Hide the default checkbox
-            {...register("shippingMethod", { required: "" })}
-          />
-          <label
-            htmlFor="default"
-            className="inline-flex items-center cursor-pointer"
-            onClick={toggleSystem}
+
+        {/* Map over shipping options to display them */}
+        {shippingOptions.map((option) => (
+          <div
+            className="flex items-center space-x-2 mt-5 ml-3"
+            key={option.id}
           >
-            <div
-              className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${shippingMethod ? "bg-_primary" : "bg-white"
+            <input
+              type="radio"
+              id={option.id}
+              value={option.id}
+              onChange={handleMethodChange}
+              checked={selectedShippingMethod === option.id}
+              className="hidden"
+            />
+            <label
+              htmlFor={option.id}
+              className="inline-flex items-center cursor-pointer"
+            >
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${
+                  selectedShippingMethod === option.id
+                    ? "bg-_primary"
+                    : "bg-white"
                 }`}
-            ></div>
-            <div className="flex justify-between ml-2 items-center gap-10">
-              <span className="text-md">Outside Dhaka : Within 5-7 days</span>
-              <span>TK. 100</span>
-            </div>
-          </label>
-        </div>
+              ></div>
+              <div className="flex justify-between ml-2 items-center gap-10">
+                <span className="text-md">{option.label}</span>
+                {option.cost && <span>{option.cost}</span>}
+              </div>
+            </label>
+          </div>
+        ))}
+
+        {/* Payment Method Section */}
         <h1 className="flex items-center text-lg font-semibold gap-4 mt-14">
           <button className="bg-_primary p-3 rounded-full">
             <MdOutlinePayment className="text-2xl text-white" />
@@ -62,34 +95,58 @@ const ShippingMethod = ({
           Payment method
         </h1>
         <div className="p-5">
-          <RadioGroup
-            {...register("onlinePayment", { required: "" })}
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="Debit-Cards-Online Payment" id="r1" />
-              <label htmlFor="r1" className="text-md mt-2">
-                Debit & Cards / Online Payment
-              </label>
-            </div>
-            {/* <div className="flex items-center space-x-2">
-              <RadioGroupItem value="Cash on Delivery" id="r2" />
-              <label htmlFor="r2" className="text-lg mt-2">
-                Cash on Delivery
-              </label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="Cards on Delivery" id="r3" />
-              <label htmlFor="r3" className="text-md mt-2">
-                Cards on Delivery
-              </label>
-            </div> */}
-          </RadioGroup>
+          <div className="flex items-center space-x-2">
+            <div
+              className={`w-6 h-6 rounded-full cursor-pointer flex items-center justify-center border-2 border-_primary ${
+                selectedPaymentMethod === "Debit-Cards-Online Payment"
+                  ? "bg-_primary"
+                  : "bg-white"
+              }`}
+              onClick={() =>
+                handlePaymentMethodChange("Debit-Cards-Online Payment")
+              }
+            />
+            <label htmlFor="r1" className="text-md mt-2 cursor-pointer">
+              Debit & Cards / Online Payment
+            </label>
+          </div>
+
+          {/* Uncomment for additional payment methods */}
+          {/* <div className="flex items-center space-x-2">
+            <div
+              className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${
+                selectedPaymentMethod === "Cash on Delivery"
+                  ? "bg-_primary"
+                  : "bg-white"
+              }`}
+              onClick={() => handlePaymentMethodChange("Cash on Delivery")}
+            />
+            <label htmlFor="r2" className="text-md mt-2 cursor-pointer">
+              Cash on Delivery
+            </label>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <div
+              className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${
+                selectedPaymentMethod === "Cards on Delivery"
+                  ? "bg-_primary"
+                  : "bg-white"
+              }`}
+              onClick={() => handlePaymentMethodChange("Cards on Delivery")}
+            />
+            <label htmlFor="r3" className="text-md mt-2 cursor-pointer">
+              Cards on Delivery
+            </label>
+          </div> */}
         </div>
+
+        {/* Order Notes */}
         <div>
           <h1 className="text-md mb-2"></h1>
           <Input
-            label="Order notes(options)"
-            placeholder="order notes"
+            label="Order notes (optional)"
+            placeholder="Add any notes for the order"
             name="orderNotes"
             textArea={true}
             className="mt-2 focus:outline-none"

@@ -142,7 +142,7 @@ const CartPage = ({ className }: any) => {
               </TableBody>
             </Table>
 
-            <Link href={"/products"}>
+            <Link href={"/"}>
               <p className="text-blue-600 text-sm cursor-pointer mt-4 hover:text-blue-800">
                 Continue Shopping
               </p>
