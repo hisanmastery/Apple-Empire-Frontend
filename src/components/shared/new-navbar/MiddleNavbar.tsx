@@ -1,5 +1,5 @@
+"use client"
 import Link from "next/link";
-import SearchInput from "../navbar/searchInput";
 import { icons } from "@/constants/icons";
 import Image from "next/image";
 import Cart from "./Cart";
@@ -8,10 +8,9 @@ import { useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
 import { images } from "@/constants/images";
-import StickyFooter from "@/components/shared/footer/StickyFooter";
 import React from "react";
 
-export default function Middlebar({ className, type }: any) {
+export default function MiddleNavbar({ className, type }: any) {
   const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
   const { isAuthenticated, customerInfo } = useAuth();
   return (

@@ -1,10 +1,7 @@
+"use client"
 import React from "react";
-import Image from "next/image";
-import SearchBox from "@/components/shared/new-navbar/SearchBox";
 import Link from "next/link";
 import { icons } from "@/constants/icons";
-import WishLists from "@/components/shared/new-navbar/WishLists";
-import Cart from "@/components/shared/new-navbar/Cart";
 import { useSelector } from "react-redux";
 import useAuth from "@/hooks/useAuth";
 

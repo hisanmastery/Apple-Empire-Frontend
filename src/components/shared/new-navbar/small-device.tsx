@@ -1,3 +1,4 @@
+"use client";
 import { images } from "@/constants/images";
 import Image from "next/image";
 import Link from "next/link";
