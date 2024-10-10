@@ -53,7 +53,7 @@ const CustomSlider = ({ sliderProducts }: any) => {
         ],
       }}
     >
-      {sliderProducts?.blogs
+      {sliderProducts?.product
         ?.slice(0, 12)
         ?.map((product: any, index: number) => (
           <div

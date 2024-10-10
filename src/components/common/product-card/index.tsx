@@ -16,7 +16,7 @@ interface ProductData {
   title: string;
   price: number;
   offer_price: number;
-  image: { viewUrl: string };
+  image: { imageUrl: string };
   review: number;
 }
 
@@ -24,7 +24,8 @@ interface ProductCardProps {
   datas: ProductData;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
+  console.log({ datas });
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -42,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
         title: data?.title,
         productId: data?._id,
         price: data?.price,
-        image: data?.image?.viewUrl,
+        image: data?.image?.imageUrl,
         quantity: 0,
       };
       const res: any = await addToCartItem({ payload });
@@ -85,7 +86,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
               title: data?.title,
               productId: data?._id,
               price: data?.price,
-              image: data?.image?.viewUrl,
+              image: data?.image?.imageUrl,
               quantity: 1,
             };
             let cart_items: any = [...product_items, payload];
@@ -101,7 +102,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
           title: data?.title,
           productId: data?._id,
           price: data?.price,
-          image: data?.image?.viewUrl,
+          image: data?.image?.imageUrl,
           quantity: 1,
         };
         let cart_items: any = [payload];
@@ -113,16 +114,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
 
   // Calculate the offer percentage
   const parsePrice = (value: number | string) => {
-    if (typeof value === 'number') return value;
-    return parseFloat((value || '0').toString().replace(/[,৳]/g, ''));
+    if (typeof value === "number") return value;
+    return parseFloat((value || "0").toString().replace(/[,৳]/g, ""));
   };
 
   // Parse and log prices
   const newPrice = parsePrice(datas?.price);
   const newOfferPrice = parsePrice(datas?.offer_price);
-  const discountPercentage = newPrice ? Math.round(
-    ((newPrice - newOfferPrice) / newPrice) * 100
-  ) : 0;
+  const discountPercentage = newPrice
+    ? Math.round(((newPrice - newOfferPrice) / newPrice) * 100)
+    : 0;
 
   const isInCart = storedCart?.find(
     (item: any) => item.productId === datas?._id
@@ -146,7 +147,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             <div
               className="product-card-img w-full min-h-[180px] xmd:h-48 sm:h-52 slg:h-[220px] object-contain"
               style={{
-                backgroundImage: `url(${datas?.image?.viewUrl})`,
+                backgroundImage: `url(${datas?.image?.imageUrl})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
@@ -156,7 +157,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
           </Link>
           <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
             <Link href={`/products/${datas?._id}`}>
-             {/* <div className="reviews flex space-x-[1px] mb-3">
+              {/* <div className="reviews flex space-x-[1px] mb-3">
                 {Array.from(Array(datas.review), () => (
                   <span key={datas.review + Math.random()}>
                     <div className="flex text-yellow-400 text-xs msm:text-md">
@@ -166,7 +167,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
                 ))}
               </div>*/}
               <p className="title mb-2 text-xs sm:text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
-                {datas.title.slice(0, 22)}...
+                {datas.name.slice(0, 22)}...
               </p>
             </Link>
             <p className="price">
@@ -184,14 +185,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
                 disabled={isInCart}
                 onClick={() => handleAddToCart(datas)}
                 className={`bg-_orange/90 uppercase mb-3 h-6 lsm:h-7 sm:h-8 py-2 px-[3px] msm:px-2 w-full lsm:px-3 text-[9px] rounded-sm ${
-                  !isInCart
-                    ? "hover:bg-_orange"
-                    : "bg-slate-500 opacity-40"
+                  !isInCart ? "hover:bg-_orange" : "bg-slate-500 opacity-40"
                 } `}
                 type="button"
               >
                 <div className="flex items-center mx-auto w-full">
-                  <span className='mx-auto'>Add To Cart</span>
+                  <span className="mx-auto">Add To Cart</span>
                 </div>
               </Button>
 
