@@ -90,7 +90,7 @@ export default function MiddleNavbar({ className, type }: any) {
               </div>
               <div className="cart-wrapper group relative py-4">
                 <div className="cart relative cursor-pointer">
-                  <Link href="/section/popular-products">
+                  <Link href="/shop">
                     <p rel="noopener noreferrer">
                       <span>
                         <icons.FaShop className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />

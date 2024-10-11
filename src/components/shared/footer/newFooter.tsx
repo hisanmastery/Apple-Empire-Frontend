@@ -48,16 +48,16 @@ const NewFooter = () => {
         {/* row -2  */}
 
         <div className="grid grid-cols-12 gap-5 justify-between w-full items-center mt-16">
-          <ul className=" flex flex-wrap justify-between items-center col-span-12 lg:col-span-8  font-normal cursor-pointer">
-            <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
+          <div className="flex flex-wrap justify-between items-center col-span-12 lg:col-span-8  font-normal cursor-pointer">
+            <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className={"text-[#EE3F0B] md:text-lg text-sm"}>About Us</li>
               <li className={"text-white hover:text-[#EE3F0B] "}>About Us</li>
               <li className={"text-white hover:text-[#EE3F0B] "}>
                 Shop Address
               </li>
               <li className={"text-white hover:text-[#EE3F0B] "}>Blog</li>
-            </li>
-            <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
+            </ul>
+            <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-[#EE3F0B] md:text-lg text-sm">Policy</li>
               <Link
                 href={"/privacy-policy"}
@@ -78,8 +78,8 @@ const NewFooter = () => {
               >
                 Terms And Conditions
               </Link>
-            </li>
-            <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
+            </ul>
+            <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-[#EE3F0B] md:text-lg text-sm">
                 PRODUCT DELIVERY
               </li>
@@ -96,16 +96,16 @@ const NewFooter = () => {
                 </li>
               </Link>
               <li className={"text-white hover:text-[#EE3F0B] "}>FAQ</li>
-            </li>
-            <li className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
+            </ul>
+            <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-[#EE3F0B] md:text-lg text-sm">CATEGORY</li>
               <li className={"text-white hover:text-[#EE3F0B]"}>
                 Phone and Tablets
               </li>
               <li className={"text-white hover:text-[#EE3F0B]"}>Macbook</li>
               <li className={"text-white hover:text-[#EE3F0B]"}>Sound</li>
-            </li>
-          </ul>
+            </ul>
+          </div>
           <div className={"col-span-12 lg:col-span-4"}>
             <div className="flex justify-center mt-4 mx-auto space-x-4 leading-3 ">
               <Link href="#">
