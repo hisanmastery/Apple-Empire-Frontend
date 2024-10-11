@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 
 const VariantDisplay = ({ product }: any) => {
   const optionTypes = ["Color", "Storage", "Display"];
-  console.log(product);
   // State for storing the selected options
   const [selectedOptions, setSelectedOptions]: any = useState(
     optionTypes.reduce((acc, option) => ({ ...acc, [option]: "" }), {})

@@ -51,7 +51,6 @@ export default function Cart({ className }: any) {
       quantity,
       totalPrice: newTotalPrice,
     };
-
     const res: any = await updateCart({ id: productData._id, payload });
 
     if (res?.data?.isSuccess) {

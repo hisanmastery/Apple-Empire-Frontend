@@ -28,14 +28,14 @@ const CartPage = ({ className }: any) => {
 
   // Constants
   const PROMO_CODE = "appleempire";
-  const SHIPPING_RATE = 0.2; // Shipping cost is 20% of subtotal
-  const DISCOUNT_RATE = 0.1; // Discount for valid promo code
+  const SHIPPING_RATE = 0.2;
+  const DISCOUNT_RATE = 0.1;
 
   // Helper function to update quantity
   const updateQuantity = (index: number, newQuantity: number) => {
-    const updatedCart = storedCart.map((cartItem: any, idx: number) => {
+    const updatedCart = storedCart?.map((cartItem: any, idx: number) => {
       if (idx === index) {
-        return { ...cartItem, quantity: Math.max(newQuantity, 1) }; // Ensure quantity is at least 1
+        return { ...cartItem, quantity: Math.max(newQuantity, 1) };
       }
       return cartItem;
     });

@@ -13,11 +13,9 @@ import {
   useAddToCartMutation,
   useUpdateCartMutation,
 } from "@/store/features/cart/cartApi";
-import { get_store_data } from "@/utils/get_store_data";
 import Loading from "@/components/common/loading";
 import useAuth from "@/hooks/useAuth";
 import useToaster from "@/hooks/useToaster";
-import QuantityController from "@/components/common/quantity-controller";
 import Emiplan from "@/components/emiplan";
 import VariantDisplay from "./variant-display";
 import ImageDisplay from "./image-display";
@@ -25,11 +23,15 @@ import ColorSelector from "./color-selector";
 import SocialShare from "./social-share";
 import ProductInfoTab from "./product-info-tab";
 import ProductActionButtons from "./ProductActionButtons";
+import { addToCart } from "./AddToCart";
+import { handleIncrementQuantity } from "./quantity-update";
+import QuantityController from "@/components/common/quantity-controller";
+import { get_store_data } from "@/utils/get_store_data";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
   const [isOpen, setIsOpen] = useState(false);
-  const { customerInfo } = useAuth();
+  const { customerInfo, isAuthenticated } = useAuth();
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
   const [selectedColor, setSelectedColor]: any = useState(
     data?.response?.variations[0]?.color
@@ -39,7 +41,6 @@ const ProductDetails = ({ id }: any) => {
   const dispatch = useDispatch();
   const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
-  const [countQuantity, setCountQuantity] = useState(1);
 
   useEffect(() => {
     if (storedCart?.length && data) {
@@ -64,141 +65,48 @@ const ProductDetails = ({ id }: any) => {
 
   // handle cart click
   const handleCartClick = async (productData: any) => {
-    const data = productData?.response;
-    const token = localStorage.getItem("token");
-    const email = localStorage.getItem("email");
-
-    if (token) {
-      const payload = {
-        email: customerInfo.email,
-        title: data?.title,
-        productId: data?._id,
-        price: data?.price,
-        image: data?.image?.viewUrl,
-        quantity: 0,
-      };
-      const res: any = await addToCartItem({ payload });
-      if (res.data.isSuccess) {
-        showToast("success", "Cart added successfull");
-        const data: any = await get_store_data();
-        if (data?.length) {
-          dispatch(getStoredData(data));
-        } else {
-          dispatch(getStoredData([]));
-        }
-      } else {
-        showToast("error", "Cart can't add");
-      }
-    } else {
-      let product_items: any = localStorage.getItem("cart_items");
-
-      product_items = JSON.parse(product_items);
-
-      if (product_items?.length) {
-        const data = productData?.response;
-        const item_id = data?._id;
-
-        if (item_id) {
-          const lists: any = [...product_items];
-
-          const filters = lists.filter((d: any) => {
-            return d?.productId == item_id;
-          });
-
-          if (filters.length == 1) {
-            let new_lists: any = [];
-            product_items.map((d: any) => {
-              if (d?.productId == item_id) {
-                const obj = { ...d };
-                obj.quantity = d.quantity + 1;
-                new_lists = [...new_lists, obj];
-              } else {
-                const obj = { ...d };
-                new_lists = [...new_lists, obj];
-              }
-            });
-            localStorage.setItem("cart_items", JSON.stringify(new_lists));
-            dispatch(getStoredData(new_lists));
-          } else {
-            const payload = {
-              email: "",
-              title: data?.title,
-              productId: data?._id,
-              price: data?.price,
-              image: data?.image?.viewUrl,
-              quantity: 1,
-            };
-            let cart_items: any = [...product_items];
-            cart_items = [...cart_items, payload];
-            localStorage.setItem("cart_items", JSON.stringify(cart_items));
-            dispatch(getStoredData(cart_items));
-          }
-        } else {
-          console.log("Product Id Not Found.");
-        }
-      } else {
-        const payload = {
-          email: "",
-          title: data?.title,
-          productId: data?._id,
-          price: data?.price,
-          image: data?.image?.viewUrl,
-          quantity: 1,
-        };
-        let cart_items: any = [];
-        cart_items = [...cart_items, payload];
-        localStorage.setItem("cart_items", JSON.stringify(cart_items));
-        dispatch(getStoredData(cart_items));
-      }
-    }
+    await addToCart(
+      productData,
+      dispatch,
+      getStoredData,
+      isAuthenticated,
+      customerInfo,
+      addToCartItem,
+      showToast
+    );
   };
   // check already added cart
-  const isInCart = storedCart?.find((item: any) => {
-    return item.productId === data?.response?._id;
-  });
+  const isInCart = storedCart?.find((item: any) => item.productId === id);
+
+  const refetchCartData = async () => {
+    const data: any = await get_store_data();
+    if (data?.length) {
+      dispatch(getStoredData(data));
+    }
+  };
+
+  // increment/Decrement function
+  const handleInQuantityUpdate = async (value: any, isIncrement: boolean) => {
+    const productData = storedCart?.find(
+      (item: any) => item.productId === value?._id
+    );
+    await handleIncrementQuantity(
+      productData,
+      isIncrement,
+      isAuthenticated,
+      updateCart,
+      showToast,
+      refetchCartData,
+      dispatch,
+      getStoredData
+    );
+  };
 
   if (isLoading) {
     return <Loading />;
   }
-
-  // Increment function
-  const handleIncrementQuantity = () => {
-    setCountQuantity((prevQuantity) => prevQuantity + 1);
-  };
-
-  // Decrement function
-  const handleDecrementQuantity = (item: any) => {
-    const new_data = item?.response;
-
-    if (new_data?._id) {
-      console.log("New Data: ", new_data);
-      const token = localStorage.getItem("token");
-      if (token) {
-      } else {
-        const filter = storedCart.filter((d: any) => {
-          return d?.productId == new_data?._id;
-        });
-        let lists: any = [];
-        storedCart.map((d: any) => {
-          if (d?.productId == new_data?._id) {
-            const obj = { ...d };
-            obj.quantity = obj.quantity - 1;
-            lists = [...lists, obj];
-          } else {
-            const obj = {
-              ...d,
-            };
-            lists = [...lists, obj];
-          }
-        });
-        localStorage.setItem("cart_items", JSON.stringify(lists));
-        dispatch(getStoredData(lists));
-      }
-    }
-  };
-
   return (
-    <section className="container mx-auto py-5 px-2 md:px-0">
+    <section className="container mx-auto py-5 px-2 md:px-0 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
         <div className="col-span-3 flex mx-auto">
           <div>
@@ -268,14 +176,12 @@ const ProductDetails = ({ id }: any) => {
           <div className="flex gap-5 justify-start items-center mt-14">
             {/* Product Quantity  */}
             <QuantityController
-              countQuantity={countQuantity}
               thisItem={thisItem}
-              data={data}
-              handleIncrementQuantity={handleCartClick}
-              handleDecrementQuantity={handleDecrementQuantity}
+              data={data?.response}
+              handleInQuantityUpdate={handleInQuantityUpdate}
             />
             <Button
-              onClick={() => handleCartClick(data)}
+              onClick={() => handleCartClick(data?.response)}
               disabled={isInCart}
               className="bg-black hover:bg-_orange rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
             >
@@ -283,7 +189,7 @@ const ProductDetails = ({ id }: any) => {
             </Button>
             <Button
               variant={"outline"}
-              // onClick={() => handleCartClick()}
+              onClick={() => handleCartClick(data?.response)}
               className="uppercase hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
             >
               <Link href={"/cart/checkout"}> Buy Now</Link>
