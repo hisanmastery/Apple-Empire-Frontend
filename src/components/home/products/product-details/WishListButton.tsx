@@ -28,7 +28,6 @@ const WishListButton = ({ item, showToast }: any) => {
             },
           }
         );
-        console.log({ res });
         if (res?.data?.isSuccess) {
           setWishItem(null);
           showToast("success", "Wish removed successfully");

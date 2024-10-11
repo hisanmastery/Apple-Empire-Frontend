@@ -1,17 +1,10 @@
 "use client";
 import { icons } from "@/constants/icons";
 import useAuth from "@/hooks/useAuth";
-import {
-  useAddToCartDeleteMutation,
-  useUpdateCartMutation,
-} from "@/store/features/cart/cartApi";
-import {
-  getStoredData,
-  storedWishLists,
-} from "@/store/features/cart/cartSlice";
+import { useUpdateCartMutation } from "@/store/features/cart/cartApi";
+import { storedWishLists } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
-import { useEffect } from "react";
-import { get_store_data, get_wish_lists } from "@/utils/get_store_data";
+import { get_wish_lists } from "@/utils/get_store_data";
 import { useDispatch, useSelector } from "react-redux";
 import useToaster from "@/hooks/useToaster";
 import axios from "axios";
@@ -20,28 +13,23 @@ import { baseApiUrl } from "@/constants/endpoint";
 export default function WishLists({ className }: any) {
   const { wishLists } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
-  const [updateCart] = useUpdateCartMutation();
-  const { isAuthenticated } = useAuth();
   const showToast = useToaster();
 
   // refetch wishlist
   const refetchWishLists = async () => {
     const data: any = await get_wish_lists();
-    if (data?.length) {
-      dispatch(storedWishLists(data));
-    }
+    dispatch(storedWishLists(data));
   };
-
   const handleIncrementQuantity = async (productData: any) => {
     const email = localStorage.getItem("email");
-
+    const newQuantity = parseFloat(productData?.quantity);
     const post_object = {
       _id: productData?._id,
       email: email,
-      productId: productData?._id,
+      productId: productData?.productId,
       image: productData?.image?.viewUrl,
       price: productData?.price,
-      quantity: productData?.quantity + 1,
+      quantity: newQuantity + 1,
       title: productData?.title,
     };
 
@@ -50,7 +38,7 @@ export default function WishLists({ className }: any) {
         `${baseApiUrl}/wishlist/update-wishlist/${productData?._id}`,
         post_object
       );
-      if (res.data.isSuccess) {
+      if (res?.data?.isSuccess) {
         await refetchWishLists();
       } else {
         showToast("error", "Wish can't be incremented");
@@ -67,7 +55,7 @@ export default function WishLists({ className }: any) {
 
     try {
       if (post_object?.quantity <= 0) {
-        const token = localStorage.getItem("token");
+        const token = localStorage?.getItem("token");
         await axios.delete(
           `${baseApiUrl}/wishlist/delete-wishlist/${item?._id}`,
           {

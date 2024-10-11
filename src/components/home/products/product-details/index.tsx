@@ -32,10 +32,9 @@ const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
   const [isOpen, setIsOpen] = useState(false);
   const { customerInfo, isAuthenticated } = useAuth();
+  const [variantPrice, setVariantPrice] = useState<any>();
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
-  const [selectedColor, setSelectedColor]: any = useState(
-    data?.response?.variations[0]?.color
-  );
+  const [selectedColor, setSelectedColor]: any = useState();
   const [thisItem, setThisItem] = useState<any>({});
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
@@ -110,7 +109,12 @@ const ProductDetails = ({ id }: any) => {
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
         <div className="col-span-3 flex mx-auto">
           <div>
-            <ImageDisplay product={data} selectedColor={selectedColor} />
+            <ImageDisplay
+              product={data}
+              selectedColor={
+                selectedColor || data?.response?.variations?.[0]?.color
+              }
+            />
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
               {data?.response?.variations
                 ?.slice(0, 4)
@@ -135,7 +139,7 @@ const ProductDetails = ({ id }: any) => {
         <div className="col-span-4 bg-white px-2 md:px-5">
           <div className="flex justify-between">
             <div className={"w-full"}>
-              <h2 className="flex items-center gap-2 text-md md:text-xl font-medium ">
+              <h2 className="flex items-center gap-2 text-md md:text-xl font-medium mb-2">
                 {data?.response?.name?.slice(0, 50)}
               </h2>
               <div className="grid grid-cols-2 items-center lg:max-w-[500px]">
@@ -161,7 +165,7 @@ const ProductDetails = ({ id }: any) => {
             showToast={showToast}
           />
           {/* color variant */}
-          <div className="flex justify-between items-center mx-1 mt-8">
+          <div className="flex justify-between items-center mx-1 mt-2">
             <ColorSelector
               variations={data?.response?.variations}
               selectedColor={selectedColor}
@@ -170,7 +174,10 @@ const ProductDetails = ({ id }: any) => {
           </div>
           {/* variant */}
           <div className="mt-2">
-            <VariantDisplay product={data?.response} />
+            <VariantDisplay
+              product={data?.response}
+              setVariantPrice={setVariantPrice}
+            />
           </div>
           {/* add to cart button */}
           <div className="flex gap-5 justify-start items-center mt-14">
@@ -208,7 +215,11 @@ const ProductDetails = ({ id }: any) => {
       <ProductSlider />
       {/* products info */}
       <ProductInfoTab product={data} />
-      <Emiplan price={400} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Emiplan
+        price={variantPrice?.price}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </section>
   );
 };
