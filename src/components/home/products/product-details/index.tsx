@@ -87,7 +87,7 @@ const ProductDetails = ({ id }: any) => {
   // increment/Decrement function
   const handleInQuantityUpdate = async (value: any, isIncrement: boolean) => {
     const productData = storedCart?.find(
-      (item: any) => item.productId === value?._id
+      (item: any) => item?.productId === value?._id
     );
     await handleIncrementQuantity(
       productData,
@@ -182,11 +182,13 @@ const ProductDetails = ({ id }: any) => {
           {/* add to cart button */}
           <div className="flex gap-5 justify-start items-center mt-14">
             {/* Product Quantity  */}
-            <QuantityController
-              thisItem={thisItem}
-              data={data?.response}
-              handleInQuantityUpdate={handleInQuantityUpdate}
-            />
+            {isInCart && (
+              <QuantityController
+                thisItem={thisItem}
+                data={data?.response}
+                handleInQuantityUpdate={handleInQuantityUpdate}
+              />
+            )}
             <Button
               onClick={() => handleCartClick(data?.response)}
               disabled={isInCart}
@@ -196,7 +198,9 @@ const ProductDetails = ({ id }: any) => {
             </Button>
             <Button
               variant={"outline"}
-              onClick={() => handleCartClick(data?.response)}
+              onClick={
+                isInCart ? () => {} : () => handleCartClick(data?.response)
+              }
               className="uppercase hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
             >
               <Link href={"/cart/checkout"}> Buy Now</Link>

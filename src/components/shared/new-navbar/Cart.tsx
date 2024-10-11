@@ -31,9 +31,7 @@ export default function Cart({ className }: any) {
 
   const refetchCartData = async () => {
     const data: any = await get_store_data();
-    if (data?.length) {
-      dispatch(getStoredData(data));
-    }
+    dispatch(getStoredData(data));
   };
 
   const quantityUpdate = async (productData: Product, isIncrement: boolean) => {

@@ -25,15 +25,16 @@ const updateProductQuantity = async (
   showToast: (type: "success" | "error", message: string) => void,
   refetchCartData: () => Promise<void>
 ) => {
+  const currentQuantity = productData?.quantity ?? 0;
   const quantity = isIncrement
-    ? productData.quantity + 1
-    : productData.quantity - 1;
+    ? currentQuantity + 1
+    : Math.max(0, currentQuantity - 1);
 
   // Calculate unit price and total price
   const unitPrice =
-    typeof productData.price === "string"
-      ? parseFloat(productData.price.replace(/,/g, ""))
-      : productData.price;
+    typeof productData?.price === "string"
+      ? parseFloat(productData?.price?.replace(/,/g, ""))
+      : productData?.price;
   const newTotalPrice = unitPrice * quantity;
 
   const payload = {
@@ -43,7 +44,7 @@ const updateProductQuantity = async (
   };
   try {
     const res: UpdateCartResponse = await updateCart({
-      id: productData._id,
+      id: productData?._id,
       payload,
     });
 
@@ -86,11 +87,12 @@ export const handleIncrementQuantity = async (
       localStorage.getItem("cart_items") || "[]"
     );
 
-    const itemId = productData.productId;
+    const itemId = productData?.productId;
     if (itemId) {
-      const updatedItems = productItems.map((item) => {
-        if (item.productId === itemId) {
-          return { ...item, quantity: item.quantity + 1 };
+      const updatedItems = productItems?.map((item) => {
+        if (item?.productId === itemId) {
+          const updatedQuantity = item?.quantity ?? 0;
+          return { ...item, quantity: updatedQuantity + 1 };
         }
         return item;
       });
