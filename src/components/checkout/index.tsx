@@ -4,38 +4,56 @@ import ShippingAddress from "./shiping-address";
 import ShippingMethod from "./shipping-method";
 import OrderSummary from "./order-summary";
 import { FormProvider, useForm } from "react-hook-form";
-import { useGetEmailCartQuery } from "@/store/features/cart/cartApi";
-import { useState } from "react";
 import { useCreatePaymentMutation } from "@/store/features/checkout/checkoutApi";
 import { useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
-import withAuth from "../hoc/with-auth-wrapper";
+import { useState } from "react";
+import { useCustomerRegisterMutation } from "@/store/api/auth/authApi";
+import { generateUniquePassword } from "@/hooks/generateUniquePassword";
+import PaymentAlert from "./payment-alert";
+
 const Checkout = () => {
   const methods = useForm();
   const router = useRouter();
+  const [customerRegister, { isLoading }] = useCustomerRegisterMutation();
   const { storedCart } = useSelector((state: any) => state?.cart);
   const [shippingMethod, setShippingMethod] = useState(false);
   const [giftSend, setGiftSend] = useState(false);
   const [createPayment] = useCreatePaymentMutation();
-  const { isAuthenticated, customerInfo } = useAuth();
-  // calculate sub total price
+  const { customerInfo } = useAuth();
+  const [userInfo, setUserInfo] = useState<any>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [payload, setPayload] = useState<any>(null);
 
+  // Calculate subtotal price
   const subtotal = storedCart?.reduce((acc: number, product: any) => {
-    if (!product?.price) return acc; // Skip if price is undefined or null
-    const priceWithoutCommas = parseInt(product.price.replace(/,/g, ""), 10);
+    if (!product?.price) return acc;
+    const priceAsString =
+      typeof product.price === "string"
+        ? product.price
+        : product.price.toString();
+
+    const priceWithoutCommas = parseFloat(priceAsString.replace(/,/g, ""));
     return acc + product.quantity * priceWithoutCommas;
   }, 0);
 
   const cartDiscount = 5;
   const deliveryFee = 100;
   const totalPrice = subtotal - cartDiscount + deliveryFee;
+
   const onSubmit = async (data: any) => {
-    if (!isAuthenticated) {
-      router.push("/login");
-      return;
-    }
-    const payload = {
-      email: customerInfo?.email,
+    const uniquePassword = generateUniquePassword();
+    const registerData = {
+      name: data.name,
+      email: data.email,
+      password: uniquePassword,
+      phone: data.number,
+      role: "customer",
+    };
+
+    // Define the payload here
+    const newPayload = {
+      email: customerInfo?.email || data?.email,
       name: data?.name,
       phone: data?.number,
       postCode: data?.postCode,
@@ -48,27 +66,59 @@ const Checkout = () => {
         paymentMethod: data?.onlinePayment,
         orderNotes: data?.orderNotes,
       },
-      // gift: giftSend,
       totalPrice: totalPrice,
     };
-    if (payload?.email) {
-      const res: any = await createPayment({ payload });
-      if (res?.data?.isSuccess) {
-        router.push(res?.data?.response?.paymentInfo?.GatewayPageURL);
+
+    if (newPayload?.email) {
+      const res: any = await customerRegister(registerData);
+
+      if (res?.data?.status_code === 200) {
+        // Successful registration
+        setPayload(newPayload);
+        setUserInfo({
+          email: registerData?.email,
+          password: registerData.password,
+        });
+        setIsModalOpen(true);
+      } else if (
+        res?.data?.message === "Email already in use" ||
+        customerInfo?.email
+      ) {
+        setUserInfo({
+          email: registerData?.email,
+          password: registerData.password,
+        });
+        handleConfirm();
+      } else {
+        alert(res?.error?.message || "Registration failed");
       }
     } else {
       alert("Email missing");
     }
   };
+  const handleConfirm = async () => {
+    if (!payload) {
+      alert("Please try again.");
+      return;
+    }
+    setIsModalOpen(false);
+    const paymentRes: any = await createPayment({ payload });
+    if (paymentRes?.data?.isSuccess) {
+      router.push(paymentRes?.data?.response?.paymentInfo?.GatewayPageURL);
+    } else {
+      alert("Payment failed");
+    }
+  };
+
   return (
-    <main className=" container mx-auto mt-10">
+    <main className="container mx-auto mt-10">
       <div className="flex justify-between items-center">
         <div className="w-[60%]">
           <h2 className="uppercase text-2xl">Checkout</h2>
           <p>Please enter your details below to complete your purchase</p>
         </div>
         <div>
-          <button className="border-2 border-_primary text-_primary  px-5 p-2 rounded-md hover:bg-_border-_primary hover:text-black transition-all ease-in-out duration-1000">
+          <button className="border-2 border-_primary text-_primary px-5 p-2 rounded-md hover:bg-_border-_primary hover:text-black transition-all ease-in-out duration-1000">
             BACK TO CART
           </button>
         </div>
@@ -104,8 +154,14 @@ const Checkout = () => {
           </div>
         </form>
       </FormProvider>
+      <PaymentAlert
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleConfirm}
+        userInfo={userInfo}
+      />
     </main>
   );
 };
 
-export default withAuth(Checkout);
+export default Checkout;

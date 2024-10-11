@@ -110,35 +110,6 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
               Debit & Cards / Online Payment
             </label>
           </div>
-
-          {/* Uncomment for additional payment methods */}
-          {/* <div className="flex items-center space-x-2">
-            <div
-              className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${
-                selectedPaymentMethod === "Cash on Delivery"
-                  ? "bg-_primary"
-                  : "bg-white"
-              }`}
-              onClick={() => handlePaymentMethodChange("Cash on Delivery")}
-            />
-            <label htmlFor="r2" className="text-md mt-2 cursor-pointer">
-              Cash on Delivery
-            </label>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <div
-              className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${
-                selectedPaymentMethod === "Cards on Delivery"
-                  ? "bg-_primary"
-                  : "bg-white"
-              }`}
-              onClick={() => handlePaymentMethodChange("Cards on Delivery")}
-            />
-            <label htmlFor="r3" className="text-md mt-2 cursor-pointer">
-              Cards on Delivery
-            </label>
-          </div> */}
         </div>
 
         {/* Order Notes */}

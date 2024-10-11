@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -13,11 +14,13 @@ import { get_store_data } from "@/utils/get_store_data";
 // Define the type for the datas prop (can adjust as per your model)
 interface ProductData {
   _id: string;
-  title: string;
+  name: string;
   price: number;
+  offerPrice: number;
   offer_price: number;
   image: { imageUrl: string };
   review: number;
+  variants: any[];
 }
 
 interface ProductCardProps {
@@ -25,7 +28,6 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
-  console.log({ datas });
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -39,15 +41,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
 
     if (token && isAuthenticated) {
       const payload = {
-        email: customerInfo.email,
-        title: data?.title,
+        email: customerInfo?.email,
+        title: data?.name,
         productId: data?._id,
-        price: data?.price,
+        price: data?.variants?.[0]?.price || data?.offerPrice || data?.price,
         image: data?.image?.imageUrl,
         quantity: 0,
       };
       const res: any = await addToCartItem({ payload });
-      if (res.data.isSuccess) {
+      if (res?.data?.isSuccess) {
         showToast("success", "Cart added successfully");
         const data: any = await get_store_data();
         if (data?.length) {
@@ -82,13 +84,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
             dispatch(getStoredData(new_lists));
           } else {
             const payload = {
-              email: "",
-              title: data?.title,
+              title: data?.name,
               productId: data?._id,
-              price: data?.price,
+              price:
+                data?.variants?.[0]?.price || data?.offerPrice || data?.price,
               image: data?.image?.imageUrl,
               quantity: 1,
             };
+            console.log(payload);
             let cart_items: any = [...product_items, payload];
             localStorage.setItem("cart_items", JSON.stringify(cart_items));
             dispatch(getStoredData(cart_items));
@@ -98,10 +101,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
         }
       } else {
         const payload = {
-          email: "",
-          title: data?.title,
+          title: data?.name,
           productId: data?._id,
-          price: data?.price,
+          price: data?.variants?.[0]?.price || data?.offerPrice || data?.price,
           image: data?.image?.imageUrl,
           quantity: 1,
         };
@@ -130,100 +132,86 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
   );
 
   return (
-    <div
-      className="overflow-hidden"
-      // style={{ boxShadow: "0px 0px 1px 0px gray" }}
-    >
-      <>
-        <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-white relative group hover:scale-105 rounded-lg ease-in-out  duration-700">
-          {/* Display Offer Percentage */}
-          {discountPercentage > 0 && (
-            <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 sm:text-sm rounded text-xs">
-              {discountPercentage}% OFF
-            </div>
-          )}
-
-          <Link href={`/products/${datas?._id}`}>
-            <div
-              className="product-card-img w-full min-h-[180px] xmd:h-48 sm:h-52 slg:h-[220px] object-contain"
-              style={{
-                backgroundImage: `url(${datas?.image?.imageUrl})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                margin: "auto",
-              }}
-            ></div>
-          </Link>
-          <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
-            <Link href={`/products/${datas?._id}`}>
-              {/* <div className="reviews flex space-x-[1px] mb-3">
-                {Array.from(Array(datas.review), () => (
-                  <span key={datas.review + Math.random()}>
-                    <div className="flex text-yellow-400 text-xs msm:text-md">
-                      {<icons.FaStar />}
-                    </div>
-                  </span>
-                ))}
-              </div>*/}
-              <p className="title mb-2 text-xs sm:text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
-                {datas.name.slice(0, 22)}...
-              </p>
-            </Link>
-            <p className="price">
-              <span className="main-price text-qgray line-through font-600 text-sm sm:text-[18px] text-red-500">
-                {datas.price}
-              </span>
-              <span className="offer-price text-qred font-600 text-sm sm:text-[18px] ml-2">
-                {datas.offer_price}
-              </span>
-            </p>
-
-            {/* Add to Cart and Buy Now Buttons */}
-            <div className="flex space-x-[2px] msm:space-x-2 h-full">
-              <Button
-                disabled={isInCart}
-                onClick={() => handleAddToCart(datas)}
-                className={`bg-_orange/90 uppercase mb-3 h-6 lsm:h-7 sm:h-8 py-2 px-[3px] msm:px-2 w-full lsm:px-3 text-[9px] rounded-sm ${
-                  !isInCart ? "hover:bg-_orange" : "bg-slate-500 opacity-40"
-                } `}
-                type="button"
-              >
-                <div className="flex items-center mx-auto w-full">
-                  <span className="mx-auto">Add To Cart</span>
-                </div>
-              </Button>
-
-              <Button
-                variant={"outline"}
-                onClick={isInCart ? () => {} : () => handleAddToCart(datas)}
-                className="h-6 lsm:h-7 sm:h-8 uppercase  px-[1px] sm:px-2 py-2  hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-[9px]"
-              >
-                <Link href={"/cart/checkout"}>Buy Now</Link>
-              </Button>
-            </div>
+    <div className="overflow-hidden">
+      <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
+        {/* Display Offer Percentage */}
+        {discountPercentage > 0 && (
+          <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 sm:text-sm rounded text-xs">
+            {discountPercentage}% OFF
           </div>
+        )}
 
-          {/* quick-access-btns */}
-          <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20 transition-all duration-300 ease-in-out">
-            <a href="#">
-              <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-                {<icons.FavoriteBorder className="text-xl" />}
-              </span>
-            </a>
-            <a href="#">
-              <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-                {<icons.MdZoomOutMapIcon className="text-xl" />}
-              </span>
-            </a>
-            <a href="#">
-              <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-                {<icons.LiaSyncSolidIcons className="text-xl" />}
-              </span>
-            </a>
+        <Link href={`/products/${datas?._id}`}>
+          <div
+            className="product-card-img w-full min-h-[180px] xmd:h-48 sm:h-52 slg:h-[220px] object-contain"
+            style={{
+              backgroundImage: `url(${datas?.image?.imageUrl})`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              margin: "auto",
+            }}
+          ></div>
+        </Link>
+        <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
+          <Link href={`/products/${datas?._id}`}>
+            <p className="title mb-2 text-xs sm:text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
+              {datas.name.slice(0, 22)}...
+            </p>
+          </Link>
+          <p className="price">
+            <span className="main-price text-qgray line-through font-600 text-sm sm:text-[18px] text-red-500">
+              {datas.price}
+            </span>
+            <span className="offer-price text-qred font-600 text-sm sm:text-[18px] ml-2">
+              {datas.offer_price}
+            </span>
+          </p>
+
+          {/* Add to Cart and Buy Now Buttons */}
+          <div className="flex space-x-[2px] msm:space-x-2 h-full">
+            <Button
+              disabled={isInCart}
+              onClick={() => handleAddToCart(datas)}
+              className={`bg-_orange/90 uppercase mb-3 h-6 lsm:h-7 sm:h-8 py-2 px-[3px] msm:px-2 w-full lsm:px-3 text-[9px] rounded-sm ${
+                !isInCart ? "hover:bg-_orange" : "bg-slate-500 opacity-40"
+              } `}
+              type="button"
+            >
+              <div className="flex items-center mx-auto w-full">
+                <span className="mx-auto">Add To Cart</span>
+              </div>
+            </Button>
+
+            <Button
+              variant={"outline"}
+              onClick={isInCart ? () => {} : () => handleAddToCart(datas)}
+              className="h-6 lsm:h-7 sm:h-8 uppercase px-[1px] sm:px-2 py-2 hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-[9px]"
+            >
+              <Link href={"/cart/checkout"}>Buy Now</Link>
+            </Button>
           </div>
         </div>
-      </>
+
+        {/* quick-access-btns */}
+        <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20 transition-all duration-300 ease-in-out">
+          <a href="#">
+            <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
+              {<icons.FavoriteBorder className="text-xl" />}
+            </span>
+          </a>
+          <a href="#">
+            <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
+              {<icons.MdZoomOutMapIcon className="text-xl" />}
+            </span>
+          </a>
+          <a href="#">
+            <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
+              {<icons.LiaSyncSolidIcons className="text-xl" />}
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
