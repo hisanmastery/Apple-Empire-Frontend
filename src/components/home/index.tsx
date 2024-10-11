@@ -1,5 +1,4 @@
 import React from "react";
-
 import ClientBrand from "../home/client-brand/index";
 import Products from "../home/products/index";
 import ProductAds from "../common/productAds/index";
@@ -7,8 +6,6 @@ import ViewMoreTitle from "../common/ViewMoreTitle/index";
 import TopSellingProducts from "../home/TopSellingProducts/index";
 import PopularProducts from "../home/popularProducts/index";
 import TopItems from "./top-items";
-import MultiCarousel from "../common/carousel";
-import ProductSlider from "./product-slider";
 import CampaignsCountDown from "./campaigns-count-down";
 import HomePopup from "@/components/home/popup/HomePopup";
 
@@ -18,9 +15,7 @@ const Home = () => {
       <div className="lg:container mx-auto md:p-0 p-3">
         {/* category */}
         <TopItems />
-
         <HomePopup />
-
         <ProductAds
           ads={[
             `https://i.ibb.co.com/t47YXtD/Whats-App-Image-2024-09-23-at-19-26-50-b279a680.jpg`,
@@ -43,9 +38,6 @@ const Home = () => {
           ]}
           className=" mb-[60px] lg:container mx-auto"
         />
-        {/* product caorusel */}
-        {/* <ProductSlider /> */}
-
         {/* top selling product */}
         <ViewMoreTitle
           className="top-selling-product mb-[60px] px-0 lg:container"
@@ -54,7 +46,6 @@ const Home = () => {
         >
           <TopSellingProducts />
         </ViewMoreTitle>
-
         {/* product ads banner */}
         <ProductAds
           ads={[
@@ -65,7 +56,6 @@ const Home = () => {
         />
 
         {/* popular products */}
-
         <ViewMoreTitle
           className="mb-[60px] lg:container"
           seeMoreUrl="/section/popular-products"
@@ -73,7 +63,6 @@ const Home = () => {
         >
           <PopularProducts />
         </ViewMoreTitle>
-
         {/* ads banner */}
         <ProductAds
           ads={[
@@ -97,9 +86,9 @@ const Home = () => {
         />
         {/* brand profile */}
         <ViewMoreTitle
-            className="top-selling-product mb-[60px] lg:container"
-            seeMoreUrl=""
-            categoryTitle="SHOP BY BRANDS"
+          className="top-selling-product mb-[60px] lg:container"
+          seeMoreUrl=""
+          categoryTitle="SHOP BY BRANDS"
         >
           <ClientBrand />
         </ViewMoreTitle>

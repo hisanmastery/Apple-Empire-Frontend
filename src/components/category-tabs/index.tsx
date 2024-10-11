@@ -3,7 +3,7 @@ import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
 import Link from "next/link";
 import { useState } from "react";
 
-const CategoryTabs = () => {
+const CategoryTabs = ({ category }: any) => {
   const { data: categoriesData }: any = useGetAllCategoryQuery({
     page: 1,
     limit: 100,

@@ -12,25 +12,23 @@ import CategoryTabs from "../category-tabs";
 
 const CategoryProducts = ({ category, subCategory }: any) => {
   const { min, max } = useSelector(selectPriceRange);
-  const { displayType, ram, shape, internalStorage, chipset, region } =
-    useSelector(selectProductsCategory);
+  const { displayType, ram, internalStorage, chipset, region } = useSelector(
+    selectProductsCategory
+  );
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
-  const { data: allProducts, isLoading }: any = useGetProductsListsQuery(
-    {
-      displayType: displayType,
-      category: decodeURIComponent(category),
-      subCategory: decodeURIComponent(subCategory),
-      ram: ram,
-      chipset: chipset,
-      region: region,
-      internalStorage: internalStorage,
-      page: currentPage,
-      limit: pageSize,
-    },
-    { pollingInterval: 1000 }
-  );
+  const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
+    displayType: displayType,
+    category: decodeURIComponent(category),
+    subCategory: decodeURIComponent(subCategory),
+    ram: ram,
+    chipset: chipset,
+    region: region,
+    internalStorage: internalStorage,
+    page: currentPage,
+    limit: pageSize,
+  });
   // pagination
   const lastPostIndex = currentPage * pageSize;
   const firstPostIndex = lastPostIndex - pageSize;
@@ -38,12 +36,13 @@ const CategoryProducts = ({ category, subCategory }: any) => {
     (product: any) => min >= parseInt(product?.price)
   );
   const currentProducts = filterProducts?.slice(firstPostIndex, lastPostIndex);
+
   if (isLoading) {
     return <Loading />;
   }
   return (
     <div className="mt-5">
-      <CategoryTabs />
+      <CategoryTabs category={category} />
       <div className="mb-10 border-b-[1px] border-_blue">
         <p className="text-2xl font-semibold mb-2">
           {decodeURIComponent(category)}

@@ -1,3 +1,4 @@
+"use client";
 import { icons } from "@/constants/icons";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import Image from "next/image";
@@ -21,8 +22,8 @@ export default function SearchBox() {
   };
 
   const handleSearch = () => {};
-  const productsData = data?.blogs;
-
+  const productsData = data?.product;
+  console.log(data);
   const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&

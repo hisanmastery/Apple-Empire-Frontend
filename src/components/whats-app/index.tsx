@@ -1,3 +1,4 @@
+"use client";
 import { images } from "@/constants/images";
 import React from "react";
 import { FloatingWhatsApp } from "react-floating-whatsapp";

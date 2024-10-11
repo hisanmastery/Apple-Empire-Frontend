@@ -1,5 +1,5 @@
+"use client";
 import CountDown from "@/utils/Helpers/countDown";
-import Link from "next/link";
 export default function CampaignsCountDown({ className, lastDate }: any) {
   const { showDate, showHour, showMinute, showSecound } = CountDown(lastDate);
 
@@ -60,17 +60,21 @@ export default function CampaignsCountDown({ className, lastDate }: any) {
                     WOO! Flash Sale
                   </h1>
                   <p className="md:text-[18px] text-sm text-qblack leading-7">
-                    You get into the 2k+ best Products in Flash offer with a special-shaped sofa for sale.
+                    You get into the 2k+ best Products in Flash offer with a
+                    special-shaped sofa for sale.
                   </p>
                 </div>
                 <div className=" w-[100px] h-8 border-b border-qblack">
-                 {/* button */}
+                  {/* button */}
                 </div>
               </div>
               <div className="w-full lg:h-[400px]  border-2 ">
-                <img className="h-full w-full" src="https://d61s2hjse0ytn.cloudfront.net/vertical_image/7-2024/Monitors.webp" alt="" />
+                <img
+                  className="h-full w-full"
+                  src="https://d61s2hjse0ytn.cloudfront.net/vertical_image/7-2024/Monitors.webp"
+                  alt=""
+                />
               </div>
-
             </div>
           </div>
         </div>

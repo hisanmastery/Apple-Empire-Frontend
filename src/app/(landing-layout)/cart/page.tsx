@@ -169,15 +169,15 @@ const CartPage = ({ className }: any) => {
               <div className="mt-4">
                 <div className="flex justify-between">
                   <p>Items ({storedCart?.length})</p>
-                  <p>{subTotal}$</p>
+                  <p>$ {subTotal}</p>
                 </div>
                 <div className="flex justify-between mt-2">
                   <p>Discount</p>
-                  <p>{discountPrice}$</p>
+                  <p>$ {discountPrice}</p>
                 </div>
                 <div className="flex justify-between mt-2">
                   <p>Shipping</p>
-                  <p>{shippingCost}$</p>
+                  <p>$ {shippingCost}</p>
                 </div>
               </div>
 
@@ -199,7 +199,7 @@ const CartPage = ({ className }: any) => {
               {/* Total Amount */}
               <div className="flex justify-between items-center mt-6">
                 <p>Total Amount</p>
-                <p>{totalPrice}$</p>
+                <p>$ {totalPrice}</p>
               </div>
 
               {/* Checkout Button */}

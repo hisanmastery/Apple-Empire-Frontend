@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
-
 import {
   Carousel,
   CarouselContent,
@@ -10,8 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import PopularProductCard from "../popularProducts/popularProductCard";
-import Link from "next/link";
+import Image from "next/image";
 
 const HeroSection = () => {
   const plugin = React?.useRef(
@@ -20,89 +18,8 @@ const HeroSection = () => {
   const products = [
     {
       id: "62aefe9ad8b80d5234af625a",
-      image: "https://i.ibb.co.com/302jz8B/Whats-App-Image-2024-09-23-at-19-26-50-c27fd853.jpg",
-      brand: "xioami",
-      review: 3,
-      quantity: 1,
-      description:
-          "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
-      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
-      offer_price: 18.73,
-      price: 27.27,
-      campaign_product: false,
-      campaign_product_available: null,
-      campaign_product_sale: null,
-      product_type: null,
-    },
-    {
-      id: "62aefe9ad8b80d5234af625b",
-      image: "https://i.ibb.co.com/nmPrV4g/Whats-App-Image-2024-09-23-at-19-26-52-a5f25037.jpg",
-      brand: "xioami",
-      review: 4,
-      quantity: 1,
-      description:
-          "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
-      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
-      offer_price: 18.73,
-      price: 27.27,
-      campaign_product: false,
-      campaign_product_available: null,
-      campaign_product_sale: null,
-      product_type: null,
-    },
-    {
-      id: "62aefe9ad8b80d5234af625a",
-      image: "https://i.ibb.co.com/LCFVpc2/Whats-App-Image-2024-09-23-at-19-26-51-19eabe7d.jpg",
-      brand: "xioami",
-      review: 3,
-      quantity: 1,
-      description:
-        "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
-      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
-      offer_price: 18.73,
-      price: 27.27,
-      campaign_product: false,
-      campaign_product_available: null,
-      campaign_product_sale: null,
-      product_type: null,
-    },
-    // {
-    //   id: "62aefe9ad8b80d5234af625s",
-    //   image: "https://i.ibb.co.com/86FZnTJ/IMG-20240919-WA0006.jpg",
-    //   brand: "xioami",
-    //   review: 4,
-    //   quantity: 1,
-    //   description:
-    //       "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
-    //   title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
-    //   offer_price: 18.73,
-    //   price: 27.27,
-    //   campaign_product: false,
-    //   campaign_product_available: null,
-    //   campaign_product_sale: null,
-    //   product_type: null,
-    // },
-  ];
- /* const products = [
-    {
-      id: "62aefe9ad8b80d5234af625a",
-      image: "https://i.ibb.co/4ZpZQSz/iPhone15.webp",
-      brand: "xioami",
-      review: 3,
-      quantity: 1,
-      description:
-        "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
-      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
-      offer_price: 18.73,
-      price: 27.27,
-      campaign_product: false,
-      campaign_product_available: null,
-      campaign_product_sale: null,
-      product_type: null,
-    },
-    {
-      id: "62aefe9ad8b80d5234af625a",
-      image: "https://i.ibb.co/VCHkXrr/Pixel-8-Series.webp",
+      image:
+        "https://i.ibb.co.com/302jz8B/Whats-App-Image-2024-09-23-at-19-26-50-c27fd853.jpg",
       brand: "xioami",
       review: 3,
       quantity: 1,
@@ -118,7 +35,8 @@ const HeroSection = () => {
     },
     {
       id: "62aefe9ad8b80d5234af625b",
-      image: "https://i.ibb.co/znZWNqy/Galazy.webp",
+      image:
+        "https://i.ibb.co.com/nmPrV4g/Whats-App-Image-2024-09-23-at-19-26-52-a5f25037.jpg",
       brand: "xioami",
       review: 4,
       quantity: 1,
@@ -132,12 +50,10 @@ const HeroSection = () => {
       campaign_product_sale: null,
       product_type: null,
     },
-  ];*/
-
-  const hotProducts = [
     {
       id: "62aefe9ad8b80d5234af625a",
-      image: "https://i.ibb.co/S70JhGt/Galaxy-F23-Forest-Green.webp",
+      image:
+        "https://i.ibb.co.com/LCFVpc2/Whats-App-Image-2024-09-23-at-19-26-51-19eabe7d.jpg",
       brand: "xioami",
       review: 3,
       quantity: 1,
@@ -150,22 +66,6 @@ const HeroSection = () => {
       campaign_product_available: null,
       campaign_product_sale: null,
       product_type: null,
-    },
-    {
-      id: "62aefe9ad8b80d5234af625a",
-      image: "https://i.ibb.co/0fx1P6Z/Galaxy-A34-Lime.webp",
-      brand: "xioami",
-      review: 3,
-      quantity: 1,
-      description:
-        "A groundbreaking Retina display. A new force-sensing trackpad. All-flash architecture. Powerful dual-core and quad-core Intel processors. Together, these features take the notebook to a new level of performance. And they will do the same for you in everything you create.",
-      title: "Xoggle aute et pariatur adipisicing nostrud et excepteur",
-      offer_price: 18.73,
-      price: 27.27,
-      campaign_product: false,
-      campaign_product_available: null,
-      campaign_product_sale: null,
-      product_type: null, 
     },
   ];
 
@@ -182,7 +82,9 @@ const HeroSection = () => {
             <div className="aspect-w-16 aspect-h-9">
               <Card className="h-full">
                 <CardContent className="flex w-full  items-center justify-center  lg:h-[480px] h-full p-1">
-                  <img
+                  <Image
+                    width={500}
+                    height={400}
                     className="w-full"
                     src={product.image}
                     alt={`Carousel Image ${index + 1}`}
