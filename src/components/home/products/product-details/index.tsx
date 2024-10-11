@@ -5,31 +5,26 @@ import ViewMoreTitle from "../../../common/ViewMoreTitle";
 import { icons } from "@/constants/icons";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getStoredData,
-  storedWishLists,
-} from "@/store/features/cart/cartSlice";
+import { getStoredData } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
 import ProductSlider from "../../product-slider";
-import CustomTabs from "@/components/common/custom-tab";
 import {
   useAddToCartMutation,
   useUpdateCartMutation,
 } from "@/store/features/cart/cartApi";
-import { get_store_data, get_wish_lists } from "@/utils/get_store_data";
+import { get_store_data } from "@/utils/get_store_data";
 import Loading from "@/components/common/loading";
-import { iconsData } from "@/data/prodcuts_details_icons";
 import useAuth from "@/hooks/useAuth";
 import useToaster from "@/hooks/useToaster";
 import QuantityController from "@/components/common/quantity-controller";
-import axios from "axios";
-import { baseApiUrl } from "@/constants/endpoint";
-import { useRouter } from "next/navigation";
 import Emiplan from "@/components/emiplan";
 import VariantDisplay from "./variant-display";
 import ImageDisplay from "./image-display";
 import ColorSelector from "./color-selector";
+import SocialShare from "./social-share";
+import ProductInfoTab from "./product-info-tab";
+import ProductActionButtons from "./ProductActionButtons";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -39,15 +34,12 @@ const ProductDetails = ({ id }: any) => {
   const [selectedColor, setSelectedColor]: any = useState(
     data?.response?.variations[0]?.color
   );
-  const [viewImage, setViewImages] = useState("");
   const [thisItem, setThisItem] = useState<any>({});
-  const [wishItem, setWishItem] = useState<any>({});
-  const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
+  const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
   const [countQuantity, setCountQuantity] = useState(1);
-  const router = useRouter();
 
   useEffect(() => {
     if (storedCart?.length && data) {
@@ -66,41 +58,10 @@ const ProductDetails = ({ id }: any) => {
     }
   }, [storedCart, data]);
 
-  useEffect(() => {
-    if (wishLists?.length) {
-      console.log(wishLists);
-      const filter = wishLists.filter((d: any) => {
-        return d?.productId === id;
-      });
-
-      if (filter?.length) {
-        const data = filter[0];
-        setWishItem(data);
-      } else {
-        setWishItem({});
-      }
-    }
-  }, [id, wishLists]);
-
   const handleColorButtonClick = (color: any) => {
     setSelectedColor(color);
   };
-  //================= color code image filter =========//
-  const selectedImages = selectedColor
-    ? data?.response?.variations?.find(
-        (variant: any) => variant?.color === selectedColor
-      )?.image
-    : data?.response?.variations[0]?.image;
-  // ================ handle color code view image show ========//
-  const handleColorImageShow = (image: any) => {
-    setViewImages(image);
-  };
-  //==========view image ==========//
-  useEffect(() => {
-    if (selectedImages?.length > 0) {
-      setViewImages(selectedImages[0]);
-    }
-  }, [selectedImages]);
+
   // handle cart click
   const handleCartClick = async (productData: any) => {
     const data = productData?.response;
@@ -195,46 +156,6 @@ const ProductDetails = ({ id }: any) => {
   const isInCart = storedCart?.find((item: any) => {
     return item.productId === data?.response?._id;
   });
-  const handleImageMouseMove = (e: any) => {
-    const img = e.target;
-    img.style.transformOrigin = `${e.nativeEvent.offsetX}px ${e.nativeEvent.offsetY}px`;
-    img.style.transform = "scale(3)";
-  };
-
-  const handleImageMouseLeave = (e: any) => {
-    const img = e.target;
-    img.style.transformOrigin = "center";
-    img.style.transform = "scale(1)";
-  };
-
-  const tabs = [
-    {
-      value: "Specification",
-      label: "Specification",
-      // content: <div>{data?.response?.specification}</div>,
-      content: (
-        <div
-          className="text-gray-600"
-          dangerouslySetInnerHTML={{ __html: data?.response?.specification }}
-        />
-      ),
-    },
-    {
-      value: "Description",
-      label: "Description",
-      content: (
-        <div
-          className="text-gray-600"
-          dangerouslySetInnerHTML={{ __html: data?.response?.description }}
-        />
-      ),
-    },
-    {
-      value: "Warranty",
-      label: "Warranty",
-      content: <div className="text-gray-600">{data?.response?.warranty}</div>,
-    },
-  ];
 
   if (isLoading) {
     return <Loading />;
@@ -276,84 +197,6 @@ const ProductDetails = ({ id }: any) => {
     }
   };
 
-  // Handle Wish Lists
-  const handleWishLists = async (item: any, hasIn: boolean) => {
-    // const data = productData?.response;
-    console.log("wishlist", item, hasIn);
-    if (hasIn) {
-      const token = localStorage.getItem("token");
-      await axios
-        .delete(`${baseApiUrl}/wishlist/delete-wishlist/${wishItem?._id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(async (res) => {
-          setWishItem({});
-          if (res.data.isSuccess) {
-            showToast("success", "Wish remove successfully");
-            const data: any = await get_wish_lists();
-            if (data?.length) {
-              //console.log("Dataa:::",data);
-              dispatch(storedWishLists(data));
-            } else {
-              dispatch(storedWishLists([]));
-            }
-          } else {
-            showToast("error", "Wish can't add");
-          }
-        })
-        .catch((error) => {
-          showToast("error", "Wish can't add");
-        });
-    } else {
-      const new_data = item?.response;
-      const email = localStorage.getItem("email");
-      if (!email) {
-        router.push("/login");
-      }
-      const post_object = {
-        email: email,
-        productId: new_data?._id,
-        image: new_data?.image?.viewUrl,
-        price: new_data?.price,
-        quantity: 1,
-        title: new_data?.title,
-      };
-      axios
-        .post(`${baseApiUrl}/wishlist/create-wishlist`, post_object)
-        .then(async (res) => {
-          if (res.data.isSuccess) {
-            showToast("success", "Wish added successful");
-            const data: any = await get_wish_lists();
-            if (data?.length) {
-              //console.log("Dataa:::",data);
-              dispatch(storedWishLists(data));
-            } else {
-              dispatch(storedWishLists([]));
-            }
-          } else {
-            showToast("error", "Wish can't add");
-          }
-        })
-        .catch((error) => {
-          showToast("error", "Wish can't add");
-        });
-    }
-  };
-
-  // Calculate the offer percentage
-  const parsePrice = (value: number | string) => {
-    if (typeof value === "number") return value;
-    return parseFloat((value || "0").toString().replace(/[,৳]/g, ""));
-  };
-
-  // Parse and log prices
-  const newPrice = parsePrice(data?.response?.price);
-  const newOfferPrice = parsePrice(data?.response?.offer_price);
-  const discountPercentage = newPrice
-    ? Math.round(((newPrice - newOfferPrice) / newPrice) * 100)
-    : 0;
   return (
     <section className="container mx-auto py-5 px-2 md:px-0">
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
@@ -404,47 +247,11 @@ const ProductDetails = ({ id }: any) => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-5 lg:max-w-[500px] mt-5">
-            {iconsData.map((item: any, index: number) =>
-              item?.label === "WISHLIST" ? (
-                <div
-                  key={index}
-                  className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
-                  onClick={() => {
-                    handleWishLists(data, wishItem?.productId === id);
-                  }}
-                >
-                  <icons.MdOutlineFavorite
-                    style={{
-                      color: `${
-                        wishItem?.productId === id ? "#A53E08" : "black"
-                      }`,
-                    }}
-                    className="text-xl"
-                  />
-                  {item.label}
-                </div>
-              ) : item.label === "EXCHANGE" ? (
-                <Link
-                  href={"/exchange-policy"}
-                  key={index}
-                  className="text-md font-medium flex items-center gap-3"
-                >
-                  {item.icon}
-                  {item.label}
-                </Link>
-              ) : (
-                <Link
-                  href={item.link ? `/compare/${id}` : ""}
-                  key={index}
-                  className="text-md font-medium flex items-center gap-3"
-                >
-                  {item.icon}
-                  {item.label}
-                </Link>
-              )
-            )}
-          </div>
+          <ProductActionButtons
+            product={data?.response}
+            id={id}
+            showToast={showToast}
+          />
           {/* color variant */}
           <div className="flex justify-between items-center mx-1 mt-8">
             <ColorSelector
@@ -457,7 +264,6 @@ const ProductDetails = ({ id }: any) => {
           <div className="mt-2">
             <VariantDisplay product={data?.response} />
           </div>
-
           {/* add to cart button */}
           <div className="flex gap-5 justify-start items-center mt-14">
             {/* Product Quantity  */}
@@ -470,7 +276,7 @@ const ProductDetails = ({ id }: any) => {
             />
             <Button
               onClick={() => handleCartClick(data)}
-              // disabled={isInCart}
+              disabled={isInCart}
               className="bg-black hover:bg-_orange rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
             >
               ADD TO CART
@@ -485,62 +291,8 @@ const ProductDetails = ({ id }: any) => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 container lg:grid-cols-9 gap-10">
-        <div className="col-span-3 flex lg:justify-start mt-8 gap-2 leading-3 lg:col-span-4">
-          <Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaFacebookIcons className="text-_black text-lg" />
-          </Link>
-          <Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaXTwitterIcons className="text-_black text-lg" />
-          </Link>
-          <Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaLinkedinIcons className="text-_black text-lg" />
-          </Link>
-          <Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaLinkedinIcons className="text-_black text-lg" />
-          </Link>
-          <Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaLinkedinIcons className="text-_black text-lg" />
-          </Link>
-          <Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaLinkedinIcons className="text-_black text-lg" />
-          </Link>
-          <Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaLinkedinIcons className="text-_black text-lg" />
-          </Link>
-        </div>
-        <div className={"col-span-5"}>
-          <h5 className="mb-3">Secure Payments</h5>
-          <Image
-            width={100}
-            height={20}
-            src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
-            alt="payment"
-            className="w-96 -mt-1"
-          />
-        </div>
-      </div>
+      {/* social share */}
+      <SocialShare />
       {/* Related products */}
       <ViewMoreTitle
         className="top-selling-product mt-14"
@@ -548,9 +300,8 @@ const ProductDetails = ({ id }: any) => {
         categoryTitle="Related products"
       />
       <ProductSlider />
-      <div className="mt-10">
-        <CustomTabs defaultValue={"Specification"} tabs={tabs} />
-      </div>
+      {/* products info */}
+      <ProductInfoTab product={data} />
       <Emiplan price={400} isOpen={isOpen} setIsOpen={setIsOpen} />
     </section>
   );
