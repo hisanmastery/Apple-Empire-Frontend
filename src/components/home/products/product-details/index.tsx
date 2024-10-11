@@ -2,16 +2,10 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import ViewMoreTitle from "../../../common/ViewMoreTitle";
-import ProductAds from "../../../common/productAds";
-import ProductImage from "./image-viewer/index";
 import { icons } from "@/constants/icons";
 import { Button } from "@/components/ui/button";
-import { IoLogoWhatsapp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addStoredCart,
-  decrementQuantity,
-  incrementQuantity,
   getStoredData,
   storedWishLists,
 } from "@/store/features/cart/cartSlice";
@@ -21,13 +15,10 @@ import ProductSlider from "../../product-slider";
 import CustomTabs from "@/components/common/custom-tab";
 import {
   useAddToCartMutation,
-  useGetEmailCartQuery,
   useUpdateCartMutation,
 } from "@/store/features/cart/cartApi";
 import { get_store_data, get_wish_lists } from "@/utils/get_store_data";
 import Loading from "@/components/common/loading";
-import { useExtractUniqueAttributes } from "@/utils/Helpers/Attributes";
-import Attributes from "@/components/common/attributes";
 import { iconsData } from "@/data/prodcuts_details_icons";
 import useAuth from "@/hooks/useAuth";
 import useToaster from "@/hooks/useToaster";
@@ -36,6 +27,9 @@ import axios from "axios";
 import { baseApiUrl } from "@/constants/endpoint";
 import { useRouter } from "next/navigation";
 import Emiplan from "@/components/emiplan";
+import VariantDisplay from "./variant-display";
+import ImageDisplay from "./image-display";
+import ColorSelector from "./color-selector";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -50,35 +44,9 @@ const ProductDetails = ({ id }: any) => {
   const [wishItem, setWishItem] = useState<any>({});
   const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
-
-  const [selectedRam, setSelectedRam] = useState<string>(""); // State for selected RAM
-  const [selectedRegion, setSelectedRegion] = useState<string>(""); // State for selected Region
-  const [selectedSize, setSelectedSize] = useState<string>("");
-  const [selectedInternalStorage, setSelectedInternalStorage] =
-    useState<string>("");
-  const [matchedVariant, setMatchedVariant] = useState<any>(null); // State for matched variant
   const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
-  // Quantity
   const [countQuantity, setCountQuantity] = useState(1);
-
-  const ram = useExtractUniqueAttributes(
-    data?.response?.variants[0]?.variantList,
-    "RAM"
-  );
-  const region = useExtractUniqueAttributes(
-    data?.response?.variants[0]?.variantList,
-    "Region"
-  );
-  const Size = useExtractUniqueAttributes(
-    data?.response?.variants[0]?.variantList,
-    "size"
-  );
-  const InternalStorage = useExtractUniqueAttributes(
-    data?.response?.variants[0]?.variantList,
-    "Storage"
-  );
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
 
   useEffect(() => {
@@ -111,13 +79,9 @@ const ProductDetails = ({ id }: any) => {
       } else {
         setWishItem({});
       }
-      // console.log("Filter::",filter);
     }
   }, [id, wishLists]);
-  // useEffect(() => {
-  //   dispatch(addStoredCart(addToCart?.response));
-  //   refetch();
-  // }, [addToCart?.response, dispatch, refetch]);
+
   const handleColorButtonClick = (color: any) => {
     setSelectedColor(color);
   };
@@ -272,47 +236,6 @@ const ProductDetails = ({ id }: any) => {
     },
   ];
 
-  //=============== handle variants function =======//
-  const handleVariants = () => {
-    // Find the variant that matches selected RAM and Region
-    const matchedVariant = data?.response?.variants[0]?.variantList.find(
-      (variant: any) => {
-        const ramMatch = variant.attributeValues.some(
-          (attr: any) =>
-            attr.label.toLowerCase() === "ram" &&
-            attr.value.toLowerCase() === selectedRam.toLowerCase()
-        );
-        const regionMatch = variant.attributeValues.some(
-          (attr: any) =>
-            attr.label?.toLowerCase() === "region" &&
-            attr.value.toLowerCase() === selectedRegion.toLowerCase()
-        );
-        const internalStorageMatch = variant.attributeValues.some(
-          (attr: any) =>
-            attr.label.toLowerCase() === "storage" &&
-            attr.value.toLowerCase() === selectedInternalStorage?.toLowerCase()
-        );
-        return ramMatch && regionMatch && internalStorageMatch;
-      }
-    );
-
-    if (matchedVariant) {
-      setMatchedVariant(matchedVariant);
-    } else {
-      setMatchedVariant(null);
-    }
-  };
-
-  // Call handleVariants initially to set default matchedVariant
-  useEffect(() => {
-    handleVariants();
-  }, [selectedRam, selectedRegion, selectedColor]);
-
-  //======== color default value set ========//
-  useEffect(() => {
-    setSelectedColor(data?.response?.variations[0]?.color);
-  }, [data]);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -436,24 +359,7 @@ const ProductDetails = ({ id }: any) => {
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
         <div className="col-span-3 flex mx-auto">
           <div>
-            <div
-              className="relative overflow-hidden bg-_white border w-[90%] md:w-[80%] mx-auto"
-              onMouseMove={handleImageMouseMove}
-              onMouseLeave={handleImageMouseLeave}
-            >
-              <Image
-                width={500}
-                height={500}
-                className="transition-transform duration-300 transform cursor-pointer mx-auto"
-                src={viewImage}
-                alt="Product Image"
-              />
-              {discountPercentage > 0 && (
-                <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 text-sm rounded">
-                  {discountPercentage}% OFF
-                </div>
-              )}
-            </div>
+            <ImageDisplay product={data} selectedColor={selectedColor} />
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
               {data?.response?.variations
                 ?.slice(0, 4)
@@ -479,20 +385,9 @@ const ProductDetails = ({ id }: any) => {
           <div className="flex justify-between">
             <div className={"w-full"}>
               <h2 className="flex items-center gap-2 text-md md:text-xl font-medium ">
-                {/* <icons.FaAppleIcons className="text-xl md:text-4xl" /> */}
-                {data?.response?.title?.slice(0, 50)}
+                {data?.response?.name?.slice(0, 50)}
               </h2>
-              <span className="text-sm text-md">{selectedRam}</span> |
-              <span className="text-sm text-md">{selectedRegion}</span>
-              <div className="grid grid-cols-2 items-center lg:max-w-[500px] ">
-                <div className="flex items-center  gap-2 mt-3">
-                  <span className="text-[18px] md:text-[18px] font-semibold text-red-500 block">
-                    ট {matchedVariant?.base_sell_price || 0}
-                  </span>
-                  <span className="line-through text-md font-semibold">
-                    ট {data?.response?.offer_price}
-                  </span>
-                </div>
+              <div className="grid grid-cols-2 items-center lg:max-w-[500px]">
                 <div
                   className={
                     "ml-2 text-md font-medium flex items-center gap-3 hover:cursor-pointer"
@@ -508,15 +403,6 @@ const ProductDetails = ({ id }: any) => {
                 </div>
               </div>
             </div>
-            {/* <p>
-              <span className="text-sm md:text-lg">Discount Price:</span>
-              <span className="text-[18px] md:text-[23px] font-semibold text-red-500 block">
-                ট {matchedVariant?.base_sell_price || 0}
-              </span>
-              <span className="line-through text-md font-semibold">
-                ট {data?.response?.offer_price}
-              </span>
-            </p> */}
           </div>
           <div className="grid grid-cols-2 gap-5 lg:max-w-[500px] mt-5">
             {iconsData.map((item: any, index: number) =>
@@ -525,7 +411,7 @@ const ProductDetails = ({ id }: any) => {
                   key={index}
                   className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
                   onClick={() => {
-                    handleWishLists(data, wishItem?.productId === id ?? false);
+                    handleWishLists(data, wishItem?.productId === id);
                   }}
                 >
                   <icons.MdOutlineFavorite
@@ -538,16 +424,7 @@ const ProductDetails = ({ id }: any) => {
                   />
                   {item.label}
                 </div>
-              ) : /*item?.label === "EMIPLAN" ? (
-          <div
-            key={index}
-            className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
-            onClick={()=>setIsOpen(true)}
-          >
-            {item.icon}
-            {item.label}
-          </div>
-        ) :*/ item.label === "EXCHANGE" ? (
+              ) : item.label === "EXCHANGE" ? (
                 <Link
                   href={"/exchange-policy"}
                   key={index}
@@ -568,66 +445,17 @@ const ProductDetails = ({ id }: any) => {
               )
             )}
           </div>
+          {/* color variant */}
           <div className="flex justify-between items-center mx-1 mt-8">
-            <div className="flex gap-[5rem] items-start">
-              <span className="w-[50px]">Color :</span>
-              <div className="flex gap-2">
-                {data?.response?.variations?.map(
-                  (variant: any, index: number) => (
-                    <button
-                      key={index}
-                      onClick={() => handleColorButtonClick(variant.color)}
-                      className={`w-8 h-8 rounded-full ${
-                        variant.color === selectedColor
-                          ? "border-2 border-blue-500"
-                          : "border"
-                      } transition-all duration-300`}
-                      style={{ backgroundColor: variant.color }}
-                    ></button>
-                  )
-                )}
-              </div>
-            </div>
+            <ColorSelector
+              variations={data?.response?.variations}
+              selectedColor={selectedColor}
+              onColorSelect={handleColorButtonClick}
+            />
           </div>
-          {/* spacification */}
-          <div className="mt-8  ">
-            <div className="flex justify-between items-center mx-1">
-              <Attributes
-                label="Ram"
-                items={(ram?.length > 0 && ram) || []}
-                handleSelection={setSelectedRam}
-                handleVariants={handleVariants}
-              />
-            </div>
-            <div className="mt-8 flex justify-between items-center">
-              <Attributes
-                label="Storage"
-                items={InternalStorage || []}
-                handleSelection={setSelectedInternalStorage}
-                handleVariants={handleVariants}
-              />
-              <div></div>
-            </div>
-            {Size?.length > 0 && (
-              <div className="mt-8 flex justify-between items-center">
-                <Attributes
-                  label="Size"
-                  items={Size || []}
-                  handleSelection={setSelectedSize}
-                  handleVariants={handleVariants}
-                />
-                <div></div>
-              </div>
-            )}
-            <div className="mt-8 flex justify-between items-center ">
-              <Attributes
-                label="Region"
-                items={(region?.length > 0 && region) || []}
-                handleSelection={setSelectedRegion}
-                handleVariants={handleVariants}
-                data={data}
-              />
-            </div>
+          {/* variant */}
+          <div className="mt-2">
+            <VariantDisplay product={data?.response} />
           </div>
 
           {/* add to cart button */}
@@ -671,36 +499,6 @@ const ProductDetails = ({ id }: any) => {
           >
             <icons.FaXTwitterIcons className="text-_black text-lg" />
           </Link>
-          {/*<Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaWhatsappIcons className="text-_black text-lg" />
-          </Link>*/}
-          {/* <Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaPinterestIcons className="text-_black text-lg" />
-          </Link>*/}
-          {/*<Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaHandshakeSimple className="text-_black text-lg" />
-          </Link>{" "}*/}
-          {/*<Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaSkypeIcons className="text-_black text-lg" />
-          </Link>*/}
-          {/*<Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaEnvelopeIcons className="text-_black text-lg" />
-          </Link>*/}
           <Link
             href="#"
             className="rounded-full p-2 border-[1px] border-_black"
@@ -731,22 +529,12 @@ const ProductDetails = ({ id }: any) => {
           >
             <icons.FaLinkedinIcons className="text-_black text-lg" />
           </Link>
-          {/*<Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaRedditIcons className="text-_black text-lg" />
-          </Link>*/}
-          {/*<Link
-            href="#"
-            className="rounded-full p-2 border-[1px] border-_black"
-          >
-            <icons.FaTelegramIcons className="text-_black text-lg" />
-          </Link>*/}
         </div>
         <div className={"col-span-5"}>
           <h5 className="mb-3">Secure Payments</h5>
-          <img
+          <Image
+            width={100}
+            height={20}
             src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
             alt="payment"
             className="w-96 -mt-1"
@@ -759,17 +547,11 @@ const ProductDetails = ({ id }: any) => {
         seeMoreUrl="/products"
         categoryTitle="Related products"
       />
-      {/* product caorusel */}
       <ProductSlider />
-      {/* products details */}
       <div className="mt-10">
         <CustomTabs defaultValue={"Specification"} tabs={tabs} />
       </div>
-      <Emiplan
-        price={matchedVariant?.base_sell_price}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
+      <Emiplan price={400} isOpen={isOpen} setIsOpen={setIsOpen} />
     </section>
   );
 };
