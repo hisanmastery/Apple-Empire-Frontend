@@ -52,7 +52,8 @@ const HomePopup = () => {
           alt="Image... "
           height={100}
           width={100}
-          className={" w-[90vw] max-w-[800px] rounded sm:w-[80vw]"}
+          quality={100}
+          className={" w-[90vw] max-w-[800px] rounded sm:w-[80vw] object-cover"}
         />
       </Link>
     </div>

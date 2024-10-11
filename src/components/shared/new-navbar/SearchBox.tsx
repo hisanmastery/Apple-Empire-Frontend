@@ -23,7 +23,6 @@ export default function SearchBox() {
 
   const handleSearch = () => {};
   const productsData = data?.product;
-  console.log(data);
   const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&

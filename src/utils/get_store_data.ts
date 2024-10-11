@@ -41,7 +41,6 @@ export const get_wish_lists = async () => {
       })
       .then((response) => {
         if (response.status === 200) {
-          //console.log("Response: ",response?.data);
           const data: any = response?.data?.wishlists;
           if (data?.length) {
             return data;
