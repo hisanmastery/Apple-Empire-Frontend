@@ -5,9 +5,10 @@ import ProductAds from "../common/productAds/index";
 import ViewMoreTitle from "../common/ViewMoreTitle/index";
 import TopSellingProducts from "../home/TopSellingProducts/index";
 import PopularProducts from "../home/popularProducts/index";
-import TopItems from "./top-items";
+const TopItems = dynamic(() => import("./top-items"));
 import CampaignsCountDown from "./campaigns-count-down";
 import HomePopup from "@/components/home/popup/HomePopup";
+import dynamic from "next/dynamic";
 
 const Home = () => {
   return (
