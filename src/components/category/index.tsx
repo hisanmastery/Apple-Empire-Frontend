@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Loading from "../common/loading";
 import ProductCard from "../common/product-card";
 import ProductsNotFound from "../products-not-found";
@@ -9,37 +9,35 @@ import { selectProductsCategory } from "@/store/features/products/productsCatego
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import Pagination from "../common/pagination";
 import CategoryTabs from "../category-tabs";
+interface CategoryProductsProps {
+  category: string;
+  subCategory: string;
+}
 
-const CategoryProducts = ({ category, subCategory }: any) => {
+const CategoryProducts: React.FC<CategoryProductsProps> = ({
+  category,
+  subCategory,
+}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(12);
   const { min, max } = useSelector(selectPriceRange);
   const { displayType, ram, internalStorage, chipset, region } = useSelector(
     selectProductsCategory
   );
-  // pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(12);
-  const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
-    displayType: displayType,
+
+  // Fetching products using custom hooks
+  const { data: allProducts, isLoading } = useGetProductsListsQuery<any>({
     category: decodeURIComponent(category),
     subCategory: decodeURIComponent(subCategory),
-    ram: ram,
-    chipset: chipset,
-    region: region,
-    internalStorage: internalStorage,
     page: currentPage,
     limit: pageSize,
   });
-  // pagination
-  const lastPostIndex = currentPage * pageSize;
-  const firstPostIndex = lastPostIndex - pageSize;
-  const filterProducts = allProducts?.blogs?.filter(
-    (product: any) => min >= parseInt(product?.price)
-  );
-  const currentProducts = filterProducts?.slice(firstPostIndex, lastPostIndex);
 
+  //Loading
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <div className="mt-5">
       <CategoryTabs category={category} />
@@ -49,19 +47,17 @@ const CategoryProducts = ({ category, subCategory }: any) => {
         </p>
       </div>
       <div>
-        {currentProducts?.length > 0 ? (
-          <>
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 xmd:grid-cols-2 grid-cols-1 px-3  ssm:px-14 xmd:px-0 mx-auto mb-10 gap-5">
-              {currentProducts?.map((product: any) => (
-                <ProductCard key={product.id} datas={product}></ProductCard>
-              ))}
-            </div>
-          </>
+        {allProducts?.product?.length > 0 ? (
+          <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 px-3 sm:px-14 mx-auto mb-10">
+            {allProducts?.product?.map((product: any) => (
+              <ProductCard key={product._id} datas={product} />
+            ))}
+          </div>
         ) : (
           <ProductsNotFound />
         )}
         <Pagination
-          totalItems={currentProducts?.length}
+          totalItems={allProducts.totalCount}
           pageSize={pageSize}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}

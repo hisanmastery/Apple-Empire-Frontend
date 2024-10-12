@@ -1,72 +1,75 @@
 "use client";
 import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
-import Link from "next/link";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
-const CategoryTabs = ({ category }: any) => {
-  const { data: categoriesData }: any = useGetAllCategoryQuery({
+interface Category {
+  category: string;
+}
+
+// Function to normalize category names for comparison
+const normalize = (str: string) =>
+  str.replace(/%20/g, " ").replace(/%26/g, "&");
+
+const CategoryTabs: React.FC<Category> = ({ category }) => {
+  const searchParams = useSearchParams();
+  const selectedSubCategory = searchParams.get("subcategory");
+
+  // Fetch categories
+  const {
+    data: categoriesData,
+    isLoading,
+    isError,
+  } = useGetAllCategoryQuery<any>({
     page: 1,
     limit: 100,
   });
 
-  const [openCategoryId, setOpenCategoryId] = useState<string | null>(null);
+  // Find subcategories for the selected category
+  const subcategories: any | undefined = categoriesData?.categories?.find(
+    (item: any) => item.categoryName === normalize(category)
+  );
 
-  // Show subcategories on hover
-  const handleMouseEnter = (categoryId: string) => {
-    setOpenCategoryId(categoryId);
+  const handleCategoryClick = (categoryName: string) => {
+    const newParams = new URLSearchParams(window.location.search);
+    newParams.set("subcategory", categoryName);
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${newParams}`
+    );
   };
 
-  const handleMouseLeave = () => {
-    setOpenCategoryId(null);
-  };
+  if (isLoading) return <div className="text-center py-4">Loading...</div>;
+  if (isError)
+    return (
+      <div className="text-center py-4 text-red-600">
+        Error fetching categories
+      </div>
+    );
 
   return (
-    <div className="py-4 bg-gray-100">
-      <div className="container mx-auto">
-        {/* Horizontal scrollable tabs for categories */}
-        <div className="flex overflow-x-auto scrollbar-hide space-x-4 px-4">
-          {categoriesData?.categories?.map((category: any) => (
-            <div
-              key={category._id}
-              className="relative"
-              onMouseEnter={() => handleMouseEnter(category._id)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <Link href={`/category/${category.categoryName}`}>
-                <div className="whitespace-nowrap py-2 px-4 bg-white border border-gray-300 rounded-md cursor-pointer text-gray-800 hover:bg-gray-200 transition-all duration-150">
-                  {category.categoryName}
-                </div>
-              </Link>
-
-              {/* Subcategories Dropdown */}
-              {openCategoryId === category._id &&
-                category.subCategory?.length > 0 && (
-                  <div className="absolute top-12 left-0 bg-white border border-gray-300 rounded-md shadow-md mt-2 w-48">
-                    <ul className="py-2">
-                      {category.subCategory.map(
-                        (subCategory: string, index: number) => (
-                          <li
-                            key={index}
-                            className="px-4 py-2 hover:bg-gray-100 transition-all duration-150"
-                          >
-                            <Link
-                              href={`/category/${category.categoryName}/${subCategory}`}
-                            >
-                              <span className="text-sm text-gray-700">
-                                {subCategory}
-                              </span>
-                            </Link>
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  </div>
-                )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+      {subcategories?.subCategory?.map((item: any, index: number) => (
+        <li
+          key={index}
+          className={`flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md transition-all duration-200 
+            cursor-pointer 
+            hover:bg-blue-500 hover:text-white 
+            ${
+              item === selectedSubCategory
+                ? "font-bold bg-blue-600 text-white border-b-4 border-blue-800"
+                : "text-gray-700"
+            }
+          `}
+          onClick={() => handleCategoryClick(item)}
+          role="tab"
+          aria-selected={item === selectedSubCategory}
+          tabIndex={0}
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
   );
 };
 
