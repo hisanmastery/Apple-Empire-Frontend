@@ -1,49 +1,80 @@
 "use client";
 import React from "react";
-import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
-import Link from "next/link";
-import Image from "next/image";
 import Loading from "@/components/common/loading";
-import MultiCarousel from "@/components/common/carousel";
+import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
+import Image from "next/image";
+
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/effect-coverflow";
+import "swiper/css/virtual";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+const breakpoints = {
+  0: {
+    slidesPerView: 2,
+    spaceBetween: 20,
+  },
+  640: {
+    slidesPerView: 3,
+    spaceBetween: 20,
+  },
+  1024: {
+    slidesPerView: 6,
+    spaceBetween: 20,
+  },
+  1440: {
+    slidesPerView: 7,
+    spaceBetween: 20,
+  },
+};
 
 const TopItems = () => {
   const { data, isLoading }: any = useGetAllCategoryQuery({
     limit: 20,
   });
+  console.log("category data", data?.categories);
 
   if (isLoading) return <Loading />;
-
   return (
-    <div className="px-1 ssm:px-2 md:px-10 sm:container sm:px-auto my-5 lsm:my-10">
-      {/* Title or section header */}
-      <h2 className="text-center text-xl font-bold mb-5">Top Categories</h2>
-
-      {/* Carousel for displaying top categories */}
-      <MultiCarousel
-        settings={{ slidesToShow: 8 }}
-        className="mb-8 p-5"
+    <div className="container">
+      <h2 className="text-xl font-semibold text-center py-4">Top Categories</h2>
+      {/* ==================== swiper slider ================ */}
+      <Swiper
+        modules={[Autoplay]}
+        loop={true}
+        autoplay={{
+          delay: 3000,
+          pauseOnMouseEnter: false,
+          disableOnInteraction: false,
+          stopOnLastSlide: false,
+        }}
+        speed={3000}
+        allowTouchMove={false}
+        breakpoints={breakpoints}
+        spaceBetween={12}
       >
-        {data?.categories?.map((category: any, index: number) => (
-          <div key={index} className="space-y-5">
-            <div className="cursor-pointer">
-              <Link href={`/category/${category?.categoryName}`}>
-                <div className="w-24 h-24 mx-auto rounded-full border border-_primary transition-all ease-in-out duration-500 group">
-                  <Image
-                    width={100}
-                    height={100}
-                    className="w-full group-hover:scale-125 transition-all ease-in-out duration-700"
-                    src={category?.image}
-                    alt={category?.categoryName}
-                  />
-                </div>
-                <h4 className="text-center text-md sm:text-md">
-                  {category?.categoryName}
-                </h4>
-              </Link>
+        {data?.categories?.map((category: any, index: any) => (
+          <SwiperSlide
+            key={index}
+            className={`!h-auto !md:h-full`}
+          >
+            <div className="w-full !h-full bg-_white py-5 px-4 rounded-lg">
+              <Image
+                src={category?.image}
+                alt={category?.categoryName}
+                width={100}
+                height={100}
+                className="w-[100px] h-[100px] mx-auto transition ease-in-out duration-300 hover:scale-105 hover:cursor-pointer"
+              />
+              <h4 className="text-base font-medium leading-normal text-black text-center pt-3">
+                {category?.categoryName}
+              </h4>
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </MultiCarousel>
+      </Swiper>
     </div>
   );
 };
