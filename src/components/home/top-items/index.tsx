@@ -14,7 +14,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 const breakpoints = {
   0: {
     slidesPerView: 2,
-    spaceBetween: 20,
+    spaceBetween: 40,
   },
   640: {
     slidesPerView: 3,
@@ -25,7 +25,7 @@ const breakpoints = {
     spaceBetween: 20,
   },
   1440: {
-    slidesPerView: 7,
+    slidesPerView: 6,
     spaceBetween: 20,
   },
 };
@@ -34,11 +34,11 @@ const TopItems = () => {
   const { data, isLoading }: any = useGetAllCategoryQuery({
     limit: 20,
   });
-  console.log("category data", data?.categories);
+  // console.log("category data", data?.categories);
 
   if (isLoading) return <Loading />;
   return (
-    <div className="container">
+    <div className="container pb-5">
       <h2 className="text-xl font-semibold text-center py-4">Top Categories</h2>
       {/* ==================== swiper slider ================ */}
       <Swiper
