@@ -12,9 +12,7 @@ const NewFooter = () => {
         <div className="absolute right-0 left-0 -top-24">
           <EmailSubscribe />
         </div>
-
         {/* row -1  */}
-
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <div>
             <Image
@@ -47,7 +45,7 @@ const NewFooter = () => {
         </div>
         {/* row -2  */}
 
-        <div className="grid grid-cols-12 gap-5 justify-between w-full items-center mt-16">
+        <div className="grid grid-cols-12 gap-5 justify-between w-full items-center mt-8">
           <div className="flex flex-wrap justify-between items-center col-span-12 lg:col-span-8  font-normal cursor-pointer">
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className={"text-[#EE3F0B] md:text-lg text-sm"}>About Us</li>

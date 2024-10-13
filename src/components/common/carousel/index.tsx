@@ -6,6 +6,7 @@ import "swiper/swiper-bundle.css";
 import { icons } from "@/constants/icons";
 
 const MultiCarousel = ({ children, settings, className }: any) => {
+  const swiperRef = useRef<any>(null);
   const defaultSettings = {
     modules: [Navigation, Autoplay],
     slidesPerView: 6,
@@ -20,14 +21,6 @@ const MultiCarousel = ({ children, settings, className }: any) => {
       prevEl: ".swiper-button-prev",
     },
     breakpoints: {
-      1024: {
-        slidesPerView: 3,
-        slidesPerGroup: 3,
-      },
-      768: {
-        slidesPerView: 2,
-        slidesPerGroup: 2,
-      },
       480: {
         slidesPerView: 1,
         slidesPerGroup: 1,
@@ -38,18 +31,18 @@ const MultiCarousel = ({ children, settings, className }: any) => {
   const mergedSettings = { ...defaultSettings, ...settings };
 
   return (
-    <div className={`${className} container relative`}>
-      <Swiper {...mergedSettings}>
+    <div className={`${className} relative`}>
+      <Swiper {...mergedSettings} ref={swiperRef}>
         {children.map((child: any, index: number) => (
           <SwiperSlide key={index}>{child}</SwiperSlide>
         ))}
       </Swiper>
 
       <div style={{ textAlign: "center" }}>
-        <button className="button swiper-button-prev absolute bg-_white-ice p-1 font-thin rounded-full left-9 top-[50%]">
+        <button className="button swiper-button-prev absolute z-10 bg-_white-ice p-1 font-thin rounded-full left-9 top-[50%]">
           <icons.GoArrowLeft className="text-xl text-_orange" />
         </button>
-        <button className="button swiper-button-next absolute bg-_white-ice p-1 font-thin rounded-full right-8 top-[50%]">
+        <button className="button swiper-button-next absolute z-10 bg-_white-ice p-1 font-thin rounded-full right-8 top-[50%]">
           <icons.GoArrowRight className="text-xl text-_orange" />
         </button>
       </div>

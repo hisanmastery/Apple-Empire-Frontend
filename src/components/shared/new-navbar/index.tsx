@@ -6,7 +6,7 @@ import LargeDevice from "./LargeDevice";
 
 const NewNavbar = () => {
   return (
-    <section className={"sticky top-0 z-[6]"}>
+    <section className={"sticky top-0 z-50"}>
       <SmallDevice />
       <MiddleNavbar />
       <LargeDevice />
