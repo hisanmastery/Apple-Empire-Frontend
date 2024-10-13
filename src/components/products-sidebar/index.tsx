@@ -1,3 +1,4 @@
+// ProductsSideBar.tsx
 "use client";
 import React from "react";
 import { Input } from "@/components/ui/input";
@@ -10,12 +11,8 @@ import {
   setPriceRangeMin,
 } from "@/store/features/products/productsPriceRangeSlice";
 import {
-  selectProductsCategory,
-  setProductsDisplayType,
-  setProductsRam,
-  setProductsInternalStorage,
-  setProductsChipset,
-  setProductsRegion,
+  selectProductsVariant,
+  setProductsVariantType,
 } from "@/store/features/products/productsCategorySlice";
 import { Accordion } from "@radix-ui/react-accordion";
 import FilterSection from "./FilterSection";
@@ -46,77 +43,61 @@ const filterOptions = {
   region: ["BD", "AT", "CA", "IN", "ID", "JP", "KP", "PK", "SG", "UK", "US"],
 };
 
-// Reusable Filter Component
+// Define FilterOption type
+interface FilterOption {
+  label: string;
+  value: string;
+}
 
-const ProductsSideBar = () => {
+const ProductsSideBar: React.FC = () => {
   const dispatch = useDispatch();
   const { min, max } = useSelector(selectPriceRange);
-  const { displayType, ram, internalStorage, chipset, region } = useSelector(
-    selectProductsCategory
-  );
+  const { label, value } = useSelector(selectProductsVariant);
 
   // Price Range Handlers
-  const handleMinPriceChange = (event: any) =>
-    dispatch(setPriceRangeMin(parseInt(event.target.value)));
-  const handleMaxPriceChange = (event: any) =>
-    dispatch(setPriceRangeMax(parseInt(event.target.value)));
-  const handleSliderChange = (values: any) => {
+  const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(event.target.value);
+    if (newValue >= 100000 && newValue <= max) {
+      dispatch(setPriceRangeMin(newValue));
+    }
+  };
+
+  const handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(event.target.value);
+    if (newValue <= 10000000 && newValue >= min) {
+      dispatch(setPriceRangeMax(newValue));
+    }
+  };
+
+  const handleSliderChange = (values: number[]) => {
     dispatch(setPriceRangeMin(values[0]));
     dispatch(setPriceRangeMax(values[1]));
   };
 
-  // Generic filter change handlers
-  const handleDisplayTypeChange = (value: any) =>
-    dispatch(setProductsDisplayType(value === displayType ? "" : value));
-  const handleRamChange = (value: any) =>
-    dispatch(setProductsRam(value === ram ? "" : value));
-  const handleInternalStorageChange = (value: any) =>
-    dispatch(
-      setProductsInternalStorage(value === internalStorage ? "" : value)
-    );
-  const handleChipsetChange = (value: any) =>
-    dispatch(setProductsChipset(value === chipset ? "" : value));
-  const handleRegionChange = (value: any) =>
-    dispatch(setProductsRegion(value === region ? "" : value));
+  const handleVariantTypeChange = (value: FilterOption) => {
+    dispatch(setProductsVariantType(value));
+  };
 
-  // Filters configuration
   const filters = [
     {
       title: "Display Type",
       options: filterOptions.displayType,
-      selected: displayType,
-      handler: handleDisplayTypeChange,
+      selected: value,
     },
-    {
-      title: "Ram",
-      options: filterOptions.ram,
-      selected: ram,
-      handler: handleRamChange,
-    },
+    { title: "Ram", options: filterOptions.ram, selected: value },
     {
       title: "Internal Storage",
       options: filterOptions.internalStorage,
-      selected: internalStorage,
-      handler: handleInternalStorageChange,
+      selected: value,
     },
-    {
-      title: "Chipset",
-      options: filterOptions.chipset,
-      selected: chipset,
-      handler: handleChipsetChange,
-    },
-    {
-      title: "Region",
-      options: filterOptions.region,
-      selected: region,
-      handler: handleRegionChange,
-    },
+    { title: "Chipset", options: filterOptions.chipset, selected: value },
+    { title: "Region", options: filterOptions.region, selected: value },
   ];
 
   return (
-    <div className="mt-5 bg-white border-[1px] border-[#dfedeb] p-5 rounded-md">
+    <div className="mt-5 bg-white border border-[#dfedeb] p-5 rounded-md">
       {/* Price Range Filter */}
-      <div className="border-[1px] border-[#dfedeb] rounded-md p-4 ">
+      <div className="border border-[#dfedeb] rounded-md p-4">
         <div className="flex justify-between items-center">
           <h4 className="text-xl font-bold">Price Range</h4>
           <span>
@@ -133,7 +114,7 @@ const ProductsSideBar = () => {
             onValueChange={handleSliderChange}
             className="cursor-pointer"
           />
-          <div className="flex justify-center lg:gap-6 md:gap-4 gap-1 mt-4">
+          <div className="flex justify-center gap-4 mt-4">
             <Input
               className="focus:outline-none"
               type="text"
@@ -157,7 +138,7 @@ const ProductsSideBar = () => {
             title={filter.title}
             options={filter.options}
             selectedOption={filter.selected}
-            handleChange={filter.handler}
+            handleChange={handleVariantTypeChange}
           />
         ))}
       </Accordion>

@@ -6,8 +6,8 @@ import userSlice from "../features/user/userSlice";
 const reducers = {
   priceRange: productsPriceRangeSlice,
   cart: cartslice,
-  productsCategory: productsCategorySlice,
-  user:userSlice
+  productsVariantType: productsCategorySlice,
+  user: userSlice,
 };
 
 export default reducers;

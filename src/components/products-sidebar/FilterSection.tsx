@@ -1,3 +1,4 @@
+// FilterSection.tsx
 import {
   AccordionContent,
   AccordionItem,
@@ -24,7 +25,7 @@ const FilterSection = ({
               type="checkbox"
               name={title}
               checked={selectedOption === option}
-              onChange={() => handleChange(option)}
+              onChange={() => handleChange({ label: title, value: option })}
             />
             <label>{option}</label>
           </div>

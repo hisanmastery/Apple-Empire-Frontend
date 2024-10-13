@@ -3,7 +3,6 @@ import React from "react";
 import Loading from "@/components/common/loading";
 import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
 import Image from "next/image";
-
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/effect-coverflow";
@@ -34,8 +33,6 @@ const TopItems = () => {
   const { data, isLoading }: any = useGetAllCategoryQuery({
     limit: 20,
   });
-  // console.log("category data", data?.categories);
-
   if (isLoading) return <Loading />;
   return (
     <div className="container pb-5">
@@ -56,10 +53,7 @@ const TopItems = () => {
         spaceBetween={12}
       >
         {data?.categories?.map((category: any, index: any) => (
-          <SwiperSlide
-            key={index}
-            className={`!h-auto !md:h-full`}
-          >
+          <SwiperSlide key={index} className={`!h-auto !md:h-full`}>
             <div className="w-full !h-full bg-_white py-5 px-4 rounded-lg">
               <Image
                 src={category?.image}

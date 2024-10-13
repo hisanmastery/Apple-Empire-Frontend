@@ -1,14 +1,14 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import Loading from "../common/loading";
 import ProductCard from "../common/product-card";
 import ProductsNotFound from "../products-not-found";
 import { useSelector } from "react-redux";
 import { selectPriceRange } from "@/store/features/products/productsPriceRangeSlice";
-import { selectProductsCategory } from "@/store/features/products/productsCategorySlice";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import Pagination from "../common/pagination";
 import CategoryTabs from "../category-tabs";
+import { selectProductsVariant } from "@/store/features/products/productsCategorySlice";
 interface CategoryProductsProps {
   category: string;
   subCategory: string;
@@ -21,9 +21,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
   const { min, max } = useSelector(selectPriceRange);
-  const { displayType, ram, internalStorage, chipset, region } = useSelector(
-    selectProductsCategory
-  );
+  const { label, value } = useSelector(selectProductsVariant);
 
   // Fetching products using custom hooks
   const { data: allProducts, isLoading } = useGetProductsListsQuery<any>({
@@ -31,6 +29,10 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
     subCategory: decodeURIComponent(subCategory),
     page: currentPage,
     limit: pageSize,
+    minVariantPrice: min,
+    maxVariantPrice: max,
+    variantOptionName: label,
+    variantOptionValue: value,
   });
 
   //Loading
@@ -40,11 +42,11 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
 
   return (
     <div className="mt-5">
-      <CategoryTabs category={category} />
-      <div className="mb-10 border-b-[1px] border-_blue">
+      <div className="bg-_white p-5">
         <p className="text-2xl font-semibold mb-2">
           {decodeURIComponent(category)}
         </p>
+        <CategoryTabs category={decodeURIComponent(category)} />
       </div>
       <div>
         {allProducts?.product?.length > 0 ? (
@@ -57,7 +59,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
           <ProductsNotFound />
         )}
         <Pagination
-          totalItems={allProducts.totalCount}
+          totalItems={allProducts?.totalCount}
           pageSize={pageSize}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}

@@ -6,14 +6,9 @@ interface Category {
   category: string;
 }
 
-// Function to normalize category names for comparison
-const normalize = (str: string) =>
-  str.replace(/%20/g, " ").replace(/%26/g, "&");
-
 const CategoryTabs: React.FC<Category> = ({ category }) => {
   const searchParams = useSearchParams();
   const selectedSubCategory = searchParams.get("subcategory");
-
   // Fetch categories
   const {
     data: categoriesData,
@@ -21,12 +16,13 @@ const CategoryTabs: React.FC<Category> = ({ category }) => {
     isError,
   } = useGetAllCategoryQuery<any>({
     page: 1,
-    limit: 100,
+    limit: 20,
+    categoryName: category,
   });
 
   // Find subcategories for the selected category
   const subcategories: any | undefined = categoriesData?.categories?.find(
-    (item: any) => item.categoryName === normalize(category)
+    (item: any) => item?.categoryName === category
   );
 
   const handleCategoryClick = (categoryName: string) => {
