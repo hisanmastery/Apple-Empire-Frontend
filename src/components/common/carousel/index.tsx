@@ -1,67 +1,55 @@
+"use client";
 import React, { useRef } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/swiper-bundle.css";
 import { icons } from "@/constants/icons";
 
 const MultiCarousel = ({ children, settings, className }: any) => {
-  let sliderRef: any = useRef(null);
-  const next = () => {
-    sliderRef.current.slickNext();
-  };
-  const previous = () => {
-    sliderRef.current.slickPrev();
-  };
-
   const defaultSettings = {
-    dots: false,
-    infinite: true,
-    speed: 1000,
-    autoplay: true,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    autoplaySpeed: 2000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
+    modules: [Navigation, Autoplay],
+    slidesPerView: 6,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      1024: {
+        slidesPerView: 3,
+        slidesPerGroup: 3,
       },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
+      768: {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
       },
-
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
+      480: {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
       },
-    ],
+    },
   };
 
   const mergedSettings = { ...defaultSettings, ...settings };
 
   return (
     <div className={`${className} container relative`}>
-      <Slider ref={sliderRef} {...mergedSettings}>
-        {children}
-      </Slider>
+      <Swiper {...mergedSettings}>
+        {children.map((child: any, index: number) => (
+          <SwiperSlide key={index}>{child}</SwiperSlide>
+        ))}
+      </Swiper>
+
       <div style={{ textAlign: "center" }}>
-        <button
-          className="button absolute bg-_white-ice font-thin p-1 rounded-full left-9 top-[50%]"
-          onClick={previous}
-        >
+        <button className="button swiper-button-prev absolute bg-_white-ice p-1 font-thin rounded-full left-9 top-[50%]">
           <icons.GoArrowLeft className="text-xl text-_orange" />
         </button>
-        <button className="button absolute bg-_white-ice p-1 font-thin rounded-full right-8 top-[50%]" onClick={next}>
+        <button className="button swiper-button-next absolute bg-_white-ice p-1 font-thin rounded-full right-8 top-[50%]">
           <icons.GoArrowRight className="text-xl text-_orange" />
         </button>
       </div>
