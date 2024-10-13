@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { useEffect, useState } from "react";
 
 function CountDown(lastDate: any) {

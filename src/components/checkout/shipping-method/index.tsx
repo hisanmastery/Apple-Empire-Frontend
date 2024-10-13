@@ -27,7 +27,6 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
   // Handle the change in selected shipping method
   const handleMethodChange = (e: any) => {
     const selectedMethod = e.target.value;
-    console.log(selectedMethod);
     setSelectedShippingMethod(selectedMethod);
     setShippingMethod(selectedMethod);
   };

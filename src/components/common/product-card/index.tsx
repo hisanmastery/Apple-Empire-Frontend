@@ -27,10 +27,9 @@ interface ProductCardProps {
   datas: ProductData;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
+const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
-  const router = useRouter();
   const [addToCartItem]: any = useAddToCartMutation();
   const { isAuthenticated, customerInfo }: any = useAuth();
   const showToast = useToaster();
@@ -46,7 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
         productId: data?._id,
         price: data?.variants?.[0]?.price || data?.offerPrice || data?.price,
         image: data?.image?.imageUrl,
-        quantity: 0,
+        quantity: 1,
       };
       const res: any = await addToCartItem({ payload });
       if (res?.data?.isSuccess) {
@@ -91,7 +90,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
               image: data?.image?.imageUrl,
               quantity: 1,
             };
-            console.log(payload);
             let cart_items: any = [...product_items, payload];
             localStorage.setItem("cart_items", JSON.stringify(cart_items));
             dispatch(getStoredData(cart_items));

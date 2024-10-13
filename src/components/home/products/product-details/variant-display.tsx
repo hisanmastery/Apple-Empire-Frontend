@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 
-const VariantDisplay = ({ product }: any) => {
+const VariantDisplay = ({ product, setVariantPrice }: any) => {
   const optionTypes = ["Color", "Storage", "Display"];
   // State for storing the selected options
   const [selectedOptions, setSelectedOptions]: any = useState(
@@ -15,11 +15,11 @@ const VariantDisplay = ({ product }: any) => {
 
   // Update available variants whenever selected options change
   useEffect(() => {
-    const filteredVariants = product.variants.filter((variant: any) =>
+    const filteredVariants = product?.variants?.filter((variant: any) =>
       variant.options.every(
         (variantOption: any) =>
           !selectedOptions[variantOption.name] || // If no option is selected, consider it a match
-          selectedOptions[variantOption.name] === variantOption.value
+          selectedOptions[variantOption.name] === variantOption?.value
       )
     );
     setAvailableVariants(filteredVariants);
@@ -34,6 +34,10 @@ const VariantDisplay = ({ product }: any) => {
   const selectedVariant: any =
     availableVariants.length > 0 ? availableVariants[0] : null;
 
+  useEffect(() => {
+    setVariantPrice(selectedVariant);
+  }, [selectedVariant, setVariantPrice]);
+
   return (
     <section className="p-4">
       <div className="mt-4">
@@ -42,9 +46,9 @@ const VariantDisplay = ({ product }: any) => {
             <h3 className="font-medium">{option}</h3>
             <div className="flex space-x-2">
               {/* Extract available values for the current option */}
-              {product.variants
+              {product?.variants
                 .flatMap((variant: any) =>
-                  variant.options
+                  variant?.options
                     .filter((opt: any) => opt.name === option)
                     .map((opt: any) => opt.value)
                 )
@@ -52,7 +56,7 @@ const VariantDisplay = ({ product }: any) => {
                   (value: any, index: number, self: any) =>
                     self.indexOf(value) === index
                 ) // Remove duplicates
-                .map((value: any) => (
+                ?.map((value: any) => (
                   <Button
                     key={value}
                     variant={
@@ -72,9 +76,9 @@ const VariantDisplay = ({ product }: any) => {
         {selectedVariant ? (
           <>
             <h2 className="text-xl font-bold">
-              Price: ${selectedVariant.price}
+              Price: $ {selectedVariant?.price}
             </h2>
-            <p className="text-gray-600">Stock: {selectedVariant.stock}</p>
+            <p className="text-gray-600">Stock: {selectedVariant?.stock}</p>
           </>
         ) : (
           <p className="text-red-500">

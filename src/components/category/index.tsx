@@ -5,64 +5,61 @@ import ProductCard from "../common/product-card";
 import ProductsNotFound from "../products-not-found";
 import { useSelector } from "react-redux";
 import { selectPriceRange } from "@/store/features/products/productsPriceRangeSlice";
-import { selectProductsCategory } from "@/store/features/products/productsCategorySlice";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import Pagination from "../common/pagination";
-import CategoryTabs from "../category-tabs";
+import { selectProductsVariant } from "@/store/features/products/productsCategorySlice";
+import SubCategoryTabs from "../category-tabs/SubCategoryTab";
+interface CategoryProductsProps {
+  category: string;
+  subCategory: string;
+}
 
-const CategoryProducts = ({ category, subCategory }: any) => {
-  const { min, max } = useSelector(selectPriceRange);
-  const { displayType, ram, shape, internalStorage, chipset, region } =
-    useSelector(selectProductsCategory);
-  // pagination
+const CategoryProducts: React.FC<CategoryProductsProps> = ({
+  category,
+  subCategory,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
-  const { data: allProducts, isLoading }: any = useGetProductsListsQuery(
-    {
-      displayType: displayType,
-      category: decodeURIComponent(category),
-      subCategory: decodeURIComponent(subCategory),
-      ram: ram,
-      chipset: chipset,
-      region: region,
-      internalStorage: internalStorage,
-      page: currentPage,
-      limit: pageSize,
-    },
-    { pollingInterval: 1000 }
-  );
-  // pagination
-  const lastPostIndex = currentPage * pageSize;
-  const firstPostIndex = lastPostIndex - pageSize;
-  const filterProducts = allProducts?.blogs?.filter(
-    (product: any) => min >= parseInt(product?.price)
-  );
-  const currentProducts = filterProducts?.slice(firstPostIndex, lastPostIndex);
+  const { min, max } = useSelector(selectPriceRange);
+  const { label, value } = useSelector(selectProductsVariant);
+
+  // Fetching products using custom hooks
+  const { data: allProducts, isLoading } = useGetProductsListsQuery<any>({
+    category: decodeURIComponent(category),
+    subCategory: decodeURIComponent(subCategory),
+    page: currentPage,
+    limit: pageSize,
+    minVariantPrice: min,
+    maxVariantPrice: max,
+    variantOptionName: label,
+    variantOptionValue: value,
+  });
+
+  //Loading
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <div className="mt-5">
-      <CategoryTabs />
-      <div className="mb-10 border-b-[1px] border-_blue">
+      <div className="bg-_white p-5">
         <p className="text-2xl font-semibold mb-2">
           {decodeURIComponent(category)}
         </p>
+        <SubCategoryTabs category={decodeURIComponent(category)} />
       </div>
       <div>
-        {currentProducts?.length > 0 ? (
-          <>
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 xmd:grid-cols-2 grid-cols-1 px-3  ssm:px-14 xmd:px-0 mx-auto mb-10 gap-5">
-              {currentProducts?.map((product: any) => (
-                <ProductCard key={product.id} datas={product}></ProductCard>
-              ))}
-            </div>
-          </>
+        {allProducts?.product?.length > 0 ? (
+          <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 px-3 sm:px-14 mx-auto mb-10">
+            {allProducts?.product?.map((product: any) => (
+              <ProductCard key={product._id} datas={product} />
+            ))}
+          </div>
         ) : (
           <ProductsNotFound />
         )}
         <Pagination
-          totalItems={currentProducts?.length}
+          totalItems={allProducts?.totalCount}
           pageSize={pageSize}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}

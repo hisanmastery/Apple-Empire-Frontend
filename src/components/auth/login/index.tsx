@@ -38,12 +38,9 @@ const Login = () => {
         showToast("error", res?.error?.data?.message);
       }
 
-      //console.log("Login Response", res);
-
       if (loginResponse.isSuccess) {
         const accessToken: any = loginResponse?.data?.accessToken;
         const decoded: any = jwt.decode(accessToken);
-        // console.log("Decoded",decoded)
         if (decoded?.email) {
           localStorage.setItem("email", decoded?.email);
         }
