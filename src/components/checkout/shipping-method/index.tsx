@@ -15,20 +15,20 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
     {
       id: "OutSide Dhaka",
       label: "Outside Dhaka : Within 5-7 days",
-      cost: "TK. 100",
+      cost: 100,
     },
     {
       id: "Shop By Pick Up",
       label: "Shop By pick up",
-      cost: "TK. 0",
+      cost: 0,
     },
   ];
 
   // Handle the change in selected shipping method
-  const handleMethodChange = (e: any) => {
-    const selectedMethod = e.target.value;
-    setSelectedShippingMethod(selectedMethod);
-    setShippingMethod(selectedMethod);
+  const handleMethodChange = (option: any) => {
+    console.log(option);
+    setSelectedShippingMethod(option.id);
+    setShippingMethod(option);
   };
 
   // Handle payment method selection and deselection
@@ -63,7 +63,7 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
               type="radio"
               id={option.id}
               value={option.id}
-              onChange={handleMethodChange}
+              onChange={() => handleMethodChange(option)}
               checked={selectedShippingMethod === option.id}
               className="hidden"
             />
@@ -80,7 +80,7 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
               ></div>
               <div className="flex justify-between ml-2 items-center gap-10">
                 <span className="text-md">{option.label}</span>
-                {option.cost && <span>{option.cost}</span>}
+                <span>TK. {option.cost}</span>
               </div>
             </label>
           </div>

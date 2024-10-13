@@ -17,7 +17,7 @@ const Checkout = () => {
   const router = useRouter();
   const [customerRegister, { isLoading }] = useCustomerRegisterMutation();
   const { storedCart } = useSelector((state: any) => state?.cart);
-  const [shippingMethod, setShippingMethod] = useState(false);
+  const [shippingMethod, setShippingMethod] = useState<any>(false);
   const [giftSend, setGiftSend] = useState(false);
   const [createPayment] = useCreatePaymentMutation();
   const { customerInfo } = useAuth();
@@ -38,7 +38,7 @@ const Checkout = () => {
   }, 0);
 
   const cartDiscount = 5;
-  const deliveryFee = 100;
+  const deliveryFee = shippingMethod?.cost;
   const totalPrice = subtotal - cartDiscount + deliveryFee;
 
   const onSubmit = async (data: any) => {
@@ -62,7 +62,7 @@ const Checkout = () => {
       address: data?.address,
       productIds: storedCart?.map((item: any) => item.productId),
       shippingMethod: {
-        shippingMethod: shippingMethod,
+        shippingMethod: shippingMethod?.id,
         paymentMethod: data?.onlinePayment,
         orderNotes: data?.orderNotes,
       },

@@ -28,6 +28,7 @@ const ShippingAddress = () => {
             label="Full Name"
             name="name"
             className="mt-2"
+            rules={{ required: " " }}
           />
         </div>
         <div>
@@ -36,6 +37,7 @@ const ShippingAddress = () => {
             label="Address"
             required
             textArea={true}
+            rules={{ required: " " }}
             name="address"
             className="mt-2 focus:outline-none"
           />
@@ -60,6 +62,7 @@ const ShippingAddress = () => {
               label="Post Code"
               required
               name="postCode"
+              rules={{ required: " " }}
               className="mt-2 focus:outline-none"
             />
           </div>
@@ -71,6 +74,7 @@ const ShippingAddress = () => {
           name="email"
           placeholder="Email"
           className="mt-2"
+          rules={{ required: " " }}
         />
         <Input
           type="text"
@@ -79,6 +83,7 @@ const ShippingAddress = () => {
           placeholder="Mobile Number"
           name="number"
           className="mt-2"
+          rules={{ required: " " }}
         />
       </div>
       <h1 className="flex items-center text-lg font-semibold gap-4 border-t border-gray-400 py-2 mt-5">

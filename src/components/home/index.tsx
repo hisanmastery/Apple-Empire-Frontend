@@ -103,10 +103,7 @@ const Home: React.FC = () => {
       />
 
       {/* Shop By Brands */}
-      <SectionWithTitleAndAds title="SHOP BY BRANDS" seeMoreUrl="">
-        <ClientBrand />
-      </SectionWithTitleAndAds>
-
+      <ClientBrand />
       {/* Campaigns Countdown */}
       <CampaignsCountDown lastDate="2024-06-22 4:00:00" />
     </main>
