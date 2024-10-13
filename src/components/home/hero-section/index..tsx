@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import * as icons from "react-icons/go";
+import { icons } from "@/constants/icons";
+
 const products = [
   {
     id: "62aefe9ad8b80d5234af625a",
@@ -25,14 +26,12 @@ const products = [
 
 const HeroSection = () => {
   const swiperRef = useRef<any>(null);
-  const [loading, setLoading] = useState(true);
   const breakpoints = {
     640: { slidesPerView: 1 },
   };
 
   return (
     <div className="relative">
-      {loading && <p>Loading...</p>}
       <Swiper
         ref={swiperRef}
         modules={[Autoplay, Navigation]}
@@ -58,7 +57,6 @@ const HeroSection = () => {
                 <Card className="h-full">
                   <CardContent className="flex w-full items-center justify-center lg:h-[480px] h-full p-1">
                     <Image
-                      onLoad={() => setLoading(false)}
                       width={500}
                       height={400}
                       className="w-full"

@@ -1,12 +1,12 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import ClientBrand from "../home/client-brand";
-import Products from "../home/products";
+const Products = dynamic(() => import("../home/products"));
 import ProductAds from "../common/productAds";
 import ViewMoreTitle from "../common/ViewMoreTitle";
-import TopSellingProducts from "../home/TopSellingProducts";
-import PopularProducts from "../home/popularProducts";
-import CampaignsCountDown from "./campaigns-count-down";
+const TopSellingProducts = dynamic(() => import("../home/TopSellingProducts"));
+const PopularProducts = dynamic(() => import("../home/popularProducts"));
+const CampaignsCountDown = dynamic(() => import("./campaigns-count-down"));
 import HomePopup from "@/components/home/popup/HomePopup";
 import { ADS_URLS } from "@/data/ads-url";
 const TopItems = dynamic(() => import("./top-items"));
