@@ -4,6 +4,7 @@ import NewNavbar from "@/components/shared/new-navbar";
 import NewFooter from "@/components/shared/footer/newFooter";
 import WhatsApp from "@/components/whats-app";
 import CartManager from "@/components/add-to-cart/cart-manager";
+import BackToTopButton from "@/components/shared/back-to-top-button";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -14,6 +15,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <section className=" overflow-auto col-span-4 p-1">{children}</section>
       <NewFooter />
       <WhatsApp />
+      <BackToTopButton />
     </main>
   );
 };
