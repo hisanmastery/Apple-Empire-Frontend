@@ -57,7 +57,7 @@ const ProductsSideBar: React.FC = () => {
       options: filterOptions.displayType,
       selected: value,
     },
-    { title: "Ram", options: filterOptions.ram, selected: value },
+    { title: "RAM", options: filterOptions.ram, selected: value },
     {
       title: "Internal Storage",
       options: filterOptions.internalStorage,
@@ -82,7 +82,7 @@ const ProductsSideBar: React.FC = () => {
           <Slider
             value={[min, max]}
             max={10000000}
-            min={100000}
+            min={0}
             step={1}
             onValueChange={handleSliderChange}
             className="cursor-pointer"

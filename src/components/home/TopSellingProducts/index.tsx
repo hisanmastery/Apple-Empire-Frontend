@@ -8,7 +8,6 @@ const TopSellingProducts = () => {
       productType: "Top Selling Products",
     }
   );
-
   return (
     <div>
       <CustomSlider sliderProducts={topSellingProducts} isLoading={isLoading} />

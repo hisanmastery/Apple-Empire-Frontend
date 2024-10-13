@@ -9,6 +9,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/virtual";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 
 const breakpoints = {
   0: {
@@ -36,8 +37,9 @@ const TopItems = () => {
   if (isLoading) return <Loading />;
   return (
     <div className="container pb-5">
-      <h2 className="text-2xl font-semibold text-center py-4">Top Categories</h2>
-      {/* ==================== swiper slider ================ */}
+      <h2 className="text-2xl font-semibold text-center py-4">
+        Top Categories
+      </h2>
       <Swiper
         modules={[Autoplay]}
         loop={true}
@@ -54,18 +56,20 @@ const TopItems = () => {
       >
         {data?.categories?.map((category: any, index: any) => (
           <SwiperSlide key={index} className={`!h-auto !md:h-full`}>
-            <div className="w-full !h-full bg-_white py-5 px-4 rounded-lg">
-              <Image
-                src={category?.image}
-                alt={category?.categoryName}
-                width={100}
-                height={100}
-                className="w-[100px] h-[100px] mx-auto transition ease-in-out duration-300 hover:scale-105 hover:cursor-pointer"
-              />
-              <h4 className="text-base font-medium leading-normal text-black text-center pt-3">
-                {category?.categoryName}
-              </h4>
-            </div>
+            <Link href={`/category/${category?.categoryName}`}>
+              <div className="w-full !h-full bg-_white py-5 px-4 rounded-lg">
+                <Image
+                  src={category?.image}
+                  alt={category?.categoryName}
+                  width={100}
+                  height={100}
+                  className="w-[100px] h-[100px] mx-auto transition ease-in-out duration-300 hover:scale-105 hover:cursor-pointer"
+                />
+                <h4 className="text-base font-medium leading-normal text-black text-center pt-3">
+                  {category?.categoryName}
+                </h4>
+              </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -9,6 +9,7 @@ import { useGetProductsListsQuery } from "@/store/features/products/productsApi"
 import Pagination from "../common/pagination";
 import { selectProductsVariant } from "@/store/features/products/productsCategorySlice";
 import SubCategoryTabs from "../category-tabs/SubCategoryTab";
+import { useSearchParams } from "next/navigation";
 interface CategoryProductsProps {
   category: string;
   subCategory: string;
@@ -18,15 +19,16 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
   category,
   subCategory,
 }) => {
+  const searchParams = useSearchParams();
+  const selectedSubCategory = searchParams.get("subcategory");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
   const { min, max } = useSelector(selectPriceRange);
   const { label, value } = useSelector(selectProductsVariant);
-
   // Fetching products using custom hooks
   const { data: allProducts, isLoading } = useGetProductsListsQuery<any>({
     category: decodeURIComponent(category),
-    subCategory: decodeURIComponent(subCategory),
+    subCategory: selectedSubCategory,
     page: currentPage,
     limit: pageSize,
     minVariantPrice: min,
@@ -42,7 +44,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
 
   return (
     <div className="mt-5">
-      <div className="bg-_white p-5">
+      <div className="bg-_white p-5 mb-5">
         <p className="text-2xl font-semibold mb-2">
           {decodeURIComponent(category)}
         </p>
@@ -50,7 +52,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
       </div>
       <div>
         {allProducts?.product?.length > 0 ? (
-          <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 px-3 sm:px-14 mx-auto mb-10">
+          <div className="grid 3xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 mx-auto mb-10">
             {allProducts?.product?.map((product: any) => (
               <ProductCard key={product._id} datas={product} />
             ))}

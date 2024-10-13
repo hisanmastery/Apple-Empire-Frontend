@@ -9,8 +9,11 @@ import ProductsNotFound from "../products-not-found";
 import Pagination from "../common/pagination";
 import { selectProductsVariant } from "@/store/features/products/productsCategorySlice";
 import CategoryTabs from "../category-tabs/CategoryTab";
+import { useSearchParams } from "next/navigation";
 
 const AllProductsSection = ({ productsType }: any) => {
+  const searchParams = useSearchParams();
+  const selectedSubCategory = searchParams.get("category");
   const usedString = productsType === "used" ? "used" : "";
   const offersString = productsType === "offers" ? "yes" : "";
   const { min, max } = useSelector(selectPriceRange);
@@ -26,6 +29,7 @@ const AllProductsSection = ({ productsType }: any) => {
     maxVariantPrice: max,
     variantOptionName: label,
     variantOptionValue: value,
+    category: selectedSubCategory,
     page: currentPage,
     limit: pageSize,
   });
@@ -42,7 +46,7 @@ const AllProductsSection = ({ productsType }: any) => {
       <div>
         {allProducts?.product?.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 xmd:grid-cols-2  mx-auto mb-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
+            <div className="grid grid-cols-1 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-1 xmd:grid-cols-2  mx-auto mb-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
               {allProducts?.product?.map((product: any) => (
                 <ProductCard key={product.id} datas={product} />
               ))}

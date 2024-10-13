@@ -49,7 +49,7 @@ const Home: React.FC = () => {
       {/* Top Selling Products */}
       <SectionWithTitleAndAds
         title="Top Selling Products"
-        seeMoreUrl="/section/top-selling-product"
+        seeMoreUrl="/section/top-selling-products"
       >
         <Products />
       </SectionWithTitleAndAds>
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
       {/* All Products */}
       <SectionWithTitleAndAds
         title="All Products"
-        seeMoreUrl="/section/top-selling-product"
+        seeMoreUrl="/section/top-selling-products"
       >
         <TopSellingProducts />
       </SectionWithTitleAndAds>

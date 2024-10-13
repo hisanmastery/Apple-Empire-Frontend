@@ -120,7 +120,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
 
   // Parse and log prices
   const newPrice = parsePrice(datas?.price);
-  const newOfferPrice = parsePrice(datas?.offer_price);
+  const newOfferPrice = parsePrice(datas?.offerPrice);
   const discountPercentage = newPrice
     ? Math.round(((newPrice - newOfferPrice) / newPrice) * 100)
     : 0;
@@ -128,7 +128,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const isInCart = storedCart?.find(
     (item: any) => item.productId === datas?._id
   );
-
+  console.log(datas?.variants?.[0]?.price);
   return (
     <div className="overflow-hidden">
       <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
@@ -158,12 +158,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             </p>
           </Link>
           <p className="price">
-            <span className="main-price text-qgray line-through font-600 text-sm sm:text-[18px] text-red-500">
-              {datas.price}
+            <span
+              className={`main-price text-qgray ${
+                datas?.offerPrice && "line-through"
+              } font-600 text-sm sm:text-[18px] text-red-500`}
+            >
+              TK.
+              {datas?.variants?.[0]?.price || datas?.price}
             </span>
-            <span className="offer-price text-qred font-600 text-sm sm:text-[18px] ml-2">
-              {datas.offer_price}
-            </span>
+            {datas?.offerPrice && (
+              <span className="offer-price text-qred font-600 text-sm sm:text-[18px] ml-2">
+                TK. {datas?.offerPrice}
+              </span>
+            )}
           </p>
 
           {/* Add to Cart and Buy Now Buttons */}
