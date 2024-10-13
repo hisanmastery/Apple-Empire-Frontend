@@ -96,13 +96,14 @@ const Home = () => {
           className=" mb-[60px] lg:container mx-auto"
         />
         {/* brand profile */}
-        <ViewMoreTitle
+        {/* <ViewMoreTitle
             className="top-selling-product mb-[60px] lg:container"
             seeMoreUrl=""
             categoryTitle="SHOP BY BRANDS"
         >
-          <ClientBrand />
-        </ViewMoreTitle>
+          
+        </ViewMoreTitle> */}
+        <ClientBrand />
         {/* Campaigns Count Down */}
 
         <CampaignsCountDown lastDate="2024-06-22 4:00:00" />

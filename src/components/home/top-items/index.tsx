@@ -39,7 +39,7 @@ const TopItems = () => {
   if (isLoading) return <Loading />;
   return (
     <div className="container pb-5">
-      <h2 className="text-xl font-semibold text-center py-4">Top Categories</h2>
+      <h2 className="text-2xl font-semibold text-center py-4">Top Categories</h2>
       {/* ==================== swiper slider ================ */}
       <Swiper
         modules={[Autoplay]}
