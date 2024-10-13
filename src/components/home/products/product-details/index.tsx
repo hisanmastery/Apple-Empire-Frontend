@@ -13,7 +13,6 @@ import {
   useAddToCartMutation,
   useUpdateCartMutation,
 } from "@/store/features/cart/cartApi";
-import Loading from "@/components/common/loading";
 import useAuth from "@/hooks/useAuth";
 import useToaster from "@/hooks/useToaster";
 import Emiplan from "@/components/emiplan";
@@ -27,6 +26,7 @@ import { addToCart } from "./AddToCart";
 import { handleIncrementQuantity } from "./quantity-update";
 import QuantityController from "@/components/common/quantity-controller";
 import { get_store_data } from "@/utils/get_store_data";
+import ProductDetailsSkeleton from "@/components/shared/skeleton/products-details-skeleton";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -101,10 +101,8 @@ const ProductDetails = ({ id }: any) => {
     );
   };
 
-  console.log({ variantPrice });
-
   if (isLoading) {
-    return <Loading />;
+    return <ProductDetailsSkeleton />;
   }
   return (
     <section className="container mx-auto py-5 px-2 md:px-0 min-h-screen">

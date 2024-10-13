@@ -1,17 +1,13 @@
 "use client";
 import React from "react";
-import Loading from "@/components/common/loading";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import CustomSlider from "@/components/common/custom-slider";
 
 const ProductSlider = () => {
   const { data: sliderProducts, isLoading }: any = useGetProductsListsQuery({});
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <div>
-      <CustomSlider sliderProducts={sliderProducts} />
+      <CustomSlider sliderProducts={sliderProducts} isLoading={isLoading} />
     </div>
   );
 };

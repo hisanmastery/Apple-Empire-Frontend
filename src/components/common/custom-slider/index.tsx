@@ -3,7 +3,9 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import ProductCard from "../product-card";
+
 import { icons } from "@/constants/icons";
+import ProductCardSkeleton from "@/components/shared/skeleton/products-card-skeleton";
 
 interface Product {
   _id: string;
@@ -20,9 +22,13 @@ interface CustomSliderProps {
   sliderProducts: {
     product: Product[];
   };
+  isLoading: boolean; // Add an isLoading prop to indicate loading state
 }
 
-const CustomSlider: React.FC<CustomSliderProps> = ({ sliderProducts }) => {
+const CustomSlider: React.FC<CustomSliderProps> = ({
+  sliderProducts,
+  isLoading,
+}) => {
   const swiperRef = useRef<any>(null);
 
   const breakpoints = {
@@ -44,6 +50,29 @@ const CustomSlider: React.FC<CustomSliderProps> = ({ sliderProducts }) => {
     },
   };
 
+  // Show skeletons if data is still loading
+  if (isLoading) {
+    return (
+      <div className="container relative p-0">
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          loop={true}
+          speed={3000}
+          allowTouchMove={false}
+          spaceBetween={12}
+          breakpoints={breakpoints}
+        >
+          {[...Array(5)].map((_, index) => (
+            <SwiperSlide key={index}>
+              <ProductCardSkeleton />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    );
+  }
+
+  // Render the actual slider content once data is loaded
   return (
     <div className={`container relative p-0`}>
       <Swiper

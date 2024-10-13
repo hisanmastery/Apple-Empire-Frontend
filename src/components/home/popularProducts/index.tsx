@@ -8,12 +8,10 @@ const PopularProducts = () => {
   const { data: popularProducts, isLoading }: any = useGetProductsListsQuery({
     productType: "Popular Products",
   });
-  if (isLoading) {
-    return <Loading />;
-  }
+
   return (
     <div>
-      <CustomSlider sliderProducts={popularProducts} />
+      <CustomSlider sliderProducts={popularProducts} isLoading={isLoading} />
     </div>
   );
 };
