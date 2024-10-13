@@ -8,6 +8,7 @@ import { selectPriceRange } from "@/store/features/products/productsPriceRangeSl
 import ProductsNotFound from "../products-not-found";
 import Pagination from "../common/pagination";
 import { selectProductsVariant } from "@/store/features/products/productsCategorySlice";
+import CategoryTabs from "../category-tabs/CategoryTab";
 
 const AllProductsSection = ({ productsType }: any) => {
   const usedString = productsType === "used" ? "used" : "";
@@ -34,13 +35,14 @@ const AllProductsSection = ({ productsType }: any) => {
   }
   return (
     <div className="mt-5">
-      <div className="mb-10 border-b-[1px] border-_blue">
+      <div className="bg-_white p-5 mb-5 rounded-md">
         <p className="text-2xl font-semibold mb-2">{productsType}</p>
+        <CategoryTabs />
       </div>
       <div>
         {allProducts?.product?.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xmd:grid-cols-2  mx-auto mb-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
+            <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 xmd:grid-cols-2  mx-auto mb-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
               {allProducts?.product?.map((product: any) => (
                 <ProductCard key={product.id} datas={product} />
               ))}

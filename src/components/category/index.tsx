@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import { selectPriceRange } from "@/store/features/products/productsPriceRangeSlice";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import Pagination from "../common/pagination";
-import CategoryTabs from "../category-tabs";
 import { selectProductsVariant } from "@/store/features/products/productsCategorySlice";
+import SubCategoryTabs from "../category-tabs/SubCategoryTab";
 interface CategoryProductsProps {
   category: string;
   subCategory: string;
@@ -46,7 +46,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
         <p className="text-2xl font-semibold mb-2">
           {decodeURIComponent(category)}
         </p>
-        <CategoryTabs category={decodeURIComponent(category)} />
+        <SubCategoryTabs category={decodeURIComponent(category)} />
       </div>
       <div>
         {allProducts?.product?.length > 0 ? (
