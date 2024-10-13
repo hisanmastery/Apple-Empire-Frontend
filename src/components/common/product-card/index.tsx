@@ -27,7 +27,7 @@ interface ProductCardProps {
   datas: ProductData;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ datas }: any) => {
+const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
   const [addToCartItem]: any = useAddToCartMutation();

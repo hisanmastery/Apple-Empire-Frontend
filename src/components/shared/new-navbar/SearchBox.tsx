@@ -46,7 +46,7 @@ export default function SearchBox() {
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
-        className="w-full p-2 focus:outline-none rounded-full focus:ring-2 focus:ring-_primary transition-all duration-300 ease-in-out"
+        className="w-full p-2 px-5 focus:outline-none rounded-full focus:ring-2 focus:ring-_primary transition-all duration-300 ease-in-out"
         placeholder="Search for products..."
         aria-label="Search"
       />

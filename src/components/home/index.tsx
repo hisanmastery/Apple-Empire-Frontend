@@ -11,7 +11,6 @@ import HomePopup from "@/components/home/popup/HomePopup";
 import { ADS_URLS } from "@/data/ads-url";
 const TopItems = dynamic(() => import("./top-items"));
 
-// Helper component for reusable section with products and ads
 const SectionWithTitleAndAds = ({
   title,
   seeMoreUrl,
