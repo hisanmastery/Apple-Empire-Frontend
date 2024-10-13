@@ -5,7 +5,7 @@ import React from "react";
 
 const SocialShare = () => {
   return (
-    <div className="grid grid-cols-1 container lg:grid-cols-9 gap-10">
+    <div className="grid grid-cols-1 container lg:grid-cols-9 gap-10 mt-2">
       <div className="col-span-3 flex lg:justify-start mt-8 gap-2 leading-3 lg:col-span-4">
         <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
           <icons.FaFacebookIcons className="text-_black text-lg" />

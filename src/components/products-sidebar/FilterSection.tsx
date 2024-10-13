@@ -1,4 +1,3 @@
-// FilterSection.tsx
 import {
   AccordionContent,
   AccordionItem,

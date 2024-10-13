@@ -101,6 +101,8 @@ const ProductDetails = ({ id }: any) => {
     );
   };
 
+  console.log({ variantPrice });
+
   if (isLoading) {
     return <Loading />;
   }
@@ -165,7 +167,7 @@ const ProductDetails = ({ id }: any) => {
             showToast={showToast}
           />
           {/* color variant */}
-          <div className="flex justify-between items-center mx-1 mt-2">
+          <div className="flex justify-between items-center mx-1">
             <ColorSelector
               variations={data?.response?.variations}
               selectedColor={selectedColor}
@@ -173,14 +175,14 @@ const ProductDetails = ({ id }: any) => {
             />
           </div>
           {/* variant */}
-          <div className="mt-2">
+          <div>
             <VariantDisplay
               product={data?.response}
               setVariantPrice={setVariantPrice}
             />
           </div>
           {/* add to cart button */}
-          <div className="flex gap-5 justify-start items-center mt-14">
+          <div className="flex gap-5 justify-start items-center mt-5">
             {/* Product Quantity  */}
             {isInCart && (
               <QuantityController
