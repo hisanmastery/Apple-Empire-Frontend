@@ -12,7 +12,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <CartManager />
       <Toaster />
       <NewNavbar />
-      <section className=" overflow-auto col-span-4 p-1">{children}</section>
+      <section className="overflow-auto col-span-4 p-1">{children}</section>
       <NewFooter />
       <WhatsApp />
       <BackToTopButton />
