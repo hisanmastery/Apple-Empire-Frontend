@@ -3,17 +3,21 @@ import { icons } from "@/constants/icons";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function SearchBox() {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const { data } = useGetProductsListsQuery<any>(
     {
       searchText: searchTerm,
+      page: 1,
+      limit: 10,
     },
-    { skip: !searchTerm }
+    { skip: !open }
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +25,11 @@ export default function SearchBox() {
     setOpen(e.target.value.length > 0);
   };
 
-  const handleSearch = () => {};
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      router.push(`/search-result?query=${encodeURIComponent(searchTerm)}`);
+    }
+  };
   const productsData = data?.product;
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -29,7 +37,6 @@ export default function SearchBox() {
       !dropdownRef.current.contains(event.target as Node)
     ) {
       setOpen(false);
-      setSearchTerm("");
     }
   };
 
@@ -46,39 +53,40 @@ export default function SearchBox() {
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
+        onClick={() => setOpen(true)}
         className="w-full p-2 px-5 focus:outline-none rounded-full focus:ring-2 focus:ring-_primary transition-all duration-300 ease-in-out"
         placeholder="Search for products..."
         aria-label="Search"
       />
       <button
         className="absolute top-2 text-_primary right-3"
-        type="submit"
+        type="button"
         onClick={handleSearch}
       >
         <icons.SearchIcons className="text-xl" />
       </button>
       {/* Conditional rendering of search results */}
-      {productsData?.length > 0 && searchTerm && open && (
+      {productsData?.length > 0 && open && (
         <div
           className="absolute top-12  z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md max-h-96 overflow-auto"
           ref={dropdownRef}
         >
-          {productsData.map((product: any) => (
+          {productsData?.map((product: any) => (
             <Link href={`/products/${product?._id}`} key={product._id}>
               <div
                 className="p-2 group hover:bg-_primary cursor-pointer flex gap-3 items-center"
                 onClick={() => setOpen(false)}
               >
                 <Image
-                  src={product?.image?.viewUrl}
+                  src={product?.image?.imageUrl}
                   alt={product?.image?.altText}
                   width={50}
                   height={50}
-                  className="object-fill"
+                  className="object-cover w-14 h-16"
                   quality={100}
                 />
                 <h4 className="group-hover:text-white group-hover:underline">
-                  {product.title}
+                  {product.name}
                 </h4>
               </div>
             </Link>
