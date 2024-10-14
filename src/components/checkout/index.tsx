@@ -1,6 +1,5 @@
 "use client";
 import { useSelector } from "react-redux";
-import ShippingAddress from "./shiping-address";
 import ShippingMethod from "./shipping-method";
 import OrderSummary from "./order-summary";
 import { FormProvider, useForm } from "react-hook-form";
@@ -11,17 +10,22 @@ import { useState } from "react";
 import { useCustomerRegisterMutation } from "@/store/api/auth/authApi";
 import { generateUniquePassword } from "@/hooks/generateUniquePassword";
 import PaymentAlert from "./payment-alert";
+import { icons } from "@/constants/icons";
+import useToaster from "@/hooks/useToaster";
+import ShippingAddress from "./shiping-address";
 
 const Checkout = () => {
   const methods = useForm();
   const router = useRouter();
+  const showToast = useToaster();
   const [customerRegister, { isLoading }] = useCustomerRegisterMutation();
   const { storedCart } = useSelector((state: any) => state?.cart);
-  const [shippingMethod, setShippingMethod] = useState<any>(false);
+  const [shippingMethod, setShippingMethod] = useState<any>(null);
   const [giftSend, setGiftSend] = useState(false);
-  const [createPayment] = useCreatePaymentMutation();
+  const [createPayment, { isLoading: isPaymentLoading }] =
+    useCreatePaymentMutation();
   const { customerInfo } = useAuth();
-  const [userInfo, setUserInfo] = useState<any>();
+  const [userCredentials, setUserCredentials] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [payload, setPayload] = useState<any>(null);
 
@@ -38,7 +42,7 @@ const Checkout = () => {
   }, 0);
 
   const cartDiscount = 5;
-  const deliveryFee = shippingMethod?.cost;
+  const deliveryFee = shippingMethod?.cost || 0;
   const totalPrice = subtotal - cartDiscount + deliveryFee;
 
   const onSubmit = async (data: any) => {
@@ -69,44 +73,55 @@ const Checkout = () => {
       totalPrice: totalPrice,
     };
 
-    if (newPayload?.email) {
-      const res: any = await customerRegister(registerData);
-
-      if (res?.data?.status_code === 200) {
-        // Successful registration
-        setPayload(newPayload);
-        setUserInfo({
-          email: registerData?.email,
-          password: registerData.password,
-        });
-        setIsModalOpen(true);
-      } else if (
-        res?.data?.message === "Email already in use" ||
-        customerInfo?.email
-      ) {
-        setUserInfo({
-          email: registerData?.email,
-          password: registerData.password,
-        });
-        handleConfirm();
-      } else {
-        alert(res?.error?.message || "Registration failed");
+    if (data?.email) {
+      try {
+        const res: any = await customerRegister(registerData);
+        if (res?.data?.status_code === 200) {
+          // Successful registration
+          setPayload(newPayload);
+          setUserCredentials({
+            email: registerData?.email,
+            password: registerData.password,
+          });
+          setIsModalOpen(true);
+        } else if (
+          res?.error?.data?.message === "Email already in use" ||
+          customerInfo?.email
+        ) {
+          handleConfirm();
+          setPayload(newPayload);
+        } else {
+          showToast("error", res?.error?.message || "Registration failed");
+        }
+      } catch (error) {
+        showToast(
+          "error",
+          "An error occurred during registration. Please try again."
+        );
       }
     } else {
-      alert("Email missing");
+      showToast("error", "Email is required.");
     }
   };
+
   const handleConfirm = async () => {
     if (!payload) {
-      alert("Please try again.");
+      showToast("error", "Payload is missing. Please try again.");
       return;
     }
     setIsModalOpen(false);
-    const paymentRes: any = await createPayment({ payload });
-    if (paymentRes?.data?.isSuccess) {
-      router.push(paymentRes?.data?.response?.paymentInfo?.GatewayPageURL);
-    } else {
-      alert("Payment failed");
+    try {
+      const paymentRes: any = await createPayment({ payload });
+      if (paymentRes?.data?.isSuccess) {
+        router.push(paymentRes?.data?.response?.paymentInfo?.GatewayPageURL);
+      } else {
+        showToast("error", "Payment failed");
+      }
+    } catch (error) {
+      showToast(
+        "error",
+        "An error occurred during payment processing. Please try again."
+      );
     }
   };
 
@@ -135,7 +150,7 @@ const Checkout = () => {
             <ShippingMethod setShippingMethod={setShippingMethod} />
           </div>
           <div>
-            CONFIRM ORDER
+            <h3 className="text-lg font-semibold">CONFIRM ORDER</h3>
             <OrderSummary
               subtotal={subtotal}
               cartDiscount={cartDiscount}
@@ -147,9 +162,17 @@ const Checkout = () => {
             />
             <button
               type="submit"
+              disabled={isLoading || isPaymentLoading}
               className="bg-_primary text-white px-5 py-2 w-full mt-3 border-[1px] hover:bg-_secondary hover:text-black hover:border-_pribg-_primary hover:text-_pribg-_primary transition-all ease-in-out duration-300"
             >
-              CONFIRM ORDER
+              {isPaymentLoading || isLoading ? (
+                <p className="flex justify-center items-center gap-2">
+                  <icons.ImSpinner3 className="animate-spin text-xl" />{" "}
+                  Processing...
+                </p>
+              ) : (
+                "CONFIRM ORDER"
+              )}
             </button>
           </div>
         </form>
@@ -158,7 +181,7 @@ const Checkout = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleConfirm}
-        userInfo={userInfo}
+        userInfo={userCredentials}
       />
     </main>
   );

@@ -67,7 +67,7 @@ import { FaFirstOrderAlt } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowUp } from "react-icons/go";
-
+import { ImSpinner3 } from "react-icons/im";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -136,4 +136,5 @@ export const icons = {
   GoArrowLeft: GoArrowLeft,
   GoArrowRight: GoArrowRight,
   GoArrowUp: GoArrowUp,
+  ImSpinner3: ImSpinner3,
 };

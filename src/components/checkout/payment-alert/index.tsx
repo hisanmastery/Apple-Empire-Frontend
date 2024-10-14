@@ -32,7 +32,7 @@ const PaymentAlert: React.FC<PaymentAlertProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-5 rounded shadow-lg w-80">
+      <div className="bg-white p-5 rounded shadow-lg w-96">
         <h2 className="text-lg font-semibold">Registration Successful!</h2>
         <p className="mt-3">Your account has been created successfully.</p>
         <div className="mt-4">
