@@ -9,7 +9,7 @@ export default function LargeDevice({ type }: any) {
   const [categoryToggle, setToggle] = useState(false);
   const { data: categoriesData }: any = useGetAllCategoryQuery({
     page: 1,
-    limit: 100,
+    limit: 7,
   });
   const handler = () => {
     setToggle(!categoryToggle);

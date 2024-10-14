@@ -28,14 +28,14 @@ const CartPage = ({ className }: any) => {
 
   // Constants
   const PROMO_CODE = "appleempire";
-  const SHIPPING_RATE = 0.2; // Shipping cost is 20% of subtotal
-  const DISCOUNT_RATE = 0.1; // Discount for valid promo code
+  const SHIPPING_RATE = 0.2;
+  const DISCOUNT_RATE = 0.1;
 
   // Helper function to update quantity
   const updateQuantity = (index: number, newQuantity: number) => {
-    const updatedCart = storedCart.map((cartItem: any, idx: number) => {
+    const updatedCart = storedCart?.map((cartItem: any, idx: number) => {
       if (idx === index) {
-        return { ...cartItem, quantity: Math.max(newQuantity, 1) }; // Ensure quantity is at least 1
+        return { ...cartItem, quantity: Math.max(newQuantity, 1) };
       }
       return cartItem;
     });
@@ -169,15 +169,15 @@ const CartPage = ({ className }: any) => {
               <div className="mt-4">
                 <div className="flex justify-between">
                   <p>Items ({storedCart?.length})</p>
-                  <p>{subTotal}$</p>
+                  <p>$ {subTotal?.toFixed(2)}</p>
                 </div>
                 <div className="flex justify-between mt-2">
                   <p>Discount</p>
-                  <p>{discountPrice}$</p>
+                  <p>$ {discountPrice?.toFixed(2)}</p>
                 </div>
                 <div className="flex justify-between mt-2">
                   <p>Shipping</p>
-                  <p>{shippingCost}$</p>
+                  <p>$ {shippingCost?.toFixed(2)}</p>
                 </div>
               </div>
 
@@ -199,7 +199,7 @@ const CartPage = ({ className }: any) => {
               {/* Total Amount */}
               <div className="flex justify-between items-center mt-6">
                 <p>Total Amount</p>
-                <p>{totalPrice}$</p>
+                <p>$ {totalPrice?.toFixed(2)}</p>
               </div>
 
               {/* Checkout Button */}

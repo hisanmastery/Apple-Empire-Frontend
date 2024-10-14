@@ -1,31 +1,44 @@
 import React from "react";
 import AllProductsSection from "@/components/all-products";
 import ProductsSideBar from "@/components/products-sidebar";
-import CategoryTabs from "@/components/category-tabs";
-const Products = ({ params }: any) => {
+
+// Define the type for props
+interface ProductsProps {
+  params: {
+    id?: string;
+  };
+}
+const formatCategory = (category: string): string => {
+  return category
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
+const Products: React.FC<ProductsProps> = ({ params }) => {
   let productsType = "";
   if (params?.id) {
-    // Decode the URL component and format it
-    const formattedCategory = decodeURIComponent(params?.id)
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-    productsType = formattedCategory;
-  }
-  if (params?.id == "used") {
-    productsType = "used";
-  } 
-  
-  else if (params?.id == "offers") {
-    productsType = "offers";
+    switch (params.id) {
+      case "used":
+        productsType = "Used";
+        break;
+      case "offers":
+        productsType = "Offers";
+        break;
+      default:
+        productsType = formatCategory(decodeURIComponent(params.id));
+        break;
+    }
   }
   return (
     <div className="container">
-      <div className="grid grid-cols-7 gap-5 ">
+      <div className="grid grid-cols-7 gap-5">
+        {/* Sidebar Column */}
         <div className="col-span-7 sm:col-span-3 md:col-span-2">
           <ProductsSideBar />
         </div>
-        <div className="col-span-7  sm:col-span-4 md:col-span-5">
+        {/* Products Section Column */}
+        <div className="col-span-7 sm:col-span-4 md:col-span-5">
           <AllProductsSection productsType={productsType} />
         </div>
       </div>

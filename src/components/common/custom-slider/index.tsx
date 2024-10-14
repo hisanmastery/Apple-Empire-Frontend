@@ -1,69 +1,115 @@
 "use client";
-import React from "react";
-import ProductCard from "@/components/common/product-card";
-import MultiCarousel from "@/components/common/carousel";
-const CustomSlider = ({ sliderProducts }: any) => {
+import React, { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+import ProductCard from "../product-card";
+
+import { icons } from "@/constants/icons";
+import ProductCardSkeleton from "@/components/shared/skeleton/products-card-skeleton";
+
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  offerPrice: number;
+  offer_price: number;
+  image: { imageUrl: string };
+  review: number;
+  variants: any[];
+}
+
+interface CustomSliderProps {
+  sliderProducts: {
+    product: Product[];
+  };
+  isLoading: boolean; // Add an isLoading prop to indicate loading state
+}
+
+const CustomSlider: React.FC<CustomSliderProps> = ({
+  sliderProducts,
+  isLoading,
+}) => {
+  const swiperRef = useRef<any>(null);
+
+  const breakpoints = {
+    0: {
+      slidesPerView: 2,
+      spaceBetween: 40,
+    },
+    640: {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 20,
+    },
+    1440: {
+      slidesPerView: 5,
+      spaceBetween: 20,
+    },
+  };
+
+  // Show skeletons if data is still loading
+  if (isLoading) {
+    return (
+      <div className="container relative p-0">
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          loop={true}
+          speed={3000}
+          allowTouchMove={false}
+          spaceBetween={12}
+          breakpoints={breakpoints}
+        >
+          {[...Array(5)].map((_, index) => (
+            <SwiperSlide key={index}>
+              <ProductCardSkeleton />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    );
+  }
+
+  // Render the actual slider content once data is loaded
   return (
-    <MultiCarousel
-      className="mt-10 bg-transparent rounded-md smd:p-5 px-0 py-5 "
-      settings={{
-        dots: false,
-        infinite: true,
-        speed: 1000,
-        autoplay: true,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        autoplaySpeed: 2000,
-        responsive: [
-          {
-            breakpoint: 1200,
-            settings: {
-              slidesToShow: 4,
-              slidesToScroll: 1,
-            },
-          },
-          {
-            breakpoint: 992,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1,
-            },
-          },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-            },
-          },
-          {
-            breakpoint: 576,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-            },
-          },
-          {
-            breakpoint: 500,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-            },
-          },
-        ],
-      }}
-    >
-      {sliderProducts?.product
-        ?.slice(0, 12)
-        ?.map((product: any, index: number) => (
-          <div
-            key={index}
-            className="aspect-w-10 aspect-h-5 lg:basis-1/6 mx-1 "
-          >
-            <ProductCard key={product._id} datas={product}></ProductCard>
-          </div>
+    <div className={`container relative p-0`}>
+      <Swiper
+        ref={swiperRef}
+        modules={[Autoplay, Navigation]}
+        loop={true}
+        autoplay={{
+          delay: 3000,
+          pauseOnMouseEnter: true,
+          disableOnInteraction: false,
+        }}
+        speed={3000}
+        allowTouchMove={true}
+        breakpoints={breakpoints}
+        spaceBetween={12}
+      >
+        {sliderProducts?.product?.map((product) => (
+          <SwiperSlide key={product._id}>
+            <ProductCard datas={product} />
+          </SwiperSlide>
         ))}
-    </MultiCarousel>
+      </Swiper>
+      <div style={{ textAlign: "center" }}>
+        <button
+          className="button swiper-button-prev absolute bg-_white-ice z-10 p-1 font-thin rounded-full left-9 top-[50%]"
+          onClick={() => swiperRef.current.swiper.slidePrev()}
+        >
+          <icons.GoArrowLeft className="text-xl text-_orange" />
+        </button>
+        <button
+          className="button swiper-button-next absolute bg-_white-ice z-10 p-1 font-thin rounded-full right-8 top-[50%]"
+          onClick={() => swiperRef.current.swiper.slideNext()}
+        >
+          <icons.GoArrowRight className="text-xl text-_orange" />
+        </button>
+      </div>
+    </div>
   );
 };
 

@@ -39,7 +39,7 @@ const ImageDisplay = ({ product, selectedColor }: any) => {
 
   return (
     <div
-      className="relative overflow-hidden bg-white border w-[90%] md:w-[80%] mx-auto"
+      className="relative overflow-hidden bg-white border w-[90%] md:w-[80%] mx-auto rounded-md"
       onMouseMove={handleImageMouseMove}
       onMouseLeave={handleImageMouseLeave}
     >

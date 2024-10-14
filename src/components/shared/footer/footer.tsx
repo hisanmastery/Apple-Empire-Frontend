@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
         {/* row -2  */}
 
-        <div className="grid grid-cols-12 gap-5 justify-between w-full items-center mt-16">
+        <div className="grid grid-cols-12 gap-5 justify-between w-full items-center mt-5">
           <ul className="flex-wrap justify-center items-center mx-auto col-span-12 lg:col-span-6  gap-4 font-normal cursor-pointer">
             <li className="hover:text-[#EE3F0B]">About Us</li>
             <li className="hover:text-[#EE3F0B]">Order Tracking</li>

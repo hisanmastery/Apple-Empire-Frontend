@@ -2,9 +2,8 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 
-const VariantDisplay = ({ product }: any) => {
+const VariantDisplay = ({ product, setVariantPrice }: any) => {
   const optionTypes = ["Color", "Storage", "Display"];
-  console.log(product);
   // State for storing the selected options
   const [selectedOptions, setSelectedOptions]: any = useState(
     optionTypes.reduce((acc, option) => ({ ...acc, [option]: "" }), {})
@@ -34,6 +33,10 @@ const VariantDisplay = ({ product }: any) => {
   // Find the variant that matches the selected options
   const selectedVariant: any =
     availableVariants.length > 0 ? availableVariants[0] : null;
+
+  useEffect(() => {
+    setVariantPrice(selectedVariant);
+  }, [selectedVariant, setVariantPrice]);
 
   return (
     <section className="p-4">
@@ -73,7 +76,7 @@ const VariantDisplay = ({ product }: any) => {
         {selectedVariant ? (
           <>
             <h2 className="text-xl font-bold">
-              Price: ${selectedVariant?.price}
+              Price: $ {selectedVariant?.price}
             </h2>
             <p className="text-gray-600">Stock: {selectedVariant?.stock}</p>
           </>
