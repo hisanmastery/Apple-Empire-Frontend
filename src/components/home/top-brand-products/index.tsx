@@ -25,7 +25,7 @@ const TopBrandProducts = () => {
 
   return (
     <div className="mb-10">
-      <h3 className="text-center text-2xl mb-4">Top Brand Products</h3>
+      <h3 className="text-center text-2xl mb-3">Top Brand Products</h3>
       <div className="flex justify-center overflow-auto">
         <div className="flex flex-col w-full max-w-lg">
           <CustomTabs
