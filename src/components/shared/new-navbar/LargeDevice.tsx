@@ -111,7 +111,7 @@ export default function LargeDevice({ type }: any) {
                 )}
                 <div className="lg:flex items-center gap-10 hidden">
                   <div className="text-_black text-md">
-                    <Link href={"/about"}>About</Link>
+                    <Link href={"/about-us"}>About</Link>
                   </div>
                   <div className="text-_black text-md">
                     <Link href={"/"}>Blogs</Link>
