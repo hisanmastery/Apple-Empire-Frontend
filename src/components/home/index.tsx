@@ -9,6 +9,7 @@ const PopularProducts = dynamic(() => import("../home/popularProducts"));
 const CampaignsCountDown = dynamic(() => import("./campaigns-count-down"));
 import HomePopup from "@/components/home/popup/HomePopup";
 import { ADS_URLS } from "@/data/ads-url";
+import TopBrandProducts from "./top-brand-products";
 const TopItems = dynamic(() => import("./top-items"));
 
 const SectionWithTitleAndAds = ({
@@ -101,7 +102,7 @@ const Home: React.FC = () => {
         ads={ADS_URLS.topPricingAds}
         className="mb-[60px] lg:container mx-auto"
       />
-
+      <TopBrandProducts />
       {/* Shop By Brands */}
       <ClientBrand />
       {/* Campaigns Countdown */}
