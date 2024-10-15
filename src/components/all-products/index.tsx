@@ -46,7 +46,7 @@ const AllProductsSection = ({ productsType }: any) => {
       <div>
         {allProducts?.product?.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-1 xmd:grid-cols-2  mx-auto mb-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
+            <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-1 xmd:grid-cols-2  mx-auto mb-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
               {allProducts?.product?.map((product: any) => (
                 <ProductCard key={product.id} datas={product} />
               ))}

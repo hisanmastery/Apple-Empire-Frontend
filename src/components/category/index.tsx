@@ -44,7 +44,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
 
   return (
     <div className="mt-5">
-      <div className="bg-_white p-5 mb-5">
+      <div className="bg-_white p-5 mb-3">
         <p className="text-2xl font-semibold mb-2">
           {decodeURIComponent(category)}
         </p>
@@ -52,7 +52,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
       </div>
       <div>
         {allProducts?.product?.length > 0 ? (
-          <div className="grid 3xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 mx-auto mb-10">
+          <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 mx-auto mb-10">
             {allProducts?.product?.map((product: any) => (
               <ProductCard key={product._id} datas={product} />
             ))}

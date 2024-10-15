@@ -43,10 +43,10 @@ const SubCategoryTabs: React.FC<Category> = ({ category }) => {
   if (isLoading) return <div className="text-center py-4">Loading...</div>;
 
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+    <ul className="flex flex-wrap gap-4 p-2">
       {/* "All" Tab */}
       <li
-        className={`flex items-center justify-center px-1 py-2 border border-gray-300 rounded-md transition-all duration-200 
+        className={`flex items-center justify-center px-5 py-[2px] border border-gray-300 rounded-md transition-all duration-200 
           cursor-pointer 
           hover:bg-blue-500 hover:text-white 
           ${
@@ -67,7 +67,7 @@ const SubCategoryTabs: React.FC<Category> = ({ category }) => {
       {subcategories?.subCategory?.map((item: any, index: number) => (
         <li
           key={index}
-          className={`flex items-center justify-center px-1 py-2 border border-gray-300 rounded-md transition-all duration-200 
+          className={`flex items-center justify-center px-3 text-sm py-[2px] border border-gray-300 rounded-md transition-all duration-200 
             cursor-pointer 
             hover:bg-blue-500 hover:text-white 
             ${
