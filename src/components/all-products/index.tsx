@@ -10,6 +10,7 @@ import Pagination from "../common/pagination";
 import { selectProductsVariant } from "@/store/features/products/productsCategorySlice";
 import CategoryTabs from "../category-tabs/CategoryTab";
 import { useSearchParams } from "next/navigation";
+import ProductCardSkeleton from "../shared/skeleton/products-card-skeleton";
 
 const AllProductsSection = ({ productsType }: any) => {
   const searchParams = useSearchParams();
@@ -35,7 +36,13 @@ const AllProductsSection = ({ productsType }: any) => {
   });
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-1 xmd:grid-cols-2  mx-auto mb-10 mt-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <ProductCardSkeleton key={index} />
+        ))}
+      </div>
+    );
   }
   return (
     <div className="mt-5">
