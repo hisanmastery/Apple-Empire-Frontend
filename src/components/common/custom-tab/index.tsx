@@ -29,13 +29,12 @@ const CustomTabs = ({
           </TabsTrigger>
         ))}
       </TabsList>
-      {tabs?.map(
-        (tab: any, index: number) =>
-          tab.content && (
-            <TabsContent key={index} value={tab.value}>
-              {tab.content} // Render the content if it exists
-            </TabsContent>
-          )
+      {tabs?.map((tab: any, index: number) =>
+        tab.content ? (
+          <TabsContent key={index} value={tab.value}>
+            {tab.content}
+          </TabsContent>
+        ) : null
       )}
     </Tabs>
   );
