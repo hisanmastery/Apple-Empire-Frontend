@@ -95,6 +95,10 @@ const NewFooter = () => {
                 Delivery and Return
               </Link>
 
+              <Link href={"/return-refund-policy"}>
+                <li className={"text-white hover:text-_primary "}>Refund and Return Policy</li>
+              </Link>
+
               <Link href={"/track-my-order"}>
                 <li className={"text-white hover:text-_primary "}>
                   Order Tracking
