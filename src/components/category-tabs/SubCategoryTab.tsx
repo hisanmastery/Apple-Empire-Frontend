@@ -48,14 +48,14 @@ const SubCategoryTabs: React.FC<Category> = ({ category }) => {
       <li
         className={`flex items-center justify-center px-1 py-2 border border-gray-300 rounded-md transition-all duration-200 
           cursor-pointer 
-          hover:bg-blue-500 hover:text-white 
+          hover:bg-_blue hover:text-white 
           ${
             selectedSubCategory === null
-              ? "font-bold bg-blue-500 text-white"
+              ? "font-bold bg-_blue text-white"
               : "text-gray-700"
           }
         `}
-        onClick={() => handleCategoryClick(null)} // Pass null for "All"
+        onClick={() => handleCategoryClick(null)}
         role="tab"
         aria-selected={selectedSubCategory === null}
         tabIndex={0}
@@ -69,10 +69,10 @@ const SubCategoryTabs: React.FC<Category> = ({ category }) => {
           key={index}
           className={`flex items-center justify-center px-1 py-2 border border-gray-300 rounded-md transition-all duration-200 
             cursor-pointer 
-            hover:bg-blue-500 hover:text-white 
+            hover:bg-_blue hover:text-white 
             ${
               item === selectedSubCategory
-                ? "font-bold bg-blue-500 text-white"
+                ? "font-bold bg-_blue text-white"
                 : "text-gray-700"
             }
           `}
