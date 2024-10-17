@@ -59,7 +59,7 @@ export default function SearchBox() {
         aria-label="Search"
       />
       <button
-        className="absolute right-0 text-_primary bg-_primary/10 p-4 py-4"
+        className="absolute right-0 text-_primary bg-_primary/15 p-4 py-4"
         type="button"
         onClick={handleSearch}
       >
