@@ -54,16 +54,16 @@ export default function SearchBox() {
         value={searchTerm}
         onChange={handleInputChange}
         onClick={() => setOpen(true)}
-        className="w-full p-2 px-5 focus:outline-none rounded-full focus:ring-2 focus:ring-_primary transition-all duration-300 ease-in-out"
+        className="w-full py-2 pl-5 focus:outline-none rounded-sm focus:ring-2 focus:ring-_primary transition-all duration-300 ease-in-out"
         placeholder="Search for products..."
         aria-label="Search"
       />
       <button
-        className="absolute top-2 text-_primary right-3"
+        className="absolute right-0 text-_primary bg-_primary/10 p-4 py-4"
         type="button"
         onClick={handleSearch}
       >
-        <icons.SearchIcons className="text-xl" />
+        <icons.SearchIcons className="text-xl " />
       </button>
       {/* Conditional rendering of search results */}
       {productsData?.length > 0 && open && (
