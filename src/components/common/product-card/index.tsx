@@ -128,7 +128,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const isInCart = storedCart?.find(
     (item: any) => item.productId === datas?._id
   );
-  console.log(datas?.variants?.[0]?.price);
   return (
     <div className="overflow-hidden">
       <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
