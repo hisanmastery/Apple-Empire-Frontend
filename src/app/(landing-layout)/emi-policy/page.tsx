@@ -3,83 +3,86 @@ import React from "react";
 
 const EMIPolicy: React.FC = () => {
   return (
-    <div className="container mt-10">
-      <h1 className="text-3xl font-bold text-center mb-6">EMI Policy</h1>
+    <div className="container mx-auto mt-10">
+      <h1 className="text-4xl font-bold text-center mb-8 text-indigo-600">
+        EMI POLICY
+      </h1> 
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Overview</h2>
-        <p className="text-gray-700">
-          Our EMI (Equated Monthly Installment) policy allows customers to
-          purchase products and pay for them in installments over time. This
-          policy outlines the eligibility, terms, and conditions associated with
-          EMI purchases.
-        </p>
-      </section>
+      <p className="mb-4 text-lg">
+        স্মার্টফোন বা গ্যাজেট পছন্দ হয়েছে, কিনতেও চাচ্ছেন কিন্তু এই মুহূর্তে নগদ
+        টাকা না থাকায় কিনতে পারছেন না?
+      </p>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Eligibility</h2>
-        <ul className="list-disc list-inside text-gray-700">
-          <li>Must be 18 years or older.</li>
-          <li>Valid credit or debit card with EMI facility.</li>
-          <li>Purchase amount should meet the minimum EMI requirement.</li>
-        </ul>
-      </section>
+      <p className="mb-4 text-lg">
+        <span className="font-bold">Apple Empire</span> আপনাদের জন্য নিয়ে এসেছে{" "}
+        <span className="font-bold text-indigo-600">EMI</span>- এর সুবিধা। এখন
+        নগদ টাকা হাতে না থাকলেও পছন্দের মোবাইল বা গ্যাজেট কেনা হবে আরো সহজ,
+        আকর্ষণীয় EMI সুবিধার মাধ্যমে।
+      </p>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Terms & Conditions</h2>
-        <p className="text-gray-700">
-          The EMI option is available for a minimum purchase of $100. Interest
-          rates may vary based on the bank's policy. Please ensure that you
-          review the terms and conditions with your bank before proceeding.
-        </p>
-      </section>
+      <p className="mb-4 text-lg">
+        EMI-এর পূর্ণরূপ হচ্ছে{" "}
+        <span className="font-bold">Equated Monthly Installments</span>। EMI এর
+        সুবিধা নিতে, নিচের তালিকাভুক্ত ব্যাংকগুলোর মধ্যে যেকোনো একটির ক্রেডিট
+        কার্ড থাকলেই আপনি EMI সুবিধা উপভোগ করতে পারবেন।
+      </p>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Cancellation & Refunds</h2>
-        <p className="text-gray-700">
-          If an order is canceled, the EMI will also be canceled, and any refund
-          due will be processed in accordance with our standard refund policy.
-          Please note that cancellation charges may apply.
-        </p>
-      </section>
+      <h2 className="text-2xl font-semibold mb-4 mt-8 text-indigo-500">
+        EMI সুবিধা গ্রহণের উপায়
+      </h2>
+      <ul className="list-disc list-inside mb-6 text-lg">
+        <li>
+          ব্যাংকের ক্রেডিট কার্ড ব্যবহার করে আপনি EMI সুবিধার মাধ্যমে ডিভাইস
+          কিনতে পারবেন।
+        </li>
+        <li>
+          আপনার পছন্দের ডিভাইসের মূল্য ৩ থেকে সর্বোচ্চ ৩৬ মাসের কিস্তিতে পরিশোধ
+          করতে পারবেন।
+        </li>
+        <li>
+          EMI নিতে হলে অবশ্যই সংশ্লিষ্ট ব্যাংকের ক্রেডিট কার্ড থাকতে হবে।
+        </li>
+      </ul>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">
-          Frequently Asked Questions (FAQs)
-        </h2>
-        <div className="space-y-4">
-          <div className="bg-gray-100 p-4 rounded-md">
-            <h3 className="text-xl font-semibold">What is EMI?</h3>
-            <p className="text-gray-700">
-              EMI stands for Equated Monthly Installment. It is a fixed payment
-              amount made by a borrower to a lender at a specified date each
-              calendar month.
-            </p>
-          </div>
-          <div className="bg-gray-100 p-4 rounded-md">
-            <h3 className="text-xl font-semibold">How do I avail EMI?</h3>
-            <p className="text-gray-700">
-              You can avail EMI by selecting the EMI option at checkout. Make
-              sure your credit or debit card supports EMI.
-            </p>
-          </div>
-          <div className="bg-gray-100 p-4 rounded-md">
-            <h3 className="text-xl font-semibold">
-              Can I cancel an EMI order?
-            </h3>
-            <p className="text-gray-700">
-              Yes, you can cancel an EMI order. The refund and cancellation will
-              follow the regular process, but bank charges may apply.
-            </p>
-          </div>
-        </div>
-      </section>
+      <h3 className="text-xl font-semibold mb-3 text-indigo-500">
+        উদাহরণ:
+      </h3>
+      <p className="mb-4 text-lg">
+        ধরুন, আপনি iPhone 14 Pro Max মডেলের একটি ফোন কিনবেন যার নগদ মূল্য{" "}
+        <span className="font-bold">৳ ১,২৬,০০০</span>। আপনি চাইলে পুরো{" "}
+        <span className="font-bold">৳ ১,২৬,০০০</span> টাকাই EMI সুবিধার মাধ্যমে
+        কিস্তিতে পরিশোধ করতে পারবেন। অথবা আপনি নগদ{" "}
+        <span className="font-bold">৳ ২৬,০০০</span> পরিশোধ করে, বাকি{" "}
+        <span className="font-bold">৳ ১,০০,০০০</span> টাকার ওপর EMI সুবিধা নিতে
+        পারবেন।
+      </p>
 
-      <div className="text-center mt-10">
-        <button className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-          <Link href={"/contact-us"}> Contact Support</Link>
+      <p className="mb-4 text-lg">
+        লক্ষ্য করুন, EMI সুবিধার ক্ষেত্রে মূল্যের বাইরে কিছু অতিরিক্ত চার্জ
+        যুক্ত হবে, যেহেতু আপনাকে ধাপে ধাপে পরিশোধ করার সুবিধা প্রদান করা
+        হচ্ছে।
+      </p>
+
+      <h2 className="text-2xl font-semibold mb-4 mt-8 text-indigo-500">
+        যেকোনো সহায়তা প্রয়োজন হলে
+      </h2>
+      <p className="mb-4 text-lg">
+        EMI সংক্রান্ত যেকোনো বিভ্রান্তি, অভিযোগ বা পরামর্শের জন্য যোগাযোগ করুন:
+      </p>
+      <ul className="list-none mb-6 text-lg">
+        <li>
+          📞 <a href="tel:01616436311" className="text-indigo-600 underline">01616436311</a> (Call & WhatsApp)
+        </li>
+        <li>
+          📞 <a href="tel:01616436318" className="text-indigo-600 underline">01616436318</a> (Call & WhatsApp)
+        </li>
+      </ul>
+
+      <Link href="/contact">
+        <button className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition">
+          Contact Us
         </button>
-      </div>
+      </Link>
     </div>
   );
 };

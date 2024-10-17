@@ -1,117 +1,112 @@
 import React from "react";
 
-const DeleveryReturn = () => {
+const DeliveryAndReturn: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 py-6">
-      <h1 className="text-3xl font-bold text-center text-_orange mb-8">
-        Delivery & Return / ডেলিভারি এবং রিটার্ন
-      </h1>
+    <div className="container mx-auto p-6">
+      {/* Heading */}
+      <h1 className="text-3xl font-bold mb-6 text-center">Delivery & Return</h1>
 
-      {/* Order Process & Delivery Options */}
+      {/* Order Process & Delivery Options Overview */}
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-_orange mb-4">
-          Order Process & Delivery Options Overview / অর্ডার প্রক্রিয়া এবং
-          ডেলিভারি অপশন
+        <h2 className="text-2xl font-semibold mb-4">
+          Order Process & Delivery Options Overview
         </h2>
-        <p className="mb-2">
-          ◉ Amount of Advance Acceptance in case of taking order of any product:
-          <br />◉ যেকোনো প্রোডাক্ট অর্ডার গ্রহণের ক্ষেত্রে অগ্রিম গ্রহণের
-          পরিমাণ:
+
+        <p className="mb-4">
+          অর্ডার প্রক্রিয়া এবং ডেলিভারি চার্জ সংক্রান্ত নিম্নলিখিত শর্তাবলি প্রযোজ্যঃ
         </p>
-        <ul className="list-disc list-inside ml-4">
+
+        <ul className="list-disc pl-6 space-y-2 mb-4">
           <li>
-            Accessories worth less than 5,000/-: Tk 305/- (Outside Dhaka City)
+            <strong>৫,০০০/-</strong> এর কম মুল্যের এক্সেসরিজের ক্ষেত্রে : 
+            <span className="text-gray-600"> ৩০৫/- টাকা (আউটসাইড ঢাকা সিটি)</span>
           </li>
           <li>
-            ৫,০০০/- এর কম মুল্যের এক্সেসরিজের ক্ষেত্রে ঃ ৩০৫/- টাকা (আউটসাইড
-            ঢাকা সিটি)
-          </li>
-
-          <li>5,000/- to 50,000/-: Tk. 1,015/-</li>
-          <li>৫,০০০/- থেকে ৫০,০০০/-: ১,০১৫/- টাকা</li>
-
-          <li>Above 50,000/-: Tk. 2,030/-</li>
-          <li>৫০,০০০ টাকার বেশি প্রোডাক্ট: ২,০৩০/- টাকা</li>
-        </ul>
-      </section>
-
-      {/* Delivery Time & Charges */}
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-_orange mb-4">
-          Delivery Information / ডেলিভারি তথ্য
-        </h2>
-        <p className="font-medium">Inside Dhaka (COD available):</p>
-        <ul className="list-disc list-inside ml-4 mb-4">
-          <li>Accessories: 100 BDT | Delivery Time: 24-72 hours</li>
-          <li>এক্সেসরিজ : ১০০ টাকা | সময়কাল: ২৪-৭২ ঘন্টা</li>
-
-          <li>
-            Devices/Premium Accessories: 250-500 BDT | Delivery Time: 24-48
-            hours
+            <strong>৫,০০০/- থেকে ৫০,০০০/-</strong> মূল্যের যে কোনো প্রোডাক্টের এর জন্য :
+            <span className="text-gray-600"> ১,০১৫/- টাকা।</span>
           </li>
           <li>
-            ডিভাইস / প্রিমিয়াম এক্সেসরিজ: ২৫০-৫০০ টাকা | সময়কাল: ২৪-৪৮ ঘন্টা
-          </li>
-
-          <li>
-            Express Delivery: 500-1000 BDT | Delivery Time: 3-6 hours
-            (Prepayment required)
-          </li>
-          <li>
-            এক্সপ্রেস ডেলিভারি: ৫০০-১০০০ টাকা | সময়কাল: ৩-৬ ঘন্টা (পূর্ণ পেমেন্ট
-            প্রযোজ্য)
+            <strong>৫০,০০০/- টাকার বেশি</strong> মূল্যের যে কোনো প্রোডাক্টের জন্য :
+            <span className="text-gray-600"> ২,০৩০/- টাকা।</span>
           </li>
         </ul>
-      </section>
 
-      {/* Refund & Return Policy */}
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-_orange mb-4">
-          Refund and Return Policy / রিফান্ড এবং রিটার্ন নীতি
-        </h2>
-        <p className="mb-2">
-          ◉ In-store purchases must be checked in front of the salesperson.
-          <br />◉ শপে প্রোডাক্ট ক্রয় করার সময়, বিক্রয়কর্মীর সামনে প্রোডাক্ট
-          চেক করতে হবে।
+        <h3 className="text-xl font-semibold mb-2">
+          Inside Dhaka Metro (Cash on Delivery - COD)
+        </h3>
+        <ul className="list-disc pl-6 space-y-2 mb-4">
+          <li>
+            <span>Accessories: <strong>100 BDT</strong></span>
+            <p className="text-gray-600">Delivery time: 24 to 72 hours</p>
+          </li>
+          <li>
+            <span>Devices / Premium Accessories: <strong>250-500 BDT</strong></span>
+            <p className="text-gray-600">Delivery time: 24 to 48 hours</p>
+          </li>
+          <li>
+            <span>Express Delivery: <strong>500-1000 BDT</strong></span>
+            <p className="text-gray-600">Delivery time: 3 to 6 hours (full payment required)</p>
+          </li>
+        </ul>
+
+        <h3 className="text-xl font-semibold mb-2">
+          Outside Dhaka City (Standard Delivery)
+        </h3>
+        <p className="mb-4">
+          If full payment is made, courier charges for any accessories or devices will be free.
         </p>
-        <p className="mb-2">
-          ◉ For online orders, notify us within 24 hours with an unboxing video
-          in case of a defect.
-          <br />◉ অনলাইন অর্ডারের ক্ষেত্রে, প্রোডাক্টের ত্রুটি থাকলে ২৪ ঘন্টার
-          মধ্যে আনবক্সিং ভিডিও সহ আমাদের জানাতে হবে।
+        <p className="mb-4">
+          For cash on delivery of regular accessories within Dhaka City, delivery charge is BDT 100/- (may vary depending on distance). Courier charges outside Dhaka are BDT 120-200 depending on the product.
         </p>
       </section>
 
-      {/* FAQs */}
+      {/* Delivery Time */}
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-_orange mb-4">
-          FAQs / সাধারণ জিজ্ঞাসা
-        </h2>
-        <ul className="list-disc list-inside ml-4">
-          <li>
-            What are the delivery options available? / ডেলিভারি অপশন কি কি?
-          </li>
-          <li>
-            How long does it take for the delivery to arrive? / ডেলিভারি পৌঁছাতে
-            কত সময় লাগে?
-          </li>
-          <li>
-            Is there free delivery for certain orders? / কিছু অর্ডারের জন্য কি
-            ফ্রি ডেলিভারি আছে?
-          </li>
-        </ul>
+        <h2 className="text-2xl font-semibold mb-4">Delivery Time</h2>
+        <p className="mb-4">
+          Inside Dhaka: Delivery will be completed within 1 to 3 working days. Outside Dhaka: Delivery within 2 to 5 working days.
+        </p>
+        <p className="mb-4 text-gray-600">
+          [Note: Orders must be placed before 5.30 PM. Orders placed after this time will be processed the next day.]
+        </p>
       </section>
 
-      {/* Contact Information */}
-      <section className="bg-gray-100 p-4 rounded-md">
-        <h2 className="text-2xl font-semibold text-_orange mb-4">
-          Need Help? / সাহায্য দরকার?
-        </h2>
-        <p className="font-bold">Phone: +880 1616 436311</p>
-        <p className="font-bold">WhatsApp: WhatsApp / Instagram</p>
+      {/* Return Policy */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Return Policy</h2>
+        <ol className="list-decimal pl-6 space-y-2 mb-4">
+          <li>
+            Place your order and select your preferred delivery method during checkout.
+          </li>
+          <li>
+            Track your product using the provided tracking number.
+          </li>
+          <li>
+            Wait for your order to arrive at your destination.
+          </li>
+          <li>
+            Collect your order from the specified pickup location during checkout.
+          </li>
+        </ol>
+      </section>
+
+      {/* Delivery & Return Options */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Delivery & Return Options</h2>
+
+        <h3 className="text-xl font-semibold mb-2">Inside Dhaka</h3>
+        <ul className="list-disc pl-6 space-y-2 mb-4">
+          <li>Standard Delivery: Get it in 2-3 working days</li>
+          <li>Express Delivery: 1-2 business days for urgent domestic orders.</li>
+        </ul>
+
+        <h3 className="text-xl font-semibold mb-2">Outside Dhaka</h3>
+        <p className="mb-4">
+          Delivery may take 3 to 7 working days. For online payments, it may take 7 to 10 business days for returns.
+        </p>
       </section>
     </div>
   );
 };
 
-export default DeleveryReturn;
+export default DeliveryAndReturn;
