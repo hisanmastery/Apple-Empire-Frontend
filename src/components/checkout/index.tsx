@@ -144,7 +144,7 @@ const Checkout = () => {
           className="grid lg:grid-cols-3 grid-cols-1 justify-center gap-14 mt-10"
         >
           <div>
-            <ShippingAddress />
+            <ShippingAddress email={customerInfo?.email} />
           </div>
           <div>
             <ShippingMethod setShippingMethod={setShippingMethod} />

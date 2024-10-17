@@ -73,7 +73,7 @@ export default function LargeDevice({ type }: any) {
                                       key={subIndex}
                                     >
                                       <Link
-                                        href={`/category/${category.categoryName}/${subCategory}`}
+                                        href={`/category/${category.categoryName}?subcategory=${subCategory}`}
                                       >
                                         <div
                                           className={`flex justify-between items-center px-2 h-10 bg-_white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
@@ -111,7 +111,7 @@ export default function LargeDevice({ type }: any) {
                 )}
                 <div className="lg:flex items-center gap-10 hidden">
                   <div className="text-_black text-md">
-                    <Link href={"/about"}>About</Link>
+                    <Link href={"/about-us"}>About</Link>
                   </div>
                   <div className="text-_black text-md">
                     <Link href={"/"}>Blogs</Link>

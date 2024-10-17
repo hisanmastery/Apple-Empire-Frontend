@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { CiLocationOn } from "react-icons/ci";
 import { Address } from "@/data/address";
 
-const ShippingAddress = () => {
+const ShippingAddress = ({ email }: any) => {
   const {
     register,
     formState: { errors },
@@ -72,6 +72,7 @@ const ShippingAddress = () => {
           type="email"
           required
           name="email"
+          defaultValue={email}
           placeholder="Email"
           className="mt-2"
           rules={{ required: " " }}
