@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { icons } from "@/constants/icons";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
 import { images } from "@/constants/images";
 import React from "react";
+import CustomTooltip from "@/components/common/custom-tooltip";
 
 export default function MiddleNavbar({ className, type }: any) {
   const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
@@ -89,47 +90,67 @@ export default function MiddleNavbar({ className, type }: any) {
                 />
               </div>
               <div className="cart-wrapper group relative py-4">
-                <div className="cart relative cursor-pointer">
-                  <Link href="/shop">
-                    <p rel="noopener noreferrer">
-                      <span>
-                        <icons.FaShop className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
-                      </span>
-                    </p>
-                  </Link>
-                </div>
+                <CustomTooltip
+                  triggerText={
+                    <div className="cart relative cursor-pointer">
+                      <Link href="/shop">
+                        <p rel="noopener noreferrer">
+                          <span>
+                            <icons.FaShop className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
+                          </span>
+                        </p>
+                      </Link>
+                    </div>
+                  }
+                  contentText="View Shop"
+                />
               </div>
               <div className="cart-wrapper group relative py-4">
-                <div className="cart relative cursor-pointer">
-                  <Link href="/cart">
-                    <p rel="noopener noreferrer">
-                      <span>
-                        <icons.MdAddShoppingCart className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
-                      </span>
-                    </p>
-                  </Link>
-                </div>
+                <CustomTooltip
+                  triggerText={
+                    <div className="cart relative cursor-pointer">
+                      <Link href="/cart">
+                        <p rel="noopener noreferrer">
+                          <span>
+                            <icons.MdAddShoppingCart className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
+                          </span>
+                        </p>
+                      </Link>
+                    </div>
+                  }
+                  contentText="View your cart"
+                />
               </div>
 
               {isAuthenticated ? (
                 <div className="favorite relative">
-                  <Link href="/profile" passHref>
-                    <p rel="noopener noreferrer">
-                      <span>
-                        <icons.LuUser2 className="ssm:text-lg msm:text-xl text-_white lsm:text-2xl smd:text-2xl" />
-                      </span>
-                    </p>
-                  </Link>
+                  <CustomTooltip
+                    triggerText={
+                      <Link href="/profile" passHref>
+                        <p rel="noopener noreferrer">
+                          <span>
+                            <icons.LuUser2 className="ssm:text-lg msm:text-xl text-_white lsm:text-2xl smd:text-2xl" />
+                          </span>
+                        </p>
+                      </Link>
+                    }
+                    contentText="View your Profile"
+                  />
                 </div>
               ) : (
                 <div>
-                  <Link href={"/login"}>
-                    <p rel="noopener noreferrer">
-                      <span>
-                        <icons.FaUserIcons className="ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
-                      </span>
-                    </p>
-                  </Link>
+                  <CustomTooltip
+                    triggerText={
+                      <Link href={"/login"}>
+                        <p rel="noopener noreferrer">
+                          <span>
+                            <icons.FaUserIcons className="ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
+                          </span>
+                        </p>
+                      </Link>
+                    }
+                    contentText="View your Profile"
+                  />
                 </div>
               )}
             </div>
