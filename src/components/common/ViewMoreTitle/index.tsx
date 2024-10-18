@@ -23,7 +23,7 @@ const ViewMoreTitle = ({
           <div>
             <Link href={seeMoreUrl}>
               <div className="flex space-x-2 items-center">
-                <p className="text-xs msm:text-md sm:text-lg md:text-xl font-600 text-black underline hover:text-blue-400 font-bold font-inherit ">
+                <p className="text-xs msm:text-md sm:text-lg md:text-xl font-600 text-black underline hover:text-_primary font-bold font-inherit ">
                   View More
                 </p>
               </div>

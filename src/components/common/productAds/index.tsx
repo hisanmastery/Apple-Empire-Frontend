@@ -46,7 +46,6 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
             )}
           </div>
         </div>
-        `
       </div>
     </>
   );

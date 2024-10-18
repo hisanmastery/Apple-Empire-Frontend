@@ -41,7 +41,7 @@ const SmallDeviceSearchBar = () => {
           aria-label="Toggle Search Bar"
           className="focus:outline-none text-_white"
         >
-          <icons.SearchIcons />
+          <icons.SearchIcons className="text-_primary w-6 h-6"/>
         </button>
       </div>
       {/* Render SearchBox if isSearchBarOpen is true */}
