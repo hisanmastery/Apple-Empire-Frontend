@@ -67,7 +67,7 @@ const CompareComponent = ({ id }: any) => {
               alt=""
               width={200}
               height={200}
-              className="w-48"
+              className="w-48 h-52 object-cover"
             />
             <div>
               <p className="mb-2">
@@ -119,11 +119,11 @@ const CompareComponent = ({ id }: any) => {
               alt=""
               width={200}
               height={200}
-              className="w-48"
+              className="w-48 h-52 object-cover"
             />
           </div>
           <h2 className="text-lg font-semibold text-end">
-            {selectedPhone?.value?.title}
+            {selectedPhone?.value?.name}
           </h2>
         </div>
       </div>
