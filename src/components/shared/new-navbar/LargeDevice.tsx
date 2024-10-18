@@ -64,7 +64,7 @@ export default function LargeDevice({ type }: any) {
 
                           {/* Category Dropdown */}
                           {openCategoryId === category._id && (
-                            <div className="category-dropdown max-h-[calc(100vh-200px)] overflow-auto w-full min-w-48 absolute left-0 top-[43px] sm:top-[47px] smd:top-[53px]">
+                            <div className="category-dropdown max-h-[calc(100vh-200px)] overflow-auto w-full min-w-48 absolute left-0 top-[43px]">
                               <ul className="categories-list">
                                 {category.subCategory.map(
                                   (subCategory: string, subIndex: number) => (
