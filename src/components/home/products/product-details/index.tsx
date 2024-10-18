@@ -122,14 +122,14 @@ const ProductDetails = ({ id }: any) => {
                   <div
                     key={index}
                     className="bg-white border rounded-md"
-                    onClick={() => handleColorButtonClick(variant.color)}
+                    onClick={() => handleColorButtonClick(variant?.color)}
                   >
                     <Image
                       width={100}
                       height={100}
                       className="transition-transform duration-300 transform cursor-pointer"
                       src={variant?.image[0]}
-                      alt={`Product Image - ${variant.color}`}
+                      alt={`Product Image - ${variant?.color}`}
                     />
                   </div>
                 ))}
