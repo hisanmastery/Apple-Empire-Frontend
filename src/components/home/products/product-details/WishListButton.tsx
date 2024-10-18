@@ -9,7 +9,7 @@ import { baseApiUrl } from "@/constants/endpoint";
 import { get_wish_lists } from "@/utils/get_store_data";
 import { useRouter } from "next/navigation";
 
-const WishListButton = ({ item, showToast }: any) => {
+const WishListButton = ({ item, showToast, isText }: any) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [wishItem, setWishItem] = useState<any>(null);
@@ -88,13 +88,13 @@ const WishListButton = ({ item, showToast }: any) => {
       className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
       onClick={handleWishLists}
     >
-      <icons.MdOutlineFavorite
+      <icons.FavoriteBorder
         style={{
-          color: `${wishItem ? "#A53E08" : "black"}`,
+          color: `${wishItem ? "#A53E08" : ""}`,
         }}
         className="text-xl"
       />
-      {wishItem ? "Remove from Wishlist" : "Add to Wishlist"}
+      {isText && (wishItem ? "Remove from Wishlist" : "Add to Wishlist")}
     </div>
   );
 };

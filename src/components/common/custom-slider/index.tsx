@@ -22,7 +22,7 @@ interface CustomSliderProps {
   sliderProducts: {
     product: Product[];
   };
-  isLoading: boolean; // Add an isLoading prop to indicate loading state
+  isLoading: boolean;
 }
 
 const CustomSlider: React.FC<CustomSliderProps> = ({
@@ -97,14 +97,14 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
       </Swiper>
       <div style={{ textAlign: "center" }}>
         <button
-          className="button swiper-button-prev absolute bg-_white-ice z-10 p-1 font-thin rounded-full left-0 top-[50%]"
-          onClick={() => swiperRef.current.swiper.slidePrev()}
+          className="button swiper-button-prev absolute bg-[#eff1f0] z-10 p-1 font-thin rounded-full left-0 top-[50%]"
+          onClick={() => swiperRef?.current?.swiper?.slidePrev()}
         >
           <icons.GoArrowLeft className="text-xl text-_orange" />
         </button>
         <button
-          className="button swiper-button-next absolute bg-_white-ice z-10 p-1 font-thin rounded-full right-0 top-[50%]"
-          onClick={() => swiperRef.current.swiper.slideNext()}
+          className="button swiper-button-next absolute bg-[#eff1f0] z-10 p-1 font-thin rounded-full right-0 top-[50%]"
+          onClick={() => swiperRef?.current?.swiper?.slideNext()}
         >
           <icons.GoArrowRight className="text-xl text-_orange" />
         </button>
