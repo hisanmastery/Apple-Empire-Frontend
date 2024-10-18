@@ -88,12 +88,11 @@ const WishListButton = ({ item, showToast, isText }: any) => {
       className="text-md font-medium flex items-center gap-3 hover:cursor-pointer"
       onClick={handleWishLists}
     >
-      <icons.FavoriteBorder
-        style={{
-          color: `${wishItem ? "#A53E08" : ""}`,
-        }}
-        className="text-xl"
-      />
+      {wishItem ? (
+        <icons.MdOutlineFavorite className="text-xl text-_primary" />
+      ) : (
+        <icons.FavoriteBorder className="text-xl" />
+      )}
       {isText && (wishItem ? "Remove from Wishlist" : "Add to Wishlist")}
     </div>
   );
