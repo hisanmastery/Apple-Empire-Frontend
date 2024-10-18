@@ -9,11 +9,11 @@ import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
 import { images } from "@/constants/images";
 import React from "react";
-import CustomTooltip from "@/components/common/custom-tooltip";
 
 export default function MiddleNavbar({ className, type }: any) {
   const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
-  const { isAuthenticated, customerInfo } = useAuth();
+  const { isAuthenticated } = useAuth();
+
   return (
     <div
       className={`hidden md:block w-full ssm:h-[75px] smd:h-[86px] bg-_black ${className}`}
@@ -21,6 +21,7 @@ export default function MiddleNavbar({ className, type }: any) {
       <div className="px-3 xsm:px-4 smd:container smd:px-auto mx-auto h-full">
         <div className="relative h-full">
           <div className="flex justify-between items-center h-full">
+            {/* Logo Section */}
             <div className="cursor-pointer">
               <Link href="/">
                 <Image
@@ -32,6 +33,8 @@ export default function MiddleNavbar({ className, type }: any) {
                 />
               </Link>
             </div>
+
+            {/* Search Icon (Mobile Only) */}
             <div className="favorite relative md:hidden">
               <Link href="/profile" passHref>
                 <p rel="noopener noreferrer">
@@ -41,118 +44,101 @@ export default function MiddleNavbar({ className, type }: any) {
                 </p>
               </Link>
             </div>
-            <div className="lg:w-[517px] lg:h-[44px] w-[50%] hidden md:block">
+
+            {/* Search Box */}
+            <div className="lg:w-[517px] lg:h-[44px] w-[40%] hidden md:block">
               <SearchBox />
             </div>
-            <div className="lg:flex hidden  space-x-6 items-center">
+
+            {/* Navigation Items */}
+            <div className="lg:flex hidden gap-10 items-center">
+              {/* Wish List */}
               <div className="cart-wrapper group relative py-4">
-                <div className="cart relative cursor-pointer">
-                  <Link href="" passHref>
-                    <p rel="noopener noreferrer">
-                      <span>
-                        <icons.FavoriteBorder className="ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
-                      </span>
-                    </p>
+                <div className="cart relative cursor-pointer flex items-center">
+                  <Link href="">
+                    <div
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <p>
+                        <icons.FavoriteBorder className="text-4xl text-_primary" />
+                      </p>
+                      <p>
+                        <span className="text-_white block font-semibold -mb-1">
+                          Wish List ({wishLists?.length ? wishLists?.length : 0}
+                          )
+                        </span>
+                        <span className="text-_white">Add items</span>
+                      </p>
+                    </div>
                   </Link>
-                  <span
-                    className={` smd:w-[18px] smd:h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
-                      type === 3 ? "bg-qh3-blue text-white" : "bg-_orange"
-                    }`}
-                  >
-                    {wishLists?.length ? wishLists?.length : 0}
-                  </span>
                 </div>
                 <WishLists
                   type={type}
-                  className="absolute -right-[45px] top-11 z-50 hidden group-hover:block"
-                />
-              </div>
-              <div className="cart-wrapper group relative py-4">
-                <div className="cart relative cursor-pointer">
-                  <Link href="/cart">
-                    <p rel="noopener noreferrer">
-                      <span>
-                        <icons.ShoppingBagSolid className="ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
-                      </span>
-                    </p>
-                  </Link>
-                  <span
-                    className={`w-[18px] h-[18px] rounded-full  absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] ${
-                      type === 3 ? "bg-qh3-blue text-white" : "bg-_orange"
-                    }`}
-                  >
-                    {storedCart?.length || 0}
-                  </span>
-                </div>
-                <Cart
-                  type={type}
-                  className="absolute -right-[45px] top-11 z-50 hidden group-hover:block"
-                />
-              </div>
-              <div className="cart-wrapper group relative py-4">
-                <CustomTooltip
-                  triggerText={
-                    <div className="cart relative cursor-pointer">
-                      <Link href="/shop">
-                        <p rel="noopener noreferrer">
-                          <span>
-                            <icons.FaShop className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
-                          </span>
-                        </p>
-                      </Link>
-                    </div>
-                  }
-                  contentText="View Shop"
-                />
-              </div>
-              <div className="cart-wrapper group relative py-4">
-                <CustomTooltip
-                  triggerText={
-                    <div className="cart relative cursor-pointer">
-                      <Link href="/cart">
-                        <p rel="noopener noreferrer">
-                          <span>
-                            <icons.MdAddShoppingCart className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
-                          </span>
-                        </p>
-                      </Link>
-                    </div>
-                  }
-                  contentText="View your cart"
+                  className="absolute -right-[45px] top-20 z-50 hidden group-hover:block"
                 />
               </div>
 
-              {isAuthenticated ? (
-                <div className="favorite relative">
-                  <CustomTooltip
-                    triggerText={
-                      <Link href="/profile" passHref>
-                        <p rel="noopener noreferrer">
-                          <span>
-                            <icons.LuUser2 className="ssm:text-lg msm:text-xl text-_white lsm:text-2xl smd:text-2xl" />
-                          </span>
-                        </p>
-                      </Link>
-                    }
-                    contentText="View your Profile"
-                  />
+              {/* Shopping Cart */}
+              <div className="cart-wrapper group relative py-4">
+                <div className="cart relative cursor-pointer flex items-center">
+                  <Link href="/cart">
+                    <div
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <p>
+                        <icons.MdAddShoppingCart className="text-4xl text-_primary" />
+                      </p>
+                      <p>
+                        <span className="text-_white block font-semibold -mb-1">
+                          Cart ({storedCart?.length || 0})
+                        </span>
+                        <span className="text-_white">Add items</span>
+                      </p>
+                    </div>
+                  </Link>
                 </div>
-              ) : (
-                <div>
-                  <CustomTooltip
-                    triggerText={
-                      <Link href={"/login"}>
-                        <p rel="noopener noreferrer">
-                          <span>
-                            <icons.FaUserIcons className="ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl" />
-                          </span>
-                        </p>
-                      </Link>
-                    }
-                    contentText="View your Profile"
-                  />
+                <Cart
+                  type={type}
+                  className="absolute -right-[45px] top-20 z-50 hidden group-hover:block"
+                />
+              </div>
+
+              {/* Shop Link */}
+              <Link href="/pre-order">
+                <div
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <p>
+                    <icons.FaShop className="text-4xl text-_primary" />
+                  </p>
+                  <p>
+                    <span className="text-_white block font-semibold -mb-1">
+                      Pre-Order
+                    </span>
+                    <span className="text-_white">Order Today</span>
+                  </p>
                 </div>
-              )}
+              </Link>
+              {/* user  */}
+              <Link href={isAuthenticated ? "/profile" : "/login"}>
+                <div
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <p>
+                    <icons.LuUser2 className="text-4xl text-_primary" />
+                  </p>
+                  <p>
+                    <span className="text-_white block font-semibold -mb-1">
+                      Account
+                    </span>
+                    <span className="text-_white">Register or Login</span>
+                  </p>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
