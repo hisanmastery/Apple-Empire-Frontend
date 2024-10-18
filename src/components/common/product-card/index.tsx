@@ -209,11 +209,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
               {<icons.MdZoomOutMapIcon className="text-xl" />}
             </span>
           </a>
-          <a href="#">
+          <Link href={`/compare/${datas?._id}`}>
             <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
               {<icons.LiaSyncSolidIcons className="text-xl" />}
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
