@@ -20,7 +20,12 @@ const ProductActionButtons: React.FC<ProductActionButtonsProps> = ({
       {iconsData.map((item: any, index: number) => {
         if (item?.label === "WISHLIST") {
           return (
-            <WishListButton key={index} item={product} showToast={showToast} />
+            <WishListButton
+              key={index}
+              item={product}
+              showToast={showToast}
+              isText={true}
+            />
           );
         } else if (item?.label === "EXCHANGE") {
           return (
