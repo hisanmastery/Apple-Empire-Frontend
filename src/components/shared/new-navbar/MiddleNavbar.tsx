@@ -46,7 +46,7 @@ export default function MiddleNavbar({ className, type }: any) {
             </div>
 
             {/* Search Box */}
-            <div className="lg:w-[517px] lg:h-[44px] w-[40%] hidden md:block">
+            <div className="lg:h-[44px] w-[50%] lg:w-[30%] 2xl:w-[35%] hidden md:block">
               <SearchBox />
             </div>
 

@@ -87,6 +87,7 @@ const Home: React.FC = () => {
       <ProductAds
         ads={ADS_URLS.popularProductsAds}
         className="mb-[60px] lg:container mx-auto"
+        sectionHeight="h-96"
       />
 
       {/* Top Pricing Products */}
@@ -101,6 +102,7 @@ const Home: React.FC = () => {
       <ProductAds
         ads={ADS_URLS.topPricingAds}
         className="mb-[60px] lg:container mx-auto"
+        sectionHeight="h-96"
       />
       <TopBrandProducts />
       {/* Shop By Brands */}
