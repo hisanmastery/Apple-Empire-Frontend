@@ -87,7 +87,7 @@ const Home: React.FC = () => {
       <ProductAds
         ads={ADS_URLS.popularProductsAds}
         className="mb-[60px] lg:container mx-auto"
-        sectionHeight="h-96"
+        sectionHeight="h-56 md:h-96 "
       />
 
       {/* Top Pricing Products */}
