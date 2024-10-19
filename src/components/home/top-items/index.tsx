@@ -37,8 +37,8 @@ const TopItems = () => {
   });
   if (isLoading) return <Loading />;
   return (
-    <div className="md:container pb-5">
-      <h2 className="text-2xl font-semibold text-center pb-4 md:py-4">
+    <div className="md:container pb-5 mt-5 md:mt-0">
+      <h2 className="text-xl md:text-2xl font-semibold text-center pb-4 md:py-4">
         Top Categories
       </h2>
 

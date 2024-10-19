@@ -16,7 +16,7 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
           >
             <div
               data-aos="fade-right"
-              className={`overflow-hidden h-full sm:mb-0 mb-5 w-full`}
+              className={`overflow-hidden h-full w-full`}
             >
               <Link href="/section/top-selling-products">
                 <Image
@@ -31,7 +31,7 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
             {ads.length > 1 && ads.length <= 2 && (
               <div
                 data-aos="fade-left"
-                className="w-full mb-5 lg:mb-auto h-full overflow-hidden"
+                className="w-full h-full overflow-hidden"
               >
                 <Link href="/section/top-selling-products">
                   <Image
