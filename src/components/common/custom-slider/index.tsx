@@ -119,5 +119,4 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
 
 export default CustomSlider;
 
-
 // bg-[#eff1f0]
