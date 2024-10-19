@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 const Offers = ({ offers }: any) => {
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 container mt-4">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 mt-4">
       {offers?.offers?.map((offer: any) => (
         <div
           key={offer.id}
