@@ -33,7 +33,7 @@ const SectionWithTitleAndAds = ({
     >
       {children}
     </ViewMoreTitle>
-    {ads && <ProductAds ads={ads} className="mb-[60px] lg:container mx-auto" />}
+    {ads && <ProductAds ads={ads} className="mb-0 md:mb-[60px] lg:container mx-auto" />}
   </>
 );
 
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
       {/* Watch Ads */}
       <ProductAds
         ads={ADS_URLS.watchAds}
-        className="mb-[60px] lg:container mx-auto"
+        className="mb-0 md:mb-[60px] lg:container mx-auto"
       />
 
       {/* All Products */}
@@ -72,7 +72,7 @@ const Home: React.FC = () => {
       {/* Secondary Ads */}
       <ProductAds
         ads={ADS_URLS.secondaryAds}
-        className="mb-[60px] lg:container mx-auto"
+        className="mb-0 md:mb-[60px] lg:container mx-auto"
       />
 
       {/* Popular Products */}
@@ -86,8 +86,8 @@ const Home: React.FC = () => {
       {/* Popular Products Ads */}
       <ProductAds
         ads={ADS_URLS.popularProductsAds}
-        className="mb-[60px] lg:container mx-auto"
-        sectionHeight="h-56 md:h-96 "
+        className="mb-0 md:mb-[60px] lg:container mx-auto"
+        sectionHeight="h-56 md:h-96"
       />
 
       {/* Top Pricing Products */}
@@ -101,8 +101,8 @@ const Home: React.FC = () => {
       {/* Top Pricing Ads */}
       <ProductAds
         ads={ADS_URLS.topPricingAds}
-        className="mb-[60px] lg:container mx-auto"
-        sectionHeight="h-96"
+        className="mb-0 md:mb-[60px] lg:container mx-auto"
+        sectionHeight="h-56 md:h-96"
       />
       <TopBrandProducts />
       {/* Shop By Brands */}
