@@ -70,7 +70,7 @@ const HeroSection = () => {
           ))
         )}
       </Swiper>
-      <div style={{ textAlign: "center" }}>
+      {/* <div style={{ textAlign: "center" }}>
         <button
           className="button swiper-button-prev absolute bg-[#eff1f0] z-30 p-1 font-thin rounded-full left-9 top-[50%]"
           onClick={() => swiperRef.current.swiper.slidePrev()}
@@ -85,7 +85,7 @@ const HeroSection = () => {
         >
           <icons.GoArrowRight className="text-xl text-_orange" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

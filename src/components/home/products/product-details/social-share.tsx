@@ -8,9 +8,10 @@ const SocialShare = () => {
     <div className="grid grid-cols-1 container lg:grid-cols-9 gap-10 mt-2">
       <div className="col-span-3 flex lg:justify-start mt-8 gap-2 leading-3 lg:col-span-4">
         {/* Scrolling text using CSS animation */}
+        <div></div>
         <div className="marquee-container">
           <div className="marquee">
-            This is a scrolling text using CSS animations.
+          সাপ্লাই চেইন, চাহিদা এবং মুদ্রার হার অনুযায়ী আন্তর্জাতিক পণ্যের দাম যেকোনো সময় পরিবর্তিত হতে পারে। স্টক প্রাপ্যতা এবং আপডেট মূল্য জানতে আমাদের হটলাইন নম্বরে যোগাযোগ করুন। International product prices may vary according to supply chain, demand and currency rate anytime. Please contact our hotline number to know the stock availability and update price
           </div>
         </div>
       </div>
@@ -39,7 +40,7 @@ const SocialShare = () => {
         .marquee {
           display: inline-block;
           white-space: nowrap;
-          animation: marquee 10s linear infinite;
+          animation: marquee 50s linear infinite;
         }
         @keyframes marquee {
           0% {
