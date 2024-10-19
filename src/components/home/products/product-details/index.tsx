@@ -29,11 +29,6 @@ import { get_store_data } from "@/utils/get_store_data";
 import ProductDetailsSkeleton from "@/components/shared/skeleton/products-details-skeleton";
 import Breadcrumbs from "@/components/common/breadcrumbs";
 
-const breadcrumbItems = [
-  { label: "", href: "/" },
-  { label: "Products", href: "/products" },
-];
-
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
   const [isOpen, setIsOpen] = useState(false);

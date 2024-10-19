@@ -73,6 +73,7 @@ import { FaTiktok } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
+import { FaBolt } from "react-icons/fa6";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -147,5 +148,5 @@ export const icons = {
   FaInstagramIcon: FaInstagram,
   FaLinkedinInIcon: FaLinkedinIn,
   FaFacebookFIcon: FaFacebookF,
-
+  offerIcons: FaBolt,
 };
