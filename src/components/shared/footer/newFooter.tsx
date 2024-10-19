@@ -1,9 +1,9 @@
 import React from "react";
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import Link from "next/link";
 import { FaAnglesDown } from "react-icons/fa6";
 import EmailSubscribe from "@/components/home/email-subscribe";
 import Image from "next/image";
+import { icons } from "@/constants/icons";
 
 const NewFooter = () => {
   return (
@@ -56,15 +56,27 @@ const NewFooter = () => {
                   About Us
                 </li>
               </Link>
-              <Link href={"#"}>
+              <Link href={"shop-address"}>
                 <li className={"text-white hover:text-_primary block"}>
                   Shop Address
                 </li>
               </Link>
-              <Link href={"#"}>
+              <Link href={"/blog"}>
                 <li className={"text-white hover:text-_primary block"}>
                   {" "}
                   Blog
+                </li>
+              </Link>
+              <Link href={"/contact-us"}>
+                <li className={"text-white hover:text-_primary block"}>
+                  {" "}
+                  Contact Us
+                </li>
+              </Link>
+              <Link href={"/faq"}>
+                <li className={"text-white hover:text-_primary block"}>
+                  {" "}
+                  FAQ
                 </li>
               </Link>
             </ul>
@@ -89,11 +101,12 @@ const NewFooter = () => {
                 Warranty Policy
               </Link>
               <Link
-                href={"/terms-conditions"}
-                className={"text-white hover:text-_primary block"}
+                href={"/exchange-policy"}
+                className={"text-white hover:text-_primary-bg block"}
               >
-                Terms And Conditions
+                Exchange Policy
               </Link>
+              
             </ul>
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-_primary md:text-lg text-sm">
@@ -117,7 +130,12 @@ const NewFooter = () => {
                   Order Tracking
                 </li>
               </Link>
-              <li className={"text-white hover:text-_primary "}>FAQ</li>
+              <Link
+                href={"/terms-conditions"}
+                className={"text-white hover:text-_primary block"}
+              >
+                Terms And Conditions
+              </Link>
             </ul>
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-_primary md:text-lg text-sm">CATEGORY</li>
@@ -135,14 +153,14 @@ const NewFooter = () => {
                 target="_blank"
                 href="https://www.facebook.com/appleempireofficial"
               >
-                <Facebook className="text-blue-500" />
+                <icons.FaFacebookIcons className="text-blue-500 w-8 h-8" />
               </Link>
               <Link
                 rel="nofollow"
                 target="_blank"
                 href="https://www.youtube.com/channel/UCBgC5hXxkx99ALzMvnmyvHw"
               >
-                <Youtube className="text-_primary" />
+                <icons.FaYoutubeIcon className="text-_primary w-8 h-8" />
               </Link>
 
               <Link
@@ -150,21 +168,21 @@ const NewFooter = () => {
                 target="_blank"
                 href="https://www.linkedin.com/company/appleempireofficial"
               >
-                <Linkedin className="text-blue-400" />
+                <icons.FaLinkedinIcons className="text-blue-400 w-8 h-8" />
               </Link>
               <Link
                 rel="nofollow"
                 target="_blank"
                 href="https://www.tiktok.com/@appleempireofficial"
               >
-                <Twitter className="text-sky-300" />
+                <icons.FaTiktokIcon className="text-sky-300 w-8 h-8" />
               </Link>
               <Link
                 rel="nofollow"
                 target="_blank"
                 href="https://www.instagram.com/appleempireofficial"
               >
-                <Instagram className="text-pink-500" />
+                <icons.FaInstagramIcon className="text-pink-500 w-8 h-8" />
               </Link>
             </div>
 

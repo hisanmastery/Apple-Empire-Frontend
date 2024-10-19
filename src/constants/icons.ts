@@ -68,6 +68,9 @@ import { GoArrowLeft } from "react-icons/go";
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowUp } from "react-icons/go";
 import { ImSpinner3 } from "react-icons/im";
+import { FaTiktok } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -137,4 +140,8 @@ export const icons = {
   GoArrowRight: GoArrowRight,
   GoArrowUp: GoArrowUp,
   ImSpinner3: ImSpinner3,
+  FaTiktokIcon: FaTiktok,
+  FaYoutubeIcon: FaYoutube,
+  FaInstagramIcon: FaInstagram,
+
 };
