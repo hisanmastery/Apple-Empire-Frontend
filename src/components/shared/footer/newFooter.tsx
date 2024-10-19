@@ -1,5 +1,5 @@
 import React from "react";
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import Link from "next/link";
 import { FaAnglesDown } from "react-icons/fa6";
 import EmailSubscribe from "@/components/home/email-subscribe";
@@ -96,7 +96,9 @@ const NewFooter = () => {
               </Link>
 
               <Link href={"/return-refund-policy"}>
-                <li className={"text-white hover:text-_primary "}>Refund and Return Policy</li>
+                <li className={"text-white hover:text-_primary "}>
+                  Refund and Return Policy
+                </li>
               </Link>
 
               <Link href={"/track-my-order"}>
@@ -117,17 +119,41 @@ const NewFooter = () => {
           </div>
           <div className={"col-span-12 lg:col-span-4"}>
             <div className="flex justify-center mt-4 mx-auto space-x-4 leading-3 ">
-              <Link href="#">
+              <Link
+                rel="nofollow"
+                target="_blank"
+                href="https://www.facebook.com/appleempireofficial"
+              >
                 <Facebook className="text-blue-500" />
               </Link>
-              <Link href="#">
+              <Link
+                rel="nofollow"
+                target="_blank"
+                href="https://www.youtube.com/channel/UCBgC5hXxkx99ALzMvnmyvHw"
+              >
+                <Youtube className="text-_primary" />
+              </Link>
+
+              <Link
+                rel="nofollow"
+                target="_blank"
+                href="https://www.linkedin.com/company/appleempireofficial"
+              >
+                <Linkedin className="text-blue-400" />
+              </Link>
+              <Link
+                rel="nofollow"
+                target="_blank"
+                href="https://www.tiktok.com/@appleempireofficial"
+              >
                 <Twitter className="text-sky-300" />
               </Link>
-              <Link href="#">
+              <Link
+                rel="nofollow"
+                target="_blank"
+                href="https://www.instagram.com/appleempireofficial"
+              >
                 <Instagram className="text-pink-500" />
-              </Link>
-              <Link href="#">
-                <Linkedin className="text-blue-400" />
               </Link>
             </div>
 
