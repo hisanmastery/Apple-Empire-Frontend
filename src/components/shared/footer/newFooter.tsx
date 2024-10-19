@@ -25,7 +25,7 @@ const NewFooter = () => {
           </div>
 
           <div className="font-normal">
-            <Link href={"/about-us"} className="text-sm md:text-md">
+            <Link href={"/contact-us"} className="text-sm md:text-md">
               Contact Us
             </Link>
             <p className="text-_primary text-xs">support@appleempirebd.com</p>
@@ -36,14 +36,14 @@ const NewFooter = () => {
             <p className="text-_primary text-xs">support@appleempirebd.com</p>
           </div>
 
-          <div className="font-normal">
+          {/* <div className="font-normal">
             <h4 className="text-sm md:text-md">Customer Service</h4>
             <p className="text-_primary text-xs">support@appleempirebd.com</p>
-          </div>
+          </div> */}
 
-          {/*<div className="md:block hidden">
+          {/* <div className="md:block hidden">
             <FaAnglesDown className="text-_primary h-14 w-14 rounded-full border-2 border-white s p-2 cursor-pointer " />
-          </div>*/}
+          </div> */}
         </div>
         {/* row -2  */}
 
@@ -51,11 +51,22 @@ const NewFooter = () => {
           <div className="flex flex-wrap justify-between items-center col-span-12 lg:col-span-8  font-normal cursor-pointer">
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className={"text-_primary md:text-lg text-sm"}>About Us</li>
-              <li className={"text-white hover:text-_primary "}>About Us</li>
-              <li className={"text-white hover:text-_primary "}>
-                Shop Address
-              </li>
-              <li className={"text-white hover:text-_primary "}>Blog</li>
+              <Link href={"/about-us"}>
+                <li className={"text-white hover:text-_primary block"}>
+                  About Us
+                </li>
+              </Link>
+              <Link href={"#"}>
+                <li className={"text-white hover:text-_primary block"}>
+                  Shop Address
+                </li>
+              </Link>
+              <Link href={"#"}>
+                <li className={"text-white hover:text-_primary block"}>
+                  {" "}
+                  Blog
+                </li>
+              </Link>
             </ul>
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-_primary md:text-lg text-sm block">Policy</li>
@@ -158,9 +169,15 @@ const NewFooter = () => {
             </div>
 
             <div className="mt-5 lg:pl-12">
-              <button className="bg-_primary w-full text-sm lg:text-lg text-white px-10 py-2 rounded-sm uppercase">
-                Store Locator
-              </button>
+              <Link
+                href="https://www.google.com/maps/dir/23.8342215,90.3941915/3+No,+Bashundhara+City+Shopping+Mall,+Basement-1,Shop+No-27,+West+Panthapath,+Dhaka+1215/@23.7506591,90.3083608,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3755b995778e1b1d:0x223b86e15d877488!2m2!1d90.3907624!2d23.7506809?entry=ttu&g_ep=EgoyMDI0MTAxNi4wIKXMDSoASAFQAw%3D%3D"
+                rel="nofollow"
+                target="_blank"
+              >
+                <button className="bg-_primary w-full text-sm lg:text-lg text-white px-10 py-2 rounded-sm uppercase">
+                  Store Locator
+                </button>
+              </Link>
             </div>
           </div>
         </div>
