@@ -1,5 +1,3 @@
-// CustomTooltip.jsx
-
 import {
   Tooltip,
   TooltipContent,

@@ -1,5 +1,9 @@
 "use client";
 import React, { useRef } from "react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/effect-coverflow";
+import "swiper/css/virtual";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import ProductCard from "../product-card";
