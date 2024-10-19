@@ -153,14 +153,14 @@ const NewFooter = () => {
                 target="_blank"
                 href="https://www.facebook.com/appleempireofficial"
               >
-                <icons.FaFacebookIcons className="text-blue-500 w-8 h-8" />
+                <icons.FaFacebookFIcon className="text-blue-500 w-6 h-6" />
               </Link>
               <Link
                 rel="nofollow"
                 target="_blank"
                 href="https://www.youtube.com/channel/UCBgC5hXxkx99ALzMvnmyvHw"
               >
-                <icons.FaYoutubeIcon className="text-_primary w-8 h-8" />
+                <icons.FaYoutubeIcon className="text-_primary w-6 h-6" />
               </Link>
 
               <Link
@@ -168,21 +168,21 @@ const NewFooter = () => {
                 target="_blank"
                 href="https://www.linkedin.com/company/appleempireofficial"
               >
-                <icons.FaLinkedinIcons className="text-blue-400 w-8 h-8" />
+                <icons.FaLinkedinInIcon className="text-blue-400 w-6 h-6" />
               </Link>
               <Link
                 rel="nofollow"
                 target="_blank"
                 href="https://www.tiktok.com/@appleempireofficial"
               >
-                <icons.FaTiktokIcon className="text-sky-300 w-8 h-8" />
+                <icons.FaTiktokIcon className="text-sky-300 w-6 h-6" />
               </Link>
               <Link
                 rel="nofollow"
                 target="_blank"
                 href="https://www.instagram.com/appleempireofficial"
               >
-                <icons.FaInstagramIcon className="text-pink-500 w-8 h-8" />
+                <icons.FaInstagramIcon className="text-pink-500 w-6 h-6" />
               </Link>
             </div>
 

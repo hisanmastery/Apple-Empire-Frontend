@@ -43,6 +43,7 @@ import { MdPhoneAndroid } from "react-icons/md";
 import { IoGameController } from "react-icons/io5";
 import { MdZoomOutMap } from "react-icons/md";
 import { LiaSyncSolid } from "react-icons/lia";
+import { FaFacebookF } from "react-icons/fa";
 import {
   FaFacebook,
   FaWhatsapp,
@@ -71,6 +72,7 @@ import { ImSpinner3 } from "react-icons/im";
 import { FaTiktok } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -143,5 +145,7 @@ export const icons = {
   FaTiktokIcon: FaTiktok,
   FaYoutubeIcon: FaYoutube,
   FaInstagramIcon: FaInstagram,
+  FaLinkedinInIcon: FaLinkedinIn,
+  FaFacebookFIcon: FaFacebookF,
 
 };
