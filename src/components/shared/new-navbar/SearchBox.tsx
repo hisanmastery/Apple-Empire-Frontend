@@ -54,7 +54,7 @@ export default function SearchBox() {
         value={searchTerm}
         onChange={handleInputChange}
         onClick={() => setOpen(true)}
-        className="w-full py-2 pl-5 focus:outline-none rounded-sm focus:ring-2 focus:ring-_primary transition-all duration-300 ease-in-out"
+        className="w-full py-2 pl-5 focus:outline-none rounded focus:ring-2 focus:ring-_primary/60 transition-all duration-300 ease-in-out"
         placeholder="Search for products..."
         aria-label="Search"
       />
@@ -68,24 +68,24 @@ export default function SearchBox() {
       {/* Conditional rendering of search results */}
       {productsData?.length > 0 && open && (
         <div
-          className="absolute top-12  z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md max-h-96 overflow-auto"
+          className="absolute top-10  z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md max-h-96 overflow-auto"
           ref={dropdownRef}
         >
           {productsData?.map((product: any) => (
             <Link href={`/products/${product?._id}`} key={product._id}>
               <div
-                className="p-2 group hover:bg-_primary cursor-pointer flex gap-3 items-center"
+                className="p-2 group cursor-pointer flex gap-3 items-center"
                 onClick={() => setOpen(false)}
               >
                 <Image
                   src={product?.image?.imageUrl}
                   alt={product?.image?.altText}
-                  width={50}
-                  height={50}
-                  className="object-cover w-14 h-16"
+                  width={30}
+                  height={30}
+                  className="object-cover w-12 h-12"
                   quality={100}
                 />
-                <h4 className="group-hover:text-white group-hover:underline">
+                <h4 className="group-hover:text-_primary group-hover:underline">
                   {product.name}
                 </h4>
               </div>

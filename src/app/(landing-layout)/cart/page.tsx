@@ -204,7 +204,10 @@ const CartPage = ({ className }: any) => {
               </TableHeader>
               <TableBody>
                 {storedCart?.map((product: any, index: number) => (
-                  <TableRow key={product.productId} className="bg-_white hover:bg-_white">
+                  <TableRow
+                    key={product.productId}
+                    className="bg-_white hover:bg-_white"
+                  >
                     <TableCell>
                       <p>{product.title}</p>
                       <div
@@ -244,11 +247,13 @@ const CartPage = ({ className }: any) => {
               </TableBody>
             </Table>
 
-            <Link href="/section/top-selling-product">
-              <p className="text-blue-600 text-sm mt-4 hover:text-blue-800">
-                Continue Shopping
-              </p>
-            </Link>
+            <div className="pt-5">
+              <Link href="/section/top-selling-product">
+                <Button className="bg-_primary text-white">
+                  Continue Shopping
+                </Button>
+              </Link>
+            </div>
           </div>
 
           {/* Order Summary */}
@@ -299,7 +304,7 @@ const CartPage = ({ className }: any) => {
               {/* Checkout Button */}
               <div className="mt-5">
                 <Link href="/cart/checkout">
-                  <Button className="w-full bg-blue-400 text-white">
+                  <Button className="w-full bg-_primary text-white">
                     Checkout
                   </Button>
                 </Link>
