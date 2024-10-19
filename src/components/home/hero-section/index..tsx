@@ -2,8 +2,11 @@
 import { useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { icons } from "@/constants/icons";
 
 const products = [
@@ -34,7 +37,7 @@ const HeroSection = () => {
     <div className="relative">
       <Swiper
         ref={swiperRef}
-        modules={[Autoplay, Navigation]}
+        modules={[Autoplay, Navigation, Pagination]}
         loop={true}
         autoplay={{
           delay: 3000,
@@ -45,6 +48,10 @@ const HeroSection = () => {
         allowTouchMove={true}
         breakpoints={breakpoints}
         spaceBetween={12}
+        pagination={{
+          clickable: true,
+          dynamicBullets: true,
+        }}
       >
         {products.length === 0 ? (
           <SwiperSlide>
