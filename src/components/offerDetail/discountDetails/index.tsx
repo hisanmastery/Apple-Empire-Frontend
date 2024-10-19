@@ -3,7 +3,7 @@ import React from 'react'
 
 const DiscountDetails = () => {
   return (
-    <div className="container mt-2">
+    <div className="mt-2">
         <div className="">
             <Image src="https://d61s2hjse0ytn.cloudfront.net/images/content/pre_order/Pre-Order_.webp" alt="offer image" width={100} height={100} className='w-full'/>
         </div>
