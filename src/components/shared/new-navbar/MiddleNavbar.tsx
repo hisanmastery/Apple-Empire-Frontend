@@ -46,7 +46,7 @@ export default function MiddleNavbar({ className, type }: any) {
             </div>
 
             {/* Search Box */}
-            <div className="lg:h-[44px] w-[50%] lg:w-[30%] 2xl:w-[35%] hidden md:block">
+            <div className="lg:h-[44px] w-[50%] lg:w-[30%] 2xl:w-[40%] hidden md:block">
               <SearchBox />
             </div>
 
@@ -56,23 +56,17 @@ export default function MiddleNavbar({ className, type }: any) {
               <div className="cart-wrapper group relative py-4">
                 <div className="cart relative cursor-pointer flex items-center">
                   <Link href="">
-                    <div
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      <p>
-                        <icons.FavoriteBorder className="text-4xl text-_primary" />
+                    <div rel="noopener noreferrer">
+                      <p className="flex justify-center">
+                        <icons.FavoriteBorder className="text-3xl text-_primary" />
                       </p>
-                      <p>
-                        <span className="text-_white block font-semibold -mb-1">
-                          Wish List ({wishLists?.length ? wishLists?.length : 0}
-                          )
-                        </span>
-                        <span className="text-_white">Add items</span>
-                      </p>
+                      <span className="text-_white text-center">Wish List</span>
                     </div>
                   </Link>
                 </div>
+                <span className="w-5 h-5 bg-_primary rounded-full absolute top-2 right-[7px] flex items-center justify-center text-_white">
+                  {wishLists?.length ? wishLists?.length : 0}
+                </span>
                 <WishLists
                   type={type}
                   className="absolute -right-[45px] top-20 z-50 hidden group-hover:block"
@@ -83,60 +77,47 @@ export default function MiddleNavbar({ className, type }: any) {
               <div className="cart-wrapper group relative py-4">
                 <div className="cart relative cursor-pointer flex items-center">
                   <Link href="/cart">
-                    <div
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
+                    <div rel="noopener noreferrer">
                       <p>
-                        <icons.MdAddShoppingCart className="text-4xl text-_primary" />
+                        <icons.MdAddShoppingCart className="text-3xl text-_primary" />
                       </p>
-                      <p>
-                        <span className="text-_white block font-semibold -mb-1">
-                          Cart ({storedCart?.length || 0})
-                        </span>
-                        <span className="text-_white">Add items</span>
-                      </p>
+                      <span className="text-_white">Cart</span>
                     </div>
                   </Link>
                 </div>
+                <span className="w-5 h-5 bg-_primary rounded-full absolute top-1 -right-3 flex items-center justify-center text-_white">
+                  {storedCart?.length || 0}
+                </span>
                 <Cart
                   type={type}
                   className="absolute -right-[45px] top-20 z-50 hidden group-hover:block"
                 />
               </div>
-
+              {/* offer */}
+              <Link href="/offers">
+                <div rel="noopener noreferrer">
+                  <p className="flex justify-center">
+                    <icons.offerIcons className="text-3xl text-_primary" />
+                  </p>
+                  <span className="text-_white">Offers</span>
+                </div>
+              </Link>
               {/* Shop Link */}
               <Link href="/pre-order">
-                <div
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <p>
-                    <icons.FaShop className="text-4xl text-_primary" />
+                <div rel="noopener noreferrer">
+                  <p className="flex justify-center">
+                    <icons.FaShop className="text-3xl text-_primary" />
                   </p>
-                  <p>
-                    <span className="text-_white block font-semibold -mb-1">
-                      Pre-Order
-                    </span>
-                    <span className="text-_white">Order Today</span>
-                  </p>
+                  <span className="text-_white">Pre-Order</span>
                 </div>
               </Link>
               {/* user  */}
               <Link href={isAuthenticated ? "/profile" : "/login"}>
-                <div
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <p>
-                    <icons.LuUser2 className="text-4xl text-_primary" />
+                <div rel="noopener noreferrer">
+                  <p className="flex justify-center">
+                    <icons.LuUser2 className="text-3xl text-_primary" />
                   </p>
-                  <p>
-                    <span className="text-_white block font-semibold -mb-1">
-                      Account
-                    </span>
-                    <span className="text-_white">Register or Login</span>
-                  </p>
+                  <span className="text-_white">Account</span>
                 </div>
               </Link>
             </div>

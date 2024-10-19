@@ -68,7 +68,7 @@ export default function SearchBox() {
       {/* Conditional rendering of search results */}
       {productsData?.length > 0 && open && (
         <div
-          className="absolute top-10  z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md max-h-96 overflow-auto"
+          className="absolute top-12  z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md max-h-96 overflow-auto"
           ref={dropdownRef}
         >
           {productsData?.map((product: any) => (
@@ -82,7 +82,7 @@ export default function SearchBox() {
                   alt={product?.image?.altText}
                   width={30}
                   height={30}
-                  className="object-cover w-12 h-12"
+                  className="object-cover w-10 h-10"
                   quality={100}
                 />
                 <h4 className="group-hover:text-_primary group-hover:underline">

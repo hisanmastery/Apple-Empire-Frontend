@@ -71,6 +71,7 @@ import { ImSpinner3 } from "react-icons/im";
 import { FaTiktok } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { FaBolt } from "react-icons/fa6";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -143,5 +144,5 @@ export const icons = {
   FaTiktokIcon: FaTiktok,
   FaYoutubeIcon: FaYoutube,
   FaInstagramIcon: FaInstagram,
-
+  offerIcons: FaBolt,
 };

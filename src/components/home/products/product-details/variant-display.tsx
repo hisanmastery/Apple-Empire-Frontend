@@ -39,7 +39,7 @@ const VariantDisplay = ({ product, setVariantPrice }: any) => {
   }, [selectedVariant, setVariantPrice]);
 
   return (
-    <section className="p-4">
+    <section>
       <div className="mt-4">
         {optionTypes.map((option: any) => (
           <div key={option} className="mb-4 flex items-center gap-5">
