@@ -1,4 +1,5 @@
 import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -11,7 +12,12 @@ const SocialShare = () => {
         <div></div>
         <div className="marquee-container">
           <div className="marquee">
-          সাপ্লাই চেইন, চাহিদা এবং মুদ্রার হার অনুযায়ী আন্তর্জাতিক পণ্যের দাম যেকোনো সময় পরিবর্তিত হতে পারে। স্টক প্রাপ্যতা এবং আপডেট মূল্য জানতে আমাদের হটলাইন নম্বরে যোগাযোগ করুন। International product prices may vary according to supply chain, demand and currency rate anytime. Please contact our hotline number to know the stock availability and update price
+            সাপ্লাই চেইন, চাহিদা এবং মুদ্রার হার অনুযায়ী আন্তর্জাতিক পণ্যের দাম
+            যেকোনো সময় পরিবর্তিত হতে পারে। স্টক প্রাপ্যতা এবং আপডেট মূল্য জানতে
+            আমাদের হটলাইন নম্বরে যোগাযোগ করুন। International product prices may
+            vary according to supply chain, demand and currency rate anytime.
+            Please contact our hotline number to know the stock availability and
+            update price
           </div>
         </div>
       </div>
@@ -21,9 +27,9 @@ const SocialShare = () => {
           width={300}
           height={20}
           quality={100}
-          src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
+          src={images.paymentImage}
           alt="payment"
-          className="w-96 h-8 -mt-1"
+          className="w-full object-cover h-7 -mt-1"
         />
       </div>
       {/* Inline CSS styles for marquee effect */}
