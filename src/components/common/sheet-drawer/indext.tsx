@@ -28,11 +28,7 @@ const SheetDrawer = ({
         style={{ backgroundColor: "#EFF1F0", overflow: "auto" }}
       >
         <div className="flex gap-4 items-center absolute  mb-4">
-          <icons.leftArrowIcon
-            onClick={() => toggleDrawer()}
-            className="text-3xl text-_primary hover:text-_dark-color cursor-pointer"
-          />
-          <h4 className="font-bold text-lg">{title}</h4>
+          <h4 className="font-bold text-xl text-_primary px-5 py-2">{title}</h4>
         </div>
         <div className="mt-8">{children}</div>
       </Drawer>
