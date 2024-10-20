@@ -36,7 +36,7 @@ const SocialShare = () => {
       <style jsx>{`
         .marquee-container {
           overflow: hidden;
-          width: 80%;
+          width: 90%;
           background-color: #f0f0f0; /* Optional: background color for better visibility */
           border: 1px solid #ccc; /* Optional: border for the marquee container */
           display: flex;
