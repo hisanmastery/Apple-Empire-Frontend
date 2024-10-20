@@ -7,144 +7,193 @@ import {
 } from "@/store/features/products/productsApi";
 import Loading from "../common/loading";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { icons } from "@/constants/icons";
 
-const CompareComponent = ({ id }: any) => {
-  const [selectedPhone, setSelectedPhone] = useState<any>(null);
+const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
+  const [firstPhone, setFirstPhone] = useState<any>(null);
+  const [secondPhone, setSecondPhone] = useState<any>(null);
   const [searchText, setSearchText] = useState("");
-  const { data: singlePhoneData, isLoading }: any = useGetSingleProductsQuery({
-    id,
-  });
-  const { data: allProducts, isLoading: isSingleLoading }: any =
+  const router = useRouter();
+  const { data: singlePhoneData, isLoading: isFirstLoading }: any =
+    useGetSingleProductsQuery({
+      id: firstPhoneId,
+    });
+  const { data: secondPhoneData, isLoading: isSecondLoading }: any =
+    useGetSingleProductsQuery({
+      id: secondPhoneId,
+    });
+  const { data: allProducts, isLoading: isProductsLoading }: any =
     useGetProductsListsQuery({
       page: 1,
       limit: 10,
       searchText: searchText,
     });
+
   const phoneListData =
     allProducts?.product?.length > 0 &&
-    allProducts?.product?.map((item: any) => {
-      return {
-        label: item?.name,
-        value: { ...item },
-      };
-    });
-  if (isLoading || isSingleLoading) {
+    allProducts?.product?.map((item: any) => ({
+      label: item?.name,
+      value: { ...item },
+    }));
+
+  const handleFirstPhone = (selectedOption: any) => {
+    setFirstPhone(selectedOption);
+    const queryParams = new URLSearchParams({
+      p1: selectedOption.value._id,
+      p2: secondPhone?.value?._id || "",
+    }).toString();
+    router.push(`?${queryParams}`);
+  };
+
+  const handleSceondPhone = (selectedOption: any) => {
+    setSecondPhone(selectedOption);
+    const queryParams = new URLSearchParams({
+      p1: firstPhone?.value?._id || "",
+      p2: selectedOption.value._id,
+    }).toString();
+    router.push(`?${queryParams}`);
+  };
+
+  const handleRemoveFirstPhone = () => {
+    setFirstPhone(null);
+    const queryParams = new URLSearchParams({
+      p1: "",
+      p2: secondPhone?.value?._id || "",
+    }).toString();
+    router.push(`?${queryParams}`);
+  };
+
+  const handleRemoveSecondPhone = () => {
+    setSecondPhone(null);
+    const queryParams = new URLSearchParams({
+      p1: firstPhone?.value?._id || "",
+      p2: "",
+    }).toString();
+    router.push(`?${queryParams}`);
+  };
+
+  if (isFirstLoading || isSecondLoading || isProductsLoading) {
     return <Loading />;
   }
+
   return (
-    <div className="container mt-5 bg-_white rounded-md shadow-lg p-5">
-      <div className="w-full">
-        <h1 className="text-2xl font-semibold mb-4">Compare</h1>
-        <div className="grid grid-cols-12 gap-4">
-          {/* First column with label */}
-          <div className="col-span-3 bg-_primary rounded-md text-_white flex items-center justify-center p-4">
-            <span className="font-medium">Product</span>
-          </div>
-
-          {/* Search and Add Device buttons */}
-          <div className="col-span-9 bg-_primary rounded-md p-4 flex items-center justify-center gap-5">
-            <button className="bg-gray-100 text-gray-700 font-medium text-start w-full py-2 px-4 rounded hover:bg-gray-200">
-              {singlePhoneData?.response?.name}
-            </button>
-            <SelectBox
-              isMulti={false}
-              name="phone"
-              className="w-full"
-              placeholder="Search and add device"
-              onChange={(selectedOption) => setSelectedPhone(selectedOption)}
-              valueOptions={phoneListData}
-              setSearchText={setSearchText}
-            />
-          </div>
-        </div>
+    <div className="container mx-auto mt-8 p-6 bg-white rounded-sm shadow-sm">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-gray-800">Compare Products</h1>
+        <p className="text-gray-500 mt-2">
+          Compare two products side by side to see their specifications.
+        </p>
       </div>
-      {/* images  */}
-      <div className="grid grid-cols-2 items-center gap-5 mt-5 mb-10">
-        <div>
-          <div className="flex gap-5 items-center">
-            <Image
-              src={singlePhoneData?.response?.image.imageUrl}
-              alt=""
-              width={200}
-              height={200}
-              className="w-48 h-52 object-cover"
-            />
-            <div>
-              <p className="mb-2">
-                <strong>Ram:</strong>{" "}
-                {singlePhoneData?.response?.ram?.join(",")}
-              </p>
-              <p className="mb-2">
-                <strong>Rom:</strong>{" "}
-                {singlePhoneData?.response?.internalStorage?.join(",")}
-              </p>
-              <p className="mb-2">
-                <strong>Chipset:</strong> {singlePhoneData?.response?.chipset}
-              </p>
-              <p className="mb-2">
-                <strong>Display:</strong>{" "}
-                {singlePhoneData?.response?.displayType}
-              </p>
-              <p>
-                <strong>Price:</strong> {singlePhoneData?.response?.price}
-              </p>
-            </div>
-          </div>
-          <h2 className="text-lg font-semibold">
-            {singlePhoneData?.response?.name}
-          </h2>
+
+      {/* Phone Selection */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="col-span-1">
+          <SelectBox
+            isMulti={false}
+            name="firstPhone"
+            className="w-full"
+            placeholder="Select the first product"
+            onChange={handleFirstPhone}
+            value={firstPhone}
+            valueOptions={phoneListData}
+            setSearchText={setSearchText}
+          />
         </div>
-        <div>
-          <div className="flex gap-5 items-center justify-between">
-            <div>
-              <p className="mb-2">
-                <strong>Ram:</strong> {selectedPhone?.value?.ram?.join(",")}
-              </p>
-              <p className="mb-2">
-                <strong>Rom:</strong>{" "}
-                {selectedPhone?.value?.internalStorage?.join(",")}
-              </p>
-              <p className="mb-2">
-                <strong>Chipset:</strong> {selectedPhone?.value?.chipset}
-              </p>
-              <p className="mb-2">
-                <strong>Display:</strong> {selectedPhone?.value?.displayType}
-              </p>
-              <p>
-                <strong>Price:</strong> {selectedPhone?.value?.price}
-              </p>
-            </div>
-            <Image
-              src={selectedPhone?.value?.image.imageUrl}
-              alt=""
-              width={200}
-              height={200}
-              className="w-48 h-52 object-cover"
-            />
-          </div>
-          <h2 className="text-lg font-semibold text-end">
-            {selectedPhone?.value?.name}
-          </h2>
+        <div className="col-span-1">
+          <SelectBox
+            isMulti={false}
+            name="secondPhone"
+            className="w-full"
+            placeholder="Select the second product"
+            onChange={handleSceondPhone}
+            value={secondPhone}
+            valueOptions={phoneListData}
+            setSearchText={setSearchText}
+          />
         </div>
       </div>
 
-      {/* specification */}
-      <div className="border-t-[1px] border-_primary pt-2">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-          <div className="break-words border-r-[1px] border-_primary">
+      {/* Product Images and Names */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-8">
+        <div className="text-center">
+          <div className="relative bg-gray-100 p-6 rounded-lg shadow-md">
+            <Image
+              src={
+                singlePhoneData?.response?.image?.imageUrl || "/placeholder.png"
+              }
+              alt={singlePhoneData?.response?.name || "First product"}
+              width={220}
+              height={220}
+              className="mx-auto rounded-lg object-cover"
+            />
+            <h2 className="mt-4 text-xl font-semibold text-gray-800">
+              {singlePhoneData?.response?.name || "Select the first product"}
+            </h2>
+            {firstPhone && (
+              <button
+                className="absolute top-0 right-3 mt-2 text-red-600 rounded-full border border-_primary p-1"
+                onClick={handleRemoveFirstPhone}
+              >
+                <icons.crossIcon />
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="text-center">
+          <div className="relative bg-gray-100 p-6 rounded-lg shadow-md">
+            <Image
+              src={
+                secondPhoneData?.response?.image?.imageUrl || "/placeholder.png"
+              }
+              alt={secondPhoneData?.response?.name || "Second product"}
+              width={220}
+              height={220}
+              className="mx-auto rounded-lg object-cover"
+            />
+            <h2 className="mt-4 text-xl font-semibold text-gray-800">
+              {secondPhoneData?.response?.name || "Select the second product"}
+            </h2>
+            {secondPhone && (
+              <button
+                className="absolute top-0 right-3 rounded-full border border-_primary mt-2 text-red-600 p-1"
+                onClick={handleRemoveSecondPhone}
+              >
+                <icons.crossIcon />
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Specifications Comparison */}
+      <div className="border-t border-gray-300 pt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg p-6 shadow-sm border">
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">
+              {singlePhoneData?.response?.name || "First product"}{" "}
+              Specifications
+            </h3>
             <p
-              style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-              className="text-wrap break-words"
+              className="text-gray-700 text-sm"
               dangerouslySetInnerHTML={{
-                __html: singlePhoneData?.response?.specification,
+                __html:
+                  singlePhoneData?.response?.specification ||
+                  "No specifications available",
               }}
             />
           </div>
-          <div className="break-words">
+          <div className="bg-white rounded-lg p-6 shadow-sm border">
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">
+              {secondPhoneData?.response?.name || "Second product"}
+              Specifications
+            </h3>
             <p
-              style={{ wordBreak: "break-word", whiteSpace: "normal" }}
+              className="text-gray-700 text-sm"
               dangerouslySetInnerHTML={{
-                __html: selectedPhone?.value?.specification,
+                __html:
+                  secondPhoneData?.response?.specification ||
+                  "No specifications available",
               }}
             />
           </div>

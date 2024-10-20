@@ -204,12 +204,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             <WishListButton item={datas} showToast={showToast} />
           </div>
           <a href="#">
-            <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
+            <span className="w-10 h-10 flex justify-center items-center rounded">
               {<icons.MdZoomOutMapIcon className="text-xl" />}
             </span>
           </a>
-          <Link href={`/compare/${datas?._id}`}>
-            <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
+          <Link href={`/compare?p1=${datas?._id}`}>
+            <span className="w-10 h-10 flex justify-center items-center gray rounded">
               {<icons.LiaSyncSolidIcons className="text-xl" />}
             </span>
           </Link>
