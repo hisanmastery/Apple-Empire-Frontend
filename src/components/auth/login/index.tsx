@@ -31,25 +31,24 @@ const Login = () => {
       // Add your signup logic here
       const res: any = await customerLogin(loginData);
       const loginResponse: any = res?.data;
-
+      console.log({ res });
       if (res?.data?.message) {
         showToast("success", res?.data?.message);
+        if (loginResponse?.isSuccess) {
+          const accessToken: any = loginResponse?.data?.accessToken;
+          const decoded: any = jwt.decode(accessToken);
+          if (decoded?.email) {
+            localStorage.setItem("email", decoded?.email);
+          }
+          localStorage.setItem("token", accessToken);
+          dispatch(updateUserToken(accessToken));
+          router.push("/");
+        }
       } else {
         showToast("error", res?.error?.data?.message);
       }
-
-      if (loginResponse.isSuccess) {
-        const accessToken: any = loginResponse?.data?.accessToken;
-        const decoded: any = jwt.decode(accessToken);
-        if (decoded?.email) {
-          localStorage.setItem("email", decoded?.email);
-        }
-        localStorage.setItem("token", accessToken);
-        dispatch(updateUserToken(accessToken));
-        router.push("/");
-      }
     } catch (error: any) {
-      console.log(error);
+      showToast("error", error?.message);
     }
   };
 

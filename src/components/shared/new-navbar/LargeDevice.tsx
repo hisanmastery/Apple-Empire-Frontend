@@ -64,7 +64,7 @@ export default function LargeDevice({ type }: any) {
 
                           {/* Category Dropdown */}
                           {openCategoryId === category._id && (
-                            <div className="category-dropdown w-full min-w-48 absolute left-0 top-[43px] sm:top-[47px] smd:top-[53px]">
+                            <div className="category-dropdown max-h-[calc(100vh-200px)] overflow-auto w-full min-w-48 absolute left-0 top-[43px]">
                               <ul className="categories-list">
                                 {category.subCategory.map(
                                   (subCategory: string, subIndex: number) => (
@@ -73,7 +73,7 @@ export default function LargeDevice({ type }: any) {
                                       key={subIndex}
                                     >
                                       <Link
-                                        href={`/category/${category.categoryName}/${subCategory}`}
+                                        href={`/category/${category.categoryName}?subcategory=${subCategory}`}
                                       >
                                         <div
                                           className={`flex justify-between items-center px-2 h-10 bg-_white transition-all duration-300 ease-in-out cursor-pointer text-qblack ${
@@ -111,7 +111,7 @@ export default function LargeDevice({ type }: any) {
                 )}
                 <div className="lg:flex items-center gap-10 hidden">
                   <div className="text-_black text-md">
-                    <Link href={"/about"}>About</Link>
+                    <Link href={"/about-us"}>About</Link>
                   </div>
                   <div className="text-_black text-md">
                     <Link href={"/"}>Blogs</Link>
@@ -123,7 +123,7 @@ export default function LargeDevice({ type }: any) {
                     <Link href={"/section/used"}>Used Products</Link>
                   </div>
                   <div className="text-_black text-md">
-                    <Link href={"/section/offers"}>Offers</Link>
+                    <Link href={"/offers"}>Offers</Link>
                   </div>
                 </div>
               </div>

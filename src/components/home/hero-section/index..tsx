@@ -1,10 +1,11 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import "swiper/css";
+import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
-import { icons } from "@/constants/icons";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const products = [
   {
@@ -34,7 +35,7 @@ const HeroSection = () => {
     <div className="relative">
       <Swiper
         ref={swiperRef}
-        modules={[Autoplay, Navigation]}
+        modules={[Autoplay, Navigation, Pagination]}
         loop={true}
         autoplay={{
           delay: 3000,
@@ -45,6 +46,10 @@ const HeroSection = () => {
         allowTouchMove={true}
         breakpoints={breakpoints}
         spaceBetween={12}
+        pagination={{
+          clickable: true,
+          dynamicBullets: true,
+        }}
       >
         {products.length === 0 ? (
           <SwiperSlide>
@@ -55,7 +60,7 @@ const HeroSection = () => {
             <SwiperSlide key={product.id}>
               <div className="aspect-w-16 aspect-h-9">
                 <Card className="h-full">
-                  <CardContent className="flex w-full items-center justify-center lg:h-[480px] h-full p-1">
+                  <CardContent className="flex w-full items-center justify-center lg:h-[580px] h-full">
                     <Image
                       width={500}
                       height={400}
@@ -70,22 +75,22 @@ const HeroSection = () => {
           ))
         )}
       </Swiper>
-      <div style={{ textAlign: "center" }}>
+      {/* <div style={{ textAlign: "center" }}>
         <button
-          className="button swiper-button-prev absolute bg-_white-ice z-30 p-1 font-thin rounded-full left-9 top-[50%]"
+          className="button swiper-button-prev absolute bg-[#eff1f0] z-30 p-1 font-thin rounded-full left-9 top-[50%]"
           onClick={() => swiperRef.current.swiper.slidePrev()}
           aria-label="Previous slide"
         >
           <icons.GoArrowLeft className="text-xl text-_orange" />
         </button>
         <button
-          className="button swiper-button-next absolute bg-_white-ice z-30 p-1 font-thin rounded-full right-8 top-[50%]"
+          className="button swiper-button-next absolute bg-[#eff1f0] z-30 p-1 font-thin rounded-full right-8 top-[50%]"
           onClick={() => swiperRef.current.swiper.slideNext()}
           aria-label="Next slide"
         >
           <icons.GoArrowRight className="text-xl text-_orange" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

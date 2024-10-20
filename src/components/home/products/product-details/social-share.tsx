@@ -7,27 +7,13 @@ const SocialShare = () => {
   return (
     <div className="grid grid-cols-1 container lg:grid-cols-9 gap-10 mt-2">
       <div className="col-span-3 flex lg:justify-start mt-8 gap-2 leading-3 lg:col-span-4">
-        <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
-          <icons.FaFacebookIcons className="text-_black text-lg" />
-        </Link>
-        <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
-          <icons.FaXTwitterIcons className="text-_black text-lg" />
-        </Link>
-        <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
-          <icons.FaLinkedinIcons className="text-_black text-lg" />
-        </Link>
-        <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
-          <icons.FaLinkedinIcons className="text-_black text-lg" />
-        </Link>
-        <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
-          <icons.FaLinkedinIcons className="text-_black text-lg" />
-        </Link>
-        <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
-          <icons.FaLinkedinIcons className="text-_black text-lg" />
-        </Link>
-        <Link href="#" className="rounded-full p-2 border-[1px] border-_black">
-          <icons.FaLinkedinIcons className="text-_black text-lg" />
-        </Link>
+        {/* Scrolling text using CSS animation */}
+        <div></div>
+        <div className="marquee-container">
+          <div className="marquee">
+          সাপ্লাই চেইন, চাহিদা এবং মুদ্রার হার অনুযায়ী আন্তর্জাতিক পণ্যের দাম যেকোনো সময় পরিবর্তিত হতে পারে। স্টক প্রাপ্যতা এবং আপডেট মূল্য জানতে আমাদের হটলাইন নম্বরে যোগাযোগ করুন। International product prices may vary according to supply chain, demand and currency rate anytime. Please contact our hotline number to know the stock availability and update price
+          </div>
+        </div>
       </div>
       <div className={"col-span-5"}>
         <h5 className="mb-3">Secure Payments</h5>
@@ -37,9 +23,34 @@ const SocialShare = () => {
           quality={100}
           src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
           alt="payment"
-          className="w-96 -mt-1"
+          className="w-full h-8 -mt-1"
         />
       </div>
+      {/* Inline CSS styles for marquee effect */}
+      <style jsx>{`
+        .marquee-container {
+          overflow: hidden;
+          width: 100%;
+          background-color: #f0f0f0; /* Optional: background color for better visibility */
+          border: 1px solid #ccc; /* Optional: border for the marquee container */
+          display: flex;
+          align-items: center; /* Vertically center the text */
+          height: 32px; /* Set a fixed height for the container */
+        }
+        .marquee {
+          display: inline-block;
+          white-space: nowrap;
+          animation: marquee 50s linear infinite;
+        }
+        @keyframes marquee {
+          0% {
+            transform: translateX(100%);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+      `}</style>
     </div>
   );
 };

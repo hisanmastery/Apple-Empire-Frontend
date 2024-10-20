@@ -116,14 +116,25 @@
   margin-left: auto;
 }
 
-
 @media screen and (max-width: 1024px) {
   .styles-module_whatsappButton__tVits {
     bottom: 4.5rem !important;
-    right: .5rem !important;
+    right: 0.5rem !important;
   }
   .styles-module_whatsappButton__tVits.floating-whatsapp-button {
     height: 45px !important;
     width: 45px !important;
   }
+}
+
+.swiper-pagination-bullet {
+  background-color: #eff1f0 !important;
+  opacity: 1 !important;
+  width: 15px !important;
+  height: 15px !important;
+}
+
+/* Active pagination bullet color */
+.swiper-pagination-bullet-active {
+  background-color: #ee3f0b !important;
 }

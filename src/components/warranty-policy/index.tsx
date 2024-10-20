@@ -1,100 +1,86 @@
-import React from "react";
+import React from 'react';
 
 const WarrantyPolicy = () => {
   return (
-    <div className="container mx-auto px-6 py-10">
-      {/* Main Heading */}
-      <h1 className="text-2xl font-bold text-center mb-6">
-        Terms & Conditions of Warranty Claim for Smart Devices
-      </h1>
+    <div className="bg-gray-100 py-8">
+      <div className="container mx-auto px-4">
+        {/* Warranty Policy Header */}
+        <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
+          Warranty Policy
+        </h1>
+        
+        {/* English Section */}
+        <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+            Terms & Conditions of Warranty Claim for Smart Devices & Accessories
+          </h2>
+          <ul className="list-disc list-inside text-gray-700 mb-4">
+            <li>Sold products are non-refundable.</li>
+            <li>
+              Active/Inactive status of the device must be verified before purchase.
+              No later objection in this regard is admissible.
+            </li>
+            <li>
+              10 days Replacement Warranty (excluding display/touch issue) applicable only for:
+              Smartphone/Tab/TV/MacBook.
+            </li>
+            <li>
+              Get 1-year free service warranty for Smartphone/Tab/MacBook (Parts/Hardware excluded).
+              For hardware issues, customers bear the parts cost, while Apple Empire covers the
+              Service Charge.
+            </li>
+            {/* Add more points here... */}
+          </ul>
 
-      {/* Paragraph Section */}
-      <p className="text-lg mb-4">
-        Apple iPhone & iPad, MacBook, iMac, Apple Watch, AirPods, iPad Pro &
-        mini, Apple Pencil, Apple TV, Apple Gadgets for Smart Devices are
-        eligible for warranty service. Only Apple Premium Reseller / Apple
-        Authorized Service Provider is allowed to claim warranty service for any
-        Apple products. For any Apple Gadget warranty claim, please contact{" "}
-        <strong>XYZ Gadgets</strong> service center directly.
-      </p>
-      <p className="text-lg mb-4">
-        Warranty can only be claimed through <strong>XYZ</strong> Service
-        Center.
-      </p>
+          <h3 className="text-xl font-semibold mb-4 text-gray-800">Reasons for which warranty will not apply:</h3>
+          <ul className="list-disc list-inside text-gray-700 mb-4">
+            <li>Physical Damage/Scratch on product and packaging</li>
+            <li>Liquid damage</li>
+            <li>Unauthorized software modification (Root/Brick/Jailbreak)</li>
+            <li>Software/security update issues (Over-heating, Battery draining, etc.)</li>
+            {/* Add more points here... */}
+          </ul>
 
-      {/* Subheading */}
-      <h2 className="text-xl font-semibold mb-4">Terms & Conditions:</h2>
+          <p className="text-gray-600 mb-4">
+            Apple Empire reserves the right to modify any policy at any time without prior notice.
+          </p>
+        </div>
 
-      {/* Bullet Points */}
-      <ul className="list-disc pl-6 mb-4">
-        <li>Warranty covers any hardware or software defects.</li>
-        <li>Warranty doesn’t cover any accidental damage or liquid damage.</li>
-        <li>Warranty voids if the device is physically damaged.</li>
-        <li>
-          Warranty voids if the device has been repaired by unauthorized
-          personnel.
-        </li>
-        <li>
-          Any kind of software issues can be handled by the XYZ Service Center.
-        </li>
-        <li>No warranty on accessories.</li>
-      </ul>
+        {/* Bangla Section */}
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+            স্মার্ট ডিভাইস এবং আনুষাঙ্গিকগুলির জন্য ওয়ারেন্টি দাবির শর্তাবলী
+          </h2>
+          <ul className="list-disc list-inside text-gray-700 mb-4">
+            <li>বিক্রিত পণ্য অফেরতযোগ্য।</li>
+            <li>
+              ডিভাইসের Active / Inactive স্ট্যাটাস অবশ্যই কেনার আগে যাচাই করে নিশ্চিত করে নিতে হবে।
+            </li>
+            <li>
+              ১০ দিনের Replacement Warranty (ডিসপ্লে/টাচ ইস্যু ব্যতীত) শুধুমাত্র
+              Smartphone/Tab/TV/MacBook এর জন্য প্রযোজ্য।
+            </li>
+            <li>
+              Smartphone/Tab/MacBook এর জন্য ১ বছরের ফ্রি সার্ভিস ওয়ারেন্টি। 
+              হার্ডওয়্যার ইস্যুতে পার্টসের খরচ ক্রেতাকে বহন করতে হবে। সার্ভিস চার্জ বহন করবে Apple Empire।
+            </li>
+            {/* Add more points here... */}
+          </ul>
 
-      {/* Subheading */}
-      <h2 className="text-xl font-semibold mb-4">
-        Terms & Conditions for Accessories Warranty Claim
-      </h2>
+          <h3 className="text-xl font-semibold mb-4 text-gray-800">ওয়ারেন্টি প্রযোজ্য হবে নাঃ</h3>
+          <ul className="list-disc list-inside text-gray-700 mb-4">
+            <li>প্রোডাক্ট এবং প্যাকেজিং-এ ফিজিক্যাল ড্যামেজ/স্ক্র্যাচ</li>
+            <li>লিকুইড ড্যামেজ</li>
+            <li>অবৈধ সফটওয়্যার পরিবর্তন (Root/Brick/Jailbreak)</li>
+            <li>সফটওয়্যার আপডেট জনিত সমস্যা (Over-Heating, Battery Draining, ইত্যাদি)</li>
+            {/* Add more points here... */}
+          </ul>
 
-      {/* Paragraph Section */}
-      <p className="text-lg mb-4">
-        Official warranty for XYZ Accessories includes: Smart Watches, Bluetooth
-        Devices, Earphones, Headphones, Powerbanks, and other accessories. The
-        warranty can only be claimed at <strong>XYZ Service Center</strong>. The
-        warranty is valid for a specified period of time depending on the
-        product category.
-      </p>
-
-      {/* Subheading */}
-      <h2 className="text-xl font-semibold mb-4">Terms and Conditions:</h2>
-
-      {/* Bullet Points */}
-      <ul className="list-disc pl-6 mb-4">
-        <li>Warranty covers any manufacturing defects.</li>
-        <li>Physical or accidental damage is not covered under warranty.</li>
-        <li>Damage caused due to improper usage is not covered.</li>
-        <li>
-          Warranty voids if accessories are repaired by unauthorized personnel.
-        </li>
-      </ul>
-
-      {/* Subheading */}
-      <h2 className="text-xl font-semibold mb-4">
-        How to Claim Warranty for Accessories?
-      </h2>
-
-      {/* Paragraph Section */}
-      <p className="text-lg mb-4">
-        To claim warranty, please visit the <strong>XYZ</strong> service center
-        with proof of purchase and the defective product. If the claim is
-        accepted, the product will either be repaired or replaced.
-      </p>
-
-      {/* Subheading */}
-      <h2 className="text-xl font-semibold mb-4">Important Notes:</h2>
-
-      {/* Bullet Points */}
-      <ul className="list-disc pl-6 mb-4">
-        <li>
-          Replacement or repair decisions are at the discretion of the service
-          provider.
-        </li>
-        <li>Proof of purchase is required for all warranty claims.</li>
-      </ul>
-
-      {/* Final Paragraph */}
-      <p className="text-lg mb-4">
-        For further details, please contact XYZ Gadgets at their service center.
-      </p>
+          <p className="text-gray-600 mb-4">
+            যেকোনো সময় পূর্বের কোনো ঘোষণা ছাড়াই Apple Empire যেকোনো পলিসি পরিবর্তন করতে পারে।
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

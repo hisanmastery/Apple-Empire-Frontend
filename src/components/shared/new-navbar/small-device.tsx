@@ -36,7 +36,7 @@ const SmallDevice = ({ type }: any) => {
           >
             <div className="flex items-center">
               <span>
-                <icons.barsIcon className="text-white" />
+                <icons.barsIcon className="text-_primary w-6 h-6" />
               </span>
             </div>
           </button>

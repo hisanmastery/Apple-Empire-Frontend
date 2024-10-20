@@ -27,6 +27,7 @@ import { handleIncrementQuantity } from "./quantity-update";
 import QuantityController from "@/components/common/quantity-controller";
 import { get_store_data } from "@/utils/get_store_data";
 import ProductDetailsSkeleton from "@/components/shared/skeleton/products-details-skeleton";
+import Breadcrumbs from "@/components/common/breadcrumbs";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -40,7 +41,7 @@ const ProductDetails = ({ id }: any) => {
   const dispatch = useDispatch();
   const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
-
+  console.log({ data });
   useEffect(() => {
     if (storedCart?.length && data) {
       const new_data = data?.response;
@@ -106,6 +107,24 @@ const ProductDetails = ({ id }: any) => {
   }
   return (
     <section className="container mx-auto py-5 px-2 md:px-0 min-h-screen">
+      <div className="mb-5">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            {
+              label: data?.response?.category?.categoryName || "Category",
+              href:
+                `/category/${data?.response?.category?.categoryName}` || "#",
+            },
+            {
+              label: data?.response?.category?.subCategory?.[0] || "Category",
+              href:
+                `/category/${data?.response?.category?.categoryName}/${data?.response?.category?.subCategory?.[0]}` ||
+                "#",
+            },
+          ]}
+        />
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
         <div className="col-span-3 flex mx-auto">
           <div>
@@ -122,14 +141,14 @@ const ProductDetails = ({ id }: any) => {
                   <div
                     key={index}
                     className="bg-white border rounded-md"
-                    onClick={() => handleColorButtonClick(variant.color)}
+                    onClick={() => handleColorButtonClick(variant?.color)}
                   >
                     <Image
                       width={100}
                       height={100}
                       className="transition-transform duration-300 transform cursor-pointer"
                       src={variant?.image[0]}
-                      alt={`Product Image - ${variant.color}`}
+                      alt={`Product Image - ${variant?.color}`}
                     />
                   </div>
                 ))}

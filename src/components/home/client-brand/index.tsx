@@ -8,13 +8,12 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/effect-coverflow";
 import "swiper/css/virtual";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { icons } from "@/constants/icons";
 
 const breakpoints = {
   0: {
-    slidesPerView: 2,
+    slidesPerView: 3,
     spaceBetween: 40,
   },
   640: {
@@ -43,47 +42,34 @@ const ClientBrand = () => {
       <h3 className="text-center text-2xl mt-5 mb-3">Shop By Brand</h3>
       <div className="container relative">
         <Swiper
-          modules={[Autoplay, Navigation]}
+          ref={swiperRef}
+          modules={[Autoplay]}
           loop={true}
           autoplay={{
             delay: 3000,
-            pauseOnMouseEnter: false,
+            pauseOnMouseEnter: true,
             disableOnInteraction: false,
             stopOnLastSlide: false,
           }}
           speed={3000}
-          allowTouchMove={false}
+          allowTouchMove={true}
           breakpoints={breakpoints}
           spaceBetween={12}
         >
           {data?.brands?.map((brand: any, index: any) => (
             <SwiperSlide key={index} className={`!h-auto !md:h-full`}>
-              <div className="w-full !h-full flex items-center bg-_white p-5 rounded-md">
+              <div className="w-full !h-full flex items-center">
                 <Image
                   src={brand?.image?.viewUrl}
                   alt={brand?.brandName}
                   width={100}
                   height={50}
-                  className="w-[100px] h-[50px] mx-auto transition ease-in-out duration-300 hover:scale-110 hover:cursor-pointer"
+                  className="w-auto h-[50px] mx-auto transition ease-in-out duration-300 hover:scale-110 hover:cursor-pointer"
                 />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
-        <div style={{ textAlign: "center" }}>
-          <button
-            className="button swiper-button-prev absolute bg-_white-ice z-10 p-1 font-thin rounded-full left-9 top-[50%]"
-            onClick={() => swiperRef.current.swiper.slidePrev()}
-          >
-            <icons.GoArrowLeft className="text-xl text-_orange" />
-          </button>
-          <button
-            className="button swiper-button-next absolute bg-_white-ice z-10 p-1 font-thin rounded-full right-8 top-[50%]"
-            onClick={() => swiperRef.current.swiper.slideNext()}
-          >
-            <icons.GoArrowRight className="text-xl text-_orange" />
-          </button>
-        </div>
       </div>
     </div>
   );

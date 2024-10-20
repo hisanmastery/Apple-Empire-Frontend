@@ -10,6 +10,7 @@ import useToaster from "@/hooks/useToaster";
 import { useAddToCartMutation } from "@/store/features/cart/cartApi";
 import { getStoredData } from "@/store/features/cart/cartSlice";
 import { get_store_data } from "@/utils/get_store_data";
+import WishListButton from "@/components/home/products/product-details/WishListButton";
 
 // Define the type for the datas prop (can adjust as per your model)
 interface ProductData {
@@ -128,7 +129,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const isInCart = storedCart?.find(
     (item: any) => item.productId === datas?._id
   );
-  console.log(datas?.variants?.[0]?.price);
   return (
     <div className="overflow-hidden">
       <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
@@ -200,21 +200,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
 
         {/* quick-access-btns */}
         <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20 transition-all duration-300 ease-in-out">
-          <a href="#">
-            <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
-              {<icons.FavoriteBorder className="text-xl" />}
-            </span>
-          </a>
+          <div className="ml-3">
+            <WishListButton item={datas} showToast={showToast} />
+          </div>
           <a href="#">
             <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
               {<icons.MdZoomOutMapIcon className="text-xl" />}
             </span>
           </a>
-          <a href="#">
+          <Link href={`/compare/${datas?._id}`}>
             <span className="w-10 h-10 flex justify-center items-center bg-primarygray rounded">
               {<icons.LiaSyncSolidIcons className="text-xl" />}
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

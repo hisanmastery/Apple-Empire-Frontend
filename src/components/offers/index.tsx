@@ -1,41 +1,33 @@
 import React from "react";
 import Link from "next/link";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import Image from "next/image";
 const Offers = ({ offers }: any) => {
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString(undefined, {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
   return (
-    <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-12 container mt-4">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 mt-4">
       {offers?.offers?.map((offer: any) => (
         <div
           key={offer.id}
-          className="text-center border rounded-lg shadow bg-white "
+          className="text-center border rounded-lg shadow bg-white p-4 relative"
         >
-          <img
-            className="w-2/3 mx-auto hover:scale-105 cursor-pointer ease-in-out duration-300"
+          <Image
             src={offer.image}
             alt="offer image"
+            width={200}
+            height={250}
+            className="w-full h-[250px] rounded-[8px]"
           />
-          <div className="p-4">
-            <p className="text-sm flex items-center justify-center gap-2">
-              {" "}
-              <FaRegCalendarAlt /> {formattedDate}
-            </p>
-            <h4 className="text-md font-semibold text-center">
+          <div className="pt-4 px-4 ">
+            <h4 className="text-2xl font-semibold text-center">
               {offer?.title}
             </h4>
-            <p className="text-sm text-justify">{offer.description}</p>
-            <button className="bg-orange-400 hover:bg-orange-500 text-white font-bold my-2 py-1 px-4 rounded-lg ">
-              <Link href={`/offerDetails/${offer?.id}`}>
-              View Details
-              </Link>
-            </button>
+            <p className="text-sm font-normal text-center pt-3 pb-14">
+              {offer.description}
+            </p>
+            <div className="absolute -bottom-20 left-0 right-0 px-4 w-full pb-24">
+              <button className=" w-full bg-_primary/75 hover:bg-_black text-white text-lg font-normal py-2 px-4 rounded-[5px] ">
+                <Link href={`/offerDetails/${offer?.id}`}>View Details</Link>
+              </button>
+            </div>
           </div>
         </div>
       ))}

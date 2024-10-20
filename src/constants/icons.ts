@@ -43,6 +43,7 @@ import { MdPhoneAndroid } from "react-icons/md";
 import { IoGameController } from "react-icons/io5";
 import { MdZoomOutMap } from "react-icons/md";
 import { LiaSyncSolid } from "react-icons/lia";
+import { FaFacebookF } from "react-icons/fa";
 import {
   FaFacebook,
   FaWhatsapp,
@@ -67,7 +68,12 @@ import { FaFirstOrderAlt } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowUp } from "react-icons/go";
-
+import { ImSpinner3 } from "react-icons/im";
+import { FaTiktok } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
+import { FaBolt } from "react-icons/fa6";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -136,4 +142,11 @@ export const icons = {
   GoArrowLeft: GoArrowLeft,
   GoArrowRight: GoArrowRight,
   GoArrowUp: GoArrowUp,
+  ImSpinner3: ImSpinner3,
+  FaTiktokIcon: FaTiktok,
+  FaYoutubeIcon: FaYoutube,
+  FaInstagramIcon: FaInstagram,
+  FaLinkedinInIcon: FaLinkedinIn,
+  FaFacebookFIcon: FaFacebookF,
+  offerIcons: FaBolt,
 };

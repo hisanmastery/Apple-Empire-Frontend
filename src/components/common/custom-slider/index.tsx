@@ -1,5 +1,9 @@
 "use client";
 import React, { useRef } from "react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/effect-coverflow";
+import "swiper/css/virtual";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import ProductCard from "../product-card";
@@ -22,7 +26,7 @@ interface CustomSliderProps {
   sliderProducts: {
     product: Product[];
   };
-  isLoading: boolean; // Add an isLoading prop to indicate loading state
+  isLoading: boolean;
 }
 
 const CustomSlider: React.FC<CustomSliderProps> = ({
@@ -34,11 +38,11 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
   const breakpoints = {
     0: {
       slidesPerView: 2,
-      spaceBetween: 40,
+      spaceBetween: 10,
     },
     640: {
       slidesPerView: 3,
-      spaceBetween: 20,
+      spaceBetween: 10,
     },
     1024: {
       slidesPerView: 4,
@@ -97,14 +101,14 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
       </Swiper>
       <div style={{ textAlign: "center" }}>
         <button
-          className="button swiper-button-prev absolute bg-_white-ice z-10 p-1 font-thin rounded-full left-9 top-[50%]"
-          onClick={() => swiperRef.current.swiper.slidePrev()}
+          className="button swiper-button-prev absolute z-10 p-1 font-thin rounded-full left-0 top-[50%]"
+          onClick={() => swiperRef?.current?.swiper?.slidePrev()}
         >
           <icons.GoArrowLeft className="text-xl text-_orange" />
         </button>
         <button
-          className="button swiper-button-next absolute bg-_white-ice z-10 p-1 font-thin rounded-full right-8 top-[50%]"
-          onClick={() => swiperRef.current.swiper.slideNext()}
+          className="button swiper-button-next absolute z-10 p-1 font-thin rounded-full right-0 top-[50%]"
+          onClick={() => swiperRef?.current?.swiper?.slideNext()}
         >
           <icons.GoArrowRight className="text-xl text-_orange" />
         </button>
@@ -114,3 +118,5 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
 };
 
 export default CustomSlider;
+
+// bg-[#eff1f0]

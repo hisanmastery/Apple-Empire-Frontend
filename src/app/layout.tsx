@@ -4,6 +4,7 @@ import "./globals.css";
 const Providers = dynamic(() => import("@/store/provider"));
 import dynamic from "next/dynamic";
 import AosSetup from "@/config/aos";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Providers>
-        <AosSetup />
-        <body className={inter.className}>{children}</body>
-      </Providers>
+      <body className={inter.className}>
+        <Providers>
+          <Toaster />
+          <AosSetup />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

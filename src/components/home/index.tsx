@@ -9,6 +9,7 @@ const PopularProducts = dynamic(() => import("../home/popularProducts"));
 const CampaignsCountDown = dynamic(() => import("./campaigns-count-down"));
 import HomePopup from "@/components/home/popup/HomePopup";
 import { ADS_URLS } from "@/data/ads-url";
+import TopBrandProducts from "./top-brand-products";
 const TopItems = dynamic(() => import("./top-items"));
 
 const SectionWithTitleAndAds = ({
@@ -26,25 +27,34 @@ const SectionWithTitleAndAds = ({
 }) => (
   <>
     <ViewMoreTitle
-      className={`mb-[60px] lg:container ${className}`}
+      className={`md:mb-[60px] mb-5 lg:container ${className}`}
       seeMoreUrl={seeMoreUrl}
       categoryTitle={title}
     >
       {children}
     </ViewMoreTitle>
-    {ads && <ProductAds ads={ads} className="mb-[60px] lg:container mx-auto" />}
+    {ads && (
+      <ProductAds
+        ads={ads}
+        className="mb-0 md:mb-[60px] lg:container mx-auto"
+      />
+    )}
   </>
 );
 
 const Home: React.FC = () => {
   return (
-    <main className="lg:container mx-auto md:p-0 p-3">
+    <main className="lg:container mx-auto md:p-0">
       {/* Top Items and Popup */}
       <TopItems />
       <HomePopup />
 
       {/* Primary Ads */}
-      <ProductAds ads={ADS_URLS.primaryAds} className="lg:container mx-auto" />
+      <ProductAds
+        ads={ADS_URLS.primaryAds}
+        className="lg:container mx-auto"
+        sectionHeight="h-[100px] lg:h-[350px]"
+      />
 
       {/* Top Selling Products */}
       <SectionWithTitleAndAds
@@ -57,7 +67,8 @@ const Home: React.FC = () => {
       {/* Watch Ads */}
       <ProductAds
         ads={ADS_URLS.watchAds}
-        className="mb-[60px] lg:container mx-auto"
+        className="lg:container mx-auto"
+        sectionHeight="h-[120px] md:h-[350px]"
       />
 
       {/* All Products */}
@@ -66,12 +77,16 @@ const Home: React.FC = () => {
         seeMoreUrl="/section/top-selling-products"
       >
         <TopSellingProducts />
+        <div className="mt-5">
+          <TopSellingProducts />
+        </div>
       </SectionWithTitleAndAds>
 
       {/* Secondary Ads */}
       <ProductAds
         ads={ADS_URLS.secondaryAds}
-        className="mb-[60px] lg:container mx-auto"
+        className="mb-0 md:mb-[60px] lg:container mx-auto"
+        sectionHeight="h-[100px] md:h-[350px]"
       />
 
       {/* Popular Products */}
@@ -85,7 +100,8 @@ const Home: React.FC = () => {
       {/* Popular Products Ads */}
       <ProductAds
         ads={ADS_URLS.popularProductsAds}
-        className="mb-[60px] lg:container mx-auto"
+        className="mb-0 md:mb-[60px] lg:container mx-auto"
+        sectionHeight="h-56 md:h-96"
       />
 
       {/* Top Pricing Products */}
@@ -99,9 +115,10 @@ const Home: React.FC = () => {
       {/* Top Pricing Ads */}
       <ProductAds
         ads={ADS_URLS.topPricingAds}
-        className="mb-[60px] lg:container mx-auto"
+        className="mb-0 md:mb-[60px] lg:container mx-auto"
+        sectionHeight="h-56 md:h-[400px]"
       />
-
+      <TopBrandProducts />
       {/* Shop By Brands */}
       <ClientBrand />
       {/* Campaigns Countdown */}
