@@ -76,7 +76,7 @@ const NewFooter = () => {
               <Link href={"/complain-by"}>
                 <li className={"text-white hover:text-_primary block"}>
                   {" "}
-                  Complain By
+                  Complain By Advise
                 </li>
               </Link>
             </ul>

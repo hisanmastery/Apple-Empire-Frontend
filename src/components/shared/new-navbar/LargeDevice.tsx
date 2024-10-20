@@ -116,9 +116,9 @@ export default function LargeDevice({ type }: any) {
                   <div className="text-_black text-md">
                     <Link href={"/"}>Blogs</Link>
                   </div>
-                  <div className="text-_black text-md">
+                  {/* <div className="text-_black text-md">
                     <Link href={"/contact-us"}>Contact</Link>
-                  </div>
+                  </div> */}
                   <div className="text-_black text-md">
                     <Link href={"/section/used"}>Used Products</Link>
                   </div>
