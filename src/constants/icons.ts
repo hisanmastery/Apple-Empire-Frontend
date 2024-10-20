@@ -44,6 +44,8 @@ import { IoGameController } from "react-icons/io5";
 import { MdZoomOutMap } from "react-icons/md";
 import { LiaSyncSolid } from "react-icons/lia";
 import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookSquare } from "react-icons/fa";
+import { IoLogoYoutube } from "react-icons/io5";
 import {
   FaFacebook,
   FaWhatsapp,
@@ -149,4 +151,7 @@ export const icons = {
   FaLinkedinInIcon: FaLinkedinIn,
   FaFacebookFIcon: FaFacebookF,
   offerIcons: FaBolt,
+  FaFacebookSquareIcon: FaFacebookSquare,
+  IoLogoYoutubeIcon: IoLogoYoutube,
+  
 };

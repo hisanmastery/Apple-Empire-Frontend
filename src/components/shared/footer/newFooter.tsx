@@ -73,10 +73,10 @@ const NewFooter = () => {
                   Contact Us
                 </li>
               </Link>
-              <Link href={"/faq"}>
+              <Link href={"/complain-by"}>
                 <li className={"text-white hover:text-_primary block"}>
                   {" "}
-                  FAQ
+                  Complain By
                 </li>
               </Link>
             </ul>
@@ -106,7 +106,9 @@ const NewFooter = () => {
               >
                 Exchange Policy
               </Link>
-              
+              <Link href={"/faq"}>
+                <li className={"text-white hover:text-_primary block"}> FAQ</li>
+              </Link>
             </ul>
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-_primary md:text-lg text-sm">
@@ -144,6 +146,7 @@ const NewFooter = () => {
               </li>
               <li className={"text-white hover:text-_primary"}>Macbook</li>
               <li className={"text-white hover:text-_primary"}>Sound</li>
+              <li className={"text-white hover:text-_primary"}>Used</li>
             </ul>
           </div>
           <div className={"col-span-12 lg:col-span-4"}>
@@ -153,14 +156,14 @@ const NewFooter = () => {
                 target="_blank"
                 href="https://www.facebook.com/appleempireofficial"
               >
-                <icons.FaFacebookFIcon className="text-blue-500 w-6 h-6" />
+                <icons.FaFacebookSquareIcon className="text-blue-500 hover:text-_primary w-6 h-6" />
               </Link>
               <Link
                 rel="nofollow"
                 target="_blank"
                 href="https://www.youtube.com/channel/UCBgC5hXxkx99ALzMvnmyvHw"
               >
-                <icons.FaYoutubeIcon className="text-_primary w-6 h-6" />
+                <icons.IoLogoYoutubeIcon className="text-red-500 hover:text-_primary w-6 h-6" />
               </Link>
 
               <Link
@@ -168,21 +171,21 @@ const NewFooter = () => {
                 target="_blank"
                 href="https://www.linkedin.com/company/appleempireofficial"
               >
-                <icons.FaLinkedinInIcon className="text-blue-400 w-6 h-6" />
+                <icons.FaLinkedinIcons className="text-blue-400 hover:text-_primary w-6 h-6" />
               </Link>
               <Link
                 rel="nofollow"
                 target="_blank"
                 href="https://www.tiktok.com/@appleempireofficial"
               >
-                <icons.FaTiktokIcon className="text-sky-300 w-6 h-6" />
+                <icons.FaTiktokIcon className="text-sky-300 hover:text-_primary w-6 h-6" />
               </Link>
               <Link
                 rel="nofollow"
                 target="_blank"
                 href="https://www.instagram.com/appleempireofficial"
               >
-                <icons.FaInstagramIcon className="text-pink-500 w-6 h-6" />
+                <icons.FaInstagramIcon className="text-pink-500 hover:text-_primary w-6 h-6" />
               </Link>
             </div>
 

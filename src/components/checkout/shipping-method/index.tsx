@@ -18,6 +18,11 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
       cost: 100,
     },
     {
+      id: "InSide Dhaka",
+      label: "InSide Dhaka : Within 5-7 days",
+      cost: 50,
+    },
+    {
       id: "Shop By Pick Up",
       label: "Shop By pick up",
       cost: 0,
@@ -67,6 +72,7 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
               checked={selectedShippingMethod === option.id}
               className="hidden"
             />
+
             <label
               htmlFor={option.id}
               className="inline-flex items-center cursor-pointer"

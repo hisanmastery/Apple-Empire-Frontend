@@ -18,6 +18,7 @@ export const authApi = authBaseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    
     customerInfo: builder.query({
       query: (email: any) => ({
         url: `/get-single-customer/${email}`,
@@ -26,7 +27,7 @@ export const authApi = authBaseApi.injectEndpoints({
       invalidatesTags: ["User"],
     }),
   }),
-  overrideExisting: false, // Ensure existing endpoints are not overridden
+  overrideExisting: false,
 });
 export const {
   useCustomerRegisterMutation,

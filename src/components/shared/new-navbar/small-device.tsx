@@ -1,3 +1,4 @@
+// SmallDevice.tsx
 "use client";
 import { images } from "@/constants/images";
 import Image from "next/image";
@@ -12,10 +13,22 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import SheetDrawer from "@/components/common/sheet-drawer/indext";
 
-const SmallDevice = ({ type }: any) => {
+interface Category {
+  _id: string;
+  categoryName: string;
+  image: string;
+  subCategory: string[];
+}
+
+interface SmallDeviceProps {
+  type?: string;
+}
+
+const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
   const [categoryToggle, setCategoryToggle] = useState(false);
-  const { data: categoriesData }: any = useGetAllCategoryQuery({
+  const { data: categoriesData } = useGetAllCategoryQuery<any>({
     page: 1,
     limit: 100,
   });
@@ -25,10 +38,10 @@ const SmallDevice = ({ type }: any) => {
   };
 
   return (
-    <div className="flex justify-between items-center md:hidden bg-_black px-5">
+    <div className="flex justify-between items-center md:hidden bg-black px-5">
       {/* Category Menu */}
       <div className="category-and-nav lg:hidden items-center">
-        <div className="category rounded-t-md mt-[6px] relative">
+        <div className="category rounded-t-md mt-1.5 relative">
           <button
             onClick={handleCategoryToggle}
             type="button"
@@ -36,51 +49,47 @@ const SmallDevice = ({ type }: any) => {
           >
             <div className="flex items-center">
               <span>
-                <icons.barsIcon className="text-_primary w-6 h-6" />
+                <icons.barsIcon className="text-_primary w-7 h-7" />
               </span>
             </div>
           </button>
-          {categoryToggle && (
-            <div
-              className="fixed top-0 left-0 w-full h-full -z-10"
-              onClick={handleCategoryToggle}
-            ></div>
-          )}
-
-          {/* Category Accordion */}
-          {categoryToggle && (
-            <div className="category-dropdown w-72 absolute left-0 top-8 bg-white shadow-lg z-50">
-              <div className="max-h-[400px] overflow-y-auto">
-                <Accordion type="multiple" className="w-full bg-_white">
-                  {categoriesData?.categories?.map((category: any) => (
+          <SheetDrawer
+            isOpen={categoryToggle}
+            setIsOpen={setCategoryToggle}
+            title="Categories"
+            direction='left'
+          >
+            <div className="category-dropdown w-72">
+              <div>
+                <Accordion type="multiple" className="w-full">
+                  {categoriesData?.categories?.map((category: Category) => (
                     <AccordionItem key={category._id} value={category._id}>
                       <AccordionTrigger>
-                        <div className="flex items-center gap-2 px-2 py-2 hover:underline hover:text-_primary text-_black">
+                        <div className="flex items-center gap-2 px-2 py-2 hover:underline hover:text-primary">
                           <Image
                             className="w-6 h-6"
                             src={category.image}
                             alt={category.categoryName}
-                            width={10}
-                            height={10}
+                            width={24}
+                            height={24}
                           />
                           <span className="text-sm font-medium">
                             {category.categoryName}
                           </span>
                         </div>
                       </AccordionTrigger>
-
                       <AccordionContent>
                         {category.subCategory.length > 0 && (
                           <ul className="pl-10">
                             {category.subCategory.map(
-                              (subCategory: string, subIndex: number) => (
+                              (subCategory, subIndex) => (
                                 <li className="py-2" key={subIndex}>
                                   <Link
                                     href={`/category/${
                                       category.categoryName
                                     }/${subCategory.trim().toLowerCase()}`}
                                   >
-                                    <span className="text-xs font-normal text-_black hover:text-blue-500">
+                                    <span className="text-xs font-normal hover:text-blue-500">
                                       {subCategory}
                                     </span>
                                   </Link>
@@ -95,13 +104,13 @@ const SmallDevice = ({ type }: any) => {
                 </Accordion>
               </div>
               <button
-                className="absolute top-2 right-2 text-_black"
+                className="absolute top-2 right-2 text-black"
                 onClick={handleCategoryToggle}
               >
                 <icons.crossIcon className="w-4 h-4" />
               </button>
             </div>
-          )}
+          </SheetDrawer>
         </div>
       </div>
 
@@ -113,10 +122,11 @@ const SmallDevice = ({ type }: any) => {
             height={50}
             src={images.NavbarLogo}
             alt="logo"
-            className="p-2 w-16 ssm:w-20 smd:w-24 mmd:w-28"
+            className="p-2 w-16"
           />
         </Link>
       </div>
+
       {/* Search Bar */}
       <div>
         <SmallDeviceSearchBar />
