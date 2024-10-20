@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 const NewNavbar = dynamic(() => import("@/components/shared/new-navbar"));
 const NewFooter = dynamic(() => import("@/components/shared/footer/newFooter"));
 const WhatsApp = dynamic(() => import("@/components/whats-app"));
@@ -10,7 +9,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main style={{ backgroundColor: "#e9f4ff6e" }}>
       <CartManager />
-      <Toaster />
       <NewNavbar />
       <section className="overflow-auto col-span-4 p-1">{children}</section>
       <NewFooter />

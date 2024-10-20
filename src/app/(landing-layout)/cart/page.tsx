@@ -24,6 +24,7 @@ import Image from "next/image";
 import useAuth from "@/hooks/useAuth";
 import { get_store_data } from "@/utils/get_store_data";
 import useToaster from "@/hooks/useToaster";
+import Breadcrumbs from "@/components/common/breadcrumbs";
 
 interface Product {
   productId: string;
@@ -170,149 +171,163 @@ const CartPage = ({ className }: any) => {
   }, [subTotal, shippingCost, discountPrice]);
 
   return (
-    <div className={`w-full msm:container mt-4 ${className || ""}`}>
-      {storedCart?.length === 0 ? (
-        <div className="h-[90vh] flex justify-center items-center">
-          <Image
-            src="https://cdn-icons-png.freepik.com/512/7835/7835563.png"
-            alt="Empty cart"
-            width={160}
-            height={160}
-          />
-        </div>
-      ) : (
-        <div className="grid md:grid-cols-6 grid-cols-3 gap-12 justify-center">
-          {/* Cart items */}
-          <div className="col-span-4">
-            <div className="flex justify-between items-center">
-              <h4 className="text-xl font-semibold">Shopping Cart</h4>
-              <h4 className="text-xl font-semibold">
-                {storedCart?.length} Items
-              </h4>
-            </div>
-            <hr className="border mt-4" />
-
-            {/* Cart Table */}
-            <Table>
-              <TableHeader className="bg-_white">
-                <TableRow>
-                  <TableHead>Product</TableHead>
-                  <TableHead>Quantity</TableHead>
-                  <TableHead>Price</TableHead>
-                  <TableHead>Total</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {storedCart?.map((product: any, index: number) => (
-                  <TableRow
-                    key={product.productId}
-                    className="bg-_white hover:bg-_white"
-                  >
-                    <TableCell>
-                      <p>{product.title}</p>
-                      <div
-                        className="mt-4 text-red-500 cursor-pointer"
-                        onClick={() => removeCart(product)}
-                      >
-                        Remove
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex justify-start gap-4 items-center mt-2">
-                        <button
-                          onClick={() => handleDecrementQuantity(product)}
-                          type="button"
-                          className="text-base w-8 h-8 flex justify-center items-center rounded-full border border-qgray text-qblack"
-                        >
-                          -
-                        </button>
-                        <span className="text-qblack text-base">
-                          {product?.quantity}
-                        </span>
-                        <button
-                          onClick={() => handleIncrementQuantity(product)}
-                          type="button"
-                          className="text-base w-8 h-8 flex justify-center items-center rounded-full border border-qgray text-qblack"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </TableCell>
-                    <TableCell>{product.price}$</TableCell>
-                    <TableCell>
-                      {parseFloat(product.price) * product.quantity}$
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-
-            <div className="pt-5">
-              <Link href="/section/top-selling-product">
-                <Button className="bg-_primary text-white">
-                  Continue Shopping
-                </Button>
-              </Link>
-            </div>
+    <div className="msm:container mt-20">
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          {
+            label: "Cart",
+            href: "/cart",
+          }
+        ]}
+      />
+      <div className={`w-full mt-4 ${className || ""}`}>
+        {storedCart?.length === 0 ? (
+          <div className="h-[90vh] flex justify-center items-center">
+            <Image
+              src="https://cdn-icons-png.freepik.com/512/7835/7835563.png"
+              alt="Empty cart"
+              width={160}
+              height={160}
+            />
           </div>
-
-          {/* Order Summary */}
-          <div className="md:col-span-2 col-span-4">
-            <div className="w-full p-4 bg-white rounded-lg shadow">
-              <h4 className="text-xl font-semibold text-center">
-                Order Summary
-              </h4>
+        ) : (
+          <div className="grid md:grid-cols-6 grid-cols-3 gap-12 justify-center">
+            {/* Cart items */}
+            <div className="col-span-4">
+              <div className="flex justify-between items-center">
+                <h4 className="text-xl font-semibold">Shopping Cart</h4>
+                <h4 className="text-xl font-semibold">
+                  {storedCart?.length} Items
+                </h4>
+              </div>
               <hr className="border mt-4" />
 
-              {/* Summary details */}
-              <div className="mt-4">
-                <div className="flex justify-between">
-                  <p>Items ({storedCart?.length})</p>
-                  <p>$ {subTotal?.toFixed(2)}</p>
-                </div>
-                <div className="flex justify-between mt-2">
-                  <p>Discount</p>
-                  <p>$ {discountPrice?.toFixed(2)}</p>
-                </div>
-                <div className="flex justify-between mt-2">
-                  <p>Shipping</p>
-                  <p>$ {shippingCost?.toFixed(2)}</p>
-                </div>
-              </div>
+              {/* Cart Table */}
+              <Table>
+                <TableHeader className="bg-_white">
+                  <TableRow>
+                    <TableHead>Product</TableHead>
+                    <TableHead>Quantity</TableHead>
+                    <TableHead>Price</TableHead>
+                    <TableHead>Total</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {storedCart?.map((product: any, index: number) => (
+                    <TableRow
+                      key={product.productId}
+                      className="bg-_white hover:bg-_white"
+                    >
+                      <TableCell>
+                        <p>{product.title}</p>
+                        <div
+                          className="mt-4 text-red-500 cursor-pointer"
+                          onClick={() => removeCart(product)}
+                        >
+                          Remove
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex justify-start gap-4 items-center mt-2">
+                          <button
+                            onClick={() => handleDecrementQuantity(product)}
+                            type="button"
+                            className="text-base w-8 h-8 flex justify-center items-center rounded-full border border-qgray text-qblack"
+                          >
+                            -
+                          </button>
+                          <span className="text-qblack text-base">
+                            {product?.quantity}
+                          </span>
+                          <button
+                            onClick={() => handleIncrementQuantity(product)}
+                            type="button"
+                            className="text-base w-8 h-8 flex justify-center items-center rounded-full border border-qgray text-qblack"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </TableCell>
+                      <TableCell>{product.price}$</TableCell>
+                      <TableCell>
+                        {parseFloat(product.price) * product.quantity}$
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
 
-              {/* Promo Code */}
-              <div className="mt-4">
-                <p className="mb-2 font-semibold">Promo Code</p>
-                <Input
-                  value={promoCode}
-                  onChange={(e) => setPromoCode(e.target.value)}
-                  placeholder="Enter your code"
-                />
-                <Button className="mt-3 w-full" onClick={handlePromoCodeApply}>
-                  Apply
-                </Button>
-              </div>
-
-              <hr className="mt-4" />
-
-              {/* Total Amount */}
-              <div className="flex justify-between items-center mt-6">
-                <p>Total Amount</p>
-                <p>$ {totalPrice?.toFixed(2)}</p>
-              </div>
-
-              {/* Checkout Button */}
-              <div className="mt-5">
-                <Link href="/cart/checkout">
-                  <Button className="w-full bg-_primary text-white">
-                    Checkout
+              <div className="pt-5">
+                <Link href="/section/top-selling-product">
+                  <Button className="bg-_primary text-white">
+                    Continue Shopping
                   </Button>
                 </Link>
               </div>
             </div>
+
+            {/* Order Summary */}
+            <div className="md:col-span-2 col-span-4">
+              <div className="w-full p-4 bg-white rounded-lg shadow">
+                <h4 className="text-xl font-semibold text-center">
+                  Order Summary
+                </h4>
+                <hr className="border mt-4" />
+
+                {/* Summary details */}
+                <div className="mt-4">
+                  <div className="flex justify-between">
+                    <p>Items ({storedCart?.length})</p>
+                    <p>$ {subTotal?.toFixed(2)}</p>
+                  </div>
+                  <div className="flex justify-between mt-2">
+                    <p>Discount</p>
+                    <p>$ {discountPrice?.toFixed(2)}</p>
+                  </div>
+                  <div className="flex justify-between mt-2">
+                    <p>Shipping</p>
+                    <p>$ {shippingCost?.toFixed(2)}</p>
+                  </div>
+                </div>
+
+                {/* Promo Code */}
+                <div className="mt-4">
+                  <p className="mb-2 font-semibold">Promo Code</p>
+                  <Input
+                    value={promoCode}
+                    onChange={(e) => setPromoCode(e.target.value)}
+                    placeholder="Enter your code"
+                  />
+                  <Button
+                    className="mt-3 w-full"
+                    onClick={handlePromoCodeApply}
+                  >
+                    Apply
+                  </Button>
+                </div>
+
+                <hr className="mt-4" />
+
+                {/* Total Amount */}
+                <div className="flex justify-between items-center mt-6">
+                  <p>Total Amount</p>
+                  <p>$ {totalPrice?.toFixed(2)}</p>
+                </div>
+
+                {/* Checkout Button */}
+                <div className="mt-5">
+                  <Link href="/cart/checkout">
+                    <Button className="w-full bg-_primary text-white">
+                      Checkout
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
