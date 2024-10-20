@@ -23,14 +23,14 @@ const SocialShare = () => {
           quality={100}
           src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
           alt="payment"
-          className="w-full h-8 -mt-1"
+          className="w-96 h-8 -mt-1"
         />
       </div>
       {/* Inline CSS styles for marquee effect */}
       <style jsx>{`
         .marquee-container {
           overflow: hidden;
-          width: 100%;
+          width: 80%;
           background-color: #f0f0f0; /* Optional: background color for better visibility */
           border: 1px solid #ccc; /* Optional: border for the marquee container */
           display: flex;

@@ -1,17 +1,17 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   screens: {
-    "ssm": "320px",
-    "msm": "380px",
-    "lsm": "450px",
+    ssm: "320px",
+    msm: "380px",
+    lsm: "450px",
   },
   prefix: "",
   theme: {
@@ -19,27 +19,26 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1500px",
+        "2xl": "1440px",
       },
     },
     extend: {
       screens: {
-        xsm: '300px',
-        ssm: '370px',
-        msm: '420px',
-        lsm: '480px',
-        xmd: '520px',
-        smd: '560px',
-        mmd: '600px',
-        lmd: '620px',
-        slg: '660px',
-        mlg: '720px',
-        // You can keep the default ones as well if needed
-        sm: '640px',   // Small screens
-        md: '768px',   // Medium screens
-        lg: '1024px',  // Large screens
-        xl: '1280px',  // Extra large screens
-        '2xl': '1536px', // 2x extra large screens
+        xsm: "300px",
+        ssm: "370px",
+        msm: "420px",
+        lsm: "480px",
+        xmd: "520px",
+        smd: "560px",
+        mmd: "600px",
+        lmd: "620px",
+        slg: "660px",
+        mlg: "720px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1440px",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -90,7 +89,7 @@ const config = {
         _blue: "#1868D5",
         _gray: "#797D7F",
         qyellow: "#FFBB38",
-        _orange:"#EE3F0B"
+        _orange: "#EE3F0B",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -114,6 +113,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;
