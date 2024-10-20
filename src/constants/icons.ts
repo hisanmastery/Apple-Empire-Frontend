@@ -76,6 +76,7 @@ import { FaYoutube } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaBolt } from "react-icons/fa6";
+import { IoMdGitCompare } from "react-icons/io";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -153,5 +154,6 @@ export const icons = {
   offerIcons: FaBolt,
   FaFacebookSquareIcon: FaFacebookSquare,
   IoLogoYoutubeIcon: IoLogoYoutube,
+  IoMdGitCompareIcon: IoMdGitCompare
   
 };
