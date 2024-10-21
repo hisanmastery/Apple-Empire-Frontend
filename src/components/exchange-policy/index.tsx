@@ -38,7 +38,7 @@ const ExchangePolicy = () => {
         এক্সচেঞ্জ করতে হলে সময় অনুযায়ী আপনার এন আই ডি কার্ড অথবা ছবি সম্বলিত কোনও একটি পরিচয়পত্র নিয়ে আসবেন।
       </p>
 
-      <div className="relative pb-[56.25%] h-0 overflow-hidden">
+      {/* <div className="relative pb-[56.25%] h-0 overflow-hidden">
         <iframe
           className="absolute top-0 left-0 w-full h-[80%]"
           src="https://www.youtube.com/embed/C9cBrVJdMOY"
@@ -46,7 +46,7 @@ const ExchangePolicy = () => {
           frameBorder="0"
           allowFullScreen
         ></iframe>
-      </div>
+      </div> */}
     </div>
   );
 };
