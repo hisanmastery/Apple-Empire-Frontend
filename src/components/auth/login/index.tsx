@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
@@ -10,10 +10,12 @@ import { updateUserToken } from "@/store/features/user/userSlice";
 import { useRouter } from "next/navigation";
 import useToaster from "@/hooks/useToaster";
 import Image from "next/image";
+import { icons } from "@/constants/icons";
 
 const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -90,18 +92,19 @@ const Login = () => {
                 </p>
               )}
             </div>
-            <div>
+            <div className="relative">
               <label htmlFor="password" className="sr-only">
                 Password
               </label>
               <Input
                 id="password"
                 {...register("password", { required: "Password is required" })}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 className="mt-5"
                 placeholder="Password"
               />
+              <span className="absolute right-3 top-3 cursor-pointer" onClick={()=>setShowPassword(!showPassword)}>{showPassword ? <icons.FaRegEyeIcon/>: <icons.FaEyeSlashIcon/>}</span>
               {errors.password?.message && (
                 <p className="text-red-500 text-sm mt-1">
                   {String(errors.password.message)}

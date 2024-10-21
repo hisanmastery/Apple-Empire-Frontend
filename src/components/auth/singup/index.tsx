@@ -1,10 +1,11 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import { useCustomerRegisterMutation } from "@/store/api/auth/authApi";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { icons } from "@/constants/icons";
 
 const Signup = () => {
   const {
@@ -14,6 +15,8 @@ const Signup = () => {
     getValues,
   } = useForm();
   const [customerRegister, { isLoading }] = useCustomerRegisterMutation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
   const onSubmit = async (data: any) => {
     const registerData = {
@@ -51,7 +54,6 @@ const Signup = () => {
           />
           Create A New Account
         </div>
-
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -114,7 +116,7 @@ const Signup = () => {
                 </p>
               )}
             </div>
-            <div>
+            <div className="relative">
               <label htmlFor="password" className="sr-only">
                 Password
               </label>
@@ -124,18 +126,19 @@ const Signup = () => {
                   required: "Password is required",
                   minLength: 6,
                 })}
-                type="password"
+                type={showConfirmPassword ? "text" : "password"}
                 autoComplete="new-password"
                 className="mt-4"
                 placeholder="Password"
               />
+              <span className="absolute right-3 top-3 cursor-pointer" onClick={()=>setShowConfirmPassword(!showConfirmPassword)}>{showConfirmPassword ? <icons.FaRegEyeIcon/>: <icons.FaEyeSlashIcon/>}</span>
               {errors.password?.message && (
                 <p className="text-red-500 text-sm">
                   {String(errors.password.message)}
                 </p>
               )}
             </div>
-            <div>
+            <div className="relative">
               <label htmlFor="passwordConfirmation" className="sr-only">
                 Confirm Password
               </label>
@@ -145,11 +148,12 @@ const Signup = () => {
                   validate: (value) =>
                     value === getValues("password") || "Passwords do not match",
                 })}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete="new-password"
                 className="mt-4"
                 placeholder="Confirm Password"
               />
+              <span className="absolute right-3 top-3 cursor-pointer" onClick={()=>setShowPassword(!showPassword)}>{showPassword ? <icons.FaRegEyeIcon/>: <icons.FaEyeSlashIcon/>}</span>
               {errors.passwordConfirmation?.message && (
                 <p className="text-red-500 text-sm">
                   {String(errors.passwordConfirmation.message)}
