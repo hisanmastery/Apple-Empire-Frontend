@@ -41,7 +41,7 @@ const ProductActionButtons: React.FC<ProductActionButtonsProps> = ({
         } else {
           return (
             <Link
-              href={item.link ? `/compare/${id}` : ""}
+              href={item.link ? `/compare?p1=${id}` : ""}
               key={index}
               className="text-md font-medium flex items-center gap-3"
             >
