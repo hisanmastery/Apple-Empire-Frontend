@@ -147,7 +147,7 @@ const Checkout = () => {
             <ShippingAddress email={customerInfo?.email} />
           </div>
           <div>
-            <Shippin55gMethod setShippingMethod={setShippingMethod} />
+            <ShippingMethod setShippingMethod={setShippingMethod} />
           </div>
           <div>
             <h3 className="text-lg font-semibold">CONFIRM ORDER</h3>

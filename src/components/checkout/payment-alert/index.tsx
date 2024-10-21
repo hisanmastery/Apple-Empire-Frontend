@@ -1,4 +1,5 @@
-import React from "react";
+import useToaster from "@/hooks/useToaster";
+import React, { useState } from "react";
 
 interface PaymentAlertProps {
   isOpen: boolean;
@@ -19,15 +20,17 @@ const PaymentAlert: React.FC<PaymentAlertProps> = ({
   if (!isOpen) return null;
 
   // Function to copy text to clipboard
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text).then(
-      () => {
-        alert("Copied to clipboard!"); // Notify user of successful copy
-      },
-      (err) => {
-        console.error("Failed to copy: ", err); // Handle errors
-      }
-    );
+  const copyToClipboard = async (text: string) => {
+    if (!text) {
+      alert("No content to copy");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("Copied to clipboard!");
+    } catch (err) {
+      alert("Failed to copy");
+    }
   };
 
   return (
@@ -76,7 +79,7 @@ const PaymentAlert: React.FC<PaymentAlertProps> = ({
             onClick={onConfirm}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
           >
-            OK
+            Continue
           </button>
         </div>
       </div>

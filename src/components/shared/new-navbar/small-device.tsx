@@ -57,7 +57,7 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
             isOpen={categoryToggle}
             setIsOpen={setCategoryToggle}
             title="Categories"
-            direction='left'
+            direction="left"
           >
             <div className="category-dropdown w-72">
               <div>
@@ -74,7 +74,9 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
                             height={24}
                           />
                           <span className="text-sm font-medium">
-                            {category.categoryName}
+                            <Link href={`/category/${category.categoryName}`}>
+                              {category.categoryName}
+                            </Link>
                           </span>
                         </div>
                       </AccordionTrigger>
