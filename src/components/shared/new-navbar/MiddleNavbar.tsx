@@ -10,7 +10,6 @@ import useAuth from "@/hooks/useAuth";
 import { images } from "@/constants/images";
 import React from "react";
 
-import compareIcon from "../../../../public/icons/Compair.png";
 
 export default function MiddleNavbar({ className, type }: any) {
   const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
@@ -74,11 +73,14 @@ export default function MiddleNavbar({ className, type }: any) {
                   className="absolute -right-[45px] top-20 z-50 hidden group-hover:block"
                 />
               </div> */}
+
+
               {/* offer */}
               <Link href="/offers">
                 <div rel="noopener noreferrer">
                   <p className="flex justify-center">
                     <icons.offerIcons className="text-3xl text-_primary" />
+                    {/* <Image src={images.offerIcon} alt="compaire icon" width={30} height={30}/> */}
                   </p>
                   <span className="text-_white">Offers</span>
                 </div>
@@ -90,6 +92,7 @@ export default function MiddleNavbar({ className, type }: any) {
                     <div rel="noopener noreferrer">
                       <p>
                         <icons.MdAddShoppingCart className="text-3xl text-_primary" />
+                        {/* <Image src={images.cartIcon} alt="compaire icon" width={30} height={30}/> */}
                       </p>
                       <span className="text-_white">Cart</span>
                     </div>
@@ -104,11 +107,12 @@ export default function MiddleNavbar({ className, type }: any) {
                 />
               </div>
               
-              {/* Shop Link */}
+              {/* pre order Link */}
               <Link href="/pre-order">
                 <div rel="noopener noreferrer">
                   <p className="flex justify-center">
                     <icons.FaShop className="text-3xl text-_primary" />
+                    {/* <Image src={images.preOderIcon} alt="compaire icon" width={30} height={30}/> */}
                   </p>
                   <span className="text-_white">Pre-Order</span>
                 </div>
@@ -118,8 +122,8 @@ export default function MiddleNavbar({ className, type }: any) {
                <Link href="/compare">
                 <div rel="noopener noreferrer">
                   <p className="flex justify-center">
-                    {/* <icons.FaShop className="text-3xl text-_primary" /> */}
-                    <Image src={compareIcon} alt="compaire icon" width={30} height={30}/>
+                    <icons.IoMdGitCompareIcon className="text-3xl text-_primary" />
+                    {/* <Image src={images.compareIcon} alt="compaire icon" width={30} height={30}/> */}
                   </p>
                   <span className="text-_white">Compare</span>
                 </div>
@@ -129,6 +133,7 @@ export default function MiddleNavbar({ className, type }: any) {
                 <div rel="noopener noreferrer">
                   <p className="flex justify-center">
                     <icons.LuUser2 className="text-3xl text-_primary" />
+                    {/* <Image src={images.accoutIcon} alt="compaire icon" width={30} height={30}/> */}
                   </p>
                   <span className="text-_white">Account</span>
                 </div>

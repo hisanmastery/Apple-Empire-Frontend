@@ -16,12 +16,26 @@ function StickyFooter({ className, type }: StickyFooterProps) {
   return (
     <footer className="bg-black block lg:hidden text-white left-0 bottom-0 w-screen fixed h-16 z-30">
       <div className="flex justify-around items-center">
+
+      <div className="cart-wrapper group relative py-4">
+          <div className="cart relative cursor-pointer">
+            <Link href="/offers">
+              <p rel="noopener noreferrer">
+                <span>
+                  <icons.offerIcons className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl"/>
+                  <span className="text-[9px]">Offers</span>
+                </span>
+              </p>
+            </Link>
+          </div>
+        </div>
+
         <div className="cart-wrapper group relative py-4">
           <div className="cart relative cursor-pointer">
             <Link href="/cart">
               <p rel="noopener noreferrer">
                 <span>
-                  <icons.ShoppingBagSolid className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl"/>
+                  <icons.MdAddShoppingCart className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl"/>
                   <span className="text-[9px]">Cart</span>
                 </span>
               </p>
@@ -35,25 +49,27 @@ function StickyFooter({ className, type }: StickyFooterProps) {
             </span>
           </div>
         </div>
+
         <div className="cart-wrapper group relative py-4">
           <div className="cart relative cursor-pointer">
-            <Link href="/section/popular-products">
+            <Link href="/pre-order">
               <p rel="noopener noreferrer">
                 <span>
                   <icons.FaShop className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl"/>
-                  <span className="text-[9px]">Shop</span>
+                  <span className="text-[9px]">Pre-Order</span>
                 </span>
               </p>
             </Link>
           </div>
         </div>
+
         <div className="cart-wrapper group relative py-4">
           <div className="cart relative cursor-pointer">
-            <Link href="/cart">
+            <Link href="/compare">
               <p rel="noopener noreferrer">
                 <span>
-                  <icons.MdAddShoppingCart className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl"/>
-                  <span className="text-[9px]">Pre-Order</span>
+                  <icons.IoMdGitCompareIcon className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl"/>
+                  <span className="text-[9px]">Compare</span>
                 </span>
               </p>
             </Link>
