@@ -24,7 +24,8 @@ const SheetDrawer = ({
         lockBackgroundScroll={lockBackgroundScroll}
         overlayOpacity={0.7}
         direction={direction}
-        style={{ backgroundColor: "#EFF1F0", overflow: "auto" }}
+        style={{ overflow: "auto" }}
+        className="bg-_white"
       >
         <div className="flex gap-4 items-center absolute  mb-4">
           <h4 className="font-bold text-xl text-_primary px-5 py-2">{title}</h4>

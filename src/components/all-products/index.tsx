@@ -11,11 +11,14 @@ import { selectProductsVariant } from "@/store/features/products/productsCategor
 import CategoryTabs from "../category-tabs/CategoryTab";
 import { useSearchParams } from "next/navigation";
 import ProductCardSkeleton from "../shared/skeleton/products-card-skeleton";
+import SmallDeviceProductsFilter from "../products-sidebar/smallDeviceProductsFilter";
+import { icons } from "@/constants/icons";
 
 const AllProductsSection = ({ productsType }: any) => {
   const searchParams = useSearchParams();
   const selectedSubCategory = searchParams.get("category");
   const usedString = productsType === "used" ? "used" : "";
+  const [openSheetDrawer, setOpenSheetDrawer] = useState(false);
   const offersString = productsType === "offers" ? "yes" : "";
   const { min, max } = useSelector(selectPriceRange);
   const { label, value } = useSelector(selectProductsVariant);
@@ -50,6 +53,14 @@ const AllProductsSection = ({ productsType }: any) => {
         <p className="text-2xl font-semibold mb-2">{productsType}</p>
         <CategoryTabs />
       </div>
+      <div className="md:hidden flex justify-end">
+        <button
+          onClick={() => setOpenSheetDrawer(true)}
+          className="flex items-center gap-2 border px-5 py-1 border-_primary-text rounded-sm"
+        >
+          Filter <icons.RiFilter2FillIcons />
+        </button>
+      </div>
       <div>
         {allProducts?.product?.length > 0 ? (
           <>
@@ -69,6 +80,12 @@ const AllProductsSection = ({ productsType }: any) => {
           currentPage={currentPage}
         />
       </div>
+      {
+        <SmallDeviceProductsFilter
+          isOpen={openSheetDrawer}
+          setIsOpen={setOpenSheetDrawer}
+        />
+      }
     </div>
   );
 };
