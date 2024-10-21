@@ -34,7 +34,7 @@ const Products: React.FC<ProductsProps> = ({ params }) => {
     <div className="container">
       <div className="grid grid-cols-7 gap-5">
         {/* Sidebar Column */}
-        <div className="col-span-7 sm:col-span-3 md:col-span-2">
+        <div className="hidden md:block md:col-span-2">
           <ProductsSideBar />
         </div>
         {/* Products Section Column */}

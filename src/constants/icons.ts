@@ -79,6 +79,7 @@ import { FaBolt } from "react-icons/fa6";
 import { IoMdGitCompare } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { RiFilter2Fill } from "react-icons/ri";
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -158,5 +159,6 @@ export const icons = {
   IoLogoYoutubeIcon: IoLogoYoutube,
   IoMdGitCompareIcon: IoMdGitCompare,
   FaRegEyeIcon: FaRegEye,
-  FaEyeSlashIcon: FaEyeSlash
+  FaEyeSlashIcon: FaEyeSlash,
+  RiFilter2FillIcons: RiFilter2Fill,
 };

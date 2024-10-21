@@ -11,6 +11,8 @@ import { selectProductsVariant } from "@/store/features/products/productsCategor
 import SubCategoryTabs from "../category-tabs/SubCategoryTab";
 import { useSearchParams } from "next/navigation";
 import ProductCardSkeleton from "../shared/skeleton/products-card-skeleton";
+import SmallDeviceProductsFilter from "../products-sidebar/smallDeviceProductsFilter";
+import { icons } from "@/constants/icons";
 interface CategoryProductsProps {
   category: string;
   subCategory: string;
@@ -23,6 +25,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
   const searchParams = useSearchParams();
   const selectedSubCategory = searchParams.get("subcategory");
   const [currentPage, setCurrentPage] = useState(1);
+  const [openSheetDrawer, setOpenSheetDrawer] = useState(false);
   const [pageSize, setPageSize] = useState(12);
   const { min, max } = useSelector(selectPriceRange);
   const { label, value } = useSelector(selectProductsVariant);
@@ -57,9 +60,17 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
         </p>
         <SubCategoryTabs category={decodeURIComponent(category)} />
       </div>
+      <div className="md:hidden flex justify-end">
+        <button
+          onClick={() => setOpenSheetDrawer(true)}
+          className="flex items-center gap-2 border px-5 py-1 border-_primary-text rounded-sm"
+        >
+          Filter <icons.RiFilter2FillIcons />
+        </button>
+      </div>
       <div>
         {allProducts?.product?.length > 0 ? (
-          <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 mx-auto mb-10">
+          <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-5 mx-auto mb-10">
             {allProducts?.product?.map((product: any) => (
               <ProductCard key={product._id} datas={product} />
             ))}
@@ -74,6 +85,12 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
           currentPage={currentPage}
         />
       </div>
+      {
+        <SmallDeviceProductsFilter
+          isOpen={openSheetDrawer}
+          setIsOpen={setOpenSheetDrawer}
+        />
+      }
     </div>
   );
 };
