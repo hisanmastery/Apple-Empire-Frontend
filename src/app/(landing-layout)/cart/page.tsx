@@ -249,9 +249,9 @@ const CartPage = ({ className }: any) => {
                           </button>
                         </div>
                       </TableCell>
-                      <TableCell>{product.price}$</TableCell>
+                      <TableCell>{product.price}৳</TableCell>
                       <TableCell>
-                        {parseFloat(product.price) * product.quantity}$
+                        {parseFloat(product.price) * product.quantity}৳
                       </TableCell>
                     </TableRow>
                   ))}
@@ -279,15 +279,15 @@ const CartPage = ({ className }: any) => {
                 <div className="mt-4">
                   <div className="flex justify-between">
                     <p>Items ({storedCart?.length})</p>
-                    <p>$ {subTotal?.toFixed(2)}</p>
+                    <p>৳ {subTotal?.toFixed(2)}</p>
                   </div>
                   <div className="flex justify-between mt-2">
                     <p>Discount</p>
-                    <p>$ {discountPrice?.toFixed(2)}</p>
+                    <p>৳ {discountPrice?.toFixed(2)}</p>
                   </div>
                   <div className="flex justify-between mt-2">
                     <p>Shipping</p>
-                    <p>$ {shippingCost?.toFixed(2)}</p>
+                    <p>৳ {shippingCost?.toFixed(2)}</p>
                   </div>
                 </div>
 
@@ -312,7 +312,7 @@ const CartPage = ({ className }: any) => {
                 {/* Total Amount */}
                 <div className="flex justify-between items-center mt-6">
                   <p>Total Amount</p>
-                  <p>$ {totalPrice?.toFixed(2)}</p>
+                  <p>৳ {totalPrice?.toFixed(2)}</p>
                 </div>
 
                 {/* Checkout Button */}
