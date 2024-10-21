@@ -133,7 +133,7 @@ const Checkout = () => {
           <p>Please enter your details below to complete your purchase</p>
         </div>
         <div>
-          <button className="border-2 border-_primary text-_primary px-5 p-2 rounded-md hover:bg-_border-_primary hover:text-black transition-all ease-in-out duration-1000">
+          <button className="border-2 border-_primary text-_primary px-5 p-2 rounded-md hover:bg-_border-_primary hover:text-black transition-all ease-in-out duration-1000 text-sm md:text-md">
             BACK TO CART
           </button>
         </div>
@@ -147,7 +147,7 @@ const Checkout = () => {
             <ShippingAddress email={customerInfo?.email} />
           </div>
           <div>
-            <ShippingMethod setShippingMethod={setShippingMethod} />
+            <Shippin55gMethod setShippingMethod={setShippingMethod} />
           </div>
           <div>
             <h3 className="text-lg font-semibold">CONFIRM ORDER</h3>
