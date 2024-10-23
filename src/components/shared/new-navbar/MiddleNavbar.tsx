@@ -79,8 +79,8 @@ export default function MiddleNavbar({ className, type }: any) {
               <Link href="/offers">
                 <div rel="noopener noreferrer">
                   <p className="flex justify-center">
-                    <icons.offerIcons className="text-3xl text-_primary" />
-                    {/* <Image src={images.offerIcon} alt="compaire icon" width={30} height={30}/> */}
+                    {/* <icons.offerIcons className="text-3xl text-_primary" /> */}
+                    <Image src={images.offerIcon} alt="compaire icon" width={30} height={30}/>
                   </p>
                   <span className="text-_white">Offers</span>
                 </div>

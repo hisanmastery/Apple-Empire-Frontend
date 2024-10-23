@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const Signup = () => {
   const {
@@ -44,12 +45,10 @@ const Signup = () => {
       <div className="max-w-md w-full bg-white p-8 rounded-md shadow-md space-y-8">
         <div className="mt-6 text-center text-xl font-extrabold text-gray-900">
           <Image
-            className="w-14 mx-auto"
-            src={
-              "https://appleempire.hisanmastery.com/assets/images/Apple-Empire-Logo.svg"
-            }
-            height={56}
-            width={56}
+            className="w-24 h-24 mx-auto"
+            src={images.appleAmpireLogo}
+            height={100}
+            width={100}
             alt="logo"
           />
           Create A New Account

@@ -78,7 +78,7 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
   }
 
   return (
-    <div className="container mx-auto mt-8 p-6 bg-white rounded-sm shadow-sm">
+    <div className="container overflow-auto mx-auto mt-8 p-6 bg-white rounded-sm shadow-sm">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Compare Products</h1>
         <p className="text-gray-500 mt-2">
@@ -87,12 +87,12 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
       </div>
 
       {/* Phone Selection */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-2 gap-2 md:gap-6 mb-8">
         <div className="col-span-1">
           <SelectBox
             isMulti={false}
             name="firstPhone"
-            className="w-full"
+            className="w-full placeholder:text-sm"
             placeholder="Select the first product"
             onChange={handleFirstPhone}
             value={firstPhone}
@@ -115,9 +115,9 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
       </div>
 
       {/* Product Images and Names */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-8">
+      <div className="grid grid-cols-2 gap-4 md:gap-6 items-center mb-8">
         <div className="text-center">
-          <div className="relative bg-gray-100 p-6 rounded-lg shadow-md">
+          <div className="relative bg-gray-100 p-4 md:p-6 rounded-lg shadow-md">
             <Image
               src={
                 singlePhoneData?.response?.image?.imageUrl || "/placeholder.png"
@@ -125,9 +125,9 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
               alt={singlePhoneData?.response?.name || "First product"}
               width={220}
               height={220}
-              className="mx-auto rounded-lg object-cover"
+              className="w-[140px] md:w-[220px] h-[140px] md:h-[220px] mx-auto rounded-lg object-cover"
             />
-            <h2 className="mt-4 text-xl font-semibold text-gray-800">
+            <h2 className="mt-2 md:mt-4 text-sm md:text-xl font-semibold text-gray-800">
               {singlePhoneData?.response?.name || "Select the first product"}
             </h2>
             {firstPhone && (
@@ -141,7 +141,7 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
           </div>
         </div>
         <div className="text-center">
-          <div className="relative bg-gray-100 p-6 rounded-lg shadow-md">
+          <div className="relative bg-gray-100 p-4 md:p-6 rounded-lg shadow-md">
             <Image
               src={
                 secondPhoneData?.response?.image?.imageUrl || "/placeholder.png"
@@ -149,9 +149,9 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
               alt={secondPhoneData?.response?.name || "Second product"}
               width={220}
               height={220}
-              className="mx-auto rounded-lg object-cover"
+              className="w-[140px] md:w-[220px] h-[140px] md:h-[220px] mx-auto rounded-lg object-cover"
             />
-            <h2 className="mt-4 text-xl font-semibold text-gray-800">
+            <h2 className="mt-2 md:mt-4 text-sm md:text-xl font-semibold text-gray-800">
               {secondPhoneData?.response?.name || "Select the second product"}
             </h2>
             {secondPhone && (
@@ -168,10 +168,10 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
 
       {/* Specifications Comparison */}
       <div className="border-t border-gray-300 pt-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-2 md:gap-6">
           <div className="bg-white rounded-lg p-6 shadow-sm border">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4">
-              {singlePhoneData?.response?.name || "First product"}{" "}
+            <h3 className="text-base md:text-lg font-semibold text-gray-700 mb-4">
+              {singlePhoneData?.response?.name || "First product"}
               Specifications
             </h3>
             <p
@@ -184,7 +184,7 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
             />
           </div>
           <div className="bg-white rounded-lg p-6 shadow-sm border">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4">
+            <h3 className="text-base md:text-lg font-semibold text-gray-700 mb-4">
               {secondPhoneData?.response?.name || "Second product"}
               Specifications
             </h3>

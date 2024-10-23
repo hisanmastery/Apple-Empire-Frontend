@@ -4,7 +4,13 @@ import compareIcon from "../../public/images/Compair.png";
 import offerIcon from "../../public/images/offers.gif";
 import cartIcon from "../../public/images/Cart.png";
 import accoutIcon from "../../public/images/PROFILE.png";
-import preOderIcon from "../../public/images/PRE-ORDER.png"
+import preOderIcon from "../../public/images/PRE-ORDER.png";
+import onlineSupportIcon from "../../public/images/Online-Support.png";
+import officialProductIcon from "../../public/images/Original-Product-icon.png";
+import fastDeliveryIcon from "../../public/images/Fast-delivery.png";
+import securePaymentIcon from "../../public/images/payment.jpg";
+import appleAmpireLogo from "../../public/icons/apple_empire_logo.png";
+
 export const images = {
   NavbarLogo,
   paymentImage,
@@ -12,5 +18,11 @@ export const images = {
   offerIcon,
   cartIcon,
   accoutIcon,
-  preOderIcon
+  preOderIcon,
+  onlineSupportIcon,
+  officialProductIcon,
+  fastDeliveryIcon,
+  securePaymentIcon,
+  appleAmpireLogo
+
 };

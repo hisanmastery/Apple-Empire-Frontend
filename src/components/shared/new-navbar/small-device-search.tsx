@@ -49,7 +49,7 @@ const SmallDeviceSearchBar = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
           <div
             ref={searchBoxRef}
-            className="absolute top-0 left-0 right-0 mx-auto bg-white w-full max-w-sm rounded-lg shadow-lg p-4 mt-4"
+            className="absolute top-0 left-0 right-0 mx-auto bg-white w-full max-w-sm rounded-lg shadow-lg p-2 mt-4"
           >
             <SearchBox />
           </div>
