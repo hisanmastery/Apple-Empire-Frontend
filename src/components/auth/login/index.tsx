@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import useToaster from "@/hooks/useToaster";
 import Image from "next/image";
 import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const Login = () => {
   const router = useRouter();
@@ -61,14 +62,11 @@ const Login = () => {
         <div>
           <div className="mt-6 text-center text-xl font-extrabold text-gray-900">
             <Image
-              // className="w-14 mx-auto"
-              src={
-                "https://i.ibb.co.com/qrVJBy8/Whats-App-Image-2024-09-20-at-22-00-34-82706a25.jpg"
-              }
-              className={"mx-auto mb-3"}
+              className="w-24 h-24 mx-auto"
+              src={images.appleAmpireLogo}
               alt="logo"
-              width={90}
-              height={90}
+              width={100}
+              height={100}
             />
             Log in Apple Empire
           </div>

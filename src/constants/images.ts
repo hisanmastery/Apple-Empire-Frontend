@@ -9,6 +9,7 @@ import onlineSupportIcon from "../../public/images/Online-Support.png";
 import officialProductIcon from "../../public/images/Original-Product-icon.png";
 import fastDeliveryIcon from "../../public/images/Fast-delivery.png";
 import securePaymentIcon from "../../public/images/payment.jpg";
+import appleAmpireLogo from "../../public/icons/apple_empire_logo.png";
 
 export const images = {
   NavbarLogo,
@@ -21,6 +22,7 @@ export const images = {
   onlineSupportIcon,
   officialProductIcon,
   fastDeliveryIcon,
-  securePaymentIcon
+  securePaymentIcon,
+  appleAmpireLogo
 
 };
