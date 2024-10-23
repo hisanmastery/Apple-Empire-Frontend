@@ -14,7 +14,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SheetDrawer from "@/components/common/sheet-drawer/indext";
-
+const tabData = [
+  { value: "category", label: "Category" },
+  { value: "menu", label: "Menu" },
+];
 interface Category {
   _id: string;
   categoryName: string;
@@ -27,6 +30,7 @@ interface SmallDeviceProps {
 }
 
 const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
+  const [selectedTab, setSelectedTab] = useState("category");
   const [categoryToggle, setCategoryToggle] = useState(false);
   const { data: categoriesData } = useGetAllCategoryQuery<any>({
     page: 1,
@@ -56,62 +60,79 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
           <SheetDrawer
             isOpen={categoryToggle}
             setIsOpen={setCategoryToggle}
-            title="Categories"
+            title=""
             direction="left"
           >
-            <div className="category-dropdown w-72">
-              <div>
-                <Accordion type="multiple" className="w-full">
-                  {categoriesData?.categories?.map((category: Category) => (
-                    <AccordionItem key={category._id} value={category._id}>
-                      <AccordionTrigger>
-                        <div className="flex items-center gap-2 px-2 py-2 hover:underline hover:text-primary">
-                          <Image
-                            className="w-6 h-6"
-                            src={category.image}
-                            alt={category.categoryName}
-                            width={24}
-                            height={24}
-                          />
-                          <span className="text-sm font-medium">
-                            <Link href={`/category/${category.categoryName}`}>
-                              {category.categoryName}
-                            </Link>
-                          </span>
-                        </div>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        {category.subCategory.length > 0 && (
-                          <ul className="pl-10">
-                            {category.subCategory.map(
-                              (subCategory, subIndex) => (
-                                <li className="py-2" key={subIndex}>
-                                  <Link
-                                    href={`/category/${
-                                      category.categoryName
-                                    }/${subCategory.trim().toLowerCase()}`}
-                                  >
-                                    <span className="text-xs font-normal hover:text-blue-500">
-                                      {subCategory}
-                                    </span>
-                                  </Link>
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        )}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
-              <button
-                className="absolute top-2 right-2 text-black"
-                onClick={handleCategoryToggle}
-              >
-                <icons.crossIcon className="w-4 h-4" />
-              </button>
+            <div className="flex gap-2 px-2">
+              {tabData?.map((item: any) => (
+                <button
+                  onClick={() => setSelectedTab(item?.value)}
+                  key={item?.value}
+                  className={`${
+                    selectedTab === item?.value && "bg-_primary text-_white"
+                  } border border-_primary-text rounded-sm mt-2 py-1 w-full flex justify-center`}
+                >
+                  {item?.label}
+                </button>
+              ))}
             </div>
+            {selectedTab === "category" ? (
+              <div className="category-dropdown w-72">
+                <div>
+                  <Accordion type="multiple" className="w-full">
+                    {categoriesData?.categories?.map((category: Category) => (
+                      <AccordionItem key={category._id} value={category._id}>
+                        <AccordionTrigger>
+                          <div className="flex items-center gap-2 px-2 py-2 hover:underline hover:text-primary">
+                            <Image
+                              className="w-6 h-6"
+                              src={category.image}
+                              alt={category.categoryName}
+                              width={24}
+                              height={24}
+                            />
+                            <span className="text-sm font-medium">
+                              <Link href={`/category/${category.categoryName}`}>
+                                {category.categoryName}
+                              </Link>
+                            </span>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          {category.subCategory.length > 0 && (
+                            <ul className="pl-10">
+                              {category.subCategory.map(
+                                (subCategory, subIndex) => (
+                                  <li className="py-2" key={subIndex}>
+                                    <Link
+                                      href={`/category/${
+                                        category.categoryName
+                                      }/${subCategory.trim().toLowerCase()}`}
+                                    >
+                                      <span className="text-xs font-normal hover:text-blue-500">
+                                        {subCategory}
+                                      </span>
+                                    </Link>
+                                  </li>
+                                )
+                              )}
+                            </ul>
+                          )}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </div>
+                <button
+                  className="absolute top-2 right-2 text-black"
+                  onClick={handleCategoryToggle}
+                >
+                  <icons.crossIcon className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </SheetDrawer>
         </div>
       </div>

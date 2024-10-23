@@ -1,7 +1,7 @@
 import CustomTooltip from "@/components/common/custom-tooltip";
 
 const ColorSelector = ({ variations, selectedColor, onColorSelect }: any) => {
-  console.log({ variations });
+
   return (
     <div className="flex justify-between items-center mx-1 mt-8">
       <span className="w-[50px] mr-2">Color :</span>

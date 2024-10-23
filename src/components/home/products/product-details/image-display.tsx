@@ -37,6 +37,8 @@ const ImageDisplay = ({ product, selectedColor }: any) => {
     ? Math.round(((newPrice - newOfferPrice) / newPrice) * 100)
     : 0;
 
+  console.log({ product });
+
   return (
     <div
       className="relative overflow-hidden bg-white border w-[90%] md:w-[80%] mx-auto rounded-md"
