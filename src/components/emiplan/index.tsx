@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CustomModal from "../common/model";
-import { bankOptions } from "@/data/bank-data";
-import { useGetEmiplanQuery } from "@/store/features/emi/emiApi";
+import {
+  useGetAllEmiListQuery,
+  useGetEmiplanQuery,
+} from "@/store/features/emi/emiApi";
 
 const Emiplan = ({ isOpen, setIsOpen, price }: any) => {
   const [selectedName, setSelectedName] = useState("AB Bank");
@@ -10,7 +12,16 @@ const Emiplan = ({ isOpen, setIsOpen, price }: any) => {
     price: inputPrice,
     bankName: selectedName,
   });
+  const { data: bankListData } = useGetAllEmiListQuery<any>({
+    page: 1,
+    limit: 50,
+  });
   const emiData = data?.data;
+  const bankNameList = bankListData?.data?.map((item: any) => ({
+    name: item?.bankName,
+    id: item?._id,
+  }));
+
   useEffect(() => {
     setInputPrice(price);
   }, [price]);
@@ -21,7 +32,7 @@ const Emiplan = ({ isOpen, setIsOpen, price }: any) => {
           {/* Left sidebar with dynamic bank buttons */}
           <div className="col-span-4 border-r-2 border-gray-200 overflow-y-auto">
             <div className="flex flex-col space-y-2 p-2">
-              {bankOptions?.map((bank) => (
+              {bankNameList?.map((bank: any) => (
                 <button
                   key={bank.id}
                   className={`w-full p-2 text-left hover:bg-_primary ${

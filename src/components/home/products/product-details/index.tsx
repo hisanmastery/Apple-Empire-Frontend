@@ -41,7 +41,7 @@ const ProductDetails = ({ id }: any) => {
   const dispatch = useDispatch();
   const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
-  console.log({ data });
+
   useEffect(() => {
     if (storedCart?.length && data) {
       const new_data = data?.response;

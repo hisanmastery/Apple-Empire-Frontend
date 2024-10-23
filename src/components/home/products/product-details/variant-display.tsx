@@ -3,10 +3,19 @@ import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 
 const VariantDisplay = ({ product, setVariantPrice }: any) => {
-  const optionTypes = ["Color", "Storage", "Display"];
+  const optionTypes = Array.from(
+    new Set(
+      product?.variants.flatMap((variant: any) =>
+        variant?.options.map((opt: any) => opt?.name)
+      )
+    )
+  );
   // State for storing the selected options
   const [selectedOptions, setSelectedOptions]: any = useState(
-    optionTypes.reduce((acc, option) => ({ ...acc, [option]: "" }), {})
+    optionTypes?.reduce(
+      (acc: any, option: any) => ({ ...acc, [option]: "" }),
+      {}
+    )
   );
 
   const [availableVariants, setAvailableVariants]: any = useState(
