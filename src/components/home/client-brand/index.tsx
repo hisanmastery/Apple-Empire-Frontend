@@ -10,6 +10,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/virtual";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 
 const breakpoints = {
   0: {
@@ -59,13 +60,15 @@ const ClientBrand = () => {
           {data?.brands?.map((brand: any, index: any) => (
             <SwiperSlide key={index} className={`!h-auto !md:h-full`}>
               <div className="w-full !h-full flex items-center">
-                <Image
-                  src={brand?.image?.viewUrl}
-                  alt={brand?.brandName}
-                  width={100}
-                  height={50}
-                  className="w-auto h-[50px] mx-auto transition ease-in-out duration-300 hover:scale-110 hover:cursor-pointer"
-                />
+                <Link href={`/brand/${brand?.brandName}`}>
+                  <Image
+                    src={brand?.image?.viewUrl}
+                    alt={brand?.brandName}
+                    width={100}
+                    height={50}
+                    className="w-auto h-[50px] mx-auto transition ease-in-out duration-300 hover:scale-110 hover:cursor-pointer"
+                  />
+                </Link>
               </div>
             </SwiperSlide>
           ))}

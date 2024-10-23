@@ -87,12 +87,12 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
       </div>
 
       {/* Phone Selection */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-2 gap-2 md:gap-6 mb-8">
         <div className="col-span-1">
           <SelectBox
             isMulti={false}
             name="firstPhone"
-            className="w-full"
+            className="w-full placeholder:text-sm"
             placeholder="Select the first product"
             onChange={handleFirstPhone}
             value={firstPhone}
@@ -115,7 +115,7 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
       </div>
 
       {/* Product Images and Names */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-8">
+      <div className="grid grid-cols-2 gap-6 items-center mb-8">
         <div className="text-center">
           <div className="relative bg-gray-100 p-6 rounded-lg shadow-md">
             <Image
@@ -125,9 +125,9 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
               alt={singlePhoneData?.response?.name || "First product"}
               width={220}
               height={220}
-              className="mx-auto rounded-lg object-cover"
+              className="w-[120px] md:w-[220px] h-[120px] md:h-[220px] mx-auto rounded-lg object-cover"
             />
-            <h2 className="mt-4 text-xl font-semibold text-gray-800">
+            <h2 className="mt-4 text-lg md:text-xl font-semibold text-gray-800">
               {singlePhoneData?.response?.name || "Select the first product"}
             </h2>
             {firstPhone && (

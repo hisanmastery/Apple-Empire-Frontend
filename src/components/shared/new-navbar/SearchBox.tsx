@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 export default function SearchBox() {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const { data } = useGetProductsListsQuery<any>(
     {
@@ -17,12 +17,12 @@ export default function SearchBox() {
       page: 1,
       limit: 10,
     },
-    { skip: !open }
+    { skip: !searchTerm }
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-    setOpen(e.target.value.length > 0);
+    // setOpen(e.target.value.length > 0);
   };
 
   const handleSearch = () => {
@@ -36,7 +36,7 @@ export default function SearchBox() {
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node)
     ) {
-      setOpen(false);
+      // setOpen(false);
     }
   };
 
@@ -53,20 +53,20 @@ export default function SearchBox() {
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
-        onClick={() => setOpen(true)}
-        className="w-full py-2 pl-5 focus:outline-none rounded focus:ring-2 focus:ring-_primary/60 transition-all duration-300 ease-in-out"
+        // onClick={() => setOpen(true)}
+        className="w-full py-0 md:py-2 pl-5 focus:outline-none rounded md:focus:ring-2 focus:ring-_primary/60 transition-all duration-300 ease-in-out"
         placeholder="Search for products..."
         aria-label="Search"
       />
       <button
-        className="absolute right-0 text-_primary bg-_primary/20 p-4 py-4"
+        className="absolute right-0 text-_primary bg-_primary/20 p-1 md:p-4 py-1 md:py-4"
         type="button"
         onClick={handleSearch}
       >
         <icons.SearchIcons className="text-xl " />
       </button>
       {/* Conditional rendering of search results */}
-      {productsData?.length > 0 && open && (
+      {productsData?.length > 0 && (
         <div
           className="absolute top-12  z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md max-h-96 overflow-auto"
           ref={dropdownRef}
@@ -75,7 +75,7 @@ export default function SearchBox() {
             <Link href={`/products/${product?._id}`} key={product._id}>
               <div
                 className="p-2 group cursor-pointer flex gap-3 items-center"
-                onClick={() => setOpen(false)}
+                // onClick={() => setOpen(false)}
               >
                 <Image
                   src={product?.image?.imageUrl}
