@@ -1,12 +1,12 @@
 import CustomTabs from "@/components/common/custom-tab";
-import React from "react";
+import React, { useState } from "react";
 
 const ProductInfoTab = ({ product }: any) => {
+  const [selectedTab, setSelectedTab] = useState("");
   const tabs = [
     {
       value: "Specification",
       label: "Specification",
-      // content: <div>{data?.response?.specification}</div>,
       content: (
         <div
           className="text-gray-600"
@@ -34,7 +34,11 @@ const ProductInfoTab = ({ product }: any) => {
   ];
   return (
     <div className="mt-10">
-      <CustomTabs defaultValue={"Specification"} tabs={tabs} />
+      <CustomTabs
+        defaultValue={"Specification"}
+        tabs={tabs}
+        setSelectedTab={setSelectedTab}
+      />
     </div>
   );
 };

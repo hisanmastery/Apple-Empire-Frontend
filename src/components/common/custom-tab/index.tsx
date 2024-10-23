@@ -1,13 +1,7 @@
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const CustomTabs = ({
-  defaultValue,
-  className,
-  tabs,
-  setSelectedTab,
-  selectedTab,
-}: any) => {
+const CustomTabs = ({ defaultValue, className, tabs, setSelectedTab }: any) => {
   const handleTabChange = (value: any) => {
     setSelectedTab(value);
   };
