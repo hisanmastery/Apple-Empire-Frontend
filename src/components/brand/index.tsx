@@ -13,17 +13,14 @@ import ProductCardSkeleton from "../shared/skeleton/products-card-skeleton";
 import SmallDeviceProductsFilter from "../products-sidebar/smallDeviceProductsFilter";
 import { icons } from "@/constants/icons";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
+import CategoryTabs from "../category-tabs/CategoryTab";
 interface BrandProductsProps {
-  category: string;
-  subCategory: string;
+  brand: string;
 }
 
-const BrandProducts: React.FC<BrandProductsProps> = ({
-  category,
-  subCategory,
-}) => {
+const BrandProducts: React.FC<BrandProductsProps> = ({ brand }) => {
   const searchParams = useSearchParams();
-  const selectedSubCategory = searchParams.get("subcategory");
+  const category = searchParams.get("category");
   const [currentPage, setCurrentPage] = useState(1);
   const [openSheetDrawer, setOpenSheetDrawer] = useState(false);
   const [pageSize, setPageSize] = useState(12);
@@ -31,16 +28,16 @@ const BrandProducts: React.FC<BrandProductsProps> = ({
   const { label, value } = useSelector(selectProductsVariant);
   // Fetching products using custom hooks
   const { data: allProducts, isLoading } = useGetProductsListsQuery<any>({
-    category: decodeURIComponent(category),
-    subCategory: selectedSubCategory,
+    category: category,
     page: currentPage,
     limit: pageSize,
     minVariantPrice: min,
+    brand: brand,
     maxVariantPrice: max,
     variantOptionName: label,
     variantOptionValue: value,
   });
-  console.log({allProducts})
+  console.log({ allProducts });
 
   //Loading
   if (isLoading) {
@@ -55,11 +52,9 @@ const BrandProducts: React.FC<BrandProductsProps> = ({
 
   return (
     <div className="mt-5">
-      <div className="bg-_white p-5 mb-3">
-        <p className="text-2xl font-semibold mb-2">
-          {decodeURIComponent(category)}
-        </p>
-        <SubCategoryTabs category={decodeURIComponent(category)} />
+      <div className="bg-_white p-5 mb-5 rounded-md">
+        <p className="text-2xl font-semibold mb-2">{brand}</p>
+        <CategoryTabs />
       </div>
       <div className="md:hidden flex justify-end">
         <button

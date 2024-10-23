@@ -10,6 +10,7 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
         params: {
           productType: arg?.productsType || "",
           type: arg?.type || "",
+          brand: arg?.brand || "",
           offerType: arg?.offerType || "",
           category: arg?.category || "",
           subCategory: arg?.subCategory || "",

@@ -18,6 +18,15 @@ const tabData = [
   { value: "category", label: "Category" },
   { value: "menu", label: "Menu" },
 ];
+
+const policyLinks = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "EMI Policy", href: "/emi-policy" },
+  { label: "Warranty Policy", href: "/warranty-policy" },
+  { label: "Exchange Policy", href: "/exchange-policy" },
+  { label: "FAQ", href: "/faq" },
+];
+
 interface Category {
   _id: string;
   categoryName: string;
@@ -105,6 +114,7 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
                                 (subCategory, subIndex) => (
                                   <li className="py-2" key={subIndex}>
                                     <Link
+                                      onClick={handleCategoryToggle}
                                       href={`/category/${
                                         category.categoryName
                                       }/${subCategory.trim().toLowerCase()}`}
@@ -131,7 +141,23 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
                 </button>
               </div>
             ) : (
-              <div></div>
+              <ul className="px-5 mt-5">
+                {policyLinks.map((item, index) => (
+                  <Link
+                    key={index}
+                    onClick={handleCategoryToggle}
+                    href={item.href}
+                    className={`text-black hover:text-_primary border-b border-_primary-text py-2 ${
+                      item.label === "Warranty Policy" ||
+                      item.label === "Exchange Policy"
+                        ? "hover:text-_primary-bg"
+                        : ""
+                    } block`}
+                  >
+                    <li className="block">{item.label}</li>
+                  </Link>
+                ))}
+              </ul>
             )}
           </SheetDrawer>
         </div>
