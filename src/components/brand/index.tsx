@@ -1,13 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import Loading from "../common/loading";
 import ProductCard from "../common/product-card";
 import ProductsNotFound from "../products-not-found";
 import { useSelector } from "react-redux";
 import { selectPriceRange } from "@/store/features/products/productsPriceRangeSlice";
 import Pagination from "../common/pagination";
 import { selectProductsVariant } from "@/store/features/products/productsCategorySlice";
-import SubCategoryTabs from "../category-tabs/SubCategoryTab";
 import { useSearchParams } from "next/navigation";
 import ProductCardSkeleton from "../shared/skeleton/products-card-skeleton";
 import SmallDeviceProductsFilter from "../products-sidebar/smallDeviceProductsFilter";
@@ -37,7 +35,6 @@ const BrandProducts: React.FC<BrandProductsProps> = ({ brand }) => {
     variantOptionName: label,
     variantOptionValue: value,
   });
-  console.log({ allProducts });
 
   //Loading
   if (isLoading) {

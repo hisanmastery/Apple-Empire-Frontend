@@ -29,6 +29,11 @@ const Checkout = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [payload, setPayload] = useState<any>(null);
 
+  const storedCartUpdate = storedCart?.map((item: any) => {
+    const { createdAt, updatedAt, __v, _id, ...cleanedItem } = item;
+    return cleanedItem;
+  });
+
   // Calculate subtotal price
   const subtotal = storedCart?.reduce((acc: number, product: any) => {
     if (!product?.price) return acc;
@@ -65,6 +70,7 @@ const Checkout = () => {
       isPayment: false,
       address: data?.address,
       productIds: storedCart?.map((item: any) => item.productId),
+      productsInfo: storedCartUpdate,
       shippingMethod: {
         shippingMethod: shippingMethod?.id,
         paymentMethod: data?.onlinePayment,

@@ -2,7 +2,11 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 
-const VariantDisplay = ({ product, setVariantPrice }: any) => {
+const VariantDisplay = ({
+  product,
+  setVariantPrice,
+  setSelectedVariantOptions,
+}: any) => {
   const optionTypes = Array.from(
     new Set(
       product?.variants.flatMap((variant: any) =>
@@ -10,12 +14,19 @@ const VariantDisplay = ({ product, setVariantPrice }: any) => {
       )
     )
   );
-  // State for storing the selected options
+  const defaultVariant = product?.variants?.[0] || null;
+
+  // State for storing the selected options, initialized based on the default variant
   const [selectedOptions, setSelectedOptions]: any = useState(
-    optionTypes?.reduce(
-      (acc: any, option: any) => ({ ...acc, [option]: "" }),
-      {}
-    )
+    defaultVariant
+      ? defaultVariant.options.reduce(
+          (acc: any, option: any) => ({ ...acc, [option.name]: option.value }),
+          {}
+        )
+      : optionTypes.reduce(
+          (acc: any, option: any) => ({ ...acc, [option]: "" }),
+          {}
+        )
   );
 
   const [availableVariants, setAvailableVariants]: any = useState(
@@ -45,7 +56,13 @@ const VariantDisplay = ({ product, setVariantPrice }: any) => {
 
   useEffect(() => {
     setVariantPrice(selectedVariant);
-  }, [selectedVariant, setVariantPrice]);
+    setSelectedVariantOptions(selectedOptions);
+  }, [
+    selectedVariant,
+    setVariantPrice,
+    selectedOptions,
+    setSelectedVariantOptions,
+  ]);
 
   return (
     <section>

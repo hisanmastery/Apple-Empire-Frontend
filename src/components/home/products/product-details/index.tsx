@@ -36,6 +36,8 @@ const ProductDetails = ({ id }: any) => {
   const [variantPrice, setVariantPrice] = useState<any>();
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
   const [selectedColor, setSelectedColor]: any = useState();
+  const [selectedVariantOptions, setSelectedVariantOptions] =
+    useState<any>(null);
   const [thisItem, setThisItem] = useState<any>({});
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
@@ -65,6 +67,11 @@ const ProductDetails = ({ id }: any) => {
 
   // handle cart click
   const handleCartClick = async (productData: any) => {
+    //products info
+    const productsInfo = {
+      ...selectedVariantOptions,
+      imageColor: selectedColor,
+    };
     await addToCart(
       productData,
       dispatch,
@@ -72,7 +79,8 @@ const ProductDetails = ({ id }: any) => {
       isAuthenticated,
       customerInfo,
       addToCartItem,
-      showToast
+      showToast,
+      productsInfo
     );
   };
   // check already added cart
@@ -102,6 +110,10 @@ const ProductDetails = ({ id }: any) => {
     );
   };
 
+  useEffect(() => {
+    setSelectedColor(data?.response?.variations?.[0]?.color);
+  }, [data]);
+
   if (isLoading) {
     return <ProductDetailsSkeleton />;
   }
@@ -128,12 +140,7 @@ const ProductDetails = ({ id }: any) => {
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
         <div className="col-span-3 flex mx-auto">
           <div>
-            <ImageDisplay
-              product={data}
-              selectedColor={
-                selectedColor || data?.response?.variations?.[0]?.color
-              }
-            />
+            <ImageDisplay product={data} selectedColor={selectedColor} />
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
               {data?.response?.variations
                 ?.slice(0, 4)
@@ -196,6 +203,7 @@ const ProductDetails = ({ id }: any) => {
             <VariantDisplay
               product={data?.response}
               setVariantPrice={setVariantPrice}
+              setSelectedVariantOptions={setSelectedVariantOptions}
             />
           </div>
           {/* add to cart button */}

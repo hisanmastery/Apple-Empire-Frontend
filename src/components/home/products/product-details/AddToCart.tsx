@@ -24,6 +24,7 @@ interface CartItem {
   image: string;
   quantity: number;
   email: string;
+  variants: object;
 }
 
 interface AddToCartResponse {
@@ -44,7 +45,8 @@ export const addToCart = async (
   isAuthenticated: boolean,
   customerInfo: CustomerInfo | null,
   addToCartItem: (payload: { payload: CartItem }) => Promise<AddToCartResponse>,
-  showToast: (type: "success" | "error", message: string) => void
+  showToast: (type: "success" | "error", message: string) => void,
+  productsInfo: any
 ) => {
   const data = productData;
   const token = localStorage.getItem("token");
@@ -53,6 +55,7 @@ export const addToCart = async (
       title: data.name,
       email: customerInfo?.email,
       productId: data._id,
+      variants: productsInfo,
       price: data.variants?.[0]?.price || data.offerPrice || data.price || 0,
       image: data.image?.imageUrl || "",
       quantity: 1,

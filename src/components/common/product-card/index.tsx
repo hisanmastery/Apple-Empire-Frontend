@@ -12,7 +12,6 @@ import { getStoredData } from "@/store/features/cart/cartSlice";
 import { get_store_data } from "@/utils/get_store_data";
 import WishListButton from "@/components/home/products/product-details/WishListButton";
 
-// Define the type for the datas prop (can adjust as per your model)
 interface ProductData {
   _id: string;
   name: string;
@@ -22,6 +21,7 @@ interface ProductData {
   image: { imageUrl: string };
   review: number;
   variants: any[];
+  variations: any[];
 }
 
 interface ProductCardProps {
@@ -35,6 +35,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const { isAuthenticated, customerInfo }: any = useAuth();
   const showToast = useToaster();
 
+  const formatVariants = datas?.variants?.[0]?.options?.reduce(
+    (acc: any, option: any) => {
+      acc[option.name] = option.value;
+      return acc;
+    },
+    {}
+  );
+
+  const productsInfo = {
+    ...formatVariants,
+    imageColor: datas?.variations?.[0]?.color,
+  };
+
   const handleAddToCart = async (productData: ProductData) => {
     const data = productData;
     const token = localStorage.getItem("token");
@@ -42,6 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
     if (token && isAuthenticated) {
       const payload = {
         email: customerInfo?.email,
+        variants: productsInfo,
         title: data?.name,
         productId: data?._id,
         price: data?.variants?.[0]?.price || data?.offerPrice || data?.price,
@@ -86,6 +100,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             const payload = {
               title: data?.name,
               productId: data?._id,
+              variants: productsInfo,
               price:
                 data?.variants?.[0]?.price || data?.offerPrice || data?.price,
               image: data?.image?.imageUrl,
@@ -96,12 +111,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             dispatch(getStoredData(cart_items));
           }
         } else {
-          console.log("Product Id Not Found.");
+          showToast("error", "Product Id Not Found.");
         }
       } else {
         const payload = {
           title: data?.name,
           productId: data?._id,
+          variants: productsInfo,
           price: data?.variants?.[0]?.price || data?.offerPrice || data?.price,
           image: data?.image?.imageUrl,
           quantity: 1,
