@@ -20,34 +20,38 @@ const OrderDetails = ({ id }: any) => {
 
   // Render the Order Details component
   return (
-    <div className="container mx-auto p-6 mt-10 bg-_white shadow rounded-lg">
+    <div className="container mx-auto p-6 mt-10 bg-_white shadow rounded-lg min-h-screen">
       <h1 className="text-2xl font-semibold mb-6">Order Details</h1>
 
       {/* Order Summary */}
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 mb-8">
         <div className="bg-gray-50 p-4 rounded-lg">
           <h2 className="text-lg font-semibold">Order Summary</h2>
-          <p className="text-gray-600">Order ID: {order._id}</p>
+          <p className="text-gray-600">Order ID: {order?._id}</p>
           <p className="text-gray-600">
-            Date: {new Date(order.createdAt).toLocaleDateString()}
+            Date: {new Date(order?.createdAt).toLocaleDateString()}
           </p>
-          <p className="text-gray-600">Total Price: ${order.totalPrice}</p>
-          <p className="text-gray-600">Payment Status: {order.paymentStatus}</p>
+          <p className="text-gray-600">Total Price: ${order?.totalPrice}</p>
           <p className="text-gray-600">
-            Delivery Status: {order.deliveryStatus}
+            Payment Status: {order?.paymentStatus}
           </p>
-          <p className="text-gray-600">Transaction ID: {order.transactionId}</p>
+          <p className="text-gray-600">
+            Delivery Status: {order?.deliveryStatus}
+          </p>
+          <p className="text-gray-600">
+            Transaction ID: {order?.transactionId}
+          </p>
         </div>
 
         {/* Customer Details */}
         <div className="bg-gray-50 p-4 rounded-lg">
           <h2 className="text-lg font-semibold">Customer Details</h2>
-          <p className="text-gray-600">Name: {order.name}</p>
-          <p className="text-gray-600">Email: {order.email}</p>
-          <p className="text-gray-600">Phone: {order.phone}</p>
-          <p className="text-gray-600">Address: {order.address}</p>
-          <p className="text-gray-600">City: {order.city}</p>
-          <p className="text-gray-600">Post Code: {order.postCode}</p>
+          <p className="text-gray-600">Name: {order?.name}</p>
+          <p className="text-gray-600">Email: {order?.email}</p>
+          <p className="text-gray-600">Phone: {order?.phone}</p>
+          <p className="text-gray-600">Address: {order?.address}</p>
+          <p className="text-gray-600">City: {order?.city}</p>
+          <p className="text-gray-600">Post Code: {order?.postCode}</p>
         </div>
       </div>
 
@@ -62,19 +66,19 @@ const OrderDetails = ({ id }: any) => {
             >
               <div className="relative w-24 h-24">
                 <Image
-                  src={product.image}
-                  alt={product.title}
+                  src={product?.image}
+                  alt={product?.title}
                   layout="fill"
                   objectFit="cover"
                   className="rounded-md"
                 />
               </div>
               <div>
-                <p className="text-gray-700 font-semibold">{product.title}</p>
-                <p className="text-gray-600">Quantity: {product.quantity}</p>
-                <p className="text-gray-600">Price: ${product.price}</p>
+                <p className="text-gray-700 font-semibold">{product?.title}</p>
+                <p className="text-gray-600">Quantity: {product?.quantity}</p>
+                <p className="text-gray-600">Price: ${product?.price}</p>
                 <div className="flex space-x-2 mt-1">
-                  {Object.entries(product.variants).map(
+                  {Object.entries(product?.variants).map(
                     ([key, value]: [string, any]) => (
                       <span
                         key={key}
@@ -95,21 +99,21 @@ const OrderDetails = ({ id }: any) => {
       <div className="bg-gray-50 p-4 rounded-lg mb-8">
         <h2 className="text-lg font-semibold">Shipping Method</h2>
         <p className="text-gray-600">
-          Shipping Method: {order.shippingMethod.shippingMethod}
+          Shipping Method: {order?.shippingMethod?.shippingMethod}
         </p>
         <p className="text-gray-600">
-          Payment Method: {order.shippingMethod.paymentMethod}
+          Payment Method: {order?.shippingMethod?.paymentMethod}
         </p>
         <p className="text-gray-600">
-          Order Notes: {order.shippingMethod.orderNotes || "N/A"}
+          Order Notes: {order?.shippingMethod?.orderNotes || "N/A"}
         </p>
       </div>
 
       {/* Order Tracking */}
       <div className="bg-gray-50 p-4 rounded-lg">
         <h2 className="text-lg font-semibold">Order Tracking</h2>
-        <OrderTracking deliveryStatus={order.deliveryStatus} />
-        <p className="text-gray-600">Current Status: {order.deliveryStatus}</p>
+        <OrderTracking deliveryStatus={order?.deliveryStatus} />
+        <p className="text-gray-600">Current Status: {order?.deliveryStatus}</p>
       </div>
 
       {/* Action Buttons */}
