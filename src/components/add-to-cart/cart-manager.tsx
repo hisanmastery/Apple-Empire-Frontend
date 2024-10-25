@@ -69,6 +69,7 @@ const CartManager: React.FC = () => {
                   email: item.email,
                   title: item.title,
                   productId: item.productId,
+                  variants: item?.variants,
                   price: item.price,
                   image: item.image,
                   quantity: item.quantity,

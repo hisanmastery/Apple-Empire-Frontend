@@ -45,7 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
 
   const productsInfo = {
     ...formatVariants,
-    imageColor: datas?.variations?.[0]?.color,
+    Color: datas?.variations?.[0]?.color,
   };
 
   const handleAddToCart = async (productData: ProductData) => {
