@@ -6,22 +6,28 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { images } from "@/constants/images";
 
 const products = [
   {
-    id: "62aefe9ad8b80d5234af625a",
-    image:
-      "https://i.ibb.co/302jz8B/Whats-App-Image-2024-09-23-at-19-26-50-c27fd853.jpg",
+    id:"54564565766782453467",
+    image: images.banner1
   },
   {
-    id: "62aefe9ad8b80d5234af625b",
-    image:
-      "https://i.ibb.co/nmPrV4g/Whats-App-Image-2024-09-23-at-19-26-52-a5f25037.jpg",
+    id: "2345678903456sdfsd",
+    image:images.banner2
   },
   {
-    id: "62aefe9ad8b80d5234af625c",
-    image:
-      "https://i.ibb.co/LCFVpc2/Whats-App-Image-2024-09-23-at-19-26-51-19eabe7d.jpg",
+    id: "234567890fghjkwesd",
+    image:images.banner3
+  },
+  {
+    id: "dfghjk345678904sdf",
+    image:images.banner4
+  },
+  {
+    id: "sdfghjksdfert2345",
+    image:images.banner5
   },
 ];
 
@@ -75,22 +81,6 @@ const HeroSection = () => {
           ))
         )}
       </Swiper>
-      {/* <div style={{ textAlign: "center" }}>
-        <button
-          className="button swiper-button-prev absolute bg-[#eff1f0] z-30 p-1 font-thin rounded-full left-9 top-[50%]"
-          onClick={() => swiperRef.current.swiper.slidePrev()}
-          aria-label="Previous slide"
-        >
-          <icons.GoArrowLeft className="text-xl text-_orange" />
-        </button>
-        <button
-          className="button swiper-button-next absolute bg-[#eff1f0] z-30 p-1 font-thin rounded-full right-8 top-[50%]"
-          onClick={() => swiperRef.current.swiper.slideNext()}
-          aria-label="Next slide"
-        >
-          <icons.GoArrowRight className="text-xl text-_orange" />
-        </button>
-      </div> */}
     </div>
   );
 };
