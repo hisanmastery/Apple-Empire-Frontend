@@ -29,19 +29,19 @@ const Checkout = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [payload, setPayload] = useState<any>(null);
 
-  const storedCartUpdate = storedCart?.map((item: any) => {
+  // Clean the stored cart items by removing unnecessary fields
+  const cleanedCart = storedCart.map((item: any) => {
     const { createdAt, updatedAt, __v, _id, ...cleanedItem } = item;
     return cleanedItem;
   });
 
   // Calculate subtotal price
-  const subtotal = storedCart?.reduce((acc: number, product: any) => {
+  const subtotal = cleanedCart.reduce((acc: any, product: any) => {
     if (!product?.price) return acc;
     const priceAsString =
       typeof product.price === "string"
         ? product.price
         : product.price.toString();
-
     const priceWithoutCommas = parseFloat(priceAsString.replace(/,/g, ""));
     return acc + product.quantity * priceWithoutCommas;
   }, 0);
@@ -51,6 +51,14 @@ const Checkout = () => {
   const totalPrice = subtotal - cartDiscount + deliveryFee;
 
   const onSubmit = async (data: any) => {
+    // Check if the email is provided if customer is not logged in
+    if (!customerInfo?.email) {
+      if (!data?.email) {
+        showToast("error", "Email is required.");
+        return;
+      }
+    }
+
     const uniquePassword = generateUniquePassword();
     const registerData = {
       name: data.name,
@@ -60,7 +68,7 @@ const Checkout = () => {
       role: "customer",
     };
 
-    // Define the payload here
+    // Define the payload for the payment
     const newPayload = {
       email: customerInfo?.email || data?.email,
       name: data?.name,
@@ -69,8 +77,8 @@ const Checkout = () => {
       city: data?.city,
       isPayment: false,
       address: data?.address,
-      productIds: storedCart?.map((item: any) => item.productId),
-      productsInfo: storedCartUpdate,
+      productIds: cleanedCart.map((item: any) => item.productId),
+      productsInfo: cleanedCart,
       shippingMethod: {
         shippingMethod: shippingMethod?.id,
         paymentMethod: data?.onlinePayment,
@@ -79,8 +87,8 @@ const Checkout = () => {
       totalPrice: totalPrice,
     };
 
-    if (data?.email) {
-      try {
+    try {
+      if (!customerInfo?.email) {
         const res: any = await customerRegister(registerData);
         if (res?.data?.status_code === 200) {
           // Successful registration
@@ -90,23 +98,25 @@ const Checkout = () => {
             password: registerData.password,
           });
           setIsModalOpen(true);
-        } else if (
-          res?.error?.data?.message === "Email already in use" ||
-          customerInfo?.email
-        ) {
+        } else if (res?.error?.data?.message === "Email already in use") {
           handleConfirm();
           setPayload(newPayload);
         } else {
           showToast("error", res?.error?.message || "Registration failed");
         }
-      } catch (error) {
-        showToast(
-          "error",
-          "An error occurred during registration. Please try again."
-        );
+      } else {
+        const paymentRes: any = await createPayment({ payload: newPayload });
+        if (paymentRes?.data?.isSuccess) {
+          router.push(paymentRes?.data?.response?.paymentInfo?.GatewayPageURL);
+        } else {
+          showToast("error", "Payment failed");
+        }
       }
-    } else {
-      showToast("error", "Email is required.");
+    } catch (error) {
+      showToast(
+        "error",
+        "An error occurred during registration. Please try again."
+      );
     }
   };
 
@@ -162,7 +172,7 @@ const Checkout = () => {
               cartDiscount={cartDiscount}
               deliveryFee={deliveryFee}
               totalPrice={totalPrice}
-              totalProducts={storedCart}
+              totalProducts={cleanedCart}
               giftSend={giftSend}
               setGiftSend={setGiftSend}
             />
@@ -173,7 +183,7 @@ const Checkout = () => {
             >
               {isPaymentLoading || isLoading ? (
                 <p className="flex justify-center items-center gap-2">
-                  <icons.ImSpinner3 className="animate-spin text-xl" />{" "}
+                  <icons.ImSpinner3 className="animate-spin text-xl" />
                   Processing...
                 </p>
               ) : (
