@@ -18,7 +18,6 @@ import useToaster from "@/hooks/useToaster";
 import Emiplan from "@/components/emiplan";
 import VariantDisplay from "./variant-display";
 import ImageDisplay from "./image-display";
-import ColorSelector from "./color-selector";
 import SocialShare from "./social-share";
 import ProductInfoTab from "./product-info-tab";
 import ProductActionButtons from "./ProductActionButtons";
@@ -70,7 +69,7 @@ const ProductDetails = ({ id }: any) => {
     //products info
     const productsInfo = {
       ...selectedVariantOptions,
-      imageColor: selectedColor,
+      Color: selectedColor,
     };
     await addToCart(
       productData,
@@ -190,20 +189,14 @@ const ProductDetails = ({ id }: any) => {
             id={id}
             showToast={showToast}
           />
-          {/* color variant */}
-          <div className="flex justify-between items-center mx-1">
-            <ColorSelector
-              variations={data?.response?.variations}
-              selectedColor={selectedColor}
-              onColorSelect={handleColorButtonClick}
-            />
-          </div>
           {/* variant */}
           <div>
             <VariantDisplay
               product={data?.response}
               setVariantPrice={setVariantPrice}
               setSelectedVariantOptions={setSelectedVariantOptions}
+              handleColorButtonClick={handleColorButtonClick}
+              selectedColor={selectedColor}
             />
           </div>
           {/* add to cart button */}

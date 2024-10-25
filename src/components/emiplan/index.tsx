@@ -87,12 +87,14 @@ const Emiplan = ({ isOpen, setIsOpen, price }: any) => {
                         <td className="p-2 border text-center">
                           {item?.months}
                         </td>
-                        <td className="p-2 border text-center">₹{item?.emi}</td>
                         <td className="p-2 border text-center">
-                          ₹{item?.emiCharge}
+                          TK. {item?.emi}
                         </td>
                         <td className="p-2 border text-center">
-                          ₹{item?.effectiveCost}
+                          TK. {item?.emiCharge}
+                        </td>
+                        <td className="p-2 border text-center">
+                          TK. {item?.effectiveCost}
                         </td>
                       </tr>
                     );
