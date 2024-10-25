@@ -60,7 +60,7 @@ const VariantDisplay = ({
   const handleColorVariant = (value: any) => {
     handleColorButtonClick(value);
     optionTypes.includes("Color") && handleOptionChange("Color", value);
-    optionTypes.includes("Color") && handleOptionChange("Color", value);
+    optionTypes.includes("color") && handleOptionChange("color", value);
   };
 
   useEffect(() => {
