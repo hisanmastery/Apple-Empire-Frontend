@@ -60,13 +60,13 @@ const TopItems = () => {
         {data?.categories?.map((category: any, index: any) => (
           <SwiperSlide key={index} className={`!h-auto !md:h-full`}>
             <Link href={`/category/${category?.categoryName}`}>
-              <div className="w-full !h-full pb-1 md:pb-5 bg-_white rounded-lg">
+              <div className="w-full !h-full p-3 bg-_white rounded-lg">
                 <Image
                   src={category?.image}
                   alt={category?.categoryName}
                   width={100}
                   height={100}
-                  className="w-[60px] md:w-[100px] h-[60px] md:h-[100px] mx-auto transition ease-in-out duration-300 hover:scale-105 hover:cursor-pointer"
+                  className="w-[60px] md:w-[80px] h-[50px] md:h-[80px] mx-auto transition ease-in-out duration-300 hover:scale-105 hover:cursor-pointer"
                 />
                 <h4 className="text-xs md:text-base font-medium leading-normal text-black text-center pt-1 md:pt-3">
                   {category?.categoryName}

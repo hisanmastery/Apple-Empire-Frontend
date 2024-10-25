@@ -10,7 +10,6 @@ import useAuth from "@/hooks/useAuth";
 import { images } from "@/constants/images";
 import React from "react";
 
-
 export default function MiddleNavbar({ className, type }: any) {
   const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
   const { isAuthenticated } = useAuth();
@@ -74,14 +73,19 @@ export default function MiddleNavbar({ className, type }: any) {
                 />
               </div> */}
 
-
               {/* offer */}
               <Link href="/offers">
                 <div rel="noopener noreferrer">
-                  <p className="flex justify-center">
-                    {/* <icons.offerIcons className="text-3xl text-_primary" /> */}
-                    <Image src={images.offerIcon} alt="compaire icon" width={30} height={30}/>
-                  </p>
+                  {/* <p className="flex justify-center">
+                    <icons.offerIcons className="text-3xl text-_primary" />
+                  </p> */}
+                  <Image
+                    src={images.offerIcon}
+                    alt="offer  icon"
+                    width={100}
+                    height={100}
+                    className="w-14 h-10"
+                  />
                   <span className="text-_white">Offers</span>
                 </div>
               </Link>
@@ -106,7 +110,7 @@ export default function MiddleNavbar({ className, type }: any) {
                   className="absolute -right-[45px] top-20 z-50 hidden group-hover:block"
                 />
               </div>
-              
+
               {/* pre order Link */}
               <Link href="/pre-order">
                 <div rel="noopener noreferrer">
@@ -118,8 +122,8 @@ export default function MiddleNavbar({ className, type }: any) {
                 </div>
               </Link>
 
-               {/* compare Link */}
-               <Link href="/compare">
+              {/* compare Link */}
+              <Link href="/compare">
                 <div rel="noopener noreferrer">
                   <p className="flex justify-center">
                     <icons.IoMdGitCompareIcon className="text-3xl text-_primary" />

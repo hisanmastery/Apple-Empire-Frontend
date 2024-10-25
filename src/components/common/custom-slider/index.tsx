@@ -20,6 +20,7 @@ interface Product {
   image: { imageUrl: string };
   review: number;
   variants: any[];
+  variations: any[];
 }
 
 interface CustomSliderProps {

@@ -4,18 +4,14 @@ import { useGetSingleOrderQuery } from "@/store/features/checkout/checkoutApi";
 import Image from "next/image";
 import OrderTracking from "../profile/OrderTracking";
 import Link from "next/link";
+import Loading from "../common/loading";
 
 const OrderDetails = ({ id }: any) => {
-  // Fetch order data using the custom hook
-  const { data, isLoading, error } = useGetSingleOrderQuery<any>(id);
+  const { data, isLoading } = useGetSingleOrderQuery<any>(id);
   const order = data?.response;
 
-  // Loading and Error States
   if (isLoading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>Failed to load order details.</p>;
+    return <Loading />;
   }
 
   // Render the Order Details component
