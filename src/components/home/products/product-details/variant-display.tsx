@@ -89,6 +89,13 @@ const VariantDisplay = ({
           onColorSelect={handleColorVariant}
         />
       )}
+      {!optionTypes.includes("color") && !optionTypes.includes("Color") && (
+        <ColorSelector
+          variations={product?.variations}
+          selectedColor={selectedColor}
+          onColorSelect={handleColorButtonClick}
+        />
+      )}
       <div className="mt-4">
         {optionTypes.map(
           (option: any) =>
