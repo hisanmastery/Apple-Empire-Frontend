@@ -42,6 +42,68 @@ const PreOrder: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center py-10 bg-gray-50">
+      {/* pre-order content  */}
+      <div className="container mx-auto px-4 py-8">
+        {/* bangla content  */}
+        <h1 className="text-3xl font-bold mb-6 text-center">
+        প্রি-অর্ডার পলিসি-
+        </h1>
+
+        <p className="text-lg text-gray-800 mb-4 text-center">
+        আপনাদের সবার আস্থার জায়গা এ্যাপেল এম্পায়ারে এখন থেকে প্রি-অর্ডারের মাধ্যমে আপনি যেকোন প্রোডাক্ট নিতে পারবেন।
+        </p>
+
+        <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+          <h2 className="text-2xl font-semibold mb-4">
+          আসুন প্রি-অর্ডার পলিসি গুলো দেখে নেই :
+          </h2>
+          <ol className="list-decimal list-inside text-gray-700 space-y-3 mb-4">
+            <li>আপনার যেকোন প্রি-অর্ডার নিতে আমাদের ফর্মটি ফিলাপ করুন।</li>
+            <li>২৪ ঘন্টার মধ্যে আপনি আমাদের থেকে ফোন পাবেন।</li>
+            <li>
+              প্রি-অর্ডার এর জন্য এডভান্স করতে হবে <strong>২০%</strong>।
+            </li>
+            <li>৩ থেকে ৭ কর্মদিবসের মাঝে আপনার প্রোডাক্ট ডেলিভারি হবে।</li>
+            <li>
+              প্রি-অর্ডার এর এডভান্স নন রিফান্ডেবল কিন্তু যদি কোন কারণে আমরা
+              দিতে ব্যর্থ হই তাহলে ৩ কর্মদিবসের মধ্যে রিফান্ড পাবেন।
+            </li>
+          </ol>
+        </div>
+        {/* englih content  */}
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          Pre-Order Policy
+        </h1>
+
+        <p className="text-lg text-gray-800 mb-4 text-center">
+        At Apple Empire, we now offer the convenience of pre-ordering any product. Let's take a look at the pre-order policies:
+        </p>
+
+        <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+          {/* <h2 className="text-2xl font-semibold mb-4">
+            Pre-order Instructions:
+          </h2> */}
+          <ol className="list-decimal list-inside text-gray-700 space-y-3 mb-4">
+            <li>To place a pre-order, please fill out our pre-order form.</li>
+            <li>You will receive a call from us within 24 hours.</li>
+            <li>
+              A <strong>**20% advance payment**</strong> is required for all
+              pre-orders.
+            </li>
+            <li>
+              Your product will be delivered within{" "}
+              <strong>**3 to 7 working days**</strong>.
+            </li>
+            <li>
+              The advance payment is <strong>**non-refundable**</strong>, but if we
+              fail to deliver the product for any reason, you will receive a
+              refund within 3 working days.
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      {/* form part  */}
       {/* Heading */}
       <h2 className="text-_orange text-2xl font-bold mb-2">
         Looking For Something Different ??
