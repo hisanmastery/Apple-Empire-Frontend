@@ -141,12 +141,20 @@ const NewFooter = () => {
             </ul>
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-_primary md:text-lg text-sm">CATEGORY</li>
-              <li className={"text-white hover:text-_primary"}>
-                Phone and Tablets
-              </li>
-              <li className={"text-white hover:text-_primary"}>Macbook</li>
-              <li className={"text-white hover:text-_primary"}>Sound</li>
-              <li className={"text-white hover:text-_primary"}>Used</li>
+              <Link href={"/"}>
+                <li className={"text-white hover:text-_primary"}>
+                  Phone and Tablets
+                </li>
+              </Link>
+              <Link href={"/"}>
+                <li className={"text-white hover:text-_primary"}>Macbook</li>
+              </Link>
+              <Link href={"/"}>
+                <li className={"text-white hover:text-_primary"}>Sound</li>
+              </Link>
+              <Link href={"/"}>
+                <li className={"text-white hover:text-_primary"}>Used</li>
+              </Link>
             </ul>
           </div>
           <div className={"col-span-12 lg:col-span-4"}>
@@ -205,12 +213,15 @@ const NewFooter = () => {
 
         {/* row -3  */}
         <div>
-            <h5 className="mb-3">Secure Payments</h5>
-            <Image
-              src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
-              alt="payment image" width={864} height={16} className="w-full h-[36px]"
-            />
-          </div>
+          <h5 className="mb-3">Secure Payments</h5>
+          <Image
+            src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
+            alt="payment image"
+            width={864}
+            height={16}
+            className="w-full h-[36px]"
+          />
+        </div>
 
         {/* <div className="flex flex-col md:flex-row md:text-md text-xs justify-between items-center mt-16 gap-4 text-center  md:text-start ">
           <div>
