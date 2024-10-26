@@ -102,6 +102,8 @@ const ProductDetails = ({ id }: any) => {
     );
   };
 
+  console.log({ data });
+
   if (isLoading) {
     return <ProductDetailsSkeleton />;
   }
@@ -196,6 +198,8 @@ const ProductDetails = ({ id }: any) => {
             <VariantDisplay
               product={data?.response}
               setVariantPrice={setVariantPrice}
+              handleColorButtonClick={handleColorButtonClick}
+              selectedColor={selectedColor}
             />
           </div>
           {/* add to cart button */}
