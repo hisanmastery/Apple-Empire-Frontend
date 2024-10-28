@@ -1,11 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
+import ColorSelector from "./color-selector";
 
 const VariantDisplay = ({
   product,
   setVariantPrice,
   setSelectedVariantOptions,
+  selectedColor,
+  handleColorButtonClick,
 }: any) => {
   const optionTypes = Array.from(
     new Set(
@@ -54,6 +57,12 @@ const VariantDisplay = ({
   const selectedVariant: any =
     availableVariants.length > 0 ? availableVariants[0] : null;
 
+  const handleColorVariant = (value: any) => {
+    handleColorButtonClick(value);
+    optionTypes.includes("Color") && handleOptionChange("Color", value);
+    optionTypes.includes("color") && handleOptionChange("color", value);
+  };
+
   useEffect(() => {
     setVariantPrice(selectedVariant);
     setSelectedVariantOptions(selectedOptions);
@@ -66,43 +75,70 @@ const VariantDisplay = ({
 
   return (
     <section>
+      {optionTypes.includes("Color") && (
+        <ColorSelector
+          variations={product?.variations}
+          selectedColor={selectedColor}
+          onColorSelect={handleColorVariant}
+        />
+      )}
+      {optionTypes.includes("color") && (
+        <ColorSelector
+          variations={product?.variations}
+          selectedColor={selectedColor}
+          onColorSelect={handleColorVariant}
+        />
+      )}
+      {!optionTypes.includes("color") && !optionTypes.includes("Color") && (
+        <ColorSelector
+          variations={product?.variations}
+          selectedColor={selectedColor}
+          onColorSelect={handleColorButtonClick}
+        />
+      )}
       <div className="mt-4">
-        {optionTypes.map((option: any) => (
-          <div key={option} className="mb-4 flex items-center gap-5">
-            <h3 className="font-medium">{option}</h3>
-            <div className="flex space-x-2">
-              {/* Extract available values for the current option */}
-              {product?.variants
-                .flatMap((variant: any) =>
-                  variant?.options
-                    .filter((opt: any) => opt.name === option)
-                    .map((opt: any) => opt.value)
-                )
-                .filter(
-                  (value: any, index: number, self: any) =>
-                    self.indexOf(value) === index
-                ) // Remove duplicates
-                ?.map((value: any) => (
-                  <Button
-                    key={value}
-                    variant={
-                      selectedOptions[option] === value ? "default" : "outline"
-                    }
-                    onClick={() => handleOptionChange(option, value)}
-                  >
-                    {value}
-                  </Button>
-                ))}
-            </div>
-          </div>
-        ))}
+        {optionTypes.map(
+          (option: any) =>
+            option !== "color" &&
+            option !== "Color" && (
+              <div key={option} className="mb-4 flex items-center gap-5">
+                <h3 className="font-medium">{option}</h3>
+                <div className="flex space-x-2">
+                  {/* Extract available values for the current option */}
+                  {product?.variants
+                    .flatMap((variant: any) =>
+                      variant?.options
+                        .filter((opt: any) => opt.name === option)
+                        .map((opt: any) => opt.value)
+                    )
+                    .filter(
+                      (value: any, index: number, self: any) =>
+                        self.indexOf(value) === index
+                    )
+                    ?.map((value: any) => (
+                      <Button
+                        key={value}
+                        variant={
+                          selectedOptions[option] === value
+                            ? "default"
+                            : "outline"
+                        }
+                        onClick={() => handleOptionChange(option, value)}
+                      >
+                        {value}
+                      </Button>
+                    ))}
+                </div>
+              </div>
+            )
+        )}
       </div>
 
       <div className="mt-6">
         {selectedVariant ? (
           <>
             <h2 className="text-xl font-bold">
-              Price: $ {selectedVariant?.price}
+              Price: TK. {selectedVariant?.price}
             </h2>
             <p className="text-gray-600">Stock: {selectedVariant?.stock}</p>
           </>
