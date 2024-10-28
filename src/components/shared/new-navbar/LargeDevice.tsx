@@ -3,164 +3,183 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
 
-export default function LargeDevice({ type }: any) {
+export default function LargeDevice() {
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [openCategoryId, setOpenCategoryId] = useState<string | null>(null);
   const [openSubCategoryId, setOpenSubCategoryId] = useState<string | null>(
     null
   );
+  const [openSubSubCategoryId, setOpenSubSubCategoryId] = useState<
+    string | null
+  >(null);
   const { data: categoriesData }: any = useGetAllCategoryQuery({
     page: 1,
     limit: 7,
   });
 
-  const handleMouseEnter = (categoryId: string) => {
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = null;
-    }
+  // Handle main category hover events
+  const handleMouseEnterCategory = (categoryId: string) => {
+    clearTimeout(closeTimeoutRef.current!);
     setOpenCategoryId(categoryId);
+    setOpenSubCategoryId(null);
+    setOpenSubSubCategoryId(null);
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeaveCategory = () => {
     closeTimeoutRef.current = setTimeout(() => {
       setOpenCategoryId(null);
       setOpenSubCategoryId(null);
-    }, 200);
+      setOpenSubSubCategoryId(null);
+    }, 400);
   };
 
-  const handleSubCategoryMouseEnter = (subCategoryId: string) => {
+  // Handle subcategory hover events
+  const handleMouseEnterSubCategory = (subCategoryId: string) => {
+    clearTimeout(closeTimeoutRef.current!);
     setOpenSubCategoryId(subCategoryId);
+    setOpenSubSubCategoryId(null);
   };
 
-  const handleSubCategoryMouseLeave = () => {
-    setOpenSubCategoryId(null);
+  const handleMouseLeaveSubCategory = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setOpenSubCategoryId(null);
+      setOpenSubSubCategoryId(null);
+    }, 400);
+  };
+
+  // Handle sub-subcategory hover events
+  const handleMouseEnterSubSubCategory = (subSubCategoryId: string) => {
+    clearTimeout(closeTimeoutRef.current!);
+    setOpenSubSubCategoryId(subSubCategoryId);
+  };
+
+  const handleMouseLeaveSubSubCategory = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setOpenSubSubCategoryId(null);
+    }, 400);
+  };
+
+  // Recursive function to render nested subcategories
+  const renderCategoryTree = (category: any) => {
+    return (
+      <li
+        key={category._id}
+        className="relative group"
+        onMouseEnter={() => handleMouseEnterSubCategory(category._id)}
+        onMouseLeave={handleMouseLeaveSubCategory}
+      >
+        <Link
+          href={`/category/${category.slug}`}
+          className="flex justify-between items-center border-b px-4 py-2 transition-all duration-300 ease-in-out cursor-pointer text-gray-800 hover:bg-gray-100 hover:text-orange-600"
+        >
+          <span>{category.categoryName}</span>
+          {category.subcategories && category.subcategories.length > 0 && (
+            <span className="ml-2 text-gray-500 transform transition-transform duration-300 group-hover:rotate-90">
+              ▶
+            </span>
+          )}
+        </Link>
+
+        {/* Render subcategories if they exist */}
+        {openSubCategoryId === category._id &&
+          category.subcategories &&
+          category.subcategories.length > 0 && (
+            <ul className="absolute left-full top-0 min-w-52 bg-white shadow-lg border rounded-md mt-1 py-2">
+              {category.subcategories.map((subCategory: any) => (
+                <li
+                  key={subCategory._id}
+                  className="relative group"
+                  onMouseEnter={() =>
+                    handleMouseEnterSubSubCategory(subCategory._id)
+                  }
+                  onMouseLeave={handleMouseLeaveSubSubCategory}
+                >
+                  <Link
+                    href={`/category/${subCategory.slug}`}
+                    className="flex justify-between items-center border-b px-4 py-2 transition-all duration-300 ease-in-out cursor-pointer text-gray-800 hover:bg-gray-100 hover:text-orange-600"
+                  >
+                    <span>{subCategory.categoryName}</span>
+                    {subCategory.subcategories &&
+                      subCategory.subcategories.length > 0 && (
+                        <span className="ml-2 text-gray-500 transform transition-transform duration-300 group-hover:rotate-90">
+                          ▶
+                        </span>
+                      )}
+                  </Link>
+
+                  {/* Render sub-subcategories if they exist */}
+                  {openSubSubCategoryId === subCategory._id &&
+                    subCategory.subcategories &&
+                    subCategory.subcategories.length > 0 && (
+                      <ul className="absolute left-full top-0 min-w-48 bg-white shadow-lg border rounded-md mt-1 py-2">
+                        {subCategory.subcategories.map(
+                          (subSubCategory: any) => (
+                            <li key={subSubCategory._id} className="group">
+                              <Link
+                                href={`/category/${subSubCategory.slug}`}
+                                className="flex items-center px-4 py-2 border-b transition-all duration-300 ease-in-out cursor-pointer text-gray-800 hover:bg-gray-100 hover:text-orange-600"
+                              >
+                                {subSubCategory.categoryName}
+                              </Link>
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    )}
+                </li>
+              ))}
+            </ul>
+          )}
+      </li>
+    );
   };
 
   return (
     <div className="hidden md:block">
-      <div className="bg-_white text-center flex justify-center items-center h-[50px] smd:h-[60px]">
-        <div className="">
-          <div className="w-full h-full relative">
-            <div className="w-full h-full flex justify-center items-center">
-              <div className="category-and-nav lg:flex hidden space-x-3 items-center">
-                {categoriesData?.data?.map((category: any, index: number) => (
-                  <div
-                    key={index}
-                    className="category px-2 rounded-t-md relative"
-                    onMouseEnter={() => handleMouseEnter(category._id)}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    {category.subcategories?.length > 0 ? (
-                      <>
-                        <div className="w-full h-full flex justify-between text-center items-center">
-                          <div className="flex space-x-3 items-center">
-                            <Link href={`/category/${category.slug}`}>
-                              <span className="text-md font-600 hover:text-_orange text-qblacktext">
-                                {category.categoryName}
-                              </span>
-                            </Link>
-                          </div>
-                        </div>
+      <div className="bg-white text-center flex justify-center items-center h-[50px] smd:h-[60px]">
+        <div className="w-full h-full relative">
+          <div className="w-full h-full flex justify-center items-center">
+            <div className="category-and-nav lg:flex hidden space-x-3 items-center">
+              {categoriesData?.data?.map((category: any) => (
+                <div
+                  key={category._id}
+                  className="relative"
+                  onMouseEnter={() => handleMouseEnterCategory(category._id)}
+                  onMouseLeave={handleMouseLeaveCategory}
+                >
+                  <div className="w-full h-full flex justify-between text-center items-center">
+                    <Link href={`/category/${category.slug}`}>
+                      <span className="text-md font-semibold hover:text-orange-500 text-gray-800">
+                        {category.categoryName}
+                      </span>
+                    </Link>
+                  </div>
 
-                        {openCategoryId === category._id && (
-                          <div className="category-dropdown absolute left-0 top-full mt-2 bg-_white min-w-48 shadow-lg border rounded-md">
-                            <ul className="categories-list py-2">
-                              {category.subcategories.map(
-                                (subCategory: any, subIndex: number) => (
-                                  <li
-                                    className="relative group"
-                                    key={subIndex}
-                                    onMouseEnter={() =>
-                                      handleSubCategoryMouseEnter(
-                                        subCategory._id
-                                      )
-                                    }
-                                    onMouseLeave={handleSubCategoryMouseLeave}
-                                  >
-                                    <Link
-                                      href={`/category/${category.slug}?subcategory=${subCategory.slug}`}
-                                    >
-                                      <div
-                                        className={`flex justify-between border-b items-center px-4 py-2 transition-all duration-300 ease-in-out cursor-pointer text-gray-800 ${
-                                          type === 3
-                                            ? "hover:bg-blue-100 hover:text-blue-700"
-                                            : "hover:bg-gray-100 hover:text-orange-600"
-                                        }`}
-                                      >
-                                        <span>{subCategory.categoryName}</span>
-                                        {subCategory.subsubcategories?.length >
-                                          0 && (
-                                          <span className="ml-2 text-gray-500">
-                                            ▶
-                                          </span>
-                                        )}
-                                      </div>
-                                    </Link>
-
-                                    {openSubCategoryId === subCategory._id &&
-                                      subCategory.subsubcategories?.length >
-                                        0 && (
-                                        <ul className="subsubcategories-list absolute left-full min-w-48 top-0 mt-0 bg-white shadow-lg border rounded-md">
-                                          {subCategory.subsubcategories.map(
-                                            (
-                                              subSubCategory: any,
-                                              subSubIndex: number
-                                            ) => (
-                                              <li key={subSubIndex}>
-                                                <Link
-                                                  href={`/category/${category.slug}?subcategory=${subCategory.slug}&subsubcategory=${subSubCategory.slug}`}
-                                                >
-                                                  <div
-                                                    className={`flex items-center px-4 py-2 transition-all duration-300 ease-in-out cursor-pointer text-gray-800 ${
-                                                      type === 3
-                                                        ? "hover:bg-blue-100 hover:text-blue-700"
-                                                        : "hover:bg-gray-100 hover:text-orange-600"
-                                                    }`}
-                                                  >
-                                                    {
-                                                      subSubCategory.categoryName
-                                                    }
-                                                  </div>
-                                                </Link>
-                                              </li>
-                                            )
-                                          )}
-                                        </ul>
-                                      )}
-                                  </li>
-                                )
-                              )}
-                            </ul>
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <Link href={`/category/${category.slug}`}>
-                        <div className="w-full h-full flex justify-between text-center items-center cursor-pointer">
-                          <div className="flex space-x-3 items-center">
-                            <span className="text-md font-600 hover:text-orange-600 text-gray-800">
-                              {category.categoryName}
-                            </span>
-                          </div>
-                        </div>
-                      </Link>
+                  {/* Render dropdown for categories with subcategories */}
+                  {openCategoryId === category._id &&
+                    category.subcategories && (
+                      <div className="category-dropdown absolute left-0 top-8 mt-2 bg-white min-w-52 shadow-lg border rounded-md">
+                        <ul className="categories-list py-2">
+                          {category.subcategories.map((subCategory: any) =>
+                            renderCategoryTree(subCategory)
+                          )}
+                        </ul>
+                      </div>
                     )}
-                  </div>
-                ))}
-                <div className="lg:flex items-center gap-10 hidden">
-                  <div className="text-black text-md">
-                    <Link href={"/about-us"}>About</Link>
-                  </div>
-                  <div className="text-black text-md">
-                    <Link href={"/"}>Blogs</Link>
-                  </div>
-                  <div className="text-black text-md">
-                    <Link href={"/section/used"}>Used Products</Link>
-                  </div>
-                  <div className="text-black text-md">
-                    <Link href={"/offers"}>Offers</Link>
-                  </div>
+                </div>
+              ))}
+              <div className="lg:flex items-center gap-10 hidden">
+                <div className="text-gray-800 text-md font-medium">
+                  <Link href={"/about-us"}>About</Link>
+                </div>
+                <div className="text-gray-800 text-md font-medium">
+                  <Link href={"/"}>Blogs</Link>
+                </div>
+                <div className="text-gray-800 text-md font-medium">
+                  <Link href={"/section/used"}>Used Products</Link>
+                </div>
+                <div className="text-gray-800 text-md font-medium">
+                  <Link href={"/offers"}>Offers</Link>
                 </div>
               </div>
             </div>
