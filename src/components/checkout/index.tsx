@@ -148,8 +148,8 @@ const Checkout = () => {
           <h2 className="uppercase text-2xl">Checkout</h2>
           <p>Please enter your details below to complete your purchase</p>
         </div>
-        <div>
-          <button className="border-2 border-_primary text-_primary px-5 p-2 rounded-md hover:bg-_border-_primary hover:text-black transition-all ease-in-out duration-1000 text-sm md:text-md">
+        <div className="">
+          <button className="border-2 border-_primary text-_primary px-3 md:px-6 py-2 rounded-md hover:bg-_border-_primary hover:text-black transition-all ease-in-out duration-1000 text-xs md:text-md">
             BACK TO CART
           </button>
         </div>

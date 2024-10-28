@@ -17,7 +17,7 @@ const Offers = ({ offers }: any) => {
             className="w-full h-[250px] rounded-[8px]"
           />
           <div className="pt-4 px-4 ">
-            <h4 className="text-2xl font-semibold text-center">
+            <h4 className="text-xl md:text-2xl font-semibold text-center">
               {offer?.title}
             </h4>
             <p className="text-sm font-normal text-center pt-3 pb-14">
