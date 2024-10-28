@@ -1,4 +1,3 @@
-// SmallDevice.tsx
 "use client";
 import { images } from "@/constants/images";
 import Image from "next/image";
@@ -14,6 +13,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SheetDrawer from "@/components/common/sheet-drawer/indext";
+
 const tabData = [
   { value: "category", label: "Category" },
   { value: "menu", label: "Menu" },
@@ -27,11 +27,36 @@ const policyLinks = [
   { label: "FAQ", href: "/faq" },
 ];
 
+interface SubSubCategory {
+  _id: string;
+  categoryName: string;
+  slug: string;
+  images: {
+    imageUrl: string;
+    altText: string;
+  };
+}
+
+interface SubCategory {
+  _id: string;
+  categoryName: string;
+  slug: string;
+  images: {
+    imageUrl: string;
+    altText: string;
+  };
+  subsubcategories: SubSubCategory[];
+}
+
 interface Category {
   _id: string;
   categoryName: string;
-  image: string;
-  subCategory: string[];
+  slug: string;
+  images: {
+    imageUrl: string;
+    altText: string;
+  };
+  subcategories: SubCategory[];
 }
 
 interface SmallDeviceProps {
@@ -89,40 +114,65 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
               <div className="category-dropdown w-72">
                 <div>
                   <Accordion type="multiple" className="w-full">
-                    {categoriesData?.categories?.map((category: Category) => (
+                    {categoriesData?.data?.map((category: Category) => (
                       <AccordionItem key={category._id} value={category._id}>
                         <AccordionTrigger>
-                          <div className="flex items-center gap-2 px-2 py-2 hover:underline hover:text-primary">
+                          <div className="flex items-center gap-2 px-2 border-b w-full py-1 hover:bg-gray-200">
                             <Image
                               className="w-6 h-6"
-                              src={category.image}
-                              alt={category.categoryName}
+                              src={category.images.imageUrl}
+                              alt={category.images.altText}
                               width={24}
                               height={24}
                             />
                             <span className="text-sm font-medium">
-                              <Link href={`/category/${category.categoryName}`}>
+                              <Link href={`/category/${category.slug}`}>
                                 {category.categoryName}
                               </Link>
+                            </span>
+                            <span className="ml-auto">
+                              <icons.GoArrowRight className="w-4 h-4 text-gray-500" />
                             </span>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                          {category.subCategory.length > 0 && (
-                            <ul className="pl-10">
-                              {category.subCategory.map(
+                          {category?.subcategories?.length > 0 && (
+                            <ul className="pl-5 bg-gray-100">
+                              {category.subcategories?.map(
                                 (subCategory, subIndex) => (
-                                  <li className="py-2" key={subIndex}>
-                                    <Link
-                                      onClick={handleCategoryToggle}
-                                      href={`/category/${
-                                        category.categoryName
-                                      }/${subCategory.trim().toLowerCase()}`}
-                                    >
-                                      <span className="text-xs font-normal hover:text-blue-500">
-                                        {subCategory}
-                                      </span>
-                                    </Link>
+                                  <li key={subIndex}>
+                                    <div className="py-1 border-b hover:bg-gray-200">
+                                      <Link
+                                        onClick={handleCategoryToggle}
+                                        href={`/category/${category.slug}/${subCategory.slug}`}
+                                      >
+                                        <span className="text-xs font-normal hover:text-blue-500">
+                                          {subCategory.categoryName}
+                                        </span>
+                                      </Link>
+                                    </div>
+                                    {subCategory?.subsubcategories?.length >
+                                      0 && (
+                                      <ul className="pl-5 bg-gray-200">
+                                        {subCategory.subsubcategories?.map(
+                                          (subSubCategory, subSubIndex) => (
+                                            <li
+                                              className="py-1 border-b hover:bg-gray-300"
+                                              key={subSubIndex}
+                                            >
+                                              <Link
+                                                onClick={handleCategoryToggle}
+                                                href={`/category/${category.slug}/${subCategory.slug}/${subSubCategory.slug}`}
+                                              >
+                                                <span className="text-xs font-light hover:text-blue-400">
+                                                  {subSubCategory.categoryName}
+                                                </span>
+                                              </Link>
+                                            </li>
+                                          )
+                                        )}
+                                      </ul>
+                                    )}
                                   </li>
                                 )
                               )}
