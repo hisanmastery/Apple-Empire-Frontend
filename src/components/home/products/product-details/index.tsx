@@ -202,28 +202,33 @@ const ProductDetails = ({ id }: any) => {
           {/* add to cart button */}
           <div className="flex gap-5 justify-start items-center mt-5">
             {/* Product Quantity  */}
-            {isInCart && (
-              <QuantityController
-                thisItem={thisItem}
-                data={data?.response}
-                handleInQuantityUpdate={handleInQuantityUpdate}
-              />
+            {/* {isInCart && (
+           
+            )} */}
+            <QuantityController
+              thisItem={thisItem}
+              data={data?.response}
+              handleInQuantityUpdate={handleInQuantityUpdate}
+            />
+            {data?.response.preOrder != "Yes" && (
+              <Button
+                onClick={() => handleCartClick(data?.response)}
+                disabled={isInCart}
+                className="bg-black hover:bg-_orange rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
+              >
+                ADD TO CART
+              </Button>
             )}
-            <Button
-              onClick={() => handleCartClick(data?.response)}
-              disabled={isInCart}
-              className="bg-black hover:bg-_orange rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
-            >
-              ADD TO CART
-            </Button>
             <Button
               variant={"outline"}
               onClick={
                 isInCart ? () => {} : () => handleCartClick(data?.response)
               }
-              className="uppercase hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
+              className="uppercase  hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
             >
-              <Link href={"/cart/checkout"}> Buy Now</Link>
+              <Link href={"/cart/checkout"}>
+                {data?.response.preOrder == "Yes" ? "Pre Order Now" : "Buy Now"}
+              </Link>
             </Button>
           </div>
         </div>
