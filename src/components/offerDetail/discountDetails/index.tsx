@@ -5,10 +5,10 @@ const DiscountDetails = () => {
   return (
     <div className="mt-2">
         <div className="">
-            <Image src="https://d61s2hjse0ytn.cloudfront.net/images/content/pre_order/Pre-Order_.webp" alt="offer image" width={800} height={200} className='w-full'/>
+            <Image src="https://d61s2hjse0ytn.cloudfront.net/images/content/pre_order/Pre-Order_.webp" alt="offer image" width={800} height={200}  className='w-full'/>
         </div>
         <div className="my-6">
-            <h4 className="text-red-500 font-semibold text-xl">এই শীতজুড়ে APPLE EMPIRE এ আপনারা পছন্দের প্রিমিয়াম গ্যাজেটস এ পাচ্ছেন নিশিত মূল্যছাড় 😱😱</h4>
+            <h4 className="text-red-500 font-semibold text-lg md:text-xl">এই শীতজুড়ে APPLE EMPIRE এ আপনারা পছন্দের প্রিমিয়াম গ্যাজেটস এ পাচ্ছেন নিশিত মূল্যছাড় 😱😱</h4>
             <p className="text-sm font-semibold my-4">শীত উপলক্ষে বিশেষ ছাড় !!!!</p>
             <p className="text-sm">APPLE EMPIRE এ চলছে Winter ধামাকা অফার।</p>
             <p className="text-sm">UP To 60 %  পর্যন্ত বিশাল ডিসকাউন্ট । তাই দেরি না করে স্টক ফুরিয়ে যাবার আগেই অডার করুন আপনার পছন্দের প্রোডাক্টটি ।</p>

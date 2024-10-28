@@ -40,7 +40,7 @@ const AllProductsSection = ({ productsType }: any) => {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-1 xmd:grid-cols-2  mx-auto mb-10 mt-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto mb-10 mt-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
         {Array.from({ length: 5 }).map((_, index) => (
           <ProductCardSkeleton key={index} />
         ))}
@@ -49,11 +49,11 @@ const AllProductsSection = ({ productsType }: any) => {
   }
   return (
     <div className="mt-5">
-      <div className="bg-_white p-5 mb-5 rounded-md">
-        <p className="text-2xl font-semibold mb-2">{productsType}</p>
+      <div className="bg-_white p-4 mb-5 rounded-md">
+        <p className="text-xl md:text-2xl font-semibold mb-2">{productsType}</p>
         <CategoryTabs />
       </div>
-      <div className="md:hidden flex justify-end">
+      <div className="md:hidden flex justify-end mb-2">
         <button
           onClick={() => setOpenSheetDrawer(true)}
           className="flex items-center gap-2 border px-5 py-1 border-_primary-text rounded-sm"
@@ -64,7 +64,7 @@ const AllProductsSection = ({ productsType }: any) => {
       <div>
         {allProducts?.product?.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-1 xmd:grid-cols-2  mx-auto mb-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
+            <div className=" grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto mb-10 gap-5">
               {allProducts?.product?.map((product: any) => (
                 <ProductCard key={product.id} datas={product} />
               ))}

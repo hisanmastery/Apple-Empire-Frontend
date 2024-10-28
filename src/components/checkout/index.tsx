@@ -142,14 +142,14 @@ const Checkout = () => {
   };
 
   return (
-    <main className="container mx-auto mt-10">
+    <main className=" mx-auto mt-10">
       <div className="flex justify-between items-center">
         <div className="w-[60%]">
           <h2 className="uppercase text-2xl">Checkout</h2>
           <p>Please enter your details below to complete your purchase</p>
         </div>
         <div className="">
-          <button className="border-2 border-_primary text-_primary px-3 md:px-6 py-2 rounded-md hover:bg-_border-_primary hover:text-black transition-all ease-in-out duration-1000 text-xs md:text-md">
+          <button className="border-2 border-_primary text-_primary px-2 sm:px-3 md:px-6 py-2 rounded-md hover:bg-_border-_primary hover:text-black transition-all ease-in-out duration-1000 text-xs md:text-md">
             BACK TO CART
           </button>
         </div>

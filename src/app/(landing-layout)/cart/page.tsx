@@ -171,7 +171,7 @@ const CartPage = ({ className }: any) => {
   }, [subTotal, shippingCost, discountPrice]);
 
   return (
-    <div className="msm:container mt-20">
+    <div className="container mt-10">
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

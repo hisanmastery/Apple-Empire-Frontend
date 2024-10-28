@@ -204,3 +204,5 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
 };
 
 export default CompareComponent;
+
+
