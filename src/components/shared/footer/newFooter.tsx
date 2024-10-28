@@ -28,12 +28,12 @@ const NewFooter = () => {
             <Link href={"/contact-us"} className="text-sm md:text-md">
               Contact Us
             </Link>
-            <p className="text-_primary text-xs">support@appleempirebd.com</p>
+            <p className="text-_primary text-xs">support@appleempire.com</p>
           </div>
 
           <div className="font-normal">
             <h4 className="text-sm md:text-md">Customer Service</h4>
-            <p className="text-_primary text-xs">support@appleempirebd.com</p>
+            <p className="text-_primary text-xs">support@appleempire.com</p>
           </div>
 
           {/* <div className="font-normal">
@@ -141,12 +141,20 @@ const NewFooter = () => {
             </ul>
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-_primary md:text-lg text-sm">CATEGORY</li>
-              <li className={"text-white hover:text-_primary"}>
-                Phone and Tablets
-              </li>
-              <li className={"text-white hover:text-_primary"}>Macbook</li>
-              <li className={"text-white hover:text-_primary"}>Sound</li>
-              <li className={"text-white hover:text-_primary"}>Used</li>
+              <Link href={"/"}>
+                <li className={"text-white hover:text-_primary"}>
+                  Phone and Tablets
+                </li>
+              </Link>
+              <Link href={"/"}>
+                <li className={"text-white hover:text-_primary"}>Macbook</li>
+              </Link>
+              <Link href={"/"}>
+                <li className={"text-white hover:text-_primary"}>Sound</li>
+              </Link>
+              <Link href={"/"}>
+                <li className={"text-white hover:text-_primary"}>Used</li>
+              </Link>
             </ul>
           </div>
           <div className={"col-span-12 lg:col-span-4"}>
@@ -191,7 +199,7 @@ const NewFooter = () => {
 
             <div className="mt-5 lg:pl-12">
               <Link
-                href="https://www.google.com/maps/dir/23.8342215,90.3941915/3+No,+Bashundhara+City+Shopping+Mall,+Basement-1,Shop+No-27,+West+Panthapath,+Dhaka+1215/@23.7506591,90.3083608,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3755b995778e1b1d:0x223b86e15d877488!2m2!1d90.3907624!2d23.7506809?entry=ttu&g_ep=EgoyMDI0MTAxNi4wIKXMDSoASAFQAw%3D%3D"
+                href="https://www.google.com/maps/place/Apple+Empire/@23.750681,90.390762,16z/data=!4m6!3m5!1s0x3755b995778e1b1d:0x223b86e15d877488!8m2!3d23.7506809!4d90.3907624!16s%2Fg%2F11tjxrzt58?hl=en&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
                 rel="nofollow"
                 target="_blank"
               >
@@ -205,12 +213,15 @@ const NewFooter = () => {
 
         {/* row -3  */}
         <div>
-            <h5 className="mb-3">Secure Payments</h5>
-            <Image
-              src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
-              alt="payment image" width={864} height={16} className="w-full h-[36px]"
-            />
-          </div>
+          <h5 className="mb-3">Secure Payments</h5>
+          <Image
+            src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
+            alt="payment image"
+            width={864}
+            height={16}
+            className="w-full h-[36px]"
+          />
+        </div>
 
         {/* <div className="flex flex-col md:flex-row md:text-md text-xs justify-between items-center mt-16 gap-4 text-center  md:text-start ">
           <div>

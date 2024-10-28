@@ -204,6 +204,8 @@ const ProductDetails = ({ id }: any) => {
               product={data?.response}
               setVariantPrice={setVariantPrice}
               setSelectedVariantOptions={setSelectedVariantOptions}
+              handleColorButtonClick={handleColorButtonClick}
+              selectedColor={selectedColor}
             />
           </div>
           {/* add to cart button */}
