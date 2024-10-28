@@ -96,7 +96,7 @@ export default function LargeDevice() {
                 >
                   <Link
                     href={`/category/${subCategory.slug}`}
-                    className="flex justify-between items-center px-4 py-2 transition-all duration-300 ease-in-out cursor-pointer text-gray-800 hover:bg-gray-100 hover:text-orange-600"
+                    className="flex justify-between items-center border-b px-4 py-2 transition-all duration-300 ease-in-out cursor-pointer text-gray-800 hover:bg-gray-100 hover:text-orange-600"
                   >
                     <span>{subCategory.categoryName}</span>
                     {subCategory.subcategories &&
@@ -117,7 +117,7 @@ export default function LargeDevice() {
                             <li key={subSubCategory._id} className="group">
                               <Link
                                 href={`/category/${subSubCategory.slug}`}
-                                className="flex items-center px-4 py-2 transition-all duration-300 ease-in-out cursor-pointer text-gray-800 hover:bg-gray-100 hover:text-orange-600"
+                                className="flex items-center px-4 py-2 border-b transition-all duration-300 ease-in-out cursor-pointer text-gray-800 hover:bg-gray-100 hover:text-orange-600"
                               >
                                 {subSubCategory.categoryName}
                               </Link>
