@@ -8,7 +8,7 @@ export const categoryApi = fetchProductsSlice.injectEndpoints({
         url: `${category}/get-all-category`,
         method: "get",
         params: {
-          limit: arg,
+          limit: arg?.limit,
           page: arg?.page,
           categoryName: arg?.categoryName,
         },
