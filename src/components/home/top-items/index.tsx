@@ -36,7 +36,7 @@ const TopItems = () => {
     page: 1,
     limit: 10,
   });
-  console.log(data);
+  console.log(data?.data);
   if (isLoading) return <Loading />;
   return (
     <div className="md:container pb-5 mt-5 md:mt-0">
@@ -59,13 +59,13 @@ const TopItems = () => {
         breakpoints={breakpoints}
         spaceBetween={12}
       >
-        {data?.categories?.map((category: any, index: any) => (
+        {data?.data?.map((category: any, index: any) => (
           <SwiperSlide key={index} className={`!h-auto !md:h-full`}>
             <Link href={`/category/${category?.categoryName}`}>
               <div className="w-full !h-full p-3 bg-_white rounded-lg">
                 <Image
-                  src={category?.image}
-                  alt={category?.categoryName}
+                  src={category?.images?.imageUrl}
+                  alt={category?.images?.altText}
                   width={100}
                   height={100}
                   className="w-[60px] md:w-[80px] h-[50px] md:h-[80px] mx-auto transition ease-in-out duration-300 hover:scale-105 hover:cursor-pointer"
@@ -77,7 +77,6 @@ const TopItems = () => {
             </Link>
           </SwiperSlide>
         ))}
-        hi
       </Swiper>
     </div>
   );
