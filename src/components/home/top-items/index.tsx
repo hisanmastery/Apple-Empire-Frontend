@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import Loading from "@/components/common/loading";
-import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
+import { useGetCategoryListQuery } from "@/store/features/category/categoryApi";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/autoplay";
@@ -32,9 +32,11 @@ const breakpoints = {
 
 const TopItems = () => {
   const swiperRef = useRef<any>(null);
-  const { data, isLoading }= useGetAllCategoryQuery<any>({
-    limit: 20,
+  const { data, isLoading } = useGetCategoryListQuery<any>({
+    page: 1,
+    limit: 10,
   });
+  console.log(data);
   if (isLoading) return <Loading />;
   return (
     <div className="md:container pb-5 mt-5 md:mt-0">
@@ -75,9 +77,11 @@ const TopItems = () => {
             </Link>
           </SwiperSlide>
         ))}
+        hi
       </Swiper>
     </div>
   );
 };
 
 export default TopItems;
+
