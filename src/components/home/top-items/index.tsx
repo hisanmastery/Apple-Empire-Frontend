@@ -61,7 +61,7 @@ const TopItems = () => {
       >
         {data?.data?.map((category: any, index: any) => (
           <SwiperSlide key={index} className={`!h-auto !md:h-full`}>
-            <Link href={`/category/${category?.categoryName}`}>
+            <Link href={`/category/${category?.slug}`}>
               <div className="w-full !h-full p-3 bg-_white rounded-lg">
                 <Image
                   src={category?.images?.imageUrl}
@@ -83,4 +83,3 @@ const TopItems = () => {
 };
 
 export default TopItems;
-
