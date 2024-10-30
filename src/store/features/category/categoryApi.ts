@@ -27,6 +27,18 @@ export const categoryApi = fetchProductsSlice.injectEndpoints({
         },
       }),
     }),
+    //single cetegroty by subCategory
+    getSingleCategoryBySubCategory: builder.query({
+      query: (arg: any) => ({
+        url: `${category}/single-category-by-subCategories`,
+        method: "get",
+        params: { canonicalUrl: arg?.canonicalUrl },
+      }),
+    }),
   }),
 });
-export const { useGetAllCategoryQuery, useGetCategoryListQuery } = categoryApi;
+export const {
+  useGetAllCategoryQuery,
+  useGetCategoryListQuery,
+  useGetSingleCategoryBySubCategoryQuery,
+} = categoryApi;

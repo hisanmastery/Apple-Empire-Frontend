@@ -1,90 +1,71 @@
 "use client";
-import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
-import { useSearchParams } from "next/navigation";
+import { useGetSingleCategoryBySubCategoryQuery } from "@/store/features/category/categoryApi";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-interface Category {
+interface CategoryProps {
   category: string;
 }
 
-const SubCategoryTabs: React.FC<Category> = ({ category }) => {
-  const searchParams = useSearchParams();
-  const selectedSubCategory = searchParams.get("subcategory");
+const SubCategoryTabs: React.FC<CategoryProps> = ({ category }) => {
+  const selectedSubCategory = usePathname();
 
-  // Fetch categories
+  // Fetch categories data
   const {
-    data: categoriesData,
+    data: categories,
     isLoading,
     isError,
-  } = useGetAllCategoryQuery<any>({
-    page: 1,
-    limit: 20,
-    categoryName: category,
+  } = useGetSingleCategoryBySubCategoryQuery<any>({
+    canonicalUrl: category,
   });
 
-  // Find subcategories for the selected category
-  const subcategories: any | undefined = categoriesData?.categories?.find(
-    (item: any) => item?.categoryName === category
-  );
-
-  const handleCategoryClick = (subCategoryName: string | null) => {
-    const newParams = new URLSearchParams(window.location.search);
-    if (subCategoryName) {
-      newParams.set("subcategory", subCategoryName);
-    } else {
-      newParams.delete("subcategory");
-    }
-    window.history.replaceState(
-      {},
-      "",
-      `${window.location.pathname}?${newParams}`
-    );
-  };
+  const categoryData = categories?.data || {};
 
   if (isLoading) return <div className="text-center py-4">Loading...</div>;
+  if (isError)
+    return (
+      <div className="text-center py-4 text-red-500">
+        Failed to load categories.
+      </div>
+    );
 
   return (
-    <ul className="flex flex-wrap gap-4 p-2">
-      {/* "All" Tab */}
-      <li
-        className={`flex items-center justify-center px-5 py-[2px] border border-gray-300 rounded-md transition-all duration-200 
-          cursor-pointer 
-          hover:bg-_blue hover:text-white 
-          ${
-            selectedSubCategory === null
-              ? "font-bold bg-_blue text-white"
-              : "text-gray-700"
-          }
-        `}
-        onClick={() => handleCategoryClick(null)}
-        role="tab"
-        aria-selected={selectedSubCategory === null}
-        tabIndex={0}
-      >
-        All
-      </li>
-
-      {/* Subcategory Tabs */}
-      {subcategories?.subCategory?.map((item: any, index: number) => (
+    <div>
+      <p className="text-md mb-2 font-semibold">{categoryData?.categoryName}</p>
+      <ul className="flex flex-wrap gap-4 p-1">
+        {/* "All" Tab */}
         <li
-          key={index}
-          className={`flex items-center justify-center px-3 text-sm py-[2px] border border-gray-300 rounded-md transition-all duration-200 
-            cursor-pointer 
-            hover:bg-_blue hover:text-white 
+          className={`flex items-center justify-center px-5 py-[2px] border border-gray-300 rounded-md transition-all duration-200 
+            cursor-pointer hover:bg-_blue hover:text-white 
             ${
-              item === selectedSubCategory
+              !selectedSubCategory
                 ? "font-bold bg-_blue text-white"
                 : "text-gray-700"
-            }
-          `}
-          onClick={() => handleCategoryClick(item)}
+            }`}
           role="tab"
-          aria-selected={item === selectedSubCategory}
           tabIndex={0}
         >
-          {item}
+          <Link href={`/category/${category}`}>All</Link>
         </li>
-      ))}
-    </ul>
+
+        {/* Subcategory Tabs */}
+        {categoryData?.relatedSubCategories?.map(
+          (item: { slug: string; categoryName: string }, index: number) => {
+            const isSelected = selectedSubCategory === `/category/${item.slug}`;
+            const tabClassNames = `flex items-center justify-center px-3 text-sm py-[2px] border border-gray-300 rounded-md transition-all duration-200
+            cursor-pointer hover:bg-_blue hover:text-white ${
+              isSelected ? "font-bold bg-_blue text-white" : "text-gray-700"
+            }`;
+
+            return (
+              <li key={index} className={tabClassNames} role="tab" tabIndex={0}>
+                <Link href={`/category/${item.slug}`}>{item.categoryName}</Link>
+              </li>
+            );
+          }
+        )}
+      </ul>
+    </div>
   );
 };
 

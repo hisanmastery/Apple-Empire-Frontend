@@ -147,7 +147,7 @@ export default function LargeDevice() {
                   onMouseEnter={() => handleMouseEnterCategory(category._id)}
                   onMouseLeave={handleMouseLeaveCategory}
                 >
-                  <div className="w-full h-full flex justify-between text-center items-center">
+                  <div className="w-full h-full flex justify-between px-2 text-center items-center">
                     <Link href={`/category/${category.slug}`}>
                       <span className="text-md font-semibold hover:text-orange-500 text-gray-800">
                         {category.categoryName}
@@ -158,7 +158,7 @@ export default function LargeDevice() {
                   {/* Render dropdown for categories with subcategories */}
                   {openCategoryId === category._id &&
                     category.subcategories && (
-                      <div className="category-dropdown absolute left-0 top-8 mt-2 bg-white min-w-52 shadow-lg border rounded-md">
+                      <div className="category-dropdown absolute left-0 top-9 mt-2 bg-white min-w-52 shadow-lg border rounded-md">
                         <ul className="categories-list py-2">
                           {category.subcategories.map((subCategory: any) =>
                             renderCategoryTree(subCategory)
