@@ -1,14 +1,19 @@
 "use client";
 import { useGetSingleCategoryBySubCategoryQuery } from "@/store/features/category/categoryApi";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface CategoryProps {
   category: string;
 }
 
 const SubCategoryTabs: React.FC<CategoryProps> = ({ category }) => {
-  const selectedSubCategory = usePathname();
+  const searchParams = useSearchParams();
+  const initialSelectedCategory = searchParams.get("category");
+  const [selectedSubCategory, setSelectedSubCategory] = useState(
+    initialSelectedCategory || null
+  );
 
   // Fetch categories data
   const {
@@ -20,6 +25,21 @@ const SubCategoryTabs: React.FC<CategoryProps> = ({ category }) => {
   });
 
   const categoryData = categories?.data || {};
+
+  const handleCategoryClick = (categoryName: string) => {
+    const newParams = new URLSearchParams(window.location.search);
+    newParams.set("category", categoryName);
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${newParams}`
+    );
+    setSelectedSubCategory(categoryName);
+  };
+
+  useEffect(() => {
+    setSelectedSubCategory(initialSelectedCategory);
+  }, [initialSelectedCategory]);
 
   if (isLoading) return <div className="text-center py-4">Loading...</div>;
   if (isError)
@@ -58,8 +78,14 @@ const SubCategoryTabs: React.FC<CategoryProps> = ({ category }) => {
             }`;
 
             return (
-              <li key={index} className={tabClassNames} role="tab" tabIndex={0}>
-                <Link href={`/category/${item.slug}`}>{item.categoryName}</Link>
+              <li
+                key={index}
+                className={tabClassNames}
+                role="tab"
+                tabIndex={0}
+                onClick={() => handleCategoryClick(item?.slug)}
+              >
+                {item.categoryName}
               </li>
             );
           }

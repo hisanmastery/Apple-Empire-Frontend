@@ -21,7 +21,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
   canonicalUrl,
 }) => {
   const searchParams = useSearchParams();
-  const selectedSubCategory = searchParams.get("subcategory");
+  const selectedategory = searchParams.get("category");
   const [currentPage, setCurrentPage] = useState(1);
   const [openSheetDrawer, setOpenSheetDrawer] = useState(false);
   const [pageSize, setPageSize] = useState(12);
@@ -29,7 +29,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
   const { label, value } = useSelector(selectProductsVariant);
   // Fetching products using custom hooks
   const { data: allProducts, isLoading } = useGetProductsListsQuery<any>({
-    category: canonicalUrl,
+    category: selectedategory || canonicalUrl,
     page: currentPage,
     limit: pageSize,
     minVariantPrice: min,

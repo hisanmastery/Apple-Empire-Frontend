@@ -1,5 +1,5 @@
 "use client";
-import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
+import { useGetCategoryListQuery } from "@/store/features/category/categoryApi";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -11,7 +11,7 @@ const CategoryTabs = () => {
   );
 
   // Fetch categories
-  const { data: categoriesData, isLoading } = useGetAllCategoryQuery<any>({
+  const { data: categoriesData, isLoading } = useGetCategoryListQuery<any>({
     page: 1,
     limit: 20,
   });
@@ -55,10 +55,10 @@ const CategoryTabs = () => {
       </li>
 
       {/* Category Tabs */}
-      {categoriesData?.categories?.map((item: any) => (
+      {categoriesData?.data?.map((item: any) => (
         <li
           key={item?.id}
-          className={`flex items-center justify-center px-2 py-[2px] border border-gray-300 rounded-md transition-all duration-200 
+          className={`flex items-center text-sm justify-center px-2 py-[2px] border border-gray-300 rounded-md transition-all duration-200 
             cursor-pointer 
             hover:bg-blue-500 hover:text-white 
             ${
@@ -67,7 +67,7 @@ const CategoryTabs = () => {
                 : "text-gray-700"
             }
           `}
-          onClick={() => handleCategoryClick(item?.categoryName)}
+          onClick={() => handleCategoryClick(item?.slug)}
           role="tab"
           aria-selected={item?.categoryName === selectedSubCategory}
           tabIndex={0}

@@ -16,7 +16,7 @@ import { icons } from "@/constants/icons";
 
 const AllProductsSection = ({ productsType }: any) => {
   const searchParams = useSearchParams();
-  const selectedSubCategory = searchParams.get("category");
+  const category = searchParams.get("category");
   const usedString = productsType === "used" ? "used" : "";
   const [openSheetDrawer, setOpenSheetDrawer] = useState(false);
   const offersString = productsType === "offers" ? "yes" : "";
@@ -33,7 +33,7 @@ const AllProductsSection = ({ productsType }: any) => {
     maxVariantPrice: max,
     variantOptionName: label,
     variantOptionValue: value,
-    category: selectedSubCategory,
+    category: category,
     page: currentPage,
     limit: pageSize,
   });
