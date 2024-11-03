@@ -44,7 +44,7 @@ const ImageDisplay = ({ product, selectedColor, stock }: any) => {
 
   return (
     <div
-      className="relative overflow-hidden bg-white border w-[90%] md:w-[80%] mx-auto rounded-md"
+      className="relative overflow-hidden bg-_white border w-[90%] md:w-[80%] mx-auto rounded-md"
       onMouseMove={handleImageMouseMove}
       onMouseLeave={handleImageMouseLeave}
     >
@@ -61,7 +61,7 @@ const ImageDisplay = ({ product, selectedColor, stock }: any) => {
 
       {/* Discount Badge */}
       {discountPercentage > 0 && (
-        <div className="absolute top-2 left-2 bg-orange-500 text-white px-2 py-1 text-sm rounded">
+        <div className="absolute top-2 left-2 bg-orange-500 text-_white px-2 py-1 text-sm rounded">
           Save {discountPercentage}%
         </div>
       )}
