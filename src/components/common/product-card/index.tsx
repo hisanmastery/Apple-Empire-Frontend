@@ -22,6 +22,7 @@ interface ProductData {
   review: number;
   variants: any[];
   variations: any[];
+  stock?: any;
 }
 
 interface ProductCardProps {
@@ -34,7 +35,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const [addToCartItem]: any = useAddToCartMutation();
   const { isAuthenticated, customerInfo }: any = useAuth();
   const showToast = useToaster();
-
+  console.log({ datas });
   const formatVariants = datas?.variants?.[0]?.options?.reduce(
     (acc: any, option: any) => {
       acc[option.name] = option.value;
@@ -147,10 +148,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   );
   return (
     <div className="overflow-hidden">
-      <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
+      <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
+        {/* Stock Out Overlay */}
+        {datas.stock === 0 && (
+          <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center rounded-md text-_white font-semibold text-xl z-10">
+            Stock Out
+          </div>
+        )}
         {/* Display Offer Percentage */}
         {discountPercentage > 0 && (
-          <div className="absolute top-2 right-2 bg-_orange/80 text-white px-2 py-1 sm:text-sm rounded text-xs">
+          <div className="absolute top-2 right-2 bg-_orange/80 text-_white px-2 py-1 sm:text-sm rounded text-xs">
             {discountPercentage}% OFF
           </div>
         )}
@@ -207,7 +214,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             <Button
               variant={"outline"}
               onClick={isInCart ? () => {} : () => handleAddToCart(datas)}
-              className="h-6 lsm:h-7 sm:h-8 uppercase px-[1px] sm:px-2 py-2 hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-[9px]"
+              className="h-6 lsm:h-7 sm:h-8 uppercase px-[1px] sm:px-2 py-2 hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-_white p-2 font-normal text-[9px]"
             >
               <Link href={"/cart/checkout"}>Buy Now</Link>
             </Button>
