@@ -46,7 +46,7 @@ const PreOrder: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         {/* bangla content  */}
         <h1 className="text-3xl font-bold mb-6 text-center">
-        প্রি-অর্ডার পলিসি-
+        প্রি-অর্ডার পলিসি
         </h1>
 
         <p className="text-lg text-gray-800 mb-4 text-center">
@@ -236,7 +236,7 @@ const PreOrder: React.FC = () => {
       </div>
 
       {/* How to Pre-Order Section */}
-      <div className="mt-10 w-full max-w-lg">
+      {/* <div className="mt-10 w-full max-w-lg">
         <h3 className="text-center text-xl font-semibold text-gray-700 mb-4">
           How to Pre-Order
         </h3>
@@ -244,7 +244,6 @@ const PreOrder: React.FC = () => {
           Watch the video and learn more about the pre-order process
         </p>
         <div className="w-full">
-          {/* Video Embed */}
           <iframe
             className="w-full h-64 rounded-lg"
             src="https://www.youtube.com/embed/7fkif715igA"
@@ -252,7 +251,7 @@ const PreOrder: React.FC = () => {
             allowFullScreen
           ></iframe>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
