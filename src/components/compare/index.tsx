@@ -92,8 +92,8 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
           <SelectBox
             isMulti={false}
             name="firstPhone"
-            className="w-full placeholder:text-sm"
-            placeholder="Select the first product"
+            className="w-full text-xs md:text-base"
+            placeholder="Select product"
             onChange={handleFirstPhone}
             value={firstPhone}
             valueOptions={phoneListData}
@@ -104,8 +104,8 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
           <SelectBox
             isMulti={false}
             name="secondPhone"
-            className="w-full"
-            placeholder="Select the second product"
+            className="w-full text-xs md:text-base"
+            placeholder="Select product"
             onChange={handleSceondPhone}
             value={secondPhone}
             valueOptions={phoneListData}

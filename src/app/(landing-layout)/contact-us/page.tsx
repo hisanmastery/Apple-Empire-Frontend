@@ -14,41 +14,59 @@ const ContactUs = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Contact Information */}
           <div className="bg-white shadow-lg p-8 rounded-lg">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+            <h3 className="text-2xl font-semibold text-gray-800 text-center">
               Get in Touch
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-6 text-center">
               Reach out to us through any of the following contact details:
             </p>
 
             <ul className="space-y-4">
               <li>
-                <span className="font-semibold text-gray-700">Email:</span>{" "}
+                <span className="font-semibold text-gray-700"><strong>Email:</strong></span>{" "}
                 support@appleempire.com
               </li>
               <li>
-                <span className="font-semibold text-gray-700">Phone:</span> +123
-                456 7890
+                <span className="font-semibold text-gray-700"><strong>For Query:</strong></span>{" "}
+                01616436311, 01616436310
               </li>
               <li>
-                <span className="font-semibold text-gray-700">Address:</span>{" "}
-                123 Apple Empire St, Tech City, CA 94000
+                <span className="font-semibold text-gray-700">
+                  <strong>For Complain or Advice:</strong>
+                </span>{" "}
+                0196307230
+              </li>
+              <li>
+                <span className="font-semibold text-gray-700">
+                  <strong>For Exchange:</strong>
+                </span>{" "}
+                01616436313, 01616436315
+              </li>
+              <li>
+                <span className="font-semibold text-gray-700">
+                  <strong>For After Sale Service:</strong>
+                </span>{" "}
+                01711072663
+              </li>
+              <li>
+                <span className="font-semibold text-gray-700"><strong>Address:</strong></span>{" "}
+                Basement-1, Shop No-27, Bashundhara City Shopping Mall,
+                Panthapath, Dhaka, Bangladesh
               </li>
             </ul>
 
             <div className="mt-6">
               <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                Business Hours:
+                <strong>Business Hours:</strong>
               </h4>
-              <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-              <p>Saturday: 10:00 AM - 4:00 PM</p>
-              <p>Sunday: Closed</p>
+              <p>Wednesday - Monday: 10:00 AM - 9:00 PM</p>
+              <p>Tuesday: Closed</p>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="bg-white shadow-lg p-8 rounded-lg">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+            <h3 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
               Send Us a Message
             </h3>
 

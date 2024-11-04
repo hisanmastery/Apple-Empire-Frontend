@@ -73,7 +73,7 @@ const NewFooter = () => {
                   Contact Us
                 </li>
               </Link>
-              <Link href={"/complain-by"}>
+              <Link href={"/complain-by-advise"}>
                 <li className={"text-white hover:text-_primary block"}>
                   {" "}
                   Complain By Advise
