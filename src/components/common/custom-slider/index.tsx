@@ -62,8 +62,14 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
         <Swiper
           modules={[Autoplay, Navigation]}
           loop={true}
+          autoplay={{
+            delay: 3000,
+            pauseOnMouseEnter: true,
+            disableOnInteraction: false,
+            stopOnLastSlide: false,
+          }}
           speed={3000}
-          allowTouchMove={false}
+          allowTouchMove={true}
           spaceBetween={12}
           breakpoints={breakpoints}
         >

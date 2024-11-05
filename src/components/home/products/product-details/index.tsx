@@ -42,7 +42,7 @@ const ProductDetails = ({ id }: any) => {
   const dispatch = useDispatch();
   const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
-
+  console.log({ variantPrice });
   useEffect(() => {
     if (storedCart?.length && data) {
       const new_data = data?.response;
@@ -52,7 +52,7 @@ const ProductDetails = ({ id }: any) => {
         });
 
         if (filter?.length) {
-          setThisItem(filter[0]);
+          setThisItem(filter?.[0]);
         } else {
           setThisItem({});
         }
@@ -139,7 +139,11 @@ const ProductDetails = ({ id }: any) => {
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
         <div className="col-span-3 flex mx-auto">
           <div>
-            <ImageDisplay product={data} selectedColor={selectedColor} />
+            <ImageDisplay
+              product={data}
+              selectedColor={selectedColor}
+              stock={variantPrice?.stock}
+            />
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
               {data?.response?.variations
                 ?.slice(0, 4)

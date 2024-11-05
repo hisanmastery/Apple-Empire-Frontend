@@ -14,16 +14,14 @@ import ProductCardSkeleton from "../shared/skeleton/products-card-skeleton";
 import SmallDeviceProductsFilter from "../products-sidebar/smallDeviceProductsFilter";
 import { icons } from "@/constants/icons";
 interface CategoryProductsProps {
-  category: string;
-  subCategory: string;
+  canonicalUrl: string;
 }
 
 const CategoryProducts: React.FC<CategoryProductsProps> = ({
-  category,
-  subCategory,
+  canonicalUrl,
 }) => {
   const searchParams = useSearchParams();
-  const selectedSubCategory = searchParams.get("subcategory");
+  const selectedategory = searchParams.get("category");
   const [currentPage, setCurrentPage] = useState(1);
   const [openSheetDrawer, setOpenSheetDrawer] = useState(false);
   const [pageSize, setPageSize] = useState(12);
@@ -31,8 +29,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
   const { label, value } = useSelector(selectProductsVariant);
   // Fetching products using custom hooks
   const { data: allProducts, isLoading } = useGetProductsListsQuery<any>({
-    category: decodeURIComponent(category),
-    subCategory: selectedSubCategory,
+    category: selectedategory || canonicalUrl,
     page: currentPage,
     limit: pageSize,
     minVariantPrice: min,
@@ -55,10 +52,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
   return (
     <div className="mt-5">
       <div className="bg-_white p-5 mb-3">
-        <p className="text-2xl font-semibold mb-2">
-          {decodeURIComponent(category)}
-        </p>
-        <SubCategoryTabs category={decodeURIComponent(category)} />
+        <SubCategoryTabs category={canonicalUrl} />
       </div>
       <div className="md:hidden flex justify-end">
         <button

@@ -15,22 +15,22 @@ const Profile = () => {
   const orders = data?.response;
 
   return (
-    <div className="min-h-screen bg-gray-100 mx-auto md:mx-0 grid grid-cols-6 gap-0">
+    <div className="min-h-screen bg-gray-100 mx-auto grid grid-cols-1 md:grid-cols-6 gap-6 md:gap-0 p-4 md:p-0">
       {/* Sidebar */}
       <ProfileCard customerInfo={customerInfo} />
 
       {/* Main Content */}
-      <div className="flex-1 p-6 md:col-span-5 col-span-6">
+      <div className="md:col-span-5 col-span-1 p-4 md:p-6 flex flex-col">
         <div className="max-w-5xl mx-auto">
           {/* Profile Information */}
           <section
             id="profile"
-            className="bg-white shadow-md rounded-lg p-6 mb-10"
+            className="bg-white shadow-md rounded-lg p-4 md:p-6 mb-6 md:mb-10"
           >
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-xl md:text-2xl font-semibold mb-4">
               Personal Information
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <ProfileField label="Full Name" value={customerInfo?.name} />
               <ProfileField label="Email Address" value={customerInfo?.email} />
               <ProfileField label="Phone Number" value={customerInfo?.phone} />
@@ -39,8 +39,11 @@ const Profile = () => {
           </section>
 
           {/* Order Information */}
-          <section id="orders" className="bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-semibold mb-4">
+          <section
+            id="orders"
+            className="bg-white shadow-md rounded-lg p-4 md:p-6"
+          >
+            <h2 className="text-xl md:text-2xl font-semibold mb-4">
               My Order Information
             </h2>
             {isLoading ? (
@@ -50,7 +53,7 @@ const Profile = () => {
                 Failed to load orders. Please try again.
               </p>
             ) : (
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {orders?.length ? (
                   orders.map((order: any, index: number) => (
                     <OrderCard key={index} order={order} />

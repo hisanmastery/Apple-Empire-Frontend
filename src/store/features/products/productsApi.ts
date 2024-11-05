@@ -13,7 +13,6 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
           brand: arg?.brand || "",
           offerType: arg?.offerType || "",
           category: arg?.category || "",
-          subCategory: arg?.subCategory || "",
           searchText: arg?.searchText,
           variantOptionName: arg?.variantOptionName,
           variantOptionValue: arg?.variantOptionValue,
