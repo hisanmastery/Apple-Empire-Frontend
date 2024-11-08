@@ -18,7 +18,22 @@ export const authApi = authBaseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    
+    resetPassword: builder.mutation({
+      query: (payload: any) => ({
+        url: "/forgot-password",
+        method: "post",
+        body: payload,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    requestResetPassword: builder.mutation({
+      query: (payload: any) => ({
+        url: "/request-forgot-password",
+        method: "post",
+        body: payload,
+      }),
+      invalidatesTags: ["User"],
+    }),
     customerInfo: builder.query({
       query: (email: any) => ({
         url: `/get-single-customer/${email}`,
@@ -33,4 +48,6 @@ export const {
   useCustomerRegisterMutation,
   useCustomerLoginMutation,
   useCustomerInfoQuery,
+  useResetPasswordMutation,
+  useRequestResetPasswordMutation,
 } = authApi;
