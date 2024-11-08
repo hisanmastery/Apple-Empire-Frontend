@@ -117,7 +117,7 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
       {/* Product Images and Names */}
       <div className="grid grid-cols-2 gap-4 md:gap-6 items-center mb-8">
         <div className="text-center">
-          <div className="relative bg-gray-100 p-4 md:p-6 rounded-lg shadow-md">
+          <div className="relative bg-gray-100 p-4 md:p-6 rounded-sm">
             <Image
               src={
                 singlePhoneData?.response?.image?.imageUrl || "/placeholder.png"
@@ -127,7 +127,7 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
               height={220}
               className="w-[140px] md:w-[220px] h-[140px] md:h-[220px] mx-auto rounded-lg object-cover"
             />
-            <h2 className="mt-2 md:mt-4 text-sm md:text-xl font-semibold text-gray-800">
+            <h2 className="mt-2 md:mt-4 text-xs md:text-xl font-semibold text-gray-800">
               {singlePhoneData?.response?.name || "Select the first product"}
             </h2>
             {firstPhone && (
@@ -141,7 +141,7 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
           </div>
         </div>
         <div className="text-center">
-          <div className="relative bg-gray-100 p-4 md:p-6 rounded-lg shadow-md">
+          <div className="relative bg-gray-100 p-4 md:p-6 rounded-sm">
             <Image
               src={
                 secondPhoneData?.response?.image?.imageUrl || "/placeholder.png"
@@ -151,7 +151,7 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
               height={220}
               className="w-[140px] md:w-[220px] h-[140px] md:h-[220px] mx-auto rounded-lg object-cover"
             />
-            <h2 className="mt-2 md:mt-4 text-sm md:text-xl font-semibold text-gray-800">
+            <h2 className="mt-2 md:mt-4 text-xs md:text-xl font-semibold text-gray-800">
               {secondPhoneData?.response?.name || "Select the second product"}
             </h2>
             {secondPhone && (
@@ -168,9 +168,9 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
 
       {/* Specifications Comparison */}
       <div className="border-t border-gray-300 pt-6">
-        <div className="grid grid-cols-2 gap-2 md:gap-6">
-          <div className="bg-white rounded-lg p-6 shadow-sm border">
-            <h3 className="text-base md:text-lg font-semibold text-gray-700 mb-4">
+        <div className="grid grid-cols-2 gap-2 md:gap-6 overflow-auto">
+          <div className="bg-white rounded-lg shadow-sm border w-full overflow-auto">
+            <h3 className="text-xs md:text-lg p-3 md:p-6 font-semibold text-gray-700 mb-4">
               {singlePhoneData?.response?.name || "First product"}
               Specifications
             </h3>
@@ -183,8 +183,8 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
               }}
             />
           </div>
-          <div className="bg-white rounded-lg p-6 shadow-sm border">
-            <h3 className="text-base md:text-lg font-semibold text-gray-700 mb-4">
+          <div className="bg-white rounded-lg p-3 md:p-6 shadow-sm border w-full overflow-auto">
+            <h3 className="text-xs md:text-lg font-semibold text-gray-700 mb-4">
               {secondPhoneData?.response?.name || "Second product"}
               Specifications
             </h3>
@@ -204,5 +204,3 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
 };
 
 export default CompareComponent;
-
-
