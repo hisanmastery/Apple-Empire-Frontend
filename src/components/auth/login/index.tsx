@@ -34,7 +34,6 @@ const Login = () => {
       // Add your signup logic here
       const res: any = await customerLogin(loginData);
       const loginResponse: any = res?.data;
-      console.log({ res });
       if (res?.data?.message) {
         showToast("success", res?.data?.message);
         if (loginResponse?.isSuccess) {
@@ -102,7 +101,16 @@ const Login = () => {
                 className="mt-5"
                 placeholder="Password"
               />
-              <span className="absolute right-3 top-3 cursor-pointer" onClick={()=>setShowPassword(!showPassword)}>{showPassword ? <icons.FaRegEyeIcon/>: <icons.FaEyeSlashIcon/>}</span>
+              <span
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <icons.FaRegEyeIcon />
+                ) : (
+                  <icons.FaEyeSlashIcon />
+                )}
+              </span>
               {errors.password?.message && (
                 <p className="text-red-500 text-sm mt-1">
                   {String(errors.password.message)}
@@ -114,7 +122,7 @@ const Login = () => {
           <div className="flex items-center justify-between">
             <div className="text-sm">
               <Link
-                href="/forgot"
+                href="/forgot-request"
                 className="font-medium text-_primary hover:text-indigo-500"
               >
                 Forgot password?
