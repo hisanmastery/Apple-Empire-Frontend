@@ -54,7 +54,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
       <div className="bg-_white p-5 mb-3">
         <SubCategoryTabs category={canonicalUrl} />
       </div>
-      <div className="md:hidden flex justify-end">
+      <div className="md:hidden flex justify-end mb-3">
         <button
           onClick={() => setOpenSheetDrawer(true)}
           className="flex items-center gap-2 border px-5 py-1 border-_primary-text rounded-sm"

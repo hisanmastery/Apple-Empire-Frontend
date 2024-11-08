@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { FaAnglesDown } from "react-icons/fa6";
 import EmailSubscribe from "@/components/home/email-subscribe";
 import Image from "next/image";
 import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const NewFooter = () => {
   return (
@@ -19,7 +19,7 @@ const NewFooter = () => {
               width={80}
               height={80}
               className="lg:w-[80px] md:w-20 w-14 my-3"
-              src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
+              src={images.NavbarLogo}
               alt=""
             />
           </div>
