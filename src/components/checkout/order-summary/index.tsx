@@ -50,10 +50,10 @@ const OrderSummary = ({
           <span>Subtotal : </span>
           <span>TK . {subtotal}</span>
         </p>
-        <p className="flex justify-between items-center mb-2">
+        {/* <p className="flex justify-between items-center mb-2">
           <span>Cart Discount :</span>
           <span>TK . {cartDiscount}</span>
-        </p>
+        </p> */}
         <p className="flex justify-between items-center mb-2">
           <span>Delivery Fee : </span> <span>TK . {deliveryFee}</span>
         </p>

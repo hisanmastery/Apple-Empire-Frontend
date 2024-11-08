@@ -7,6 +7,7 @@ import authBaseApi from "./api/auth/authBaseAPI";
 import fetchEmiSlice from "./api/emi/emiSlice";
 import fetchPreOrderSlice from "./api/pre-order/preOrderSlice";
 import fetchBrandsSlice from "./api/brand/brandsSlice";
+import fetchShippingSlice from "./api/shipping-methods/ShippingMethodsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     [fetchEmiSlice.reducerPath]: fetchEmiSlice.reducer,
     [fetchPreOrderSlice.reducerPath]: fetchPreOrderSlice.reducer,
     [authBaseApi.reducerPath]: authBaseApi.reducer,
-    [fetchBrandsSlice.reducerPath] : fetchBrandsSlice.reducer,
+    [fetchBrandsSlice.reducerPath]: fetchBrandsSlice.reducer,
+    [fetchShippingSlice.reducerPath]: fetchShippingSlice.reducer,
     ...reducers,
   },
   middleware: (getDefaultMiddleware) =>
@@ -29,5 +31,5 @@ export const store = configureStore({
       .concat(authBaseApi.middleware)
       .concat(fetchPreOrderSlice.middleware)
       .concat(fetchBrandsSlice.middleware)
-      ,
+      .concat(fetchShippingSlice.middleware),
 });

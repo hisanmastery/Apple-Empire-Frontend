@@ -63,6 +63,15 @@ export const cartApi = fetchCheckoutSlice.injectEndpoints({
       }),
       providesTags: ["User"],
     }),
+
+    //shipping method
+    getAllShippingMethods: builder.query({
+      query: (id: any) => ({
+        url: `shipping-methods/all-shipping-methods`,
+        method: "GET",
+      }),
+      providesTags: ["User"],
+    }),
   }),
 });
 export const {
@@ -72,5 +81,5 @@ export const {
   useAddToCartDeleteMutation,
   useCustomerOrdersQuery,
   useGetSingleOrderQuery,
-  useLazyGetSingleOrderQuery
+  useLazyGetSingleOrderQuery,
 } = cartApi;

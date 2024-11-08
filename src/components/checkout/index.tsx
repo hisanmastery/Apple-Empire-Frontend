@@ -46,9 +46,8 @@ const Checkout = () => {
     return acc + product.quantity * priceWithoutCommas;
   }, 0);
 
-  const cartDiscount = 5;
-  const deliveryFee = shippingMethod?.cost || 0;
-  const totalPrice = subtotal - cartDiscount + deliveryFee;
+  const deliveryFee = parseFloat(shippingMethod?.amount) || 0;
+  const totalPrice = subtotal + deliveryFee;
 
   const onSubmit = async (data: any) => {
     // Check if the email is provided if customer is not logged in
@@ -80,7 +79,7 @@ const Checkout = () => {
       productIds: cleanedCart.map((item: any) => item.productId),
       productsInfo: cleanedCart,
       shippingMethod: {
-        shippingMethod: shippingMethod?.id,
+        shippingMethod: shippingMethod?.title,
         paymentMethod: data?.onlinePayment,
         orderNotes: data?.orderNotes,
       },
@@ -169,7 +168,7 @@ const Checkout = () => {
             <h3 className="text-lg font-semibold">CONFIRM ORDER</h3>
             <OrderSummary
               subtotal={subtotal}
-              cartDiscount={cartDiscount}
+              // cartDiscount={cartDiscount}
               deliveryFee={deliveryFee}
               totalPrice={totalPrice}
               totalProducts={cleanedCart}
