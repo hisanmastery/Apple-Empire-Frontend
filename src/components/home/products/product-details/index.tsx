@@ -108,7 +108,7 @@ const ProductDetails = ({ id }: any) => {
       getStoredData
     );
   };
-
+  console.log({ data });
   useEffect(() => {
     setSelectedColor(data?.response?.variations?.[0]?.color);
   }, [data]);
@@ -123,15 +123,16 @@ const ProductDetails = ({ id }: any) => {
           items={[
             { label: "Home", href: "/" },
             {
-              label: data?.response?.category?.categoryName || "Category",
-              href:
-                `/category/${data?.response?.category?.categoryName}` || "#",
+              label: data?.response?.category?.parentCategory?.name,
+              href: `/category/${data?.response?.category?.parentCategory?.slug}`,
             },
             {
-              label: data?.response?.category?.subCategory?.[0] || "Category",
-              href:
-                `/category/${data?.response?.category?.categoryName}/${data?.response?.category?.subCategory?.[0]}` ||
-                "#",
+              label: data?.response?.category?.subCategory?.name,
+              href: `/category/${data?.response?.category?.subCategory?.slug}`,
+            },
+            {
+              label: data?.response?.category?.subSubCategory?.name,
+              href: `/category/${data?.response?.category?.subSubCategory?.slug}`,
             },
           ]}
         />

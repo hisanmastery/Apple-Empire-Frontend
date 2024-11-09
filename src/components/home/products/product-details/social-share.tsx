@@ -6,8 +6,8 @@ import React from "react";
 
 const SocialShare = () => {
   return (
-    <div className="grid grid-cols-1 container lg:grid-cols-9 gap-10 mt-2">
-      <div className="col-span-3 flex lg:justify-start mt-8 gap-2 leading-3 lg:col-span-4">
+    <div className="grid grid-cols-1 lg:grid-cols-9 gap-10 mt-2">
+      <div className="col-span-9 flex lg:justify-start mt-8 gap-2 leading-3 md:col-span-4">
         {/* Scrolling text using CSS animation */}
         <div></div>
         <div className="marquee-container">
@@ -21,7 +21,7 @@ const SocialShare = () => {
           </div>
         </div>
       </div>
-      <div className={"col-span-5"}>
+      <div className={" col-span-9 md:col-span-5"}>
         <h5 className="mb-3">Secure Payments</h5>
         <Image
           width={300}
