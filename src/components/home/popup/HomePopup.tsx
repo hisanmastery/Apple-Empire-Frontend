@@ -46,7 +46,7 @@ const HomePopup = () => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <Link href={"/section/popular-products"}>
         <Image
-          // ref={popupRef}
+          ref={popupRef}
           src={images.popup}
           alt="Popup"
           height={100}
