@@ -1,66 +1,26 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 import Loading from "@/components/common/loading";
-import { useGetCategoryListQuery } from "@/store/features/category/categoryApi";
+import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
 import Image from "next/image";
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/effect-coverflow";
-import "swiper/css/virtual";
-import { Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 
-const breakpoints = {
-  0: {
-    slidesPerView: 3,
-    spaceBetween: 20,
-  },
-  640: {
-    slidesPerView: 3,
-    spaceBetween: 20,
-  },
-  1024: {
-    slidesPerView: 6,
-    spaceBetween: 20,
-  },
-  1440: {
-    slidesPerView: 6,
-    spaceBetween: 20,
-  },
-};
-
 const TopItems = () => {
-  const swiperRef = useRef<any>(null);
-  const { data, isLoading } = useGetCategoryListQuery<any>({
+  const { data, isLoading } = useGetAllCategoryQuery<any>({
     page: 1,
-    limit: 10,
+    limit: 12,
   });
-  console.log(data?.data);
+
   if (isLoading) return <Loading />;
   return (
-    <div className="md:container pb-5 mt-5 md:mt-0">
+    <div className="md:container mb-3 sm:mt-0">
       <h2 className="text-xl md:text-2xl font-semibold text-center pb-4 md:py-4">
         Top Categories
       </h2>
 
-      <Swiper
-        ref={swiperRef}
-        modules={[Autoplay]}
-        loop={true}
-        autoplay={{
-          delay: 3000,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: false,
-          stopOnLastSlide: false,
-        }}
-        speed={3000}
-        allowTouchMove={true}
-        breakpoints={breakpoints}
-        spaceBetween={12}
-      >
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
         {data?.data?.map((category: any, index: any) => (
-          <SwiperSlide key={index} className={`!h-auto !md:h-full`}>
+          <div key={index} className={`!h-auto !md:h-full`}>
             <Link href={`/category/${category?.slug}`}>
               <div className="w-full !h-full p-3 bg-_white rounded-lg">
                 <Image
@@ -75,9 +35,9 @@ const TopItems = () => {
                 </h4>
               </div>
             </Link>
-          </SwiperSlide>
+          </div>
         ))}
-      </Swiper>
+      </div>
     </div>
   );
 };

@@ -10,24 +10,24 @@ import { images } from "@/constants/images";
 
 const products = [
   {
-    id:"54564565766782453467",
-    image: images.banner1
+    id: "54564565766782453467",
+    image: images.banner1,
   },
   {
     id: "2345678903456sdfsd",
-    image:images.banner2
+    image: images.banner2,
   },
   {
     id: "234567890fghjkwesd",
-    image:images.banner3
+    image: images.banner3,
   },
   {
     id: "dfghjk345678904sdf",
-    image:images.banner4
+    image: images.banner4,
   },
   {
     id: "sdfghjksdfert2345",
-    image:images.banner5
+    image: images.banner5,
   },
 ];
 
@@ -65,12 +65,13 @@ const HeroSection = () => {
           products.map((product, index) => (
             <SwiperSlide key={product.id}>
               <div className="aspect-w-16 aspect-h-9">
-                <Card className="h-full">
-                  <CardContent className="flex w-full items-center justify-center lg:h-[580px] h-full">
+                <Card className="!h-full">
+                  <CardContent className="flex w-full items-center justify-center lg:h-[580px] h-52">
                     <Image
                       width={500}
                       height={400}
-                      className="w-full"
+                      quality={100}
+                      className="w-full h-full object-cover"
                       src={product.image}
                       alt={`Carousel Image ${index + 1}`}
                     />

@@ -35,7 +35,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const [addToCartItem]: any = useAddToCartMutation();
   const { isAuthenticated, customerInfo }: any = useAuth();
   const showToast = useToaster();
-  console.log({ datas });
   const formatVariants = datas?.variants?.[0]?.options?.reduce(
     (acc: any, option: any) => {
       acc[option.name] = option.value;
@@ -176,8 +175,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
         </Link>
         <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
           <Link href={`/products/${datas?._id}`}>
-            <p className="title mb-2 text-xs sm:text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-qyellow cursor-pointer">
-              {datas.name.slice(0, 22)}...
+            <p className="title mb-2 text-xs sm:text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-_primary cursor-pointer">
+              {datas.name.slice(0, 25)}
             </p>
           </Link>
           <p className="price">
