@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import Image from "next/image";
+import { images } from "@/constants/images";
 
 const HomePopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,15 +46,13 @@ const HomePopup = () => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <Link href={"/section/popular-products"}>
         <Image
-          ref={popupRef}
-          src={
-            "https://cdn.grabon.in/gograbon/images/web-images/uploads/1618571140235/mobile-offers.jpg"
-          }
-          alt="Image... "
+          // ref={popupRef}
+          src={images.popup}
+          alt="Popup"
           height={100}
           width={100}
-          quality={100}
-          className={" w-[90vw] max-w-[800px] rounded sm:w-[80vw] object-cover"}
+          quality={70}
+          className={"w-[90vw] max-w-[500px] rounded sm:w-[50vw] object-cover"}
         />
       </Link>
     </div>
