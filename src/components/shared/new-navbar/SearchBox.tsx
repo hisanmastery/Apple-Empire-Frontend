@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function SearchBox() {
   const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<any>(null);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -62,7 +62,6 @@ export default function SearchBox() {
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
-        onClick={() => setOpen(true)}
         className="w-full py-0 md:py-2 pl-5 focus:outline-none rounded md:focus:ring-2 focus:ring-_primary/60 transition-all duration-300 ease-in-out"
         placeholder="Search for products..."
         aria-label="Search"
