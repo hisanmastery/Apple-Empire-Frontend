@@ -47,7 +47,7 @@ const HomePopup = () => {
       <Link href={"/section/popular-products"}>
         <Image
           ref={popupRef}
-          src={images.popup}
+          src={images.popup.src}
           alt="Popup"
           height={100}
           width={100}

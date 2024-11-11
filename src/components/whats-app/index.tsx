@@ -6,7 +6,7 @@ import { FloatingWhatsApp } from "react-floating-whatsapp";
 const WhatsApp = () => {
   return (
     <FloatingWhatsApp
-      phoneNumber="01907252606"
+      phoneNumber="01616436310"
       accountName="Apple Empire"
       avatar={images.NavbarLogo.src || ""}
     />
