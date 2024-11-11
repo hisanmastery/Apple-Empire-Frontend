@@ -8,9 +8,10 @@ import { useEffect, useRef, useState } from "react";
 
 export default function SearchBox() {
   const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState("");
-  // const [open, setOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<any>(null);
+  const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+
   const { data } = useGetProductsListsQuery<any>(
     {
       searchText: searchTerm,
@@ -22,7 +23,7 @@ export default function SearchBox() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-    // setOpen(e.target.value.length > 0);
+    setOpen(e.target.value.length > 0);
   };
 
   const handleSearch = () => {
@@ -30,20 +31,28 @@ export default function SearchBox() {
       router.push(`/search-result?query=${encodeURIComponent(searchTerm)}`);
     }
   };
+
   const productsData = data?.product;
   const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node)
     ) {
-      // setOpen(false);
+      setOpen(false);
     }
+  };
+
+  const handleScroll = () => {
+    setOpen(false);
   };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -53,7 +62,6 @@ export default function SearchBox() {
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
-        // onClick={() => setOpen(true)}
         className="w-full py-0 md:py-2 pl-5 focus:outline-none rounded md:focus:ring-2 focus:ring-_primary/60 transition-all duration-300 ease-in-out"
         placeholder="Search for products..."
         aria-label="Search"
@@ -65,17 +73,16 @@ export default function SearchBox() {
       >
         <icons.SearchIcons className="text-xl " />
       </button>
-      {/* Conditional rendering of search results */}
-      {productsData?.length > 0 && (
+      {open && productsData?.length > 0 && (
         <div
-          className="absolute top-12  z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md max-h-96 overflow-auto"
+          className="absolute top-12 z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md max-h-96 overflow-auto"
           ref={dropdownRef}
         >
           {productsData?.map((product: any) => (
             <Link href={`/products/${product?._id}`} key={product._id}>
               <div
                 className="p-2 group cursor-pointer flex gap-3 items-center"
-                // onClick={() => setOpen(false)}
+                onClick={() => setOpen(false)}
               >
                 <Image
                   src={product?.image?.imageUrl}

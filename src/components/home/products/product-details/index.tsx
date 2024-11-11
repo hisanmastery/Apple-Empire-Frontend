@@ -18,7 +18,6 @@ import useToaster from "@/hooks/useToaster";
 import Emiplan from "@/components/emiplan";
 import VariantDisplay from "./variant-display";
 import ImageDisplay from "./image-display";
-import SocialShare from "./social-share";
 import ProductInfoTab from "./product-info-tab";
 import ProductActionButtons from "./ProductActionButtons";
 import { addToCart } from "./AddToCart";
@@ -27,6 +26,7 @@ import QuantityController from "@/components/common/quantity-controller";
 import { get_store_data } from "@/utils/get_store_data";
 import ProductDetailsSkeleton from "@/components/shared/skeleton/products-details-skeleton";
 import Breadcrumbs from "@/components/common/breadcrumbs";
+import MarqueeTag from "./marquee-tag";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -42,7 +42,7 @@ const ProductDetails = ({ id }: any) => {
   const dispatch = useDispatch();
   const [addToCartItem]: any = useAddToCartMutation();
   const [updateCart] = useUpdateCartMutation();
-  console.log({ variantPrice });
+
   useEffect(() => {
     if (storedCart?.length && data) {
       const new_data = data?.response;
@@ -108,7 +108,7 @@ const ProductDetails = ({ id }: any) => {
       getStoredData
     );
   };
-
+  console.log({ data });
   useEffect(() => {
     setSelectedColor(data?.response?.variations?.[0]?.color);
   }, [data]);
@@ -123,15 +123,16 @@ const ProductDetails = ({ id }: any) => {
           items={[
             { label: "Home", href: "/" },
             {
-              label: data?.response?.category?.categoryName || "Category",
-              href:
-                `/category/${data?.response?.category?.categoryName}` || "#",
+              label: data?.response?.category?.parentCategory?.name,
+              href: `/category/${data?.response?.category?.parentCategory?.slug}`,
             },
             {
-              label: data?.response?.category?.subCategory?.[0] || "Category",
-              href:
-                `/category/${data?.response?.category?.categoryName}/${data?.response?.category?.subCategory?.[0]}` ||
-                "#",
+              label: data?.response?.category?.subCategory?.name,
+              href: `/category/${data?.response?.category?.subCategory?.slug}`,
+            },
+            {
+              label: data?.response?.category?.subSubCategory?.name,
+              href: `/category/${data?.response?.category?.subSubCategory?.slug}`,
             },
           ]}
         />
@@ -238,7 +239,7 @@ const ProductDetails = ({ id }: any) => {
         </div>
       </div>
       {/* social share */}
-      <SocialShare />
+      <MarqueeTag />
       {/* Related products */}
       <ViewMoreTitle
         className="top-selling-product mt-14"

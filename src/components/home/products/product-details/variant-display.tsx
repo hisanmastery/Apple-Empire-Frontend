@@ -101,9 +101,9 @@ const VariantDisplay = ({
           (option: any) =>
             option !== "color" &&
             option !== "Color" && (
-              <div key={option} className="mb-4 flex items-center gap-5">
-                <h3 className="font-medium">{option}</h3>
-                <div className="flex space-x-2">
+              <div key={option} className="mb-4 flex">
+                <h3 className="font-medium w-[30%] md:w-[15%]">{option}:</h3>
+                <div className="flex flex-wrap gap-2">
                   {/* Extract available values for the current option */}
                   {product?.variants
                     .flatMap((variant: any) =>
@@ -117,6 +117,7 @@ const VariantDisplay = ({
                     )
                     ?.map((value: any) => (
                       <Button
+                        size={"sm"}
                         key={value}
                         variant={
                           selectedOptions[option] === value
@@ -140,7 +141,7 @@ const VariantDisplay = ({
             <h2 className="text-xl font-bold">
               Price: TK. {selectedVariant?.price}
             </h2>
-            <p className="text-gray-600">Stock: {selectedVariant?.stock}</p>
+            {/* <p className="text-gray-600">Stock: {selectedVariant?.stock}</p> */}
           </>
         ) : (
           <p className="text-red-500">

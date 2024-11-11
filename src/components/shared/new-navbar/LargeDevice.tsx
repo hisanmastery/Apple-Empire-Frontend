@@ -14,7 +14,7 @@ export default function LargeDevice() {
   >(null);
   const { data: categoriesData }: any = useGetAllCategoryQuery({
     page: 1,
-    limit: 7,
+    limit: 8,
   });
 
   // Handle main category hover events
@@ -70,9 +70,9 @@ export default function LargeDevice() {
       >
         <Link
           href={`/category/${category.slug}`}
-          className="flex justify-between items-center border-b px-4 py-2 transition-all duration-300 ease-in-out cursor-pointer text-gray-800 hover:bg-gray-100 hover:text-orange-600"
+          className="flex justify-between items-center border-b px-2 py-2 transition-all duration-300 ease-in-out cursor-pointer text-gray-800 hover:bg-gray-100 hover:text-orange-600"
         >
-          <span>{category.categoryName}</span>
+          <span className="text-start">{category.categoryName}</span>
           {category.subcategories && category.subcategories.length > 0 && (
             <span className="ml-2 text-gray-500 transform transition-transform duration-300 group-hover:rotate-90">
               ▶
@@ -158,7 +158,7 @@ export default function LargeDevice() {
                   {/* Render dropdown for categories with subcategories */}
                   {openCategoryId === category._id &&
                     category.subcategories && (
-                      <div className="category-dropdown absolute left-0 top-9 mt-2 bg-white min-w-52 shadow-lg border rounded-md">
+                      <div className="category-dropdown absolute left-0 top-8 mt-2 bg-white min-w-52 shadow-lg border rounded-md">
                         <ul className="categories-list py-2">
                           {category.subcategories.map((subCategory: any) =>
                             renderCategoryTree(subCategory)
@@ -169,9 +169,6 @@ export default function LargeDevice() {
                 </div>
               ))}
               <div className="lg:flex items-center gap-10 hidden">
-                <div className="text-gray-800 text-md font-medium">
-                  <Link href={"/about-us"}>About</Link>
-                </div>
                 <div className="text-gray-800 text-md font-medium">
                   <Link href={"/"}>Blogs</Link>
                 </div>

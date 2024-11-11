@@ -14,11 +14,13 @@ import {
 } from "@/components/ui/accordion";
 import SheetDrawer from "@/components/common/sheet-drawer/indext";
 
+// Tabs for toggling between Category and Menu views
 const tabData = [
   { value: "category", label: "Category" },
   { value: "menu", label: "Menu" },
 ];
 
+// Policy links for the Menu tab
 const policyLinks = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "EMI Policy", href: "/emi-policy" },
@@ -27,42 +29,33 @@ const policyLinks = [
   { label: "FAQ", href: "/faq" },
 ];
 
+// Interfaces for category tree
 interface SubSubCategory {
   _id: string;
   categoryName: string;
   slug: string;
-  images: {
-    imageUrl: string;
-    altText: string;
-  };
 }
 
 interface SubCategory {
   _id: string;
   categoryName: string;
   slug: string;
-  images: {
-    imageUrl: string;
-    altText: string;
-  };
-  subsubcategories: SubSubCategory[];
+  subcategories?: SubSubCategory[];
 }
 
 interface Category {
   _id: string;
   categoryName: string;
+  images: any;
   slug: string;
-  images: {
-    imageUrl: string;
-    altText: string;
-  };
-  subcategories: SubCategory[];
+  subcategories?: SubCategory[];
 }
 
 interface SmallDeviceProps {
   type?: string;
 }
 
+// Main Component
 const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
   const [selectedTab, setSelectedTab] = useState("category");
   const [categoryToggle, setCategoryToggle] = useState(false);
@@ -77,7 +70,7 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
 
   return (
     <div className="flex justify-between items-center md:hidden bg-black px-5">
-      {/* Category Menu */}
+      {/* Category Menu Button */}
       <div className="category-and-nav lg:hidden items-center">
         <div className="category rounded-t-md mt-1.5 relative">
           <button
@@ -91,14 +84,17 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
               </span>
             </div>
           </button>
+
+          {/* Drawer for Category/Menu */}
           <SheetDrawer
             isOpen={categoryToggle}
             setIsOpen={setCategoryToggle}
             title=""
             direction="left"
           >
+            {/* Tabs for Category and Menu */}
             <div className="flex gap-2 px-2">
-              {tabData?.map((item: any) => (
+              {tabData.map((item) => (
                 <button
                   onClick={() => setSelectedTab(item?.value)}
                   key={item?.value}
@@ -110,79 +106,108 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
                 </button>
               ))}
             </div>
+
+            {/* Category Tab */}
             {selectedTab === "category" ? (
-              <div className="category-dropdown w-72">
-                <div>
-                  <Accordion type="multiple" className="w-full">
-                    {categoriesData?.data?.map((category: Category) => (
-                      <AccordionItem key={category._id} value={category._id}>
-                        <AccordionTrigger>
-                          <div className="flex items-center gap-2 px-2 border-b w-full py-1 hover:bg-gray-200">
-                            <Image
-                              className="w-6 h-6"
-                              src={category.images.imageUrl}
-                              alt={category.images.altText}
-                              width={24}
-                              height={24}
-                            />
-                            <span className="text-sm font-medium">
-                              <Link href={`/category/${category.slug}`}>
-                                {category.categoryName}
-                              </Link>
-                            </span>
-                            <span className="ml-auto">
-                              <icons.GoArrowRight className="w-4 h-4 text-gray-500" />
-                            </span>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          {category?.subcategories?.length > 0 && (
-                            <ul className="pl-5 bg-gray-100">
-                              {category.subcategories?.map(
-                                (subCategory, subIndex) => (
-                                  <li key={subIndex}>
-                                    <div className="py-1 border-b hover:bg-gray-200">
+              <div className="category-dropdown w-72 mt-3">
+                <Accordion type="multiple" className="w-full">
+                  {categoriesData?.data?.map((category: Category) => (
+                    <div key={category._id}>
+                      {category?.subcategories?.length ? (
+                        <AccordionItem value={category._id}>
+                          <AccordionTrigger className="hover:bg-gray-200 p-2">
+                            <div className="flex items-center gap-2 px-2 border-b w-full">
+                              <Image
+                                className="w-6 h-6"
+                                src={category?.images?.imageUrl}
+                                alt={category?.images?.altText}
+                                width={24}
+                                height={24}
+                              />
+                              <span className="text-sm font-medium">
+                                <Link
+                                  href={`/category/${category?.slug}`}
+                                  onClick={handleCategoryToggle}
+                                >
+                                  {category?.categoryName}
+                                </Link>
+                              </span>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <Accordion type="multiple">
+                              {category?.subcategories?.map((subCategory) => (
+                                <div key={subCategory._id}>
+                                  {subCategory?.subcategories?.length ? (
+                                    <AccordionItem value={subCategory._id}>
+                                      <AccordionTrigger className="hover:bg-gray-200 p-2 pl-5">
+                                        <span className="text-xs font-normal">
+                                          <Link
+                                            onClick={handleCategoryToggle}
+                                            href={`/category/${subCategory?.slug}`}
+                                          >
+                                            {subCategory?.categoryName}
+                                          </Link>
+                                        </span>
+                                      </AccordionTrigger>
+                                      <AccordionContent>
+                                        <ul className="pl-5 bg-gray-200">
+                                          {subCategory?.subcategories.map(
+                                            (subSubCategory) => (
+                                              <li
+                                                key={subSubCategory._id}
+                                                className="py-1 border-b hover:bg-gray-300"
+                                              >
+                                                <Link
+                                                  onClick={handleCategoryToggle}
+                                                  href={`/category/${subSubCategory?.slug}`}
+                                                >
+                                                  <span className="text-xs font-light hover:text-blue-400">
+                                                    {
+                                                      subSubCategory?.categoryName
+                                                    }
+                                                  </span>
+                                                </Link>
+                                              </li>
+                                            )
+                                          )}
+                                        </ul>
+                                      </AccordionContent>
+                                    </AccordionItem>
+                                  ) : (
+                                    <div className="py-2 pl-5 border-b">
                                       <Link
+                                        href={`/category/${subCategory?.slug}`}
                                         onClick={handleCategoryToggle}
-                                        href={`/category/${category.slug}/${subCategory.slug}`}
                                       >
                                         <span className="text-xs font-normal hover:text-blue-500">
-                                          {subCategory.categoryName}
+                                          {subCategory?.categoryName}
                                         </span>
                                       </Link>
                                     </div>
-                                    {subCategory?.subsubcategories?.length >
-                                      0 && (
-                                      <ul className="pl-5 bg-gray-200">
-                                        {subCategory.subsubcategories?.map(
-                                          (subSubCategory, subSubIndex) => (
-                                            <li
-                                              className="py-1 border-b hover:bg-gray-300"
-                                              key={subSubIndex}
-                                            >
-                                              <Link
-                                                onClick={handleCategoryToggle}
-                                                href={`/category/${category.slug}/${subCategory.slug}/${subSubCategory.slug}`}
-                                              >
-                                                <span className="text-xs font-light hover:text-blue-400">
-                                                  {subSubCategory.categoryName}
-                                                </span>
-                                              </Link>
-                                            </li>
-                                          )
-                                        )}
-                                      </ul>
-                                    )}
-                                  </li>
-                                )
-                              )}
-                            </ul>
-                          )}
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
-                </div>
+                                  )}
+                                </div>
+                              ))}
+                            </Accordion>
+                          </AccordionContent>
+                        </AccordionItem>
+                      ) : (
+                        <div className="py-2 px-2 border-b">
+                          <Link
+                            href={`/category/${category?.slug}`}
+                            onClick={handleCategoryToggle}
+                          >
+                            <span className="text-sm font-medium hover:text-blue-500">
+                              {category?.categoryName}
+                            </span>
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </Accordion>
+
+                {/* Close Drawer Button */}
                 <button
                   className="absolute top-2 right-2 text-black"
                   onClick={handleCategoryToggle}
@@ -191,6 +216,7 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
                 </button>
               </div>
             ) : (
+              // Menu Tab with Policy Links
               <ul className="px-5 mt-5">
                 {policyLinks.map((item, index) => (
                   <Link

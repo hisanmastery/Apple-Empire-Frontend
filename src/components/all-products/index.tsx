@@ -53,7 +53,7 @@ const AllProductsSection = ({ productsType }: any) => {
         <p className="text-xl md:text-2xl font-semibold mb-2">{productsType}</p>
         <CategoryTabs />
       </div>
-      <div className="md:hidden flex justify-end mb-2">
+      <div className="md:hidden flex justify-end mb-3">
         <button
           onClick={() => setOpenSheetDrawer(true)}
           className="flex items-center gap-2 border px-5 py-1 border-_primary-text rounded-sm"

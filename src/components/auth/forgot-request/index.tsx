@@ -1,31 +1,35 @@
 "use client";
 import useToaster from "@/hooks/useToaster";
-import { useResetPasswordMutation } from "@/store/api/auth/authApi";
+import { useRequestResetPasswordMutation } from "@/store/api/auth/authApi";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-const Forgot = ({ token }: any) => {
+interface FormData {
+  email: string;
+}
+
+const ForgotRequest = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  } = useForm<FormData>();
   const showTost = useToaster();
+  const [requestResetPassword, { isLoading }] =
+    useRequestResetPasswordMutation();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
-      data.token = token;
-      const res: any = await resetPassword(data);
-      if (res?.data?.message) {
-        showTost("error", res?.data?.message);
+      const res: any = await requestResetPassword(data);
+      if (res?.data?.isSuccess) {
+        showTost("success", res?.data?.message);
       } else {
-        showTost("error", res?.error?.data?.message);
+        showTost("error", res?.error?.data?.message || "Request failed.");
       }
     } catch (error: any) {
-      showTost("error", error?.message);
+      showTost("error", error?.message || "An unexpected error occurred.");
     }
   };
 
@@ -51,31 +55,32 @@ const Forgot = ({ token }: any) => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              New Password
+              Email:
             </label>
             <input
-              type="password"
-              id="password"
+              type="email"
+              id="email"
               className="mt-1 block w-full focus:outline-none px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              {...register("password", { required: "Password is required" })}
+              {...register("email", { required: "Email is required" })}
             />
-            {errors.password && (
+            {errors.email && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.password.message as string}
+                {errors.email.message}
               </p>
             )}
           </div>
           <button
             type="submit"
+            disabled={isLoading}
             className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            {isLoading ? "Loading...." : "Submit"}
+            {isLoading ? "Loading..." : "Submit"}
           </button>
         </form>
         {/* Link to the login page */}
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
-            Remembered your password?
+            Remembered your password?{" "}
             <Link href="/login" className="text-blue-600 hover:underline">
               Login here
             </Link>
@@ -86,4 +91,4 @@ const Forgot = ({ token }: any) => {
   );
 };
 
-export default Forgot;
+export default ForgotRequest;

@@ -3,36 +3,17 @@ import React, { useState } from "react";
 import { MdOutlinePayment } from "react-icons/md";
 import { useFormContext } from "react-hook-form";
 import Input from "@/components/common/input";
+import { useGetAllShippingMethodsQuery } from "@/store/features/shipping-methods/ShippingMethodsApi";
 
 const ShippingMethod = ({ setShippingMethod }: any) => {
-  const { register, setValue } = useFormContext();
-
+  const { setValue } = useFormContext();
+  const { data, isLoading } = useGetAllShippingMethodsQuery<any>({});
   const [selectedShippingMethod, setSelectedShippingMethod] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
 
-  // Shipping options
-  const shippingOptions = [
-    {
-      id: "OutSide Dhaka",
-      label: "Outside Dhaka : Within 5-7 days",
-      cost: 100,
-    },
-    {
-      id: "InSide Dhaka",
-      label: "InSide Dhaka : Within 5-7 days",
-      cost: 50,
-    },
-    {
-      id: "Shop By Pick Up",
-      label: "Shop By pick up",
-      cost: 0,
-    },
-  ];
-
   // Handle the change in selected shipping method
   const handleMethodChange = (option: any) => {
-    console.log(option);
-    setSelectedShippingMethod(option.id);
+    setSelectedShippingMethod(option.title);
     setShippingMethod(option);
   };
 
@@ -46,7 +27,10 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
       setValue("onlinePayment", method);
     }
   };
-
+  //loading
+  if (isLoading) {
+    return;
+  }
   return (
     <div>
       {/* Shipping Method Section */}
@@ -59,34 +43,34 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
         </h1>
 
         {/* Map over shipping options to display them */}
-        {shippingOptions.map((option) => (
+        {data?.data?.map((option: any) => (
           <div
             className="flex items-center space-x-2 mt-5 ml-3"
-            key={option.id}
+            key={option._id}
           >
             <input
               type="radio"
-              id={option.id}
-              value={option.id}
+              id={option._id}
+              value={option.title}
               onChange={() => handleMethodChange(option)}
-              checked={selectedShippingMethod === option.id}
+              checked={selectedShippingMethod === option.title}
               className="hidden"
             />
 
             <label
-              htmlFor={option.id}
+              htmlFor={option._id}
               className="inline-flex items-center cursor-pointer"
             >
               <div
                 className={`w-6 h-6 rounded-full flex items-center justify-center border-2 border-_primary ${
-                  selectedShippingMethod === option.id
+                  selectedShippingMethod === option.title
                     ? "bg-_primary"
                     : "bg-white"
                 }`}
               ></div>
               <div className="flex justify-between ml-2 items-center gap-10">
-                <span className="text-md">{option.label}</span>
-                <span>TK. {option.cost}</span>
+                <span className="text-md">{option.title}</span>
+                <span>TK. {option.amount}</span>
               </div>
             </label>
           </div>

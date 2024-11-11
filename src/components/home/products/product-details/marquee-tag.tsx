@@ -1,15 +1,13 @@
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
-const SocialShare = () => {
+const MarqueeTag = () => {
   return (
-    <div className="grid grid-cols-1 container lg:grid-cols-9 gap-10 mt-2">
-      <div className="col-span-3 flex lg:justify-start mt-8 gap-2 leading-3 lg:col-span-4">
-        {/* Scrolling text using CSS animation */}
-        <div></div>
+    <div className="grid grid-cols-1 lg:grid-cols-9 gap-10 mt-2">
+      {/* Marquee Section */}
+      <div className="col-span-9 lg:col-span-4 flex lg:justify-start mt-8 gap-2 leading-3">
         <div className="marquee-container">
           <div className="marquee">
             সাপ্লাই চেইন, চাহিদা এবং মুদ্রার হার অনুযায়ী আন্তর্জাতিক পণ্যের দাম
@@ -21,7 +19,9 @@ const SocialShare = () => {
           </div>
         </div>
       </div>
-      <div className={"col-span-5"}>
+
+      {/* Payment Section */}
+      <div className="col-span-9 lg:col-span-5 mt-2 md:mt-8">
         <h5 className="mb-3">Secure Payments</h5>
         <Image
           width={300}
@@ -32,28 +32,39 @@ const SocialShare = () => {
           className="w-full object-cover h-7 -mt-1"
         />
       </div>
-      {/* Inline CSS styles for marquee effect */}
+
+      {/* Marquee Styles */}
       <style jsx>{`
         .marquee-container {
           overflow: hidden;
-          width: 90%;
-          background-color: #f0f0f0; /* Optional: background color for better visibility */
-          border: 1px solid #ccc; /* Optional: border for the marquee container */
+          width: 90%; /* Full width */
+          background-color: #f0f0f0;
+          border: 1px solid #ccc;
           display: flex;
-          align-items: center; /* Vertically center the text */
-          height: 32px; /* Set a fixed height for the container */
+          align-items: center;
+          height: 32px;
         }
+
         .marquee {
           display: inline-block;
           white-space: nowrap;
           animation: marquee 50s linear infinite;
         }
+
         @keyframes marquee {
           0% {
-            transform: translateX(100%);
+            transform: translateX(10%);
           }
           100% {
             transform: translateX(-100%);
+          }
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 640px) {
+          /* Faster marquee animation on smaller screens */
+          .marquee {
+            animation: marquee 30s linear infinite;
           }
         }
       `}</style>
@@ -61,4 +72,4 @@ const SocialShare = () => {
   );
 };
 
-export default SocialShare;
+export default MarqueeTag;
