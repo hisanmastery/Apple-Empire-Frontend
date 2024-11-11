@@ -57,6 +57,7 @@ import {
   FaReddit,
   FaRegUserCircle,
 } from "react-icons/fa";
+import { IoMdSend } from "react-icons/io";
 import { GrCurrency } from "react-icons/gr";
 import { FaCodeCompare } from "react-icons/fa6";
 import { TbExchange } from "react-icons/tb";
@@ -80,6 +81,8 @@ import { IoMdGitCompare } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { RiFilter2Fill } from "react-icons/ri";
+import { SiWhatsapp } from "react-icons/si";
+
 export const icons = {
   GiDiscussion,
   GiTeamIdea,
@@ -161,4 +164,6 @@ export const icons = {
   FaRegEyeIcon: FaRegEye,
   FaEyeSlashIcon: FaEyeSlash,
   RiFilter2FillIcons: RiFilter2Fill,
+  sendIcons: IoMdSend,
+  whatsappIcons: SiWhatsapp,
 };

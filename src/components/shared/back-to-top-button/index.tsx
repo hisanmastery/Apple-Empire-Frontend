@@ -25,7 +25,7 @@ const BackToTopButton: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-36 md:bottom-28 right-2 md:right-8 z-50">
+    <div className="fixed bottom-36 md:bottom-28 right-2 md:right-8 z-40">
       {isVisible && (
         <button
           onClick={scrollToTop}
