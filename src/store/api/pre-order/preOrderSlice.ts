@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const fetchPreOrderSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: `${baseApiUrl}/pre-order`,
+    baseUrl: `${baseApiUrl}`,
   }),
   tagTypes: ["pre-order"],
   reducerPath: "pre-order",

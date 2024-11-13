@@ -57,12 +57,12 @@ const HeroSection = () => {
           dynamicBullets: true,
         }}
       >
-        {products.length === 0 ? (
+        {products?.length === 0 ? (
           <SwiperSlide>
             <p>No products available</p>
           </SwiperSlide>
         ) : (
-          products.map((product, index) => (
+          products?.map((product, index) => (
             <SwiperSlide key={product.id}>
               <div className="aspect-w-16 aspect-h-9">
                 <Card className="!h-full">
@@ -71,7 +71,7 @@ const HeroSection = () => {
                       width={500}
                       height={400}
                       quality={100}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full"
                       src={product.image}
                       alt={`Carousel Image ${index + 1}`}
                     />

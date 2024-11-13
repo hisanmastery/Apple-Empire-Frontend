@@ -62,6 +62,9 @@ const MarqueeTag = () => {
 
         /* Responsive Fixes */
         @media (max-width: 640px) {
+          .marquee-container {
+            width: 100%; /* Full width on screens smaller than 640px */
+          }
           /* Faster marquee animation on smaller screens */
           .marquee {
             animation: marquee 30s linear infinite;

@@ -10,7 +10,6 @@ const Products = () => {
       productType: "Top Selling Products",
     }
   );
-  // console.log({ topSellingProducts });
   if (isLoading) {
     return <ProductCardSkeleton />;
   }

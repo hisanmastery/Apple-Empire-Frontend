@@ -12,8 +12,8 @@ const OfferDetailsPage = ({ params }: any) => {
             href: "/offers",
           },
           {
-            label: "OfferDetails",
-            href: "/offers/offerDetails",
+            label: "Offer Details",
+            href: "/offers/offer-details",
           },
         ]}
       />

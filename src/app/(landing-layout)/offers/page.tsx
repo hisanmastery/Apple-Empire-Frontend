@@ -1,5 +1,4 @@
 import Offers from "@/components/offers";
-import offerDatas from "@/../../public/offers.json";
 import React from "react";
 import Breadcrumbs from "@/components/common/breadcrumbs";
 
@@ -15,7 +14,7 @@ const OffersPage = () => {
           },
         ]}
       />
-      <Offers offers={offerDatas} />
+      <Offers />
     </div>
   );
 };

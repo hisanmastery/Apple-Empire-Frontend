@@ -1,7 +1,7 @@
 "use client";
 import useToaster from "@/hooks/useToaster";
 import { uploadImage } from "@/lib/helpers/upload-image";
-import { useCreatePreOrderMutation } from "@/store/features/pre-order/preOrderApi";
+import { useCreatePreOrderMutation } from "@/store/features/pre-order/preOrderOrOfferApi";
 import React, { useState, ChangeEvent, FormEvent } from "react";
 
 const PreOrder: React.FC = () => {
@@ -46,16 +46,17 @@ const PreOrder: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         {/* bangla content  */}
         <h1 className="text-3xl font-bold mb-6 text-center">
-        প্রি-অর্ডার পলিসি
+          প্রি-অর্ডার পলিসি
         </h1>
 
         <p className="text-lg text-gray-800 mb-4 text-center">
-        আপনাদের সবার আস্থার জায়গা এ্যাপেল এম্পায়ারে এখন থেকে প্রি-অর্ডারের মাধ্যমে আপনি যেকোন প্রোডাক্ট নিতে পারবেন।
+          আপনাদের সবার আস্থার জায়গা এ্যাপেল এম্পায়ারে এখন থেকে প্রি-অর্ডারের
+          মাধ্যমে আপনি যেকোন প্রোডাক্ট নিতে পারবেন।
         </p>
 
         <div className="bg-white shadow-md rounded-lg p-6 mb-8">
           <h2 className="text-2xl font-semibold mb-4">
-          আসুন প্রি-অর্ডার পলিসি গুলো দেখে নেই :
+            আসুন প্রি-অর্ডার পলিসি গুলো দেখে নেই :
           </h2>
           <ol className="list-decimal list-inside text-gray-700 space-y-3 mb-4">
             <li>আপনার যেকোন প্রি-অর্ডার নিতে আমাদের ফর্মটি ফিলাপ করুন।</li>
@@ -76,7 +77,8 @@ const PreOrder: React.FC = () => {
         </h1>
 
         <p className="text-lg text-gray-800 mb-4 text-center">
-        At Apple Empire, we now offer the convenience of pre-ordering any product. Let's take a look at the pre-order policies:
+          At Apple Empire, we now offer the convenience of pre-ordering any
+          product. Let's take a look at the pre-order policies:
         </p>
 
         <div className="bg-white shadow-md rounded-lg p-6 mb-8">
@@ -95,8 +97,8 @@ const PreOrder: React.FC = () => {
               <strong>**3 to 7 working days**</strong>.
             </li>
             <li>
-              The advance payment is <strong>**non-refundable**</strong>, but if we
-              fail to deliver the product for any reason, you will receive a
+              The advance payment is <strong>**non-refundable**</strong>, but if
+              we fail to deliver the product for any reason, you will receive a
               refund within 3 working days.
             </li>
           </ol>

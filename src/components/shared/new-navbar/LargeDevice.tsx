@@ -149,7 +149,7 @@ export default function LargeDevice() {
                 >
                   <div className="w-full h-full flex justify-between px-2 text-center items-center">
                     <Link href={`/category/${category.slug}`}>
-                      <span className="text-md font-semibold hover:text-orange-500 text-gray-800">
+                      <span className="text-sm font-semibold hover:text-orange-500 text-gray-800">
                         {category.categoryName}
                       </span>
                     </Link>

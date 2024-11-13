@@ -44,7 +44,7 @@ const SectionWithTitleAndAds = ({
 
 const Home: React.FC = () => {
   return (
-    <main className="lg:container mx-auto md:p-0">
+    <main className="lg:container mx-auto md:p-0 mt-5">
       {/* Top Items and Popup */}
       <TopItems />
       <HomePopup />

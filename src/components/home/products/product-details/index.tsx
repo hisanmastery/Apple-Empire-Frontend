@@ -165,7 +165,7 @@ const ProductDetails = ({ id }: any) => {
             </div>
           </div>
         </div>
-        <div className="col-span-4 bg-white px-2 md:px-5">
+        <div className="col-span-4 bg-white px-2 md:px-5 mt-5 md:mt-0">
           <div className="flex justify-between">
             <div className={"w-full"}>
               <h2 className="flex items-center gap-2 text-md md:text-xl font-medium mb-2">

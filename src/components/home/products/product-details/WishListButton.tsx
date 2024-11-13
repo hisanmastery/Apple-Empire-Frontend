@@ -92,7 +92,7 @@ const WishListButton = ({ item, showToast, isText }: any) => {
       {wishItem ? (
         <icons.MdOutlineFavorite className="text-xl text-_primary" />
       ) : (
-        <icons.FavoriteBorder className="text-xl" />
+        <icons.FavoriteBorder className="text-sm md:text-xl" />
       )}
       {isText && (wishItem ? "Remove from Wishlist" : "Add to Wishlist")}
     </div>

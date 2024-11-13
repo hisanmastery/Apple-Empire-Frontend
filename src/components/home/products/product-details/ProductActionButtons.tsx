@@ -32,7 +32,7 @@ const ProductActionButtons: React.FC<ProductActionButtonsProps> = ({
             <Link
               href="/exchange-policy"
               key={index}
-              className="text-md font-medium flex items-center gap-3"
+              className="text-sm md:text-md font-medium flex items-center gap-3"
             >
               {item.icon}
               {item.label}
@@ -43,7 +43,7 @@ const ProductActionButtons: React.FC<ProductActionButtonsProps> = ({
             <Link
               href={item.link ? `/compare?p1=${id}` : ""}
               key={index}
-              className="text-md font-medium flex items-center gap-3"
+              className="text-sm md:text-md font-medium flex items-center gap-3"
             >
               {item.icon}
               {item.label}
