@@ -20,7 +20,7 @@ interface ProductData {
   offer_price: number;
   image: { imageUrl: string };
   review: number;
-  variants: any[];
+  variants: any;
   variations: any[];
   stock?: any;
 }
@@ -35,18 +35,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const [addToCartItem]: any = useAddToCartMutation();
   const { isAuthenticated, customerInfo }: any = useAuth();
   const showToast = useToaster();
-  const formatVariants = datas?.variants?.[0]?.options?.reduce(
+  const formatVariants = datas?.variants?.options?.reduce(
     (acc: any, option: any) => {
       acc[option.name] = option.value;
       return acc;
     },
     {}
   );
-
-  const productsInfo = {
-    ...formatVariants,
-    Color: datas?.variations?.[0]?.color,
-  };
 
   const handleAddToCart = async (productData: ProductData) => {
     const data = productData;
@@ -55,10 +50,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
     if (token && isAuthenticated) {
       const payload = {
         email: customerInfo?.email,
-        variants: productsInfo,
+        variants: formatVariants,
         title: data?.name,
         productId: data?._id,
-        price: data?.variants?.[0]?.price || data?.offerPrice || data?.price,
+        price: data?.variants?.price || data?.offerPrice || data?.price,
         image: data?.image?.imageUrl,
         quantity: 1,
       };
@@ -100,7 +95,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             const payload = {
               title: data?.name,
               productId: data?._id,
-              variants: productsInfo,
+              variants: formatVariants,
               price:
                 data?.variants?.[0]?.price || data?.offerPrice || data?.price,
               image: data?.image?.imageUrl,
@@ -117,8 +112,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
         const payload = {
           title: data?.name,
           productId: data?._id,
-          variants: productsInfo,
-          price: data?.variants?.[0]?.price || data?.offerPrice || data?.price,
+          variants: formatVariants,
+          price: data?.variants?.price || data?.offerPrice || data?.price,
           image: data?.image?.imageUrl,
           quantity: 1,
         };
@@ -176,7 +171,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
         <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
           <Link href={`/products/${datas?._id}`}>
             <p className="title mb-2 text-xs sm:text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-_primary cursor-pointer">
-              {datas.name.slice(0, 25)}
+              {datas?.name}
             </p>
           </Link>
           <p className="price">
@@ -186,7 +181,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
               } font-600 text-sm sm:text-[18px] text-red-500`}
             >
               TK.
-              {datas?.variants?.[0]?.price || datas?.price}
+              {datas?.variants?.price || datas?.price}
             </span>
             {datas?.offerPrice && (
               <span className="offer-price text-qred font-600 text-sm sm:text-[18px] ml-2">

@@ -69,7 +69,6 @@ const ProductDetails = ({ id }: any) => {
     //products info
     const productsInfo = {
       ...selectedVariantOptions,
-      Color: selectedColor,
     };
     await addToCart(
       productData,
@@ -108,7 +107,7 @@ const ProductDetails = ({ id }: any) => {
       getStoredData
     );
   };
-  console.log({ data });
+
   useEffect(() => {
     setSelectedColor(data?.response?.variations?.[0]?.color);
   }, [data]);
