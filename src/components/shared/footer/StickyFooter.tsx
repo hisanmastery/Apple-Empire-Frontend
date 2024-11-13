@@ -52,11 +52,11 @@ function StickyFooter({ className, type }: StickyFooterProps) {
 
         <div className="cart-wrapper group relative py-4">
           <div className="cart relative cursor-pointer">
-            <Link href="/pre-order">
+            <Link href="/section/used">
               <p rel="noopener noreferrer">
                 <span>
                   <icons.FaShop className="mx-auto ssm:text-lg text-_white msm:text-xl lsm:text-2xl smd:text-2xl"/>
-                  <span className="text-[9px]">Pre-Order</span>
+                  <span className="text-[9px]">Used Product</span>
                 </span>
               </p>
             </Link>

@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function SearchBox() {
   const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState<any>(null);
+  const [searchTerm, setSearchTerm] = useState<any>();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
