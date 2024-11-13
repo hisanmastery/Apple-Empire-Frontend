@@ -61,7 +61,7 @@ const Home: React.FC = () => {
         title="Top Selling Products"
         seeMoreUrl="/section/top-selling-products"
       >
-        <Products />
+        <TopSellingProducts />
       </SectionWithTitleAndAds>
 
       {/* Watch Ads */}
@@ -76,10 +76,7 @@ const Home: React.FC = () => {
         title="All Products"
         seeMoreUrl="/section/top-selling-products"
       >
-        <TopSellingProducts />
-        <div className="mt-5">
-          <TopSellingProducts />
-        </div>
+        <Products />
       </SectionWithTitleAndAds>
 
       {/* Secondary Ads */}
