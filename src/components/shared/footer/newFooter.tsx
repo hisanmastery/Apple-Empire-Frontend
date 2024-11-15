@@ -35,15 +35,6 @@ const NewFooter = () => {
             <h4 className="text-sm md:text-md">Customer Service</h4>
             <p className="text-_primary text-xs">support@appleempire.com</p>
           </div>
-
-          {/* <div className="font-normal">
-            <h4 className="text-sm md:text-md">Customer Service</h4>
-            <p className="text-_primary text-xs">support@appleempirebd.com</p>
-          </div> */}
-
-          {/* <div className="md:block hidden">
-            <FaAnglesDown className="text-_primary h-14 w-14 rounded-full border-2 border-white s p-2 cursor-pointer " />
-          </div> */}
         </div>
         {/* row -2  */}
 
@@ -62,20 +53,15 @@ const NewFooter = () => {
                 </li>
               </Link>
               <Link href={"/blog"}>
-                <li className={"text-white hover:text-_primary block"}>
-                  {" "}
-                  Blog
-                </li>
+                <li className={"text-white hover:text-_primary block"}>Blog</li>
               </Link>
               <Link href={"/contact-us"}>
                 <li className={"text-white hover:text-_primary block"}>
-                  {" "}
                   Contact Us
                 </li>
               </Link>
               <Link href={"/complain-by-advise"}>
                 <li className={"text-white hover:text-_primary block"}>
-                  {" "}
                   Complain By Advise
                 </li>
               </Link>
@@ -222,22 +208,6 @@ const NewFooter = () => {
             className="w-full h-[36px]"
           />
         </div>
-
-        {/* <div className="flex flex-col md:flex-row md:text-md text-xs justify-between items-center mt-16 gap-4 text-center  md:text-start ">
-          <div>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-            officia iure adipisci laborum dolore eos exercitationem quis est
-            quod. Laborum incidunt sint aperiam asperiores sapiente recusandae.
-          </div>
-
-          <div>
-            <h5 className="mb-3">Secure Payments</h5>
-            <img
-              src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
-              alt=""
-            />
-          </div>
-        </div> */}
       </div>
     </footer>
   );

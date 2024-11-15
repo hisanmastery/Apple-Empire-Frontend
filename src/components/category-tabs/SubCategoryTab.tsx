@@ -42,13 +42,6 @@ const SubCategoryTabs: React.FC<CategoryProps> = ({ category }) => {
   }, [initialSelectedCategory]);
 
   if (isLoading) return <div className="text-center py-4">Loading...</div>;
-  if (isError)
-    return (
-      <div className="text-center py-4 text-red-500">
-        Failed to load categories.
-      </div>
-    );
-
   return (
     <div>
       <p className="text-md mb-2 font-semibold">{categoryData?.categoryName}</p>

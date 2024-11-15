@@ -13,20 +13,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SheetDrawer from "@/components/common/sheet-drawer/indext";
+import { policyLinks } from "@/data/small-device-menus";
 
 // Tabs for toggling between Category and Menu views
 const tabData = [
   { value: "category", label: "Category" },
   { value: "menu", label: "Menu" },
-];
-
-// Policy links for the Menu tab
-const policyLinks = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "EMI Policy", href: "/emi-policy" },
-  { label: "Warranty Policy", href: "/warranty-policy" },
-  { label: "Exchange Policy", href: "/exchange-policy" },
-  { label: "FAQ", href: "/faq" },
 ];
 
 // Interfaces for category tree
@@ -223,7 +215,7 @@ const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
                     key={index}
                     onClick={handleCategoryToggle}
                     href={item.href}
-                    className={`text-black hover:text-_primary border-b border-_primary-text py-2 ${
+                    className={`text-black hover:text-_primary border-b py-2 ${
                       item.label === "Warranty Policy" ||
                       item.label === "Exchange Policy"
                         ? "hover:text-_primary-bg"
