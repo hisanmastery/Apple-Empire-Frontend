@@ -1,4 +1,3 @@
-// Define Product and Response types
 interface Product {
   _id: string;
   productId: string;
@@ -14,52 +13,51 @@ interface UpdateCartResponse {
   };
 }
 
-// Function to update the quantity of a product (increment or decrement)
+// Function to update the quantity of a product (increment or decrement) for authenticated users
 const updateProductQuantity = async (
   productData: Product,
   isIncrement: boolean,
-  updateCart: (params: {
-    id: string;
-    payload: Product;
-  }) => Promise<UpdateCartResponse>,
+  updateCart: any,
   showToast: (type: "success" | "error", message: string) => void,
   refetchCartData: () => Promise<void>
 ) => {
-  const currentQuantity = productData?.quantity ?? 0;
+  const currentQuantity = productData?.quantity ?? 1;
   const quantity = isIncrement
     ? currentQuantity + 1
-    : Math.max(0, currentQuantity - 1);
+    : Math.max(1, currentQuantity - 1);
 
-  // Calculate unit price and total price
+  // Calculate unit price and new total price
   const unitPrice =
     typeof productData?.price === "string"
-      ? parseFloat(productData?.price?.replace(/,/g, ""))
+      ? parseFloat(productData?.price.replace(/,/g, ""))
       : productData?.price;
   const newTotalPrice = unitPrice * quantity;
-
   const payload = {
     ...productData,
     quantity,
     totalPrice: newTotalPrice,
   };
   try {
-    const res: UpdateCartResponse = await updateCart({
-      id: productData?._id,
+    const response: UpdateCartResponse = await updateCart({
+      id: productData._id,
       payload,
     });
 
-    if (res.data.isSuccess) {
-      showToast("success", res.data.message);
-      await refetchCartData();
+    if (response?.data?.isSuccess) {
+      showToast("success", response?.data?.message);
+      await refetchCartData(); // Refresh cart data after successful update
     } else {
       showToast("error", "Something went wrong, please try again");
     }
-  } catch (error) {
-    showToast("error", "Error updating the cart");
+  } catch (error: any) {
+    showToast(
+      "error",
+      error?.response?.data?.message || "Error updating the cart"
+    );
   }
 };
 
-// Function to handle incrementing quantity, based on user authentication
+// Function to handle quantity updates, both for authenticated and guest users
 export const handleIncrementQuantity = async (
   productData: Product,
   isIncrement: boolean,
@@ -67,13 +65,12 @@ export const handleIncrementQuantity = async (
   updateCart: any,
   showToast: (type: "success" | "error", message: string) => void,
   refetchCartData: () => Promise<void>,
-  dispatch: any,
+  dispatch: (action: any) => void,
   getStoredData: (data: Product[]) => void
 ) => {
   const token = localStorage.getItem("token");
-
   if (token && isAuthenticated) {
-    // Authenticated user case: Call reusable function
+    // Authenticated user: Use the API to update quantity
     await updateProductQuantity(
       productData,
       isIncrement,
@@ -82,23 +79,31 @@ export const handleIncrementQuantity = async (
       refetchCartData
     );
   } else {
-    // Non-authenticated user case: Update local storage
-    let productItems: Product[] = JSON.parse(
-      localStorage.getItem("cart_items") || "[]"
-    );
+    // Guest user: Update quantity locally
+    try {
+      let productItems: Product[] = JSON.parse(
+        localStorage.getItem("cart_items") || "[]"
+      );
 
-    const itemId = productData?.productId;
-    if (itemId) {
-      const updatedItems = productItems?.map((item) => {
-        if (item?.productId === itemId) {
-          const updatedQuantity = item?.quantity ?? 0;
-          return { ...item, quantity: updatedQuantity + 1 };
-        }
-        return item;
-      });
+      const itemId = productData.productId;
+      if (itemId) {
+        // Update the product's quantity locally
+        const updatedItems = productItems.map((item) => {
+          if (item.productId === itemId) {
+            const updatedQuantity = isIncrement
+              ? item.quantity + 1
+              : Math.max(1, item.quantity - 1); // Enforce minimum quantity of 1
+            return { ...item, quantity: updatedQuantity };
+          }
+          return item;
+        });
 
-      localStorage.setItem("cart_items", JSON.stringify(updatedItems));
-      dispatch(getStoredData(updatedItems));
+        // Save updated items to local storage and update Redux store
+        localStorage.setItem("cart_items", JSON.stringify(updatedItems));
+        dispatch(getStoredData(updatedItems));
+      }
+    } catch (error: any) {
+      showToast("error", "An error occurred while updating your cart");
     }
   }
 };

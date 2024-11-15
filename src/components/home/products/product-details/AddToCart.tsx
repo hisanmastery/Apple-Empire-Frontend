@@ -48,68 +48,76 @@ export const addToCart = async (
   showToast: (type: "success" | "error", message: string) => void,
   productsInfo: any
 ) => {
-  const data = productData;
   const token = localStorage.getItem("token");
+  console.log("hit");
   if (token && isAuthenticated && customerInfo) {
+    // Authenticated user flow
     const payload: CartItem = {
-      title: data.name,
-      email: customerInfo?.email,
-      productId: data._id,
+      title: productData.name,
+      email: customerInfo.email,
+      productId: productData._id,
       variants: productsInfo,
-      price: data.variants?.[0]?.price || data.offerPrice || data.price || 0,
-      image: data.image?.imageUrl || "",
+      price:
+        productData.variants?.[0]?.price ||
+        productData.offerPrice ||
+        productData.price ||
+        0,
+      image: productData.image?.imageUrl || "",
       quantity: 1,
     };
 
     try {
-      const res = await addToCartItem({ payload });
-      if (res?.data?.isSuccess) {
-        showToast("success", "Cart added successfully");
-        const data: any = await get_store_data();
-        if (data?.length) {
-          dispatch(getStoredData(data));
-        } else {
-          dispatch(getStoredData([]));
-        }
+      const response = await addToCartItem({ payload });
+      if (response?.data?.isSuccess) {
+        showToast("success", "Added to cart successfully!");
+        const updatedCart = await get_store_data();
+        dispatch(getStoredData(updatedCart));
       } else {
-        showToast("error", "Cart can't be added");
+        showToast("error", "Failed to add item to cart.");
       }
     } catch (error) {
-      showToast("error", "Error adding to cart");
+      console.error("Error adding to cart (authenticated):", error);
+      showToast("error", "An error occurred while adding to the cart.");
     }
   } else {
-    let productItems: CartItem[] = JSON.parse(
-      localStorage.getItem("cart_items") || "[]"
-    );
+    // Guest user flow
+    try {
+      let cartItems: CartItem[] = JSON.parse(
+        localStorage.getItem("cart_items") || "[]"
+      );
 
-    if (productItems?.length) {
-      const itemId = data?._id;
+      const existingItemIndex = cartItems.findIndex(
+        (item) => item.productId === productData._id
+      );
 
-      if (itemId) {
-        const updatedItems = productItems.map((item) => {
-          if (item.productId === itemId) {
-            return { ...item, quantity: item.quantity + 1 };
-          }
-          return item;
-        });
-
-        localStorage.setItem("cart_items", JSON.stringify(updatedItems));
-        dispatch(getStoredData(updatedItems));
+      if (existingItemIndex !== -1) {
+        // Update quantity for existing item
+        cartItems[existingItemIndex].quantity += 1;
       } else {
-        console.log("Product Id Not Found.");
+        // Add new item to cart
+        const newItem: CartItem = {
+          title: productData.name,
+          productId: productData._id,
+          price:
+            productData.variants?.[0]?.price ||
+            productData.offerPrice ||
+            productData.price ||
+            0,
+          image: productData.image?.imageUrl || "",
+          quantity: 1,
+          email: "", // For guest users, email is empty
+          variants: productsInfo,
+        };
+        cartItems.push(newItem);
       }
-    } else {
-      const payload: any = {
-        title: data.name,
-        productId: data._id,
-        price: data.variants?.[0]?.price || data.offerPrice || data.price || 0,
-        image: data.image?.imageUrl || "",
-        quantity: 1,
-      };
 
-      const cartItems = [payload];
+      // Save to localStorage and update Redux state
       localStorage.setItem("cart_items", JSON.stringify(cartItems));
       dispatch(getStoredData(cartItems));
+      showToast("success", "Added to cart successfully!");
+    } catch (error) {
+      console.error("Error adding to cart (guest):", error);
+      showToast("error", "An error occurred while adding to the cart.");
     }
   }
 };
