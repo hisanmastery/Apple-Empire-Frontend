@@ -49,9 +49,9 @@ const HomePopup = () => {
           ref={popupRef}
           src={images.popup.src}
           alt="Popup"
-          height={100}
-          width={100}
-          quality={70}
+          height={600}
+          width={600}
+          quality={100}
           className={"w-[90vw] max-w-[500px] rounded sm:w-[50vw] object-cover"}
         />
       </Link>

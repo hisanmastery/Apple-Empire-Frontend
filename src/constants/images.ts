@@ -15,7 +15,7 @@ import banner2 from "../../public/images/all-banner/banner2.jpg";
 import banner3 from "../../public/images/all-banner/banner3.jpg";
 import banner4 from "../../public/images/all-banner/banner4.jpg";
 import banner5 from "../../public/images/all-banner/banner5.jpg";
-import popup from "../../public/images/popup.png";
+import popup from "../../public/images/POP UP Website maintances 1200x1200 (1).webp";
 export const images = {
   NavbarLogo,
   paymentImage,
