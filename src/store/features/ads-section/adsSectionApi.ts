@@ -1,22 +1,33 @@
-import fetchDynamicPageSlice from "@/store/api/dynamic-page/dynamicPageSlice";
-
-export const dynamicPageApi = fetchDynamicPageSlice.injectEndpoints({
+import fetchAdsSectionsSlice from "@/store/api/ads-section/adsSectionSlice";
+const adsSection = "/ads-section";
+const carousel = "/carousel";
+export const AdsSectionApi = fetchAdsSectionsSlice.injectEndpoints({
   endpoints: (builder: any) => ({
     // get all
-    getAllDynamicPage: builder.query({
+    getAllAds: builder.query({
       query: () => ({
-        url: `/get-all`,
+        url: `${adsSection}/get-all`,
         method: "get",
       }),
     }),
     //get single
-    getSingleDynamicPage: builder.query({
+    getSingleAds: builder.query({
       query: ({ slug }: any) => ({
-        url: `/get/${slug}`,
+        url: `${adsSection}/get/${slug}`,
+        method: "get",
+      }),
+    }),
+    // get all carousel
+    getAllCarousel: builder.query({
+      query: ({ page, limit }: any) => ({
+        url: `${carousel}/get-all-carousel?page=${page}&limit=${limit}`,
         method: "get",
       }),
     }),
   }),
 });
-export const { useGetAllDynamicPageQuery, useGetSingleDynamicPageQuery } =
-  dynamicPageApi;
+export const {
+  useGetAllAdsQuery,
+  useGetSingleAdsQuery,
+  useGetAllCarouselQuery,
+} = AdsSectionApi;

@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { images } from "@/constants/images";
+import { useGetAllCarouselQuery } from "@/store/features/ads-section/adsSectionApi";
 
 const products = [
   {
@@ -33,6 +34,7 @@ const products = [
 
 const HeroSection = () => {
   const swiperRef = useRef<any>(null);
+  const { data } = useGetAllCarouselQuery<any>({ page: 1, limit: 10 });
   const breakpoints = {
     640: { slidesPerView: 1 },
   };
@@ -57,12 +59,12 @@ const HeroSection = () => {
           dynamicBullets: true,
         }}
       >
-        {products?.length === 0 ? (
+        {data?.response?.length === 0 ? (
           <SwiperSlide>
             <p>No products available</p>
           </SwiperSlide>
         ) : (
-          products?.map((product, index) => (
+          data?.response?.map((product: any, index: number) => (
             <SwiperSlide key={product.id}>
               <div className="aspect-w-16 aspect-h-9">
                 <Card className="!h-full">
@@ -72,8 +74,8 @@ const HeroSection = () => {
                       height={400}
                       quality={100}
                       className="w-full h-full"
-                      src={product.image}
-                      alt={`Carousel Image ${index + 1}`}
+                      src={product.images?.imageUrl}
+                      alt={product?.images?.altText}
                     />
                   </CardContent>
                 </Card>

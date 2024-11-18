@@ -1,16 +1,15 @@
-import fetchAdsSectionsSlice from "@/store/api/ads-section/adsSectionSlice";
-
-export const AdsSectionApi = fetchAdsSectionsSlice.injectEndpoints({
+import fetchDynamicPageSlice from "@/store/api/dynamic-page/dynamicPageSlice";
+export const dynamicPageApi = fetchDynamicPageSlice.injectEndpoints({
   endpoints: (builder: any) => ({
     // get all
-    getAllAds: builder.query({
+    getAllDynamicPage: builder.query({
       query: () => ({
         url: `/get-all`,
         method: "get",
       }),
     }),
     //get single
-    getSingleAds: builder.query({
+    getSingleDynamicPage: builder.query({
       query: ({ slug }: any) => ({
         url: `/get/${slug}`,
         method: "get",
@@ -18,4 +17,5 @@ export const AdsSectionApi = fetchAdsSectionsSlice.injectEndpoints({
     }),
   }),
 });
-export const { useGetAllAdsQuery, useGetSingleAdsQuery } = AdsSectionApi;
+export const { useGetAllDynamicPageQuery, useGetSingleDynamicPageQuery } =
+  dynamicPageApi;

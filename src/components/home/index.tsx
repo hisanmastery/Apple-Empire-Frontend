@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import dynamic from "next/dynamic";
 import ClientBrand from "../home/client-brand";
@@ -10,6 +11,7 @@ const CampaignsCountDown = dynamic(() => import("./campaigns-count-down"));
 import HomePopup from "@/components/home/popup/HomePopup";
 import { ADS_URLS } from "@/data/ads-url";
 import TopBrandProducts from "./top-brand-products";
+import { useGetAllAdsQuery } from "@/store/features/ads-section/adsSectionApi";
 const TopItems = dynamic(() => import("./top-items"));
 
 const SectionWithTitleAndAds = ({
@@ -43,6 +45,23 @@ const SectionWithTitleAndAds = ({
 );
 
 const Home: React.FC = () => {
+  const { data } = useGetAllAdsQuery<any>({});
+  const bannerImageAll = data?.sections;
+  const firstImage = bannerImageAll?.find(
+    (item: any) => item?.sectionName === "first_section"
+  );
+  const second_section = bannerImageAll?.find(
+    (item: any) => item?.sectionName === "second_section"
+  );
+  const third_section = bannerImageAll?.find(
+    (item: any) => item?.sectionName === "third_section"
+  );
+  const fourth_section = bannerImageAll?.find(
+    (item: any) => item?.sectionName === "fourth_section"
+  );
+  const fifth_section = bannerImageAll?.find(
+    (item: any) => item?.sectionName === "fifth_section"
+  );
   return (
     <main className="lg:container mx-auto md:p-0 mt-5">
       {/* Top Items and Popup */}
@@ -51,7 +70,12 @@ const Home: React.FC = () => {
 
       {/* Primary Ads */}
       <ProductAds
-        ads={ADS_URLS.primaryAds}
+        ads={[
+          firstImage?.images?.[0]?.imageUrl,
+          firstImage?.images?.length > 1
+            ? firstImage?.images?.[1]?.imageUrl
+            : undefined,
+        ].filter(Boolean)}
         className="lg:container mx-auto"
         sectionHeight="h-[100px] lg:h-[350px]"
       />
@@ -66,7 +90,12 @@ const Home: React.FC = () => {
 
       {/* Watch Ads */}
       <ProductAds
-        ads={ADS_URLS.watchAds}
+        ads={[
+          second_section?.images?.[0]?.imageUrl,
+          second_section?.images?.length > 1
+            ? second_section?.images?.[1]?.imageUrl
+            : undefined,
+        ].filter(Boolean)}
         className="lg:container mx-auto"
         sectionHeight="h-[120px] md:h-[350px]"
       />
@@ -81,7 +110,12 @@ const Home: React.FC = () => {
 
       {/* Secondary Ads */}
       <ProductAds
-        ads={ADS_URLS.secondaryAds}
+        ads={[
+          third_section?.images?.[0]?.imageUrl,
+          third_section?.images?.length > 1
+            ? third_section?.images?.[1]?.imageUrl
+            : undefined,
+        ].filter(Boolean)}
         className="mb-0 md:mb-[60px] lg:container mx-auto"
         sectionHeight="h-[100px] md:h-[350px]"
       />
@@ -96,7 +130,12 @@ const Home: React.FC = () => {
 
       {/* Popular Products Ads */}
       <ProductAds
-        ads={ADS_URLS.popularProductsAds}
+        ads={[
+          fourth_section?.images?.[0]?.imageUrl,
+          fourth_section?.images?.length > 1
+            ? fourth_section?.images?.[1]?.imageUrl
+            : undefined,
+        ].filter(Boolean)}
         className="mb-0 md:mb-[60px] lg:container mx-auto"
         sectionHeight="h-56 md:h-96"
       />
@@ -111,7 +150,12 @@ const Home: React.FC = () => {
 
       {/* Top Pricing Ads */}
       <ProductAds
-        ads={ADS_URLS.topPricingAds}
+        ads={[
+          fifth_section?.images?.[0]?.imageUrl,
+          fifth_section?.images?.length > 1
+            ? fifth_section?.images?.[1]?.imageUrl
+            : undefined,
+        ].filter(Boolean)}
         className="mb-0 md:mb-[60px] lg:container mx-auto"
         sectionHeight="h-56 md:h-[400px]"
       />

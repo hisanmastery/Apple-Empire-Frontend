@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const fetchAdsSectionsSlice = createApi({
   reducerPath: "ads-section",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${baseApiUrl}/ads-section`,
+    baseUrl: `${baseApiUrl}`,
   }),
   tagTypes: ["ads-section"],
   endpoints: (builder) => ({}),
