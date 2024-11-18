@@ -8,6 +8,8 @@ import fetchEmiSlice from "./api/emi/emiSlice";
 import fetchPreOrderSlice from "./api/pre-order/preOrderSlice";
 import fetchBrandsSlice from "./api/brand/brandsSlice";
 import fetchShippingSlice from "./api/shipping-methods/ShippingMethodsSlice";
+import fetchAdsSectionsSlice from "./api/ads-section/adsSectionSlice";
+import fetchDynamicPageSlice from "./api/dynamic-page/dynamicPageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ export const store = configureStore({
     [authBaseApi.reducerPath]: authBaseApi.reducer,
     [fetchBrandsSlice.reducerPath]: fetchBrandsSlice.reducer,
     [fetchShippingSlice.reducerPath]: fetchShippingSlice.reducer,
+    [fetchAdsSectionsSlice.reducerPath]: fetchAdsSectionsSlice.reducer,
+    [fetchDynamicPageSlice.reducerPath]: fetchDynamicPageSlice.reducer,
     ...reducers,
   },
   middleware: (getDefaultMiddleware) =>
@@ -31,5 +35,7 @@ export const store = configureStore({
       .concat(authBaseApi.middleware)
       .concat(fetchPreOrderSlice.middleware)
       .concat(fetchBrandsSlice.middleware)
-      .concat(fetchShippingSlice.middleware),
+      .concat(fetchShippingSlice.middleware)
+      .concat(fetchAdsSectionsSlice.middleware)
+      .concat(fetchDynamicPageSlice.middleware),
 });
