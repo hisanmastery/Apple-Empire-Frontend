@@ -97,7 +97,7 @@ const Home: React.FC = () => {
             : undefined,
         ].filter(Boolean)}
         className="lg:container mx-auto"
-        sectionHeight="h-[120px] md:h-[350px]"
+        sectionHeight="h-[100px] md:h-[350px]"
       />
 
       {/* All Products */}
@@ -137,7 +137,7 @@ const Home: React.FC = () => {
             : undefined,
         ].filter(Boolean)}
         className="mb-0 md:mb-[60px] lg:container mx-auto"
-        sectionHeight="h-56 md:h-96"
+        sectionHeight="h-[100px] lg:h-[350px]"
       />
 
       {/* Top Pricing Products */}
@@ -157,7 +157,7 @@ const Home: React.FC = () => {
             : undefined,
         ].filter(Boolean)}
         className="mb-0 md:mb-[60px] lg:container mx-auto"
-        sectionHeight="h-56 md:h-[400px]"
+        sectionHeight="h-[100px] lg:h-[350px]"
       />
       <TopBrandProducts />
       {/* Shop By Brands */}

@@ -14,17 +14,16 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
                 : ""
             } items-center w-full overflow-hidden`}
           >
-            <div
-              data-aos="fade-right"
-              className={`overflow-hidden h-full w-full`}
-            >
+            <div data-aos="fade-right" className={`h-full w-full`}>
               <Link href="/section/top-selling-products">
                 <Image
-                  width={500}
-                  height={200}
+                  width={1280}
+                  height={350}
                   src={ads[0]}
+                  quality={100}
                   alt="ads"
-                  className="w-full h-full hover:scale-105 ease-in-out transition-all duration-1000"
+                  sizes="(max-width: 768px) 640px, (max-width: 1200px) 960px, 1280px"
+                  className="w-full h-auto hover:scale-105 ease-in-out transition-all duration-1000"
                 />
               </Link>
             </div>
@@ -35,11 +34,13 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
               >
                 <Link href="/section/top-selling-products">
                   <Image
-                    width={500}
-                    height={200}
+                    width={1280}
+                    height={350}
                     src={ads[1]}
+                    quality={100}
                     alt="ads"
-                    className="w-full h-full hover:scale-105 ease-in-out transition-all duration-1000"
+                    sizes="(max-width: 768px) 640px, (max-width: 1200px) 960px, 1280px"
+                    className="w-full h-auto hover:scale-105 ease-in-out transition-all duration-1000"
                   />
                 </Link>
               </div>
