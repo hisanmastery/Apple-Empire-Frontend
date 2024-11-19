@@ -8,6 +8,8 @@ export const productsApi = fetchProductsSlice.injectEndpoints({
         url: `/get-all-products`,
         method: "get",
         params: {
+          page: arg?.page,
+          limit: arg?.limit,
           productType: arg?.productsType || "",
           type: arg?.type || "",
           brand: arg?.brand || "",

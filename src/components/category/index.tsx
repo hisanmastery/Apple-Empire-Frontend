@@ -27,6 +27,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
   const [pageSize, setPageSize] = useState(12);
   const { min, max } = useSelector(selectPriceRange);
   const { label, value } = useSelector(selectProductsVariant);
+  console.log(currentPage,pageSize);
   // Fetching products using custom hooks
   const { data: allProducts, isLoading } = useGetProductsListsQuery<any>({
     category: selectedategory || canonicalUrl,
