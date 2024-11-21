@@ -76,9 +76,11 @@ export default function CampaignsCountDown({
               <div className="w-full lg:h-[400px] h-[200px]  border-2 ">
                 <Image
                   className="h-full w-full"
-                  fill
+                  // fill
+                  width={500}
+                  height={200}
                   src={count_down_section?.images?.[0]?.imageUrl}
-                  alt={count_down_section?.images?.altText}
+                  alt={count_down_section?.images?.[0].altText}
                   quality={100}
                 />
               </div>

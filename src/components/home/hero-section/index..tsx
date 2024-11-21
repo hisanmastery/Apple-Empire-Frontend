@@ -70,8 +70,8 @@ const HeroSection = () => {
                 <Card className="!h-full">
                   <CardContent className="flex w-full items-center justify-center lg:h-[580px] h-52">
                     <Image
-                      width={500}
-                      height={400}
+                      width={1300}
+                      height={700}
                       quality={100}
                       className="w-full h-full"
                       src={product.images?.imageUrl}
