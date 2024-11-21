@@ -1,6 +1,11 @@
 "use client";
 import CountDown from "@/utils/Helpers/countDown";
-export default function CampaignsCountDown({ className, lastDate }: any) {
+import Image from "next/image";
+export default function CampaignsCountDown({
+  className,
+  lastDate,
+  count_down_section,
+}: any) {
   const { showDate, showHour, showMinute, showSecound } = CountDown(lastDate);
 
   return (
@@ -69,10 +74,12 @@ export default function CampaignsCountDown({ className, lastDate }: any) {
                 </div>
               </div>
               <div className="w-full lg:h-[400px] h-[200px]  border-2 ">
-                <img
+                <Image
                   className="h-full w-full"
-                  src="https://d61s2hjse0ytn.cloudfront.net/vertical_image/7-2024/Monitors.webp"
-                  alt=""
+                  fill
+                  src={count_down_section?.images?.[0]?.imageUrl}
+                  alt={count_down_section?.images?.altText}
+                  quality={100}
                 />
               </div>
             </div>

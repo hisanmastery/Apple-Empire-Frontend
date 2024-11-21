@@ -9,7 +9,6 @@ const TopSellingProducts = dynamic(() => import("../home/TopSellingProducts"));
 const PopularProducts = dynamic(() => import("../home/popularProducts"));
 const CampaignsCountDown = dynamic(() => import("./campaigns-count-down"));
 import HomePopup from "@/components/home/popup/HomePopup";
-import { ADS_URLS } from "@/data/ads-url";
 import TopBrandProducts from "./top-brand-products";
 import { useGetAllAdsQuery } from "@/store/features/ads-section/adsSectionApi";
 const TopItems = dynamic(() => import("./top-items"));
@@ -61,6 +60,9 @@ const Home: React.FC = () => {
   );
   const fifth_section = bannerImageAll?.find(
     (item: any) => item?.sectionName === "fifth_section"
+  );
+  const count_down_section = bannerImageAll?.find(
+    (item: any) => item?.sectionName === "count_down_section"
   );
   return (
     <main className="lg:container mx-auto md:p-0 mt-5">
@@ -163,7 +165,10 @@ const Home: React.FC = () => {
       {/* Shop By Brands */}
       <ClientBrand />
       {/* Campaigns Countdown */}
-      <CampaignsCountDown lastDate="2024-06-22 4:00:00" />
+      <CampaignsCountDown
+        lastDate="2024-06-22 4:00:00"
+        count_down_section={count_down_section}
+      />
     </main>
   );
 };
