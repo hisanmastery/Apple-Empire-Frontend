@@ -1,15 +1,15 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-import ClientBrand from "../home/client-brand";
+const ClientBrand = dynamic(import("../home/client-brand"));
 const Products = dynamic(() => import("../home/products"));
-import ProductAds from "../common/productAds";
-import ViewMoreTitle from "../common/ViewMoreTitle";
+const ProductAds = dynamic(() => import("../common/productAds"));
+const ViewMoreTitle = dynamic(() => import("../common/ViewMoreTitle"));
 const TopSellingProducts = dynamic(() => import("../home/TopSellingProducts"));
 const PopularProducts = dynamic(() => import("../home/popularProducts"));
 const CampaignsCountDown = dynamic(() => import("./campaigns-count-down"));
-import HomePopup from "@/components/home/popup/HomePopup";
-import TopBrandProducts from "./top-brand-products";
+const HomePopup = dynamic(() => import("@/components/home/popup/HomePopup"));
+const TopBrandProducts = dynamic(import("./top-brand-products"));
 import { useGetAllAdsQuery } from "@/store/features/ads-section/adsSectionApi";
 const TopItems = dynamic(() => import("./top-items"));
 
@@ -28,18 +28,13 @@ const SectionWithTitleAndAds = ({
 }) => (
   <>
     <ViewMoreTitle
-      className={`md:mb-[60px] mb-5 lg:container ${className}`}
+      className={`mb-5 lg:container ${className}`}
       seeMoreUrl={seeMoreUrl}
       categoryTitle={title}
     >
       {children}
     </ViewMoreTitle>
-    {ads && (
-      <ProductAds
-        ads={ads}
-        className="mb-0 md:mb-[60px] lg:container mx-auto"
-      />
-    )}
+    {ads && <ProductAds ads={ads} className="lg:container mx-auto" />}
   </>
 );
 
@@ -79,9 +74,8 @@ const Home: React.FC = () => {
             : undefined,
         ].filter(Boolean)}
         className="lg:container mx-auto"
-        sectionHeight="h-[100px] lg:h-[350px]"
+        sectionHeight="h-[120px] lg:h-[350px]"
       />
-
       {/* Top Selling Products */}
       <SectionWithTitleAndAds
         title="Top Selling Products"
@@ -99,7 +93,7 @@ const Home: React.FC = () => {
             : undefined,
         ].filter(Boolean)}
         className="lg:container mx-auto"
-        sectionHeight="h-[100px] md:h-[350px]"
+        sectionHeight="h-[120px] md:h-[350px]"
       />
 
       {/* All Products */}
@@ -118,8 +112,8 @@ const Home: React.FC = () => {
             ? third_section?.images?.[1]?.imageUrl
             : undefined,
         ].filter(Boolean)}
-        className="mb-0 md:mb-[60px] lg:container mx-auto"
-        sectionHeight="h-[100px] md:h-[350px]"
+        className="lg:container mx-auto"
+        sectionHeight="h-[120px] md:h-[350px]"
       />
 
       {/* Popular Products */}
@@ -138,8 +132,8 @@ const Home: React.FC = () => {
             ? fourth_section?.images?.[1]?.imageUrl
             : undefined,
         ].filter(Boolean)}
-        className="mb-0 md:mb-[60px] lg:container mx-auto"
-        sectionHeight="h-[100px] lg:h-[350px]"
+        className="lg:container mx-auto"
+        sectionHeight="h-[120px] lg:h-[350px]"
       />
 
       {/* Top Pricing Products */}
@@ -158,8 +152,8 @@ const Home: React.FC = () => {
             ? fifth_section?.images?.[1]?.imageUrl
             : undefined,
         ].filter(Boolean)}
-        className="mb-0 md:mb-[60px] lg:container mx-auto"
-        sectionHeight="h-[100px] lg:h-[350px]"
+        className="lg:container mx-auto"
+        sectionHeight="h-[120px] lg:h-[350px]"
       />
       <TopBrandProducts />
       {/* Shop By Brands */}

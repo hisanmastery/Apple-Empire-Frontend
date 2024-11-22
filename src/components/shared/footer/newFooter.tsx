@@ -1,11 +1,18 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import EmailSubscribe from "@/components/home/email-subscribe";
 import Image from "next/image";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
+import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
 
 const NewFooter = () => {
+  const { data } = useGetAllCategoryQuery<any>({
+    page: 1,
+    limit: 5,
+  });
+  const categoryData = data?.data;
   return (
     <footer className="bg-black text-white py-10 mt-32 w-full relative">
       <div className="container mx-auto mt-20">
@@ -127,17 +134,14 @@ const NewFooter = () => {
             </ul>
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-_primary md:text-lg text-sm">CATEGORY</li>
-              <Link href={"/"}>
-                <li className={"text-white hover:text-_primary"}>
-                  Phone and Tablets
-                </li>
-              </Link>
-              <Link href={"/"}>
-                <li className={"text-white hover:text-_primary"}>Macbook</li>
-              </Link>
-              <Link href={"/"}>
-                <li className={"text-white hover:text-_primary"}>Sound</li>
-              </Link>
+
+              {categoryData?.map((item: any) => (
+                <Link href={`/category/${item.slug}`} key={item.slug}>
+                  <li className="text-white hover:text-_primary">
+                    {item.categoryName}
+                  </li>
+                </Link>
+              ))}
               <Link href={"/"}>
                 <li className={"text-white hover:text-_primary"}>Used</li>
               </Link>

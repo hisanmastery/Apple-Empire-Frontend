@@ -6,31 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { images } from "@/constants/images";
 import { useGetAllCarouselQuery } from "@/store/features/ads-section/adsSectionApi";
-
-const products = [
-  {
-    id: "54564565766782453467",
-    image: images.banner1,
-  },
-  {
-    id: "2345678903456sdfsd",
-    image: images.banner2,
-  },
-  {
-    id: "234567890fghjkwesd",
-    image: images.banner3,
-  },
-  {
-    id: "dfghjk345678904sdf",
-    image: images.banner4,
-  },
-  {
-    id: "sdfghjksdfert2345",
-    image: images.banner5,
-  },
-];
 
 const HeroSection = () => {
   const swiperRef = useRef<any>(null);

@@ -22,8 +22,7 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
                   src={ads[0]}
                   quality={100}
                   alt="ads"
-                  sizes="(max-width: 768px) 640px, (max-width: 1200px) 960px, 1280px"
-                  className="w-full h-auto hover:scale-105 ease-in-out transition-all duration-1000"
+                  className="w-full h-full hover:scale-105 ease-in-out transition-all duration-1000"
                 />
               </Link>
             </div>
@@ -39,8 +38,7 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
                     src={ads[1]}
                     quality={100}
                     alt="ads"
-                    sizes="(max-width: 768px) 640px, (max-width: 1200px) 960px, 1280px"
-                    className="w-full h-auto hover:scale-105 ease-in-out transition-all duration-1000"
+                    className="w-full h-full hover:scale-105 ease-in-out transition-all duration-1000"
                   />
                 </Link>
               </div>
