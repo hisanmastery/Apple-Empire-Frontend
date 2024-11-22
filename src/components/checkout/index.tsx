@@ -34,7 +34,7 @@ const Checkout = () => {
     const { createdAt, updatedAt, __v, _id, ...cleanedItem } = item;
     return cleanedItem;
   });
-
+  console.log({ shippingMethod });
   // Calculate subtotal price
   const subtotal = cleanedCart.reduce((acc: any, product: any) => {
     if (!product?.price) return acc;
@@ -45,7 +45,6 @@ const Checkout = () => {
     const priceWithoutCommas = parseFloat(priceAsString.replace(/,/g, ""));
     return acc + product.quantity * priceWithoutCommas;
   }, 0);
-
   const deliveryFee = parseFloat(shippingMethod?.amount) || 0;
   const totalPrice = subtotal + deliveryFee;
 
