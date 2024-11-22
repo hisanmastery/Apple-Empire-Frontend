@@ -11,6 +11,7 @@ const nextConfig = {
       "i.ibb.co",
       "i.ibb.co.com",
       "34.121.66.25",
+      "cdn.pixabay.com" 
     ],
   },
   experimental: {

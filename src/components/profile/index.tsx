@@ -17,11 +17,13 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gray-100 mx-auto grid grid-cols-1 md:grid-cols-6 gap-6 md:gap-0 p-4 md:p-0">
       {/* Sidebar */}
-      <ProfileCard customerInfo={customerInfo} />
+      <div className="col-span-1">
+        <ProfileCard customerInfo={customerInfo} />
+      </div>
 
       {/* Main Content */}
-      <div className="md:col-span-5 col-span-1 p-4 md:p-6 flex flex-col">
-        <div className="max-w-5xl mx-auto">
+      <div className="md:col-span-5 col-span-1 p-4 md:p-6">
+        <div className="mx-auto">
           {/* Profile Information */}
           <section
             id="profile"
@@ -41,7 +43,7 @@ const Profile = () => {
           {/* Order Information */}
           <section
             id="orders"
-            className="bg-white shadow-md rounded-lg p-4 md:p-6"
+            className="bg-white shadow-md rounded-lg p-4 md:p-6 w-full"
           >
             <h2 className="text-xl md:text-2xl font-semibold mb-4">
               My Order Information

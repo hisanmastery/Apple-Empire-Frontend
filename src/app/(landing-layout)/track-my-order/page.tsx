@@ -16,7 +16,7 @@ const OrderTracking = () => {
         .unwrap()
         .then((resOrder: any) => {
           if (resOrder?.response) {
-            setOrderData(resOrder.response);
+            setOrderData(resOrder?.response);
           } else {
             setOrderData(null);
           }
@@ -79,9 +79,9 @@ const OrderTracking = () => {
           <div className="space-y-6">
             <div
               className={`${
-                orderData.deliveryStatus === "Delivered"
+                orderData?.deliveryStatus === "Delivered"
                   ? "bg-green-100"
-                  : orderData.deliveryStatus === "Canceled"
+                  : orderData?.deliveryStatus === "Canceled"
                   ? "bg-red-100"
                   : "bg-gray-50"
               } p-4 rounded-md shadow-md flex flex-col space-y-4 border`}
@@ -90,18 +90,18 @@ const OrderTracking = () => {
                 <h3 className="text-lg font-semibold">
                   Order #{orderData._id}
                 </h3>
-                <p className="text-gray-600">Date: {orderData.createdAt}</p>
+                <p className="text-gray-600">Date: {orderData?.createdAt}</p>
                 <p className="text-gray-600">
-                  Payment Status: {orderData.paymentStatus}
+                  Payment Status: {orderData?.paymentStatus}
                 </p>
                 <p className="text-gray-600">
-                  Transaction ID: {orderData.transactionId}
+                  Transaction ID: {orderData?.transactionId}
                 </p>
                 <p className="text-gray-600">
-                  Delivery Status: {orderData.deliveryStatus}
+                  Delivery Status: {orderData?.deliveryStatus}
                 </p>
                 <p className="text-gray-600">
-                  Total Price: ${orderData.totalPrice}
+                  Total Price: TK.{orderData?.totalPrice}
                 </p>
               </div>
 
@@ -120,7 +120,7 @@ const OrderTracking = () => {
                             "Shipped",
                             "Out for Delivery",
                             "Delivered",
-                          ].includes(orderData.deliveryStatus)
+                          ].includes(orderData?.deliveryStatus)
                             ? "bg-blue-500"
                             : "bg-gray-300"
                         } rounded-full`}
@@ -135,7 +135,7 @@ const OrderTracking = () => {
                             "Shipped",
                             "Out for Delivery",
                             "Delivered",
-                          ].includes(orderData.deliveryStatus)
+                          ].includes(orderData?.deliveryStatus)
                             ? "bg-blue-500"
                             : "bg-gray-300"
                         } rounded-full`}
@@ -146,7 +146,7 @@ const OrderTracking = () => {
                       <div
                         className={`w-full h-2 ${
                           ["Shipped", "Out for Delivery", "Delivered"].includes(
-                            orderData.deliveryStatus
+                            orderData?.deliveryStatus
                           )
                             ? "bg-blue-500"
                             : "bg-gray-300"
@@ -158,7 +158,7 @@ const OrderTracking = () => {
                       <div
                         className={`w-full h-2 ${
                           ["Out for Delivery", "Delivered"].includes(
-                            orderData.deliveryStatus
+                            orderData?.deliveryStatus
                           )
                             ? "bg-blue-500"
                             : "bg-gray-300"
@@ -171,7 +171,7 @@ const OrderTracking = () => {
                     <div className="flex-1">
                       <div
                         className={`w-full h-2 ${
-                          orderData.deliveryStatus === "Delivered"
+                          orderData?.deliveryStatus === "Delivered"
                             ? "bg-blue-500"
                             : "bg-gray-300"
                         } rounded-full`}
