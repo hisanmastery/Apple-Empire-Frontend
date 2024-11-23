@@ -1,7 +1,7 @@
 "use client";
 import { useGetSingleCategoryBySubCategoryQuery } from "@/store/features/category/categoryApi";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface CategoryProps {
@@ -16,13 +16,10 @@ const SubCategoryTabs: React.FC<CategoryProps> = ({ category }) => {
   );
 
   // Fetch categories data
-  const {
-    data: categories,
-    isLoading,
-    isError,
-  } = useGetSingleCategoryBySubCategoryQuery<any>({
-    canonicalUrl: category,
-  });
+  const { data: categories, isLoading } =
+    useGetSingleCategoryBySubCategoryQuery<any>({
+      canonicalUrl: category,
+    });
 
   const categoryData = categories?.data || {};
 

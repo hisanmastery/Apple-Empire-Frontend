@@ -1,6 +1,5 @@
 import Link from "next/link";
 import SelectBox from "./Selectbox";
-import Image from "next/image";
 export default function TopBar() {
   return (
     <>

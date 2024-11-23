@@ -65,7 +65,7 @@ export default function Cart({ className }: any) {
     if (token && isAuthenticated) {
       await quantityUpdate(productData, true);
     } else {
-      let product_items: Product[] = JSON.parse(
+      const product_items: Product[] = JSON.parse(
         localStorage.getItem("cart_items") || "[]"
       );
 

@@ -6,6 +6,6 @@ const fetchProductsSlice = createApi({
     baseUrl: `${baseApiUrl}/product`,
   }),
   tagTypes: ["products"],
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
 export default fetchProductsSlice;

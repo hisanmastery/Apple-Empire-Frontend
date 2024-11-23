@@ -18,8 +18,8 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <div>
             <Image
-                width={80}
-                height={80}
+              width={80}
+              height={80}
               className="w-[80px]"
               src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
               alt=""
@@ -84,9 +84,10 @@ const Footer = () => {
 
           <div>
             <h5 className="mb-3">Secure Payments</h5>
-            <img
+            <Image
+              fill
               src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
-              alt=""
+              alt="Secure Payments"
             />
           </div>
         </div>

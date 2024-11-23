@@ -25,7 +25,7 @@ interface FilterOption {
 const ProductsSideBar: React.FC = () => {
   const dispatch = useDispatch();
   const { min, max } = useSelector(selectPriceRange);
-  const { label, value } = useSelector(selectProductsVariant);
+  const { value } = useSelector(selectProductsVariant);
 
   // Price Range Handlers
   const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {

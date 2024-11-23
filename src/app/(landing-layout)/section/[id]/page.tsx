@@ -2,12 +2,6 @@ import React from "react";
 import AllProductsSection from "@/components/all-products";
 import ProductsSideBar from "@/components/products-sidebar";
 
-// Define the type for props
-interface ProductsProps {
-  params: {
-    id?: string;
-  };
-}
 const formatCategory = (category: string): string => {
   return category
     .split("-")
@@ -15,7 +9,7 @@ const formatCategory = (category: string): string => {
     .join(" ");
 };
 
-const Products: React.FC<ProductsProps> = ({ params }) => {
+const Products = ({ params }: any) => {
   let productsType = "";
   if (params?.id) {
     switch (params.id) {

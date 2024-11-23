@@ -8,7 +8,7 @@ const TermsAndConditions: React.FC = () => {
   const { data } = useGetSingleDynamicPageQuery<any>({ slug: slug });
   return (
     <div
-      className="container mx-auto"
+      className="container mx-auto overflow-hidden"
       dangerouslySetInnerHTML={{ __html: data?.page?.description }}
     />
   );

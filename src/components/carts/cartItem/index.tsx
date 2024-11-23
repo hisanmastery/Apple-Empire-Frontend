@@ -1,54 +1,16 @@
 "use client";
-import { TableRow } from "@/components/ui/table";
 import { useDispatch, useSelector } from "react-redux";
 import InputQuantityCom from "../InputQuantityCom";
 import { addStoredCart } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { icons } from "@/constants/icons";
-import { Button } from "@/components/ui/button";
-
-import {
-  useAddToCartDeleteMutation,
-  useGetEmailCartQuery,
-} from "@/store/features/cart/cartApi";
+import { useAddToCartDeleteMutation } from "@/store/features/cart/cartApi";
+import Image from "next/image";
 
 const CartItem = () => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const [addToCartDelete] = useAddToCartDeleteMutation();
-  // Using reduce to calculate the total price
-  const totalPrice = storedCart?.reduce((acc: number, product: any) => {
-    return acc + product?.quantity * parseInt(product?.offer_price);
-  }, 0);
-
   const dispatch = useDispatch();
-
-  // handle increment quantity
-  // const handleIncrement = (_id: string, newQuantity: number) => {
-  //   const updatedStoredCart = storedCart.map((product: any) => {
-  //     if (product._id === _id) {
-  //       // If the product's _id matches the _id passed to the function,
-  //       // update its quantity
-  //       return { ...product, quantity: newQuantity };
-  //     } else {
-  //       // Otherwise, return the product unchanged
-  //       return product;
-  //     }
-  //   });
-
-  //   console.log(updatedStoredCart); // Check the updated cart in the console
-
-  //   // Dispatch the action to update the cart in the Redux store
-  //   dispatch(addStoredCart(updatedStoredCart));
-  // };
-
-  // handle decrement quantity
-  // const handleDecrement = (index: any, newQuantity: number) => {
-  //   const updatedStoredCart = JSON.parse(JSON.stringify(storedCart));
-  //   updatedStoredCart[index].quantity = newQuantity;
-  //   dispatch(addStoredCart(updatedStoredCart));
-  // };
-  // CartItem.jsx
-
   // handle increment quantity for a specific product
   const handleIncrement = async (productId: string, newQuantity: number) => {
     const updatedStoredCart = storedCart.map((product: any) => {
@@ -105,7 +67,12 @@ const CartItem = () => {
           {storedCart?.map((product: any, index: number) => (
             <div key={index} className="border p-1 mt-2">
               <div className="mt-4 flex gap-2 justify-between items-center">
-                <img src={product?.image} className="w-16" alt="products" />
+                <Image
+                  fill
+                  src={product?.image}
+                  className="w-16"
+                  alt="products"
+                />
                 <div className="font-medium text-sm w-1/2">
                   <p>{product?.title?.slice(0, 30)}...</p>
                 </div>

@@ -6,8 +6,7 @@ import React, { useState } from "react";
 const OrderTracking = () => {
   const [orderId, setOrderId] = useState("");
   const [orderData, setOrderData]: any = useState(null);
-  const [trigger, { data, isLoading, isError }]: any =
-    useLazyGetSingleOrderQuery();
+  const [trigger, { isLoading, isError }]: any = useLazyGetSingleOrderQuery();
 
   // Handler to track the order based on order ID
   const handleTrackOrder = () => {

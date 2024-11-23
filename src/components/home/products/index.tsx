@@ -8,11 +8,15 @@ const Products = () => {
     page: 1,
     limit: 20,
   });
+  if (isLoading) {
+    return <Loading />;
+  }
 
   // Reverse the products array to show the last item first
-  const reversedProducts = allProducts
-    ? [...allProducts?.product].reverse()
-    : [];
+  const reversedProducts: any =
+    allProducts && allProducts.product
+      ? [...allProducts.product].reverse()
+      : [];
 
   const reversedAllProducts = {
     product: reversedProducts,

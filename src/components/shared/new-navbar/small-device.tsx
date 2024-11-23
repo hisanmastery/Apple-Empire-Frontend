@@ -48,7 +48,7 @@ interface SmallDeviceProps {
 }
 
 // Main Component
-const SmallDevice: React.FC<SmallDeviceProps> = ({ type }) => {
+const SmallDevice: React.FC<SmallDeviceProps> = () => {
   const [selectedTab, setSelectedTab] = useState("category");
   const [categoryToggle, setCategoryToggle] = useState(false);
   const { data: categoriesData } = useGetAllCategoryQuery<any>({

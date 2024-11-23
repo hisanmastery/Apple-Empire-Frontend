@@ -7,6 +7,6 @@ const fetchDynamicPageSlice = createApi({
     baseUrl: `${baseApiUrl}/dynamic-page`,
   }),
   tagTypes: ["dynamic-page"],
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
 export default fetchDynamicPageSlice;

@@ -36,10 +36,6 @@ const HomePopup = () => {
     };
   }, []);
 
-  const closePopup = () => {
-    setIsOpen(false);
-  };
-
   if (!isOpen) return null;
 
   return (

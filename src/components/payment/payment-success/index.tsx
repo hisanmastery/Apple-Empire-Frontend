@@ -1,5 +1,4 @@
 "use client";
-import withAuth from "@/components/hoc/with-auth-wrapper";
 import { icons } from "@/constants/icons";
 import { usePaymentStatusUpdateMutation } from "@/store/features/checkout/checkoutApi";
 import Link from "next/link";

@@ -7,6 +7,6 @@ const fetchShippingSlice = createApi({
   }),
   tagTypes: ["shipping"],
   reducerPath: "shipping",
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
 export default fetchShippingSlice;

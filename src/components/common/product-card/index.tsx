@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { icons } from "@/constants/icons";
@@ -101,7 +100,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
               image: data?.image?.imageUrl,
               quantity: 1,
             };
-            let cart_items: any = [...product_items, payload];
+            const cart_items: any = [...product_items, payload];
             localStorage.setItem("cart_items", JSON.stringify(cart_items));
             dispatch(getStoredData(cart_items));
           }
@@ -117,7 +116,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
           image: data?.image?.imageUrl,
           quantity: 1,
         };
-        let cart_items: any = [payload];
+        const cart_items: any = [payload];
         localStorage.setItem("cart_items", JSON.stringify(cart_items));
         dispatch(getStoredData(cart_items));
       }

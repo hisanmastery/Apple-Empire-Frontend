@@ -7,6 +7,6 @@ const fetchCartSlice = createApi({
   }),
   tagTypes: ["carts"],
   reducerPath: "carts",
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
 export default fetchCartSlice;

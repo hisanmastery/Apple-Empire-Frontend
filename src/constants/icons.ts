@@ -13,7 +13,7 @@ import { MdAddShoppingCart, MdManageHistory } from "react-icons/md";
 import { MdTimer, MdOutlineFavorite } from "react-icons/md";
 import { MdOutlineSupportAgent } from "react-icons/md";
 import { SlBadge } from "react-icons/sl";
-import { IoCheckmark, IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { BsBagCheckFill } from "react-icons/bs";
 import { TbWorldPlus } from "react-icons/tb";
 import { MdSupervisorAccount } from "react-icons/md";

@@ -7,6 +7,6 @@ const fetchEmiSlice = createApi({
   }),
   tagTypes: ["emi"],
   reducerPath: "emi",
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
 export default fetchEmiSlice;

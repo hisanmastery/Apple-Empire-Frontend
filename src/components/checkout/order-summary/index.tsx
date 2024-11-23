@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { FaFileAlt } from "react-icons/fa";
 const OrderSummary = ({
   subtotal,
-  cartDiscount,
   deliveryFee,
   totalPrice,
   totalProducts,

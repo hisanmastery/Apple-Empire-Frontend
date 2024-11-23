@@ -6,7 +6,7 @@ import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const Forgot = ({ token }: any) => {
+const Forgot = ({ token }: { token: string }) => {
   const {
     register,
     handleSubmit,

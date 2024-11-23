@@ -7,6 +7,6 @@ const fetchAdsSectionsSlice = createApi({
     baseUrl: `${baseApiUrl}`,
   }),
   tagTypes: ["ads-section"],
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
 export default fetchAdsSectionsSlice;

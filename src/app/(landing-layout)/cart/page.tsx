@@ -1,10 +1,7 @@
 "use client";
 import React, { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addStoredCart,
-  getStoredData,
-} from "../../../store/features/cart/cartSlice";
+import { getStoredData } from "../../../store/features/cart/cartSlice";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -86,7 +83,7 @@ const CartPage = ({ className }: any) => {
     if (token && isAuthenticated) {
       await quantityUpdate(productData, true);
     } else {
-      let product_items: Product[] = JSON.parse(
+      const product_items: Product[] = JSON.parse(
         localStorage.getItem("cart_items") || "[]"
       );
 
@@ -178,7 +175,7 @@ const CartPage = ({ className }: any) => {
           {
             label: "Cart",
             href: "/cart",
-          }
+          },
         ]}
       />
       <div className={`w-full mt-4 ${className || ""}`}>
@@ -215,10 +212,7 @@ const CartPage = ({ className }: any) => {
                 </TableHeader>
                 <TableBody>
                   {storedCart?.map((product: any, index: number) => (
-                    <TableRow
-                      key={product.productId}
-                      className="bg-_white hover:bg-_white"
-                    >
+                    <TableRow key={product.productId} className="bg-_white">
                       <TableCell>
                         <p>{product.title}</p>
                         <div

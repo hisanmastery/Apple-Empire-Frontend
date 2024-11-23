@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Loading from "@/components/common/loading";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import ProductCard from "../common/product-card";
 import { useSelector } from "react-redux";

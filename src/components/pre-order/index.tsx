@@ -2,6 +2,7 @@
 import useToaster from "@/hooks/useToaster";
 import { uploadImage } from "@/lib/helpers/upload-image";
 import { useCreatePreOrderMutation } from "@/store/features/pre-order/preOrderOrOfferApi";
+import Image from "next/image";
 import React, { useState, ChangeEvent, FormEvent } from "react";
 
 const PreOrder: React.FC = () => {
@@ -144,7 +145,8 @@ const PreOrder: React.FC = () => {
             {/* Preview */}
             {preview && (
               <div className="mt-4">
-                <img
+                <Image
+                  fill
                   src={preview}
                   alt="Preview"
                   className="h-20 w-20 object-cover rounded-lg shadow-md"
@@ -236,24 +238,6 @@ const PreOrder: React.FC = () => {
           </div>
         </form>
       </div>
-
-      {/* How to Pre-Order Section */}
-      {/* <div className="mt-10 w-full max-w-lg">
-        <h3 className="text-center text-xl font-semibold text-gray-700 mb-4">
-          How to Pre-Order
-        </h3>
-        <p className="text-center text-gray-600 mb-4">
-          Watch the video and learn more about the pre-order process
-        </p>
-        <div className="w-full">
-          <iframe
-            className="w-full h-64 rounded-lg"
-            src="https://www.youtube.com/embed/7fkif715igA"
-            title="How to Pre-Order"
-            allowFullScreen
-          ></iframe>
-        </div>
-      </div> */}
     </div>
   );
 };

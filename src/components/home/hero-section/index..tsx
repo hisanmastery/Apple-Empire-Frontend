@@ -40,7 +40,7 @@ const HeroSection = () => {
             <p>No products available</p>
           </SwiperSlide>
         ) : (
-          data?.response?.map((product: any, index: number) => (
+          data?.response?.map((product: any) => (
             <SwiperSlide key={product.id}>
               <div className="aspect-w-16 aspect-h-9">
                 <Card className="!h-full">

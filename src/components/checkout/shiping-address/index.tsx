@@ -6,10 +6,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { Address } from "@/data/address";
 
 const ShippingAddress = ({ email }: any) => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
+  const { register } = useFormContext();
 
   return (
     <div className="border border-gray-400 p-5 rounded-lg shadow-md">

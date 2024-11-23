@@ -81,7 +81,7 @@ export const handleIncrementQuantity = async (
   } else {
     // Guest user: Update quantity locally
     try {
-      let productItems: Product[] = JSON.parse(
+      const productItems: Product[] = JSON.parse(
         localStorage.getItem("cart_items") || "[]"
       );
 

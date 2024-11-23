@@ -2,8 +2,8 @@ import { baseApiUrl } from "@/constants/endpoint";
 import axios from "axios";
 
 export const get_store_data = async () => {
-  let email: any = localStorage.getItem("email");
-  let token: any = localStorage.getItem("token");
+  const email = localStorage.getItem("email") as string;
+  const token = localStorage.getItem("token") as string;
   let res: any = [];
   if (email && token) {
     res = await axios
@@ -29,8 +29,8 @@ export const get_store_data = async () => {
   return res;
 };
 export const get_wish_lists = async () => {
-  let email: any = localStorage.getItem("email");
-  let token: any = localStorage.getItem("token");
+  const email: any = localStorage.getItem("email");
+  const token: any = localStorage.getItem("token");
   let res: any = [];
   if (email && token) {
     res = await axios

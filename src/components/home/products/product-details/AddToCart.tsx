@@ -82,7 +82,7 @@ export const addToCart = async (
   } else {
     // Guest user flow
     try {
-      let cartItems: CartItem[] = JSON.parse(
+      const cartItems: CartItem[] = JSON.parse(
         localStorage.getItem("cart_items") || "[]"
       );
 

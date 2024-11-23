@@ -1,4 +1,3 @@
-import fetchCartSlice from "@/store/api/cart/cartSlice";
 import fetchCheckoutSlice from "@/store/api/checkout/checkoutSlice";
 
 export const cartApi = fetchCheckoutSlice.injectEndpoints({
@@ -66,7 +65,7 @@ export const cartApi = fetchCheckoutSlice.injectEndpoints({
 
     //shipping method
     getAllShippingMethods: builder.query({
-      query: (id: any) => ({
+      query: () => ({
         url: `shipping-methods/all-shipping-methods`,
         method: "GET",
       }),

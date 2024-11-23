@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Loading from "../common/loading";
 import ProductCard from "../common/product-card";
 import ProductsNotFound from "../products-not-found";
 import { useSelector } from "react-redux";
@@ -27,7 +26,6 @@ const CategoryProducts: React.FC<CategoryProductsProps> = ({
   const [pageSize, setPageSize] = useState(12);
   const { min, max } = useSelector(selectPriceRange);
   const { label, value } = useSelector(selectProductsVariant);
-  console.log(currentPage,pageSize);
   // Fetching products using custom hooks
   const { data: allProducts, isLoading } = useGetProductsListsQuery<any>({
     category: selectedategory || canonicalUrl,

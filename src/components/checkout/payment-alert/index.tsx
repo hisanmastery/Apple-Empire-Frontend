@@ -1,5 +1,4 @@
-import useToaster from "@/hooks/useToaster";
-import React, { useState } from "react";
+import React from "react";
 
 interface PaymentAlertProps {
   isOpen: boolean;

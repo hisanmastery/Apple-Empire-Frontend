@@ -7,6 +7,6 @@ const authBaseApi = createApi({
     baseUrl: `${baseApiUrl}/auth`,
   }),
   tagTypes: ["user"],
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
 export default authBaseApi;

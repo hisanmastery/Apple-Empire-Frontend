@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import datas from "@/../public/product.json";
 import { ICartState } from "@/interfaces/index";
 
 const cartSlice = createSlice({
@@ -9,7 +8,7 @@ const cartSlice = createSlice({
       product: [],
     },
     storedCart: [],
-    wishLists:[]
+    wishLists: [],
   },
   reducers: {
     addcart(state: any, { payload }: any) {
@@ -29,25 +28,36 @@ const cartSlice = createSlice({
       }));
       // state.storedCart = payload;
     },
-    getStoredData:(state,action)=>{
-      state.storedCart=action.payload;
+    getStoredData: (state, action) => {
+      state.storedCart = action.payload;
     },
     incrementQuantity(state, { payload }) {
-      const item: any = state.storedCart.find((item: any) => item._id === payload._id);
+      const item: any = state.storedCart.find(
+        (item: any) => item._id === payload._id
+      );
       if (item) {
         item.quantity += 1;
       }
     },
     decrementQuantity(state, { payload }) {
-      const item: any = state.storedCart.find((item: any) => item._id === payload._id);
+      const item: any = state.storedCart.find(
+        (item: any) => item._id === payload._id
+      );
       if (item && item.quantity > 1) {
         item.quantity -= 1;
       }
     },
-    storedWishLists:(state,action)=>{
-      state.wishLists=action.payload;
-    }
+    storedWishLists: (state, action) => {
+      state.wishLists = action.payload;
+    },
   },
 });
-export const { addcart,storedWishLists, addStoredCart, incrementQuantity, decrementQuantity,getStoredData } = cartSlice.actions;
+export const {
+  addcart,
+  storedWishLists,
+  addStoredCart,
+  incrementQuantity,
+  decrementQuantity,
+  getStoredData,
+} = cartSlice.actions;
 export default cartSlice.reducer;

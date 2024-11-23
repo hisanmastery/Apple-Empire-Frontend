@@ -6,12 +6,9 @@ const ViewMoreTitle = ({
   className,
   children,
   seeMoreUrl = "",
-  style,
 }: any) => {
   return (
-    <div
-      className={`section-wrapper w-full mt-3 md:mt-5 ${className || ""}`}
-    >
+    <div className={`section-wrapper w-full mt-3 md:mt-5 ${className || ""}`}>
       <div className="container-x mx-auto">
         <div className=" section-title flex justify-between items-center mb-5 md:px-5">
           <div>

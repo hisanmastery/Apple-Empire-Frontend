@@ -1,9 +1,30 @@
 {
-  "extends": "next/core-web-vitals",
-  "rules": { 
-    "react/no-unescaped-entities": 0,
-    "@typescript-eslint/no-explicit-any": "off"
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/prop-types": "off",
+    "react/jsx-uses-react": "off",
+    "react/jsx-uses-vars": "off",
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "off", // Turn off unused-vars rule for TypeScript
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
-  
-  
 }

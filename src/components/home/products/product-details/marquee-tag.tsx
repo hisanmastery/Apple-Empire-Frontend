@@ -1,4 +1,3 @@
-import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import Image from "next/image";
 import React from "react";

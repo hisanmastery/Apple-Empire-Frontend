@@ -28,7 +28,6 @@ const Pagination: React.FC<PaginationProps> = ({
         }
       } else {
         // If more than 5 pages, show first, last, current, and add ellipses
-        const maxPagesToShow = 5;
 
         // Show first page
         pageNumbers.push(1);

@@ -43,7 +43,7 @@ const useAuth = () => {
     } else {
       setLoading(false); // Stop loading even if there's no token
     }
-  }, []);
+  });
 
   const logout = useCallback(() => {
     localStorage.removeItem("token");

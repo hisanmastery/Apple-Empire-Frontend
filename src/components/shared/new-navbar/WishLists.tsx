@@ -1,7 +1,5 @@
 "use client";
 import { icons } from "@/constants/icons";
-import useAuth from "@/hooks/useAuth";
-import { useUpdateCartMutation } from "@/store/features/cart/cartApi";
 import { storedWishLists } from "@/store/features/cart/cartSlice";
 import Image from "next/image";
 import { get_wish_lists } from "@/utils/get_store_data";

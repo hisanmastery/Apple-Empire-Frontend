@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 const ProductInfoTab = ({ product }: any) => {
   const [selectedTab, setSelectedTab] = useState("");
+  console.log(selectedTab);
   const tabs = [
     {
       value: "Specification",

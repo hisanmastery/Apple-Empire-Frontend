@@ -3,25 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { icons } from "@/constants/icons";
 import CartItem from "./cartItem";
 import SheetDrawer from "../common/sheet-drawer/indext";
-import { useEffect, useState } from "react";
-import { useGetEmailCartQuery } from "@/store/features/cart/cartApi";
-import { addStoredCart } from "@/store/features/cart/cartSlice";
-import useAuth from "@/hooks/useAuth";
+import { useState } from "react";
 const Carts = () => {
   const { storedCart } = useSelector((state: any) => state?.cart);
-  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const { customerInfo } = useAuth();
-  // const { data, refetch }: any = useGetEmailCartQuery(
-  //   {
-  //     email: customerInfo.email,
-  //   },
-  //   { pollingInterval: 1000 }
-  // );
-  // useEffect(() => {
-  //   dispatch(addStoredCart(data?.response));
-  //   refetch();
-  // }, [data?.response, dispatch, refetch, storedCart]);
   // Using reduce to calculate the total price
   const totalPrice = storedCart?.reduce((acc: number, product: any) => {
     return acc + product?.quantity * parseInt(product?.price);

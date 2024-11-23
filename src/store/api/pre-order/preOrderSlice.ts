@@ -7,6 +7,6 @@ const fetchPreOrderSlice = createApi({
   }),
   tagTypes: ["pre-order"],
   reducerPath: "pre-order",
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
 export default fetchPreOrderSlice;

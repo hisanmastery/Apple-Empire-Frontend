@@ -2,7 +2,6 @@ import React from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -10,7 +9,7 @@ import {
 
 interface ModalProps {
   isOpen: boolean;
-  title:String,
+  title?: string;
   setIsOpen: (open: boolean) => void;
   children?: React.ReactNode;
 }
@@ -23,11 +22,10 @@ const CustomModal: React.FC<ModalProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
-      <DialogTrigger asChild>
-      </DialogTrigger>
+      <DialogTrigger asChild></DialogTrigger>
       <DialogContent className="min-w-[800px]">
         <DialogHeader className="border-b-[1px] border-_primary pb-2">
-          <DialogTitle>{ title}</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         {children && <div>{children}</div>}
       </DialogContent>

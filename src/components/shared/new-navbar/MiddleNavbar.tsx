@@ -3,7 +3,6 @@ import Link from "next/link";
 import { icons } from "@/constants/icons";
 import Image from "next/image";
 import Cart from "./Cart";
-import WishLists from "./WishLists";
 import { useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
@@ -11,7 +10,7 @@ import { images } from "@/constants/images";
 import React from "react";
 
 export default function MiddleNavbar({ className, type }: any) {
-  const { storedCart, wishLists } = useSelector((state: any) => state?.cart);
+  const { storedCart } = useSelector((state: any) => state?.cart);
   const { isAuthenticated } = useAuth();
 
   return (

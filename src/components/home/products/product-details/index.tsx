@@ -247,6 +247,7 @@ const ProductDetails = ({ id }: any) => {
       />
       <RelatedProducts
         category={data?.response?.category?.parentCategory?.slug}
+        subCategory={data?.response?.category?.subCategory?.slug}
       />
       {/* products info */}
       <ProductInfoTab product={data} />
