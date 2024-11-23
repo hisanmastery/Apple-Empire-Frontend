@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStoredData } from "@/store/features/cart/cartSlice";
 import Link from "next/link";
 import { useGetSingleProductsQuery } from "@/store/features/products/productsApi";
-import ProductSlider from "../../product-slider";
 import {
   useAddToCartMutation,
   useUpdateCartMutation,
@@ -27,6 +26,7 @@ import { get_store_data } from "@/utils/get_store_data";
 import ProductDetailsSkeleton from "@/components/shared/skeleton/products-details-skeleton";
 import Breadcrumbs from "@/components/common/breadcrumbs";
 import MarqueeTag from "./marquee-tag";
+import RelatedProducts from "./Related-Products";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
@@ -245,7 +245,9 @@ const ProductDetails = ({ id }: any) => {
         seeMoreUrl="/products"
         categoryTitle="Related products"
       />
-      <ProductSlider />
+      <RelatedProducts
+        category={data?.response?.category?.parentCategory?.slug}
+      />
       {/* products info */}
       <ProductInfoTab product={data} />
       <Emiplan
