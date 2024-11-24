@@ -44,7 +44,7 @@ const HeroSection = () => {
             <SwiperSlide key={product.id}>
               <div className="aspect-w-16 aspect-h-9">
                 <Card className="!h-full">
-                  <CardContent className="flex w-full items-center justify-center lg:h-[580px] h-52">
+                  <CardContent className="flex w-full items-center justify-center lg:h-[590px] h-52">
                     <Image
                       width={1300}
                       height={700}

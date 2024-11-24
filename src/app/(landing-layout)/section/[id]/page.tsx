@@ -1,7 +1,6 @@
 import React from "react";
 import AllProductsSection from "@/components/all-products";
 import ProductsSideBar from "@/components/products-sidebar";
-
 const formatCategory = (category: string): string => {
   return category
     .split("-")

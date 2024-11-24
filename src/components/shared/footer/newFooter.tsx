@@ -10,7 +10,7 @@ import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
 const NewFooter = () => {
   const { data } = useGetAllCategoryQuery<any>({
     page: 1,
-    limit: 5,
+    limit: 4,
   });
   const categoryData = data?.data;
   return (
@@ -89,13 +89,13 @@ const NewFooter = () => {
               </Link>
               <Link
                 href={"/warranty-policy"}
-                className={"text-white hover:text-_primary-bg block"}
+                className={"text-white hover:text-_primary block"}
               >
                 Warranty Policy
               </Link>
               <Link
                 href={"/exchange-policy"}
-                className={"text-white hover:text-_primary-bg block"}
+                className={"text-white hover:text-_primary block"}
               >
                 Exchange Policy
               </Link>
@@ -131,6 +131,7 @@ const NewFooter = () => {
               >
                 Terms And Conditions
               </Link>
+              <p className="text-_black mt-1">------</p>
             </ul>
             <ul className="w-1/2 md:w-auto mb-5 text-xs md:text-sm">
               <li className="text-_primary md:text-lg text-sm">CATEGORY</li>
