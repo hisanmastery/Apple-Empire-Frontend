@@ -139,7 +139,7 @@ export default function LargeDevice() {
       <div className="bg-white text-center flex justify-center items-center h-[50px] smd:h-[60px]">
         <div className="w-full h-full relative">
           <div className="w-full h-full flex justify-center items-center">
-            <div className="category-and-nav lg:flex hidden space-x-3 items-center">
+            <div className="category-and-nav lg:flex hidden space-x-5 items-center">
               {categoriesData?.data?.map((category: any) => (
                 <div
                   key={category._id}
@@ -147,9 +147,9 @@ export default function LargeDevice() {
                   onMouseEnter={() => handleMouseEnterCategory(category._id)}
                   onMouseLeave={handleMouseLeaveCategory}
                 >
-                  <div className="w-full h-full flex justify-between px-2 text-center items-center">
+                  <div className="w-full h-full flex justify-between text-center items-center">
                     <Link href={`/category/${category.slug}`}>
-                      <span className="text-sm font-semibold hover:text-orange-500 text-gray-800">
+                      <span className="text-xs xl:text-sm font-semibold hover:text-orange-500 text-gray-800">
                         {category.categoryName}
                       </span>
                     </Link>
@@ -168,14 +168,14 @@ export default function LargeDevice() {
                     )}
                 </div>
               ))}
-              <div className="lg:flex items-center gap-10 hidden">
-                <div className="text-gray-800 text-md font-medium">
+              <div className="lg:flex items-center gap-2 xl:gap-10 hidden text-gray-800 text-xs xl:text-sm font-semibold">
+                <div>
                   <Link href={"/"}>Blogs</Link>
                 </div>
-                <div className="text-gray-800 text-md font-medium">
+                <div>
                   <Link href={"/section/used"}>Used Products</Link>
                 </div>
-                <div className="text-gray-800 text-md font-medium">
+                <div>
                   <Link href={"/offers"}>Offers</Link>
                 </div>
               </div>
