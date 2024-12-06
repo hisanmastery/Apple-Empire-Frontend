@@ -47,7 +47,7 @@ const ShippingAddress = ({ email }: any) => {
             <h1 className="mb-1">City</h1>
             <select
               {...register("city", { required: "City is required" })}
-              className="border w-full p-2 rounded-md focus:outline-none border-gray-400"
+              className="border w-full p-2 rounded-md focus:outline-none border-gray-400 mt-[5px]"
             >
               {Address?.map((item: any, index: number) => (
                 <option value={item} key={index}>
