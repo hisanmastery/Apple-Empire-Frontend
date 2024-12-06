@@ -64,6 +64,7 @@ const ClientBrand = () => {
                   <Image
                     src={brand?.image?.viewUrl}
                     alt={brand?.brandName}
+                    fill
                     width={100}
                     height={50}
                     className="w-auto h-[50px] mx-auto transition ease-in-out duration-300 hover:scale-110 hover:cursor-pointer"

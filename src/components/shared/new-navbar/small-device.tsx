@@ -51,7 +51,7 @@ interface SmallDeviceProps {
 const SmallDevice: React.FC<SmallDeviceProps> = () => {
   const [selectedTab, setSelectedTab] = useState("category");
   const [categoryToggle, setCategoryToggle] = useState(false);
-  const { data: categoriesData } = useGetAllCategoryQuery<any>({
+  const { data: categoriesData, isLoading } = useGetAllCategoryQuery<any>({
     page: 1,
     limit: 100,
   });
@@ -59,7 +59,9 @@ const SmallDevice: React.FC<SmallDeviceProps> = () => {
   const handleCategoryToggle = () => {
     setCategoryToggle(!categoryToggle);
   };
-
+  if (isLoading) {
+    return;
+  }
   return (
     <div className="flex justify-between items-center md:hidden bg-black px-5">
       {/* Category Menu Button */}
