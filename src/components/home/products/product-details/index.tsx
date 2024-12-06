@@ -32,9 +32,10 @@ const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
   const [isOpen, setIsOpen] = useState(false);
   const { customerInfo, isAuthenticated } = useAuth();
-  const [variantPrice, setVariantPrice] = useState<any>();
+  const [selectedVariant, setSelectedVariant] = useState<any>();
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
   const [selectedColor, setSelectedColor]: any = useState();
+  const [viewImage, setViewImage] = useState<any>();
   const [selectedVariantOptions, setSelectedVariantOptions] =
     useState<any>(null);
   const [thisItem, setThisItem] = useState<any>({});
@@ -60,8 +61,14 @@ const ProductDetails = ({ id }: any) => {
     }
   }, [storedCart, data]);
 
-  const handleColorButtonClick = (color: any) => {
+  const handleImageVariant = (image: any) => {
+    setViewImage(image);
+  };
+
+  // handle variations images
+  const handleVariationsImage = (image: string, color: string) => {
     setSelectedColor(color);
+    setViewImage(image);
   };
 
   // handle cart click
@@ -109,8 +116,12 @@ const ProductDetails = ({ id }: any) => {
   };
 
   useEffect(() => {
-    setSelectedColor(data?.response?.variations?.[0]?.color);
-  }, [data]);
+    setViewImage(
+      viewImage ||
+        selectedVariant?.images?.[0] ||
+        data?.response?.image?.imageUrl
+    );
+  }, [data, selectedVariant, viewImage]);
 
   if (isLoading) {
     return <ProductDetailsSkeleton />;
@@ -141,27 +152,50 @@ const ProductDetails = ({ id }: any) => {
           <div>
             <ImageDisplay
               product={data}
-              selectedColor={selectedColor}
-              stock={variantPrice?.stock}
+              viewImage={viewImage}
+              stock={selectedVariant?.stock}
             />
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
-              {data?.response?.variations
-                ?.slice(0, 4)
-                ?.map((variant: any, index: number) => (
-                  <div
-                    key={index}
-                    className="bg-white border rounded-md"
-                    onClick={() => handleColorButtonClick(variant?.color)}
-                  >
-                    <Image
-                      width={100}
-                      height={100}
-                      className="transition-transform duration-300 transform cursor-pointer"
-                      src={variant?.image[0]}
-                      alt={`Product Image - ${variant?.color}`}
-                    />
-                  </div>
-                ))}
+              {data?.response?.variations?.length > 0
+                ? data?.response?.variations
+                    ?.slice(0, 4)
+                    .map((variant: any, index: number) => (
+                      <div
+                        key={index}
+                        className="bg-white border rounded-md"
+                        onClick={() =>
+                          handleVariationsImage(
+                            variant?.image[0],
+                            variant?.color
+                          )
+                        }
+                      >
+                        <Image
+                          width={100}
+                          height={100}
+                          className="transition-transform duration-300 transform cursor-pointer"
+                          src={variant?.image[0] || " "}
+                          alt={`Product Image - ${variant?.color}`}
+                        />
+                      </div>
+                    ))
+                : selectedVariant?.images
+                    ?.slice(0, 4)
+                    .map((image: any, index: number) => (
+                      <div
+                        key={index}
+                        className="bg-white border rounded-md"
+                        onClick={() => handleImageVariant(image)}
+                      >
+                        <Image
+                          width={100}
+                          height={100}
+                          className="transition-transform duration-300 transform cursor-pointer"
+                          src={image || " "}
+                          alt={`Product Image - ${image}`}
+                        />
+                      </div>
+                    ))}
             </div>
           </div>
         </div>
@@ -197,10 +231,10 @@ const ProductDetails = ({ id }: any) => {
           <div>
             <VariantDisplay
               product={data?.response}
-              setVariantPrice={setVariantPrice}
+              setVariantPrice={setSelectedVariant}
               setSelectedVariantOptions={setSelectedVariantOptions}
-              handleColorButtonClick={handleColorButtonClick}
               selectedColor={selectedColor}
+              setSelectedColor={setSelectedColor}
             />
           </div>
           {/* add to cart button */}
@@ -252,7 +286,7 @@ const ProductDetails = ({ id }: any) => {
       {/* products info */}
       <ProductInfoTab product={data} />
       <Emiplan
-        price={variantPrice?.price}
+        price={selectedVariant?.price}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />

@@ -1,18 +1,7 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-const ImageDisplay = ({ product, selectedColor, stock }: any) => {
-  const [viewImage, setViewImage] = useState("");
-
-  useEffect(() => {
-    const selectedImages = product?.response?.variations.find(
-      (variant: any) => variant?.color === selectedColor
-    )?.image;
-    if (selectedImages?.length > 0) {
-      setViewImage(selectedImages?.[0]);
-    }
-  }, [selectedColor, product]);
-
+const ImageDisplay = ({ product, stock, viewImage }: any) => {
   const handleImageMouseMove = (e: any) => {
     const zoomContainer = e.currentTarget.querySelector(".zoom-container");
     const { offsetX, offsetY } = e.nativeEvent;

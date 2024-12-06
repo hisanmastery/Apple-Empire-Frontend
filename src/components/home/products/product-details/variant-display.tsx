@@ -2,13 +2,14 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import ColorSelector from "./color-selector";
+import CustomTooltip from "@/components/common/custom-tooltip";
 
 const VariantDisplay = ({
   product,
   setVariantPrice,
   setSelectedVariantOptions,
   selectedColor,
-  handleColorButtonClick,
+  setSelectedColor,
 }: any) => {
   const optionTypes = Array.from(
     new Set(
@@ -17,6 +18,13 @@ const VariantDisplay = ({
       )
     )
   );
+
+  //check variant image
+  const hasImages = product?.variants?.some(
+    (variant: any) =>
+      Array.isArray(variant?.images) && variant?.images?.length > 0
+  );
+
   const defaultVariant = product?.variants?.[0] || null;
 
   // State for storing the selected options, initialized based on the default variant
@@ -58,7 +66,7 @@ const VariantDisplay = ({
     availableVariants.length > 0 ? availableVariants[0] : null;
 
   const handleColorVariant = (value: any) => {
-    handleColorButtonClick(value);
+    setSelectedColor(value);
     optionTypes.includes("Color") && handleOptionChange("Color", value);
     optionTypes.includes("color") && handleOptionChange("color", value);
   };
@@ -75,60 +83,82 @@ const VariantDisplay = ({
 
   return (
     <section>
-      {optionTypes.includes("Color") && (
-        <ColorSelector
-          variations={product?.variations}
-          selectedColor={selectedColor}
-          onColorSelect={handleColorVariant}
-        />
-      )}
-      {optionTypes.includes("color") && (
-        <ColorSelector
-          variations={product?.variations}
-          selectedColor={selectedColor}
-          onColorSelect={handleColorVariant}
-        />
-      )}
-      {!optionTypes.includes("color") && !optionTypes.includes("Color") && (
-        <ColorSelector
-          variations={product?.variations}
-          selectedColor={selectedColor}
-          onColorSelect={handleColorButtonClick}
-        />
-      )}
+      {optionTypes.some((option: any) => option.toLowerCase() === "color") &&
+        !hasImages && (
+          <ColorSelector
+            variations={product?.variations}
+            selectedColor={selectedColor}
+            onColorSelect={handleColorVariant}
+          />
+        )}
+
       <div className="mt-4">
-        {optionTypes.map(
+        {optionTypes?.map(
           (option: any) =>
-            option !== "color" &&
-            option !== "Color" && (
+            (hasImages || (option !== "color" && option !== "Color")) && (
               <div key={option} className="mb-4 flex">
                 <h3 className="font-medium w-[30%] md:w-[15%]">{option}:</h3>
                 <div className="flex flex-wrap gap-2">
-                  {/* Extract available values for the current option */}
-                  {product?.variants
-                    .flatMap((variant: any) =>
-                      variant?.options
-                        .filter((opt: any) => opt.name === option)
-                        .map((opt: any) => opt.value)
-                    )
-                    .filter(
-                      (value: any, index: number, self: any) =>
-                        self.indexOf(value) === index
-                    )
-                    ?.map((value: any) => (
-                      <Button
-                        size={"sm"}
-                        key={value}
-                        variant={
-                          selectedOptions[option] === value
-                            ? "default"
-                            : "outline"
-                        }
-                        onClick={() => handleOptionChange(option, value)}
-                      >
-                        {value}
-                      </Button>
-                    ))}
+                  {/* Check for 'Color' option and render color selector if images are available */}
+                  {option.toLowerCase() === "color" && hasImages
+                    ? product?.variants
+                        .flatMap((variant: any) =>
+                          variant?.options
+                            .filter(
+                              (opt: any) => opt.name.toLowerCase() === "color"
+                            )
+                            .map((opt: any) => opt.value)
+                        )
+                        .filter(
+                          (value: any, index: number, self: any) =>
+                            self.indexOf(value) === index
+                        )
+                        ?.map((colorValue: any, index: number) => (
+                          <CustomTooltip
+                            key={index}
+                            contentText={`${colorValue}`}
+                            triggerText={
+                              <button
+                                className={`w-8 h-8 rounded-full ${
+                                  selectedColor === colorValue
+                                    ? "ring-2 ring-_dark-color"
+                                    : ""
+                                }`}
+                                style={{
+                                  backgroundColor: colorValue.toLowerCase(),
+                                }}
+                                onClick={() => {
+                                  handleColorVariant(colorValue);
+                                }}
+                              />
+                            }
+                          />
+                        ))
+                    : // If the option is not color and doesn't require images, render other options
+                      product?.variants
+                        .flatMap((variant: any) =>
+                          variant?.options
+                            .filter((opt: any) => opt.name === option)
+                            .map((opt: any) => opt.value)
+                        )
+                        .filter(
+                          (value: any, index: number, self: any) =>
+                            self.indexOf(value) === index
+                        )
+                        ?.map((value: any) => (
+                          <Button
+                            size={"sm"}
+                            key={value}
+                            variant={
+                              selectedOptions[option] === value
+                                ? "default"
+                                : "outline"
+                            }
+                            onClick={() => handleOptionChange(option, value)}
+                          >
+                            {value}
+                          </Button>
+                        ))}
                 </div>
               </div>
             )
@@ -141,7 +171,6 @@ const VariantDisplay = ({
             <h2 className="text-xl font-bold">
               Price: TK. {selectedVariant?.price}
             </h2>
-            {/* <p className="text-gray-600">Stock: {selectedVariant?.stock}</p> */}
           </>
         ) : (
           <p className="text-red-500">

@@ -13,7 +13,7 @@ const ColorSelector = ({ variations, selectedColor, onColorSelect }: any) => {
                 onClick={() => onColorSelect(variant?.color)}
                 className={`w-8 h-8 rounded-full ${
                   variant.color === selectedColor
-                    ? "border-2 border-blue-500"
+                    ? "border-2 border-_dark-color"
                     : "border"
                 } transition-all duration-300`}
                 style={{ backgroundColor: variant?.colorCode }}
