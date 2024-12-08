@@ -114,15 +114,7 @@ const ProductDetails = ({ id }: any) => {
       getStoredData
     );
   };
-
-  useEffect(() => {
-    setViewImage(
-      viewImage ||
-        selectedVariant?.images?.[0] ||
-        data?.response?.image?.imageUrl
-    );
-  }, [data, selectedVariant, viewImage]);
-
+  console.log(selectedVariant);
   if (isLoading) {
     return <ProductDetailsSkeleton />;
   }
@@ -152,8 +144,9 @@ const ProductDetails = ({ id }: any) => {
           <div>
             <ImageDisplay
               product={data}
+              profileImageUrl={data?.response?.image?.imageUrl}
               viewImage={viewImage}
-              stock={selectedVariant?.stock}
+              selectedVariant={selectedVariant}
             />
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
               {data?.response?.variations?.length > 0
@@ -203,7 +196,7 @@ const ProductDetails = ({ id }: any) => {
           <div className="flex justify-between">
             <div className={"w-full"}>
               <h2 className="flex items-center gap-2 text-md md:text-xl font-medium mb-2">
-                {data?.response?.name?.slice(0, 50)}
+                {data?.response?.name}
               </h2>
               <div className="grid grid-cols-2 items-center lg:max-w-[500px]">
                 <div
@@ -235,6 +228,7 @@ const ProductDetails = ({ id }: any) => {
               setSelectedVariantOptions={setSelectedVariantOptions}
               selectedColor={selectedColor}
               setSelectedColor={setSelectedColor}
+              setViewImage={setViewImage}
             />
           </div>
           {/* add to cart button */}
@@ -248,7 +242,8 @@ const ProductDetails = ({ id }: any) => {
               data={data?.response}
               handleInQuantityUpdate={handleInQuantityUpdate}
             />
-            {data?.response.preOrder != "Yes" && (
+            {(data?.response.preOrder != "Yes" ||
+              selectedVariant?.preOrder !== "Yes") && (
               <Button
                 onClick={() => handleCartClick(data?.response)}
                 disabled={isInCart}
@@ -265,7 +260,10 @@ const ProductDetails = ({ id }: any) => {
               className="uppercase  hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
             >
               <Link href={"/cart/checkout"}>
-                {data?.response.preOrder == "Yes" ? "Pre Order Now" : "Buy Now"}
+                {data?.response.preOrder == "Yes" ||
+                selectedVariant?.preOrder === "Yes"
+                  ? "Pre Order Now"
+                  : "Buy Now"}
               </Link>
             </Button>
           </div>

@@ -1,20 +1,12 @@
 import CustomTabs from "@/components/common/custom-tab";
 import React, { useState } from "react";
+import SpecificationsTable from "./Specifications";
 
 const ProductInfoTab = ({ product }: any) => {
+  // eslint-disable-next-line no-unused-vars
   const [selectedTab, setSelectedTab] = useState("");
-  console.log(selectedTab);
+  console.log(product?.response?.specification);
   const tabs = [
-    {
-      value: "Specification",
-      label: "Specification",
-      content: (
-        <div
-          className="text-gray-600"
-          dangerouslySetInnerHTML={{ __html: product?.response?.specification }}
-        />
-      ),
-    },
     {
       value: "Description",
       label: "Description",
@@ -26,10 +18,23 @@ const ProductInfoTab = ({ product }: any) => {
       ),
     },
     {
+      value: "Specification",
+      label: "Specification",
+      content: (
+        <SpecificationsTable
+          specifications={product?.response?.specification}
+        />
+      ),
+    },
+
+    {
       value: "Warranty",
       label: "Warranty",
       content: (
-        <div className="text-gray-600">{product?.response?.warranty}</div>
+        <div
+          className="text-gray-600"
+          dangerouslySetInnerHTML={{ __html: product?.response?.warranty }}
+        />
       ),
     },
   ];

@@ -9,6 +9,7 @@ const VariantDisplay = ({
   setVariantPrice,
   setSelectedVariantOptions,
   selectedColor,
+  setViewImage,
   setSelectedColor,
 }: any) => {
   const optionTypes = Array.from(
@@ -73,7 +74,9 @@ const VariantDisplay = ({
 
   useEffect(() => {
     setVariantPrice(selectedVariant);
+    setViewImage(selectedVariant?.images?.[0]);
     setSelectedVariantOptions(selectedOptions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     selectedVariant,
     setVariantPrice,

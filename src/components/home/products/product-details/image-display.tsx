@@ -1,7 +1,12 @@
 import Image from "next/image";
 import React from "react";
 
-const ImageDisplay = ({ product, stock, viewImage }: any) => {
+const ImageDisplay = ({
+  product,
+  selectedVariant,
+  viewImage,
+  profileImageUrl,
+}: any) => {
   const handleImageMouseMove = (e: any) => {
     const zoomContainer = e.currentTarget.querySelector(".zoom-container");
     const { offsetX, offsetY } = e.nativeEvent;
@@ -25,8 +30,8 @@ const ImageDisplay = ({ product, stock, viewImage }: any) => {
     return parseFloat((value || "0").toString().replace(/[,৳]/g, ""));
   };
 
-  const newPrice = parsePrice(product?.response?.price);
-  const newOfferPrice = parsePrice(product?.response?.offer_price);
+  const newPrice = parsePrice(selectedVariant?.price);
+  const newOfferPrice = parsePrice(selectedVariant?.offer_price);
   const discountPercentage = newPrice
     ? Math.round(((newPrice - newOfferPrice) / newPrice) * 100)
     : 0;
@@ -43,20 +48,20 @@ const ImageDisplay = ({ product, stock, viewImage }: any) => {
           width={500}
           height={500}
           className="transform cursor-pointer mx-auto"
-          src={viewImage}
+          src={viewImage || profileImageUrl}
           alt="Product Image"
         />
       </div>
 
       {/* Discount Badge */}
-      {discountPercentage > 0 && (
+      {discountPercentage > 0 && selectedVariant?.offer_price && (
         <div className="absolute top-2 left-2 bg-orange-500 text-_white px-2 py-1 text-sm rounded">
           Save {discountPercentage}%
         </div>
       )}
 
       {/* Stock Out Overlay */}
-      {stock === 0 && (
+      {selectedVariant?.stock === 0 && (
         <div className="absolute inset-0 bg-gray-900/35 flex items-center justify-center text-_white font-semibold text-xl">
           Stock Out
         </div>
