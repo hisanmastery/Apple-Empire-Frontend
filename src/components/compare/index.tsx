@@ -60,22 +60,32 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
   const specs1Groups = singlePhoneData?.response?.specification?.groups || [];
   const specs2Groups = secondPhoneData?.response?.specification?.groups || [];
 
-  const renderGroup = (group: any, secondGroup: any) => {
-    return group.details.map((detail: any, index: number) => {
-      const matchingDetail =
-        secondGroup?.details?.find((item: any) => item.name === detail.name) ||
-        {};
+  const renderGroup = (group1: any, group2: any) => {
+    // Collect all unique feature names from both groups
+    const allFeatures = Array.from(
+      new Set([
+        ...(group1?.details?.map((detail: any) => detail.name) || []),
+        ...(group2?.details?.map((detail: any) => detail.name) || []),
+      ])
+    );
+
+    return allFeatures.map((featureName: string, index: number) => {
+      // Find details in both groups for this feature
+      const feature1 =
+        group1?.details?.find((item: any) => item.name === featureName) || {};
+      const feature2 =
+        group2?.details?.find((item: any) => item.name === featureName) || {};
 
       return (
-        <tr key={`${group.group}-${index}`}>
+        <tr key={`${featureName}-${index}`}>
           <td className="px-4 py-2 font-semibold text-gray-700 border">
-            {detail.name}
+            {featureName}
           </td>
           <td className="px-4 py-2 text-gray-700 border">
-            {detail.value || "-"}
+            {feature1.value || "----------"}
           </td>
           <td className="px-4 py-2 text-gray-700 border">
-            {matchingDetail.value || "-"}
+            {feature2.value || "----------"}
           </td>
         </tr>
       );
@@ -83,10 +93,21 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
   };
 
   const renderAllGroups = () => {
-    return specs1Groups.map((group: any, index: number) => {
-      const secondGroup = specs2Groups.find(
-        (item: any) => item.group === group.group
-      );
+    // Merge groups from both products
+    const allGroups = Array.from(
+      new Set([
+        ...specs1Groups.map((g: any) => g.group),
+        ...specs2Groups.map((g: any) => g.group),
+      ])
+    );
+
+    return allGroups.map((groupName: string, index: number) => {
+      const group1 = specs1Groups.find((g: any) => g.group === groupName) || {
+        details: [],
+      };
+      const group2 = specs2Groups.find((g: any) => g.group === groupName) || {
+        details: [],
+      };
 
       return (
         <React.Fragment key={`group-${index}`}>
@@ -95,10 +116,10 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
               colSpan={3}
               className="px-4 py-2 font-bold text-gray-800 border text-left"
             >
-              {group.group}
+              {groupName}
             </td>
           </tr>
-          {renderGroup(group, secondGroup)}
+          {renderGroup(group1, group2)}
         </React.Fragment>
       );
     });
