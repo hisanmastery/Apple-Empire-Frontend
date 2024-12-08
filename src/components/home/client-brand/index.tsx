@@ -36,11 +36,13 @@ const ClientBrand = () => {
   const { data, isLoading }: any = useGetAllBrandQuery({
     limit: 20,
   });
-
+  console.log(data?.brands);
   if (isLoading) return <Loading />;
   return (
     <div>
-      <h3 className="text-center text-lg md:text-2xl mt-5 mb-3">Shop By Brand</h3>
+      <h3 className="text-center text-lg md:text-2xl mt-5 mb-3">
+        Shop By Brand
+      </h3>
       <div className="container relative">
         <Swiper
           ref={swiperRef}
@@ -62,9 +64,8 @@ const ClientBrand = () => {
               <div className="w-full !h-full flex items-center">
                 <Link href={`/brand/${brand?.brandName}`}>
                   <Image
-                    src={brand?.image?.viewUrl}
-                    alt={brand?.brandName}
-                    fill
+                    src={brand?.image?.viewUrl || ""}
+                    alt={brand?.image?.altText}
                     width={100}
                     height={50}
                     className="w-auto h-[50px] mx-auto transition ease-in-out duration-300 hover:scale-110 hover:cursor-pointer"

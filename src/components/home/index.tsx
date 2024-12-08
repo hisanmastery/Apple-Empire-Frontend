@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-const ClientBrand = dynamic(import("../home/client-brand"));
 const Products = dynamic(() => import("../home/products"));
 const ProductAds = dynamic(() => import("../common/productAds"));
 const ViewMoreTitle = dynamic(() => import("../common/ViewMoreTitle"));
@@ -9,8 +8,9 @@ const TopSellingProducts = dynamic(() => import("../home/TopSellingProducts"));
 const PopularProducts = dynamic(() => import("../home/popularProducts"));
 const CampaignsCountDown = dynamic(() => import("./campaigns-count-down"));
 const HomePopup = dynamic(() => import("@/components/home/popup/HomePopup"));
-const TopBrandProducts = dynamic(import("./top-brand-products"));
 import { useGetAllAdsQuery } from "@/store/features/ads-section/adsSectionApi";
+import ClientBrand from "./client-brand";
+import TopBrandProducts from "./top-brand-products";
 const TopItems = dynamic(() => import("./top-items"));
 
 const SectionWithTitleAndAds = ({
