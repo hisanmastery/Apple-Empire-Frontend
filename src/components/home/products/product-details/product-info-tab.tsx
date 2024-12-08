@@ -5,7 +5,6 @@ import SpecificationsTable from "./Specifications";
 const ProductInfoTab = ({ product }: any) => {
   // eslint-disable-next-line no-unused-vars
   const [selectedTab, setSelectedTab] = useState("");
-  console.log(product?.response?.specification);
   const tabs = [
     {
       value: "Description",
@@ -20,9 +19,14 @@ const ProductInfoTab = ({ product }: any) => {
     {
       value: "Specification",
       label: "Specification",
-      content: (
+      content: product?.response?.specification?.groups ? (
         <SpecificationsTable
           specifications={product?.response?.specification}
+        />
+      ) : (
+        <div
+          className="text-gray-600"
+          dangerouslySetInnerHTML={{ __html: product?.response?.specification }}
         />
       ),
     },
