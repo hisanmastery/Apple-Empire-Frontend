@@ -35,6 +35,14 @@ export const preOrderApi = fetchPreOrderSlice.injectEndpoints({
         body: data,
       }),
     }),
+     //get whatsapp
+     getAllWhatsappNumber: builder.query({
+      query: () => ({
+        url: `/whatsapp/get-whatsapp`,
+        method: "GET",
+      }),
+      providesTags: ["pre-order"],
+    }),
   }),
 });
 export const {
@@ -42,4 +50,5 @@ export const {
   useGetAllOfferQuery,
   useGetSingleOfferQuery,
   useCreateAdviesAndComplainMutation,
+  useGetAllWhatsappNumberQuery
 } = preOrderApi;

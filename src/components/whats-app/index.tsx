@@ -5,8 +5,11 @@ import Image from "next/image";
 import { icons } from "@/constants/icons";
 import { usePathname } from "next/navigation";
 import { envConfig } from "@/config/envConfig";
+import { useGetAllWhatsappNumberQuery } from "@/store/features/pre-order/preOrderOrOfferApi";
 
 const CustomWhatsApp = () => {
+  const { data } = useGetAllWhatsappNumberQuery<any>({});
+  console.log(data?.data);
   const [isOpen, setIsOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState<string>("");
 
@@ -55,9 +58,7 @@ const CustomWhatsApp = () => {
 
   // Function to open WhatsApp
   const handleChat = () => {
-    const countryCode = "880";
-    const phoneNumber = "1616436310";
-    const fullPhoneNumber = `${countryCode}${phoneNumber}`;
+    const fullPhoneNumber = `${data?.data?.number}`;
     const message = `${envConfig.frontend_url}${path}`;
     const whatsappUrl = `https://wa.me/${fullPhoneNumber}?text=${encodeURIComponent(
       message
@@ -93,8 +94,8 @@ const CustomWhatsApp = () => {
           <div className="flex items-center justify-between bg-green-600 text-white p-[5px] rounded-t-lg">
             <div className="flex items-center space-x-3">
               <Image
-                src={images.NavbarLogo}
-                alt="Logo"
+                src={data?.data?.images?.imageUrl || images.NavbarLogo}
+                alt={data?.data?.images?.altText || "Logo"}
                 width={40}
                 height={40}
                 className="w-14 h-14 rounded-full"
