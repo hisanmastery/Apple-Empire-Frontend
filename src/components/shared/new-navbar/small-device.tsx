@@ -113,7 +113,7 @@ const SmallDevice: React.FC<SmallDeviceProps> = () => {
                             <div className="flex items-center gap-2 px-2 border-b w-full">
                               <Image
                                 className="w-6 h-6"
-                                src={category?.images?.imageUrl}
+                                src={category?.images?.imageUrl || ""}
                                 alt={category?.images?.altText}
                                 width={24}
                                 height={24}

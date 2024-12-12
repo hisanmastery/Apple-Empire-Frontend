@@ -85,7 +85,7 @@ export default function SearchBox() {
                 onClick={() => setOpen(false)}
               >
                 <Image
-                  src={product?.image?.imageUrl}
+                  src={product?.image?.imageUrl || ""}
                   alt={product?.image?.altText}
                   width={30}
                   height={30}

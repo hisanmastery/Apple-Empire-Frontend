@@ -28,7 +28,7 @@ const OrderCard = ({ order }: { order: any }) => (
           <li key={index} className="flex items-center space-x-4">
             <div className="relative w-14 h-14">
               <Image
-                src={product.image}
+                src={product.image || ""}
                 alt={product.title}
                 layout="fill"
                 objectFit="cover"

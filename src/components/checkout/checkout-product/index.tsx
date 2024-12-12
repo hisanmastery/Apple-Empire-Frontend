@@ -13,7 +13,7 @@ const CheckoutProduct = ({ storedCart, subTotal }: any) => {
             <div className="flex items-center ">
               <div>
                 <Image
-                  src={`${product?.image}`}
+                  src={`${product?.image}` || ""}
                   alt="product"
                   className="w-20 h-20 rounded-   md object-contain"
                   width={80}

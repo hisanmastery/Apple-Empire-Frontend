@@ -59,7 +59,7 @@ const CustomWhatsApp = () => {
   // Function to open WhatsApp
   const handleChat = () => {
     const fullPhoneNumber = `${data?.data?.number}`;
-    const message = `${envConfig.frontend_url}${path}`;
+    const message = `${envConfig?.frontend_url}${path}`;
     const whatsappUrl = `https://wa.me/${fullPhoneNumber}?text=${encodeURIComponent(
       message
     )}`;

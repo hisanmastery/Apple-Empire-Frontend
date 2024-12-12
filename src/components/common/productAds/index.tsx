@@ -19,7 +19,7 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
                 <Image
                   width={1280}
                   height={350}
-                  src={ads[0]}
+                  src={ads[0] || ""}
                   quality={100}
                   alt="ads"
                   className="w-full h-full hover:scale-105 ease-in-out transition-all duration-1000"
@@ -35,7 +35,7 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
                   <Image
                     width={1280}
                     height={350}
-                    src={ads[1]}
+                    src={ads[1] || ""}
                     quality={100}
                     alt="ads"
                     className="w-full h-full hover:scale-105 ease-in-out transition-all duration-1000"

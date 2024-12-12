@@ -50,8 +50,8 @@ const HeroSection = () => {
                       height={700}
                       quality={100}
                       className="w-full h-full"
-                      src={product.images?.imageUrl}
-                      alt={product?.images?.altText}
+                      src={product.images?.imageUrl || ""}
+                      alt={product?.images?.altText || ""}
                     />
                   </CardContent>
                 </Card>

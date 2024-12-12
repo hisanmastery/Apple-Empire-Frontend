@@ -13,7 +13,7 @@ const EmailSubscribe = () => {
             <div className="text-center">
               <Image
                 className="text-3xl  bg-slate-200 hover:bg-_primary text-_primary hover:text-_secondary-text w-14 h-14 lsm:w-20 lsm:h-20 p-3 lsm:p-5 mx-auto rounded-full flex justify-center items-center  ease-in-out duration-500 transition-all"
-                src={images.onlineSupportIcon}
+                src={images.onlineSupportIcon || ""}
                 alt="online support"
                 width={50}
                 height={50}
@@ -24,7 +24,7 @@ const EmailSubscribe = () => {
               {/* <icons.giftIcon className="text-3xl  bg-slate-200 hover:bg-_primary text-_primary hover:text-_secondary-text w-14 h-14 lsm:w-20 lsm:h-20 p-3 lsm:p-5 mx-auto rounded-full flex justify-center items-center  ease-in-out duration-500 transition-all" /> */}
               <Image
                 className="text-3xl  bg-slate-200 hover:bg-_primary text-_primary hover:text-_secondary-text w-14 h-14 lsm:w-20 lsm:h-20 p-3 lsm:p-5 mx-auto rounded-full flex justify-center items-center  ease-in-out duration-500 transition-all"
-                src={images.officialProductIcon}
+                src={images.officialProductIcon || ""}
                 alt="online support"
                 width={50}
                 height={50}
@@ -35,7 +35,7 @@ const EmailSubscribe = () => {
               {/* <icons.truckDelivaryIcon className="text-3xl  bg-slate-200 hover:bg-_primary text-_primary hover:text-_secondary-text w-14 h-14 lsm:w-20 lsm:h-20 p-3 lsm:p-5 mx-auto rounded-full flex justify-center items-center  ease-in-out duration-500 transition-all" /> */}
               <Image
                 className="text-3xl  bg-slate-200 hover:bg-_primary text-_primary hover:text-_secondary-text w-14 h-14 lsm:w-20 lsm:h-20 p-3 lsm:p-5 mx-auto rounded-full flex justify-center items-center  ease-in-out duration-500 transition-all"
-                src={images.fastDeliveryIcon}
+                src={images.fastDeliveryIcon || ""}
                 alt="online support"
                 width={50}
                 height={50}

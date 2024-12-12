@@ -62,7 +62,7 @@ const Login = () => {
           <div className="mt-6 text-center text-xl font-extrabold text-gray-900">
             <Image
               className="w-24 h-24 mx-auto"
-              src={images.appleAmpireLogo}
+              src={images.appleAmpireLogo || ""}
               alt="logo"
               width={100}
               height={100}

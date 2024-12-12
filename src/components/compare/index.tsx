@@ -164,8 +164,8 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
         <div className="text-center">
           {singlePhoneData?.response?.image ? (
             <Image
-              src={singlePhoneData?.response?.image?.imageUrl}
-              alt={singlePhoneData?.response?.image?.altText}
+              src={singlePhoneData?.response?.image?.imageUrl || ""}
+              alt={singlePhoneData?.response?.image?.altText || ""}
               width={192}
               height={192}
               className="mx-auto w-48 h-48 object-cover"
@@ -194,8 +194,8 @@ const CompareComponent = ({ firstPhoneId, secondPhoneId }: any) => {
         <div className="text-center">
           {secondPhoneData?.response?.image ? (
             <Image
-              src={secondPhoneData?.response?.image?.imageUrl}
-              alt={secondPhoneData?.response?.image?.altText}
+              src={secondPhoneData?.response?.image?.imageUrl || ""}
+              alt={secondPhoneData?.response?.image?.altText || ""}
               width={192}
               height={192}
               className="mx-auto w-48 h-48 object-cover"

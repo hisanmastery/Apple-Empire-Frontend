@@ -144,7 +144,7 @@ const ProductDetails = ({ id }: any) => {
           <div>
             <ImageDisplay
               product={data}
-              profileImageUrl={data?.response?.image?.imageUrl}
+              profileImageUrl={data?.response?.image?.imageUrl || ""}
               viewImage={viewImage}
               selectedVariant={selectedVariant}
             />

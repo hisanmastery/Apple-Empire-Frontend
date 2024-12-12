@@ -26,7 +26,7 @@ const OrderSummary = ({
           <div key={index} className="flex justify-between items-center gap-5">
             <div className="w-[75%] flex gap-2 items-center mb-3">
               <Image
-                src={item?.image}
+                src={item?.image || ""}
                 alt="image"
                 width={80}
                 height={80}

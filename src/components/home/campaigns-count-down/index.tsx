@@ -79,8 +79,8 @@ export default function CampaignsCountDown({
                   // fill
                   width={500}
                   height={200}
-                  src={count_down_section?.images?.[0]?.imageUrl}
-                  alt={count_down_section?.images?.[0].altText}
+                  src={count_down_section?.images?.[0]?.imageUrl || ""}
+                  alt={count_down_section?.images?.[0].altText || ""}
                   quality={100}
                 />
               </div>

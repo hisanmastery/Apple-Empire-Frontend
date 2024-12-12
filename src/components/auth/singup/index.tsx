@@ -46,14 +46,14 @@ const Signup = () => {
         <div className="mt-6 text-center text-xl font-extrabold text-gray-900">
           <Image
             className="w-24 h-24 mx-auto"
-            src={images.appleAmpireLogo}
+            src={images.appleAmpireLogo || ""}
             height={100}
             width={100}
             alt="logo"
           />
           Create A New Account
         </div>
-        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}> 
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="name" className="sr-only">
@@ -130,7 +130,16 @@ const Signup = () => {
                 className="mt-4"
                 placeholder="Password"
               />
-              <span className="absolute right-3 top-3 cursor-pointer" onClick={()=>setShowConfirmPassword(!showConfirmPassword)}>{showConfirmPassword ? <icons.FaRegEyeIcon/>: <icons.FaEyeSlashIcon/>}</span>
+              <span
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <icons.FaRegEyeIcon />
+                ) : (
+                  <icons.FaEyeSlashIcon />
+                )}
+              </span>
               {errors.password?.message && (
                 <p className="text-red-500 text-sm">
                   {String(errors.password.message)}
@@ -152,7 +161,16 @@ const Signup = () => {
                 className="mt-4"
                 placeholder="Confirm Password"
               />
-              <span className="absolute right-3 top-3 cursor-pointer" onClick={()=>setShowPassword(!showPassword)}>{showPassword ? <icons.FaRegEyeIcon/>: <icons.FaEyeSlashIcon/>}</span>
+              <span
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <icons.FaRegEyeIcon />
+                ) : (
+                  <icons.FaEyeSlashIcon />
+                )}
+              </span>
               {errors.passwordConfirmation?.message && (
                 <p className="text-red-500 text-sm">
                   {String(errors.passwordConfirmation.message)}

@@ -69,7 +69,7 @@ const CartItem = () => {
               <div className="mt-4 flex gap-2 justify-between items-center">
                 <Image
                   fill
-                  src={product?.image}
+                  src={product?.image || ""}
                   className="w-16"
                   alt="products"
                 />

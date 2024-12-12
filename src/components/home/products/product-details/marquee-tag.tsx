@@ -26,7 +26,7 @@ const MarqueeTag = () => {
           width={300}
           height={20}
           quality={100}
-          src={images.paymentImage}
+          src={images.paymentImage || ""}
           alt="payment"
           className="w-full object-cover h-7 -mt-1"
         />

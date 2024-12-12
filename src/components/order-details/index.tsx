@@ -62,7 +62,7 @@ const OrderDetails = ({ id }: any) => {
             >
               <div className="relative w-24 h-24">
                 <Image
-                  src={product?.image}
+                  src={product?.image || ""}
                   alt={product?.title}
                   layout="fill"
                   objectFit="cover"

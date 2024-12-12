@@ -119,7 +119,7 @@ export default function WishLists({ className }: any) {
                     <Image
                       height={50}
                       width={50}
-                      src={product?.image}
+                      src={product?.image || ""}
                       className="w-16"
                       alt="products"
                     />

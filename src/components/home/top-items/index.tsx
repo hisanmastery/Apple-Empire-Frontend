@@ -20,7 +20,7 @@ const TopItems = () => {
             <Link href={`/category/${category?.slug}`}>
               <div className="w-full !h-full p-3 bg-_white rounded-lg">
                 <Image
-                  src={category?.images?.imageUrl || "s"}
+                  src={category?.images?.imageUrl || " "}
                   alt={category?.images?.altText}
                   width={100}
                   height={100}

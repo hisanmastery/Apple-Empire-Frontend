@@ -34,7 +34,7 @@ const Offers = () => {
               className="text-center border rounded-lg shadow bg-white p-4 relative"
             >
               <Image
-                src={offer.images?.imageUrl}
+                src={offer.images?.imageUrl || ""}
                 alt={offer.images?.altText}
                 width={200}
                 height={250}
