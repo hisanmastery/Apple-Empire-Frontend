@@ -2,8 +2,7 @@
 import React, { useRef } from "react";
 import "swiper/css";
 import "swiper/css/autoplay";
-import "swiper/css/effect-coverflow";
-import "swiper/css/virtual";
+import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import ProductCard from "../product-card";
@@ -55,11 +54,12 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
     },
   };
 
-  // Show skeletons if data is still loading
+  // Skeleton UI for loading state
   if (isLoading) {
     return (
       <div className="container relative p-0">
         <Swiper
+          onSwiper={(swiperInstance) => (swiperRef.current = swiperInstance)}
           modules={[Autoplay, Navigation]}
           loop={true}
           autoplay={{
@@ -72,6 +72,10 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
           allowTouchMove={true}
           spaceBetween={12}
           breakpoints={breakpoints}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }}
         >
           {[...Array(5)].map((_, index) => (
             <SwiperSlide key={index}>
@@ -79,15 +83,26 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
             </SwiperSlide>
           ))}
         </Swiper>
+        <div style={{ textAlign: "center" }}>
+          <button className="swiper-button-prev">
+            <icons.GoArrowLeft className="text-xl text-_orange" />
+          </button>
+          <button className="swiper-button-next">
+            <icons.GoArrowRight className="text-xl text-_orange" />
+          </button>
+        </div>
       </div>
     );
   }
 
-  // Render the actual slider content once data is loaded
+  // Render actual products when data is ready
   return (
     <div className={`container relative p-0`}>
       <Swiper
-        ref={swiperRef}
+        onSwiper={(swiperInstance) => {
+          swiperRef.current = swiperInstance;
+          swiperInstance.navigation.update(); // Ensure navigation updates properly
+        }}
         modules={[Autoplay, Navigation]}
         loop={true}
         autoplay={{
@@ -99,6 +114,10 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
         allowTouchMove={true}
         breakpoints={breakpoints}
         spaceBetween={12}
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }}
       >
         {sliderProducts?.product?.map((product) => (
           <SwiperSlide key={product._id}>
@@ -107,16 +126,10 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
         ))}
       </Swiper>
       <div style={{ textAlign: "center" }}>
-        <button
-          className="button swiper-button-prev absolute z-10 p-1 font-thin rounded-full left-0 top-[50%]"
-          onClick={() => swiperRef?.current?.swiper?.slidePrev()}
-        >
+        <button className="swiper-button-prev">
           <icons.GoArrowLeft className="text-xl text-_orange" />
         </button>
-        <button
-          className="button swiper-button-next absolute z-10 p-1 font-thin rounded-full right-0 top-[50%]"
-          onClick={() => swiperRef?.current?.swiper?.slideNext()}
-        >
+        <button className="swiper-button-next">
           <icons.GoArrowRight className="text-xl text-_orange" />
         </button>
       </div>
@@ -125,5 +138,3 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
 };
 
 export default CustomSlider;
-
-// bg-[#eff1f0]

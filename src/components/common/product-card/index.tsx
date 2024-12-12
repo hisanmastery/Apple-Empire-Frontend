@@ -149,7 +149,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
           </div>
         )}
         {/* Display Offer Percentage */}
-        {discountPercentage > 0 && (
+        {discountPercentage > 0 && datas?.offerPrice && (
           <div className="absolute top-2 right-2 bg-_orange/80 text-_white px-2 py-1 sm:text-sm rounded text-xs">
             {discountPercentage}% OFF
           </div>
