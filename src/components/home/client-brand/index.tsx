@@ -36,7 +36,6 @@ const ClientBrand = () => {
   const { data, isLoading }: any = useGetAllBrandQuery({
     limit: 20,
   });
-  console.log(data?.brands);
   if (isLoading) return <Loading />;
   return (
     <div>

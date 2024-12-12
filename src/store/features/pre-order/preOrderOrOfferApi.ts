@@ -27,10 +27,19 @@ export const preOrderApi = fetchPreOrderSlice.injectEndpoints({
       }),
       providesTags: ["pre-order"],
     }),
+    //create api
+    createAdviesAndComplain: builder.mutation({
+      query: (data: any) => ({
+        url: `/complain-by-advise/create-complain-by-advise`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 export const {
   useCreatePreOrderMutation,
   useGetAllOfferQuery,
   useGetSingleOfferQuery,
+  useCreateAdviesAndComplainMutation,
 } = preOrderApi;

@@ -1,16 +1,12 @@
 "use client";
 import React from "react";
 import Loading from "@/components/common/loading";
-import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
 import Image from "next/image";
 import Link from "next/link";
+import { useGetAllCategoryForOrderListQuery } from "@/store/features/category/categoryApi";
 
 const TopItems = () => {
-  const { data, isLoading } = useGetAllCategoryQuery<any>({
-    page: 1,
-    limit: 12,
-  });
-
+  const { data, isLoading } = useGetAllCategoryForOrderListQuery<any>({});
   if (isLoading) return <Loading />;
   return (
     <div className="md:container mb-3 sm:mt-0">
@@ -19,12 +15,12 @@ const TopItems = () => {
       </h2>
 
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
-        {data?.data?.map((category: any, index: any) => (
+        {data?.data?.categories?.map((category: any, index: any) => (
           <div key={index} className={`!h-auto !md:h-full`}>
             <Link href={`/category/${category?.slug}`}>
               <div className="w-full !h-full p-3 bg-_white rounded-lg">
                 <Image
-                  src={category?.images?.imageUrl}
+                  src={category?.images?.imageUrl || "s"}
                   alt={category?.images?.altText}
                   width={100}
                   height={100}

@@ -14,6 +14,13 @@ export const categoryApi = fetchProductsSlice.injectEndpoints({
         },
       }),
     }),
+    // get all
+    getAllCategoryForOrderList: builder.query({
+      query: () => ({
+        url: `${category}/get-top-category`,
+        method: "get",
+      }),
+    }),
 
     // get category list
     getCategoryList: builder.query({
@@ -41,4 +48,5 @@ export const {
   useGetAllCategoryQuery,
   useGetCategoryListQuery,
   useGetSingleCategoryBySubCategoryQuery,
+  useGetAllCategoryForOrderListQuery,
 } = categoryApi;
