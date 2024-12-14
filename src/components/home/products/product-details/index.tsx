@@ -27,10 +27,12 @@ import ProductDetailsSkeleton from "@/components/shared/skeleton/products-detail
 import Breadcrumbs from "@/components/common/breadcrumbs";
 import MarqueeTag from "./marquee-tag";
 import RelatedProducts from "./Related-Products";
+import useHeadline from "@/hooks/useHeadline";
 
 const ProductDetails = ({ id }: any) => {
   const showToast = useToaster();
   const [isOpen, setIsOpen] = useState(false);
+  const { data: headlineData } = useHeadline();
   const { customerInfo, isAuthenticated } = useAuth();
   const [selectedVariant, setSelectedVariant] = useState<any>();
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
@@ -274,8 +276,8 @@ const ProductDetails = ({ id }: any) => {
       {/* Related products */}
       <ViewMoreTitle
         className="top-selling-product mt-14"
-        seeMoreUrl="/products"
-        categoryTitle="Related products"
+        seeMoreUrl="/section/top-selling-products"
+        categoryTitle={headlineData?.related_products}
       />
       <RelatedProducts
         category={data?.response?.category?.parentCategory?.slug}

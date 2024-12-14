@@ -42,7 +42,6 @@ const SectionWithTitleAndAds = ({
 const Home: React.FC = () => {
   const { data } = useGetAllAdsQuery<any>({});
   const { data: headlineData } = useHeadline();
-  console.log(headlineData);
   const bannerImageAll = data?.sections;
   const firstImage = bannerImageAll?.find(
     (item: any) => item?.sectionName === "first_section"
@@ -65,7 +64,7 @@ const Home: React.FC = () => {
   return (
     <main className="lg:container mx-auto md:p-0 mt-5">
       {/* Top Items and Popup */}
-      <TopItems />
+      <TopItems title={headlineData?.top_categories} />
       <HomePopup />
 
       {/* Primary Ads */}
