@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { images } from "@/constants/images"; // Make sure to set up your images or use a placeholder
+import { images } from "@/constants/images";
 import Image from "next/image";
 import { icons } from "@/constants/icons";
 import { usePathname } from "next/navigation";
@@ -9,7 +9,6 @@ import { useGetAllWhatsappNumberQuery } from "@/store/features/pre-order/preOrde
 
 const CustomWhatsApp = () => {
   const { data } = useGetAllWhatsappNumberQuery<any>({});
-  console.log(data?.data);
   const [isOpen, setIsOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState<string>("");
 

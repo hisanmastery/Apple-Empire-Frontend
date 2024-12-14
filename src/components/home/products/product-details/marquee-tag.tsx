@@ -1,8 +1,10 @@
 import { images } from "@/constants/images";
+import { useGetAllLogoQuery } from "@/store/features/ads-section/adsSectionApi";
 import Image from "next/image";
 import React from "react";
 
 const MarqueeTag = () => {
+  const { data: logo } = useGetAllLogoQuery<any>({});
   return (
     <div className="grid grid-cols-1 lg:grid-cols-9 gap-10 mt-2">
       {/* Marquee Section */}
@@ -26,8 +28,11 @@ const MarqueeTag = () => {
           width={300}
           height={20}
           quality={100}
-          src={images.paymentImage || ""}
-          alt="payment"
+          src={
+            logo?.data?.productDetailsPagePayment?.imageUrl ||
+            images.paymentImage
+          }
+          alt={logo?.data?.productDetailsPagePayment?.altText || "payment"}
           className="w-full object-cover h-7 -mt-1"
         />
       </div>

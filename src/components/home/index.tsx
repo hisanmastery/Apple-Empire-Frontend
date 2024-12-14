@@ -11,6 +11,7 @@ const HomePopup = dynamic(() => import("@/components/home/popup/HomePopup"));
 import { useGetAllAdsQuery } from "@/store/features/ads-section/adsSectionApi";
 import ClientBrand from "./client-brand";
 import TopBrandProducts from "./top-brand-products";
+import useHeadline from "@/hooks/useHeadline";
 const TopItems = dynamic(() => import("./top-items"));
 
 const SectionWithTitleAndAds = ({
@@ -40,6 +41,8 @@ const SectionWithTitleAndAds = ({
 
 const Home: React.FC = () => {
   const { data } = useGetAllAdsQuery<any>({});
+  const { data: headlineData } = useHeadline();
+  console.log(headlineData);
   const bannerImageAll = data?.sections;
   const firstImage = bannerImageAll?.find(
     (item: any) => item?.sectionName === "first_section"
@@ -73,12 +76,13 @@ const Home: React.FC = () => {
             ? firstImage?.images?.[1]?.imageUrl
             : undefined,
         ].filter(Boolean)}
+        link={firstImage?.canonicalUrl}
         className="lg:container mx-auto"
         sectionHeight="h-[120px] lg:h-[350px]"
       />
       {/* Top Selling Products */}
       <SectionWithTitleAndAds
-        title="Top Selling Products"
+        title={data?.popular_products || "Top Selling Products"}
         seeMoreUrl="/section/top-selling-products"
       >
         <TopSellingProducts />
@@ -92,13 +96,14 @@ const Home: React.FC = () => {
             ? second_section?.images?.[1]?.imageUrl
             : undefined,
         ].filter(Boolean)}
+        link={second_section?.canonicalUrl}
         className="lg:container mx-auto"
         sectionHeight="h-[120px] md:h-[350px]"
       />
 
       {/* All Products */}
       <SectionWithTitleAndAds
-        title="All Products"
+        title={headlineData?.all_products || "All Products"}
         seeMoreUrl="/section/top-selling-products"
       >
         <Products />
@@ -112,13 +117,14 @@ const Home: React.FC = () => {
             ? third_section?.images?.[1]?.imageUrl
             : undefined,
         ].filter(Boolean)}
+        link={third_section?.canonicalUrl}
         className="lg:container mx-auto"
         sectionHeight="h-[120px] md:h-[350px]"
       />
 
       {/* Popular Products */}
       <SectionWithTitleAndAds
-        title="Popular Products"
+        title={headlineData?.popular_products || "Popular Products"}
         seeMoreUrl="/section/popular-products"
       >
         <PopularProducts />
@@ -132,13 +138,14 @@ const Home: React.FC = () => {
             ? fourth_section?.images?.[1]?.imageUrl
             : undefined,
         ].filter(Boolean)}
+        link={fourth_section?.canonicalUrl}
         className="lg:container mx-auto"
         sectionHeight="h-[120px] lg:h-[350px]"
       />
 
       {/* Top Pricing Products */}
       <SectionWithTitleAndAds
-        title="Top Pricing Products"
+        title={headlineData?.top_pricing_products || "Top Pricing Products"}
         seeMoreUrl="/section/top-pricing-products"
       >
         <TopSellingProducts />
@@ -152,12 +159,13 @@ const Home: React.FC = () => {
             ? fifth_section?.images?.[1]?.imageUrl
             : undefined,
         ].filter(Boolean)}
+        link={fifth_section?.canonicalUrl}
         className="lg:container mx-auto"
         sectionHeight="h-[120px] lg:h-[350px]"
       />
-      <TopBrandProducts />
+      <TopBrandProducts title={headlineData?.top_brand_products} />
       {/* Shop By Brands */}
-      <ClientBrand />
+      <ClientBrand title={headlineData?.shop_by_brand} />
       {/* Campaigns Countdown */}
       <CampaignsCountDown
         lastDate="2024-06-22 4:00:00"

@@ -6,8 +6,10 @@ import Image from "next/image";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
+import { useGetAllLogoQuery } from "@/store/features/ads-section/adsSectionApi";
 
 const NewFooter = () => {
+  const { data: logo } = useGetAllLogoQuery<any>({});
   const { data } = useGetAllCategoryQuery<any>({
     page: 1,
     limit: 4,
@@ -26,8 +28,8 @@ const NewFooter = () => {
               width={80}
               height={80}
               className="lg:w-[80px] md:w-20 w-14 my-3"
-              src={images.NavbarLogo}
-              alt=""
+              src={logo?.data?.footerLogo?.imageUrl || images.NavbarLogo}
+              alt={logo?.data?.footerLogo?.altText || ""}
             />
           </div>
 
@@ -206,8 +208,8 @@ const NewFooter = () => {
         <div>
           <h5 className="mb-3">Secure Payments</h5>
           <Image
-            src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
-            alt="payment image"
+            src={logo?.data?.footerPayment?.imageUrl}
+            alt={logo?.data?.footerPayment?.altText || "payment image"}
             width={864}
             height={16}
             className="w-full h-[36px]"

@@ -114,7 +114,7 @@ const ProductDetails = ({ id }: any) => {
       getStoredData
     );
   };
-  console.log(selectedVariant);
+
   if (isLoading) {
     return <ProductDetailsSkeleton />;
   }

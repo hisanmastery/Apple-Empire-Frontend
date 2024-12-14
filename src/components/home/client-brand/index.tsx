@@ -31,7 +31,7 @@ const breakpoints = {
   },
 };
 
-const ClientBrand = () => {
+const ClientBrand = ({ title }: any) => {
   const swiperRef = useRef<any>(null);
   const { data, isLoading }: any = useGetAllBrandQuery({
     limit: 20,
@@ -39,9 +39,7 @@ const ClientBrand = () => {
   if (isLoading) return <Loading />;
   return (
     <div>
-      <h3 className="text-center text-lg md:text-2xl mt-5 mb-3">
-        Shop By Brand
-      </h3>
+      <h3 className="text-center text-lg md:text-2xl mt-5 mb-3">{title}</h3>
       <div className="container relative">
         <Swiper
           ref={swiperRef}

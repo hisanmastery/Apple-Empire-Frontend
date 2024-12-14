@@ -5,7 +5,7 @@ import { useGetAllBrandQuery } from "@/store/features/brand/brandApi";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
 import React, { useState } from "react";
 
-const TopBrandProducts = () => {
+const TopBrandProducts = ({ title }: any) => {
   const [selectedTab, setSelectedTab] = useState();
   const { data } = useGetAllBrandQuery<any>({
     page: 1,
@@ -25,9 +25,7 @@ const TopBrandProducts = () => {
 
   return (
     <div className="md:container mb-10">
-      <h3 className="text-center text-lg md:text-2xl my-3">
-        Top Brand Products
-      </h3>
+      <h3 className="text-center text-lg md:text-2xl my-3">{title}</h3>
       <div className="flex justify-center overflow-auto">
         <div className="flex flex-col w-full max-w-lg">
           <CustomTabs

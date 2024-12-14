@@ -1,11 +1,15 @@
+"use client";
 import React from "react";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
 import { FaAnglesDown } from "react-icons/fa6";
 import EmailSubscribe from "@/components/home/email-subscribe";
 import Image from "next/image";
+import { useGetAllLogoQuery } from "@/store/features/ads-section/adsSectionApi";
 
 const Footer = () => {
+  const { data } = useGetAllLogoQuery<any>({});
+  console.log(data);
   return (
     <footer className="bg-black text-white py-10 mt-32 w-full relative">
       <div className="container mx-auto mt-20">
@@ -21,8 +25,8 @@ const Footer = () => {
               width={80}
               height={80}
               className="w-[80px]"
-              src="https://appleempirebd.com/wp-content/uploads/2023/07/Apple-Empire-W-SVG-1.svg"
-              alt=""
+              src={data?.data?.navbar?.imageUrl}
+              alt={data?.data?.navbar?.imageUrl || "logo"}
             />
           </div>
 
@@ -86,8 +90,8 @@ const Footer = () => {
             <h5 className="mb-3">Secure Payments</h5>
             <Image
               fill
-              src="https://i.ibb.co/FsWdHzy/Screenshot-2024-03-14-210457.png"
-              alt="Secure Payments"
+              src={data?.data?.navbar?.imageUrl}
+              alt={data?.data?.navbar?.imageUrl || "Secure Payments"}
             />
           </div>
         </div>

@@ -8,8 +8,10 @@ import SearchBox from "./SearchBox";
 import useAuth from "@/hooks/useAuth";
 import { images } from "@/constants/images";
 import React from "react";
+import { useGetAllLogoQuery } from "@/store/features/ads-section/adsSectionApi";
 
 export default function MiddleNavbar({ className, type }: any) {
+  const { data } = useGetAllLogoQuery<any>({});
   const { storedCart } = useSelector((state: any) => state?.cart);
   const { isAuthenticated } = useAuth();
 
@@ -26,8 +28,8 @@ export default function MiddleNavbar({ className, type }: any) {
                 <Image
                   width={50}
                   height={50}
-                  src={images.NavbarLogo}
-                  alt="logo"
+                  src={data?.data?.navbar?.imageUrl || images.NavbarLogo}
+                  alt={data?.data?.navbar?.altText || "logo"}
                   className="p-2 w-16 ssm:w-20 smd:w-24 mmd:w-28"
                 />
               </Link>

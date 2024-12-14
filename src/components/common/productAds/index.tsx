@@ -2,7 +2,12 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 
-const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
+const ProductAds = ({
+  className,
+  ads = ["", ""],
+  sectionHeight,
+  link,
+}: any) => {
   return (
     <>
       <div className={`w-full md:mt-10 ${className || ""}`}>
@@ -15,7 +20,7 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
             } items-center w-full overflow-hidden`}
           >
             <div data-aos="fade-right" className={`h-full w-full`}>
-              <Link href="/section/top-selling-products">
+              <Link href={link || ""}>
                 <Image
                   width={1280}
                   height={350}
@@ -31,7 +36,7 @@ const ProductAds = ({ className, ads = ["", ""], sectionHeight }: any) => {
                 data-aos="fade-left"
                 className="w-full h-full overflow-hidden"
               >
-                <Link href="/section/top-selling-products">
+                <Link href={link || ""}>
                   <Image
                     width={1280}
                     height={350}

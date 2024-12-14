@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useGetAllCategoryForOrderListQuery } from "@/store/features/category/categoryApi";
 
-const TopItems = () => {
+const TopItems = ({ title }: any) => {
   const { data, isLoading } = useGetAllCategoryForOrderListQuery<any>({});
   if (isLoading) return <Loading />;
   return (
     <div className="md:container mb-3 sm:mt-0">
       <h2 className="text-xl md:text-2xl font-semibold text-center pb-4 md:py-4">
-        Top Categories
+        {title}
       </h2>
 
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
