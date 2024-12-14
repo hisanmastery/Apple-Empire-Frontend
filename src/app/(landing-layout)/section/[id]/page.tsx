@@ -19,7 +19,7 @@ const Products = ({ params }: any) => {
         productsType = "Offers";
         break;
       default:
-        productsType = formatCategory(decodeURIComponent(params.id));
+        productsType = formatCategory(decodeURIComponent(params?.id));
         break;
     }
   }

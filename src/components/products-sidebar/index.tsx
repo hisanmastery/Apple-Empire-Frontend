@@ -15,7 +15,7 @@ import {
 } from "@/store/features/products/productsCategorySlice";
 import { Accordion } from "@radix-ui/react-accordion";
 import FilterSection from "./FilterSection";
-import { filterOptions } from "@/data/sidebar-data";
+import { useGetAllFilterDataQuery } from "@/store/features/ads-section/adsSectionApi";
 
 interface FilterOption {
   label: string;
@@ -24,6 +24,7 @@ interface FilterOption {
 
 const ProductsSideBar: React.FC = () => {
   const dispatch = useDispatch();
+  const { data } = useGetAllFilterDataQuery<any>({});
   const { min, max } = useSelector(selectPriceRange);
   const { value } = useSelector(selectProductsVariant);
 
@@ -51,21 +52,13 @@ const ProductsSideBar: React.FC = () => {
     dispatch(setProductsVariantType(value));
   };
 
-  const filters = [
-    {
-      title: "Display Type",
-      options: filterOptions.displayType,
+  const filters =
+    data?.data?.map((filter: any) => ({
+      title: filter.title,
+      _id: filter?._id,
+      options: filter.options,
       selected: value,
-    },
-    { title: "RAM", options: filterOptions.ram, selected: value },
-    {
-      title: "Internal Storage",
-      options: filterOptions.internalStorage,
-      selected: value,
-    },
-    { title: "Chipset", options: filterOptions.chipset, selected: value },
-    { title: "Region", options: filterOptions.region, selected: value },
-  ];
+    })) || [];
 
   return (
     <div className="mt-5 bg-white border border-[#dfedeb] p-5 rounded-md">
@@ -105,9 +98,9 @@ const ProductsSideBar: React.FC = () => {
       </div>
       {/* Filter Sections */}
       <Accordion type="single" collapsible className="w-full">
-        {filters.map((filter, index) => (
+        {filters?.map((filter: any) => (
           <FilterSection
-            key={index}
+            key={filter?._id}
             title={filter.title}
             options={filter.options}
             selectedOption={filter.selected}
