@@ -31,14 +31,14 @@ const ProductsSideBar: React.FC = () => {
   // Price Range Handlers
   const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(event.target.value);
-    if (newValue >= 100000 && newValue <= max) {
+    if (newValue >= 5000 && newValue <= max) {
       dispatch(setPriceRangeMin(newValue));
     }
   };
 
   const handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(event.target.value);
-    if (newValue <= 10000000 && newValue >= min) {
+    if (newValue <= 500000 && newValue >= min) {
       dispatch(setPriceRangeMax(newValue));
     }
   };

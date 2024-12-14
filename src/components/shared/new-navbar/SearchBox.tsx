@@ -32,6 +32,13 @@ export default function SearchBox() {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent the form from submitting in the traditional way
+      handleSearch();
+    }
+  };
+
   const productsData = data?.product;
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -62,6 +69,7 @@ export default function SearchBox() {
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
         className="w-full py-0 md:py-2 pl-5 focus:outline-none rounded md:focus:ring-2 focus:ring-_primary/60 transition-all duration-300 ease-in-out"
         placeholder="Search for products..."
         aria-label="Search"
