@@ -34,6 +34,7 @@ const ProductDetails = ({ id }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: headlineData } = useHeadline();
   const { customerInfo, isAuthenticated } = useAuth();
+  const [imageVariantList, setImageVariantsList] = useState<any>();
   const [selectedVariant, setSelectedVariant] = useState<any>();
   const { data, isLoading }: any = useGetSingleProductsQuery({ id });
   const [selectedColor, setSelectedColor]: any = useState();
@@ -117,6 +118,11 @@ const ProductDetails = ({ id }: any) => {
     );
   };
 
+  useEffect(() => {
+    setImageVariantsList(data?.response?.variations?.[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   if (isLoading) {
     return <ProductDetailsSkeleton />;
   }
@@ -144,6 +150,27 @@ const ProductDetails = ({ id }: any) => {
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
         <div className="col-span-3 flex mx-auto">
           <div>
+            {imageVariantList?.image
+              ?.slice(0, 4)
+              .map((variant: any, index: number) => (
+                <div
+                  key={index}
+                  className="bg-white border rounded-md mb-1"
+                  onClick={() =>
+                    handleVariationsImage(variant, imageVariantList?.color)
+                  }
+                >
+                  <Image
+                    width={100}
+                    height={100}
+                    className="transition-transform duration-300 transform cursor-pointer"
+                    src={variant || " "}
+                    alt={`Product Image - ${imageVariantList?.color}`}
+                  />
+                </div>
+              ))}
+          </div>
+          <div>
             <ImageDisplay
               product={data}
               profileImageUrl={data?.response?.image?.imageUrl || ""}
@@ -168,6 +195,7 @@ const ProductDetails = ({ id }: any) => {
                         <Image
                           width={100}
                           height={100}
+                          onClick={() => setImageVariantsList(variant)}
                           className="transition-transform duration-300 transform cursor-pointer"
                           src={variant?.image[0] || " "}
                           alt={`Product Image - ${variant?.color}`}
@@ -235,39 +263,50 @@ const ProductDetails = ({ id }: any) => {
           </div>
           {/* add to cart button */}
           <div className="flex gap-5 justify-start items-center mt-5">
-            {/* Product Quantity  */}
-            {/* {isInCart && (
+            {data?.response.preOrder === "Yes" ||
+            selectedVariant?.preOrder === "Yes" ? (
+              // Pre Order Now Button
+              <Button
+                variant={"outline"}
+                onClick={
+                  isInCart ? () => {} : () => handleCartClick(data?.response)
+                }
+                className="uppercase bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-64 text-_white p-2 font-normal text-sm"
+              >
+                <Link href={"/cart/checkout"}>Pre Order Now</Link>
+              </Button>
+            ) : (
+              <>
+                {/* Product Quantity  */}
+                {/* {isInCart && (
            
             )} */}
-            <QuantityController
-              thisItem={thisItem}
-              data={data?.response}
-              handleInQuantityUpdate={handleInQuantityUpdate}
-            />
-            {(data?.response.preOrder != "Yes" ||
-              selectedVariant?.preOrder !== "Yes") && (
-              <Button
-                onClick={() => handleCartClick(data?.response)}
-                disabled={isInCart}
-                className="bg-black hover:bg-_orange rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm"
-              >
-                ADD TO CART
-              </Button>
+                <QuantityController
+                  thisItem={thisItem}
+                  data={data?.response}
+                  handleInQuantityUpdate={handleInQuantityUpdate}
+                />
+                {/* Add to Cart Button */}
+                <Button
+                  onClick={() => handleCartClick(data?.response)}
+                  disabled={isInCart}
+                  className="bg-black hover:bg-_orange rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm mb-2"
+                >
+                  Add to Cart
+                </Button>
+
+                {/* Buy Now Button */}
+                <Button
+                  variant={"outline"}
+                  onClick={
+                    isInCart ? () => {} : () => handleCartClick(data?.response)
+                  }
+                  className="uppercase hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
+                >
+                  <Link href={"/cart/checkout"}>Buy Now</Link>
+                </Button>
+              </>
             )}
-            <Button
-              variant={"outline"}
-              onClick={
-                isInCart ? () => {} : () => handleCartClick(data?.response)
-              }
-              className="uppercase  hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
-            >
-              <Link href={"/cart/checkout"}>
-                {data?.response.preOrder == "Yes" ||
-                selectedVariant?.preOrder === "Yes"
-                  ? "Pre Order Now"
-                  : "Buy Now"}
-              </Link>
-            </Button>
           </div>
         </div>
       </div>
