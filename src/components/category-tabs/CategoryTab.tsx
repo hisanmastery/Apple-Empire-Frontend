@@ -1,5 +1,5 @@
 "use client";
-import { useGetCategoryListQuery } from "@/store/features/category/categoryApi";
+import { useGetCategoryWithProductQuery } from "@/store/features/category/categoryApi";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -11,10 +11,10 @@ const CategoryTabs = () => {
   );
 
   // Fetch categories
-  const { data: categoriesData, isLoading } = useGetCategoryListQuery<any>({
-    page: 1,
-    limit: 20,
-  });
+  const { data: categoriesData, isLoading } =
+    useGetCategoryWithProductQuery<any>({
+      slug: undefined,
+    });
 
   const handleCategoryClick = (categoryName: string) => {
     const newParams = new URLSearchParams(window.location.search);

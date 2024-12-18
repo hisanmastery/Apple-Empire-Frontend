@@ -42,6 +42,28 @@ export const categoryApi = fetchProductsSlice.injectEndpoints({
         params: { canonicalUrl: arg?.canonicalUrl },
       }),
     }),
+    // navbar category
+    getNavbarCategoryList: builder.query({
+      query: () => ({
+        url: `${category}/get-navbar-category_with_subCategory`,
+        method: "get",
+      }),
+    }),
+    // footer category
+    getFooterCategoryList: builder.query({
+      query: () => ({
+        url: `${category}/get-footer-category`,
+        method: "get",
+      }),
+    }),
+    // category with product
+    getCategoryWithProduct: builder.query({
+      query: (arg: any) => ({
+        url: `${category}/get-category-with-products`,
+        method: "get",
+        params: { slug: arg?.slug },
+      }),
+    }),
   }),
 });
 export const {
@@ -49,4 +71,7 @@ export const {
   useGetCategoryListQuery,
   useGetSingleCategoryBySubCategoryQuery,
   useGetAllCategoryForOrderListQuery,
+  useGetNavbarCategoryListQuery,
+  useGetFooterCategoryListQuery,
+  useGetCategoryWithProductQuery,
 } = categoryApi;

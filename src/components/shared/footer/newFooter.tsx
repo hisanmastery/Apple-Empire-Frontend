@@ -5,16 +5,13 @@ import EmailSubscribe from "@/components/home/email-subscribe";
 import Image from "next/image";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
+import { useGetFooterCategoryListQuery } from "@/store/features/category/categoryApi";
 import { useGetAllLogoQuery } from "@/store/features/ads-section/adsSectionApi";
 
 const NewFooter = () => {
   const { data: logo } = useGetAllLogoQuery<any>({});
-  const { data } = useGetAllCategoryQuery<any>({
-    page: 1,
-    limit: 4,
-  });
-  const categoryData = data?.data;
+  const { data } = useGetFooterCategoryListQuery<any>({});
+  const categoryData = data?.data?.categories;
   return (
     <footer className="bg-black text-white py-10 mt-32 w-full relative">
       <div className="container mx-auto mt-20">

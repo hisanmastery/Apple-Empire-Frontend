@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import Link from "next/link";
-import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
+import { useGetNavbarCategoryListQuery } from "@/store/features/category/categoryApi";
 
 export default function LargeDevice() {
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -12,10 +12,7 @@ export default function LargeDevice() {
   const [openSubSubCategoryId, setOpenSubSubCategoryId] = useState<
     string | null
   >(null);
-  const { data: categoriesData }: any = useGetAllCategoryQuery({
-    page: 1,
-    limit: 8,
-  });
+  const { data: categoriesData }: any = useGetNavbarCategoryListQuery({});
 
   // Handle main category hover events
   const handleMouseEnterCategory = (categoryId: string) => {
@@ -84,7 +81,7 @@ export default function LargeDevice() {
         {openSubCategoryId === category._id &&
           category.subcategories &&
           category.subcategories.length > 0 && (
-            <ul className="absolute left-full top-0 min-w-52 bg-white shadow-lg border rounded-md mt-1 py-2">
+            <ul className="absolute left-full top-0 min-w-52 bg-_white shadow-lg border rounded-md mt-1 py-2">
               {category.subcategories.map((subCategory: any) => (
                 <li
                   key={subCategory._id}
@@ -101,7 +98,7 @@ export default function LargeDevice() {
                     <span>{subCategory.categoryName}</span>
                     {subCategory.subcategories &&
                       subCategory.subcategories.length > 0 && (
-                        <span className="ml-2 text-gray-500 transform transition-transform duration-300 group-hover:rotate-90">
+                        <span className="ml-2 transform transition-transform duration-300 group-hover:rotate-90">
                           ▶
                         </span>
                       )}
@@ -111,7 +108,7 @@ export default function LargeDevice() {
                   {openSubSubCategoryId === subCategory._id &&
                     subCategory.subcategories &&
                     subCategory.subcategories.length > 0 && (
-                      <ul className="absolute left-full top-0 min-w-48 bg-white shadow-lg border rounded-md mt-1 py-2">
+                      <ul className="absolute left-full top-0 min-w-48 bg-_white shadow-lg border rounded-md mt-1 py-2">
                         {subCategory.subcategories.map(
                           (subSubCategory: any) => (
                             <li key={subSubCategory._id} className="group">
@@ -136,7 +133,7 @@ export default function LargeDevice() {
 
   return (
     <div className="hidden md:block">
-      <div className="bg-white text-center flex justify-center items-center h-[50px] smd:h-[60px]">
+      <div className="bg-_white text-center flex justify-center items-center h-[50px] smd:h-[60px]">
         <div className="w-full h-full relative">
           <div className="w-full h-full flex justify-center items-center">
             <div className="category-and-nav lg:flex hidden space-x-5 items-center">
@@ -158,7 +155,7 @@ export default function LargeDevice() {
                   {/* Render dropdown for categories with subcategories */}
                   {openCategoryId === category._id &&
                     category.subcategories && (
-                      <div className="category-dropdown absolute left-0 top-8 mt-2 bg-white min-w-52 shadow-lg border rounded-md">
+                      <div className="category-dropdown absolute left-0 top-8 mt-2 bg-_white min-w-52 shadow-lg border rounded-md">
                         <ul className="categories-list py-2">
                           {category.subcategories.map((subCategory: any) =>
                             renderCategoryTree(subCategory)
