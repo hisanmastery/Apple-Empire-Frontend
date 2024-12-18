@@ -57,7 +57,7 @@ const AllProductsSection = ({ productsType }: any) => {
           onClick={() => setOpenSheetDrawer(true)}
           className="flex items-center gap-2 border px-5 py-1 border-_primary-text rounded-sm"
         >
-          Filter <icons.RiFilter2FillIcons />
+          Filters <icons.RiFilter2FillIcons />
         </button>
       </div>
       <div>
