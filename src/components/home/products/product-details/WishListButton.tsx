@@ -48,7 +48,7 @@ const WishListButton = ({ item, showToast, isText }: any) => {
         productId: item?._id,
         image: item?.image?.imageUrl,
 
-        price: item?.variants?.[0]?.price || item?.offerPrice || item?.price,
+        price: item?.variants?.price || item?.offerPrice || item?.price,
         quantity: 1,
         title: item?.name,
       };

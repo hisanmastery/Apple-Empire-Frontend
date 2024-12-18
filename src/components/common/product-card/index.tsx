@@ -1,5 +1,5 @@
 "use  ";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   const { storedCart } = useSelector((state: any) => state?.cart);
   const dispatch = useDispatch();
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const [addToCartItem]: any = useAddToCartMutation();
   const { isAuthenticated, customerInfo }: any = useAuth();
   const showToast = useToaster();
@@ -140,98 +141,122 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
     (item: any) => item.productId === datas?._id
   );
   return (
-    <div className="overflow-hidden">
-      <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
-        {/* Stock Out Overlay */}
-        {datas?.stock === 0 && (
-          <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center rounded-md text-_white font-semibold text-xl z-10">
-            Stock Out
-          </div>
-        )}
-        {/* Display Offer Percentage */}
-        {discountPercentage > 0 && datas?.offerPrice && (
-          <div className="absolute top-2 right-2 bg-_orange/80 text-_white px-2 py-1 sm:text-sm rounded text-xs">
-            {discountPercentage}% OFF
-          </div>
-        )}
-
-        <Link href={`/products/${datas?._id}`}>
-          <div
-            className="product-card-img w-full min-h-[180px] xmd:h-48 sm:h-52 slg:h-[220px] object-contain"
-            style={{
-              backgroundImage: `url(${datas?.image?.imageUrl})`,
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              margin: "auto",
-            }}
-          ></div>
-        </Link>
-        <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
-          <Link href={`/products/${datas?._id}`}>
-            <p className="title mb-2 text-xs sm:text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-_primary cursor-pointer">
-              {datas?.name}
-            </p>
-          </Link>
-          <p className="price">
-            <span
-              className={`main-price text-qgray ${
-                datas?.offerPrice && "line-through"
-              } font-600 text-sm sm:text-[18px] text-red-500`}
+    <>
+      {/* Full-Screen Modal */}
+      {isFullScreen && (
+        <div
+          className="fixed inset-0 z-50 bg-_white flex items-center justify-center"
+          onClick={() => setIsFullScreen(false)} // Close modal on click
+        >
+          <div className="relative w-full h-full">
+            <img
+              src={datas?.image?.imageUrl}
+              alt={datas?.name}
+              className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110" // Zoom on hover
+            />
+            <button
+              className="absolute top-5 right-5 bg-white text-_black p-3 size-4 rounded-full"
+              onClick={() => setIsFullScreen(false)}
             >
-              TK.
-              {datas?.variants?.price || datas?.price}
-            </span>
-            {datas?.offerPrice && (
-              <span className="offer-price text-qred font-600 text-sm sm:text-[18px] ml-2">
-                TK. {datas?.offerPrice}
-              </span>
-            )}
-          </p>
-
-          {/* Add to Cart and Buy Now Buttons */}
-          <div className="flex space-x-[2px] msm:space-x-2 h-full">
-            <Button
-              disabled={isInCart}
-              onClick={() => handleAddToCart(datas)}
-              className={`bg-_orange/90 uppercase mb-3 h-6 lsm:h-7 sm:h-8 py-2 px-[3px] msm:px-2 w-full lsm:px-3 text-[9px] rounded-sm ${
-                !isInCart ? "hover:bg-_orange" : "bg-slate-500 opacity-40"
-              } `}
-              type="button"
-            >
-              <div className="flex items-center mx-auto w-full">
-                <span className="mx-auto">Add To Cart</span>
-              </div>
-            </Button>
-
-            <Button
-              variant={"outline"}
-              onClick={isInCart ? () => {} : () => handleAddToCart(datas)}
-              className="h-6 lsm:h-7 sm:h-8 uppercase px-[1px] sm:px-2 py-2 hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-_white p-2 font-normal text-[9px]"
-            >
-              <Link href={"/cart/checkout"}>Buy Now</Link>
-            </Button>
+              ✕
+            </button>
           </div>
         </div>
+      )}
 
-        {/* quick-access-btns */}
-        <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20 transition-all duration-300 ease-in-out">
-          <div className="ml-3">
-            <WishListButton item={datas} showToast={showToast} />
-          </div>
-          <a href="#">
-            <span className="w-10 h-10 flex justify-center items-center rounded">
-              {<icons.MdZoomOutMapIcon className="text-xl" />}
-            </span>
-          </a>
-          <Link href={`/compare?p1=${datas?._id}`}>
-            <span className="w-10 h-10 flex justify-center items-center gray rounded">
-              {<icons.LiaSyncSolidIcons className="text-xl" />}
-            </span>
+      <div className="overflow-hidden">
+        <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
+          {/* Stock Out Overlay */}
+          {datas?.stock === 0 && (
+            <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center rounded-md text-_white font-semibold text-xl z-10">
+              Stock Out
+            </div>
+          )}
+          {/* Display Offer Percentage */}
+          {discountPercentage > 0 && datas?.offerPrice && (
+            <div className="absolute top-2 right-2 bg-_orange/80 text-_white px-2 py-1 sm:text-sm rounded text-xs">
+              {discountPercentage}% OFF
+            </div>
+          )}
+
+          <Link href={`/products/${datas?._id}`}>
+            <div
+              className="product-card-img w-full min-h-[180px] xmd:h-48 sm:h-52 slg:h-[220px] object-contain"
+              style={{
+                backgroundImage: `url(${datas?.image?.imageUrl})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                margin: "auto",
+              }}
+            ></div>
           </Link>
+          <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
+            <Link href={`/products/${datas?._id}`}>
+              <p className="title mb-2 text-xs sm:text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-_primary cursor-pointer">
+                {datas?.name}
+              </p>
+            </Link>
+            <p className="price">
+              <span
+                className={`main-price text-qgray ${
+                  datas?.offerPrice && "line-through"
+                } font-600 text-sm sm:text-[18px] text-red-500`}
+              >
+                TK.
+                {datas?.variants?.price || datas?.price}
+              </span>
+              {datas?.offerPrice && (
+                <span className="offer-price text-qred font-600 text-sm sm:text-[18px] ml-2">
+                  TK. {datas?.offerPrice}
+                </span>
+              )}
+            </p>
+
+            {/* Add to Cart and Buy Now Buttons */}
+            <div className="flex space-x-[2px] msm:space-x-2 h-full">
+              <Button
+                disabled={isInCart}
+                onClick={() => handleAddToCart(datas)}
+                className={`bg-_orange/90 uppercase mb-3 h-6 lsm:h-7 sm:h-8 py-2 px-[3px] msm:px-2 w-full lsm:px-3 text-[9px] rounded-sm ${
+                  !isInCart ? "hover:bg-_orange" : "bg-slate-500 opacity-40"
+                } `}
+                type="button"
+              >
+                <div className="flex items-center mx-auto w-full">
+                  <span className="mx-auto">Add To Cart</span>
+                </div>
+              </Button>
+
+              <Button
+                variant={"outline"}
+                onClick={isInCart ? () => {} : () => handleAddToCart(datas)}
+                className="h-6 lsm:h-7 sm:h-8 uppercase px-[1px] sm:px-2 py-2 hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-_white p-2 font-normal text-[9px]"
+              >
+                <Link href={"/cart/checkout"}>Buy Now</Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* quick-access-btns */}
+          <div className="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20 transition-all duration-300 ease-in-out">
+            <div className="ml-3">
+              <WishListButton item={datas} showToast={showToast} />
+            </div>
+            <button onClick={() => setIsFullScreen(true)}>
+              <span className="w-10 h-10 flex justify-center items-center rounded">
+                {<icons.MdZoomOutMapIcon className="text-xl" />}
+              </span>
+            </button>
+            <Link href={`/compare?p1=${datas?._id}`}>
+              <span className="w-10 h-10 flex justify-center items-center gray rounded">
+                {<icons.LiaSyncSolidIcons className="text-xl" />}
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
