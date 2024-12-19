@@ -39,14 +39,17 @@ const ProductActionButtons: React.FC<ProductActionButtonsProps> = ({
             </Link>
           );
         } else if (item?.label === "DELIVERY PLAN") {
-          <Link
-            href="/delivery-return"
-            key={index}
-            className="text-sm md:text-md font-medium flex items-center gap-3"
-          >
-            {item.icon}
-            {item.label}
-          </Link>;
+          return (
+            // এখানে `return` যোগ করা হয়েছে
+            <Link
+              href="/delivery-return"
+              key={index}
+              className="text-sm md:text-md font-medium flex items-center gap-3"
+            >
+              {item.icon}
+              {item.label}
+            </Link>
+          );
         } else {
           return (
             <Link
