@@ -61,7 +61,7 @@ export const categoryApi = fetchProductsSlice.injectEndpoints({
       query: (arg: any) => ({
         url: `${category}/get-category-with-products`,
         method: "get",
-        params: { slug: arg?.slug },
+        params: { slug: arg?.slug, product_type: arg?.product_type },
       }),
     }),
   }),

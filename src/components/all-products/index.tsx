@@ -25,7 +25,7 @@ const AllProductsSection = ({ productsType }: any) => {
   const [pageSize, setPageSize] = useState(12);
 
   const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
-    productsType: productsType,
+    productType: productsType,
     type: usedString,
     offerType: offersString,
     minVariantPrice: min,
@@ -40,7 +40,7 @@ const AllProductsSection = ({ productsType }: any) => {
   if (isLoading) {
     return (
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto mb-10 mt-10 gap-5 ssm:px-3 msm:px-8 lsm:px-12 xmd:px-0">
-        {Array.from({ length: 5 }).map((_, index) => (
+        {Array.from({ length: 8 }).map((_, index) => (
           <ProductCardSkeleton key={index} />
         ))}
       </div>
@@ -50,7 +50,7 @@ const AllProductsSection = ({ productsType }: any) => {
     <div className="mt-5">
       <div className="bg-_white p-4 mb-5 rounded-md">
         <p className="text-xl md:text-2xl font-semibold mb-2">{productsType}</p>
-        <CategoryTabs />
+        <CategoryTabs productType={productsType}/>
       </div>
       <div className="md:hidden flex justify-end mb-3">
         <button

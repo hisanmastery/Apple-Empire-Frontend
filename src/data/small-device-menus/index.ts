@@ -39,4 +39,20 @@ export const policyLinks = [
     label: "About Us",
     href: "/about-us",
   },
+  {
+    label: "Shop Address",
+    href: "/shop-address",
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+  },
+  {
+    label: "Contact Us",
+    href: "/contact-us",
+  },
+  {
+    label: "Complain By Advise",
+    href: "/complain-by-advise",
+  },
 ];

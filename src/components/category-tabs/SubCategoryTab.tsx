@@ -1,5 +1,5 @@
 "use client";
-import { useGetSingleCategoryBySubCategoryQuery } from "@/store/features/category/categoryApi";
+import { useGetCategoryWithProductQuery } from "@/store/features/category/categoryApi";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,12 +16,11 @@ const SubCategoryTabs: React.FC<CategoryProps> = ({ category }) => {
   );
 
   // Fetch categories data
-  const { data: categories, isLoading } =
-    useGetSingleCategoryBySubCategoryQuery<any>({
-      canonicalUrl: category,
-    });
-
-  const categoryData = categories?.data || {};
+  const { data: categories, isLoading } = useGetCategoryWithProductQuery<any>({
+    slug: category,
+  });
+  console.log(categories);
+  const categoryData = categories?.data;
 
   const handleCategoryClick = (categoryName: string) => {
     const newParams = new URLSearchParams(window.location.search);
@@ -59,7 +58,7 @@ const SubCategoryTabs: React.FC<CategoryProps> = ({ category }) => {
         </li>
 
         {/* Subcategory Tabs */}
-        {categoryData?.relatedSubCategories?.map(
+        {categoryData?.map(
           (item: { slug: string; categoryName: string }, index: number) => {
             const isSelected = selectedSubCategory === `${item.slug}`;
             const tabClassNames = `flex items-center justify-center px-3 text-sm py-[2px] border border-gray-300 rounded-md transition-all duration-200

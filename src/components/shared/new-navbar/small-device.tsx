@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import SmallDeviceSearchBar from "./small-device-search";
-import { useGetAllCategoryQuery } from "@/store/features/category/categoryApi";
+import { useGetNavbarCategoryListQuery } from "@/store/features/category/categoryApi";
 import { icons } from "@/constants/icons";
 import {
   Accordion,
@@ -51,10 +51,8 @@ interface SmallDeviceProps {
 const SmallDevice: React.FC<SmallDeviceProps> = () => {
   const [selectedTab, setSelectedTab] = useState("category");
   const [categoryToggle, setCategoryToggle] = useState(false);
-  const { data: categoriesData, isLoading } = useGetAllCategoryQuery<any>({
-    page: 1,
-    limit: 100,
-  });
+  const { data: categoriesData, isLoading } =
+    useGetNavbarCategoryListQuery<any>({});
 
   const handleCategoryToggle = () => {
     setCategoryToggle(!categoryToggle);

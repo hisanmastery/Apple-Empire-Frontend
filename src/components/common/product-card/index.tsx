@@ -142,29 +142,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   );
   return (
     <>
-      {/* Full-Screen Modal */}
-      {isFullScreen && (
-        <div
-          className="fixed inset-0 z-50 bg-_white flex items-center justify-center"
-          onClick={() => setIsFullScreen(false)} // Close modal on click
-        >
-          <div className="relative w-full h-full">
-            <img
-              src={datas?.image?.imageUrl}
-              alt={datas?.name}
-              className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110" // Zoom on hover
-            />
-            <button
-              className="absolute top-5 right-5 bg-white text-_black p-3 size-4 rounded-full"
-              onClick={() => setIsFullScreen(false)}
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
-
       <div className="overflow-hidden">
+        {/* Full-Screen Modal */}
+        {isFullScreen && (
+          <div
+            className="fixed inset-0 z-50 bg-_white flex items-center justify-center"
+            onClick={() => setIsFullScreen(false)}
+          >
+            <div className="relative w-full h-full">
+              <img
+                src={datas?.image?.imageUrl}
+                alt={datas?.name}
+                className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110" // Zoom on hover
+              />
+              <button
+                className="absolute top-5 right-5 bg-white text-_black p-3 size-4 rounded-full"
+                onClick={() => setIsFullScreen(false)}
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
         <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
           {/* Stock Out Overlay */}
           {datas?.stock === 0 && (
@@ -193,7 +192,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
           </Link>
           <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
             <Link href={`/products/${datas?._id}`}>
-              <p className="title mb-2 text-xs sm:text-[15px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-_primary cursor-pointer">
+              <p className="title mb-2 text-[5px] sm:text-[13px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-_primary cursor-pointer">
                 {datas?.name}
               </p>
             </Link>

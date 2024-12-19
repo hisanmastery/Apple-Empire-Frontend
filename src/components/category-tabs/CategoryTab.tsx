@@ -3,7 +3,7 @@ import { useGetCategoryWithProductQuery } from "@/store/features/category/catego
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const CategoryTabs = () => {
+const CategoryTabs = ({ productsType }: any) => {
   const searchParams = useSearchParams();
   const initialSelectedCategory = searchParams.get("category");
   const [selectedSubCategory, setSelectedSubCategory] = useState(
@@ -14,6 +14,7 @@ const CategoryTabs = () => {
   const { data: categoriesData, isLoading } =
     useGetCategoryWithProductQuery<any>({
       slug: undefined,
+      product_type: productsType,
     });
 
   const handleCategoryClick = (categoryName: string) => {

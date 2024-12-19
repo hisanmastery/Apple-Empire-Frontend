@@ -74,7 +74,7 @@ const ProductsSideBar: React.FC = () => {
         <div className="mt-5 mb-2">
           <Slider
             value={[min, max]}
-            max={10000000}
+            max={500000}
             min={0}
             step={1}
             onValueChange={handleSliderChange}
