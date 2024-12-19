@@ -45,7 +45,7 @@ const ProductInfoTab = ({ product }: any) => {
   return (
     <div className="mt-10">
       <CustomTabs
-        defaultValue={"Specification"}
+        defaultValue={"Description"}
         tabs={tabs}
         setSelectedTab={setSelectedTab}
       />
