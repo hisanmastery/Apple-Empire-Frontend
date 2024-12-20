@@ -12,6 +12,7 @@ import { useGetAllAdsQuery } from "@/store/features/ads-section/adsSectionApi";
 import ClientBrand from "./client-brand";
 import TopBrandProducts from "./top-brand-products";
 import useHeadline from "@/hooks/useHeadline";
+import Resverse_product from "./products/Resverse_product";
 const TopItems = dynamic(() => import("./top-items"));
 
 const SectionWithTitleAndAds = ({
@@ -107,7 +108,7 @@ const Home: React.FC = () => {
       >
         <Products />
       </SectionWithTitleAndAds>
-
+      <Resverse_product />
       {/* Secondary Ads */}
       <ProductAds
         ads={[

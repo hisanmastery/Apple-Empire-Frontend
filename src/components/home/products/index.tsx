@@ -12,25 +12,9 @@ const Products = () => {
     return <Loading />;
   }
 
-  // Reverse the products array to show the last item first
-  const reversedProducts: any =
-    allProducts && allProducts.product
-      ? [...allProducts.product].reverse()
-      : [];
-
-  const reversedAllProducts = {
-    product: reversedProducts,
-  };
-
   return (
     <div>
       <CustomSlider sliderProducts={allProducts} isLoading={isLoading} />
-      <div className="mt-4">
-        <CustomSlider
-          sliderProducts={reversedAllProducts}
-          isLoading={isLoading}
-        />
-      </div>
     </div>
   );
 };
