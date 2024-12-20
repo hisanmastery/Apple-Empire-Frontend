@@ -145,7 +145,7 @@ const CartPage = ({ className }: any) => {
 
   // Handle promo code application
   const handlePromoCodeApply = () => {
-    if (promoCode.toLowerCase() === PROMO_CODE) {
+    if (promoCode.toLowerCase() === PROMO_CODE) {2
       setDiscountPrice(subTotal * DISCOUNT_RATE);
     } else {
       alert("Invalid promo code. Please try again.");
@@ -159,13 +159,12 @@ const CartPage = ({ className }: any) => {
     }, 0);
   }, [storedCart]);
 
-  // Shipping cost based on subtotal
-  const shippingCost = useMemo(() => subTotal * SHIPPING_RATE, [subTotal]);
+ 
 
   // Total price calculation
   const totalPrice = useMemo(() => {
-    return subTotal + shippingCost - discountPrice;
-  }, [subTotal, shippingCost, discountPrice]);
+    return subTotal  - discountPrice;
+  }, [subTotal, discountPrice]);
 
   return (
     <div className="container mt-10">
@@ -278,10 +277,6 @@ const CartPage = ({ className }: any) => {
                   <div className="flex justify-between mt-2">
                     <p>Discount</p>
                     <p>৳ {discountPrice?.toFixed(2)}</p>
-                  </div>
-                  <div className="flex justify-between mt-2">
-                    <p>Shipping</p>
-                    <p>৳ {shippingCost?.toFixed(2)}</p>
                   </div>
                 </div>
 
