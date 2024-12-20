@@ -34,7 +34,7 @@ const Checkout = () => {
     const { createdAt, updatedAt, __v, _id, ...cleanedItem } = item;
     return cleanedItem;
   });
-  console.log({ shippingMethod });
+
   // Calculate subtotal price
   const subtotal = cleanedCart.reduce((acc: any, product: any) => {
     if (!product?.price) return acc;
@@ -77,6 +77,7 @@ const Checkout = () => {
       address: data?.address,
       productIds: cleanedCart.map((item: any) => item.productId),
       productsInfo: cleanedCart,
+      gift: giftSend,
       shippingMethod: {
         shippingMethod: shippingMethod?.title,
         paymentMethod: data?.onlinePayment,

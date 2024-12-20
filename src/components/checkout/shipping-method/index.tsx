@@ -97,7 +97,6 @@ const ShippingMethod = ({ setShippingMethod }: any) => {
 
       {/* Order Notes Section */}
       <div>
-        <h1 className="text-md mb-2">Order Notes</h1>
         <Input
           label="Order notes (optional)"
           placeholder="Add any notes for the order"

@@ -82,7 +82,7 @@ const OrderSummary = ({
       </div>
       <p className="text-sm mt-8">
         By Clicking Confirm Order. You agree to your{" "}
-        <Link href={""} className="underline">
+        <Link href={"/terms-conditions"} className="underline">
           terms and condition
         </Link>
       </p>
