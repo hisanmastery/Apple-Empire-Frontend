@@ -62,6 +62,7 @@ const Home: React.FC = () => {
   const count_down_section = bannerImageAll?.find(
     (item: any) => item?.sectionName === "count_down_section"
   );
+
   return (
     <main className="lg:container mx-auto md:p-0 mt-5">
       {/* Top Items and Popup */}
@@ -82,7 +83,8 @@ const Home: React.FC = () => {
       />
       {/* Top Selling Products */}
       <SectionWithTitleAndAds
-        title={data?.popular_products || "Top Selling Products"}
+        title={headlineData?.top_selling_products
+           || "Top Selling Products"}
         seeMoreUrl="/section/top-selling-products"
       >
         <TopSellingProducts />
