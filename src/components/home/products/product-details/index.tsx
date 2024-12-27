@@ -75,11 +75,18 @@ const ProductDetails = ({ id }: any) => {
   };
 
   // handle cart click
-  const handleCartClick = async (productData: any) => {
+  const handleCartClick = async () => {
     //products info
     const productsInfo = {
       ...selectedVariantOptions,
     };
+    const productData={
+      price:selectedVariant?.price || data?.response?.price,
+      offer_price:selectedVariant?.offer_price,
+      image:viewImage,
+      name:data?.response?.name,
+      _id:data?.response?._id
+    }
     await addToCart(
       productData,
       dispatch,
@@ -269,7 +276,7 @@ const ProductDetails = ({ id }: any) => {
               <Button
                 variant={"outline"}
                 onClick={
-                  isInCart ? () => {} : () => handleCartClick(data?.response)
+                  isInCart ? () => {} : handleCartClick
                 }
                 className="uppercase bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-64 text-_white p-2 font-normal text-sm"
               >
@@ -288,7 +295,7 @@ const ProductDetails = ({ id }: any) => {
                 />
                 {/* Add to Cart Button */}
                 <Button
-                  onClick={() => handleCartClick(data?.response)}
+                  onClick={handleCartClick}
                   disabled={isInCart}
                   className="bg-black hover:bg-_orange rounded ease-in-out duration-500 transition-all w-full text-white p-2 font-normal text-sm mb-2"
                 >
@@ -299,7 +306,7 @@ const ProductDetails = ({ id }: any) => {
                 <Button
                   variant={"outline"}
                   onClick={
-                    isInCart ? () => {} : () => handleCartClick(data?.response)
+                    isInCart ? () => {} : handleCartClick
                   }
                   className="uppercase hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
                 >

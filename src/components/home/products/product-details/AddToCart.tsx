@@ -4,17 +4,13 @@ interface ProductVariant {
   price?: number;
 }
 
-interface ProductImage {
-  imageUrl: string;
-}
-
 interface ProductData {
   _id: string;
   name: string;
   variants?: ProductVariant[];
-  offerPrice?: number;
+  offer_price?: number;
   price?: number;
-  image?: ProductImage;
+  image?: string;
 }
 
 interface CartItem {
@@ -49,7 +45,6 @@ export const addToCart = async (
   productsInfo: any
 ) => {
   const token = localStorage.getItem("token");
-  console.log("hit");
   if (token && isAuthenticated && customerInfo) {
     // Authenticated user flow
     const payload: CartItem = {
@@ -58,11 +53,10 @@ export const addToCart = async (
       productId: productData._id,
       variants: productsInfo,
       price:
-        productData.variants?.[0]?.price ||
-        productData.offerPrice ||
+        productData.offer_price ||
         productData.price ||
         0,
-      image: productData.image?.imageUrl || "",
+      image: productData.image || "",
       quantity: 1,
     };
 
@@ -99,11 +93,10 @@ export const addToCart = async (
           title: productData.name,
           productId: productData._id,
           price:
-            productData.variants?.[0]?.price ||
-            productData.offerPrice ||
+            productData.offer_price ||
             productData.price ||
             0,
-          image: productData.image?.imageUrl || "",
+          image: productData.image || "",
           quantity: 1,
           email: "", // For guest users, email is empty
           variants: productsInfo,

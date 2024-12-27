@@ -172,7 +172,7 @@ const VariantDisplay = ({
         {selectedVariant ? (
           <>
             <h2 className="text-xl font-bold">
-              Price: TK. {selectedVariant?.price}
+              Price: TK. {selectedVariant?.offer_price ||selectedVariant?.price}
             </h2>
           </>
         ) : (
