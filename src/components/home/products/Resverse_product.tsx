@@ -23,7 +23,7 @@ const Resverse_product = () => {
         product: reversedProducts,
       };
     return (
-        <div className="mt-4">
+        <div className="container mt-4">
         <CustomSlider
           sliderProducts={reversedAllProducts}
           isLoading={isLoading}
