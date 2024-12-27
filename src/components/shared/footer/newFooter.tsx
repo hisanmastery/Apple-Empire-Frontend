@@ -142,9 +142,6 @@ const NewFooter = () => {
                   </li>
                 </Link>
               ))}
-              <Link href={"/"}>
-                <li className={"text-white hover:text-_primary"}>Used</li>
-              </Link>
             </ul>
           </div>
           <div className={"col-span-12 lg:col-span-4"}>

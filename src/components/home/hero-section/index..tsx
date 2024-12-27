@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useGetAllCarouselQuery } from "@/store/features/ads-section/adsSectionApi";
+import Link from "next/link";
 
 const HeroSection = () => {
   const swiperRef = useRef<any>(null);
@@ -14,7 +15,7 @@ const HeroSection = () => {
   const breakpoints = {
     640: { slidesPerView: 1 },
   };
-
+console.log(data);
   return (
     <div className="relative">
       <Swiper
@@ -42,7 +43,8 @@ const HeroSection = () => {
         ) : (
           data?.response?.map((product: any) => (
             <SwiperSlide key={product.id}>
-              <div className="aspect-w-16 aspect-h-9">
+             <Link href={product?.canonicalUrl || " "}>
+             <div className="aspect-w-16 aspect-h-9">
                 <Card className="!h-full">
                   <CardContent className="flex w-full items-center justify-center lg:h-[590px] h-52">
                     <Image
@@ -56,6 +58,7 @@ const HeroSection = () => {
                   </CardContent>
                 </Card>
               </div>
+             </Link>
             </SwiperSlide>
           ))
         )}
