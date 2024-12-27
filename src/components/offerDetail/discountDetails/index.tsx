@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-const DiscountDetails = ({ image }: any) => {
+const DiscountDetails = ({ image,description}: any) => {
   return (
     <div className="mt-2">
       {image && (
@@ -15,6 +15,7 @@ const DiscountDetails = ({ image }: any) => {
           />
         </div>
       )}
+     {description&& <p className="mt-5" dangerouslySetInnerHTML={{__html:description}}/>}
     </div>
   );
 };

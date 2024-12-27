@@ -17,7 +17,7 @@ const OfferDetailsPage = ({ params }: any) => {
           },
         ]}
       />
-      <OfferDetail params={params} />
+      <OfferDetail id={params?.id} />
     </div>
   );
 };
