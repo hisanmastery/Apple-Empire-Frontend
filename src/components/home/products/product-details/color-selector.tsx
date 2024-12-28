@@ -3,7 +3,7 @@ import CustomTooltip from "@/components/common/custom-tooltip";
 const ColorSelector = ({ variations, selectedColor, onColorSelect }: any) => {
   return (
     <div className="flex items-center mt-8">
-      <p className="font-medium mr-2 w-[28%] md:w-[14%]">Color :</p>
+      <p className="font-medium mr-2 w-[90px] md:w-[14%]">Color :</p>
       <div className="flex flex-wrap gap-2">
         {variations?.map((variant: any, index: number) => (
           <CustomTooltip

@@ -4,8 +4,9 @@ import { usePathname } from "next/navigation";
 import React from "react";
 
 const ExchangePolicy: React.FC = () => {
-  const path = usePathname();
-  const { data } = useGetSingleDynamicPageQuery<any>({ slug: path });
+ const path = usePathname();
+  const slug = path?.slice(1);
+  const { data } = useGetSingleDynamicPageQuery<any>({ slug: slug });
   return (
     <div
       className="container mx-auto"

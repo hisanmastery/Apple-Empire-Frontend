@@ -100,8 +100,8 @@ const VariantDisplay = ({
           (option: any) =>
             (hasImages || (option !== "color" && option !== "Color")) && (
               <div key={option} className="mb-4 flex">
-                <h3 className="font-medium w-[30%] md:w-[15%]">{option}:</h3>
-                <div className="flex flex-wrap gap-2">
+                <h3 className="font-medium w-[100px] md:w-[15%]">{option}:</h3>
+                <div className="flex flex-wrap gap-1">
                   {/* Check for 'Color' option and render color selector if images are available */}
                   {option.toLowerCase() === "color" && hasImages
                     ? product?.variants
@@ -170,15 +170,23 @@ const VariantDisplay = ({
 
       <div className="mt-6">
         {selectedVariant ? (
-          <>
-            <h2 className="text-xl font-bold">
-              Price: TK. {selectedVariant?.offer_price ||selectedVariant?.price}
-            </h2>
-          </>
+          <h2 className="text-lg font-semibold">
+            {selectedVariant?.offer_price ? (
+              <>
+               Cash Discount Price:
+                <span className="line-through text-gray-500 mr-2">
+                  {selectedVariant?.price}৳
+                </span>
+                <span className="text-orange-500 font-bold">
+                  {selectedVariant?.offer_price}৳
+                </span>
+              </>
+            ) : (
+              <span className="text-black">Price : {selectedVariant?.price}৳</span>
+            )}
+          </h2>
         ) : (
-          <p className="text-red-500">
-            No variant matches the selected options.
-          </p>
+          <p className="text-red-500">No variant matches the selected options.</p>
         )}
       </div>
     </section>
