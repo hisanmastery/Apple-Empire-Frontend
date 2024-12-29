@@ -70,7 +70,7 @@ const ShopAdress = () => {
         </div>
 
         {showDetails && description && (
-          <div className="mt-4 p-4 bg-gray-200 rounded">
+          <div>
             <h4 className="text-lg font-semibold">Details:</h4>
             <div
              className="overflow-hidden"
