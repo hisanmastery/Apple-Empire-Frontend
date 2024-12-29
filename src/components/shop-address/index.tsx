@@ -1,7 +1,17 @@
+"use client";
+import { useGetSingleDynamicPageQuery } from "@/store/features/dynamic-page/dynamicPageApi";
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
+import React, { useState } from "react";
 
 const ShopAdress = () => {
+  const path = usePathname();
+  const slug = path?.slice(1);
+  const { data } = useGetSingleDynamicPageQuery<any>({ slug: slug });
+  const description = data?.page?.description;
+
+  const [showDetails, setShowDetails] = useState(false);
+
   return (
     <div className="flex flex-col items-center justify-center h-screen p-6 bg-gray-100">
       <h1 className="text-2xl font-bold mb-4">Shop Address</h1>
@@ -43,13 +53,31 @@ const ShopAdress = () => {
 
         <div className="flex mt-4 space-x-4">
           <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            <Link href="https://www.google.com/maps?ll=23.750681,90.390762&z=16&t=m&hl=en&gl=BD&mapclient=embed&cid=2466713523410400392" rel="nofollow" target="_blank">Show Map</Link>
-            
+            <Link
+              href="https://www.google.com/maps?ll=23.750681,90.390762&z=16&t=m&hl=en&gl=BD&mapclient=embed&cid=2466713523410400392"
+              rel="nofollow"
+              target="_blank"
+            >
+              Show Map
+            </Link>
           </button>
-          <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-            Show Details
+          <button
+            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+            onClick={() => setShowDetails(!showDetails)}
+          >
+            {showDetails ? "Hide Details" : "Show Details"}
           </button>
         </div>
+
+        {showDetails && description && (
+          <div className="mt-4 p-4 bg-gray-200 rounded">
+            <h4 className="text-lg font-semibold">Details:</h4>
+            <div
+             className="container mx-auto overflow-hidden"
+             dangerouslySetInnerHTML={{ __html: data?.page?.description }}
+           />
+          </div>
+        )}
       </div>
     </div>
   );
