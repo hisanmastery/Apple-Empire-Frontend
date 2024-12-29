@@ -13,9 +13,9 @@ const ShopAdress = () => {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen p-6 bg-gray-100">
+    <div className="container flex flex-col items-center justify-center h-screen p-6 bg-gray-100">
       <h1 className="text-2xl font-bold mb-4">Shop Address</h1>
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-lg w-full">
+      <div className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-xl font-semibold mb-2">Apple Empire</h2>
         <p className="text-gray-600 mb-4">
           Basement-1, Shop No-27, Bashundhara City Shopping Mall, Panthapath,
@@ -73,7 +73,7 @@ const ShopAdress = () => {
           <div className="mt-4 p-4 bg-gray-200 rounded">
             <h4 className="text-lg font-semibold">Details:</h4>
             <div
-             className="container mx-auto overflow-hidden"
+             className="overflow-hidden"
              dangerouslySetInnerHTML={{ __html: data?.page?.description }}
            />
           </div>
