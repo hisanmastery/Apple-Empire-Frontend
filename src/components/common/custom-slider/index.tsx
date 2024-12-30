@@ -20,6 +20,7 @@ interface Product {
   review: number;
   variants: any[];
   variations: any[];
+  metaInformation:any
 }
 
 interface CustomSliderProps {
