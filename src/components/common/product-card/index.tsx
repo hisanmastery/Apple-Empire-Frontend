@@ -179,7 +179,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             </div>
           )}
 
-          <Link href={`/products/${datas?.metaInformation?.canonicalUrl}`}>
+          <Link href={`/products/${datas?._id}`}>
             <div
               className="product-card-img w-full min-h-[170px] xmd:h-48 sm:h-48 slg:h-[210px] object-contain"
               style={{
