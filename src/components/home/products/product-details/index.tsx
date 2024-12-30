@@ -185,7 +185,7 @@ const ProductDetails = ({ id }: any) => {
               selectedVariant={selectedVariant}
             />
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
-              {data?.response?.variations?.length > 0
+              {data?.response?.variations?.length > 1
                 ? data?.response?.variations
                     ?.slice(0, 4)
                     .map((variant: any, index: number) => (

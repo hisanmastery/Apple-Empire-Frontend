@@ -142,7 +142,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
   );
   return (
     <>
-      <div className="overflow-hidden">
+      <div className="relative overflow-hidden">
         {/* Full-Screen Modal */}
         {isFullScreen && (
           <div
@@ -164,7 +164,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             </div>
           </div>
         )}
-        <div className="cursor-pointer product-card-one w-full h-full max-h-[320px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
+        <div className="cursor-pointer product-card-one w-full h-[340px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
           {/* Stock Out Overlay */}
           {datas?.stock === 0 && (
             <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center rounded-md text-_white font-semibold text-xl z-10">
@@ -180,7 +180,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
 
           <Link href={`/products/${datas?._id}`}>
             <div
-              className="product-card-img w-full min-h-[180px] xmd:h-48 sm:h-52 slg:h-[220px] object-contain"
+              className="product-card-img w-full min-h-[170px] xmd:h-48 sm:h-48 slg:h-[210px] object-contain"
               style={{
                 backgroundImage: `url(${datas?.image?.imageUrl})`,
                 backgroundSize: "contain",
@@ -192,7 +192,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
           </Link>
           <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
             <Link href={`/products/${datas?._id}`}>
-              <p className="title mb-2 text-[5px] sm:text-[13px] font-600 text-qblack leading-[24px] line-clamp-2 hover:text-_primary cursor-pointer">
+              <p className="mb-2 text-[5px] sm:text-[13px] font-600 text-qblack whitespace-normal break-words hover:text-_primary cursor-pointer">
                 {datas?.name}
               </p>
             </Link>
@@ -213,7 +213,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             </p>
 
             {/* Add to Cart and Buy Now Buttons */}
-            <div className="flex space-x-[2px] msm:space-x-2 h-full">
+            <div className="absolute -bottom-[75px] flex space-x-[2px] msm:space-x-2 h-full">
               <Button
                 disabled={isInCart}
                 onClick={() => handleAddToCart(datas)}
