@@ -80,13 +80,13 @@ const ProductDetails = ({ id }: any) => {
     const productsInfo = {
       ...selectedVariantOptions,
     };
-    const productData={
-      price:selectedVariant?.price || data?.response?.price,
-      offer_price:selectedVariant?.offer_price,
-      image:viewImage,
-      name:data?.response?.name,
-      _id:data?.response?._id
-    }
+    const productData = {
+      price: selectedVariant?.price || data?.response?.price,
+      offer_price: selectedVariant?.offer_price,
+      image: viewImage,
+      name: data?.response?.name,
+      _id: data?.response?._id,
+    };
     await addToCart(
       productData,
       dispatch,
@@ -157,25 +157,26 @@ const ProductDetails = ({ id }: any) => {
       <div className="grid grid-cols-1 lg:grid-cols-7 lg:gap-10">
         <div className="col-span-3 flex mx-auto">
           <div>
-            {imageVariantList?.image
-              ?.slice(0, 4)
-              .map((variant: any, index: number) => (
-                <div
-                  key={index}
-                  className="bg-white border rounded-md mb-1"
-                  onClick={() =>
-                    handleVariationsImage(variant, imageVariantList?.color)
-                  }
-                >
-                  <Image
-                    width={100}
-                    height={100}
-                    className="transition-transform duration-300 transform cursor-pointer"
-                    src={variant || " "}
-                    alt={`Product Image - ${imageVariantList?.color}`}
-                  />
-                </div>
-              ))}
+            {imageVariantList?.image.length > 1 &&
+              imageVariantList?.image
+                ?.slice(0, 4)
+                .map((variant: any, index: number) => (
+                  <div
+                    key={index}
+                    className="bg-white border rounded-md mb-1"
+                    onClick={() =>
+                      handleVariationsImage(variant, imageVariantList?.color)
+                    }
+                  >
+                    <Image
+                      width={100}
+                      height={100}
+                      className="transition-transform duration-300 transform cursor-pointer"
+                      src={variant || " "}
+                      alt={`Product Image - ${imageVariantList?.color}`}
+                    />
+                  </div>
+                ))}
           </div>
           <div>
             <ImageDisplay
@@ -185,7 +186,7 @@ const ProductDetails = ({ id }: any) => {
               selectedVariant={selectedVariant}
             />
             <div className="flex gap-2 mt-2 md:w-[80%] mx-auto">
-              {data?.response?.variations?.length > 1
+              {data?.response?.variations?.length > 0
                 ? data?.response?.variations
                     ?.slice(0, 4)
                     .map((variant: any, index: number) => (
@@ -259,14 +260,34 @@ const ProductDetails = ({ id }: any) => {
           />
           {/* variant */}
           <div>
-            <VariantDisplay
-              product={data?.response}
-              setVariantPrice={setSelectedVariant}
-              setSelectedVariantOptions={setSelectedVariantOptions}
-              selectedColor={selectedColor}
-              setSelectedColor={setSelectedColor}
-              setViewImage={setViewImage}
-            />
+            {data.response?.variations?.length > 0 ? (
+              <VariantDisplay
+                product={data?.response}
+                setVariantPrice={setSelectedVariant}
+                setSelectedVariantOptions={setSelectedVariantOptions}
+                selectedColor={selectedColor}
+                setSelectedColor={setSelectedColor}
+                setViewImage={setViewImage}
+              />
+            ) : (
+              <h2 className="text-lg font-semibold mt-5">
+                {data.response?.offerPrice ? (
+                  <>
+                    Cash Discount Price:
+                    <span className="line-through text-gray-500 mr-2">
+                      {data.response?.price}৳
+                    </span>
+                    <span className="text-orange-500 font-bold">
+                      {data.response?.offerPrice}৳
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-black">
+                    Price : {data.response?.price}৳
+                  </span>
+                )}
+              </h2>
+            )}
           </div>
           {/* add to cart button */}
           <div className="flex gap-5 justify-start items-center mt-5">
@@ -275,9 +296,7 @@ const ProductDetails = ({ id }: any) => {
               // Pre Order Now Button
               <Button
                 variant={"outline"}
-                onClick={
-                  isInCart ? () => {} : handleCartClick
-                }
+                onClick={isInCart ? () => {} : handleCartClick}
                 className="uppercase bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-64 text-_white p-2 font-normal text-sm"
               >
                 <Link href={"/cart/checkout"}>Pre Order Now</Link>
@@ -305,9 +324,7 @@ const ProductDetails = ({ id }: any) => {
                 {/* Buy Now Button */}
                 <Button
                   variant={"outline"}
-                  onClick={
-                    isInCart ? () => {} : handleCartClick
-                  }
+                  onClick={isInCart ? () => {} : handleCartClick}
                   className="uppercase hover:bg-_orange border-[#FF4C06] rounded ease-in-out duration-500 transition-all w-full text-black hover:text-white p-2 font-normal text-sm"
                 >
                   <Link href={"/cart/checkout"}>Buy Now</Link>
