@@ -283,7 +283,7 @@ const ProductDetails = ({ id }: any) => {
                   </>
                 ) : (
                   <span className="text-black">
-                    Price : {data.response?.price}৳
+                    Price : {data.response?.price} ৳
                   </span>
                 )}
               </h2>
