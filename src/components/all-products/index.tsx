@@ -23,9 +23,9 @@ const AllProductsSection = ({ productsType }: any) => {
   const { label, value } = useSelector(selectProductsVariant);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
-
+console.log({productsType});
   const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
-    productType: productsType ==="all-products"?undefined:productsType,
+    productType: productsType ==="all-products"? "":productsType,
     type: usedString,
     offerType: offersString,
     minVariantPrice: min,
