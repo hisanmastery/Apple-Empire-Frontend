@@ -25,7 +25,7 @@ const AllProductsSection = ({ productsType }: any) => {
   const [pageSize, setPageSize] = useState(12);
 
   const { data: allProducts, isLoading }: any = useGetProductsListsQuery({
-    productType: productsType,
+    productType: productsType ==="all-products"?undefined:productsType,
     type: usedString,
     offerType: offersString,
     minVariantPrice: min,
