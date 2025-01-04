@@ -33,7 +33,7 @@ const Pagination: React.FC<PaginationProps> = ({
         pageNumbers.push(1);
         // Show ellipsis if current page is far from the start
         if (currentPage > 3) pageNumbers.push(-1); // -1 signifies an ellipsis
-        // Show current page
+        // Show current page and surrounding pages
         for (
           let i = Math.max(2, currentPage - 1);
           i <= Math.min(totalPages - 1, currentPage + 1);
@@ -50,7 +50,8 @@ const Pagination: React.FC<PaginationProps> = ({
     };
 
     createPages();
-  }, [totalPages, currentPage]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [totalItems, pageSize, currentPage]);
 
   const handlePageChange = (page: number) => {
     if (page !== -1 && page !== currentPage && page > 0 && page <= totalPages) {
@@ -69,6 +70,7 @@ const Pagination: React.FC<PaginationProps> = ({
       >
         <icons.previousIcon className="text-lg" />
       </button>
+
       {pages.map((page, index) =>
         page === -1 ? (
           <span key={index} className="text-white">
@@ -86,6 +88,7 @@ const Pagination: React.FC<PaginationProps> = ({
           </button>
         )
       )}
+
       <button
         className={`flex justify-center items-center w-10 h-10 ${
           currentPage === totalPages
