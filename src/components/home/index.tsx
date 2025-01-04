@@ -106,7 +106,7 @@ const Home: React.FC = () => {
       {/* All Products */}
       <SectionWithTitleAndAds
         title={headlineData?.all_products || "All Products"}
-        seeMoreUrl="/section/top-selling-products"
+        seeMoreUrl="/section/all-products"
       >
         <Products />
       </SectionWithTitleAndAds>

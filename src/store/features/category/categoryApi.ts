@@ -64,6 +64,13 @@ export const categoryApi = fetchProductsSlice.injectEndpoints({
         params: { slug: arg?.slug, product_type: arg?.product_type },
       }),
     }),
+    getOrderWithBrand: builder.query({
+      query: (arg: any) => ({
+        url: `${category}/get-shop-by-brand`,
+        method: "get",
+        params: { slug: arg?.slug, product_type: arg?.product_type },
+      }),
+    }),
   }),
 });
 export const {
@@ -74,4 +81,5 @@ export const {
   useGetNavbarCategoryListQuery,
   useGetFooterCategoryListQuery,
   useGetCategoryWithProductQuery,
+  useGetOrderWithBrandQuery,
 } = categoryApi;

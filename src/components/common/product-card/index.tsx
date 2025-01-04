@@ -147,10 +147,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
         {/* Full-Screen Modal */}
         {isFullScreen && (
           <div
-            className="fixed inset-0 z-50 bg-_white flex items-center justify-center"
+            className="absolute right-0 left-0 w-full h-full overflow-hidden z-50 bg-_white flex items-center justify-center"
             onClick={() => setIsFullScreen(false)}
           >
-            <div className="relative w-full h-full">
+            <div>
               <img
                 src={datas?.image?.imageUrl}
                 alt={datas?.name}

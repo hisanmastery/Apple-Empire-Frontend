@@ -1,13 +1,13 @@
 "use client";
 import CustomSlider from "@/components/common/custom-slider";
 import CustomTabs from "@/components/common/custom-tab";
-import { useGetAllBrandQuery } from "@/store/features/brand/brandApi";
+import { useGetOrderWithBrandQuery } from "@/store/features/category/categoryApi";
 import { useGetProductsListsQuery } from "@/store/features/products/productsApi";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TopBrandProducts = ({ title }: any) => {
-  const [selectedTab, setSelectedTab] = useState();
-  const { data } = useGetAllBrandQuery<any>({
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(undefined);
+  const { data } = useGetOrderWithBrandQuery<any>({
     page: 1,
     limit: 10,
   });
@@ -18,10 +18,17 @@ const TopBrandProducts = ({ title }: any) => {
     limit: 10,
   });
 
-  const BrandTabData = data?.brands?.map((item: any) => ({
+  const BrandTabData = data?.data?.brands?.map((item: any) => ({
     label: item?.brandName,
     value: item?.brandName,
   }));
+
+  // Set the first brand as the default selected tab
+  useEffect(() => {
+    if (BrandTabData?.length > 0 && !selectedTab) {
+      setSelectedTab(BrandTabData[0].value);
+    }
+  }, [BrandTabData, selectedTab]);
 
   return (
     <div className="md:container mb-10">
@@ -31,6 +38,7 @@ const TopBrandProducts = ({ title }: any) => {
           <CustomTabs
             tabs={BrandTabData}
             selectedTab={selectedTab}
+            defaultValue={BrandTabData?.[0]?.value}
             setSelectedTab={setSelectedTab}
           />
         </div>
