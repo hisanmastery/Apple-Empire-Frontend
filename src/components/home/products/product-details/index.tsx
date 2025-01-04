@@ -260,7 +260,7 @@ const ProductDetails = ({ id }: any) => {
           />
           {/* variant */}
           <div>
-            {data.response?.variations?.length > 0 ? (
+            {data.response?.variants?.length > 0 ? (
               <VariantDisplay
                 product={data?.response}
                 setVariantPrice={setSelectedVariant}
