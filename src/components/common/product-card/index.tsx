@@ -165,7 +165,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             </div>
           </div>
         )}
-        <div className="cursor-pointer product-card-one w-full h-full sm:h-[340px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
+        <div className="cursor-pointer product-card-one w-full h-[290px] sm:h-[340px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
           {/* Stock Out Overlay */}
           {datas?.stock === 0 && (
             <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center rounded-md text-_white font-semibold text-xl z-10">
@@ -193,7 +193,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
           </Link>
           <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
             <Link href={`/products/${datas?._id}`}>
-              <p className="mb-2 text-[6px] sm:text-[13px] font-600 text-qblack whitespace-normal break-words hover:text-_primary cursor-pointer">
+              <p className="mb-2 text-[12px] sm:text-[13px] font-600 text-qblack whitespace-normal break-words hover:text-_primary cursor-pointer">
                 {datas?.name}
               </p>
             </Link>
