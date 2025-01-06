@@ -165,7 +165,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             </div>
           </div>
         )}
-        <div className="cursor-pointer product-card-one w-full h-[340px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
+        <div className="cursor-pointer product-card-one w-full h-full sm:h-[340px] text-nowrap bg-_white relative group hover:scale-105 rounded-lg ease-in-out duration-700">
           {/* Stock Out Overlay */}
           {datas?.stock === 0 && (
             <div className="absolute inset-0 bg-gray-900/50 flex items-center justify-center rounded-md text-_white font-semibold text-xl z-10">
