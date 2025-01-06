@@ -109,8 +109,9 @@ const Home: React.FC = () => {
         seeMoreUrl="/section/all-products"
       >
         <Products />
+        <Resverse_product />
       </SectionWithTitleAndAds>
-      <Resverse_product />
+    
       {/* Secondary Ads */}
       <ProductAds
         ads={[

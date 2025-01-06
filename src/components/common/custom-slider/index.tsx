@@ -83,7 +83,7 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
         {sliderProducts?.product?.map((product: any) => (
           <CarouselItem
             key={product._id}
-            className="pl-1 sm:basis-1/2 md:basis-1/3 lg:basis-1/5"
+            className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/5"
           >
             <div className="p-1">
               <ProductCard datas={product} />
