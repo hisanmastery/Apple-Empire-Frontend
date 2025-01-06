@@ -193,7 +193,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
           </Link>
           <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
             <Link href={`/products/${datas?._id}`}>
-              <p className="mb-2 text-[5px] sm:text-[13px] font-600 text-qblack whitespace-normal break-words hover:text-_primary cursor-pointer">
+              <p className="mb-2 text-[6px] sm:text-[13px] font-600 text-qblack whitespace-normal break-words hover:text-_primary cursor-pointer">
                 {datas?.name}
               </p>
             </Link>
