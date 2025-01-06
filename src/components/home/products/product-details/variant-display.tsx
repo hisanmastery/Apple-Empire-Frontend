@@ -65,7 +65,7 @@ const VariantDisplay = ({
   // Find the variant that matches the selected options
   const selectedVariant: any =
     availableVariants.length > 0 ? availableVariants[0] : null;
-
+console.log({availableVariants});
   const handleColorVariant = (value: any) => {
     setSelectedColor(value);
     optionTypes.includes("Color") && handleOptionChange("Color", value);
@@ -82,6 +82,7 @@ const VariantDisplay = ({
     setVariantPrice,
     selectedOptions,
     setSelectedVariantOptions,
+    selectedColor
   ]);
 
   return (
