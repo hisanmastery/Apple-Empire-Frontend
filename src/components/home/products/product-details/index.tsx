@@ -135,7 +135,7 @@ const ProductDetails = ({ id }: any) => {
   }
   return (
     <section className="container mx-auto py-5 px-2 md:px-0 min-h-screen">
-      <div className="mb-5">
+      <div className="mb-5 container">
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },

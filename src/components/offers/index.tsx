@@ -2,11 +2,16 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import { useGetAllOfferQuery } from "@/store/features/pre-order/preOrderOrOfferApi";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Offers = () => {
   const { data, isLoading } = useGetAllOfferQuery<any>({});
+
+  // Helper function to format dates
+  const formatDate = (dateString: string) => dateString?.split("T")[0];
+
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 mt-4">
       {isLoading
@@ -33,29 +38,40 @@ const Offers = () => {
               key={offer._id}
               className="text-center border rounded-lg shadow bg-white p-4 relative"
             >
+              {/* Display offer image */}
               <Image
-                src={offer.images?.imageUrl || ""}
-                alt={offer.images?.altText}
+                src={offer.images?.imageUrl || "/placeholder-image.jpg"}
+                alt={offer.images?.altText || "Offer Image"}
                 width={200}
                 height={250}
-                className="w-full h-[250px] rounded-[8px]"
+                className="w-full h-[250px] object-cover rounded-[8px]"
               />
-              <div className="pt-4 px-4">
+
+              {/* Display offer dates */}
+              <div className="flex items-center justify-center gap-2 pt-4 px-4">
+                <FaRegCalendarAlt className="w-[30px] h-[30px]" />
+                <span className="text-base font-medium text-black">{formatDate(offer?.startDate)}</span> -{" "}
+                <span className="text-base font-medium text-black">{formatDate(offer?.endDate)}</span>
+              </div>
+
+              {/* Display offer details */}
+              <div className="pt-2 px-4">
                 <h4 className="text-xl md:text-2xl font-semibold text-center">
                   {offer?.name}
                 </h4>
                 <p
                   className="text-sm font-normal text-center pt-3 pb-14"
                   dangerouslySetInnerHTML={{
-                    __html: offer?.description?.slice(0, 100),
+                    __html: offer?.description?.slice(0, 100) + "...",
                   }}
                 />
+                {/* View Details button */}
                 <div className="absolute -bottom-20 left-0 right-0 px-4 w-full pb-24">
-                  <button className="w-full bg-_primary/75 hover:bg-_black text-white text-lg font-normal py-2 px-4 rounded-[5px]">
-                    <Link href={`/offer-details/${offer?._id}`}>
+                  <Link href={`/offer-details/${offer?._id}`}>
+                    <button className="w-full bg-_primary/75 hover:bg-_black text-white text-lg font-normal py-2 px-4 rounded-[5px]">
                       View Details
-                    </Link>
-                  </button>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

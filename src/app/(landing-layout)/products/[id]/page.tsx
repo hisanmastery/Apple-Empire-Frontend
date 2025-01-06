@@ -3,7 +3,7 @@ import ProductDetails from "@/components/home/products/product-details";
 const ProductsDetailsPage = ({ params }: any) => {
   const id = params?.id as string;
   return (
-    <div className="bg-_white">
+    <div className="bg-_white ">
       <ProductDetails id={id} />
     </div>
   );
