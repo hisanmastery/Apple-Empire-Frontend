@@ -88,10 +88,10 @@ const Emiplan = ({ isOpen, setIsOpen, price }: any) => {
                           {item?.months}
                         </td>
                         <td className="p-2 border text-center">
-                         {item?.emi}  %
+                        TK. {item?.emi}
                         </td>
                         <td className="p-2 border text-center">
-                          TK. {item?.emiCharge}
+                           {item?.emiCharge} %
                         </td>
                         <td className="p-2 border text-center">
                           TK. {item?.effectiveCost}
