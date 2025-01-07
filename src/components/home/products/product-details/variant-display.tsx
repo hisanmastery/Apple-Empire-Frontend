@@ -65,8 +65,12 @@ const VariantDisplay = ({
   // Find the variant that matches the selected options
   const selectedVariant: any =
     availableVariants.length > 0 ? availableVariants[0] : null;
-console.log({availableVariants});
+
   const handleColorVariant = (value: any) => {
+    const imageList = product.variations;
+    const selectedVariant = imageList.find((variant: any) => variant.color === value);
+    const selectedImage = selectedVariant?.image?.[0];
+    setViewImage(selectedImage)
     setSelectedColor(value);
     optionTypes.includes("Color") && handleOptionChange("Color", value);
     optionTypes.includes("color") && handleOptionChange("color", value);
@@ -74,7 +78,6 @@ console.log({availableVariants});
 
   useEffect(() => {
     setVariantPrice(selectedVariant);
-    setViewImage(selectedVariant?.images?.[0]);
     setSelectedVariantOptions(selectedOptions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -82,7 +85,6 @@ console.log({availableVariants});
     setVariantPrice,
     selectedOptions,
     setSelectedVariantOptions,
-    selectedColor
   ]);
 
   return (
