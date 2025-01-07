@@ -23,7 +23,7 @@ const CustomModal: React.FC<ModalProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
       <DialogTrigger asChild></DialogTrigger>
-      <DialogContent className="min-w-[800px]">
+      <DialogContent className="min-w-[800px] max-h-[600px]">
         <DialogHeader className="border-b-[1px] border-_primary pb-2">
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>

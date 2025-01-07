@@ -28,9 +28,9 @@ const Emiplan = ({ isOpen, setIsOpen, price }: any) => {
   return (
     <div>
       <CustomModal isOpen={isOpen} setIsOpen={setIsOpen} title="EMI Options">
-        <div className="grid grid-cols-12 h-[500px]">
+        <div className="grid grid-cols-12 h-full">
           {/* Left sidebar with dynamic bank buttons */}
-          <div className="col-span-4 border-r-2 border-gray-200 overflow-y-auto">
+          <div className="col-span-4 border-r-2 border-gray-200 max-h-[500px] overflow-auto">
             <div className="flex flex-col space-y-2 p-2">
               {bankNameList?.map((bank: any) => (
                 <button
@@ -49,7 +49,7 @@ const Emiplan = ({ isOpen, setIsOpen, price }: any) => {
           </div>
 
           {/* Right content */}
-          <div className="col-span-8 p-4">
+          <div className="col-span-8 p-4 max-h-[500px] overflow-auto">
             {/* Amount Input */}
             <div className="mb-4">
               <label
