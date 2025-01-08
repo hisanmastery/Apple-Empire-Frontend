@@ -179,7 +179,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             </div>
           )}
 
-          <Link href={`/products/${datas?._id}`}>
+          <Link href={`/products/${datas?.metaInformation?.canonicalUrl}`}>
             <div
               className="product-card-img w-full min-h-[170px] xmd:h-48 sm:h-48 slg:h-[210px] object-contain"
               style={{
@@ -192,7 +192,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ datas }) => {
             ></div>
           </Link>
           <div className=" px-2 msm:px-3 sm:px-[30px] sm:pb-[30px] relative">
-            <Link href={`/products/${datas?._id}`}>
+            <Link href={`/products/${datas?.metaInformation?.canonicalUrl}`}>
               <p className="mb-2 text-[12px] sm:text-[13px] font-600 text-qblack whitespace-normal break-words hover:text-_primary cursor-pointer">
                 {datas?.name}
               </p>
