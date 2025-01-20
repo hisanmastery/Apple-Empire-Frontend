@@ -87,7 +87,7 @@ export default function SearchBox() {
           ref={dropdownRef}
         >
           {productsData?.map((product: any) => (
-            <Link href={`/products/${product?._id}`} key={product._id}>
+            <Link href={`/products/${product?.metaInformation?.canonicalUrl}}`} key={product._id}>
               <div
                 className="p-2 group cursor-pointer flex gap-3 items-center"
                 onClick={() => setOpen(false)}
