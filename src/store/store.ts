@@ -10,6 +10,7 @@ import fetchBrandsSlice from "./api/brand/brandsSlice";
 import fetchShippingSlice from "./api/shipping-methods/ShippingMethodsSlice";
 import fetchAdsSectionsSlice from "./api/ads-section/adsSectionSlice";
 import fetchDynamicPageSlice from "./api/dynamic-page/dynamicPageSlice";
+import todoBaseApi from "./api/todo/todoSlice";
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     [fetchShippingSlice.reducerPath]: fetchShippingSlice.reducer,
     [fetchAdsSectionsSlice.reducerPath]: fetchAdsSectionsSlice.reducer,
     [fetchDynamicPageSlice.reducerPath]: fetchDynamicPageSlice.reducer,
+    [todoBaseApi.reducerPath]: todoBaseApi.reducer,
     ...reducers,
   },
   middleware: (getDefaultMiddleware) =>
@@ -37,5 +39,6 @@ export const store = configureStore({
       .concat(fetchBrandsSlice.middleware)
       .concat(fetchShippingSlice.middleware)
       .concat(fetchAdsSectionsSlice.middleware)
-      .concat(fetchDynamicPageSlice.middleware),
+      .concat(fetchDynamicPageSlice.middleware)
+      .concat(todoBaseApi.middleware),
 });

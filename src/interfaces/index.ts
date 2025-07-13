@@ -4,3 +4,6 @@ export interface ICartState {
   };
   storedCart: any[];
 }
+
+// Export Todo-related interfaces
+export * from './todo';
