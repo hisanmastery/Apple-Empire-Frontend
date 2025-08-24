@@ -36,3 +36,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# backend build artifacts
+backend/TodoApi/bin/
+backend/TodoApi/obj/
